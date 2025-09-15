@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rbAllineamentoDestra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pulCancellaTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="rbAllineamentoSinistra.Text" xml:space="preserve">
+    <value>Le&amp;ft</value>
+  </data>
+  <data name="tbRientroDestra.HelpKeyword" xml:space="preserve">
+    <value>paragraphindentright.html</value>
+  </data>
+  <data name="gbAllineamento.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 147</value>
+  </data>
+  <data name="&gt;&gt;labRientroSinista.Name" xml:space="preserve">
+    <value>labRientroSinista</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoSinistra.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labRientroSporgente.Text" xml:space="preserve">
+    <value>&amp;Hanging:</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labRientroSporgente.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cbPunti.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rbAllineamentoDestra.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labRientroSinista.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pulNuovoTab.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lbTab.Parent" xml:space="preserve">
+    <value>gbTab</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoCentro.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbRientroSporgente.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 50</value>
+  </data>
+  <data name="rbAllineamentoGiusto.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbPunti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pulCancellaTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 65</value>
+  </data>
+  <data name="tbRientroSporgente.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="rbAllineamentoGiusto.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pulNuovoTab.Name" xml:space="preserve">
+    <value>pulNuovoTab</value>
+  </data>
+  <data name="&gt;&gt;pulCancellaTab.Parent" xml:space="preserve">
+    <value>gbTab</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSporgente.Parent" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="labRientroSporgente.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gbRientro.Text" xml:space="preserve">
+    <value>Indentation:</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSporgente.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoGiusto.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbRientroSinistra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="lbTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="labRientroDestra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 83</value>
+  </data>
+  <data name="btnOK.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gbRientro.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labRientroSinista.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;tbRientroDestra.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbAllineamentoSinistra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="&gt;&gt;gbRientro.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lbTab.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoDestra.Name" xml:space="preserve">
+    <value>rbAllineamentoDestra</value>
+  </data>
+  <data name="&gt;&gt;lbTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rbAllineamentoCentro.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
+  </data>
+  <data name="gbRientro.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;gbRientro.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pulCancellaTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Paragrafo</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoCentro.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labRientroSinista.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 23</value>
+  </data>
+  <data name="&gt;&gt;cbPunti.Name" xml:space="preserve">
+    <value>cbPunti</value>
+  </data>
+  <data name="&gt;&gt;pulCancellaTab.Name" xml:space="preserve">
+    <value>pulCancellaTab</value>
+  </data>
+  <data name="gbTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="rbAllineamentoCentro.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbRientroDestra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Name" xml:space="preserve">
+    <value>btnCanc</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Paragraph</value>
+  </data>
+  <data name="gbRientro.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="cbPunti.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pulNuovoTab.Parent" xml:space="preserve">
+    <value>gbTab</value>
+  </data>
+  <data name="labRientroDestra.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gbRientro.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labRientroSporgente.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 53</value>
+  </data>
+  <data name="rbAllineamentoSinistra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
+  <data name="gbTab.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbAllineamentoCentro.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
+  </data>
+  <data name="pulNuovoTab.HelpKeyword" xml:space="preserve">
+    <value>paragraphtabnew.html</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoCentro.Name" xml:space="preserve">
+    <value>rbAllineamentoCentro</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="gbAllineamento.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="lbTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 69</value>
+  </data>
+  <data name="gbAllineamento.HelpKeyword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;lbTab.Name" xml:space="preserve">
+    <value>lbTab</value>
+  </data>
+  <data name="pulNuovoTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 19</value>
+  </data>
+  <data name="rbAllineamentoCentro.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;labRientroSporgente.Parent" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="rbAllineamentoSinistra.HelpKeyword" xml:space="preserve">
+    <value>paragraphalign.html</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>LaParola.Template, LaParola, Version=7.17.0.0, Culture=neutral, PublicKeyToken=934e5a3ed9094c37</value>
+  </data>
+  <data name="rbAllineamentoSinistra.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;labRientroSporgente.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="gbTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 95</value>
+  </data>
+  <data name="&gt;&gt;labRientroDestra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbAllineamentoCentro.Text" xml:space="preserve">
+    <value>&amp;Center</value>
+  </data>
+  <data name="&gt;&gt;gbAllineamento.Name" xml:space="preserve">
+    <value>gbAllineamento</value>
+  </data>
+  <data name="cbPunti.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 176</value>
+  </data>
+  <data name="gbAllineamento.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSporgente.Name" xml:space="preserve">
+    <value>tbRientroSporgente</value>
+  </data>
+  <data name="tbRientroSinistra.HelpKeyword" xml:space="preserve">
+    <value>paragraphindentleft.html</value>
+  </data>
+  <data name="labRientroDestra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="cbPunti.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoDestra.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbAllineamento.Text" xml:space="preserve">
+    <value>Alignment:</value>
+  </data>
+  <data name="gbAllineamento.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulNuovoTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="gbTab.Text" xml:space="preserve">
+    <value>Tabs (cm):</value>
+  </data>
+  <data name="rbAllineamentoGiusto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 17</value>
+  </data>
+  <data name="labRientroDestra.HelpKeyword" xml:space="preserve">
+    <value>paragraphindentright.html</value>
+  </data>
+  <data name="cbPunti.Text" xml:space="preserve">
+    <value>&amp;Bullets</value>
+  </data>
+  <data name="labRientroDestra.Text" xml:space="preserve">
+    <value>&amp;Right:</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAB
+        ARiIgAAAAAAAAAAAAAAAGQiBGIiAAAAAAAAAAAAAABkYd3EYiIAAAAAAAAAAAAGZEZh3cRiIgAAAAAAA
+        AAABkRERmHdxGIiAAAAAAAAAGZERERGYd3EYiIAAAAAAABkREREbsZh3cRiAAAAAAAGZERERO7ERmHCI
+        AAAAAAABkREREbsxERGRiAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7ER
+        EREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZE7MR
+        O7EREREYAAAAAAABkRu7s7sxERERGAAAAAAAGZERO7u7MREREYAAAAAAABkRERE7u7sxERGAAAAAAAGZ
+        ERERO7O7uxEYAAAAAAABkREREbsxE7MRGAAAAAAACZERERO7EREREYAAAAAAAAAZkREbsxERERGAAAAA
+        AAAAABmRG7EREREYAAAAAAAAAAAAGZEREREREAAAAAAAAAAAAAAZkREREQAAAAAAAAAAAAAAABmREREA
+        AAAAAAAAAAAAAAAAGZEQAAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf///gC
+        f//94B///8AH///AAf//gAB//4AAH/8AAAf/AAAH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/8AAAf/AA
+        AH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/+AAAf/wAAH//AAD//8AB///wA////AP///8H////x/////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAEBEw
+        AAAAAAARiBEwAAAAARERiBEwAAABERuxgxAAABERGxERMAAAERG7EREAAAEREbEREQAAAREbsREQAAAR
+        G7sRERAAABERu7sRAAAAERGxEREAAAABG7EREAAAAAABEREAAAAAAAABEQAAAAAAAAAAAAAA4D8AAPQP
+        AAD4AwAA+AAAAPAAAADwAQAA4AEAAOADAADAAwAAwAcAAIAHAACADwAAwA8AAPAfAAD8PwAA/z8AAA==
+</value>
+  </data>
+  <data name="btnOK.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;labRientroSinista.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labRientroDestra.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labRientroSinista.HelpKeyword" xml:space="preserve">
+    <value>paragraphindentleft.html</value>
+  </data>
+  <data name="&gt;&gt;labRientroDestra.Parent" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoSinistra.Parent" xml:space="preserve">
+    <value>gbAllineamento</value>
+  </data>
+  <data name="labRientroSinista.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSinistra.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoSinistra.Name" xml:space="preserve">
+    <value>rbAllineamentoSinistra</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSinistra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbRientroDestra.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gbTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 130</value>
+  </data>
+  <data name="lbTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
+  </data>
+  <data name="cbPunti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSinistra.Name" xml:space="preserve">
+    <value>tbRientroSinistra</value>
+  </data>
+  <data name="&gt;&gt;gbAllineamento.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labRientroSinista.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbAllineamentoDestra.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gbRientro.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 112</value>
+  </data>
+  <data name="labRientroSporgente.HelpKeyword" xml:space="preserve">
+    <value>paragraphindenthanging.html</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="rbAllineamentoCentro.HelpKeyword" xml:space="preserve">
+    <value>paragraphalign.html</value>
+  </data>
+  <data name="cbPunti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;gbRientro.Name" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="tbRientroDestra.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="tbRientroSinistra.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cbPunti.HelpKeyword" xml:space="preserve">
+    <value>paragraphbullets.html</value>
+  </data>
+  <data name="&gt;&gt;labRientroSporgente.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbRientroDestra.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tbRientroSinistra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 20</value>
+  </data>
+  <data name="tbRientroSinistra.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labRientroSinista.Text" xml:space="preserve">
+    <value>&amp;Left:</value>
+  </data>
+  <data name="&gt;&gt;labRientroSinista.Parent" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="btnCanc.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;labRientroDestra.Name" xml:space="preserve">
+    <value>labRientroDestra</value>
+  </data>
+  <data name="rbAllineamentoDestra.Text" xml:space="preserve">
+    <value>Ri&amp;ght</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSinistra.Parent" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="labRientroSporgente.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labRientroSporgente.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;labRientroDestra.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pulCancellaTab.Text" xml:space="preserve">
+    <value>&amp;Delete</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoGiusto.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbAllineamento.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="gbTab.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="pulNuovoTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="rbAllineamentoGiusto.Text" xml:space="preserve">
+    <value>&amp;Justified</value>
+  </data>
+  <data name="rbAllineamentoGiusto.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labRientroDestra.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;pulCancellaTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbRientroSporgente.HelpKeyword" xml:space="preserve">
+    <value>paragraphindenthanging.html</value>
+  </data>
+  <data name="lbTab.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbAllineamentoCentro.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbAllineamentoGiusto.HelpKeyword" xml:space="preserve">
+    <value>paragraphalign.html</value>
+  </data>
+  <data name="rbAllineamentoSinistra.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoCentro.Parent" xml:space="preserve">
+    <value>gbAllineamento</value>
+  </data>
+  <data name="&gt;&gt;tbRientroDestra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbAllineamentoDestra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 81</value>
+  </data>
+  <data name="tbRientroSinistra.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="pulNuovoTab.Text" xml:space="preserve">
+    <value>&amp;New</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoDestra.Parent" xml:space="preserve">
+    <value>gbAllineamento</value>
+  </data>
+  <data name="&gt;&gt;pulNuovoTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gbAllineamento.Location" type="System.Drawing.Point, System.Drawing">
+    <value>209, 12</value>
+  </data>
+  <data name="tbRientroSporgente.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rbAllineamentoCentro.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbAllineamentoDestra.HelpKeyword" xml:space="preserve">
+    <value>paragraphalign.html</value>
+  </data>
+  <data name="rbAllineamentoSinistra.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulCancellaTab.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;gbTab.Name" xml:space="preserve">
+    <value>gbTab</value>
+  </data>
+  <data name="&gt;&gt;tbRientroDestra.Parent" xml:space="preserve">
+    <value>gbRientro</value>
+  </data>
+  <data name="tbRientroSporgente.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;pulNuovoTab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pulNuovoTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoSinistra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbAllineamento.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbPunti.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbRientroDestra.Name" xml:space="preserve">
+    <value>tbRientroDestra</value>
+  </data>
+  <data name="rbAllineamentoDestra.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbTab.HelpKeyword" xml:space="preserve">
+    <value>paragraphtablist.html</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoGiusto.Name" xml:space="preserve">
+    <value>rbAllineamentoGiusto</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoDestra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbRientroSporgente.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulCancellaTab.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbAllineamentoGiusto.Parent" xml:space="preserve">
+    <value>gbAllineamento</value>
+  </data>
+  <data name="&gt;&gt;tbRientroSporgente.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labRientroSporgente.Name" xml:space="preserve">
+    <value>labRientroSporgente</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>360, 266</value>
+  </data>
+  <data name="labRientroSporgente.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="rbAllineamentoSinistra.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="tbRientroDestra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 80</value>
+  </data>
+  <data name="rbAllineamentoDestra.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="rbAllineamentoGiusto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 111</value>
+  </data>
+  <data name="&gt;&gt;gbTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pulCancellaTab.HelpKeyword" xml:space="preserve">
+    <value>paragraphtabdelete.html</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labRientroDestra.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnCanc.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbPunti.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Name" xml:space="preserve">
+    <value>guidaFile</value>
+  </data>
+  <data name="labRientroSinista.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 13</value>
+  </data>
+  <data name="rbAllineamentoGiusto.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;gbTab.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="labRientroSinista.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pulCancellaTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;gbRientro.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pulCancellaTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="guidaFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

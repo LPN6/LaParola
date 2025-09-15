@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="etiParola1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto.Name" xml:space="preserve">
+    <value>etiVersetto</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="etiParola.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 13</value>
+  </data>
+  <data name="etiLibro.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiLibro.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 10</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbBrano.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiParola1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbLibro1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="txtVersetto2.HelpKeyword" xml:space="preserve">
+    <value>referenceverse2.html</value>
+  </data>
+  <data name="etiLibro1.Text" xml:space="preserve">
+    <value>Boo&amp;k of the beginning of the passage:</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo1.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;txtParola1.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;etiLibro2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiLibro2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 13</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapitolo1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 13</value>
+  </data>
+  <data name="cbLibro1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="etiParola1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="etiVersetto2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtCapitolo1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiVersetto1.Text" xml:space="preserve">
+    <value>Ver&amp;se of the beginning of the passage:</value>
+  </data>
+  <data name="txtVersetto2.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;etiParola2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="etiParola2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 13</value>
+  </data>
+  <data name="etiCapitolo2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 13</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtVersetto2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtParola2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="etiParola2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLibro1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 13</value>
+  </data>
+  <data name="etiParola1.Text" xml:space="preserve">
+    <value>Wor&amp;d of the beginning of the passage:</value>
+  </data>
+  <data name="&gt;&gt;txtParola1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo2.Name" xml:space="preserve">
+    <value>etiCapitolo2</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiVersetto1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo2.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtParola1.Name" xml:space="preserve">
+    <value>txtParola1</value>
+  </data>
+  <data name="&gt;&gt;etiLibro.Name" xml:space="preserve">
+    <value>etiLibro</value>
+  </data>
+  <data name="txtCapitolo2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiCapitolo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="txtCapitolo2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLibro1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 10</value>
+  </data>
+  <data name="&gt;&gt;etiLibro2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="btnOK.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbLibro2.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="cbBrano.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiLibro2.HelpKeyword" xml:space="preserve">
+    <value>referencebook2.html</value>
+  </data>
+  <data name="txtParola1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="cbLibro2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiCapitolo1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiLibro.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtCapitolo2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 153</value>
+  </data>
+  <data name="&gt;&gt;txtParola1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo1.Name" xml:space="preserve">
+    <value>etiCapitolo1</value>
+  </data>
+  <data name="etiVersetto2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 13</value>
+  </data>
+  <data name="etiLibro2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 130</value>
+  </data>
+  <data name="txtParola1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtParola2.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="etiParola2.HelpKeyword" xml:space="preserve">
+    <value>referenceword2.html</value>
+  </data>
+  <data name="etiVersetto.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CreaRiferimento</value>
+  </data>
+  <data name="etiLibro1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiVersetto2.Text" xml:space="preserve">
+    <value>V&amp;erse of the end of the passage:</value>
+  </data>
+  <data name="etiVersetto.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiVersetto1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="txtCapitolo2.HelpKeyword" xml:space="preserve">
+    <value>referencechapter2.html</value>
+  </data>
+  <data name="&gt;&gt;etiLibro1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtParola2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Name" xml:space="preserve">
+    <value>btnCanc</value>
+  </data>
+  <data name="etiLibro.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="etiVersetto2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 182</value>
+  </data>
+  <data name="etiLibro1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="txtVersetto2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiParola.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiVersetto1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiParola1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtCapitolo2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="txtParola2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiCapitolo2.HelpKeyword" xml:space="preserve">
+    <value>referencechapter2.html</value>
+  </data>
+  <data name="&gt;&gt;txtParola2.Name" xml:space="preserve">
+    <value>txtParola2</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="etiCapitolo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiParola1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;etiParola.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiLibro1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiParola.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtVersetto1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 59</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="etiCapitolo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLibro2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo1.Name" xml:space="preserve">
+    <value>txtCapitolo1</value>
+  </data>
+  <data name="&gt;&gt;etiParola.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>LaParola.Template, LaParola, Version=7.17.0.0, Culture=neutral, PublicKeyToken=934e5a3ed9094c37</value>
+  </data>
+  <data name="txtVersetto2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiLibro2.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="etiLibro2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="etiCapitolo.HelpKeyword" xml:space="preserve">
+    <value>referencechapter1.html</value>
+  </data>
+  <data name="txtCapitolo1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtVersetto1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiParola1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiLibro2.Text" xml:space="preserve">
+    <value>B&amp;ook of the end of the passage:</value>
+  </data>
+  <data name="txtParola2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiLibro1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtParola1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiCapitolo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 36</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto2.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="txtCapitolo2.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;etiParola1.Name" xml:space="preserve">
+    <value>etiParola1</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto1.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="etiCapitolo1.HelpKeyword" xml:space="preserve">
+    <value>referencechapter1.html</value>
+  </data>
+  <data name="&gt;&gt;etiLibro1.Name" xml:space="preserve">
+    <value>etiLibro1</value>
+  </data>
+  <data name="etiParola2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapitolo2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiParola2.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="etiVersetto2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="btnOK.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="txtCapitolo1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbBrano.HelpKeyword" xml:space="preserve">
+    <value>referencepassage.html</value>
+  </data>
+  <data name="etiParola.Text" xml:space="preserve">
+    <value>&amp;Word (0 or blank for all the verse):</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnCanc.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;etiParola.Name" xml:space="preserve">
+    <value>etiParola</value>
+  </data>
+  <data name="cbLibro2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 127</value>
+  </data>
+  <data name="etiParola1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 13</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto2.Name" xml:space="preserve">
+    <value>txtVersetto2</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo2.Name" xml:space="preserve">
+    <value>txtCapitolo2</value>
+  </data>
+  <data name="etiCapitolo2.Text" xml:space="preserve">
+    <value>Cha&amp;pter of the end of the passage:</value>
+  </data>
+  <data name="txtVersetto2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 179</value>
+  </data>
+  <data name="etiCapitolo2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cbLibro1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiParola2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto1.Name" xml:space="preserve">
+    <value>txtVersetto1</value>
+  </data>
+  <data name="etiCapitolo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 13</value>
+  </data>
+  <data name="&gt;&gt;etiLibro.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiParola2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 208</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;etiLibro1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;etiParola2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiLibro.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="etiCapitolo1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbLibro1.Name" xml:space="preserve">
+    <value>cbLibro1</value>
+  </data>
+  <data name="etiLibro.Text" xml:space="preserve">
+    <value>&amp;Book:</value>
+  </data>
+  <data name="&gt;&gt;etiLibro2.Name" xml:space="preserve">
+    <value>etiLibro2</value>
+  </data>
+  <data name="txtParola1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto1.Name" xml:space="preserve">
+    <value>etiVersetto1</value>
+  </data>
+  <data name="etiLibro.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiVersetto.Text" xml:space="preserve">
+    <value>&amp;Verse (0 or blank for all the chapter):</value>
+  </data>
+  <data name="btnCanc.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiVersetto2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbLibro1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbBrano.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiVersetto1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Name" xml:space="preserve">
+    <value>cbBrano</value>
+  </data>
+  <data name="etiCapitolo2.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cbLibro2.HelpKeyword" xml:space="preserve">
+    <value>referencebook2.html</value>
+  </data>
+  <data name="cbBrano.Text" xml:space="preserve">
+    <value>&amp;Note on a passage</value>
+  </data>
+  <data name="etiParola.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiParola.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 88</value>
+  </data>
+  <data name="etiVersetto.HelpKeyword" xml:space="preserve">
+    <value>referenceverse1.html</value>
+  </data>
+  <data name="etiParola.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtVersetto2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiVersetto1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiLibro1.HelpKeyword" xml:space="preserve">
+    <value>referencebook1.html</value>
+  </data>
+  <data name="&gt;&gt;cbLibro2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtVersetto2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="etiParola2.Text" xml:space="preserve">
+    <value>Wo&amp;rd of the end of the passage:</value>
+  </data>
+  <data name="&gt;&gt;txtParola2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiVersetto2.HelpKeyword" xml:space="preserve">
+    <value>referenceverse2.html</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto2.Name" xml:space="preserve">
+    <value>etiVersetto2</value>
+  </data>
+  <data name="etiParola.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="etiLibro2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiParola2.Name" xml:space="preserve">
+    <value>etiParola2</value>
+  </data>
+  <data name="etiVersetto.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cbLibro2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiParola2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiParola1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 88</value>
+  </data>
+  <data name="etiLibro.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbLibro2.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="etiVersetto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 13</value>
+  </data>
+  <data name="etiLibro1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cbBrano.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 110</value>
+  </data>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="etiVersetto.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtParola1.HelpKeyword" xml:space="preserve">
+    <value>referenceword1.html</value>
+  </data>
+  <data name="etiParola2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiParola.HelpKeyword" xml:space="preserve">
+    <value>referenceword1.html</value>
+  </data>
+  <data name="txtParola1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 85</value>
+  </data>
+  <data name="&gt;&gt;etiParola1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapitolo.Text" xml:space="preserve">
+    <value>C&amp;hapter (0 or blank for all the book):</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="cbLibro1.HelpKeyword" xml:space="preserve">
+    <value>referencebook1.html</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiLibro1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtCapitolo1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="txtParola2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiVersetto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 62</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto2.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cbLibro2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiVersetto2.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtVersetto1.HelpKeyword" xml:space="preserve">
+    <value>referenceverse1.html</value>
+  </data>
+  <data name="txtCapitolo1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 33</value>
+  </data>
+  <data name="txtVersetto1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtParola2.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="cbLibro1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="&gt;&gt;etiLibro2.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="etiVersetto2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiCapitolo2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 156</value>
+  </data>
+  <data name="&gt;&gt;cbLibro1.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="etiCapitolo1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 36</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbLibro2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtVersetto1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiCapitolo1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiLibro2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cbLibro1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiVersetto2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbBrano.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>360, 266</value>
+  </data>
+  <data name="etiVersetto1.HelpKeyword" xml:space="preserve">
+    <value>referenceverse1.html</value>
+  </data>
+  <data name="etiParola1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbLibro2.Name" xml:space="preserve">
+    <value>cbLibro2</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo.Name" xml:space="preserve">
+    <value>etiCapitolo</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Build a Reference</value>
+  </data>
+  <data name="txtParola2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 205</value>
+  </data>
+  <data name="etiParola1.HelpKeyword" xml:space="preserve">
+    <value>referenceword1.html</value>
+  </data>
+  <data name="cbLibro1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 7</value>
+  </data>
+  <data name="etiLibro.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtCapitolo2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="etiVersetto1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 13</value>
+  </data>
+  <data name="etiCapitolo2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtCapitolo1.HelpKeyword" xml:space="preserve">
+    <value>referencechapter1.html</value>
+  </data>
+  <data name="btnCanc.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiCapitolo1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiCapitolo2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;cbLibro2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtVersetto1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="cbBrano.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 17</value>
+  </data>
+  <data name="etiVersetto1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 62</value>
+  </data>
+  <data name="&gt;&gt;txtCapitolo1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiCapitolo1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="etiCapitolo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Name" xml:space="preserve">
+    <value>guidaFile</value>
+  </data>
+  <data name="txtParola2.HelpKeyword" xml:space="preserve">
+    <value>referenceword2.html</value>
+  </data>
+  <data name="&gt;&gt;etiCapitolo2.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="etiCapitolo1.Text" xml:space="preserve">
+    <value>Ch&amp;apter of the beginning of the passage:</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="guidaFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

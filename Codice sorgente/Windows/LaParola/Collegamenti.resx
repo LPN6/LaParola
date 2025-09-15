@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="&gt;&gt;lbCollegamenti.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;txtParametri.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiLingua.HelpKeyword" xml:space="preserve">
+    <value>linkstype.html</value>
+  </data>
+  <data name="txtImmagine.HelpKeyword" xml:space="preserve">
+    <value>linksimage.html</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtScorciatoia.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtImmagine.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtScorciatoia.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtDescrizione.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="pulNuovo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbCollegamenti.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 8</value>
+  </data>
+  <data name="etiDescrizione.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiIndirizzo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiParametri.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiLingua.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="etiScorciatoia.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiImmagine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtNome.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="pulSalva.HelpKeyword" xml:space="preserve">
+    <value>linkssave.html</value>
+  </data>
+  <data name="&gt;&gt;rbTipoParola.Parent" xml:space="preserve">
+    <value>gbTipo</value>
+  </data>
+  <data name="&gt;&gt;pulNuovo.Name" xml:space="preserve">
+    <value>pulNuovo</value>
+  </data>
+  <data name="&gt;&gt;txtNome.Name" xml:space="preserve">
+    <value>txtNome</value>
+  </data>
+  <data name="pulSalva.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 260</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="etiCategoria.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="etiScorciatoia.HelpKeyword" xml:space="preserve">
+    <value>linksshortcut.html</value>
+  </data>
+  <data name="&gt;&gt;etiLingua.Name" xml:space="preserve">
+    <value>etiLingua</value>
+  </data>
+  <data name="&gt;&gt;rbTipoParola.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="etiNome.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtDescrizione.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="gbTipo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rbTipoRiferimento.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiDescrizione.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pulSalva.Text" xml:space="preserve">
+    <value>Sa&amp;ve</value>
+  </data>
+  <data name="&gt;&gt;txtDescrizione.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;pulNuovo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtParametri.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;etiParametri.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtCategoria.HelpKeyword" xml:space="preserve">
+    <value>linkscategory.html</value>
+  </data>
+  <data name="&gt;&gt;gbTipo.Name" xml:space="preserve">
+    <value>gbTipo</value>
+  </data>
+  <data name="&gt;&gt;rbTipoRiferimento.Name" xml:space="preserve">
+    <value>rbTipoRiferimento</value>
+  </data>
+  <data name="etiImmagine.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtCategoria.Name" xml:space="preserve">
+    <value>txtCategoria</value>
+  </data>
+  <data name="etiDescrizione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 37</value>
+  </data>
+  <data name="rbTipoRiferimento.HelpKeyword" xml:space="preserve">
+    <value>linkstype.html</value>
+  </data>
+  <data name="txtIndirizzo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="&gt;&gt;txtIndirizzo.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="gbTipo.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="etiCategoria.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulNuovo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiLingua.Parent" xml:space="preserve">
+    <value>gbTipo</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Name" xml:space="preserve">
+    <value>guidaFile</value>
+  </data>
+  <data name="pulSalva.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbCollegamenti.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;gbTipo.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="etiParametri.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="pulCancella.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="txtDescrizione.HelpKeyword" xml:space="preserve">
+    <value>linksdescription.html</value>
+  </data>
+  <data name="etiDescrizione.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiIndirizzo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 136</value>
+  </data>
+  <data name="txtCategoria.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtCategoria.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="pulSalva.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiScorciatoia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbTipoParola.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="pulCancella.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbTipoRiferimento.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiDescrizione.HelpKeyword" xml:space="preserve">
+    <value>linksdescription.html</value>
+  </data>
+  <data name="&gt;&gt;rbTipoRiferimento.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Collegamenti</value>
+  </data>
+  <data name="pulNuovo.HelpKeyword" xml:space="preserve">
+    <value>linksnew.html</value>
+  </data>
+  <data name="pulNuovo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="etiScorciatoia.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiDescrizione.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulCancella.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 23</value>
+  </data>
+  <data name="&gt;&gt;rbTipoRiferimento.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtLingua.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pulSalva.Name" xml:space="preserve">
+    <value>pulSalva</value>
+  </data>
+  <data name="txtDescrizione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 32</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>External Links</value>
+  </data>
+  <data name="txtIndirizzo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;gbTipo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtLingua.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="etiImmagine.HelpKeyword" xml:space="preserve">
+    <value>linksimage.html</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Name" xml:space="preserve">
+    <value>btnCanc</value>
+  </data>
+  <data name="rbTipoRiferimento.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="etiNome.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiLingua.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiImmagine.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rbTipoRiferimento.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtLingua.HelpKeyword" xml:space="preserve">
+    <value>linkstype.html</value>
+  </data>
+  <data name="txtDescrizione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="etiDescrizione.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;pulSalva.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiParametri.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 160</value>
+  </data>
+  <data name="&gt;&gt;pulCancella.Name" xml:space="preserve">
+    <value>pulCancella</value>
+  </data>
+  <data name="txtIndirizzo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiIndirizzo.Text" xml:space="preserve">
+    <value>&amp;Address/program:</value>
+  </data>
+  <data name="pulSalva.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 23</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;etiCategoria.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtImmagine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 181</value>
+  </data>
+  <data name="lbCollegamenti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 238</value>
+  </data>
+  <data name="etiDescrizione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="pulCancella.HelpKeyword" xml:space="preserve">
+    <value>linksdelete.html</value>
+  </data>
+  <data name="etiParametri.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtDescrizione.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pulSalva.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtCategoria.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="etiIndirizzo.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="etiLingua.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 48</value>
+  </data>
+  <data name="&gt;&gt;txtDescrizione.Name" xml:space="preserve">
+    <value>txtDescrizione</value>
+  </data>
+  <data name="etiParametri.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtIndirizzo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtCategoria.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="gbTipo.Text" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="pulNuovo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 260</value>
+  </data>
+  <data name="rbTipoParola.HelpKeyword" xml:space="preserve">
+    <value>linkstype.html</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>404, 295</value>
+  </data>
+  <data name="txtLingua.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtNome.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtCategoria.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 229</value>
+  </data>
+  <data name="pulNuovo.Text" xml:space="preserve">
+    <value>Ne&amp;w</value>
+  </data>
+  <data name="txtNome.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiImmagine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtNome.HelpKeyword" xml:space="preserve">
+    <value>linksname.html</value>
+  </data>
+  <data name="gbTipo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="btnCanc.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;txtImmagine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiParametri.Name" xml:space="preserve">
+    <value>etiParametri</value>
+  </data>
+  <data name="rbTipoParola.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiParametri.HelpKeyword" xml:space="preserve">
+    <value>linksparameters.html</value>
+  </data>
+  <data name="etiLingua.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtParametri.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;etiScorciatoia.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiScorciatoia.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiNome.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiIndirizzo.HelpKeyword" xml:space="preserve">
+    <value>linksaddress.html</value>
+  </data>
+  <data name="etiIndirizzo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 13</value>
+  </data>
+  <data name="&gt;&gt;pulNuovo.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;txtScorciatoia.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rbTipoRiferimento.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAB
+        ARiIgAAAAAAAAAAAAAAAGQiBGIiAAAAAAAAAAAAAABkYd3EYiIAAAAAAAAAAAAGZEZh3cRiIgAAAAAAA
+        AAABkRERmHdxGIiAAAAAAAAAGZERERGYd3EYiIAAAAAAABkREREbsZh3cRiAAAAAAAGZERERO7ERmHCI
+        AAAAAAABkREREbsxERGRiAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7ER
+        EREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZE7MR
+        O7EREREYAAAAAAABkRu7s7sxERERGAAAAAAAGZERO7u7MREREYAAAAAAABkRERE7u7sxERGAAAAAAAGZ
+        ERERO7O7uxEYAAAAAAABkREREbsxE7MRGAAAAAAACZERERO7EREREYAAAAAAAAAZkREbsxERERGAAAAA
+        AAAAABmRG7EREREYAAAAAAAAAAAAGZEREREREAAAAAAAAAAAAAAZkREREQAAAAAAAAAAAAAAABmREREA
+        AAAAAAAAAAAAAAAAGZEQAAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf///gC
+        f//94B///8AH///AAf//gAB//4AAH/8AAAf/AAAH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/8AAAf/AA
+        AH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/+AAAf/wAAH//AAD//8AB///wA////AP///8H////x/////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAEBEw
+        AAAAAAARiBEwAAAAARERiBEwAAABERuxgxAAABERGxERMAAAERG7EREAAAEREbEREQAAAREbsREQAAAR
+        G7sRERAAABERu7sRAAAAERGxEREAAAABG7EREAAAAAABEREAAAAAAAABEQAAAAAAAAAAAAAA4D8AAPQP
+        AAD4AwAA+AAAAPAAAADwAQAA4AEAAOADAADAAwAAwAcAAIAHAACADwAAwA8AAPAfAAD8PwAA/z8AAA==
+</value>
+  </data>
+  <data name="&gt;&gt;gbTipo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiNome.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtNome.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtDescrizione.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rbTipoParola.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtScorciatoia.Name" xml:space="preserve">
+    <value>txtScorciatoia</value>
+  </data>
+  <data name="btnCanc.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtParametri.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiNome.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiDescrizione.Text" xml:space="preserve">
+    <value>&amp;Description:</value>
+  </data>
+  <data name="&gt;&gt;etiIndirizzo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtLingua.Parent" xml:space="preserve">
+    <value>gbTipo</value>
+  </data>
+  <data name="&gt;&gt;txtCategoria.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiCategoria.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="&gt;&gt;etiCategoria.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="btnOK.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtImmagine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiParametri.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rbTipoRiferimento.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="etiImmagine.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="txtScorciatoia.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="txtNome.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtLingua.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtParametri.Name" xml:space="preserve">
+    <value>txtParametri</value>
+  </data>
+  <data name="etiCategoria.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiDescrizione.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;txtIndirizzo.Name" xml:space="preserve">
+    <value>txtIndirizzo</value>
+  </data>
+  <data name="&gt;&gt;txtParametri.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtParametri.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 157</value>
+  </data>
+  <data name="&gt;&gt;pulSalva.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtNome.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;rbTipoRiferimento.Parent" xml:space="preserve">
+    <value>gbTipo</value>
+  </data>
+  <data name="etiIndirizzo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pulCancella.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtScorciatoia.HelpKeyword" xml:space="preserve">
+    <value>linksshortcut.html</value>
+  </data>
+  <data name="lbCollegamenti.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtCategoria.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiLingua.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbTipoParola.Text" xml:space="preserve">
+    <value>&amp;Word</value>
+  </data>
+  <data name="btnCanc.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="txtScorciatoia.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtLingua.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 45</value>
+  </data>
+  <data name="pulSalva.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtCategoria.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="etiDescrizione.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="etiScorciatoia.Text" xml:space="preserve">
+    <value>&amp;Shortcut:</value>
+  </data>
+  <data name="txtLingua.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="txtNome.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 8</value>
+  </data>
+  <data name="etiImmagine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="&gt;&gt;etiScorciatoia.Name" xml:space="preserve">
+    <value>etiScorciatoia</value>
+  </data>
+  <data name="&gt;&gt;etiParametri.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="gbTipo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 55</value>
+  </data>
+  <data name="btnCanc.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="etiNome.HelpKeyword" xml:space="preserve">
+    <value>linksname.html</value>
+  </data>
+  <data name="txtParametri.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="gbTipo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbCollegamenti.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbCollegamenti.Name" xml:space="preserve">
+    <value>lbCollegamenti</value>
+  </data>
+  <data name="etiNome.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="etiCategoria.HelpKeyword" xml:space="preserve">
+    <value>linkscategory.html</value>
+  </data>
+  <data name="etiNome.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 11</value>
+  </data>
+  <data name="etiLingua.Text" xml:space="preserve">
+    <value>&amp;Language:</value>
+  </data>
+  <data name="etiScorciatoia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 209</value>
+  </data>
+  <data name="&gt;&gt;etiCategoria.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCategoria.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiImmagine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 184</value>
+  </data>
+  <data name="&gt;&gt;etiNome.Name" xml:space="preserve">
+    <value>etiNome</value>
+  </data>
+  <data name="etiLingua.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;pulCancella.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbCollegamenti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pulNuovo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 23</value>
+  </data>
+  <data name="&gt;&gt;pulSalva.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lbCollegamenti.HelpKeyword" xml:space="preserve">
+    <value>linkslist.html</value>
+  </data>
+  <data name="etiNome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>LaParola.Template, LaParola, Version=7.17.0.0, Culture=neutral, PublicKeyToken=934e5a3ed9094c37</value>
+  </data>
+  <data name="etiScorciatoia.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="etiCategoria.Text" xml:space="preserve">
+    <value>Cate&amp;gory:</value>
+  </data>
+  <data name="pulCancella.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="etiImmagine.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbTipoRiferimento.Text" xml:space="preserve">
+    <value>&amp;Reference</value>
+  </data>
+  <data name="&gt;&gt;etiScorciatoia.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtNome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="txtScorciatoia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 206</value>
+  </data>
+  <data name="gbTipo.HelpKeyword" xml:space="preserve">
+    <value>linkstype.html</value>
+  </data>
+  <data name="etiNome.Text" xml:space="preserve">
+    <value>&amp;Name:</value>
+  </data>
+  <data name="etiIndirizzo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbCollegamenti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiParametri.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="gbTipo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 75</value>
+  </data>
+  <data name="txtIndirizzo.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;pulNuovo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiImmagine.Name" xml:space="preserve">
+    <value>etiImmagine</value>
+  </data>
+  <data name="etiCategoria.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 232</value>
+  </data>
+  <data name="etiParametri.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnCanc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 260</value>
+  </data>
+  <data name="&gt;&gt;txtIndirizzo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pulCancella.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 260</value>
+  </data>
+  <data name="&gt;&gt;etiLingua.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pulCancella.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="etiParametri.Text" xml:space="preserve">
+    <value>&amp;Parameters:</value>
+  </data>
+  <data name="&gt;&gt;txtIndirizzo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiIndirizzo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rbTipoParola.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 46</value>
+  </data>
+  <data name="txtParametri.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtIndirizzo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 133</value>
+  </data>
+  <data name="&gt;&gt;etiDescrizione.Name" xml:space="preserve">
+    <value>etiDescrizione</value>
+  </data>
+  <data name="&gt;&gt;etiIndirizzo.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;txtScorciatoia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbTipoParola.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
+  </data>
+  <data name="txtScorciatoia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="txtImmagine.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtParametri.HelpKeyword" xml:space="preserve">
+    <value>linksparameters.html</value>
+  </data>
+  <data name="etiNome.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulCancella.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="txtCategoria.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="&gt;&gt;txtNome.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="etiImmagine.Text" xml:space="preserve">
+    <value>&amp;Image file name:</value>
+  </data>
+  <data name="txtScorciatoia.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;rbTipoParola.Name" xml:space="preserve">
+    <value>rbTipoParola</value>
+  </data>
+  <data name="txtIndirizzo.HelpKeyword" xml:space="preserve">
+    <value>linksaddress.html</value>
+  </data>
+  <data name="&gt;&gt;rbTipoParola.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiScorciatoia.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;etiIndirizzo.Name" xml:space="preserve">
+    <value>etiIndirizzo</value>
+  </data>
+  <data name="btnOK.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="txtLingua.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtImmagine.Name" xml:space="preserve">
+    <value>txtImmagine</value>
+  </data>
+  <data name="txtImmagine.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="pulCancella.Text" xml:space="preserve">
+    <value>D&amp;elete</value>
+  </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 260</value>
+  </data>
+  <data name="&gt;&gt;txtImmagine.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="etiLingua.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtDescrizione.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="etiLingua.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="btnOK.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiDescrizione.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiImmagine.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtParametri.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="rbTipoParola.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtLingua.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="etiCategoria.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="txtDescrizione.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;txtLingua.Name" xml:space="preserve">
+    <value>txtLingua</value>
+  </data>
+  <data name="etiScorciatoia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiImmagine.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;etiCategoria.Name" xml:space="preserve">
+    <value>etiCategoria</value>
+  </data>
+  <data name="&gt;&gt;etiNome.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="txtImmagine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="&gt;&gt;etiIndirizzo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtImmagine.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="guidaFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

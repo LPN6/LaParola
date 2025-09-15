@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnCanc.Text" xml:space="preserve">
+    <value>&amp;Chiudi</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="etiPesi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="etiPesi.Text" xml:space="preserve">
+    <value>&amp;Pesi:</value>
+  </data>
+  <data name="cbPesi1.Items" xml:space="preserve">
+    <value>grammo</value>
+  </data>
+  <data name="cbPesi1.Items1" xml:space="preserve">
+    <value>ghera</value>
+  </data>
+  <data name="cbPesi1.Items2" xml:space="preserve">
+    <value>beca</value>
+  </data>
+  <data name="cbPesi1.Items4" xml:space="preserve">
+    <value>siclo</value>
+  </data>
+  <data name="cbPesi1.Items6" xml:space="preserve">
+    <value>talento</value>
+  </data>
+  <data name="cbPesi1.Items7" xml:space="preserve">
+    <value>libbra</value>
+  </data>
+  <data name="etiLunghezze.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="etiLunghezze.Text" xml:space="preserve">
+    <value>&amp;Lunghezze:</value>
+  </data>
+  <data name="cbLunghezze1.Items" xml:space="preserve">
+    <value>metro</value>
+  </data>
+  <data name="cbLunghezze1.Items1" xml:space="preserve">
+    <value>dito</value>
+  </data>
+  <data name="cbLunghezze1.Items2" xml:space="preserve">
+    <value>palmo</value>
+  </data>
+  <data name="cbLunghezze1.Items3" xml:space="preserve">
+    <value>spanna</value>
+  </data>
+  <data name="cbLunghezze1.Items4" xml:space="preserve">
+    <value>cubito</value>
+  </data>
+  <data name="cbLunghezze1.Items5" xml:space="preserve">
+    <value>canna</value>
+  </data>
+  <data name="cbLunghezze1.Items6" xml:space="preserve">
+    <value>cammin di sabato</value>
+  </data>
+  <data name="cbLunghezze1.Items7" xml:space="preserve">
+    <value>braccio</value>
+  </data>
+  <data name="cbLunghezze1.Items8" xml:space="preserve">
+    <value>miglio</value>
+  </data>
+  <data name="cbLunghezze1.Items9" xml:space="preserve">
+    <value>stadio</value>
+  </data>
+  <data name="etiCapacita.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="etiCapacita.Text" xml:space="preserve">
+    <value>C&amp;apacità:</value>
+  </data>
+  <data name="cbCapacita1.Items" xml:space="preserve">
+    <value>litro</value>
+  </data>
+  <data name="cbCapacita1.Items1" xml:space="preserve">
+    <value>log (liquidi)</value>
+  </data>
+  <data name="cbCapacita1.Items2" xml:space="preserve">
+    <value>hin (liquidi)</value>
+  </data>
+  <data name="cbCapacita1.Items3" xml:space="preserve">
+    <value>bat (liquidi)</value>
+  </data>
+  <data name="cbCapacita1.Items4" xml:space="preserve">
+    <value>cor/comer (liquidi/solidi)</value>
+  </data>
+  <data name="cbCapacita1.Items5" xml:space="preserve">
+    <value>cab (solidi)</value>
+  </data>
+  <data name="cbCapacita1.Items6" xml:space="preserve">
+    <value>omer (solidi)</value>
+  </data>
+  <data name="cbCapacita1.Items7" xml:space="preserve">
+    <value>misura (OT)(solidi)</value>
+  </data>
+  <data name="cbCapacita1.Items8" xml:space="preserve">
+    <value>efa (solidi)</value>
+  </data>
+  <data name="etiMonete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="etiMonete.Text" xml:space="preserve">
+    <value>&amp;Monete:</value>
+  </data>
+  <data name="cbMonete1.Items1" xml:space="preserve">
+    <value>lepton/spicciolo</value>
+  </data>
+  <data name="cbMonete1.Items2" xml:space="preserve">
+    <value>quadrante/quattrino</value>
+  </data>
+  <data name="cbMonete1.Items3" xml:space="preserve">
+    <value>asse/soldo</value>
+  </data>
+  <data name="cbMonete1.Items4" xml:space="preserve">
+    <value>denaro/paga giornaliera</value>
+  </data>
+  <data name="cbMonete1.Items5" xml:space="preserve">
+    <value>dramma</value>
+  </data>
+  <data name="cbMonete1.Items6" xml:space="preserve">
+    <value>didramma</value>
+  </data>
+  <data name="cbMonete1.Items7" xml:space="preserve">
+    <value>statere/siclo</value>
+  </data>
+  <data name="cbMonete1.Items8" xml:space="preserve">
+    <value>aurei</value>
+  </data>
+  <data name="cbMonete1.Items9" xml:space="preserve">
+    <value>mina</value>
+  </data>
+  <data name="cbMonete1.Items10" xml:space="preserve">
+    <value>talento</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAB
+        ARiIgAAAAAAAAAAAAAAAGQiBGIiAAAAAAAAAAAAAABkYd3EYiIAAAAAAAAAAAAGZEZh3cRiIgAAAAAAA
+        AAABkRERmHdxGIiAAAAAAAAAGZERERGYd3EYiIAAAAAAABkREREbsZh3cRiAAAAAAAGZERERO7ERmHCI
+        AAAAAAABkREREbsxERGRiAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7ER
+        EREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZE7MR
+        O7EREREYAAAAAAABkRu7s7sxERERGAAAAAAAGZERO7u7MREREYAAAAAAABkRERE7u7sxERGAAAAAAAGZ
+        ERERO7O7uxEYAAAAAAABkREREbsxE7MRGAAAAAAACZERERO7EREREYAAAAAAAAAZkREbsxERERGAAAAA
+        AAAAABmRG7EREREYAAAAAAAAAAAAGZEREREREAAAAAAAAAAAAAAZkREREQAAAAAAAAAAAAAAABmREREA
+        AAAAAAAAAAAAAAAAGZEQAAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf///gC
+        f//94B///8AH///AAf//gAB//4AAH/8AAAf/AAAH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/8AAAf/AA
+        AH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/+AAAf/wAAH//AAD//8AB///wA////AP///8H////x/////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAEBEw
+        AAAAAAARiBEwAAAAARERiBEwAAABERuxgxAAABERGxERMAAAERG7EREAAAEREbEREQAAAREbsREQAAAR
+        G7sRERAAABERu7sRAAAAERGxEREAAAABG7EREAAAAAABEREAAAAAAAABEQAAAAAAAAAAAAAA4D8AAPQP
+        AAD4AwAA+AAAAPAAAADwAQAA4AEAAOADAADAAwAAwAcAAIAHAACADwAAwA8AAPAfAAD8PwAA/z8AAA==
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Misure e pesi</value>
+  </data>
+</root>

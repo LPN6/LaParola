@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="msBarreDiStrumenti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 92</value>
+  </data>
+  <data name="newToolStripButton.Text" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="openToolStripButton.Text" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="saveToolStripButton.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="printToolStripButton.Text" xml:space="preserve">
+    <value>Imprimir</value>
+  </data>
+  <data name="printPreviewToolStripButton.Text" xml:space="preserve">
+    <value>Previsualizar Impresión</value>
+  </data>
+  <data name="undoToolStripButton.Text" xml:space="preserve">
+    <value>Deshacer</value>
+  </data>
+  <data name="redoToolStripButton.Text" xml:space="preserve">
+    <value>Rehacer</value>
+  </data>
+  <data name="cutToolStripButton.Text" xml:space="preserve">
+    <value>Cortar</value>
+  </data>
+  <data name="copyToolStripButton.Text" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="pasteToolStripButton.Text" xml:space="preserve">
+    <value>Pegar</value>
+  </data>
+  <data name="bibleToolStripButton.Text" xml:space="preserve">
+    <value>Ver Biblia</value>
+  </data>
+  <data name="notaToolStripButton.Text" xml:space="preserve">
+    <value>Ver Comentario</value>
+  </data>
+  <data name="apriNotaToolStripButton.Text" xml:space="preserve">
+    <value>Abrir Nota</value>
+  </data>
+  <data name="bookmarksToolStripButton.Text" xml:space="preserve">
+    <value>Marcadores</value>
+  </data>
+  <data name="navigatorToolStripButton.Text" xml:space="preserve">
+    <value>Navegador</value>
+  </data>
+  <data name="imageToolStripButton.Text" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
+  <data name="searchStripButton.Text" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="showToolStripButton.Text" xml:space="preserve">
+    <value>Mostrar Pasaje</value>
+  </data>
+  <data name="concordanceToolStripButton.Text" xml:space="preserve">
+    <value>Crear Concordancia</value>
+  </data>
+  <data name="informationToolStripButton.Text" xml:space="preserve">
+    <value>Obtener Información</value>
+  </data>
+  <data name="readingsToolStripButton.Text" xml:space="preserve">
+    <value>Lecturas Diarias</value>
+  </data>
+  <data name="measuresToolStripButton.Text" xml:space="preserve">
+    <value>Pesos y Medidas</value>
+  </data>
+  <data name="manageCollectionsToolStripButton.Text" xml:space="preserve">
+    <value>Manejar Textos</value>
+  </data>
+  <data name="updateToolStripButton.Text" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="updateToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="optionsToolStripButton.Text" xml:space="preserve">
+    <value>Opcione</value>
+  </data>
+  <data name="helpToolStripButton.Text" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="bsPrincipaleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="bsPrincipaleToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Principal</value>
+  </data>
+  <data name="bsFormatoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="bsFormatoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Formato</value>
+  </data>
+  <data name="bsOrdineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="bsOrdineToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Ordenar</value>
+  </data>
+  <data name="bsRigaComanoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="bsRigaComanoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Línea de Comando</value>
+  </data>
+  <data name="fileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="fileMenu.Text" xml:space="preserve">
+    <value>&amp;Archivos</value>
+  </data>
+  <data name="editMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="editMenu.Text" xml:space="preserve">
+    <value>&amp;Editar</value>
+  </data>
+  <data name="viewMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 20</value>
+  </data>
+  <data name="viewMenu.Text" xml:space="preserve">
+    <value>&amp;Ver</value>
+  </data>
+  <data name="formatMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="formatMenu.Text" xml:space="preserve">
+    <value>&amp;Formato</value>
+  </data>
+  <data name="toolsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="toolsMenu.Text" xml:space="preserve">
+    <value>&amp;Herramientas</value>
+  </data>
+  <data name="cascadeToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Cascada</value>
+  </data>
+  <data name="tileVerticalToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mosaico &amp;Vertical</value>
+  </data>
+  <data name="tileHorizontalToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mosaico &amp;Horizontal</value>
+  </data>
+  <data name="closeAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cerrar &amp;Todo</value>
+  </data>
+  <data name="arrangeIconsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Ordenar Íconos</value>
+  </data>
+  <data name="projectToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Proyectos</value>
+  </data>
+  <data name="removeProjectedWindowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 22</value>
+  </data>
+  <data name="removeProjectedWindowToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Retire ventana proyectada</value>
+  </data>
+  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 20</value>
+  </data>
+  <data name="windowsMenu.Text" xml:space="preserve">
+    <value>Ve&amp;ntanas</value>
+  </data>
+  <data name="helpMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="helpMenu.Text" xml:space="preserve">
+    <value>A&amp;yuda</value>
+  </data>
+  <data name="arrangementMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="arrangementMenu.Text" xml:space="preserve">
+    <value>Arre&amp;glar</value>
+  </data>
+  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="newToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Nuevo</value>
+  </data>
+  <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="openToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Abrir</value>
+  </data>
+  <data name="closeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="closeToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Cerrar</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 6</value>
+  </data>
+  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Guardar</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>G&amp;uardar como</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 6</value>
+  </data>
+  <data name="importBibleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="importBibleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Biblia desde archivo &amp;OSIS...</value>
+  </data>
+  <data name="importZefaniaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="importZefaniaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Biblia desde archivo &amp;Zefania XML...</value>
+  </data>
+  <data name="importBibleworksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="importBibleworksToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Biblia desde archivo Te&amp;xto (BibleWorks)...</value>
+  </data>
+  <data name="importNoteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="importNoteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Notas desde archivos &amp;RTF...</value>
+  </data>
+  <data name="importThMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="importThMLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Texto desde archivo &amp;ThML...</value>
+  </data>
+  <data name="importEswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="importEswordToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar Texto desde archivo e-S&amp;word...</value>
+  </data>
+  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Exportar Texto...</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 6</value>
+  </data>
+  <data name="printToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="printToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Imprimir</value>
+  </data>
+  <data name="printPreviewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="printPreviewToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Previsualizar Impresión</value>
+  </data>
+  <data name="printSetupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="printSetupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Con&amp;figurar Impresión</value>
+  </data>
+  <data name="printToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 6</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 22</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Salir</value>
+  </data>
+  <data name="undoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="undoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Deshacer</value>
+  </data>
+  <data name="redoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="redoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reh&amp;acer</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 6</value>
+  </data>
+  <data name="cutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="cutToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Cortar</value>
+  </data>
+  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cop&amp;iar</value>
+  </data>
+  <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Pegar</value>
+  </data>
+  <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
+    <value>B&amp;orrar</value>
+  </data>
+  <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Seleccionar Todo</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 6</value>
+  </data>
+  <data name="findToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="findToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Buscar...</value>
+  </data>
+  <data name="findAgainToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="findAgainToolStripMenuItem.Text" xml:space="preserve">
+    <value>B&amp;uscar de nuevo</value>
+  </data>
+  <data name="replaceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="replaceToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Reemplazar...</value>
+  </data>
+  <data name="replaceAgainToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="replaceAgainToolStripMenuItem.Text" xml:space="preserve">
+    <value>R&amp;eemplazar de nuevo</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 6</value>
+  </data>
+  <data name="hypertextJumpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="hypertextJumpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Saltar a &amp;Hipertexto</value>
+  </data>
+  <data name="bibleStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="bibleStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Biblia</value>
+  </data>
+  <data name="commentaryStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="commentaryStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Comentario</value>
+  </data>
+  <data name="dictionaryStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="dictionaryStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Diccionario</value>
+  </data>
+  <data name="parallelTextsStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="parallelTextsStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Textos Paralelos</value>
+  </data>
+  <data name="bookStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="bookStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Libro</value>
+  </data>
+  <data name="zoomToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 6</value>
+  </data>
+  <data name="zoomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="toolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 6</value>
+  </data>
+  <data name="bookmarksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="bookmarksToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Marcadores</value>
+  </data>
+  <data name="bookmarksQuickGoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="bookmarksQuickGoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Ir a Marcador</value>
+  </data>
+  <data name="bookmarksQuickSetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="bookmarksQuickSetToolStripMenuItem.Text" xml:space="preserve">
+    <value>C&amp;olocar Marcador</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 6</value>
+  </data>
+  <data name="bookmarksChaptersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="bookmarksChaptersToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Capítulos</value>
+  </data>
+  <data name="bookmarksChaptersToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Cada capítulo de la Biblia</value>
+  </data>
+  <data name="bookmarksOT1ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="bookmarksOT1ToolStripMenuItem.Text" xml:space="preserve">
+    <value>AT: Históricos</value>
+  </data>
+  <data name="bookmarksOT2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="bookmarksOT2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>AT: Escrituras y Profetas</value>
+  </data>
+  <data name="bookmarksNTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="bookmarksNTToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nuevo Testamento</value>
+  </data>
+  <data name="toolStripSeparator28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 6</value>
+  </data>
+  <data name="bookmarksEditToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="bookmarksEditToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Editar...</value>
+  </data>
+  <data name="navigatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="navigatorToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Navegador</value>
+  </data>
+  <data name="imageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="imageToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Imagen</value>
+  </data>
+  <data name="fontToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="fontToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Fuente...</value>
+  </data>
+  <data name="highlightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="highlightToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Resaltar</value>
+  </data>
+  <data name="highlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="highlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Resaltador</value>
+  </data>
+  <data name="yellowHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="yellowHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Amarillo</value>
+  </data>
+  <data name="limeHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="limeHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verde &amp;Lima</value>
+  </data>
+  <data name="cyanHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="cyanHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Cian</value>
+  </data>
+  <data name="pinkHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="pinkHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ro&amp;sado</value>
+  </data>
+  <data name="blueHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="blueHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>A&amp;zul</value>
+  </data>
+  <data name="redHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="redHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Rojo</value>
+  </data>
+  <data name="orangeHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="orangeHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Naranja</value>
+  </data>
+  <data name="magentaHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="greenHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="greenHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Verde</value>
+  </data>
+  <data name="purpleHighlighterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="purpleHighlighterToolStripMenuItem.Text" xml:space="preserve">
+    <value>M&amp;orado</value>
+  </data>
+  <data name="colourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="colourToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Color</value>
+  </data>
+  <data name="yellowColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="yellowColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Amarillo</value>
+  </data>
+  <data name="limeColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="limeColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verde &amp;Lima</value>
+  </data>
+  <data name="cyanColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="cyanColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Cian</value>
+  </data>
+  <data name="pinkColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="pinkColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ro&amp;sado</value>
+  </data>
+  <data name="blueColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="blueColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>A&amp;zul</value>
+  </data>
+  <data name="redColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="redColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Rojo</value>
+  </data>
+  <data name="orangeColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="orangeColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Naranja</value>
+  </data>
+  <data name="magentaColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="greenColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="greenColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Verde</value>
+  </data>
+  <data name="purpleColourToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="purpleColourToolStripMenuItem.Text" xml:space="preserve">
+    <value>M&amp;orado</value>
+  </data>
+  <data name="underlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="underlineToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Subrayar</value>
+  </data>
+  <data name="lineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="lineToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Línea</value>
+  </data>
+  <data name="dotsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="dotsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Puntos</value>
+  </data>
+  <data name="dashesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="dashesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Rayas</value>
+  </data>
+  <data name="dotdashToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="dotdashToolStripMenuItem.Text" xml:space="preserve">
+    <value>P&amp;unto-Raya</value>
+  </data>
+  <data name="wavyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="wavyToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Ondulada</value>
+  </data>
+  <data name="thickToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="thickToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Gruesa</value>
+  </data>
+  <data name="toolStripSeparator30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 6</value>
+  </data>
+  <data name="noneToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="noneToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Ninguno</value>
+  </data>
+  <data name="paragraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="paragraphToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Párrafo...</value>
+  </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 6</value>
+  </data>
+  <data name="hypertextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="hypertextToolStripMenuItem.Text" xml:space="preserve">
+    <value>Vínculo de &amp;Hipertexto</value>
+  </data>
+  <data name="ipertestoVersesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="ipertestoVersesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Versículos</value>
+  </data>
+  <data name="ipertestoNotaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="ipertestoFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="toolStripSeparator31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 6</value>
+  </data>
+  <data name="boldToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="italicToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="underlineToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="leftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="centerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="rightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="justifyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="updateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="updateToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Actualizar...</value>
+  </data>
+  <data name="updateToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 6</value>
+  </data>
+  <data name="searchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="searchToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Buscar...</value>
+  </data>
+  <data name="showToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="showToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Mostrar Pasaje...</value>
+  </data>
+  <data name="concordanceStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="concordanceStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Crear Concordancia...</value>
+  </data>
+  <data name="informationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="informationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Obtener &amp;Información...</value>
+  </data>
+  <data name="similarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="similarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pasajes &amp;Similares...</value>
+  </data>
+  <data name="toolStripSeparator27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 6</value>
+  </data>
+  <data name="parallelsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="parallelsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Paralelos</value>
+  </data>
+  <data name="readingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="readingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Lecturas Diarias</value>
+  </data>
+  <data name="measuresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="measuresToolStripMenuItem.Text" xml:space="preserve">
+    <value>P&amp;esos y Medidas</value>
+  </data>
+  <data name="quizStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 6</value>
+  </data>
+  <data name="manageNotesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="manageNotesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mane&amp;jo de Textos...</value>
+  </data>
+  <data name="createNoteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="createNoteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Crear/Modificar una &amp;Nota...</value>
+  </data>
+  <data name="toolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 6</value>
+  </data>
+  <data name="externalLinkStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="externalLinkStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Vínculos Externos</value>
+  </data>
+  <data name="toolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 6</value>
+  </data>
+  <data name="externalLinkEditToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="externalLinkEditToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Editar...</value>
+  </data>
+  <data name="toolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 6</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Opciones</value>
+  </data>
+  <data name="indexToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="indexToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Contenido</value>
+  </data>
+  <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="contentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Í&amp;ndice</value>
+  </data>
+  <data name="searchHelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="searchHelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Buscar</value>
+  </data>
+  <data name="videoToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 6</value>
+  </data>
+  <data name="videoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="videoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tutoriales de &amp;Video</value>
+  </data>
+  <data name="tutorialsOnInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="tutorialsOnInternetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tutoriales en &amp;Internet</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 6</value>
+  </data>
+  <data name="aboutBibleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="aboutBibleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ac&amp;erca de</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Acerca de...</value>
+  </data>
+  <data name="arrangementEmptyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 22</value>
+  </data>
+  <data name="arrangementEmptyToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Vacío</value>
+  </data>
+  <data name="toolStripSeparator32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 6</value>
+  </data>
+  <data name="arrangementSaveCurrentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 22</value>
+  </data>
+  <data name="arrangementSaveCurrentToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Guardar Actual</value>
+  </data>
+  <data name="arrangementDeleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 22</value>
+  </data>
+  <data name="arrangementDeleteToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Borrar</value>
+  </data>
+  <data name="browseToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Escriba una referencia Bíblica a visualizar</value>
+  </data>
+  <data name="browseNotesToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Seleccione una nota a visualizar</value>
+  </data>
+  <data name="gotoToolStripButton.Text" xml:space="preserve">
+    <value>Ir a Versículo</value>
+  </data>
+  <data name="bookToolStripLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 24</value>
+  </data>
+  <data name="bookToolStripLabel.Text" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="bookUDToolStripButton.Text" xml:space="preserve">
+    <value>Libro</value>
+  </data>
+  <data name="chapterUDToolStripButton.Text" xml:space="preserve">
+    <value>Capítulo</value>
+  </data>
+  <data name="verseUDToolStripButton.Text" xml:space="preserve">
+    <value>Versículo</value>
+  </data>
+  <data name="browseBookmarkListToolStripComboBox.Items" xml:space="preserve">
+    <value>Seleccionar lista...</value>
+  </data>
+  <data name="browseBookmarkListToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Grupo de Marcadores</value>
+  </data>
+  <data name="browseBookmarkPreviousToolStripButton.Text" xml:space="preserve">
+    <value>Marcador Anterior</value>
+  </data>
+  <data name="browseBookmarkBookmarkToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Marcador</value>
+  </data>
+  <data name="browseBookmarkNextToolStripButton.Text" xml:space="preserve">
+    <value>Siguiente Marcador</value>
+  </data>
+  <data name="browseSearchToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Escriba una expresión a buscar</value>
+  </data>
+  <data name="browseSearchGotoToolStripButton.Text" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="browseSearchVersesToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Lista de versículos que contienen la expresión de búsqueda</value>
+  </data>
+  <data name="browseBackToolStripButton.Text" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="highlightBrowseToolStripSplitButton.Text" xml:space="preserve">
+    <value>Resaltar</value>
+  </data>
+  <data name="orderPreviousToolStripButton.Text" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="orderIndexToolStripButton.Text" xml:space="preserve">
+    <value>Índice</value>
+  </data>
+  <data name="orderNextToolStripButton.Text" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="fontToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Tipo de Fuente</value>
+  </data>
+  <data name="fontToolStripButton.Text" xml:space="preserve">
+    <value>Fuente</value>
+  </data>
+  <data name="boldToolStripButton.Text" xml:space="preserve">
+    <value>Negrita</value>
+  </data>
+  <data name="italicToolStripButton.Text" xml:space="preserve">
+    <value>Itálica</value>
+  </data>
+  <data name="underlineToolStripButton.Text" xml:space="preserve">
+    <value>Subrayar</value>
+  </data>
+  <data name="highlightFormatToolStripSplitButton.Text" xml:space="preserve">
+    <value>Resaltar</value>
+  </data>
+  <data name="findToolStripButton.Text" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="replaceToolStripButton.Text" xml:space="preserve">
+    <value>Reemplazar</value>
+  </data>
+  <data name="paragraphToolStripButton.Text" xml:space="preserve">
+    <value>Párrafo</value>
+  </data>
+  <data name="alignLeftToolStripButton.Text" xml:space="preserve">
+    <value>Alinear a la Izquierda</value>
+  </data>
+  <data name="alignCenterToolStripButton.Text" xml:space="preserve">
+    <value>Centrar</value>
+  </data>
+  <data name="alignRightToolStripButton.Text" xml:space="preserve">
+    <value>Alinear a la Derecha</value>
+  </data>
+  <data name="bulletsToolStripButton.Text" xml:space="preserve">
+    <value>Viñetas</value>
+  </data>
+  <data name="indentDecreaseToolStripButton.Text" xml:space="preserve">
+    <value>Disminuir Sangría</value>
+  </data>
+  <data name="indentIncreaseToolStripButton.Text" xml:space="preserve">
+    <value>Aumentar Sangría</value>
+  </data>
+  <data name="hypertextToolStripSplitButton.Text" xml:space="preserve">
+    <value>Vínculo de Hipertexto</value>
+  </data>
+  <data name="versesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 22</value>
+  </data>
+  <data name="versesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Versículos</value>
+  </data>
+  <data name="notaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 22</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 22</value>
+  </data>
+  <data name="comandoToolStripLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 22</value>
+  </data>
+  <data name="comandoToolStripLabel.Text" xml:space="preserve">
+    <value>&amp;Comando:</value>
+  </data>
+  <data name="comandoToolStripComboBox.ToolTipText" xml:space="preserve">
+    <value>Escriba un comando a ejecutar (e.g. ? for a list of commands)</value>
+  </data>
+  <data name="comandoToolStripButton.Text" xml:space="preserve">
+    <value>Ejecutar</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAB
+        ARiIgAAAAAAAAAAAAAAAGQiBGIiAAAAAAAAAAAAAABkYd3EYiIAAAAAAAAAAAAGZEZh3cRiIgAAAAAAA
+        AAABkRERmHdxGIiAAAAAAAAAGZERERGYd3EYiIAAAAAAABkREREbsZh3cRiAAAAAAAGZERERO7ERmHCI
+        AAAAAAABkREREbsxERGRiAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7ER
+        EREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZE7MR
+        O7EREREYAAAAAAABkRu7s7sxERERGAAAAAAAGZERO7u7MREREYAAAAAAABkRERE7u7sxERGAAAAAAAGZ
+        ERERO7O7uxEYAAAAAAABkREREbsxE7MRGAAAAAAACZERERO7EREREYAAAAAAAAAZkREbsxERERGAAAAA
+        AAAAABmRG7EREREYAAAAAAAAAAAAGZEREREREAAAAAAAAAAAAAAZkREREQAAAAAAAAAAAAAAABmREREA
+        AAAAAAAAAAAAAAAAGZEQAAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf///gC
+        f//94B///8AH///AAf//gAB//4AAH/8AAAf/AAAH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/8AAAf/AA
+        AH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/+AAAf/wAAH//AAD//8AB///wA////AP///8H////x/////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAEBEw
+        AAAAAAARiBEwAAAAARERiBEwAAABERuxgxAAABERGxERMAAAERG7EREAAAEREbEREQAAAREbsREQAAAR
+        G7sRERAAABERu7sRAAAAERGxEREAAAABG7EREAAAAAABEREAAAAAAAABEQAAAAAAAAAAAAAA4D8AAPQP
+        AAD4AwAA+AAAAPAAAADwAQAA4AEAAOADAADAAwAAwAcAAIAHAACADwAAwA8AAPAfAAD8PwAA/z8AAA==
+</value>
+  </data>
+</root>

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="tvCategorie.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQwAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQJY2hp
+        bGRyZW4wCWNoaWxkcmVuMQljaGlsZHJlbjIIVXNlckRhdGEBAQAAAQABAAQEBAEBCAgIHVN5c3RlbS5X
+        aW5kb3dzLkZvcm1zLlRyZWVOb2RlAgAAAB1TeXN0ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQIAAAAd
+        U3lzdGVtLldpbmRvd3MuRm9ybXMuVHJlZU5vZGUCAAAAAgAAAAYDAAAAB1Jlc3VsdHMGBAAAAAx0dm5S
+        aXN1bHRhdGkA/////wYFAAAAAP////8JBQAAAAMAAAAJBgAAAAkHAAAACQgAAAAGCQAAAAxwYW5SaXN1
+        bHRhdGkFBgAAAB1TeXN0ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hl
+        Y2tlZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5
+        CkNoaWxkQ291bnQIVXNlckRhdGEBAQAAAQABAAEBCAgIAgAAAAYKAAAABFRleHQGCwAAAAh0dm5UZXN0
+        bwD/////CQUAAAD/////CQUAAAAAAAAABg0AAAAIcGFuVGVzdG8FBwAAAB1TeXN0ZW0uV2luZG93cy5G
+        b3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4CEltYWdlS2V5ElNl
+        bGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNlckRhdGEBAQAAAQAB
+        AAEBCAgIAgAAAAYOAAAAClJlZmVyZW5jZXMGDwAAAA50dm5SaWZlcmltZW50aQD/////CQUAAAD/////
+        CQUAAAAAAAAABhEAAAAOcGFuUmlmZXJpbWVudGkFCAAAAB1TeXN0ZW0uV2luZG93cy5Gb3Jtcy5UcmVl
+        Tm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1h
+        Z2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNlckRhdGEBAQAAAQABAAEBCAgIAgAA
+        AAYSAAAABUZvbnRzBhMAAAAMdHZuQ2FyYXR0ZXJpAP////8JBQAAAP////8JBQAAAAAAAAAGFQAAAAxw
+        YW5DYXJhdHRlcmkL
+</value>
+  </data>
+  <data name="tvCategorie.Nodes1" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQJY2hp
+        bGRyZW4wCFVzZXJEYXRhAQEAAAEAAQAEAQEICAgdU3lzdGVtLldpbmRvd3MuRm9ybXMuVHJlZU5vZGUC
+        AAAAAgAAAAYDAAAABVRleHRzBgQAAAAIdHZuVGVzdGkA/////wYFAAAAAP////8JBQAAAAEAAAAJBgAA
+        AAYHAAAACHBhblRlc3RpBQYAAAAdU3lzdGVtLldpbmRvd3MuRm9ybXMuVHJlZU5vZGUJAAAABFRleHQE
+        TmFtZQlJc0NoZWNrZWQKSW1hZ2VJbmRleAhJbWFnZUtleRJTZWxlY3RlZEltYWdlSW5kZXgQU2VsZWN0
+        ZWRJbWFnZUtleQpDaGlsZENvdW50CFVzZXJEYXRhAQEAAAEAAQABAQgICAIAAAAGCAAAAAxEaWN0aW9u
+        YXJpZXMGCQAAAAx0dm5EaXppb25hcmkA/////wkFAAAA/////wkFAAAAAAAAAAYLAAAADHBhbkRpemlv
+        bmFyaQs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes2" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAABUJvb2tzBgQAAAAIdHZuTGlicmkA/////wYFAAAAAP//
+        //8JBQAAAAAAAAAGBgAAAAhwYW5MaWJyaQs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes3" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAACUludGVyZmFjZQYEAAAADnR2bkludGVyZmFjY2lhAP//
+        //8GBQAAAAD/////CQUAAAAAAAAABgYAAAAOcGFuSW50ZXJmYWNjaWEL
+</value>
+  </data>
+  <data name="tvCategorie.Nodes4" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAACUNsaXBib2FyZAYEAAAADHR2bkNsaXBib2FyZAD/////
+        BgUAAAAA/////wkFAAAAAAAAAAYGAAAADHBhbkNsaXBib2FyZAs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes5" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAAB1VwZGF0ZXMGBAAAABB0dm5BZ2dpb3JuYW1lbnRpAP//
+        //8GBQAAAAD/////CQUAAAAAAAAABgYAAAAQcGFuQWdnaW9ybmFtZW50aQs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes6" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAADU1pc2NlbGxhbmVvdXMGBAAAAAh0dm5BbHRyZQD/////
+        BgUAAAAA/////wkFAAAAAAAAAAYGAAAACHBhbkFsdHJlCw==
+</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbIpertestoTooltipInTooltip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 17</value>
+  </data>
+  <data name="cbIpertestoTooltipInTooltip.Text" xml:space="preserve">
+    <value>&amp;También en un Tooltip</value>
+  </data>
+  <data name="labVociMassimeMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 13</value>
+  </data>
+  <data name="labVociMassimeMenu.Text" xml:space="preserve">
+    <value>&amp;Máximo de Ítems en un Menú:</value>
+  </data>
+  <data name="labBarraDiStrumenti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 13</value>
+  </data>
+  <data name="labBarraDiStrumenti.Text" xml:space="preserve">
+    <value>Ver &amp;Barra de Herramientas:</value>
+  </data>
+  <data name="cbBSRigaComando.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 17</value>
+  </data>
+  <data name="cbBSRigaComando.Text" xml:space="preserve">
+    <value>&amp;Línea de Comando</value>
+  </data>
+  <data name="cbBSOrdine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 17</value>
+  </data>
+  <data name="cbBSOrdine.Text" xml:space="preserve">
+    <value>&amp;Orden</value>
+  </data>
+  <data name="cbBSFormato.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="cbBSFormato.Text" xml:space="preserve">
+    <value>&amp;Formato</value>
+  </data>
+  <data name="cbBSPrincipale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 17</value>
+  </data>
+  <data name="cbBSPrincipale.Text" xml:space="preserve">
+    <value>&amp;Principal</value>
+  </data>
+  <data name="cbIpertestoTooltip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 17</value>
+  </data>
+  <data name="cbIpertestoTooltip.Text" xml:space="preserve">
+    <value>Mostrar &amp;Hipertexto como Tooltip</value>
+  </data>
+  <data name="cbStessaFinestraPerRisultati.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 17</value>
+  </data>
+  <data name="cbStessaFinestraPerRisultati.Text" xml:space="preserve">
+    <value>&amp;Ver Resultados en la misma Ventana</value>
+  </data>
+  <data name="cbBarraDiStato.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="cbBarraDiStato.Text" xml:space="preserve">
+    <value>Ver Barra de &amp;Estado</value>
+  </data>
+  <data name="labRichiesteMemorizzate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 13</value>
+  </data>
+  <data name="labRichiesteMemorizzate.Text" xml:space="preserve">
+    <value>Lista &amp;Reciente de Comandos:</value>
+  </data>
+  <data name="labLingua.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="labLingua.Text" xml:space="preserve">
+    <value>&amp;Idioma:</value>
+  </data>
+  <data name="cbLingua.Items" xml:space="preserve">
+    <value>Del computador</value>
+  </data>
+  <data name="cbLingua.Items1" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="cbLingua.Items2" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="cbLingua.Items3" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="btnFontGreco.Text" xml:space="preserve">
+    <value>Ca&amp;mbiar</value>
+  </data>
+  <data name="labFontEbraicoTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="labFontEbraicoTesto.Text" xml:space="preserve">
+    <value>Fuente de Texto Hebreo:</value>
+  </data>
+  <data name="labFontGrecoTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="labFontGrecoTesto.Text" xml:space="preserve">
+    <value>Fuente de Texto Griego</value>
+  </data>
+  <data name="btnFontRicerca.Text" xml:space="preserve">
+    <value>Cambia&amp;r</value>
+  </data>
+  <data name="labFontRicercaTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 13</value>
+  </data>
+  <data name="labFontRicercaTesto.Text" xml:space="preserve">
+    <value>Fuente de Palabras a Buscar:</value>
+  </data>
+  <data name="cbRifApice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 157</value>
+  </data>
+  <data name="cbRifApice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
+  </data>
+  <data name="cbRifApice.Text" xml:space="preserve">
+    <value>&amp;Superíndice</value>
+  </data>
+  <data name="btnFontRif.Text" xml:space="preserve">
+    <value>Camb&amp;iar</value>
+  </data>
+  <data name="btnFont.Text" xml:space="preserve">
+    <value>C&amp;ambiar</value>
+  </data>
+  <data name="labFontPredefTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="labFontPredefTesto.Text" xml:space="preserve">
+    <value>Fuente Actual:</value>
+  </data>
+  <data name="labFontRifTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 13</value>
+  </data>
+  <data name="labFontRifTesto.Text" xml:space="preserve">
+    <value>Fuente de Referencias:</value>
+  </data>
+  <data name="btnFontEbraico.Text" xml:space="preserve">
+    <value>Cam&amp;biar</value>
+  </data>
+  <data name="labEsempio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="labEsempio.Text" xml:space="preserve">
+    <value>Ejemplo:</value>
+  </data>
+  <data name="cbTitoli.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 17</value>
+  </data>
+  <data name="cbTitoli.Text" xml:space="preserve">
+    <value>&amp;Mostrar Sección Títulos de Biblias</value>
+  </data>
+  <data name="gbTesto.Text" xml:space="preserve">
+    <value>Texto:</value>
+  </data>
+  <data name="rbTesto2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 17</value>
+  </data>
+  <data name="rbTesto2.Text" xml:space="preserve">
+    <value>&amp;Ninguno</value>
+  </data>
+  <data name="rbTesto1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="rbTesto1.Text" xml:space="preserve">
+    <value>&amp;Párrafos</value>
+  </data>
+  <data name="rbTesto0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="rbTesto0.Text" xml:space="preserve">
+    <value>&amp;Versículos</value>
+  </data>
+  <data name="cbRifContestoRicerche.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 17</value>
+  </data>
+  <data name="cbRifContestoRicerche.Text" xml:space="preserve">
+    <value>Contexto en &amp;Búsquedas</value>
+  </data>
+  <data name="gbPosto.Text" xml:space="preserve">
+    <value>Lugar:</value>
+  </data>
+  <data name="rbRifPosto2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rbRifPosto2.Text" xml:space="preserve">
+    <value>&amp;Después</value>
+  </data>
+  <data name="rbRifPosto1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 17</value>
+  </data>
+  <data name="rbRifPosto1.Text" xml:space="preserve">
+    <value>Antes, diferente &amp;línea</value>
+  </data>
+  <data name="rbRifPosto0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 17</value>
+  </data>
+  <data name="rbRifPosto0.Text" xml:space="preserve">
+    <value>Antes, &amp;misma línea</value>
+  </data>
+  <data name="gbFormato.Text" xml:space="preserve">
+    <value>Formato:</value>
+  </data>
+  <data name="rbRifFormato2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 17</value>
+  </data>
+  <data name="rbRifFormato2.Text" xml:space="preserve">
+    <value>&amp;Ninguno</value>
+  </data>
+  <data name="rbRifFormato1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="rbRifFormato1.Text" xml:space="preserve">
+    <value>&amp;Abreviado</value>
+  </data>
+  <data name="rbRifFormato0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 17</value>
+  </data>
+  <data name="rbRifFormato0.Text" xml:space="preserve">
+    <value>&amp;Completo</value>
+  </data>
+  <data name="gbRifTipo.Text" xml:space="preserve">
+    <value>Tipo:</value>
+  </data>
+  <data name="btnLibriSpagnolo.Text" xml:space="preserve">
+    <value>&amp;Español</value>
+  </data>
+  <data name="btnLibriItaliano.Text" xml:space="preserve">
+    <value>I&amp;taliano</value>
+  </data>
+  <data name="btnLibriInglese.Text" xml:space="preserve">
+    <value>&amp;Inglés</value>
+  </data>
+  <data name="pulCancellaCartella.Text" xml:space="preserve">
+    <value>&amp;Borrar</value>
+  </data>
+  <data name="pulAggiungiCartella.Text" xml:space="preserve">
+    <value>&amp;Agregar...</value>
+  </data>
+  <data name="labCartelle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 13</value>
+  </data>
+  <data name="labCartelle.Text" xml:space="preserve">
+    <value>&amp;Directorios Adicionales a Buscar Archivos:</value>
+  </data>
+  <data name="labCommentari.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="labCommentari.Text" xml:space="preserve">
+    <value>&amp;Comentario Actual:</value>
+  </data>
+  <data name="tbProxyDominio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 197</value>
+  </data>
+  <data name="tbProxyDominio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 20</value>
+  </data>
+  <data name="etiProxyDominio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="etiProxyDominio.Text" xml:space="preserve">
+    <value>&amp;Dominio:</value>
+  </data>
+  <data name="tbProxyPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 171</value>
+  </data>
+  <data name="tbProxyPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 20</value>
+  </data>
+  <data name="tbProxyNomeUtente.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 145</value>
+  </data>
+  <data name="tbProxyNomeUtente.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 20</value>
+  </data>
+  <data name="etiProxyNomeUtente.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="etiProxyNomeUtente.Text" xml:space="preserve">
+    <value>&amp;Nombre Usuario:</value>
+  </data>
+  <data name="tbProxyPorta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 119</value>
+  </data>
+  <data name="tbProxyPorta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 20</value>
+  </data>
+  <data name="etiProxyPort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="etiProxyPort.Text" xml:space="preserve">
+    <value>&amp;Puerto Proxy:</value>
+  </data>
+  <data name="tbProxy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 93</value>
+  </data>
+  <data name="tbProxy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 20</value>
+  </data>
+  <data name="etiProxy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="etiProxy.Text" xml:space="preserve">
+    <value>&amp;Receptor Proxy:</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items" xml:space="preserve">
+    <value>días</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items1" xml:space="preserve">
+    <value>3 días</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items2" xml:space="preserve">
+    <value>semana</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items3" xml:space="preserve">
+    <value>2 semanas</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items4" xml:space="preserve">
+    <value>mes</value>
+  </data>
+  <data name="rbAggiornaAutomatica.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 17</value>
+  </data>
+  <data name="rbAggiornaAutomatica.Text" xml:space="preserve">
+    <value>Buscar Actualizaciones &amp;Automáticamente</value>
+  </data>
+  <data name="rbAggiornaManuale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 17</value>
+  </data>
+  <data name="rbAggiornaManuale.Text" xml:space="preserve">
+    <value>Buscar Actualizaciones &amp;Manualmente</value>
+  </data>
+  <data name="labDizionarioLatino.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 13</value>
+  </data>
+  <data name="labDizionarioLatino.Text" xml:space="preserve">
+    <value>Diccionario en &amp;Latín:</value>
+  </data>
+  <data name="labDizionarioEbraico.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 13</value>
+  </data>
+  <data name="labDizionarioEbraico.Text" xml:space="preserve">
+    <value>Diccionario en &amp;Hebreo:</value>
+  </data>
+  <data name="labDizionarioGreco.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="labDizionarioGreco.Text" xml:space="preserve">
+    <value>Diccionario en &amp;Griego:</value>
+  </data>
+  <data name="labDizionarioItaliano.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="labDizionarioItaliano.Text" xml:space="preserve">
+    <value>Diccionario en I&amp;taliano:</value>
+  </data>
+  <data name="labDizionarioInglese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="labDizionarioInglese.Text" xml:space="preserve">
+    <value>Diccionario en &amp;Inglés:</value>
+  </data>
+  <data name="cbDizionarioTooltip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 17</value>
+  </data>
+  <data name="cbDizionarioTooltip.Text" xml:space="preserve">
+    <value>&amp;Mostrar Definiciones como Tooltips</value>
+  </data>
+  <data name="pulReload.Text" xml:space="preserve">
+    <value>R&amp;ecargar Configuración</value>
+  </data>
+  <data name="pulReset.Text" xml:space="preserve">
+    <value>&amp;Reajustar Configuración</value>
+  </data>
+  <data name="cbDisposizioni.Items" xml:space="preserve">
+    <value>donde el programa fue últimamente cerrado</value>
+  </data>
+  <data name="etiDisposizione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 84</value>
+  </data>
+  <data name="etiDisposizione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 13</value>
+  </data>
+  <data name="etiDisposizione.Text" xml:space="preserve">
+    <value>&amp;Al abrir el programa, mostrar la ventana:</value>
+  </data>
+  <data name="cbLetture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 17</value>
+  </data>
+  <data name="cbLetture.Text" xml:space="preserve">
+    <value>&amp;Lecturas Diarias al Iniciar el Computador</value>
+  </data>
+  <data name="labClipboardLunghezza1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 13</value>
+  </data>
+  <data name="labClipboardLunghezza1.Text" xml:space="preserve">
+    <value>&amp;Largo Máximo de Control:</value>
+  </data>
+  <data name="labClipboardTempo2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="labClipboardTempo2.Text" xml:space="preserve">
+    <value>milisegundos</value>
+  </data>
+  <data name="labClipboardTempo1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
+  <data name="labClipboardTempo1.Text" xml:space="preserve">
+    <value>Control de &amp;Frecuencia:</value>
+  </data>
+  <data name="cbClipboardAttivo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 17</value>
+  </data>
+  <data name="cbClipboardAttivo.Text" xml:space="preserve">
+    <value>&amp;Activar Control de Portapapeles</value>
+  </data>
+  <data name="Nome.HeaderText" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="AbbUsate.HeaderText" xml:space="preserve">
+    <value>Abv. Usada</value>
+  </data>
+  <data name="AbbRicono.HeaderText" xml:space="preserve">
+    <value>Abv. Recon.</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAB
+        ARiIgAAAAAAAAAAAAAAAGQiBGIiAAAAAAAAAAAAAABkYd3EYiIAAAAAAAAAAAAGZEZh3cRiIgAAAAAAA
+        AAABkRERmHdxGIiAAAAAAAAAGZERERGYd3EYiIAAAAAAABkREREbsZh3cRiAAAAAAAGZERERO7ERmHCI
+        AAAAAAABkREREbsxERGRiAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7ER
+        EREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZE7MR
+        O7EREREYAAAAAAABkRu7s7sxERERGAAAAAAAGZERO7u7MREREYAAAAAAABkRERE7u7sxERGAAAAAAAGZ
+        ERERO7O7uxEYAAAAAAABkREREbsxE7MRGAAAAAAACZERERO7EREREYAAAAAAAAAZkREbsxERERGAAAAA
+        AAAAABmRG7EREREYAAAAAAAAAAAAGZEREREREAAAAAAAAAAAAAAZkREREQAAAAAAAAAAAAAAABmREREA
+        AAAAAAAAAAAAAAAAGZEQAAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf///gC
+        f//94B///8AH///AAf//gAB//4AAH/8AAAf/AAAH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/8AAAf/AA
+        AH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/+AAAf/wAAH//AAD//8AB///wA////AP///8H////x/////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAEBEw
+        AAAAAAARiBEwAAAAARERiBEwAAABERuxgxAAABERGxERMAAAERG7EREAAAEREbEREQAAAREbsREQAAAR
+        G7sRERAAABERu7sRAAAAERGxEREAAAABG7EREAAAAAABEREAAAAAAAABEQAAAAAAAAAAAAAA4D8AAPQP
+        AAD4AwAA+AAAAPAAAADwAQAA4AEAAOADAADAAwAAwAcAAIAHAACADwAAwA8AAPAfAAD8PwAA/z8AAA==
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+</root>

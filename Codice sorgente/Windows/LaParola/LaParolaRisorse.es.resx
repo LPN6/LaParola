@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutCaption" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Versión</value>
+  </data>
+  <data name="BookmarkDelete" xml:space="preserve">
+    <value>¿Está seguro que quiere borrar todos los marcadores de este archivo?</value>
+  </data>
+  <data name="BookmarkFileExists" xml:space="preserve">
+    <value>El archivo ya existe. ¿Quiere reemplazarlo?</value>
+  </data>
+  <data name="BookmarkNew" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="BrowseBack" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="BrowseForward" xml:space="preserve">
+    <value>Adelante</value>
+  </data>
+  <data name="BrowseTo" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="ChooseWordErrorWordNotChosen" xml:space="preserve">
+    <value>Necesita escoger una palabra, no un asterisco.</value>
+  </data>
+  <data name="CommandlineGetHelp" xml:space="preserve">
+    <value>Escriba "help" en la línea de comando para obtener ayuda sobre los comandos y sintaxis permitidos.</value>
+  </data>
+  <data name="CommandlineHelp" xml:space="preserve">
+    <value>Esta es una lista de posibles comandos con la sintaxis necesaria para usar en la línea de comandos.\par
+Las palabras en {\i itálicas} deben sustituirse con cualquier palabra que quiera usar.\par
+Las partes entre [corchetes] son opcionales.\par
+Para {\i texto}, puede usar el nombre de una traducción de la Biblia ó colección de notas (y sólo en ese caso debe escribir 
+correctamente las letras mayúsculas y minúsculas) ó las abreviaturas de una traducción ó colección. Si alguna 
+no ha sido dada, la última traducción será usada (la que está al final, a la derecha de la ventana principal del programa).\par
+Si hay un espacio en la frase, pasaje ó texto, necesita colocarlo entre "comillas".\par
+Puede colocar varios comandos en una línea, separándolos con punto y coma (;).\par
+\par
+buscar {\i frase} [en {\i pasaje}] [de {\i texto}]\par
+mostrar {\i pasaje} [de {\i texto}]\par
+mostrar {\i pasaje} de biblias\par
+mostrar {\i pasaje} de comentarios\par
+copiar {\i pasaje} [de {\i texto}]\par
+concordancia {\i pasaje} [de {\i texto}]\par
+similar {\i pasaje} [de {\i Biblia}]\par
+definiciones {\i pasaje} [de {\i texto}]\par
+nota {\i pasaje} de {\i colección}\par
+nota {\i título} de {\i colección}\par
+copiarnota {\i pasaje} de {\i colección}\par
+copiarnota {\i título} de {\i colección}\par
+referencias {\i pasaje} de {\i colección}\par
+ver [{\i pasaje}] [de {\i texto}]\par
+ver [{\i pasaje}] [de {\i textos paralelos}]\par
+ira {\i pasaje}\par
+abrir {\i nombre_archivo}\par
+info {\i frase}\par
+info {\i pasaje}\par
+vínculo {\i dirección/programa} [{\i parámetros}]\par
+cerrar [todo]\par
+actualizar [existente][todo]\par
+colocar biblia {\i nombre_Biblia}\par
+colocar idioma {\i italiano ó english ó español}\par
+ayuda\par
+?\par
+\par
+Por ejemplo:\par
+buscar abba en rom-ebr de "American Standard Version"; nota amós de "Enciclopedia bíblica"; concordancia "Mt 1-14" de acv\par</value>
+  </data>
+  <data name="CommandlineSyntaxError" xml:space="preserve">
+    <value>Hay un error de sintaxis en el comando.</value>
+  </data>
+  <data name="CommandlineUnknownCommand" xml:space="preserve">
+    <value>El comando {0} es desconocido.</value>
+  </data>
+  <data name="CommandlineUnknownText" xml:space="preserve">
+    <value>{0} no es una versión de la Biblia ó colección de notas.</value>
+  </data>
+  <data name="ConcordanceCompleted" xml:space="preserve">
+    <value>Se creó la Concordancia.</value>
+  </data>
+  <data name="ConcordanceCurrent" xml:space="preserve">
+    <value>Creando la concordancia:</value>
+  </data>
+  <data name="ConcordanceTitle" xml:space="preserve">
+    <value>Concordancia de</value>
+  </data>
+  <data name="EditorErrorCantOpenFile" xml:space="preserve">
+    <value>El archivo {0} no se puede abrir: {1}</value>
+  </data>
+  <data name="EditorErrorCantSaveFile" xml:space="preserve">
+    <value>El archivo {0} no se puede guardar: {1}</value>
+  </data>
+  <data name="EditorErrorCantStartFile" xml:space="preserve">
+    <value>El archivo {0} no se puede abrir: {1}</value>
+  </data>
+  <data name="EditorFindNotFound" xml:space="preserve">
+    <value>El ítem de búsqueda '{0}' no se encontró.</value>
+  </data>
+  <data name="EditorPosition" xml:space="preserve">
+    <value>Línea: {0} Col: {1}</value>
+  </data>
+  <data name="EditorSaveChanges" xml:space="preserve">
+    <value>¿Guardar los cambios a {0}?</value>
+  </data>
+  <data name="EditorSaveFilter" xml:space="preserve">
+    <value>Archivos de Texto (*.rtf; *.txt)|*.rtf;*.txt|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ImagesFilter" xml:space="preserve">
+    <value>Archivos de imagen (*.bmp; *.gif; *.ico; *.jpg; *.png; *.tif)|*.bmp;*.gif;*.ico;*.jpg;*.png;*.tif|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ImmaginiCollezioneNonTrovata" xml:space="preserve">
+    <value>La colección de notas vinculadas a esta imagen ({0}) no se encontró.</value>
+  </data>
+  <data name="ImportCompleted" xml:space="preserve">
+    <value>La escritura de {0} se completó.</value>
+  </data>
+  <data name="ImportCurrent" xml:space="preserve">
+    <value>Escribiendo {0}:</value>
+  </data>
+  <data name="ImportDirectoryDescription" xml:space="preserve">
+    <value>Seleccione el directorio que contiene los archivos con las notas:</value>
+  </data>
+  <data name="ImportError" xml:space="preserve">
+    <value>Error en el archivo importado: {0}</value>
+  </data>
+  <data name="ImportErrorDifferentRoots" xml:space="preserve">
+    <value>Error en la línea {1} en el archivo radici_diverse: {0}</value>
+  </data>
+  <data name="ImportXmlFilter" xml:space="preserve">
+    <value>Archivos XML (*.xml)|*.xml|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ImportUnknownCode" xml:space="preserve">
+    <value>Código no reconocido: {0}</value>
+  </data>
+  <data name="InformationBible" xml:space="preserve">
+    <value>Biblia</value>
+  </data>
+  <data name="InformationBiblesAll" xml:space="preserve">
+    <value>Todas</value>
+  </data>
+  <data name="InformationBookmarks" xml:space="preserve">
+    <value>Marcadores</value>
+  </data>
+  <data name="InformationCollection" xml:space="preserve">
+    <value>Colección</value>
+  </data>
+  <data name="InformationCommentariesAll" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="InformationCommentary" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="InformationConcordance" xml:space="preserve">
+    <value>Concordancia</value>
+  </data>
+  <data name="InformationImage" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
+  <data name="InformationLinks" xml:space="preserve">
+    <value>Vínculos Externos</value>
+  </data>
+  <data name="InformationNote" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="InformationParallels" xml:space="preserve">
+    <value>Pasaje Paralelo</value>
+  </data>
+  <data name="InformationReferences" xml:space="preserve">
+    <value>Referencias</value>
+  </data>
+  <data name="LinksConfirmDelete" xml:space="preserve">
+    <value>¿Está seguro que desea borrar {0}?</value>
+  </data>
+  <data name="LinksErrorDelete" xml:space="preserve">
+    <value>Error al borrar el archivo {0}: {1}</value>
+  </data>
+  <data name="LinksErrorWritingLinksErrorWriting" xml:space="preserve">
+    <value>Error al escribir el archivo {0}: {1}</value>
+  </data>
+  <data name="LinksWritten" xml:space="preserve">
+    <value>escrito</value>
+  </data>
+  <data name="MainAllBibles" xml:space="preserve">
+    <value>Todas</value>
+  </data>
+  <data name="MainAllCommentaries" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="MainArrangementNewName" xml:space="preserve">
+    <value>Nuevo Arreglo</value>
+  </data>
+  <data name="MainArrangementSaveCaption" xml:space="preserve">
+    <value>Nuevo Arreglo de Ventanas</value>
+  </data>
+  <data name="MainArrangementSaveQuestion" xml:space="preserve">
+    <value>¿Qué nombre desea dar a este nuevo arreglo de ventanas?</value>
+  </data>
+  <data name="MainErrorChangesNotSaved" xml:space="preserve">
+    <value>No ha sido posible guardar los cambios de los siguientes textos en el disco: {0}</value>
+  </data>
+  <data name="MainLinksErrorCommandFailed" xml:space="preserve">
+    <value>Error al abrir {0}: {1}</value>
+  </data>
+  <data name="MainMakeHypertextCaption" xml:space="preserve">
+    <value>Nuevo vínculo</value>
+  </data>
+  <data name="MainMakeHypertextQuestion" xml:space="preserve">
+    <value>¿A cuál pasaje, nota ó archivo desea crear un vínculo?</value>
+  </data>
+  <data name="MainNewEditorCaption" xml:space="preserve">
+    <value>Sin nombre</value>
+  </data>
+  <data name="MainNoBible" xml:space="preserve">
+    <value>No se encontró ningún archivo con el texto de la Biblia. Necesita instalar una Biblia.</value>
+  </data>
+  <data name="MainNoteChanged" xml:space="preserve">
+    <value>Las notas que han sido cambiadas, se están guardando. Por favor, espere.</value>
+  </data>
+  <data name="MainQuickBookmarkSetCaption" xml:space="preserve">
+    <value>Colocar marcador</value>
+  </data>
+  <data name="MainQuickBookmarkSetQuestion" xml:space="preserve">
+    <value>¿A cuál versículo desea crear un marcador?</value>
+  </data>
+  <data name="MainUpdateNotConnected" xml:space="preserve">
+    <value>Se produjo un error mientras se verificaba la versión más reciente en Internet: {0}</value>
+  </data>
+  <data name="MainUpdateNoUpdate" xml:space="preserve">
+    <value>No hay actualizaciones disponibles: ya tiene la versión más reciente del programa.</value>
+  </data>
+  <data name="ManageNotesCopied" xml:space="preserve">
+    <value>El texto {0} ha sido copiado a {1}.</value>
+  </data>
+  <data name="ManageNotesCopyOf" xml:space="preserve">
+    <value>Copiar de {0}</value>
+  </data>
+  <data name="ManageNotesDeleted" xml:space="preserve">
+    <value>El texto {0} ha sido borrado.</value>
+  </data>
+  <data name="ManageNotesErrorNotCopied" xml:space="preserve">
+    <value>Se produjo un error al copiar el texto {1}: {0}</value>
+  </data>
+  <data name="ManageNotesErrorNotDeleted" xml:space="preserve">
+    <value>Se produjo un error al borrar el texto {1}: {0}</value>
+  </data>
+  <data name="ManageNotesErrorNotExported" xml:space="preserve">
+    <value>Se produjo un error al exportar el texto {1}: {0}</value>
+  </data>
+  <data name="ManageNotesErrorNotJoined" xml:space="preserve">
+    <value>Se produjo un error al unir los textos para crear {1}: {0}</value>
+  </data>
+  <data name="ManageNotesErrorNotRenamed" xml:space="preserve">
+    <value>Se produjo un error al renombrar el texto {1}: {0}</value>
+  </data>
+  <data name="ManageNotesExported" xml:space="preserve">
+    <value>El texto {0} ha sido exportado a</value>
+  </data>
+  <data name="ManageNotesRenameCaption" xml:space="preserve">
+    <value>Renombrar</value>
+  </data>
+  <data name="ManageNotesRenamed" xml:space="preserve">
+    <value>El texto {0} ha sido renombrado a {1}.</value>
+  </data>
+  <data name="ManageNotesRenameQuestion" xml:space="preserve">
+    <value>¿Cuál es el nuevo nombre del texto?</value>
+  </data>
+  <data name="MiscBlack" xml:space="preserve">
+    <value>Ne&amp;gro</value>
+  </data>
+  <data name="MiscClose" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="MiscConfirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="MiscError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MiscInfo" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="OptionsAddDirectory" xml:space="preserve">
+    <value>Agregar un directorio para examinar los archivos del programa:</value>
+  </data>
+  <data name="OptionsChangeLanguage" xml:space="preserve">
+    <value>¿Desea usar los nombres por defecto de los libros de la Biblia en este nuevo idioma?</value>
+  </data>
+  <data name="OptionsReload" xml:space="preserve">
+    <value>¿Está seguro que desea volver a cargar la configuración actual del programa cuando sea abierto?</value>
+  </data>
+  <data name="OptionsReset" xml:space="preserve">
+    <value>¿Está seguro que quiere cancelar todos los cambios hechos a la configuración?</value>
+  </data>
+  <data name="ParagraphTabs" xml:space="preserve">
+    <value>Nueva Etiqueta</value>
+  </data>
+  <data name="ParagraphTabsNew" xml:space="preserve">
+    <value>Escriba el valor de la nueva etiqueta (en centímetros).</value>
+  </data>
+  <data name="ParallelPassagesVerseNotFound" xml:space="preserve">
+    <value>No se ha encontrado el versículo {0} en estos pasajes paralelos.</value>
+  </data>
+  <data name="ParallelPassagesVerseNotUnderstood" xml:space="preserve">
+    <value>No se entiende la referencia {0}.</value>
+  </data>
+  <data name="SearchBookmarksDescription1" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="SearchBookmarksDescription2" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="SearchBrackets" xml:space="preserve">
+    <value>Los paréntesis son incorrectos.</value>
+    <comment>Also in Light</comment>
+  </data>
+  <data name="SearchCompleted" xml:space="preserve">
+    <value>Búsqueda completada.</value>
+  </data>
+  <data name="SearchCurrent" xml:space="preserve">
+    <value>Buscando:</value>
+  </data>
+  <data name="SearchExpressionEmpty" xml:space="preserve">
+    <value>Necesita ingresar una expresión a buscar.</value>
+    <comment>Also in Light</comment>
+  </data>
+  <data name="SearchNewVerseListCaption" xml:space="preserve">
+    <value>Nueva lista de versículos</value>
+  </data>
+  <data name="SearchNewVerseListQuestion1" xml:space="preserve">
+    <value>Escriba el nombre de la nueva lista de versículos:</value>
+  </data>
+  <data name="SearchNewVerseListQuestion2" xml:space="preserve">
+    <value>Escriba la referencia de la nueva lista de versículos:</value>
+  </data>
+  <data name="SearchSquareBrackets" xml:space="preserve">
+    <value>Los corchetes son incorrectos ó están anidados.</value>
+    <comment>Also in Light</comment>
+  </data>
+  <data name="SearchSyntax" xml:space="preserve">
+    <value>Error de sintaxis en carácter numérico {0}.</value>
+    <comment>Also in Light</comment>
+  </data>
+  <data name="SearchTime" xml:space="preserve">
+    <value>tiempo</value>
+  </data>
+  <data name="SearchTimes" xml:space="preserve">
+    <value>tiempos</value>
+  </data>
+  <data name="ShowCompleted" xml:space="preserve">
+    <value>Texto creado.</value>
+  </data>
+  <data name="ShowCurrent" xml:space="preserve">
+    <value>Creando el texto:</value>
+  </data>
+  <data name="StartupReadingsDescription" xml:space="preserve">
+    <value>Abrir el programa de la Biblia mostrando la lectura de hoy.</value>
+  </data>
+  <data name="StartupReadingsTitle" xml:space="preserve">
+    <value>Lectura Diaria</value>
+  </data>
+  <data name="UpdateComponentTypes" xml:space="preserve">
+    <value>Programa|Actualizar|Texto|Biblia|Comentario|Diccionario|Notas|Libro|Paralelos|Vínculo Externo|Marcadores|Lecturas Diarias|Tutorial|Textos Paralelos</value>
+    <comment>This list is also used in ListaTesti</comment>
+  </data>
+  <data name="UpdateHide" xml:space="preserve">
+    <value>Ocultar</value>
+  </data>
+  <data name="UpdateNew" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="UpdateNoUpdate" xml:space="preserve">
+    <value>No actualizar</value>
+  </data>
+  <data name="UpdateProgramNotRun" xml:space="preserve">
+    <value>Error al abrir la actualización del programa: {0}</value>
+  </data>
+  <data name="UpdateUpdateNow" xml:space="preserve">
+    <value>Actualizar ahora</value>
+  </data>
+  <data name="ReadingsErrorNoPlan" xml:space="preserve">
+    <value>No se encontraron planes de lectura diaria. Puede instalar nuevos planes usando el comando Actualizar del programa.</value>
+  </data>
+  <data name="ImportEswordFilter" xml:space="preserve">
+    <value>Archivos e-Sword (*.bbl; *.cmt; *.dct; *.top)|*.bbl; *.cmt; *.dct; *.top|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="MainVideoAddress" xml:space="preserve">
+    <value>http://www.laparola.net/program/video.php</value>
+  </data>
+  <data name="BookmarkImportName" xml:space="preserve">
+    <value>Marcadores Importados</value>
+  </data>
+  <data name="BookmarkImportFileError" xml:space="preserve">
+    <value>Error al abrir el archivo: {0}</value>
+  </data>
+  <data name="BookmarkImportWebError" xml:space="preserve">
+    <value>Error al entrar a la página web: {0}</value>
+  </data>
+  <data name="BookmarkImportWebInputCaption" xml:space="preserve">
+    <value>Dirección de la página web:</value>
+  </data>
+  <data name="BookmarkImportWebInputTitle" xml:space="preserve">
+    <value>Importar desde la página Web</value>
+  </data>
+  <data name="ListTextsFilterHtml" xml:space="preserve">
+    <value>Archivos HTML (*.html; *.htm)|*.html;*.htm|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ListTextsFilterRtf" xml:space="preserve">
+    <value>Archivos RTF (*.rtf)|*.rtf|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ListTextsFilterText" xml:space="preserve">
+    <value>Archivos de Texto (*.txt)|*.txt|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ListTextsFilterXml" xml:space="preserve">
+    <value>Archivos XML (*.xml)|*.xml|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ListTextsText" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="MainListTexts" xml:space="preserve">
+    <value>&amp;Todos los Textos</value>
+  </data>
+  <data name="BookmarkImportNoReference" xml:space="preserve">
+    <value>No se encontraron referencias Bíblicas.</value>
+  </data>
+  <data name="ListTextsFilterCsv" xml:space="preserve">
+    <value>Archivos CSV (*.csv)|*.csv|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="ExportCompleted" xml:space="preserve">
+    <value>Textos exportados.</value>
+  </data>
+  <data name="ExportCurrent" xml:space="preserve">
+    <value>Exportando los textos:</value>
+  </data>
+  <data name="ImportErrorPassword" xml:space="preserve">
+    <value>El archivo está protegido por contraseña, el programa no puede importar este tipo de archivos.</value>
+  </data>
+  <data name="BrowsePopupBookmark" xml:space="preserve">
+    <value>&amp;Marcador </value>
+  </data>
+  <data name="BrowsePopupCopy" xml:space="preserve">
+    <value>&amp;Copiar</value>
+  </data>
+  <data name="BrowsePopupInfoVerse" xml:space="preserve">
+    <value>In&amp;formación de </value>
+  </data>
+  <data name="BrowsePopupInfoWord" xml:space="preserve">
+    <value>&amp;Información de </value>
+  </data>
+  <data name="BrowsePopupNoteVerse" xml:space="preserve">
+    <value>N&amp;ota de </value>
+  </data>
+  <data name="BrowsePopupNoteWord" xml:space="preserve">
+    <value>&amp;Nota de </value>
+  </data>
+  <data name="BrowsePopupPrint" xml:space="preserve">
+    <value>Im&amp;primir Selección</value>
+  </data>
+  <data name="BrowsePopupSearch" xml:space="preserve">
+    <value>&amp;Buscar</value>
+  </data>
+  <data name="ParallelTextsSaveCaption" xml:space="preserve">
+    <value>Grupo de Textos Paralelos</value>
+  </data>
+  <data name="ParallelTextsSaveQuestion" xml:space="preserve">
+    <value>¿Qué nombre desea colocar a este grupo de textos?</value>
+  </data>
+  <data name="BrowseAddBible" xml:space="preserve">
+    <value>Agregar &amp;Biblia</value>
+  </data>
+  <data name="BrowseAddCommentary" xml:space="preserve">
+    <value>Agregar &amp;Commentario</value>
+  </data>
+  <data name="DefinitionsCompleted" xml:space="preserve">
+    <value>Definiciones mostradas.</value>
+  </data>
+  <data name="DefinitionsCurrent" xml:space="preserve">
+    <value>Buscando las definiciones:</value>
+  </data>
+  <data name="InformationDefinitions" xml:space="preserve">
+    <value>Definiciones</value>
+  </data>
+  <data name="ImportTextFilter" xml:space="preserve">
+    <value>&gt;Archivos de Texto (*.txt)|*.txt|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="SimilarCompleted" xml:space="preserve">
+    <value>Pasajes Similares mostrados.</value>
+  </data>
+  <data name="SimilarCurrent" xml:space="preserve">
+    <value>Buscando pasajes similares:</value>
+  </data>
+  <data name="SimilarTitle" xml:space="preserve">
+    <value>Pasajes similares a </value>
+  </data>
+  <data name="InformationSimilar" xml:space="preserve">
+    <value>Pasajes Similares</value>
+  </data>
+  <data name="ManageNotesErrorModified" xml:space="preserve">
+    <value>Para exportar en este formato, primero debe guardar la colección una vez que ha sido modificada. Cierre y reabra el programa e inténtelo nuevamente.</value>
+  </data>
+  <data name="MainArrangementError" xml:space="preserve">
+    <value>Error al escribir el archivo {0}: {1}</value>
+  </data>
+  <data name="QuizAlways" xml:space="preserve">
+    <value>siempre</value>
+  </data>
+  <data name="QuizAnswer" xml:space="preserve">
+    <value>Respuesta</value>
+  </data>
+  <data name="QuizQuestion" xml:space="preserve">
+    <value>Pregunta</value>
+  </data>
+  <data name="QuizRight" xml:space="preserve">
+    <value>Correcto</value>
+  </data>
+  <data name="QuizRightAnswer" xml:space="preserve">
+    <value>Respuesta correcta</value>
+  </data>
+  <data name="QuizScore" xml:space="preserve">
+    <value>Puntuación</value>
+  </data>
+  <data name="QuizWrong" xml:space="preserve">
+    <value>Incorrecto</value>
+  </data>
+  <data name="QuizWrongAnswer" xml:space="preserve">
+    <value>Respuesta incorrecta</value>
+  </data>
+  <data name="QuizInstructions" xml:space="preserve">
+    <value>Este quiz le hace muchas preguntas diferentes en la Biblia, con cuatro respuestas posibles. \par\par En cada pregunta, haga clic en la respuesta que considere correcta, o escriba un número del 1 al 4.</value>
+  </data>
+</root>

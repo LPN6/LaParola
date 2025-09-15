@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnOK.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="btnCanc.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="tvCategorie.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQsAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQJY2hp
+        bGRyZW4wCWNoaWxkcmVuMQljaGlsZHJlbjIBAQAAAQABAAQEBAEICAgdU3lzdGVtLldpbmRvd3MuRm9y
+        bXMuVHJlZU5vZGUCAAAAHVN5c3RlbS5XaW5kb3dzLkZvcm1zLlRyZWVOb2RlAgAAAB1TeXN0ZW0uV2lu
+        ZG93cy5Gb3Jtcy5UcmVlTm9kZQIAAAACAAAABgMAAAAJUmlzdWx0YXRpBgQAAAAMdHZuUmlzdWx0YXRp
+        AP////8GBQAAAAD/////CQUAAAADAAAACQYAAAAJBwAAAAkIAAAABQYAAAAdU3lzdGVtLldpbmRvd3Mu
+        Rm9ybXMuVHJlZU5vZGUIAAAABFRleHQETmFtZQlJc0NoZWNrZWQKSW1hZ2VJbmRleAhJbWFnZUtleRJT
+        ZWxlY3RlZEltYWdlSW5kZXgQU2VsZWN0ZWRJbWFnZUtleQpDaGlsZENvdW50AQEAAAEAAQABCAgIAgAA
+        AAYJAAAABVRlc3RvBgoAAAAIdHZuVGVzdG8A/////wkFAAAA/////wkFAAAAAAAAAAUHAAAAHVN5c3Rl
+        bS5XaW5kb3dzLkZvcm1zLlRyZWVOb2RlCAAAAARUZXh0BE5hbWUJSXNDaGVja2VkCkltYWdlSW5kZXgI
+        SW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRDb3VudAEBAAAB
+        AAEAAQgICAIAAAAGDAAAAAtSaWZlcmltZW50aQYNAAAADnR2blJpZmVyaW1lbnRpAP////8JBQAAAP//
+        //8JBQAAAAAAAAAFCAAAAB1TeXN0ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQgAAAAEVGV4dAROYW1l
+        CUlzQ2hlY2tlZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZElt
+        YWdlS2V5CkNoaWxkQ291bnQBAQAAAQABAAEICAgCAAAABg8AAAAJQ2FyYXR0ZXJpBhAAAAAMdHZuQ2Fy
+        YXR0ZXJpAP////8JBQAAAP////8JBQAAAAAAAAAL
+</value>
+  </data>
+  <data name="tvCategorie.Nodes1" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQJY2hp
+        bGRyZW4wAQEAAAEAAQAEAQgICB1TeXN0ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQIAAAACAAAABgMA
+        AAAFVGVzdGkGBAAAAAh0dm5UZXN0aQD/////BgUAAAAA/////wkFAAAAAQAAAAkGAAAABQYAAAAdU3lz
+        dGVtLldpbmRvd3MuRm9ybXMuVHJlZU5vZGUIAAAABFRleHQETmFtZQlJc0NoZWNrZWQKSW1hZ2VJbmRl
+        eAhJbWFnZUtleRJTZWxlY3RlZEltYWdlSW5kZXgQU2VsZWN0ZWRJbWFnZUtleQpDaGlsZENvdW50AQEA
+        AAEAAQABCAgIAgAAAAYHAAAACURpemlvbmFyaQYIAAAADHR2bkRpemlvbmFyaQD/////CQUAAAD/////
+        CQUAAAAAAAAACw==
+</value>
+  </data>
+  <data name="tvCategorie.Nodes2" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQgAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQBAQAA
+        AQABAAEICAgCAAAABgMAAAAFTGlicmkGBAAAAAh0dm5MaWJyaQD/////BgUAAAAA/////wkFAAAAAAAA
+        AAs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes3" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQgAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQBAQAA
+        AQABAAEICAgCAAAABgMAAAALSW50ZXJmYWNjaWEGBAAAAA50dm5JbnRlcmZhY2NpYQD/////BgUAAAAA
+        /////wkFAAAAAAAAAAs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes4" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAACUNsaXBib2FyZAYEAAAADHR2bkNsaXBib2FyZAD/////
+        BgUAAAAA/////wkFAAAAAAAAAAYGAAAADHBhbkNsaXBib2FyZAs=
+</value>
+  </data>
+  <data name="tvCategorie.Nodes5" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQgAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQBAQAA
+        AQABAAEICAgCAAAABgMAAAANQWdnaW9ybmFtZW50aQYEAAAAEHR2bkFnZ2lvcm5hbWVudGkA/////wYF
+        AAAAAP////8JBQAAAAAAAAAL
+</value>
+  </data>
+  <data name="tvCategorie.Nodes6" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAROYW1lCUlzQ2hlY2tlZApJbWFnZUluZGV4
+        CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNoaWxkQ291bnQIVXNl
+        ckRhdGEBAQAAAQABAAEBCAgIAgAAAAYDAAAABUFsdHJlBgQAAAAIdHZuQWx0cmUA/////wYFAAAAAP//
+        //8JBQAAAAAAAAAGBgAAAAhwYW5BbHRyZQs=
+</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbIpertestoTooltipInTooltip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 17</value>
+  </data>
+  <data name="cbIpertestoTooltipInTooltip.Text" xml:space="preserve">
+    <value>&amp;Anche in un tooltip</value>
+  </data>
+  <data name="labVociMassimeMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 13</value>
+  </data>
+  <data name="labVociMassimeMenu.Text" xml:space="preserve">
+    <value>&amp;Voci massime nei menu:</value>
+  </data>
+  <data name="labBarraDiStrumenti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 13</value>
+  </data>
+  <data name="labBarraDiStrumenti.Text" xml:space="preserve">
+    <value>Visualizzare &amp;barre degli strumenti:</value>
+  </data>
+  <data name="cbBSRigaComando.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 17</value>
+  </data>
+  <data name="cbBSRigaComando.Text" xml:space="preserve">
+    <value>&amp;Riga di comando</value>
+  </data>
+  <data name="cbBSOrdine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="cbBSOrdine.Text" xml:space="preserve">
+    <value>&amp;Ordine</value>
+  </data>
+  <data name="cbBSFormato.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="cbBSFormato.Text" xml:space="preserve">
+    <value>&amp;Formato</value>
+  </data>
+  <data name="cbBSPrincipale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 17</value>
+  </data>
+  <data name="cbBSPrincipale.Text" xml:space="preserve">
+    <value>&amp;Principale</value>
+  </data>
+  <data name="cbIpertestoTooltip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 17</value>
+  </data>
+  <data name="cbIpertestoTooltip.Text" xml:space="preserve">
+    <value>Mostra &amp;ipertesto tooltip</value>
+  </data>
+  <data name="cbStessaFinestraPerRisultati.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 17</value>
+  </data>
+  <data name="cbStessaFinestraPerRisultati.Text" xml:space="preserve">
+    <value>&amp;Usa la stessa finestra per i risultati</value>
+  </data>
+  <data name="cbBarraDiStato.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 17</value>
+  </data>
+  <data name="cbBarraDiStato.Text" xml:space="preserve">
+    <value>Visualizza barra di &amp;stato</value>
+  </data>
+  <data name="labRichiesteMemorizzate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 13</value>
+  </data>
+  <data name="labRichiesteMemorizzate.Text" xml:space="preserve">
+    <value>&amp;Elenco comandi recenti:</value>
+  </data>
+  <data name="labLingua.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="labLingua.Text" xml:space="preserve">
+    <value>&amp;Lingua:</value>
+  </data>
+  <data name="cbLingua.Items" xml:space="preserve">
+    <value>Del computer</value>
+  </data>
+  <data name="cbLingua.Items1" xml:space="preserve">
+    <value>italiano</value>
+  </data>
+  <data name="cbLingua.Items2" xml:space="preserve">
+    <value>inglese</value>
+  </data>
+  <data name="cbLingua.Items3" xml:space="preserve">
+    <value>spagnolo</value>
+  </data>
+  <data name="panInterfaccia.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="btnFontGreco.Text" xml:space="preserve">
+    <value>M&amp;odifica</value>
+  </data>
+  <data name="labFontEbraicoTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 13</value>
+  </data>
+  <data name="labFontEbraicoTesto.Text" xml:space="preserve">
+    <value>Font di testo ebraico:</value>
+  </data>
+  <data name="labFontGrecoTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="labFontGrecoTesto.Text" xml:space="preserve">
+    <value>Font di testo greco:</value>
+  </data>
+  <data name="btnFontRicerca.Text" xml:space="preserve">
+    <value>Modi&amp;fica</value>
+  </data>
+  <data name="labFontRicercaTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 13</value>
+  </data>
+  <data name="labFontRicercaTesto.Text" xml:space="preserve">
+    <value>Font delle parole ricercate:</value>
+  </data>
+  <data name="cbRifApice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>178, 158</value>
+  </data>
+  <data name="cbRifApice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 17</value>
+  </data>
+  <data name="cbRifApice.Text" xml:space="preserve">
+    <value>&amp;Apice</value>
+  </data>
+  <data name="btnFontRif.Text" xml:space="preserve">
+    <value>Mod&amp;ifica</value>
+  </data>
+  <data name="btnFont.Text" xml:space="preserve">
+    <value>&amp;Modifica</value>
+  </data>
+  <data name="labFontPredefTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="labFontPredefTesto.Text" xml:space="preserve">
+    <value>Font predefinito:</value>
+  </data>
+  <data name="labFontRifTesto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 13</value>
+  </data>
+  <data name="labFontRifTesto.Text" xml:space="preserve">
+    <value>Font dei riferimenti:</value>
+  </data>
+  <data name="btnFontEbraico.Text" xml:space="preserve">
+    <value>Mo&amp;difica</value>
+  </data>
+  <data name="panCaratteri.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labEsempio.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labEsempio.Text" xml:space="preserve">
+    <value>Esempio:</value>
+  </data>
+  <data name="panRisultati.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbTitoli.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 17</value>
+  </data>
+  <data name="cbTitoli.Text" xml:space="preserve">
+    <value>Mostra i &amp;titoli delle sezioni delle Bibbie</value>
+  </data>
+  <data name="rbTesto2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rbTesto2.Text" xml:space="preserve">
+    <value>N&amp;essuno</value>
+  </data>
+  <data name="rbTesto1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rbTesto1.Text" xml:space="preserve">
+    <value>&amp;Paragrafi</value>
+  </data>
+  <data name="rbTesto0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rbTesto0.Text" xml:space="preserve">
+    <value>&amp;Versetti</value>
+  </data>
+  <data name="gbTesto.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="gbTesto.Text" xml:space="preserve">
+    <value>Testo:</value>
+  </data>
+  <data name="panTesto.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbRifContestoRicerche.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
+  </data>
+  <data name="cbRifContestoRicerche.Text" xml:space="preserve">
+    <value>&amp;Contesto in ricerche</value>
+  </data>
+  <data name="rbRifPosto2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
+  </data>
+  <data name="rbRifPosto2.Text" xml:space="preserve">
+    <value>&amp;Dopo</value>
+  </data>
+  <data name="rbRifPosto1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="rbRifPosto1.Text" xml:space="preserve">
+    <value>Prima, &amp;riga diversa</value>
+  </data>
+  <data name="rbRifPosto0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
+  </data>
+  <data name="rbRifPosto0.Text" xml:space="preserve">
+    <value>Prima, &amp;stessa riga</value>
+  </data>
+  <data name="gbPosto.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="gbPosto.Text" xml:space="preserve">
+    <value>Posizione:</value>
+  </data>
+  <data name="rbRifFormato2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rbRifFormato2.Text" xml:space="preserve">
+    <value>&amp;Nessuno</value>
+  </data>
+  <data name="rbRifFormato1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="rbRifFormato1.Text" xml:space="preserve">
+    <value>&amp;Abbreviazione</value>
+  </data>
+  <data name="rbRifFormato0.Text" xml:space="preserve">
+    <value>&amp;Intero</value>
+  </data>
+  <data name="gbFormato.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="gbFormato.Text" xml:space="preserve">
+    <value>Formato:</value>
+  </data>
+  <data name="gbRifTipo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="gbRifTipo.Text" xml:space="preserve">
+    <value>Tipo:</value>
+  </data>
+  <data name="panRiferimenti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="btnLibriSpagnolo.Text" xml:space="preserve">
+    <value>Pr. &amp;spagnolo</value>
+  </data>
+  <data name="Nome.HeaderText" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="AbbUsate.HeaderText" xml:space="preserve">
+    <value>Abb. usate</value>
+  </data>
+  <data name="AbbRicono.HeaderText" xml:space="preserve">
+    <value>Abb. ricono.</value>
+  </data>
+  <data name="btnLibriItaliano.Text" xml:space="preserve">
+    <value>Pred. &amp;italiano</value>
+  </data>
+  <data name="btnLibriInglese.Text" xml:space="preserve">
+    <value>Pred. in&amp;glese</value>
+  </data>
+  <data name="panLibri.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="pulCancellaCartella.Text" xml:space="preserve">
+    <value>&amp;Rimuovi</value>
+  </data>
+  <data name="pulAggiungiCartella.Text" xml:space="preserve">
+    <value>&amp;Aggiungi...</value>
+  </data>
+  <data name="labCartelle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 13</value>
+  </data>
+  <data name="labCartelle.Text" xml:space="preserve">
+    <value>Car&amp;telle addizionali in cui cercare dei file:</value>
+  </data>
+  <data name="labCommentari.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="labCommentari.Text" xml:space="preserve">
+    <value>C&amp;ommentari predefiniti:</value>
+  </data>
+  <data name="panTesti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiProxyDominio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="etiProxyDominio.Text" xml:space="preserve">
+    <value>&amp;Dominio:</value>
+  </data>
+  <data name="etiProxyNomeUtente.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="etiProxyNomeUtente.Text" xml:space="preserve">
+    <value>&amp;Nome utente:</value>
+  </data>
+  <data name="etiProxyPort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="etiProxyPort.Text" xml:space="preserve">
+    <value>Proxy &amp;porta:</value>
+  </data>
+  <data name="etiProxy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="etiProxy.Text" xml:space="preserve">
+    <value>Proxy &amp;host:</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items" xml:space="preserve">
+    <value>giorno</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items1" xml:space="preserve">
+    <value>3 giorni</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items2" xml:space="preserve">
+    <value>settimana</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items3" xml:space="preserve">
+    <value>2 settimane</value>
+  </data>
+  <data name="cbAggiornaGiorni.Items4" xml:space="preserve">
+    <value>mese</value>
+  </data>
+  <data name="rbAggiornaAutomatica.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 17</value>
+  </data>
+  <data name="rbAggiornaAutomatica.Text" xml:space="preserve">
+    <value>Cerca aggiornamenti &amp;automaticamente ogni</value>
+  </data>
+  <data name="rbAggiornaManuale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 17</value>
+  </data>
+  <data name="rbAggiornaManuale.Text" xml:space="preserve">
+    <value>Cerca aggiornamenti &amp;manualmente</value>
+  </data>
+  <data name="panAggiornamenti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labDizionarioLatino.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="labDizionarioLatino.Text" xml:space="preserve">
+    <value>&amp;Dizionario &amp;latino:</value>
+  </data>
+  <data name="labDizionarioEbraico.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="labDizionarioEbraico.Text" xml:space="preserve">
+    <value>Dizionario &amp;ebraico:</value>
+  </data>
+  <data name="labDizionarioGreco.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="labDizionarioGreco.Text" xml:space="preserve">
+    <value>Dizionario &amp;greco:</value>
+  </data>
+  <data name="labDizionarioItaliano.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="labDizionarioItaliano.Text" xml:space="preserve">
+    <value>Dizionario i&amp;taliano:</value>
+  </data>
+  <data name="labDizionarioInglese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="labDizionarioInglese.Text" xml:space="preserve">
+    <value>Dizionario &amp;inglese:</value>
+  </data>
+  <data name="cbDizionarioTooltip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
+  </data>
+  <data name="cbDizionarioTooltip.Text" xml:space="preserve">
+    <value>&amp;Mostra definizioni come descrizione comandi</value>
+  </data>
+  <data name="panDizionari.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="pulReload.Text" xml:space="preserve">
+    <value>R&amp;icarica impostazioni</value>
+  </data>
+  <data name="pulReset.Text" xml:space="preserve">
+    <value>&amp;Reimposta impostazioni</value>
+  </data>
+  <data name="cbDisposizioni.Items" xml:space="preserve">
+    <value>aperte quando il programma è stato chiuso</value>
+  </data>
+  <data name="etiDisposizione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 13</value>
+  </data>
+  <data name="etiDisposizione.Text" xml:space="preserve">
+    <value>&amp;Quando il programma è aperto, mostra le finestre:</value>
+  </data>
+  <data name="cbLetture.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 17</value>
+  </data>
+  <data name="cbLetture.Text" xml:space="preserve">
+    <value>&amp;Letture quotidiane all'avvio del computer</value>
+  </data>
+  <data name="panAltre.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardLunghezza2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardLunghezza2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="labClipboardLunghezza2.Text" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="tbClipboardLunghezza.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardLunghezza1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardLunghezza1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 13</value>
+  </data>
+  <data name="labClipboardLunghezza1.Text" xml:space="preserve">
+    <value>&amp;Lunghezza massima da controllare:</value>
+  </data>
+  <data name="labClipboardTempo2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardTempo2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="labClipboardTempo2.Text" xml:space="preserve">
+    <value>millisecondi</value>
+  </data>
+  <data name="tbClipboardTempo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardTempo1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="labClipboardTempo1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
+  <data name="labClipboardTempo1.Text" xml:space="preserve">
+    <value>&amp;Frequenza di controllo:</value>
+  </data>
+  <data name="cbClipboardAttivo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbClipboardAttivo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 17</value>
+  </data>
+  <data name="cbClipboardAttivo.Text" xml:space="preserve">
+    <value>C&amp;ontrollo clipboard attivo</value>
+  </data>
+  <data name="panClipboard.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAB
+        ARiIgAAAAAAAAAAAAAAAGQiBGIiAAAAAAAAAAAAAABkYd3EYiIAAAAAAAAAAAAGZEZh3cRiIgAAAAAAA
+        AAABkRERmHdxGIiAAAAAAAAAGZERERGYd3EYiIAAAAAAABkREREbsZh3cRiAAAAAAAGZERERO7ERmHCI
+        AAAAAAABkREREbsxERGRiAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7ER
+        EREYAAAAAAABkREREbsxERERGAAAAAAAGZERERO7EREREYAAAAAAABkREREbsxERERGAAAAAAAGZE7MR
+        O7EREREYAAAAAAABkRu7s7sxERERGAAAAAAAGZERO7u7MREREYAAAAAAABkRERE7u7sxERGAAAAAAAGZ
+        ERERO7O7uxEYAAAAAAABkREREbsxE7MRGAAAAAAACZERERO7EREREYAAAAAAAAAZkREbsxERERGAAAAA
+        AAAAABmRG7EREREYAAAAAAAAAAAAGZEREREREAAAAAAAAAAAAAAZkREREQAAAAAAAAAAAAAAABmREREA
+        AAAAAAAAAAAAAAAAGZEQAAAAAAAAAAAAAAAAAAAREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf///gC
+        f//94B///8AH///AAf//gAB//4AAH/8AAAf/AAAH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/8AAAf/AA
+        AH/gAAD/4AAA/8AAAf/AAAH/gAAD/4AAA/+AAAf/wAAH//AAD//8AB///wA////AP///8H////x/////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAEBEw
+        AAAAAAARiBEwAAAAARERiBEwAAABERuxgxAAABERGxERMAAAERG7EREAAAEREbEREQAAAREbsREQAAAR
+        G7sRERAAABERu7sRAAAAERGxEREAAAABG7EREAAAAAABEREAAAAAAAABEQAAAAAAAAAAAAAA4D8AAPQP
+        AAD4AwAA+AAAAPAAAADwAQAA4AEAAOADAADAAwAAwAcAAIAHAACADwAAwA8AAPAfAAD8PwAA/z8AAA==
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Opzioni</value>
+  </data>
+</root>

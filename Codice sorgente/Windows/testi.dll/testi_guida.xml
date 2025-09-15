@@ -1,0 +1,2725 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>testi</name>
+    </assembly>
+    <members>
+        <member name="T:TestiBiblici.RichTextBoxEx">
+            <summary>
+            An extension for RichTextBox suitable for printing, formatting selections, justifying text
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.InizioRiferimento">
+            <summary>
+            Le otto cifre che seguono danno il riferimento del versetto che segue.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.InizioLink">
+            <summary>
+            Il carattere inserito per indicare l'inizio di un link ipertestuale.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.FineLink1">
+            <summary>
+            Il carattere inserito per indicare l'inizio della parte finale un link ipertestuale.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.FineLink2">
+            <summary>
+            Il carattere inserito per indicare la fine della parte finale un link ipertestuale.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.FineLinkBrano">
+            <summary>
+            Il carattere inserito per indicare la fine di un link ipertestuale ad un brano.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.FineLinkNota">
+            <summary>
+            Il carattere inserito per indicare la fine di un link ipertestuale ad una nota.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.FineLinkFile">
+            <summary>
+            Il carattere inserito per indicare la fine di un link ipertestuale ad un file.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.ParolaRicercata">
+            <summary>
+            Il carattere inserito per indicare l'inizio di una parola ricercata.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.RichTextBoxEx.Rtf">
+            <summary>
+            Il testo Rtf del controllo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.RichTextBoxEx.SelectedRtf">
+            <summary>
+            Il testo Rtf del testo selezionato.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SelectAll">
+            <summary>
+            Seleziona tutto il testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.RichTextBoxEx.DetectUrls">
+            <summary>
+            Se il controllo rivela e visualizza gli url automaticamente.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.RichTextBoxEx.Versione">
+            <summary>
+            La versione della Bibbia del testo nel controllo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.RichTextBoxEx.Lingua">
+            <summary>
+            La lingua del testo nel controllo (o lingue, se separate con una riga verticale |).
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.RichTextBoxEx.TextAlign">
+            <summary>
+            Specifies how text in a RichText control is horizontally aligned.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.TextAlign.None">
+            <summary>
+            The text has no alignment assigned.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.TextAlign.Left">
+            <summary>
+            The text is aligned to the left.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.TextAlign.Right">
+            <summary>
+            The text is aligned to the right.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.TextAlign.Center">
+            <summary>
+            The text is aligned in the center.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RichTextBoxEx.TextAlign.Justify">
+            <summary>
+            The text is justified.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.#ctor">
+            <summary>
+            Il costruttore.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.AggiungiRtf(System.String)">
+            <summary>
+            Aggiunge del testo RTF (cioè {\rtf...}) alla fine del controllo.
+            </summary>
+            <param name="testoRtfDaAggiungere">Il testo da aggiungere.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.FormatRangeNotMono(System.Boolean,System.Drawing.Printing.PrintPageEventArgs,System.Int32,System.Int32)">
+            <summary>
+            Calculate or render the contents of our RichTextBox for printing
+            </summary>
+            <param name="measureOnly">If true, only the calculation is performed, otherwise the text is rendered as well</param>
+            <param name="e">The PrintPageEventArgs object from the PrintPage event</param>
+            <param name="primoCarattere">Index of first character to be printed</param>
+            <param name="ultimoCarattere">Index of last character to be printed</param>
+            <returns>(Index of last character that fitted on the page) + 1</returns>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.HundredthInchToTwips(System.Int32)">
+            <summary>
+            Convert between 1/100 inch (unit used by the .NET framework)
+            and twips (1/1440 inch, used by Win32 API calls)
+            </summary>
+            <param name="n">Value in 1/100 inch</param>
+            <returns>Value in twips</returns>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.FormatRangeDoneNotMono">
+            <summary>
+            Free cached data from rich edit control after printing
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetFont(System.String)">
+            <summary>
+            Imposta il font della selezione.
+            </summary>
+            <param name="nomeFont">Il nome del font.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetSize(System.Single)">
+            <summary>
+            Imposta la dimensione del font della selezione.
+            </summary>
+            <param name="size">La dimensione da impostare.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetSelectionBold(System.Boolean)">
+            <summary>
+            Cambia se la selezione è in grassetto.
+            </summary>
+            <param name="set">True lo imposta, false lo toglie.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetSelectionItalic(System.Boolean)">
+            <summary>
+            Cambia se la selezione è in corsivo.
+            </summary>
+            <param name="set">True lo imposta, false lo toglie.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetSelectionUnderline(System.Boolean)">
+            <summary>
+            Cambia se la selezione è sottolineata.
+            </summary>
+            <param name="set">True lo imposta, false lo toglie.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetSelectionUnderlineTypeNotMono(System.Byte)">
+            <summary>
+            Cambia il tipo di sottolineatura.
+            </summary>
+            <param name="underlineType">Il tipo di sottolineatura.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.SetSelectionLink(System.Boolean)">
+            <summary>
+            Set the current selection's link style
+            </summary>
+            <param name="link">true: set link style, false: clear link style</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.InserisciLink(System.String,System.Char)">
+            <summary>
+            Change the selected text to a link. The link text is followed by a @ symbol,
+            a letter indicating the type of link, and the given hyperlink text, all of them invisible.
+            When clicked on, the whole link text and hyperlink string are given in the LinkClickedEventArgs.
+            </summary>
+            <param name="link">Invisible hyperlink string to be inserted</param>
+            <param name="tipo">The type of link: FineLinkBrano->Bible passage, FineLinkNota->nota, FineLinkFile->file</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.MostraLink">
+            <summary>
+            Cambia il formato del testo per visualizzare tutti i link.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.RichTextBoxEx.SelectionAlignment">
+            <summary>
+            Gets or sets the alignment to apply to the current
+            selection or insertion point.
+            </summary>
+            <remarks>
+            Replaces the SelectionAlignment from <see cref="T:System.Windows.Forms.RichTextBox"/>.
+            </remarks>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.OnHandleCreated(System.EventArgs)">
+            <summary>
+            This member overrides
+            <see cref="T:System.Windows.Forms.Control"/>.OnHandleCreated.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.BloccaRtf(System.Boolean)">
+            <summary>
+            Impedisce che il controllo sia aggiornato.
+            Siccome diversi aggiornamenti, e quindi blocchi, possono essersi innestati, la funzione conta il numero di blocchi
+               e sblocca il controllo solo quando l'ultimo sblocco è rimosso.
+            Per questo motivo, è importante sempre chiamare questa funzione due volte, per bloccare e poi sbloccare.
+            </summary>
+            <param name="blocca">True per bloccare, false per sbloccare.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Analizza un messaggio di Windows.
+            </summary>
+            <param name="m">Il messaggio</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.MostraHover(System.String,System.String,System.Drawing.Point,System.Boolean)">
+            <summary>
+            Mostra il testo ipertestuale quando il mouse è sopra un link.
+            </summary>
+            <param name="testo">Il testo da visualizzare.</param>
+            <param name="versioneDelTesto">La nomeVersione della Bibbia del testo.</param>
+            <param name="posizione">La posizione del mouse sul controllo.</param>
+            <param name="mostraInTooltip">Se il testo dovrà essere visualizzato anche nelle finestre dell'ipertesto.</param>
+        </member>
+        <member name="E:TestiBiblici.RichTextBoxEx.LinkHoverEvento">
+            <summary>
+            L'evento quando il mouse si ferma sopra un link.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.OnLinkHover(TestiBiblici.LinkHoverEventArgs)">
+            <summary>
+            L'evento quando il mouse si ferma sopra un link.
+            </summary>
+            <param name="e">Gli argomenti dell'evento.</param>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.ParolaAttuale(System.Int32)">
+            <summary>
+            La parola di una certa posizione nel testo della finestra.
+            </summary>
+            <param name="posizione">La posizione della parola.</param>
+            <returns>La parola a quella posizione.</returns>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.VersettoAttuale(System.Int32)">
+            <summary>
+            Il versetto di una certa posizione nel testo della finestra, nel formato 01002003=Gen 2:3.
+            </summary>
+            <param name="posizione">La posizione del versetto.</param>
+            <returns>Il riferimento del versetto attuale.</returns>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.IndexUltimoOf(System.String,System.Int32)">
+            <summary>
+            Restituisce l'indice dell'ultima volta che una stringa occorre.
+            </summary>
+            <param name="stringaDaRicerca">La stringa da ricercare.</param>
+            <param name="posizioneFinale">L'ultima posizione nella stringa in cui cercare la stringa da ricercare.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.IndexUltimoOf(System.Char,System.Int32)">
+            <summary>
+            Restituisce l'indice dell'ultima volta che un carattere occorre.
+            </summary>
+            <param name="carattereDaRicerca">Il carattere da ricercare.</param>
+            <param name="posizioneFinale">L'ultima posizione nella stringa in cui cercare il carattere da ricercare.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TestiBiblici.RichTextBoxEx.CopiaSenzaTestoNascosto">
+            <summary>
+            Copia il testo selezionato al clipboard; però il testo semplice (non RTF) non contiene il testo nascosto.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.LinkHoverEventArgs">
+            <summary>
+            Gli argomenti dell'evento quando il mouse si ferma sopra un link.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.LinkHoverEventArgs.LinkTesto">
+            <summary>
+            Il testo del link.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.LinkHoverEventArgs.RichText">
+            <summary>
+            Il controllo in cui il link esiste.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.LinkHoverEventArgs.#ctor(TestiBiblici.RichTextBoxEx,System.String)">
+            <summary>
+            Il costruttore della classe.
+            </summary>
+            <param name="controllo">Il controllo in cui il link esiste.</param>
+            <param name="testo">Il testo del link.</param>
+        </member>
+        <member name="T:TestiBiblici.ConfrontoCI">
+            <summary>
+            Una classe per confrontare due stringhe, che funziona anche con i caratteri greci.
+            Case insensitive.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.ConfrontoCI.Compare(System.String,System.String)">
+            <summary>
+            La funzione Compare.
+            </summary>
+            <param name="x">La prima stringa.</param>
+            <param name="y">La seconda stringa.</param>
+            <returns>Il confronto delle stringhe: -1, 0 o 1.</returns>
+        </member>
+        <member name="T:TestiBiblici.ConfrontoCS">
+            <summary>
+            Una classe per confrontare due stringhe, che funziona anche con i caratteri greci.
+            Case sensitive.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.ConfrontoCS.Compare(System.String,System.String)">
+            <summary>
+            La funzione Compare.
+            </summary>
+            <param name="x">La prima stringa.</param>
+            <param name="y">La seconda stringa.</param>
+            <returns>Il confronto delle stringhe: -1, 0 o 1.</returns>
+        </member>
+        <member name="T:TestiBiblici.BloccatoTipi">
+            <summary>
+            Il modo in cui una collezione è bloccata.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.BloccatoTipi.Sbloccato">
+            <summary>
+            La collezione non è bloccata.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.BloccatoTipi.Bloccato">
+            <summary>
+            La collezione è bloccata, ma può essere sbloccata.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.BloccatoTipi.BloccatoSempre">
+            <summary>
+            La collezione è bloccata, ma non può essere sbloccata dall'utente.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.TestoTipi">
+            <remarks>
+            Il tipo di un certo testo.
+            </remarks>
+        </member>
+        <member name="F:TestiBiblici.TestoTipi.None">
+            <summary>
+            Il tipo non è stato impostato.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoTipi.Bibbia">
+            <summary>
+            Una versione della Bibbia (o una parte).
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoTipi.Commentario">
+            <summary>
+            Un commentario, cioè delle note collegate a versetti o brani.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoTipi.Dizionario">
+            <summary>
+            Un dizionario, cioè delle note collegate a temi.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoTipi.Libro">
+            <summary>
+            Un libro, cioè note che hanno un ordine.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.OccorrenzaParola">
+            <remarks>
+            Per la concordanza, dà il numero del versetto o della nota e il numero della parola nella voce
+            </remarks>
+        </member>
+        <member name="P:TestiBiblici.OccorrenzaParola.Voce">
+            <summary>
+            Il numero della voce (versetto o nota) nel testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.OccorrenzaParola.Parola">
+            <summary>
+            Il numero della parola nel testo.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.CompareTo(System.Object)">
+            <summary>
+            Confronta un altro oggetto di tipo OccorrenzaParola con quello attuale.
+            </summary>
+            <param name="obj">L'altro oggetto di tipo OccorrenzaParola da confrontare.</param>
+            <returns>-1 se questa parola è prima dell'altro, 0 se è uguale, 1 se è dopo.</returns>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.Equals(System.Object)">
+            <summary>
+            Restituisce se due oggetti sono uguali.
+            </summary>
+            <param name="obj">Un oggetto di tipo OccorrenzaParola a cui paragonare questo oggetto.</param>
+            <returns>True se le occorrenze sono uguali.</returns>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.GetHashCode">
+            <summary>
+            Calcola il hash code.
+            </summary>
+            <returns>Il hash code.</returns>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.op_Equality(TestiBiblici.OccorrenzaParola,TestiBiblici.OccorrenzaParola)">
+            <summary>
+            Se due oggetti sono uguali.
+            </summary>
+            <param name="primoOggetto">Primo oggetto.</param>
+            <param name="secondoOggetto">Secondo oggetto.</param>
+            <returns>True se sono uguali.</returns>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.op_Inequality(TestiBiblici.OccorrenzaParola,TestiBiblici.OccorrenzaParola)">
+            <summary>
+            Se due oggetti sono diversi.
+            </summary>
+            <param name="primoOggetto">Primo oggetto.</param>
+            <param name="secondoOggetto">Secondo oggetto.</param>
+            <returns>True se sono diversi.</returns>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.op_LessThan(TestiBiblici.OccorrenzaParola,TestiBiblici.OccorrenzaParola)">
+            <summary>
+            Se una parola appare prima di un'altra.
+            </summary>
+            <param name="primoOggetto">Prima parola.</param>
+            <param name="secondoOggetto">Seconda parola.</param>
+            <returns>True se la prima appare prima della seconda.</returns>
+        </member>
+        <member name="M:TestiBiblici.OccorrenzaParola.op_GreaterThan(TestiBiblici.OccorrenzaParola,TestiBiblici.OccorrenzaParola)">
+            <summary>
+            Se una parola appare dopo un'altra.
+            </summary>
+            <param name="primoOggetto">Prima parola.</param>
+            <param name="secondoOggetto">Seconda parola.</param>
+            <returns>True se la prima appare dopo la seconda.</returns>
+        </member>
+        <member name="T:TestiBiblici.VersioneInformazioni">
+            <remarks>
+            Informazione su un testo che è in un file dei dati, che può essere una versione della Bibbia
+            oppure un commentario e/o un un dizionario e/o un libro.
+            </remarks>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Versione">
+            <summary>
+            Il numero della versione del file (nel formato 7.13.11)
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.NomeDelFile">
+            <summary>
+            Il nome e percorso del file che contiene il testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Nome">
+            <summary>
+            Il nome del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Abbreviazione">
+            <summary>
+            L'abbreviazione del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Titolo">
+            <summary>
+            Il titolo del testo, di solito più lungo del nome, e visualizzato solo nella finestra Informazioni su.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Autore">
+            <summary>
+            L'autore del testo (per una Bibbia, di solito è vuota)
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.CasaEditrice">
+            <summary>
+            La casa editrice del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Data">
+            <summary>
+            La data di pubblicazione del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Copyright">
+            <summary>
+            Una stringa che descrive il copyright del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Isbn">
+            <summary>
+            Il numero ISBN del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Descrizione">
+            <summary>
+            Una descrizione del testo. Può essere in formato RTF.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Lingua">
+            <summary>
+            La lingua principale del testo. Deve essere un codice ISO 639-1 (2 lettere) oppure ISO 639-2 (3 lettere).
+            Può anche essere diverse lingue separate da una riga verticale |, principale (che è la lingua quando il testo è considerato come dizionario) e secondarie,
+            per esempio un dizionario greco-italiano avrebbe lingua el|it.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.VersioneDelleNote">
+            <summary>
+            La versione della Bibbia a cui le note fanno riferimento. È vuoto per una Bibbia.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Tipo">
+            <summary>
+            Il tipo del testo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.VersioneInformazioni.Bloccato">
+            <summary>
+            Il tipo del bloccaggio di una collezione di note.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.VersioneInformazioni.#ctor">
+            <summary>
+            Il costruttore della classe VersioneInformazioni. Valori predefiniti sono dati a tutti i membri.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.TestoVisualizzato">
+            <summary>
+            Come visualizzare il testo proprio.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoVisualizzato.Versetti">
+            <summary>
+            Mostrare ogni versetto su una riga diversa.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoVisualizzato.Paragrafi">
+            <summary>
+            Mostrare il testo come paragrafi.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.TestoVisualizzato.Nessuno">
+            <summary>
+            Non mostrare il testo.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.RiferimentoTipo">
+            <summary>
+            Come visualizzare i riferimenti nel testo.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoTipo.DuePunti">
+            <summary>
+            Con due punti fra il capitolo e il versetto, per esempio 1P 5:2,6-7
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoTipo.Virgola">
+            <summary>
+            Con una virgola fra il capitolo e il versetto, per esempio 1P 5,2.6-7
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoTipo.Citazione">
+            <summary>
+            Come una citazione, per esempio 1P., 5, 2.6-7:
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.RiferimentoFormato">
+            <summary>
+            Come visualizzare il libro nel riferimento.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoFormato.Intero">
+            <summary>
+            Il nome intero del libro.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoFormato.Abbreviazione">
+            <summary>
+            L'abbreviazione del libro.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoFormato.Nessuno">
+            <summary>
+            Non mostrare nessun riferimento.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoFormato.NessunoLibro">
+            <summary>
+            Non mostrare il nome del libro.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoFormato.AbbreviazioneRiconosciuta">
+            <summary>
+            Usare un'abbreviazione del libro che il programma riconosce.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.RiferimentoPosto">
+            <summary>
+            Dove visualizzare i riferimenti nel testo.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoPosto.PrimaStessaRiga">
+            <summary>
+            Prima del testo del versetto, sulla stessa riga.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoPosto.PrimaRigaDiversa">
+            <summary>
+            Prima del testo del versetto, sulla riga precedente.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.RiferimentoPosto.Dopo">
+            <summary>
+            Dopo il testo del versetto.
+            </summary>
+        </member>
+        <member name="T:TestiBiblici.FormatoTesto">
+            <remarks>
+            Descrive il formato usato per visualizzare il testo biblico.
+            </remarks>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontNome">
+            <summary>
+            Il nome del font predefinito.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontDimensione">
+            <summary>
+            La dimensione del font predefinito.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrassetto">
+            <summary>
+            Se il font predefinito è in grassetto.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontCorsivo">
+            <summary>
+            Se il font predefinito è in corsivo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontSottolineato">
+            <summary>
+            Se il font predefinito è sottolineato.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontColore">
+            <summary>
+            Il colore del font.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrecoNome">
+            <summary>
+            Il nome del font greco.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrecoDimensione">
+            <summary>
+            La dimensione del font greco.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrecoGrassetto">
+            <summary>
+            Se il font greco è in grassetto.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrecoCorsivo">
+            <summary>
+            Se il font greco è in corsivo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrecoSottolineato">
+            <summary>
+            Se il font greco è sottolineato.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontGrecoColore">
+            <summary>
+            Il colore del font greco.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontEbraicoNome">
+            <summary>
+            Il nome del font ebraico.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontEbraicoDimensione">
+            <summary>
+            La dimensione del font ebraico.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontEbraicoGrassetto">
+            <summary>
+            Se il font ebraico è in grassetto.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontEbraicoCorsivo">
+            <summary>
+            Se il font ebraico è in corsivo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontEbraicoSottolineato">
+            <summary>
+            Se il font ebraico è sottolineato.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontEbraicoColore">
+            <summary>
+            Il colore del font ebraico.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRiferimentoNome">
+            <summary>
+            Il nome del font usato per i riferimenti.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRiferimentoDimensione">
+            <summary>
+            La dimensione del font usato per i riferimenti.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRiferimentoGrassetto">
+            <summary>
+            Se il font usato per i riferimenti è in grassetto.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRiferimentoCorsivo">
+            <summary>
+            Se il font usato per i riferimenti è in corsivo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRiferimentoSottolineato">
+            <summary>
+            Se il font usato per i riferimenti è sottolineato.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRiferimentoColore">
+            <summary>
+            Il colore del font usato per i riferimenti.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.RiferimentoApice">
+            <summary>
+            Se i riferimenti sono in apice.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.RiferimentoContestoRicerche">
+            <summary>
+            Se un collegamento ipertestuale è creato per i riferimenti in una ricerca.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRicercaNome">
+            <summary>
+            Il nome del font usato per le parole ricercate.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRicercaDimensione">
+            <summary>
+            La dimensione del font usato per le parole ricercate.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRicercaGrassetto">
+            <summary>
+            Se il font usato per le parole ricercate è in grassetto.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRicercaCorsivo">
+            <summary>
+            Se il font usato per le parole ricercate è in corsivo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRicercaSottolineato">
+            <summary>
+            Se il font usato per le parole ricercate è sottolineato.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.FontRicercaColore">
+            <summary>
+            Il colore del font usato per le parole ricercate.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.TitoliVisualizzati">
+            <summary>
+            Se i titoli delle sezioni sono visualizzati nel testo biblico.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.TestoVisualizzato">
+            <summary>
+            Come il testo biblico è visualizzato.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.RiferimentoTipo">
+            <summary>
+            Il tipo di riferimento da usare.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.RiferimentoFormato">
+            <summary>
+            Il formato dei riferimenti.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.FormatoTesto.RiferimentoPosto">
+            <summary>
+            La posizione dei riferimenti relativa al testo.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.FormatoTesto.#ctor">
+            <summary>
+            Il costruttore della classe FormatoTesto. Valori predefiniti sono dati a tutti i membri.
+            </summary>
+            <seealso cref="T:TestiBiblici.FormatoTesto"/>
+        </member>
+        <member name="M:TestiBiblici.FormatoTesto.CopiaA(TestiBiblici.FormatoTesto)">
+            <summary>
+            Copia tutte le caratteristiche di un formato ad un altro.
+            </summary>
+            <param name="formato">Il formato a cui copiare le caratteristiche.</param>
+        </member>
+        <member name="T:TestiBiblici.Riferimento">
+            <remarks>
+            Una classe che contiene informazioni sul riferimento di un brano, o una lista di note.
+            </remarks>
+        </member>
+        <member name="P:TestiBiblici.Riferimento.Versetti">
+            <summary>
+            Se il riferimento contiene un elenco di versetti (l'alternativa è un elenco di note).
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.Riferimento.Brani">
+            <summary>
+            Una collezione di brani, ognuno nel formato di un array di sei byte. I primi tre interi danno il versetto di inizio (numero del libro, capitolo, versetto) e i secondo tre interi l'ultimo versetto (numero del libro, capitolo, versetto).
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.Riferimento.Note">
+            <summary>
+            Una collezione di titoli di note.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Riferimento.numeroParola">
+            <summary>
+            Specifica il numero di alcune parole nel primo versetto del brano.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.Riferimento.DaTradurre">
+            <summary>
+            Se è necessario tradurre il riferimento allo schema dei riferimenti di altre versioni.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.#ctor">
+            <summary>
+            Il costruttore della classe, che crea un riferimento a versetti senza un brano.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Il costruttore della classe, che crea un riferimento a versetti con un versetto.
+            </summary>
+            <param name="libro">Il libro del versetto.</param>
+            <param name="capitolo">Il capitolo del versetto.</param>
+            <param name="versetto">Il versetto del versetto.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.#ctor(System.Byte[])">
+            <summary>
+            Il costruttore della classe, che crea un riferimento a versetti con un brano.
+            </summary>
+            <param name="brano">Il brano del riferimento.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.#ctor(System.Boolean)">
+            <summary>
+            Il costruttore della classe, che crea un riferimento a versetti o a note.
+            </summary>
+            <param name="brano">Se vero, crea un riferimento ad un brano (l'alternativa è un elenco di note).</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.#ctor(TestiBiblici.Riferimento)">
+            <summary>
+            Il costruttore della classe, che crea un riferimento a versetti con un brano.
+            </summary>
+            <param name="riferimento">Un riferimento, di cui questo nuovo riferimento è una copia.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.AggiungiBrano8Byte(System.Byte[])">
+            <summary>
+            Aggiunge un brano ad un riferimento, in cui possibilmente ci sono anche la parola iniziale e finale
+            </summary>
+            <param name="brano">Il brano da aggiungere, come libro, capitolo, versetto, parola iniziale e libro, capitolo, versetto, parola finale.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.Rimuovi(System.Int32)">
+            <summary>
+            Cancella un brano o una nota dal riferimento. Se il paramento è meno di 0 o più del numero dei brani/note, non succede niente.
+            </summary>
+            <param name="numero">Il numero del brano o della nota da rimuovere.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.RimuoviVersetto(System.Byte[])">
+            <summary>
+            Rimuove un versetto da un riferimento che contiene dai versetti.
+            Se il versetto non è nel riferimento, o se il riferimento contiene delle note, non succede niente.
+            </summary>
+            <param name="brano">Il versetto di rimuovere.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.RimuoviVersetti(TestiBiblici.Riferimento)">
+            <summary>
+            Rimuove tutti i versetti in un riferimento dal riferimento.
+            </summary>
+            <param name="riferimentoDaRimuovere">Il riferimento che contiene i versetti da rimuovere.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.Clear">
+            <summary>
+            Cancella tutti i dati del riferimento.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.PrimoVersettoUguale(System.Int32,System.Int32)">
+            <summary>
+            Indica se il primo versetto di due brani sono uguali.
+            </summary>
+            <param name="primoIndice">L'indice del primo brano.</param>
+            <param name="secondoIndice">L'indice del secondo brano.</param>
+            <returns>Un boolean che dà se i primi versetti sono uguali.</returns>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.SoloUnoVersetto(System.Int32)">
+            <summary>
+            Indica se un brano è composto da uno solo versetto.
+            </summary>
+            <param name="indice">L'indice del brano.</param>
+            <returns>Un boolean che dà se il brano è composto da uno solo versetto.</returns>
+        </member>
+        <member name="P:TestiBiblici.Riferimento.Count">
+            <summary>
+            Il numero di brani o di note nel riferimento.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.AggiungiBrano(System.Byte[])">
+            <summary>
+            Aggiunge un brano al riferimento.
+            </summary>
+            <param name="brano">Il brano da aggiungere.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.AggiungiBraniDaRiferimento(TestiBiblici.Riferimento)">
+            <summary>
+            Aggiunge tutti i brani di un riferimento al riferimento.
+            </summary>
+            <param name="riferimento">Il riferimento che contiene i brani da aggiungere.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.AggiungiBranoEParole(System.Byte[],System.Collections.ObjectModel.Collection{System.UInt16})">
+            <summary>
+            Aggiunge un brano e una collezione di parole selezionate nel primo versetto del brano al riferimento.
+            </summary>
+            <param name="brano">Il brano da aggiungere.</param>
+            <param name="parole">I numeri delle parole nel versetto.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.AggiungiNotaEParole(System.String,System.Collections.ObjectModel.Collection{System.UInt16})">
+            <summary>
+            Aggiunge una nota e una collezione di parole selezionate al riferimento.
+            </summary>
+            <param name="nota">Il titolo della nota da aggiungere.</param>
+            <param name="parole">I numeri delle parole nella nota.</param>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.ComeNotaTuttoRiferimento">
+            <summary>
+            <summary>
+            Restituisce una string che rappresenta come tutto il riferimento è mostrato quando è il titolo di una nota.
+            </summary>
+            <returns>Il riferimento come il titolo di una nota.</returns>
+            </summary>
+            <returns>I titoli delle note nel riferimento.</returns>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.ComeNotaPrimoRiferimento">
+            <summary>
+            Restituisce una string che rappresenta come il primo brano nel riferimento è mostrato quando è il titolo di una nota.
+            </summary>
+            <returns>Il riferimento come il titolo di una nota.</returns>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.Uguale(TestiBiblici.Riferimento)">
+            <summary>
+            Valuta se due riferimenti sono uguali.
+            </summary>
+            <param name="riferimentoDaConfrontare">Il riferimento con cui confrontare quello attuale.</param>
+            <returns>Vero se i due riferimenti sono identici.</returns>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.ContieneVersetto(TestiBiblici.Riferimento)">
+            <summary>
+            Decide se il riferimento contiene un certo versetto.
+            </summary>
+            <param name="versettoDaRicercare">Un riferimento che contiene il versetto da controllare (solo l'inizio del primo brano è controllato).</param>
+            <returns>Vero se il riferimento contiene il versetto. Falso se il riferimento da controllare era vuoto.</returns>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.ContieneBrano(TestiBiblici.Riferimento)">
+            <summary>
+            Decide se il riferimento contiene almeno una parte di un certo brano.
+            </summary>
+            <param name="branoDaRicercare">Un riferimento che contiene il brano da controllare.</param>
+            <returns>Vero se il riferimento contiene una parte del brano. Falso se il brano da controllare era vuoto.</returns>
+        </member>
+        <member name="M:TestiBiblici.Riferimento.Compare(System.Object,System.Object)">
+            <summary>
+            Confonta due riferimenti per determinare quale è primo.
+            </summary>
+            <param name="x">Il primo riferimento.</param>
+            <param name="y">Il secondo riferimento.</param>
+            <returns>-1, 0 o 1 se il primo riferimento è prima, uguale a o dopo il secondo.</returns>
+        </member>
+        <member name="T:TestiBiblici.LibriAbbreviazioniRiconosciuteHash">
+            <summary>
+            Una classe che gestisce le abbreviazioni riconosciute dal libro.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.LibriAbbreviazioniRiconosciuteHash.#ctor">
+            <summary>
+            Il costruttore della classe.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.LibriAbbreviazioniRiconosciuteHash.Item(System.String)">
+            <summary>
+            Restituisce il libro che corrisponde ad una data abbreviazione.
+            </summary>
+            <param name="abbreviazione">L'abbreviazione di cui si vuole il libro.</param>
+            <returns>Il numero del libro.</returns>
+        </member>
+        <member name="M:TestiBiblici.LibriAbbreviazioniRiconosciuteHash.Abbreviazione(System.Byte)">
+            <summary>
+            Restituisce un'abbreviazione riconosciuto di un certo libro.
+            </summary>
+            <param name="libro">Il numero di un libro.</param>
+            <returns>Un'abbreviazione riconosciuta.</returns>
+        </member>
+        <member name="M:TestiBiblici.LibriAbbreviazioniRiconosciuteHash.ContainsKey(System.String)">
+            <summary>
+            Decide se l'abbreviazione è riconosciuta.
+            </summary>
+            <param name="abbreviazione">L'abbreviazione da controllare.</param>
+            <returns>Vero se l'abbreviazione è riconosciuta.</returns>
+        </member>
+        <member name="M:TestiBiblici.LibriAbbreviazioniRiconosciuteHash.Clear">
+            <summary>
+            Rimuovi tutte le abbreviazioni dall'elenco.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.LibriAbbreviazioniRiconosciuteHash.AbbreviazioniPerLibro">
+            <summary>
+            Restituisce tutte le abbreviazioni riconosciute, ordinate per libro.
+            </summary>
+            <returns>Un array con 73 elementi (da 0 a 72), ogni elemento ha tutte le abbreviazioni separate da una virgola per un libro.</returns>
+        </member>
+        <member name="T:TestiBiblici.TextNotExistException">
+            <summary>
+            Exception quando una richiesta è fatta per informazioni di una versione che non esiste.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.TextNotExistException.#ctor">
+            <summary>
+            Exception quando una richiesta è fatta per informazioni di una versione che non esiste.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.TextNotExistException.#ctor(System.String)">
+            <summary>
+            Exception quando una richiesta è fatta per informazioni di una versione che non esiste.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+        </member>
+        <member name="M:TestiBiblici.TextNotExistException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando una richiesta è fatta per informazioni di una versione che non esiste.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.TextNotExistException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando una richiesta è fatta per informazioni di una versione che non esiste.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.ImpossibileScrivereModificheException">
+            <summary>
+            Exception quando la scrittura di una collezione di note modificata dà un errore.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.ImpossibileScrivereModificheException.#ctor">
+            <summary>
+            Exception quando la scrittura di una collezione di note modificata dà un errore.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.ImpossibileScrivereModificheException.#ctor(System.String)">
+            <summary>
+            Exception quando la scrittura di una collezione di note modificata dà un errore.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+        </member>
+        <member name="M:TestiBiblici.ImpossibileScrivereModificheException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando la scrittura di una collezione di note modificata dà un errore.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.ImpossibileScrivereModificheException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando la scrittura di una collezione di note modificata dà un errore.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.FileNonValidoException">
+            <summary>
+            Exception quando il file da aprire con un testo del programma non è valido.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.FileNonValidoException.#ctor">
+            <summary>
+            Exception quando il file da aprire con un testo del programma non è valido.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.FileNonValidoException.#ctor(System.String)">
+            <summary>
+            Exception quando il file da aprire con un testo del programma non è valido.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+        </member>
+        <member name="M:TestiBiblici.FileNonValidoException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando il file da aprire con un testo del programma non è valido.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.FileNonValidoException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando il file da aprire con un testo del programma non è valido.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.CarattereSconosciutoException">
+            <summary>
+            Exception quando un carattere sconosciuto è trovato in un file che è analizzato per cercare le parole.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.CarattereSconosciutoException.#ctor">
+            <summary>
+            Exception quando un carattere sconosciuto è trovato in un file che è analizzato per cercare le parole.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.CarattereSconosciutoException.#ctor(System.String)">
+            <summary>
+            Exception quando un carattere sconosciuto è trovato in un file che è analizzato per cercare le parole.
+            </summary>
+            <param name="testo">Il testo che contiene il carattere sconosciuto.</param>
+        </member>
+        <member name="M:TestiBiblici.CarattereSconosciutoException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando un carattere sconosciuto è trovato in un file che è analizzato per cercare le parole.
+            </summary>
+            <param name="testo">Il testo che contiene il carattere sconosciuto.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.CarattereSconosciutoException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando un carattere sconosciuto è trovato in un file che è analizzato per cercare le parole.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.SearchExpressionEmptyException">
+            <summary>
+            Exception quando l'espressione da ricercare è vuota.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchExpressionEmptyException.#ctor">
+            <summary>
+            Exception quando l'espressione da ricercare è vuota.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchExpressionEmptyException.#ctor(System.String)">
+            <summary>
+            Exception quando l'espressione da ricercare è vuota.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchExpressionEmptyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando l'espressione da ricercare è vuota.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchExpressionEmptyException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando l'espressione da ricercare è vuota.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.SearchSyntaxErrorException">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore di sintassi.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchSyntaxErrorException.#ctor(System.String)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore di sintassi.
+            </summary>
+            <param name="carattere">Il numero del carattere dove c'è l'errore.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchSyntaxErrorException.#ctor">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore di sintassi.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchSyntaxErrorException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore di sintassi.
+            </summary>
+            <param name="carattere">Il numero del carattere dove c'è l'errore.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchSyntaxErrorException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore di sintassi.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.SearchParenthesesException">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchParenthesesException.#ctor">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchParenthesesException.#ctor(System.String)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchParenthesesException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchParenthesesException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.SearchBracketsException">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi quadrate.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchBracketsException.#ctor">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi quadrate.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.SearchBracketsException.#ctor(System.String)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi quadrate.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchBracketsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi quadrate.
+            </summary>
+            <param name="messaggio">Il messaggio da dare.</param>
+            <param name="innerException">L'exception che è la causa dell'exception attuale.</param>
+        </member>
+        <member name="M:TestiBiblici.SearchBracketsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Exception quando l'espressione da ricercare ha un errore nelle parentesi quadrate.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestiBiblici.UltimaBibbiaEventArgs">
+            <summary>
+            Gli argomenti dell'evento quando la Bibbia utilizzata è cambiata.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.UltimaBibbiaEventArgs.NuovaBibbia">
+            <summary>
+            La Bibbia utilizzata.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.UltimaBibbiaEventArgs.#ctor(System.String)">
+            <summary>
+            Il costruttore della classe.
+            </summary>
+            <param name="bibbiaUtilizzata">La Bibbia utilizzata.</param>
+        </member>
+        <member name="T:TestiBiblici.ITexts">
+            <summary>
+            The interface that is exported as a COM object.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.ITexts.Passage(System.String,System.String)">
+            <summary>
+            The text of a Bible passage in RTF format.
+            </summary>
+            <param name="bibleReference">The reference of the required passage.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>A rich text formatted string with the text of the passage.</returns>
+            <exception cref="T:TestiBiblici.TextNotExistException">No text with that name was found.</exception>
+        </member>
+        <member name="M:TestiBiblici.ITexts.PassageInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a Bible passage onto the Windows clipboard. It can than be pasted into the client application.
+            </summary>
+            <param name="bibleReference">The reference of the required passage.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <exception cref="T:TestiBiblici.TextNotExistException">No text with that name was found.</exception>
+        </member>
+        <member name="M:TestiBiblici.ITexts.Search(System.String,System.String,System.String)">
+            <summary>
+            Finds a word or expression in a certain part of the Bible.
+            </summary>
+            <param name="expression">The expression to search for.</param>
+            <param name="passage">The passage in the Bible in which to search the expression. If it is an empty string, the whole Bible is searched.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>A list of the Bible references of the verses that contain the expression. The string can then be passed to the <see cref="M:TestiBiblici.ITexts.Passage(System.String,System.String)" /> function for the text of the verses.</returns>
+            <exception cref="T:TestiBiblici.SearchExpressionEmptyException">The search expression was empty.</exception>
+            <exception cref="T:TestiBiblici.SearchSyntaxErrorException">A syntax error in the search expression.</exception>
+            <exception cref="T:TestiBiblici.SearchParenthesesException">An error in the parentheses in the search expression.</exception>
+            <exception cref="T:TestiBiblici.SearchBracketsException">An error in the brackets in the search expression.</exception>
+            <exception cref="T:TestiBiblici.TextNotExistException">No text with that name was found.</exception>
+        </member>
+        <member name="M:TestiBiblici.ITexts.AddDirectory(System.String)">
+            <summary>
+            Looks for and analyses all the data files in a given directory.
+            </summary>
+            <param name="directory">The directory to look in.</param>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NumberTexts">
+            <summary>
+            Returns the number of texts (Bibles and collections of notes) that were found and are available to be used.
+            When the object is created, it automatically finds all the data files in the directory of the LaParola program and in the data directory of the program.
+            </summary>
+            <returns>The number of texts found.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NameText(System.Int32)">
+            <summary>
+            Gives the name of a certain text out of those found.
+            </summary>
+            <param name="numberText">The number (out of the <see cref="M:TestiBiblici.ITexts.NumberTexts"/> of texts available) to give the name of. The counting starts at zero.</param>
+            <returns>The name of the text.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.LastBibleUsed">
+            <summary>
+            Gives the name of the last Bible translation used by the program.
+            </summary>
+            <returns>The name of the last Bible.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.ChaptersInBook(System.Int32,System.String)">
+            <summary>
+            Returns the number of chapters in a given book of the Bible.
+            Returns zero if the text is not a Bible translation, or if the book number is out of range.
+            </summary>
+            <param name="book">The number of the book (from 1 to 73, with the apocryphal books inserted into the Old Testament).</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>The number of chapters in the book, or zero if there is an error in the input.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.VersesInChapter(System.Int32,System.Int32,System.String)">
+            <summary>
+            Returns the number of verses in a given chapter of a book of the Bible.
+            Returns zero if the text is not a Bible translation, or if the book or chapter numbers are out of range.
+            </summary>
+            <param name="book">The number of the book (from 1 to 73, with the apocryphal books inserted into the Old Testament).</param>
+            <param name="chapter">The number of the chapter in the book.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>The number of verses in the chapter, or zero if there is an error in the input.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.RootOfWord(System.String,System.String)">
+            <summary>
+            Returns the root word of a certain word (that is, the base form of the word, without plurals, changes in the tense of the verb, etc.).
+            </summary>
+            <param name="word">The word.</param>
+            <param name="nameText">The name of the text (Bible or collection of notes) to use.</param>
+            <returns>The root of the word.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NumberOfAppearancesOfWord(System.String,System.String)">
+            <summary>
+            Returns the number of times a word appears in a text.
+            </summary>
+            <param name="word">The word.</param>
+            <param name="nameText">The name of the text (Bible or collection of notes) to use.</param>
+            <returns>The number of times the word appears.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NumberOfAppearancesOfRoot(System.String,System.String)">
+            <summary>
+            Returns the number of times a root word appears in a text.
+            </summary>
+            <param name="root">The root.</param>
+            <param name="nameText">The name of the text (Bible or collection of notes) to use.</param>
+            <returns>The number of times the root appears.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NoteTitle(System.String,System.String)">
+            <summary>
+            Returns the text of a note that has a title in RTF format.
+            </summary>
+            <param name="title">The title of the note.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+            <returns>The text of the note.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NoteTitleInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a note that has a title onto the Windows clipboard. It can than be pasted into the client application.
+            </summary>
+            <param name="title">The title of the note.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NotePassage(System.String,System.String)">
+            <summary>
+            Returns the text of a note on a Bible passage in RTF format.
+            </summary>
+            <param name="reference">The Bible reference of the passage.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+            <returns>The text of the note.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NotePassageInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a note on a Bible passage onto the Windows clipboard. It can than be pasted into the client application.
+            </summary>
+            <param name="reference">The Bible reference of the passage.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.ITexts.NoteInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a note of any type into the Windows clipboard.  It can than be pasted into the client application.
+            </summary>
+            <param name="name">The Bible reference of a passage or the title of a note.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.ITexts.SearchCollection(System.String,System.String)">
+            <summary>
+            Finds a word or expression in a collection of notes, returning the text of the notes in RTF format.
+            </summary>
+            <param name="expression">The expression to search for.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+            <returns>The text of the notes that contain the expression.</returns>
+        </member>
+        <member name="M:TestiBiblici.ITexts.SearchCollectionInClipboard(System.String,System.String)">
+            <summary>
+            Finds a word or expression in a collection of notes, copying the text of the notes to the Windows clipboard.
+            </summary>
+            <param name="expression">The expression to search for.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="T:TestiBiblici.Texts">
+            <remarks>
+            Una classe che contiene tutte le informazioni sui testi biblici trovati, e restituisce le informazioni necessarie ad altri programmi.
+            </remarks>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriNomiInglese">
+            <summary>
+            I nomi di tutti i libri della Bibbia in inglese.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriAbbreviazioniUsateInglese">
+            <summary>
+            Le abbreviazioni usate dei libri della Bibbia in inglese.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriAbbreviazioniRiconosciuteInglese">
+            <summary>
+            Le abbreviazioni riconosciute dei libri della Bibbia in inglese.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriNomiItaliano">
+            <summary>
+            I nomi di tutti i libri della Bibbia in italiano.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriAbbreviazioniUsateItaliano">
+            <summary>
+            Le abbreviazioni usate dei libri della Bibbia in italiano.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriAbbreviazioniRiconosciuteItaliano">
+            <summary>
+            Le abbreviazioni riconosciute dei libri della Bibbia in italiano.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriNomiSpagnolo">
+            <summary>
+            I nomi di tutti i libri della Bibbia in spagnolo.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriAbbreviazioniUsateSpagnolo">
+            <summary>
+            Le abbreviazioni usate dei libri della Bibbia in spagnolo.
+            </summary>
+        </member>
+        <member name="F:TestiBiblici.Texts.LibriAbbreviazioniRiconosciuteSpagnolo">
+            <summary>
+            Le abbreviazioni riconosciute dei libri della Bibbia in spagnolo.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.Texts.Formato">
+            <summary>
+            Il formato del testo biblico visualizzato.
+            </summary>
+            <seealso cref="T:TestiBiblici.FormatoTesto"/>
+        </member>
+        <member name="E:TestiBiblici.Texts.UltimaBibbiaEvento">
+            <summary>
+            L'handler dell'evento quando la Bibbia utilizzata è cambiata.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Texts.OnChangedUltimaBibbia(TestiBiblici.UltimaBibbiaEventArgs)">
+            <summary>
+            Inizia l'evento quando la Bibbia utilizzata è cambiata.
+            </summary>
+            <param name="e">Gli argomenti dell'evento.</param>
+        </member>
+        <member name="P:TestiBiblici.Texts.UltimaBibbia">
+            <summary>
+            L'ultima versione della Bibbia usata dall'utente.
+            È usata quando il programma deve mostrare del testo in una versione qualsiasi, per esempio nelle Opzioni.
+            </summary>
+        </member>
+        <member name="P:TestiBiblici.Texts.UltimaBibbiaCompleta">
+            <summary>
+            L'ultima versione della Bibbia usata dall'utente che contiene Genesi, Matteo e preferibilmente Tobia (cioè AT, apocrifa e NT).
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetLibroNome(System.Int32)">
+            <summary>
+            Restituisce i nomi usati dei libri della Bibbia (inclusa l'apocrifa).
+            </summary>
+            <param name="numeroLibro">Il numero del libro (da 1 a 73).</param>
+            <returns>Il nome del libro.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.SetLibroNome(System.Int32,System.String)">
+            <summary>
+            Imposta i nomi usati dei libri della Bibbia (inclusa l'apocrifa).
+            </summary>
+            <param name="numeroLibro">Il numero del libro (da 1 a 73).</param>
+            <param name="nome">Il nome del libro.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetLibroAbbreviazioneUsata(System.Int32)">
+            <summary>
+            Restituisce le abbreviazioni usate dei libri della Bibbia (inclusa l'apocrifa).
+            </summary>
+            <param name="numeroLibro">Il numero del libro (da 1 a 73).</param>
+            <returns>L'abbreviazione del libro.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.SetLibroAbbreviazioneUsata(System.Int32,System.String)">
+            <summary>
+            Imposta le abbreviazioni usate dei libri della Bibbia (inclusa l'apocrifa).
+            </summary>
+            <param name="numeroLibro">Il numero del libro (da 1 a 73).</param>
+            <param name="nome">L'abbreviazione del libro.</param>
+        </member>
+        <member name="P:TestiBiblici.Texts.LibriAbbreviazioniRiconosciute">
+            <summary>
+            Le abbreviazioni dei libri che il programma riconosce. 
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetLibroNumeroDaAbbreviazione(System.String)">
+            <summary>
+            Trova il numero del libro (da 1 a 73; 0 se l'abbreviazione non è stata trovata) che corrisponde ad un'abbreviazione del nome di un libro.
+            </summary>
+            <param name="abbreviazione">L'abbreviazione da ricercare.</param>
+            <returns>Il numero del libro.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.#ctor">
+            <summary>
+            The constructor of the class. It gives default values to all the members of the class, and looks for and analyses all the data files that it finds in default directory (the subdirectory LaParola of the system application data directory).
+            If there are data files in other directories, the <see cref="M:TestiBiblici.Texts.AddDirectory(System.String)" /> method needs to be called as well.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Texts.#ctor(System.String)">
+            <summary>
+            Il costruttore della classe. Dà valori predefiniti ai membri della classe, e cerca e analizza tutti i file dei dati che trova nella directory specificata.
+            </summary>
+            <param name="directory">La directory in cui cercare dei file dei dati.</param>
+            <seealso cref="T:TestiBiblici.Texts"/>
+        </member>
+        <member name="M:TestiBiblici.Texts.#ctor(System.String,System.Boolean)">
+            <summary>
+            Il costruttore della classe. Dà valori predefiniti ai membri della classe, e cerca e analizza tutti i file dei dati che trova nella directory specificata.
+            </summary>
+            <param name="directory">La directory in cui cercare dei file dei dati.</param>
+            <param name="leggiImpostazioni">Se leggere le impostazioni salvate.</param>
+            <seealso cref="T:TestiBiblici.Texts"/>
+        </member>
+        <member name="M:TestiBiblici.Texts.Passage(System.String,System.String)">
+            <summary>
+            The text of a Bible passage in RTF format.
+            </summary>
+            <param name="bibleReference">The reference of the required passage.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>A rich text formatted string with the text of the passage.</returns>
+            <exception cref="T:TestiBiblici.TextNotExistException">No text with that name was found.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.PassageInClipboard(System.String,System.String)">
+            <summary>
+            The text of a Bible passage copied into the Windows clipboard. It can than be pasted into the client applicatio.
+            </summary>
+            <param name="bibleReference">The reference of the required passage.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <exception cref="T:TestiBiblici.TextNotExistException">No text with that name was found.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.Search(System.String,System.String,System.String)">
+            <summary>
+            Finds a word or expression in a certain part of the Bible.
+            </summary>
+            <param name="expression">The expression to search for.</param>
+            <param name="passage">The passage in the Bible in which to search the expression. If it is an empty string, the whole Bible is searched.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>A list of the Bible references of the verses that contain the expression. The string can then be passed to the <see cref="M:TestiBiblici.Texts.Passage(System.String,System.String)" /> function for the text of the verses.</returns>
+            <exception cref="T:TestiBiblici.SearchExpressionEmptyException">The search expression was empty.</exception>
+            <exception cref="T:TestiBiblici.SearchSyntaxErrorException">A syntax error in the search expression.</exception>
+            <exception cref="T:TestiBiblici.SearchParenthesesException">An error in the parentheses in the search expression.</exception>
+            <exception cref="T:TestiBiblici.SearchBracketsException">An error in the brackets in the search expression.</exception>
+            <exception cref="T:TestiBiblici.TextNotExistException">No text with that name was found.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.AddDirectory(System.String)">
+            <summary>
+            Looks for and analyses all the data files in a given directory.
+            </summary>
+            <param name="directory">The directory to look in.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.NumberTexts">
+            <summary>
+            Returns the number of texts (Bibles and collections of notes) that were found and are available to be used.
+            </summary>
+            <returns>The number of texts found.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NameText(System.Int32)">
+            <summary>
+            Gives the name of a certain text out of those found.
+            </summary>
+            <param name="numberText">The number (out of the <see cref="M:TestiBiblici.Texts.NumberTexts"/> of texts available) to give the name of. The counting starts at zero.</param>
+            <returns>The name of the text. If numberText is less than zero or at least equal to the number of texts, an empty string is returned.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.LastBibleUsed">
+            <summary>
+            Gives the name of the last Bible translation used by the program.
+            </summary>
+            <returns>The name of the last Bible.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ChaptersInBook(System.Int32,System.String)">
+            <summary>
+            Returns the number of chapters in a given book of the Bible.
+            Return zero if the text is not a Bible translation, or if the book number is out of range.
+            </summary>
+            <param name="book">The number of the book (from 1 to 73, with the apocryphal books inserted into the Old Testament).</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>The number of chapters in the book, or zero if there is an error in the input.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.VersesInChapter(System.Int32,System.Int32,System.String)">
+            <summary>
+            Returns the number of verses in a given chapter of a book of the Bible.
+            Return zero if the text is not a Bible translation, or if the book or chapter numbers are out of range.
+            </summary>
+            <param name="book">The number of the book (from 1 to 73, with the apocryphal books inserted into the Old Testament).</param>
+            <param name="chapter">The number of the chapter in the book.</param>
+            <param name="nameTranslation">The name of the Bible translation to use.</param>
+            <returns>The number of verses in the chapter, or zero if there is an error in the input.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RootOfWord(System.String,System.String)">
+            <summary>
+            Returns the root word of a certain word (that is, the base form of the word, without plurals, changes in the tense of the verb, etc.).
+            </summary>
+            <param name="word">The word.</param>
+            <param name="nameText">The name of the text (Bible or collection of notes) to use.</param>
+            <returns>The root of the word.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NumberOfAppearancesOfWord(System.String,System.String)">
+            <summary>
+            Returns the number of times a word appears in a text.
+            </summary>
+            <param name="word">The word.</param>
+            <param name="nameText">The name of the text (Bible or collection of notes) to use.</param>
+            <returns>The number of times the word appears.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NumberOfAppearancesOfRoot(System.String,System.String)">
+            <summary>
+            Returns the number of times a root word appears in a text.
+            </summary>
+            <param name="root">The root.</param>
+            <param name="nameText">The name of the text (Bible or collection of notes) to use.</param>
+            <returns>The number of times the root appears.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NoteTitle(System.String,System.String)">
+            <summary>
+            Returns the text of a note that has a title in RTF format.
+            </summary>
+            <param name="title">The title of the note.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+            <returns>The text of the note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NoteTitleInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a note that has a title onto the Windows clipboard. It can than be pasted into the client application.
+            </summary>
+            <param name="title">The title of the note.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.NotePassage(System.String,System.String)">
+            <summary>
+            Returns the text of a note on a Bible passage in RTF format.
+            </summary>
+            <param name="reference">The Bible reference of the passage.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+            <returns>The text of the note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NotePassageInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a note on a Bible passage onto the Windows clipboard. It can than be pasted into the client application.
+            </summary>
+            <param name="reference">The Bible reference of the passage.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.NoteInClipboard(System.String,System.String)">
+            <summary>
+            Copies the text of a note of any type into the Windows clipboard.  It can than be pasted into the client application.
+            </summary>
+            <param name="name">The Bible reference of a passage or the title of a note.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.SearchCollection(System.String,System.String)">
+            <summary>
+            Finds a word or expression in a collection of notes, returning the text of the notes in RTF format.
+            </summary>
+            <param name="expression">The expression to search for.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+            <returns>The text of the notes that contain the expression.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.SearchCollectionInClipboard(System.String,System.String)">
+            <summary>
+            Finds a word or expression in a collection of notes, copying the text of the notes to the Windows clipboard.
+            </summary>
+            <param name="expression">The expression to search for.</param>
+            <param name="nameCollection">The name of the collection of notes to use.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.RtfIntestazione">
+            <summary>
+            Il codice RTF da inserire all'inizio di ogni testo creato, con la formattazione delle opzioni.
+            </summary>
+            <returns>L'intestazione del codice RTF.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.AggiungiDirectory(System.String)">
+            <summary>
+            Aggiunge tutti i testi trovati in una certa directory.
+            </summary>
+            <param name="directory">La cartella in cui cercare i file che contengono testi del programma.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.Chiudi">
+            <summary>
+            Chiude i testi, salvando eventuali note modificate.
+            <returns>Un elenco di versioni, separate da spazi, di cui non è stato possibile salvare le modifiche.</returns>
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Texts.CaricaInformazioniAddizionali">
+            <summary>
+            Carica dei file dei testi informazioni sulle radici e sulle citazioni ai brani,
+            che possono essere lette in un secondo momento dopo la creazione dell'oggetto Testi.
+            </summary>
+        </member>
+        <member name="M:TestiBiblici.Texts.AggiungiTesto(System.String,System.Byte)">
+            <summary>
+            Analizza un file dei dati e lo aggiunge all'elenco di quelli disponibili al programma.
+            </summary>
+            <param name="percorsoFile">Il percorso e nome del file dei dati.</param>
+            <param name="testoInFile">Il numero (da 0) del testo nel file.</param>
+            <returns>Il nome del testo aggiunto (stringa vuota se non è stato possibile)</returns>
+            <exception cref="T:TestiBiblici.FileNonValidoException">Se c'è un errore nel file.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.CancellaTesto(System.String)">
+            <summary>
+            Cancella il file che contiene un testo.
+            </summary>
+            <param name="nomeVersione">Il nome del testo da cancellare.</param>
+            <exception cref="T:System.IO.IOException">Il file del testo è ancora utilizzato (cioè è stato impossibile chiuderlo).</exception>
+            <exception cref="T:System.UnauthorizedAccessException">All'utente non è permesso cancellare il file.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.RinominaTesto(System.String,System.String)">
+            <summary>
+            Rinomina il testo in un file.
+            </summary>
+            <param name="nomeVersione">Il nome del testo da rinominare.</param>
+            <param name="nuovoNome">Il nuovo nome del testo.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.CopiaTesto(System.String,System.String,System.String)">
+            <summary>
+            Copia il file che contiene un testo.
+            </summary>
+            <param name="nomeVersione">Il nome del testo da copiare.</param>
+            <param name="nuovoNomeTesto">Il nome del nuovo testo.</param>
+            <param name="nuovoNomeFile">Il nome del file a cui sarà copiato (con (1), (2), ecc. aggiunto se il file esiste già).</param>
+            <returns>Il nome del testo che è stato creato.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NomiVersioni">
+            <summary>
+            Tutti i file dei dati attualmente disponibili.
+            </summary>
+            <returns>Una collezione di stringhe con i nomi di tutte le versioni disponibili.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NomiVersioni(TestiBiblici.TestoTipi)">
+            <summary>
+            Tutti i file dei dati attualmente disponibili che contengono almeno uno di certi tipi di testo.
+            </summary>
+            <param name="tipo">Il tipo di testo da cercare.</param>
+            <returns>Una collezione di stringhe con i nomi di tutte le versioni del tipo giusto disponibili.</returns>
+            <seealso cref="T:TestiBiblici.TestoTipi"/>
+        </member>
+        <member name="M:TestiBiblici.Texts.NomiVersioni(TestiBiblici.TestoTipi,System.Boolean)">
+            <summary>
+            Tutti i file dei dati attualmente disponibili che contengono certi tipi di testo.
+            </summary>
+            <param name="tipo">Il tipo di testo da cercare.</param>
+            <param name="almenoUno">Se è vero (valore predefinito), almeno uno dei tipi in "tipo" deve essere presente nel testo; se è falso, tutti i tipi devono essere presenti.</param>
+            <returns>Una collezione di stringhe con i nomi di tutte le versioni del tipo giusto disponibili.</returns>
+            <seealso cref="T:TestiBiblici.TestoTipi"/>
+        </member>
+        <member name="M:TestiBiblici.Texts.Info(System.String)">
+            <summary>
+            Informazioni su un file dei dati.
+            </summary>
+            <param name="nomeVersione">Il nome della versione nel file dei dati.</param>
+            <returns>Informazioni sulla versione. Se la versione non esiste, tutti i campi delle informazioni sono vuoti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TipoPrincipaleDiTesto(System.String)">
+            <summary>
+            Come il testo va mostrato nella finestra di visualizzazione, quando il tipo non è specificato.
+            </summary>
+            <param name="nomeVersione">Il nome della versione nel file dei dati.</param>
+            <returns>Bibbia se è una Bibbia, Commentario se contiene un commentario, Dizionario se non è un commentario.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.CambiaSolaLettura(System.String)">
+            <summary>
+            Cambia lo stato di una collezione di note da sola lettura a non sola lettura, o il contrario.
+            </summary>
+            <param name="nomeVersione">Il nome della versione nel file dei dati.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.VersioneDaAbbreviazione(System.String)">
+            <summary>
+            Trova il nome del testo che ha una certa abbreviazione.
+            </summary>
+            <param name="abbreviazione">L'abbreviazione da cercare.</param>
+            <returns>Il nome della versione, o una stringa vuota se non è stata trovata.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.VersioneEsiste(System.String)">
+            <summary>
+            Se un testo con un certo nome esiste.
+            </summary>
+            <param name="nomeVersione">Il nome del testo da cercare.</param>
+            <returns>Vero se un testo esiste con il nome.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Ricerca(System.String,System.String,System.String)">
+            <summary>
+            I versetti che contengono una certa espressione.
+            </summary>
+            <param name="espressione">L'espressione da ricercare.</param>
+            <param name="brano">Il brano in cui ricercare l'espressione.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il riferimento dei versetti.</returns>
+            <exception cref="T:TestiBiblici.SearchExpressionEmptyException">L'espressione da ricercare era vuota.</exception>
+            <exception cref="T:TestiBiblici.SearchSyntaxErrorException">Un errore di sintassi al carattere dato dal numero dopo 'sintassi'.</exception>
+            <exception cref="T:TestiBiblici.SearchParenthesesException">Un errore nelle parentesi al carattere dato dal numero dopo 'parentesi'.</exception>
+            <exception cref="T:TestiBiblici.SearchBracketsException">Un errore nelle parentesi quadrate al carattere dato dal numero dopo 'quadrate'.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.Ricerca(System.String,System.String)">
+            <summary>
+            I versetti che contengono una certa espressione in tutta la Bibbia.
+            </summary>
+            <param name="espressione">L'espressione da ricercare.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il riferimento dei versetti.</returns>
+            <exception cref="T:TestiBiblici.SearchExpressionEmptyException">L'espressione da ricercare era vuota.</exception>
+            <exception cref="T:TestiBiblici.SearchSyntaxErrorException">Un errore di sintassi al carattere dato dal numero dopo 'sintassi'.</exception>
+            <exception cref="T:TestiBiblici.SearchParenthesesException">Un errore nelle parentesi al carattere dato dal numero dopo 'parentesi'.</exception>
+            <exception cref="T:TestiBiblici.SearchBracketsException">Un errore nelle parentesi quadrate al carattere dato dal numero dopo 'quadrate'.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.Ricerca(System.String,TestiBiblici.Riferimento,System.String)">
+            <summary>
+            I versetti che contengono una certa espressione.
+            </summary>
+            <param name="espressione">L'espressione da ricercare.</param>
+            <param name="riferimentoDaRicercare">Il riferimento del brano in cui ricercare l'espressione.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il riferimento dei versetti.</returns>
+            <exception cref="T:TestiBiblici.SearchExpressionEmptyException">L'espressione da ricercare era vuota.</exception>
+            <exception cref="T:TestiBiblici.SearchSyntaxErrorException">Un errore di sintassi al carattere dato dal numero dopo 'sintassi'.</exception>
+            <exception cref="T:TestiBiblici.SearchParenthesesException">Un errore nelle parentesi al carattere dato dal numero dopo 'parentesi'.</exception>
+            <exception cref="T:TestiBiblici.SearchBracketsException">Un errore nelle parentesi quadrate al carattere dato dal numero dopo 'quadrate'.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.RicercaParolaInBrano(System.String,TestiBiblici.Riferimento,System.String)">
+            <summary>
+            I versetti che contengono una certa parola in un certo brano.
+            Questa funzione può essere usata invece di Ricerca per ricercare un numero.
+            Restituisce un versetto due volte se la parola appare due volte.
+            </summary>
+            <param name="parola">La parola da ricercare.</param>
+            <param name="brano">Il brano in cui ricercare la parola.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il riferimento dei versetti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RicercaRadiceInBrano(System.String,System.String)">
+            <summary>
+            I versetti che contengono una certa radice.
+            Restituisce un versetto due volte se la radice appare due volte.
+            </summary>
+            <param name="radice">La radice da ricercare.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il riferimento dei versetti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RicercaRadiceInBrano(System.String,TestiBiblici.Riferimento,System.String)">
+            <summary>
+            I versetti  in un certo branoche contengono una certa radice.
+            Restituisce un versetto due volte se la radice appare due volte.
+            </summary>
+            <param name="radice">La radice da ricercare.</param>
+            <param name="brano">Il brano in cui ricercare la radice.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il riferimento dei versetti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String,TestiBiblici.Riferimento)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(System.String,System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(System.String,System.String)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(System.String,System.String,System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(System.String,System.String,System.Collections.ObjectModel.Collection{System.String},TestiBiblici.Riferimento)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String,System.Collections.ObjectModel.Collection{System.String},TestiBiblici.Riferimento)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String,System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(System.String,System.Collections.ObjectModel.Collection{System.String},System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una lista di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Boolean,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una lista di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String,System.Collections.ObjectModel.Collection{System.String},System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.String,System.Collections.ObjectModel.Collection{System.String},TestiBiblici.Riferimento,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.Boolean,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},TestiBiblici.Riferimento,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},TestiBiblici.Riferimento,System.Boolean,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoBrano(TestiBiblici.Riferimento,System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.Boolean,TestiBiblici.Riferimento,System.Boolean,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Il testo biblico di un brano.
+            </summary>
+            <param name="riferimento">Il riferimento del brano desiderato.</param>
+            <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
+            <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
+            <param name="conNomiVersioni">Se aggiungi i nomi dei testi al risultato.</param>
+            <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
+            <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
+            <param name="worker">Il thread in cui il testo è creato.</param>
+            <param name="e">Gli argomenti del thread.</param>
+            <returns>Il testo biblico.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TestoVersettoRaw(System.Byte,System.Byte,System.Byte,System.String)">
+            <summary>
+            Solo il testo di un versetto come è memorizzato nel file.
+            </summary>
+            <param name="libro">Il numero del libro nel riferimento del versetto desiderato.</param>
+            <param name="capitolo">Il numero del capitolo nel riferimento del versetto desiderato.</param>
+            <param name="versetto">Il numero del versetto nel riferimento del versetto desiderato.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il testo del versetto come è memorizzato nel file.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.CapitoliInLibro(System.Byte,System.String)">
+            <summary>
+            Il numero di capitoli in un libro in una versione.
+            </summary>
+            <param name="libro">Il numero del libro (da 1 a 73).</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero di capitoli.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Se il nome della versione non esiste.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Se libro non è da 1 a 73.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.CapitoliFinoALibro(System.Byte,System.String)">
+            <summary>
+            Il numero di capitoli in tutti i libri fino ad un certo libro in una versione.
+            </summary>
+            <param name="libro">Il numero del libro (da 1 a 73).</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero di capitoli.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Se il nome della versione non esiste.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Se libro non è da 1 a 73.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.VersettiInCapitolo(System.Byte,System.Byte,System.String)">
+            <summary>
+            Il numero di versetti in un capitolo in un libro in una versione.
+            </summary>
+            <param name="libro">Il numero del libro (da 1 a 73).</param>
+            <param name="capitolo">Il numero del capitolo.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero di versetti.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Se il nome della versione non esiste.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Se libro non è da 1 a 73.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.VersettiFinoACapitolo(System.Byte,System.Byte,System.String)">
+            <summary>
+            Il numero di versetti in tutti i capitoli fino ad un certo capitolo in una versione.
+            </summary>
+            <param name="libro">Il numero del libro (da 1 a 73).</param>
+            <param name="capitolo">Il numero del capitolo.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero di versetti.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Se il nome della versione non esiste.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Se libro non è da 1 a 73.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.VersettiFinoACapitolo(System.Byte,System.Byte)">
+            <summary>
+            Il numero di versetti in tutti i capitoli fino ad un certo capitolo nell'ultima versione completa usata.
+            </summary>
+            <param name="libro">Il numero del libro (da 1 a 73).</param>
+            <param name="capitolo">Il numero del capitolo.</param>
+            <returns>Il numero di versetti.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Se non c'è stata un'ultima versione.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Se libro non è da 1 a 73.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.LibroDiCapitolo(System.Int32,System.String)">
+            <summary>
+            Il numero di un libro in cui è un certo capitolo della Bibbia (contando da 1 a circa 1300).
+            </summary>
+            <param name="capitolo">Il capitolo da cercare (1-50 in Genesi, 51-90 in Esodo, ecc.).</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero del libro.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RiferimentoDiVersetto(System.Int32,System.String)">
+            <summary>
+            Il riferimento di un versetto, secondo il suo posto nell'ordine della Bibbia (contando da 1 a circa 31000).
+            </summary>
+            <param name="versetto">Il versetto da cercare (1-31 in Genesi 1, 32-56 in Genesi 2, ecc.).</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il riferimento del versetto.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RiferimentoDiCapitolo(System.Int32,System.String)">
+            <summary>
+            Il riferimento di un capitolo, secondo il suo posto nell'ordine della Bibbia (contando da 1 a circa 1200).
+            </summary>
+            <param name="capitolo">Il capitolo da cercare (1-50 in Genesi, 51-91 in Esodo, ecc.).</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il riferimento del capitolo.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ConvertiAStandard(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Converte un riferimento in una versione allo schema standard di riferimenti del programma.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il riferimento nello schema standard.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ConvertiDaStandard(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Converte un riferimento nello schema standard di riferimenti del programma al riferimento in una versione della Bibbia.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il riferimento nello schema della versione.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ConvertiRiferimentoDa3Numeri(System.String)">
+            <summary>
+            Converte un riferimento nel formato "1 28:14; 4 24:17" a "Genesi 28:14; Numeri 24:17".
+            </summary>
+            <param name="riferimentoDaConvertire">Il riferimento da convertire</param>
+            <returns>Il riferimento convertito</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.String)">
+            <summary>
+            Converte un riferimento in formato testuale ad uno più bello. Usa le abbreviazioni dei libri.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.String,TestiBiblici.RiferimentoFormato)">
+            <summary>
+            Converte un riferimento in formato testuale ad uno più bello.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <param name="formatoDelRiferimento">Il formato del riferimento da visualizzare.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(TestiBiblici.Riferimento)">
+            <summary>
+            Converte un riferimento nel formato del programma ad uno più bello.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(TestiBiblici.Riferimento,TestiBiblici.RiferimentoFormato)">
+            <summary>
+            Converte un riferimento nel formato del programma ad uno più bello.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <param name="formatoDelRiferimento">Il formato del riferimento da visualizzare.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Converte un riferimento di un brano (libro, capitolo, versetto) ad un formato più bello.
+            </summary>
+            <param name="libroInizio">Il numero del libro dell'inizio del brano.</param>
+            <param name="capitoloInizio">Il capitolo dell'inizio del brano.</param>
+            <param name="versettoInizio">Il versetto dell'inizio del brano.</param>
+            <param name="libroFine">Il numero del libro della fine del brano.</param>
+            <param name="capitoloFine">Il capitolo della fine del brano.</param>
+            <param name="versettoFine">Il versetto della fine del brano.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Converte un riferimento (libro, capitolo, versetto) ad un formato più bello.
+            </summary>
+            <param name="libro">Il numero del libro.</param>
+            <param name="capitolo">Il capitolo.</param>
+            <param name="versetto">Il versetto.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Converte un riferimento (libro, capitolo, versetto) ad un formato più bello.
+            </summary>
+            <param name="libro">Il numero del libro.</param>
+            <param name="capitolo">Il capitolo.</param>
+            <param name="versetto">Il versetto.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.String,System.String,System.String)">
+            <summary>
+            Converte un riferimento (libro, capitolo, versetto) ad un formato più bello.
+            </summary>
+            <param name="libro">Il numero del libro, come stringa.</param>
+            <param name="capitolo">Il capitolo, come stringa.</param>
+            <param name="versetto">Il versetto, come stringa.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimento(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Converte un riferimento ad un brano (libro, capitolo, versetto) ad un formato più bello.
+            </summary>
+            <param name="libroInizio">Il numero del libro dell'inizio del brano, come stringa.</param>
+            <param name="capitoloInizio">Il capitolo dell'inizio del brano, come stringa.</param>
+            <param name="versettoInizio">Il versetto dell'inizio del brano, come stringa.</param>
+            <param name="libroFine">Il numero del libro della fine del brano, come stringa.</param>
+            <param name="capitoloFine">Il capitolo della fine del brano, come stringa.</param>
+            <param name="versettoFine">Il versetto della fine del brano, come stringa.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NormalizzaRiferimentoSegnalibro(System.String)">
+            <summary>
+            Converte un segnalibro ad un formato testuale più bello.
+            </summary>
+            <param name="segnalibro">Il riferimento del segnalibro.</param>
+            <returns>Il riferimento convertito.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ConvertiRiferimento(System.String)">
+            <summary>
+            Converti un riferimento testuale al formato usato dal programma.
+            </summary>
+            <param name="riferimento">Il riferimento da convertire.</param>
+            <returns>Il riferimento nel formato usato dal programma.</returns>
+            <seealso cref="T:TestiBiblici.Riferimento"/>
+        </member>
+        <member name="M:TestiBiblici.Texts.ConvertiRiferimenti(System.String)">
+            <summary>
+            Trova tutti i riferimenti in una stringa.
+            </summary>
+            <param name="stringaDaAnalizzare">La stringa in cui cercare i riferimenti.</param>
+            <returns>I riferimenti trovati, nel formato usato dal programma.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ConvertiTitoloNotaARiferimento(System.String)">
+            <summary>
+            Converte il titolo di una nota che inizia con # ad una stringa con il riferimento in formato leggibile.
+            </summary>
+            <param name="notaDaConvertire">Il titolo di una nota.</param>
+            <returns>Un riferimento come una stringa.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.SeparatoriNeiRiferimenti">
+            <summary>
+            I caratteri da mettere nei riferimenti, secondo le opzioni.
+            </summary>
+            <returns>Un array di tre stringhe: la prima è fra il libro e il capitolo, la seconda fra il capitolo e il versetto, la terza fra due versetti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Parole(System.String)">
+            <summary>
+            Tutte le parole che appaiono in un testo.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Un array di stringhe con tutte le parole.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.EsistonoRadici(System.String)">
+            <summary>
+            Se la versione ha delle radici.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Vero se esistono la radici.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Radici(System.String)">
+            <summary>
+            Tutte le radici che appaiono in un testo.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Un array di stringhe con tutte le radici.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RadiceDiParola(System.String,System.String)">
+            <summary>
+            La radice di una certa parola in un testo.
+            </summary>
+            <param name="parola">La parola di cui si vuole la radice.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>La radice della parola.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ParoleDiRadice(System.String,System.String)">
+            <summary>
+            Tutte le parole di una certa radice che appaiono in un testo.
+            </summary>
+            <param name="radice">La radice di cui si vogliono le parole.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Una collezione di stringhe con le parole.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NumeroVolteParola(System.String,System.String)">
+            <summary>
+            Restituisce quante volte una parola appare in una versione.
+            </summary>
+            <param name="parola">La parola da ricercare.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero di volte.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NumeroVolteRadice(System.String,System.String)">
+            <summary>
+            Restituisce quante volte una radice appare in una versione.
+            </summary>
+            <param name="radice">La radice da ricercare.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero di volte.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.AggiungiRadiciAllaVersione(System.String[],System.String[],System.String)">
+            <summary>
+            Aggiunge delle radici ad un testo.
+            </summary>
+            <param name="elencoRadici">Un array di tutte le radici nel testo.</param>
+            <param name="radiceStringaDiParole">La radice di ogni parola nel testo.</param>
+            <param name="nomeVersione">Il nome della testo.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetApparenzeParole(System.String)">
+            <summary>
+            Restituisce tutte le apparenze di tutte le parole.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetNumeroNotaTitolo(System.String,System.String)">
+            <summary>
+            Trova una nota con un certo titolo.
+            </summary>
+            <param name="titolo">Il titolo da cercare.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il numero della nota se esiste una nota con quel titolo, altrimenti un numero negativo.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetNotaTesto(System.String,System.String)">
+            <summary>
+            Il testo di una nota con un certo titolo; può essere in formato RTF o testo normale.
+            </summary>
+            <param name="titolo">Il titolo della nota.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il testo della nota.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetTutteLeNote(System.String)">
+            <summary>
+            Il testo di tutte le note su un certo titolo.
+            </summary>
+            <param name="titolo">Il titolo della nota.</param>
+            <returns>Il testo delle note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetTutteLeNote(System.String,System.String)">
+            <summary>
+            Il testo di tutte le note su un certo titolo.
+            </summary>
+            <param name="titolo">Il titolo della nota.</param>
+            <param name="radice">Il radice del titolo, da cercare se il titolo non ha una nota.</param>
+            <returns>Il testo delle note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetNotaTesto(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Il testo di una nota con un certo riferimento; può essere in formato RTF o testo normale.
+            </summary>
+            <param name="riferimento">Il riferimento della nota.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il testo della nota.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.SetNotaTesto(System.String,System.String,System.String)">
+            <summary>
+            Cambia il testo di una nota con un certo titolo; può essere in formato RTF o testo normale.
+            </summary>
+            <param name="testo">Il nuovo testo della nota.</param>
+            <param name="titolo">Il titolo della nota.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.SetNotaTesto(System.String,TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Cambia il testo di una nota con un certo riferimento; può essere in formato RTF o testo normale.
+            </summary>
+            <param name="testo">Il nuovo testo della nota.</param>
+            <param name="riferimento">Il riferimento della nota.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.Note(System.String)">
+            <summary>
+            Restituisce un elenco di tutte le note.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Una collezione con i nomi di tutte le note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NoteConTitolo(System.String)">
+            <summary>
+            Restituisce un elenco di tutte le note con un titolo.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Una collezione di tutti i titoli.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NotePrimaOrdinate(System.String,System.Boolean)">
+            <summary>
+            Restituisce un elenco di tutte le note, con quelle ordinate all'inizio dell'elenco.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <param name="conNoteSuBrani">Se include anche i commenti nell'elenco, oppure solo quelli del dizionario su un tema.</param>
+            <returns>Una collezione con i nomi di tutte le note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetNoteInOrdine(System.String)">
+            <summary>
+            Restituisce un elenco di tutte le note in ordine.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Il primo elemento è l'indice, gli altri l'ordine delle note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.SetNoteInOrdine(System.Collections.ObjectModel.Collection{System.String},System.String)">
+            <summary>
+            Impone l'ordine delle note in una collezione.
+            </summary>
+            <param name="noteInOrdine">Una collezione: il primo elemento è l'indice, gli altri l'ordine delle note.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.ElencaNoteInBrano(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Un elenco di tutte le note che contengono un certo riferimento.
+            </summary>
+            <param name="riferimento">Il riferimento del brano da cercare.</param>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <returns>Un riferimento con tutte le note.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NotePrecedenteSuccessiva(System.String,System.String)">
+            <summary>
+            Restituisce la nota precedente e la nota successiva ad una data nota.
+            </summary>
+            <param name="nomeVersione">Il nome della versione.</param>
+            <param name="titolo">Il titolo della nota.</param>
+            <returns>Un array con due stringhe, con i titoli delle note precedente e successiva.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ScriviNote(System.IO.BinaryWriter,System.UInt32,System.String[],System.String[])">
+            <summary>
+            Scrive una collezione di note ad un file del programma.
+            </summary>
+            <param name="bw">Un binary writer dove i dati saranno scritti.</param>
+            <param name="posizioneInizioDati">La posizione nel file in cui i dati iniziano.</param>
+            <param name="noteTitolo">I titoli delle note</param>
+            <param name="noteTesto">I testi delle note (formato RTF o testo normale)</param>
+            <returns>Due interi senza segno, con la posizione dell'inizio dei titoli e la posizione dell'inizio dell'indice delle note, sempre relativo a pInizioDati</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.ScriviRiferimentiCitati(System.IO.BinaryWriter,System.String[])">
+            <summary>
+            Scrivi un indice dei riferimenti citati in una collezione alla posizione attuale del file.
+            </summary>
+            <param name="bw">Un binary writer dove i dati saranno scritti.</param>
+            <param name="noteTesto">I testi delle note (formato RTF o testo normale)</param>
+            <returns>Falso se non c'erano riferimenti citati nella collezione.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.TrovaParoleInVoce(System.String,System.UInt32,System.Collections.Generic.SortedDictionary{System.String,System.Collections.Generic.List{TestiBiblici.OccorrenzaParola}},System.String)">
+            <summary>
+            Analizza un testo per aggiungere le sue parole ad una corcordanza.
+            </summary>
+            <param name="testo">Il testo da analizzare.</param>
+            <param name="numeroVoce">Il numero del testo nella versione della Bibbia o nella collezione di note.</param>
+            <param name="chiave">La chiave a cui aggiungere le parole.</param>
+            <param name="lingua">Le lingue (separate da una riga verticale |) delle parole (necessaria per decidere la fine di una parola con apostrofe).</param>
+        </member>
+        <member name="M:TestiBiblici.Texts.TrovaRiferimentiInVoce(System.String)">
+            <summary>
+            Trova tutte le citazioni a riferimenti in una nota.
+            </summary>
+            <param name="testo">Il testo della nota da analizzare.</param>
+            <returns>Una lista con tutti i brani.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.CollezioneModificata(System.String)">
+            <summary>
+            Indica se una collezione di note è stata modificata.
+            </summary>
+            <param name="nomeVersione">La collezione da controllare.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.NoteModificate">
+            <summary>
+            Indica se almeno una collezione di note è stata modificata.
+            </summary>
+            <returns>Se una collezione di note è stata modificata.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.EsistonoCitazioni(System.String)">
+            <summary>
+            Restituisce se esistono citazioni a brani della Bibbia in una collezione di note.
+            </summary>
+            <param name="nomeVersione">La collezione in cui cercare le citazioni.</param>
+            <returns>Se ci sono citazioni nella collezione.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Citazioni(System.String,System.String)">
+            <summary>
+            Dove un brano è menzionato in una collezione di note.
+            </summary>
+            <param name="riferimento">Il riferimento del brano da cercare.</param>
+            <param name="nomeVersione">La collezione in cui cercare il riferimento.</param>
+            <returns>Un elenco di tutte le note che contengono un riferimento al brano.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Citazioni(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Dove un brano è menzionato in una collezione di note.
+            </summary>
+            <param name="riferimento">Il riferimento del brano da cercare.</param>
+            <param name="nomeVersione">La collezione in cui cercare il riferimento.</param>
+            <returns>Un elenco di tutte le note che contengono un riferimento al brano.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Immagini(System.String)">
+            <summary>
+            Trova i file grafici che contengono un nome.
+            </summary>
+            <param name="nome">Il nome da ricercare.</param>
+            <returns>Una collezione con i nomi di tutti i file grafici che contengono il nome.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.EsisteBrano(TestiBiblici.Riferimento,System.String)">
+            <summary>
+            Se un brano o delle note esistono in una certa versione.
+            </summary>
+            <param name="riferimento">Il brano o elenco di note da controllare.</param>
+            <param name="nomeVersione">La versione in cui cercare il brano o note.</param>
+            <returns>Vero se il brano o nota esiste.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetRadiciDiverse(System.String)">
+            <summary>
+            Una lista di tutte le radici diverse in una certa versione.
+            </summary>
+            <param name="nomeVersione">La versione di cui restituire le radici diverse.</param>
+            <returns>Una lista di stringhe, con il versetto o numero della note, poi il numero della parola, poi la radice diverse, separati dal carattere |.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetRiferimentiDiversi(System.String)">
+            <summary>
+            Una lista di tutti i riferimenti diversi dai riferimenti standard in una certa versione.
+            </summary>
+            <param name="nomeVersione">La versione di cui restituire i riferimenti diversi.</param>
+            <returns>Una lista di stringhe, con sei numeri separati dal carattere |.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetRiferimentiCitati(System.String)">
+            <summary>
+            Una lista di tutti i riferimenti citati nelle note.
+            </summary>
+            <param name="nomeVersione">La versione di cui restituire i riferimenti citati.</param>
+            <returns>Una lista di stringhe, con sette numeri separati dal carattere |.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.GetParoleRadici(System.String)">
+            <summary>
+            Una lista di tutte le parole in una versione con le loro radici.
+            </summary>
+            <param name="nomeVersione">La versione di cui restituire le parole e le loro radici.</param>
+            <returns>Una lista di stringhe, con le parole, poi =, poi la radice di ogni parola.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.LinguaPrincipale(System.String)">
+            <summary>
+            Data una stringa con diverse lingue separate da una riga verticale |, restituisce la prima
+            </summary>
+            <param name="lingua">Un elenco di lingue separate da una riga verticale.</param>
+            <returns>La lingua principale.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.RimuoviTestoNascosto(System.String)">
+            <summary>
+            Cancella il testo nascosto da una stringa in formato RTF.
+            </summary>
+            <param name="testoRtf">La stringa da cui cancellare il testo nascosto.</param>
+            <returns>Una stringa senza il testo nascosto.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Versione.#ctor(TestiBiblici.Texts,System.String,System.Byte)">
+            <summary>
+            Costruttore della classe che descrive un testo nel programma.
+            </summary>
+            <param name="testi">La classe genitore che contiene tutti i testi.</param>
+            <param name="nomeFile">Il nome del file (incluso il percorso) che contiene il testo.</param>
+            <param name="testoInFile">Il numero (partendo da 0) del testo nel file.</param>
+            <exception cref="T:TestiBiblici.FileNonValidoException">Se c'è un errore nel file.</exception>
+        </member>
+        <member name="M:TestiBiblici.Texts.Versione.RicercaParolaInBrano(System.String,TestiBiblici.Riferimento)">
+            <summary>
+            Trova tutti i versetti in un brano che contengono una parola.
+            Se la parola non esiste nella versione, un riferimento vuoto è restituito.
+            </summary>
+            <param name="parola">La parola da ricercare.</param>
+            <param name="branoDaRicercare">Il brano in cui cercare la parola.</param>
+            <returns>Il riferimento di tutti i versetti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Versione.RicercaParolaInBrano(System.String)">
+            <summary>
+            Trova tutti i versetti nella Bibbia che contengono una parola.
+            Se la parola non esiste nella versione, un riferimento vuoto è restituito.
+            </summary>
+            <param name="parola">La parola da ricercare.</param>
+            <returns>Il riferimento di tutti i versetti.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Versione.NumeroVolteRadice(System.String)">
+            <summary>
+            Il numero di occorrenze delle parole che hanno questa radice, cioè non considera quando una di queste
+            parole ha una radice diversa, oppure parole con altre radici con questa come radice diversa.
+            </summary>
+            <param name="radice">La radice di cui si vuole il numero di occorrenze.</param>
+            <returns>Il numero di occorrenze.</returns>
+        </member>
+        <member name="M:TestiBiblici.Texts.Versione.GetNumeroNotaTitolo(System.String)">
+            <summary>
+            Trova una nota con un certo titolo.
+            </summary>
+            <param name="titolo">Il titolo da cercare.</param>
+            <returns>Il numero della nota se esiste una nota con quel titolo, altrimenti un numero negativo.</returns>
+        </member>
+    </members>
+</doc>

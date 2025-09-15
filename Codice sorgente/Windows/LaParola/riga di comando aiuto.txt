@@ -1,0 +1,51 @@
+Questo \'e8 un elenco dei comandi possibili nella riga di comando, con la sintassi necessaria.\par
+Le parole in {\i corsivo} devono essere sostituite da quello che si vuole usare.\par
+Le parti fra [parentesi quadrate] sono facoltative.\par
+Per {\i testo}, si possono usare il nome di una versione della Bibbia o collezione di note (e solo in quel caso \'e8 necessario digitare correttamente le lettere maiuscole e minuscole) oppure la abbreviazione di una versione o collezione. Se non \'e8 dato, l'ultima versione \'e8 usata (quella in fondo a destra della finestra principale del programma).\par
+Se c'\'e8 uno spazio nella frase, brano o testo, bisogna metterlo fra "virgolette".\par
+Si possono mettere diversi comandi in una riga, separandoli con un punto e virgola.\par
+\par
+ricerca {\i frase} [in {\i brano}] [da {\i testo}]\par
+mostra {\i brano} [da {\i testo}]\par
+mostra {\i brano} da bibbie\par
+mostra {\i brano} da commentari\par
+chiave {\i brano} [da {\i testo}]\par
+nota {\i brano} da {\i collezione}\par
+nota {\i titolo} da {\i collezione}\par
+riferimenti {\i brano} da {\i collezione}\par
+visualizza [{\i brano}] [da {\i testo}]\par
+apri {\i nome_file}\par
+info {\i frase}\par
+info {\i brano}\par
+link {\i indirizzo/programma} [{\i parametri}]\par
+aiuto\par
+?\par
+\par
+Per esempio:\par
+ricerca abb\'e0 in rom-ebr; nota amos da "Enciclopedia biblica"; chiave "Mt 1-14" da nnr\par
+
+This is a list of the possible commands for the command line, with the necessary syntax.\par
+The words in {\i italics} have to be substituted with whatever you want to use.\par
+The parts in [square brackets] are optional.\par
+For {\i text}, you can use the name of a translation of the Bible or collection of notes (and only in that case you have to correctly type the upper and lower case letters) or the abbreviation of a translation or collection. If one is not given, the last translation is used (the one at the bottom right of the main window of the program).\par
+If there is a space in the phrase, passage or text, you need to put it between "inverted commas".\par
+You can put several commands in one line, separating them with a semi-colon.\par
+\par
+search {\i phrase} [in {\i passage}] [from {\i text}]\par
+show {\i passage} [from {\i text}]\par
+show {\i passage} from bibles\par
+show {\i passage} from commentaries\par
+concordance {\i passage} [from {\i text}]\par
+note {\i passage} from {\i collection}\par
+note {\i title} from {\i collection}\par
+references {\i passage} from {\i collection}\par
+view [{\i passage}] [from {\i text}]\par
+open {\i file_name}\par
+info {\i phrase}\par
+info {\i passage}\par
+link {\i address/program} [{\i parameters}]\par
+help\par
+?\par
+\par
+For example:\par
+search abba in rom-ebr from "American Standard Version"; note amos from "Enciclopedia biblica"; concordance "Mt 1-14" from acv\par

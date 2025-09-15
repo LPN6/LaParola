@@ -1,0 +1,889 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{023AC39D-FF5F-4B62-A383-BFA4D9075A75}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LaParola</RootNamespace>
+    <AssemblyName>LaParola</AssemblyName>
+    <StartupObject>LaParola.Program</StartupObject>
+    <ApplicationIcon>bibbia.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Documents and Settings\wilson\Documenti\Visual Studio 2005\Projects\LaParola\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://www.laparola.net/</SupportUrl>
+    <TargetCulture>it</TargetCulture>
+    <ProductName>LaParola</ProductName>
+    <PublisherName>LaParola.Net</PublisherName>
+    <MinimumRequiredVersion>7.0.0.0</MinimumRequiredVersion>
+    <WebPage>publish.htm</WebPage>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>6.90.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aggiorna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Aggiorna.Designer.cs">
+      <DependentUpon>Aggiorna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApriNota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApriNota.Designer.cs">
+      <DependentUpon>ApriNota.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BraniParalleli.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BraniParalleli.Designer.cs">
+      <DependentUpon>BraniParalleli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BraniSimili.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BraniSimili.Designer.cs">
+      <DependentUpon>BraniSimili.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Chiave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chiave.Designer.cs">
+      <DependentUpon>Chiave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Collegamenti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Collegamenti.Designer.cs">
+      <DependentUpon>Collegamenti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LaParolaRisorse.es.Designer.cs">
+      <DependentUpon>LaParolaRisorse.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CreaRiferimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreaRiferimento.Designer.cs">
+      <DependentUpon>CreaRiferimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Esporta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Esporta.Designer.cs">
+      <DependentUpon>Esporta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="funzioni.cs" />
+    <Compile Include="GestisciNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestisciNote.Designer.cs">
+      <DependentUpon>GestisciNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Immagine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Immagine.Designer.cs">
+      <DependentUpon>Immagine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportaBibbia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportaBibbia.Designer.cs">
+      <DependentUpon>ImportaBibbia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Informazioni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Informazioni.Designer.cs">
+      <DependentUpon>Informazioni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformazioniSu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InformazioniSu.Designer.cs">
+      <DependentUpon>InformazioniSu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformazioniSuBibbia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InformazioniSuBibbia.Designer.cs">
+      <DependentUpon>InformazioniSuBibbia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lettura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lettura.Designer.cs">
+      <DependentUpon>Lettura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListaTesti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaTesti.Designer.cs">
+      <DependentUpon>ListaTesti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Misure.Designer.cs">
+      <DependentUpon>Misure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Navigatore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Navigatore.Designer.cs">
+      <DependentUpon>Navigatore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paragrafo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paragrafo.Designer.cs">
+      <DependentUpon>Paragrafo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="quiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="quiz.Designer.cs">
+      <DependentUpon>quiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ricerca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ricerca.Designer.cs">
+      <DependentUpon>Ricerca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Designer.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mostra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mostra.Designer.cs">
+      <DependentUpon>Mostra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Opzioni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Opzioni.Designer.cs">
+      <DependentUpon>Opzioni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LaParolaRisorse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LaParolaRisorse.resx</DependentUpon>
+    </Compile>
+    <Compile Include="LaParolaRisorse.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LaParolaRisorse.it.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Principale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principale.Designer.cs">
+      <DependentUpon>Principale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Aggiorna.es.resx">
+      <DependentUpon>Aggiorna.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Aggiorna.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Aggiorna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Aggiorna.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Aggiorna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ApriNota.es.resx">
+      <DependentUpon>ApriNota.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ApriNota.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ApriNota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ApriNota.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ApriNota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BraniParalleli.es.resx">
+      <DependentUpon>BraniParalleli.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BraniParalleli.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BraniParalleli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BraniParalleli.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BraniParalleli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BraniSimili.es.resx">
+      <DependentUpon>BraniSimili.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BraniSimili.it.resx">
+      <DependentUpon>BraniSimili.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BraniSimili.resx">
+      <DependentUpon>BraniSimili.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chiave.es.resx">
+      <DependentUpon>Chiave.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chiave.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Chiave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chiave.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Chiave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collegamenti.es.resx">
+      <DependentUpon>Collegamenti.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collegamenti.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Collegamenti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collegamenti.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Collegamenti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreaRiferimento.es.resx">
+      <DependentUpon>CreaRiferimento.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.es.resx">
+      <DependentUpon>Editor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Esporta.es.resx">
+      <DependentUpon>Esporta.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestisciNote.es.resx">
+      <DependentUpon>GestisciNote.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportaBibbia.es.resx">
+      <DependentUpon>ImportaBibbia.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informazioni.es.resx">
+      <DependentUpon>Informazioni.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformazioniSu.es.resx">
+      <DependentUpon>InformazioniSu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.es.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaParolaRisorse.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LaParolaRisorse.es.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreaRiferimento.it.resx">
+      <DependentUpon>CreaRiferimento.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreaRiferimento.resx">
+      <DependentUpon>CreaRiferimento.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Esporta.it.resx">
+      <DependentUpon>Esporta.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Esporta.resx">
+      <DependentUpon>Esporta.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestisciNote.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GestisciNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestisciNote.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GestisciNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Immagine.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Immagine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportaBibbia.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportaBibbia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportaBibbia.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportaBibbia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informazioni.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Informazioni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informazioni.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Informazioni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformazioniSu.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InformazioniSu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformazioniSu.resx">
+      <DependentUpon>InformazioniSu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformazioniSuBibbia.resx">
+      <DependentUpon>InformazioniSuBibbia.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaParolaRisorse.it.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LaParolaRisorse.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaParolaRisorse.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LaParolaRisorse.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lettura.es.resx">
+      <DependentUpon>Lettura.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lettura.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Lettura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lettura.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Lettura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaTesti.es.resx">
+      <DependentUpon>ListaTesti.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaTesti.it.resx">
+      <DependentUpon>ListaTesti.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaTesti.resx">
+      <DependentUpon>ListaTesti.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misure.es.resx">
+      <DependentUpon>Misure.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misure.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Misure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misure.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Misure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mostra.es.resx">
+      <DependentUpon>Mostra.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mostra.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Mostra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mostra.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Mostra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Navigatore.es.resx">
+      <DependentUpon>Navigatore.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Navigatore.it.resx">
+      <DependentUpon>Navigatore.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Navigatore.resx">
+      <DependentUpon>Navigatore.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Opzioni.es.resx">
+      <DependentUpon>Opzioni.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Opzioni.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Opzioni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Opzioni.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Opzioni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paragrafo.es.resx">
+      <DependentUpon>Paragrafo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paragrafo.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Paragrafo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paragrafo.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Paragrafo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principale.es.resx">
+      <DependentUpon>Principale.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principale.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Principale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principale.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Principale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="quiz.es.resx">
+      <DependentUpon>quiz.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="quiz.it.resx">
+      <DependentUpon>quiz.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="quiz.resx">
+      <DependentUpon>quiz.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ricerca.es.resx">
+      <DependentUpon>Ricerca.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ricerca.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Ricerca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ricerca.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Ricerca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScegliParola.es.resx">
+      <DependentUpon>ScegliParola.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScegliParola.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ScegliParola.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScegliParola.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ScegliParola.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Segnalibri.es.resx">
+      <DependentUpon>Segnalibri.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Segnalibri.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Segnalibri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Segnalibri.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Segnalibri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.es.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Template.es.resx">
+      <DependentUpon>Template.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestiParalleli.es.resx">
+      <DependentUpon>TestiParalleli.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrovaSostituisci.es.resx">
+      <DependentUpon>TrovaSostituisci.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visualizza.es.resx">
+      <DependentUpon>Visualizza.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visualizza.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Visualizza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visualizza.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Visualizza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Template.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Template.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Template.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Template.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestiParalleli.it.resx">
+      <DependentUpon>TestiParalleli.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestiParalleli.resx">
+      <DependentUpon>TestiParalleli.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrovaSostituisci.it.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TrovaSostituisci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrovaSostituisci.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TrovaSostituisci.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="laparolakey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RichTextBoxHighlight.cs" />
+    <Compile Include="ScegliParola.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScegliParola.Designer.cs">
+      <DependentUpon>ScegliParola.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Segnalibri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Segnalibri.Designer.cs">
+      <DependentUpon>Segnalibri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Visualizza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Visualizza.Designer.cs">
+      <DependentUpon>Visualizza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShellLinkNative.cs" />
+    <Compile Include="ShellShortcut.cs" />
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Template.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Template.Designer.cs">
+      <DependentUpon>Template.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestiParalleli.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestiParalleli.Designer.cs">
+      <DependentUpon>TestiParalleli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrovaSostituisci.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrovaSostituisci.Designer.cs">
+      <DependentUpon>TrovaSostituisci.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bibbia.ico" />
+    <None Include="images\quiz.gif" />
+    <None Include="images\quiz.txt" />
+    <None Include="images\proiettore_no.png" />
+    <None Include="images\proiettore.png" />
+    <None Include="images\navigatore.png" />
+    <None Include="images\ipertesto.gif" />
+    <None Include="images\quiz.sql" />
+    <None Include="images\quiztemi.sql" />
+    <None Include="images\visparalleli.gif" />
+    <None Include="images\rimuovi.gif" />
+    <None Include="images\aggiungi.gif" />
+    <None Include="images\evidenzia.gif" />
+    <None Include="images\bibbia_statico.gif" />
+    <None Include="images\splash.gif" />
+    <None Include="images\guida.gif" />
+    <None Include="images\underline.gif" />
+    <None Include="images\italic.gif" />
+    <None Include="images\bold.gif" />
+    <None Include="images\allineagiust.gif" />
+    <None Include="images\allineadestro.gif" />
+    <None Include="images\allineacentro.gif" />
+    <None Include="images\allineasinistra.gif" />
+    <None Include="images\rientrodiminuisce.gif" />
+    <None Include="images\rientroaumenta.gif" />
+    <None Include="images\elenco.gif" />
+    <None Include="images\seltutto.gif" />
+    <None Include="images\impostapagina.gif" />
+    <None Include="images\anteprima.gif" />
+    <None Include="images\salva.gif" />
+    <None Include="images\nuovo.gif" />
+    <None Include="images\chiudi.gif" />
+    <None Include="images\lettura.gif" />
+    <None Include="images\bibbia.gif" />
+    <None Include="images\segnalibri.gif" />
+    <None Include="images\ripristina.gif" />
+    <None Include="images\incolla.gif" />
+    <None Include="images\taglia.gif" />
+    <None Include="images\annulla.gif" />
+    <None Include="images\stampa.gif" />
+    <None Include="images\aggiornamento.gif" />
+    <None Include="images\misure.gif" />
+    <None Include="images\arrow_d_small.gif" />
+    <None Include="images\arrow_u_small.gif" />
+    <None Include="images\arrow_d.gif" />
+    <None Include="images\arrow_u.gif" />
+    <None Include="images\paralleli.gif" />
+    <None Include="images\zoom.gif" />
+    <None Include="images\infovai.gif" />
+    <None Include="images\info.gif" />
+    <None Include="images\immagine.gif" />
+    <None Include="images\autocomp.gif" />
+    <None Include="images\ordineprossimo.gif" />
+    <None Include="images\ordineprecdente.gif" />
+    <None Include="images\ordineindice.gif" />
+    <None Include="images\collegamentoInternet.gif" />
+    <None Include="images\trovaprossima.gif" />
+    <None Include="images\trova.gif" />
+    <None Include="images\sostituisci.gif" />
+    <None Include="images\chiave.gif" />
+    <None Include="images\visnota.gif" />
+    <None Include="images\aprinota.gif" />
+    <None Include="images\cancellaoggetto.gif" />
+    <None Include="images\collegamento.gif" />
+    <None Include="images\indietro.bmp" />
+    <None Include="images\avanti.bmp" />
+    <None Include="images\ricerca.gif" />
+    <None Include="images\cancella.gif" />
+    <None Include="images\copia.gif" />
+    <None Include="images\opzioni.gif" />
+    <None Include="images\vai.gif" />
+    <None Include="images\sugiu.gif" />
+    <None Include="images\visbibbia.gif" />
+    <None Include="images\paragrafo.gif" />
+    <None Include="images\mostra.gif" />
+    <None Include="images\apri.gif" />
+    <None Include="images\fontstile.gif" />
+    <None Include="images\italicit.gif" />
+    <None Include="images\boldit.gif" />
+    <None Include="images\underit.gif" />
+    <None Include="Properties\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\testi.dll\testi.dll.csproj">
+      <Project>{DF067DC6-98DA-4D1B-B8BC-B29B2FDAD5DC}</Project>
+      <Name>testi.dll</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="bibbia.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

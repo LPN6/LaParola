@@ -1,0 +1,1095 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="&gt;&gt;etiLunghezzeUguali.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiCapacitaUguali.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbMonete1.Items5" xml:space="preserve">
+    <value>drachma/silver coin</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="etiPesiUguale.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapacitaUguali.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="etiCapacita.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="etiPesiUguale.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiMonete.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbPesi2.HelpKeyword" xml:space="preserve">
+    <value>measuresto.html</value>
+  </data>
+  <data name="tbCapacita1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLunghezze.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbLunghezze1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 88</value>
+  </data>
+  <data name="cbCapacita2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 144</value>
+  </data>
+  <data name="cbMonete1.Items8" xml:space="preserve">
+    <value>aureus/gold coin</value>
+  </data>
+  <data name="&gt;&gt;cbMonete2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbLunghezze2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbPesi1.Items5" xml:space="preserve">
+    <value>mina</value>
+  </data>
+  <data name="btnOK.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiPesi2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbMonete2.Name" xml:space="preserve">
+    <value>cbMonete2</value>
+  </data>
+  <data name="&gt;&gt;cbMonete2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbCapacita1.Items1" xml:space="preserve">
+    <value>log (liquids)</value>
+  </data>
+  <data name="&gt;&gt;etiMoneteUguali.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita1.Name" xml:space="preserve">
+    <value>cbCapacita1</value>
+  </data>
+  <data name="etiLunghezzeUguali.Text" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="etiMonete.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="etiLunghezze2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;cbPesi1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbPesi1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 7</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="cbPesi1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="etiLunghezzeUguali.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbLunghezze1.Items7" xml:space="preserve">
+    <value>fathom</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiCapacita2.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="etiMonete2.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="tbPesi1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="etiPesi2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cbCapacita1.Items4" xml:space="preserve">
+    <value>cor/omer (liquids/solids)</value>
+  </data>
+  <data name="tbLunghezze1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="cbCapacita2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="tbPesi1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbLunghezze1.Items2" xml:space="preserve">
+    <value>palm</value>
+  </data>
+  <data name="etiCapacita2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiPesiUguale.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 17pt</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Name" xml:space="preserve">
+    <value>guidaFile</value>
+  </data>
+  <data name="&gt;&gt;etiPesiUguale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbPesi1.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbPesi1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="etiCapacitaUguali.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 29</value>
+  </data>
+  <data name="&gt;&gt;cbPesi1.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;tbPesi1.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="etiMoneteUguali.Text" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="etiMoneteUguali.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiPesiUguale.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiMoneteUguali.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbPesi1.Name" xml:space="preserve">
+    <value>tbPesi1</value>
+  </data>
+  <data name="cbLunghezze1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tbMonete1.Name" xml:space="preserve">
+    <value>tbMonete1</value>
+  </data>
+  <data name="cbPesi1.Items2" xml:space="preserve">
+    <value>beka</value>
+  </data>
+  <data name="cbLunghezze2.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;etiMoneteUguali.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiMonete.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;cbMonete1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbPesi2.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="etiPesi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 10</value>
+  </data>
+  <data name="tbCapacita1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="etiLunghezze.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiMoneteUguali.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="etiPesi2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 10</value>
+  </data>
+  <data name="etiPesiUguale.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiPesi2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLunghezze.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLunghezze2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="etiLunghezzeUguali.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="cbMonete1.Items3" xml:space="preserve">
+    <value>assarion/penny</value>
+  </data>
+  <data name="tbLunghezze1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 63</value>
+  </data>
+  <data name="cbMonete1.HelpKeyword" xml:space="preserve">
+    <value>measuresfrom.html</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbLunghezze1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbLunghezze1.Items6" xml:space="preserve">
+    <value>sabbath day's walk</value>
+  </data>
+  <data name="cbCapacita1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 144</value>
+  </data>
+  <data name="etiMonete2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Name" xml:space="preserve">
+    <value>btnCanc</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezzeUguali.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="tbMonete1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 175</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="etiPesiUguale.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapacitaUguali.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 17pt</value>
+  </data>
+  <data name="etiCapacitaUguali.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbCapacita1.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbCapacita2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze.Name" xml:space="preserve">
+    <value>etiLunghezze</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita.Name" xml:space="preserve">
+    <value>etiCapacita</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze1.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;etiMonete.Name" xml:space="preserve">
+    <value>etiMonete</value>
+  </data>
+  <data name="&gt;&gt;tbCapacita1.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze2.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="tbLunghezze1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbPesi2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;etiMonete.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="tbPesi1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="cbMonete1.Items9" xml:space="preserve">
+    <value>mina/pound</value>
+  </data>
+  <data name="&gt;&gt;cbMonete1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiPesi.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbPesi2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiMonete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiMonete2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbLunghezze1.Items9" xml:space="preserve">
+    <value>stadion</value>
+  </data>
+  <data name="etiCapacita.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbMonete2.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="cbMonete1.Items2" xml:space="preserve">
+    <value>kodrante/penny</value>
+  </data>
+  <data name="cbPesi1.Items" xml:space="preserve">
+    <value>gram</value>
+  </data>
+  <data name="tbCapacita1.HelpKeyword" xml:space="preserve">
+    <value>measuresnumber.html</value>
+  </data>
+  <data name="etiMonete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="&gt;&gt;etiPesi.Name" xml:space="preserve">
+    <value>etiPesi</value>
+  </data>
+  <data name="&gt;&gt;etiPesi2.Name" xml:space="preserve">
+    <value>etiPesi2</value>
+  </data>
+  <data name="etiCapacita.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbPesi2.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="etiMonete2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 178</value>
+  </data>
+  <data name="cbPesi1.Items6" xml:space="preserve">
+    <value>talent</value>
+  </data>
+  <data name="cbMonete1.Items7" xml:space="preserve">
+    <value>shekel</value>
+  </data>
+  <data name="&gt;&gt;tbMonete1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="btnCanc.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;tbCapacita1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiMoneteUguali.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiMonete2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbLunghezze1.Items" xml:space="preserve">
+    <value>meter</value>
+  </data>
+  <data name="etiCapacita2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbMonete1.Items" xml:space="preserve">
+    <value>euro</value>
+  </data>
+  <data name="cbMonete1.Items4" xml:space="preserve">
+    <value>denarius/daily wage</value>
+  </data>
+  <data name="tbCapacita1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="cbLunghezze1.HelpKeyword" xml:space="preserve">
+    <value>measuresfrom.html</value>
+  </data>
+  <data name="cbLunghezze2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiLunghezze2.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;etiPesi2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiCapacita.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 122</value>
+  </data>
+  <data name="btnOK.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiLunghezze2.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="cbMonete1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 200</value>
+  </data>
+  <data name="cbPesi1.Items3" xml:space="preserve">
+    <value>pim</value>
+  </data>
+  <data name="&gt;&gt;cbMonete1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cbMonete1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbPesi2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 32</value>
+  </data>
+  <data name="cbCapacita1.Items7" xml:space="preserve">
+    <value>measure (OT)(solids)</value>
+  </data>
+  <data name="cbLunghezze1.Items10" xml:space="preserve">
+    <value>estadio</value>
+  </data>
+  <data name="&gt;&gt;cbPesi2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiMonete.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze2.Name" xml:space="preserve">
+    <value>etiLunghezze2</value>
+  </data>
+  <data name="&gt;&gt;tbMonete1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="tbMonete1.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="etiPesi.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="etiMoneteUguali.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 17pt</value>
+  </data>
+  <data name="btnCanc.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze2.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cbCapacita1.HelpKeyword" xml:space="preserve">
+    <value>measuresfrom.html</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita2.Name" xml:space="preserve">
+    <value>etiCapacita2</value>
+  </data>
+  <data name="etiLunghezze.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="etiCapacitaUguali.Text" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="etiMonete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 178</value>
+  </data>
+  <data name="btnOK.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;tbLunghezze1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbPesi2.Name" xml:space="preserve">
+    <value>cbPesi2</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiCapacitaUguali.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita2.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze2.Name" xml:space="preserve">
+    <value>cbLunghezze2</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezzeUguali.Name" xml:space="preserve">
+    <value>etiLunghezzeUguali</value>
+  </data>
+  <data name="&gt;&gt;tbLunghezze1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbMonete2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbCapacita1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="etiLunghezzeUguali.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 29</value>
+  </data>
+  <data name="etiPesi2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="&gt;&gt;etiPesi2.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="cbCapacita1.Items8" xml:space="preserve">
+    <value>ephah (solids)</value>
+  </data>
+  <data name="tbLunghezze1.HelpKeyword" xml:space="preserve">
+    <value>measuresnumber.html</value>
+  </data>
+  <data name="etiMoneteUguali.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 184</value>
+  </data>
+  <data name="tbMonete1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="tbPesi1.HelpKeyword" xml:space="preserve">
+    <value>measuresnumber.html</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Misure</value>
+  </data>
+  <data name="&gt;&gt;tbCapacita1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbLunghezze1.Items5" xml:space="preserve">
+    <value>reed</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita2.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="etiMonete2.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnCanc.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbMonete2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Index</value>
+  </data>
+  <data name="cbLunghezze2.HelpKeyword" xml:space="preserve">
+    <value>measuresto.html</value>
+  </data>
+  <data name="cbPesi1.Items7" xml:space="preserve">
+    <value>pound</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita2.Name" xml:space="preserve">
+    <value>cbCapacita2</value>
+  </data>
+  <data name="&gt;&gt;tbMonete1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiPesi2.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="etiLunghezze.Text" xml:space="preserve">
+    <value>&amp;Length:</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiCapacita2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbMonete1.Items10" xml:space="preserve">
+    <value>talent</value>
+  </data>
+  <data name="cbPesi2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbCapacita1.Items" xml:space="preserve">
+    <value>litre</value>
+  </data>
+  <data name="etiCapacita.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="&gt;&gt;cbMonete2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbLunghezze1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="etiPesiUguale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 16</value>
+  </data>
+  <data name="cbMonete2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbMonete1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiCapacita2.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze1.Name" xml:space="preserve">
+    <value>cbLunghezze1</value>
+  </data>
+  <data name="cbCapacita2.HelpKeyword" xml:space="preserve">
+    <value>measuresto.html</value>
+  </data>
+  <data name="&gt;&gt;etiPesi.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiCapacitaUguali.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapacita.Text" xml:space="preserve">
+    <value>Ca&amp;pacity:</value>
+  </data>
+  <data name="etiCapacitaUguali.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;tbLunghezze1.Name" xml:space="preserve">
+    <value>tbLunghezze1</value>
+  </data>
+  <data name="cbCapacita1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbCapacita1.Items6" xml:space="preserve">
+    <value>omer (solids)</value>
+  </data>
+  <data name="cbLunghezze1.Items8" xml:space="preserve">
+    <value>mile</value>
+  </data>
+  <data name="etiPesiUguale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 29</value>
+  </data>
+  <data name="&gt;&gt;etiPesi.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="etiCapacitaUguali.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbCapacita1.Items3" xml:space="preserve">
+    <value>bath (liquids)</value>
+  </data>
+  <data name="etiMonete.Text" xml:space="preserve">
+    <value>&amp;Money:</value>
+  </data>
+  <data name="cbCapacita2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="etiPesi2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiPesi.Text" xml:space="preserve">
+    <value>&amp;Weight:</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>LaParola.Template, LaParola, Version=7.17.0.0, Culture=neutral, PublicKeyToken=934e5a3ed9094c37</value>
+  </data>
+  <data name="&gt;&gt;etiMoneteUguali.Name" xml:space="preserve">
+    <value>etiMoneteUguali</value>
+  </data>
+  <data name="&gt;&gt;cbPesi1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="tbMonete1.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="etiMonete2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbPesi1.HelpKeyword" xml:space="preserve">
+    <value>measuresfrom.html</value>
+  </data>
+  <data name="cbCapacita1.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="etiLunghezze.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;etiPesi.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiLunghezze.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 66</value>
+  </data>
+  <data name="&gt;&gt;etiMonete2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiLunghezzeUguali.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezzeUguali.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbCapacita1.Name" xml:space="preserve">
+    <value>tbCapacita1</value>
+  </data>
+  <data name="cbLunghezze1.Items3" xml:space="preserve">
+    <value>span</value>
+  </data>
+  <data name="&gt;&gt;cbMonete1.Name" xml:space="preserve">
+    <value>cbMonete1</value>
+  </data>
+  <data name="cbMonete2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 200</value>
+  </data>
+  <data name="&gt;&gt;etiLunghezze2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="etiLunghezze2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbMonete1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiMonete.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;etiPesiUguale.Name" xml:space="preserve">
+    <value>etiPesiUguale</value>
+  </data>
+  <data name="etiMoneteUguali.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="cbPesi1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiMonete2.Name" xml:space="preserve">
+    <value>etiMonete2</value>
+  </data>
+  <data name="etiMoneteUguali.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 29</value>
+  </data>
+  <data name="&gt;&gt;tbPesi1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiPesi2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbMonete2.HelpKeyword" xml:space="preserve">
+    <value>measuresto.html</value>
+  </data>
+  <data name="cbPesi1.Items4" xml:space="preserve">
+    <value>shekel</value>
+  </data>
+  <data name="&gt;&gt;cbLunghezze2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbPesi1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 32</value>
+  </data>
+  <data name="etiPesi.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbLunghezze1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="etiLunghezzeUguali.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 17pt</value>
+  </data>
+  <data name="cbCapacita1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbCapacita1.Items2" xml:space="preserve">
+    <value>hin (liquids)</value>
+  </data>
+  <data name="&gt;&gt;etiCapacitaUguali.Name" xml:space="preserve">
+    <value>etiCapacitaUguali</value>
+  </data>
+  <data name="cbLunghezze1.Items1" xml:space="preserve">
+    <value>digit</value>
+  </data>
+  <data name="etiCapacita2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 122</value>
+  </data>
+  <data name="cbMonete1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="cbMonete1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="tbCapacita1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbPesi2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbMonete1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbMonete1.Items6" xml:space="preserve">
+    <value>didrachma</value>
+  </data>
+  <data name="etiCapacita2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="etiLunghezzeUguali.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 72</value>
+  </data>
+  <data name="&gt;&gt;tbPesi1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbPesi1.Name" xml:space="preserve">
+    <value>cbPesi1</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>360, 266</value>
+  </data>
+  <data name="cbPesi1.Items1" xml:space="preserve">
+    <value>gerah</value>
+  </data>
+  <data name="etiPesi.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbCapacita2.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="cbMonete1.Items1" xml:space="preserve">
+    <value>lepton/copper coin</value>
+  </data>
+  <data name="tbLunghezze1.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Weights and Measures</value>
+  </data>
+  <data name="cbCapacita1.Items5" xml:space="preserve">
+    <value>cab (solids)</value>
+  </data>
+  <data name="tbPesi1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiCapacitaUguali.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 128</value>
+  </data>
+  <data name="&gt;&gt;tbLunghezze1.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cbPesi1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiPesi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="&gt;&gt;etiPesiUguale.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="etiMonete2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="&gt;&gt;etiCapacita.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbCapacita1.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tbCapacita1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 119</value>
+  </data>
+  <data name="etiLunghezzeUguali.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cbLunghezze1.Items4" xml:space="preserve">
+    <value>cubit</value>
+  </data>
+  <data name="&gt;&gt;etiMonete2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiCapacita.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiPesiUguale.Text" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="cbLunghezze2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 88</value>
+  </data>
+  <data name="cbLunghezze1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbLunghezze2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="tbLunghezze1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="etiLunghezze2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiLunghezze2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 66</value>
+  </data>
+  <data name="tbMonete1.HelpKeyword" xml:space="preserve">
+    <value>measuresnumber.html</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="guidaFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbFormato.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbOrdine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 68</value>
+  </data>
+  <data name="btnTutti.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;etiColonne.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnTutti.Text" xml:space="preserve">
+    <value>&amp;All</value>
+  </data>
+  <data name="btnNessuno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;btnTutti.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cbOrdine.Items1" xml:space="preserve">
+    <value>Type, Name</value>
+  </data>
+  <data name="btnNessuno.Text" xml:space="preserve">
+    <value>&amp;None</value>
+  </data>
+  <data name="clbColonne.Items11" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbOrdine.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnTutti.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 216</value>
+  </data>
+  <data name="btnCanc.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiFormato.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="etiColonne.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="etiFormato.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 13</value>
+  </data>
+  <data name="etiOrdine.Text" xml:space="preserve">
+    <value>&amp;Order of the Texts:</value>
+  </data>
+  <data name="etiOrdine.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>360, 266</value>
+  </data>
+  <data name="btnCanc.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiOrdine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 13</value>
+  </data>
+  <data name="cbFormato.Items" xml:space="preserve">
+    <value>Text File</value>
+  </data>
+  <data name="clbColonne.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 184</value>
+  </data>
+  <data name="&gt;&gt;cbOrdine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbFormato.Name" xml:space="preserve">
+    <value>cbFormato</value>
+  </data>
+  <data name="cbOrdine.Items" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="etiOrdine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 42</value>
+  </data>
+  <data name="&gt;&gt;btnNessuno.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbOrdine.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;etiColonne.Name" xml:space="preserve">
+    <value>etiColonne</value>
+  </data>
+  <data name="cbFormato.Items2" xml:space="preserve">
+    <value>CSV File</value>
+  </data>
+  <data name="clbColonne.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbFormato.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;clbColonne.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="clbColonne.Items10" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="btnOK.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Name" xml:space="preserve">
+    <value>guidaFile</value>
+  </data>
+  <data name="cbOrdine.Items2" xml:space="preserve">
+    <value>Language, Name</value>
+  </data>
+  <data name="&gt;&gt;btnNessuno.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="etiOrdine.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiFormato.HelpKeyword" xml:space="preserve">
+    <value>listtextsformat.html</value>
+  </data>
+  <data name="&gt;&gt;btnTutti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbFormato.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clbColonne.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 26</value>
+  </data>
+  <data name="btnTutti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnNessuno.HelpKeyword" xml:space="preserve">
+    <value>listtextsinformationnone.html</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnTutti.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbOrdine.Name" xml:space="preserve">
+    <value>cbOrdine</value>
+  </data>
+  <data name="&gt;&gt;cbFormato.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbOrdine.HelpKeyword" xml:space="preserve">
+    <value>listtextsorder.html</value>
+  </data>
+  <data name="etiFormato.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 111</value>
+  </data>
+  <data name="etiFormato.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiOrdine.HelpKeyword" xml:space="preserve">
+    <value>listtextsorder.html</value>
+  </data>
+  <data name="etiColonne.HelpKeyword" xml:space="preserve">
+    <value>listtextsinformation.html</value>
+  </data>
+  <data name="&gt;&gt;cbOrdine.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cbFormato.Items1" xml:space="preserve">
+    <value>RTF File</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ListaTesti</value>
+  </data>
+  <data name="etiColonne.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Export a List of Installed Texts</value>
+  </data>
+  <data name="cbOrdine.Items3" xml:space="preserve">
+    <value>Type, Language, Name</value>
+  </data>
+  <data name="&gt;&gt;cbFormato.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnTutti.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiColonne.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbFormato.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 136</value>
+  </data>
+  <data name="clbColonne.Items9" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="&gt;&gt;etiFormato.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnNessuno.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="etiColonne.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 10</value>
+  </data>
+  <data name="clbColonne.HelpKeyword" xml:space="preserve">
+    <value>listtextsinformation.html</value>
+  </data>
+  <data name="clbColonne.Items1" xml:space="preserve">
+    <value>Abbreviation</value>
+  </data>
+  <data name="&gt;&gt;btnTutti.Name" xml:space="preserve">
+    <value>btnTutti</value>
+  </data>
+  <data name="clbColonne.Items3" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="clbColonne.Items2" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="clbColonne.Items5" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="clbColonne.Items4" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="clbColonne.Items7" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+  <data name="clbColonne.Items6" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="&gt;&gt;etiOrdine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="clbColonne.Items8" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="etiColonne.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>LaParola.Template, LaParola, Version=7.17.0.0, Culture=neutral, PublicKeyToken=934e5a3ed9094c37</value>
+  </data>
+  <data name="cbOrdine.Items4" xml:space="preserve">
+    <value>Language, Type, Name</value>
+  </data>
+  <data name="btnOK.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="etiOrdine.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="etiFormato.Text" xml:space="preserve">
+    <value>&amp;Format of the File:</value>
+  </data>
+  <data name="&gt;&gt;etiOrdine.Name" xml:space="preserve">
+    <value>etiOrdine</value>
+  </data>
+  <data name="&gt;&gt;etiFormato.Name" xml:space="preserve">
+    <value>etiFormato</value>
+  </data>
+  <data name="&gt;&gt;etiColonne.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="&gt;&gt;etiFormato.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="clbColonne.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbOrdine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 21</value>
+  </data>
+  <data name="&gt;&gt;clbColonne.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="clbColonne.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="btnTutti.HelpKeyword" xml:space="preserve">
+    <value>listtextsinformationall.html</value>
+  </data>
+  <data name="cbFormato.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="clbColonne.Items" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="etiFormato.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Name" xml:space="preserve">
+    <value>btnCanc</value>
+  </data>
+  <data name="&gt;&gt;etiOrdine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnNessuno.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 216</value>
+  </data>
+  <data name="etiOrdine.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cbOrdine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;clbColonne.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="btnNessuno.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;clbColonne.Name" xml:space="preserve">
+    <value>clbColonne</value>
+  </data>
+  <data name="btnTutti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="&gt;&gt;etiFormato.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="etiColonne.Text" xml:space="preserve">
+    <value>&amp;Select the Information to Export:</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNessuno.Name" xml:space="preserve">
+    <value>btnNessuno</value>
+  </data>
+  <data name="btnNessuno.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="etiColonne.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 13</value>
+  </data>
+  <data name="&gt;&gt;etiOrdine.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="etiFormato.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="cbOrdine.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;etiColonne.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbFormato.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 21</value>
+  </data>
+  <data name="cbFormato.Items3" xml:space="preserve">
+    <value>HTML File</value>
+  </data>
+  <data name="btnNessuno.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbFormato.Items4" xml:space="preserve">
+    <value>XML File</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbFormato.HelpKeyword" xml:space="preserve">
+    <value>listtextsformat.html</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="guidaFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnOK.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="guidaFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnOK.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnCanc.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnCanc.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Name" xml:space="preserve">
+    <value>btnCanc</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCanc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbEspressione.HelpKeyword" xml:space="preserve">
+    <value>searchexpression.html</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbEspressione.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbEspressione.HelpString" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbEspressione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 25</value>
+  </data>
+  <data name="cbEspressione.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbEspressione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 21</value>
+  </data>
+  <data name="cbEspressione.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cbEspressione.Name" xml:space="preserve">
+    <value>cbEspressione</value>
+  </data>
+  <data name="&gt;&gt;cbEspressione.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbEspressione.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbEspressione.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbVersione.HelpKeyword" xml:space="preserve">
+    <value>searchtext.html</value>
+  </data>
+  <data name="cbVersione.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbVersione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 94</value>
+  </data>
+  <data name="cbVersione.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbVersione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 21</value>
+  </data>
+  <data name="cbVersione.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;cbVersione.Name" xml:space="preserve">
+    <value>cbVersione</value>
+  </data>
+  <data name="&gt;&gt;cbVersione.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbVersione.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbVersione.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labEspressione.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labEspressione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
+  </data>
+  <data name="labEspressione.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labEspressione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 13</value>
+  </data>
+  <data name="labEspressione.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labEspressione.Text" xml:space="preserve">
+    <value>&amp;Expression to search for:</value>
+  </data>
+  <data name="&gt;&gt;labEspressione.Name" xml:space="preserve">
+    <value>labEspressione</value>
+  </data>
+  <data name="&gt;&gt;labEspressione.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labEspressione.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labEspressione.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labVersione.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labVersione.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 78</value>
+  </data>
+  <data name="labVersione.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labVersione.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="labVersione.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labVersione.Text" xml:space="preserve">
+    <value>&amp;Text to search in:</value>
+  </data>
+  <data name="&gt;&gt;labVersione.Name" xml:space="preserve">
+    <value>labVersione</value>
+  </data>
+  <data name="&gt;&gt;labVersione.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labVersione.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labVersione.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="btnScegliParola.HelpKeyword" xml:space="preserve">
+    <value>searchchooseword.html</value>
+  </data>
+  <data name="btnScegliParola.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="btnScegliParola.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 52</value>
+  </data>
+  <data name="btnScegliParola.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnScegliParola.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 23</value>
+  </data>
+  <data name="btnScegliParola.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnScegliParola.Text" xml:space="preserve">
+    <value>Choose &amp;Word...</value>
+  </data>
+  <data name="&gt;&gt;btnScegliParola.Name" xml:space="preserve">
+    <value>btnScegliParola</value>
+  </data>
+  <data name="&gt;&gt;btnScegliParola.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnScegliParola.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnScegliParola.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.Name" xml:space="preserve">
+    <value>pulListaVersettiNuova</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.Name" xml:space="preserve">
+    <value>cbListaVersetti</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.Name" xml:space="preserve">
+    <value>rbListaVersetti</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Name" xml:space="preserve">
+    <value>cbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cbParte.Name" xml:space="preserve">
+    <value>cbParte</value>
+  </data>
+  <data name="&gt;&gt;cbParte.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbParte.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbParte.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.Name" xml:space="preserve">
+    <value>rbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;rbParte.Name" xml:space="preserve">
+    <value>rbParte</value>
+  </data>
+  <data name="&gt;&gt;rbParte.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbParte.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbParte.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="gbBrano.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 121</value>
+  </data>
+  <data name="gbBrano.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gbBrano.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 104</value>
+  </data>
+  <data name="gbBrano.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="gbBrano.Text" xml:space="preserve">
+    <value>Passage to Search in:</value>
+  </data>
+  <data name="&gt;&gt;gbBrano.Name" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;gbBrano.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbBrano.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbBrano.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pulListaVersettiNuova.HelpKeyword" xml:space="preserve">
+    <value>searchnewverselist.html</value>
+  </data>
+  <data name="pulListaVersettiNuova.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="pulListaVersettiNuova.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 47</value>
+  </data>
+  <data name="pulListaVersettiNuova.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pulListaVersettiNuova.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 23</value>
+  </data>
+  <data name="pulListaVersettiNuova.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="pulListaVersettiNuova.Text" xml:space="preserve">
+    <value>&amp;New</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.Name" xml:space="preserve">
+    <value>pulListaVersettiNuova</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;pulListaVersettiNuova.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbListaVersetti.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cbListaVersetti.HelpKeyword" xml:space="preserve">
+    <value>searchverselist.html</value>
+  </data>
+  <data name="cbListaVersetti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbListaVersetti.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 47</value>
+  </data>
+  <data name="cbListaVersetti.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbListaVersetti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 21</value>
+  </data>
+  <data name="cbListaVersetti.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.Name" xml:space="preserve">
+    <value>cbListaVersetti</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbListaVersetti.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbListaVersetti.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbListaVersetti.HelpKeyword" xml:space="preserve">
+    <value>searchverselist.html</value>
+  </data>
+  <data name="rbListaVersetti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="rbListaVersetti.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 48</value>
+  </data>
+  <data name="rbListaVersetti.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbListaVersetti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="rbListaVersetti.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbListaVersetti.Text" xml:space="preserve">
+    <value>&amp;Verse List:</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.Name" xml:space="preserve">
+    <value>rbListaVersetti</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbListaVersetti.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbBrano.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cbBrano.HelpKeyword" xml:space="preserve">
+    <value>searchpassage.html</value>
+  </data>
+  <data name="cbBrano.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbBrano.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 77</value>
+  </data>
+  <data name="cbBrano.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbBrano.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 21</value>
+  </data>
+  <data name="cbBrano.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Name" xml:space="preserve">
+    <value>cbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbBrano.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbParte.HelpKeyword" xml:space="preserve">
+    <value>searchsection.html</value>
+  </data>
+  <data name="cbParte.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbParte.Items" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="cbParte.Items1" xml:space="preserve">
+    <value>Old Testament</value>
+  </data>
+  <data name="cbParte.Items2" xml:space="preserve">
+    <value>New Testament</value>
+  </data>
+  <data name="cbParte.Items3" xml:space="preserve">
+    <value>Pentateuch</value>
+  </data>
+  <data name="cbParte.Items4" xml:space="preserve">
+    <value>Historical Books</value>
+  </data>
+  <data name="cbParte.Items5" xml:space="preserve">
+    <value>Writings</value>
+  </data>
+  <data name="cbParte.Items6" xml:space="preserve">
+    <value>Prophets</value>
+  </data>
+  <data name="cbParte.Items7" xml:space="preserve">
+    <value>Gospels</value>
+  </data>
+  <data name="cbParte.Items8" xml:space="preserve">
+    <value>Gospels and Acts</value>
+  </data>
+  <data name="cbParte.Items9" xml:space="preserve">
+    <value>Letters</value>
+  </data>
+  <data name="cbParte.Items10" xml:space="preserve">
+    <value>Paul's Letters</value>
+  </data>
+  <data name="cbParte.Items11" xml:space="preserve">
+    <value>Others' Letters</value>
+  </data>
+  <data name="cbParte.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 16</value>
+  </data>
+  <data name="cbParte.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="cbParte.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbParte.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 21</value>
+  </data>
+  <data name="cbParte.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cbParte.Name" xml:space="preserve">
+    <value>cbParte</value>
+  </data>
+  <data name="&gt;&gt;cbParte.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbParte.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;cbParte.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rbBrano.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbBrano.HelpKeyword" xml:space="preserve">
+    <value>searchpassage.html</value>
+  </data>
+  <data name="rbBrano.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="rbBrano.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 78</value>
+  </data>
+  <data name="rbBrano.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbBrano.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 17</value>
+  </data>
+  <data name="rbBrano.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rbBrano.Text" xml:space="preserve">
+    <value>&amp;Passage:</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.Name" xml:space="preserve">
+    <value>rbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbBrano.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rbParte.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbParte.HelpKeyword" xml:space="preserve">
+    <value>searchsection.html</value>
+  </data>
+  <data name="rbParte.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="rbParte.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="rbParte.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbParte.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="rbParte.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbParte.Text" xml:space="preserve">
+    <value>&amp;Section:</value>
+  </data>
+  <data name="&gt;&gt;rbParte.Name" xml:space="preserve">
+    <value>rbParte</value>
+  </data>
+  <data name="&gt;&gt;rbParte.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbParte.Parent" xml:space="preserve">
+    <value>gbBrano</value>
+  </data>
+  <data name="&gt;&gt;rbParte.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cbSalvaListaVersetti.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbSalvaListaVersetti.HelpKeyword" xml:space="preserve">
+    <value>searchsaveverselist.html</value>
+  </data>
+  <data name="cbSalvaListaVersetti.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="cbSalvaListaVersetti.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 56</value>
+  </data>
+  <data name="cbSalvaListaVersetti.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbSalvaListaVersetti.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 17</value>
+  </data>
+  <data name="cbSalvaListaVersetti.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cbSalvaListaVersetti.Text" xml:space="preserve">
+    <value>Save &amp;Results to Verse List</value>
+  </data>
+  <data name="cbSalvaListaVersetti.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;cbSalvaListaVersetti.Name" xml:space="preserve">
+    <value>cbSalvaListaVersetti</value>
+  </data>
+  <data name="&gt;&gt;cbSalvaListaVersetti.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbSalvaListaVersetti.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbSalvaListaVersetti.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>370, 266</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>WindowsDefaultLocation</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Name" xml:space="preserve">
+    <value>guidaFile</value>
+  </data>
+  <data name="&gt;&gt;guidaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Ricerca</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>LaParola.Template, LaParola, Version=7.19.3.0, Culture=neutral, PublicKeyToken=934e5a3ed9094c37</value>
+  </data>
+</root>
