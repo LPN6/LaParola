@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head>
+<style>
+body { color: #222;background: #fff; }
+a { color: blue;}
+@media (prefers-color-scheme: dark) { body { color: #eee; background-color: #121212;background-color: #121212; } a {color: lightblue; }}
+</style>
+</head><body><div>
+<!--<h1>LaParola Guida</h1>-->
+<p>L'app <b>LaParola</b> &egrave; composta da due parti: la visualizzazione del testo della Bibbia o di un altro libro, e un elenco dei testi aperti seguito da alcuni strumenti (<a href="#biblioteca">Biblioteca</a>, <a href="#preferenze">Preferenze</a>, <a href="#guida">Guida</a>).<br />
+Con l'iPhone, non &egrave; possibile aprire le due parti contemporaneamente. Tocca il nome di un testo o di uno strumento per passare alla visualizzazione del suo contenuto, o tocca <i>&lt; LaParola</i> in alto a sinstra per passare dal testo all'elenco.<br />
+Con l'iPad, &egrave; possibile vedere le due parti contemporaneamente, ma puoi anche toccare l'icona in alto a sinstra per nascondere o aprire l'elenco. In <i>Split View</i>, l'app si comporta come per l'iPhone.</p>
+<h2>Testi</h2>
+<p>Il testo da visualizzare viene scelto dall'elenco a sinistra.<br />
+Per aggiungere o rimuovere un testo da questo elenco, o riordinarli, usa i pulsanti + e <i>Modifica</i> nella parte superiore dello schermo.<br />
+Per rendere altri testi disponibili per la lettura, o per toglierne alcuni che sono gi&agrave; disponibili, usa la <a href="#biblioteca">Biblioteca</a>.</p>
+
+<h2>Navigare dentro un testo</h2>
+<p>Nella barra nella parte superiore dello schermo, ci sono due modi per visualizzare un'altra parte del testo. Il primo &egrave; scegliere il riferimento (libro, capitolo, versetto). In base all'impostazione per <a href="#preferenze.interfaccia">l'interfaccia nelle Preferenze</a>, ci sar&agrave; un'icona con un libro e/o tre elenchi. Per una versione della Bibbia, puoi scegliere solo i libri contenuti in quella versione. Per un commentario, &egrave; possibile scegliere qualsiasi libro presente nella <a href="#preferenze.versionepreferita">versione preferita</a>, anche se il commentario potrebbe non esiste per quel libro.<br />
+Il secondo modo &egrave; digitare un riferimento o una frase da ricercare nella casella di ricerca. Se il testo da ricercare termina con un numero, &egrave; considerato un riferimento, altrimenti una frase da ricerca. Questo vuol dire che per visualizzare tutto il testo di un libro della Bibbia, bisogna aggiungere dei numeri per i capitoli, per esempio <i>Giacomo 1-200</i>. Quasi qualsiasi forma per il riferimento o abbreviazione per i libri della Bibbia sono accettati; eventuali altre abbreviazioni personali possono essere aggiunte nelle <a href="#preferenze.libri">Preferenze</a>.<br />
+Se la casella di ricerca non &egrave; visibile nella parte superiore dello schermo (che succede quando lo schermo non &egrave; abbastanza largo), &egrave; messa soprattutto il testo, bisogna trascinare in gi&ugrave; per rivelarla.</p>
+<p>Quando la barra laterale non &egrave; visibile, puoi anche spostare il testo al capitolo precedente o successivo con un gesto di scorrimento orizzontale.</p>
+<p>Nella barra superiore, ci sono anche due altri pulsanti:<br />
+<b>Sintesi vocale:</b> iniziare o fermare la sintesi vocale del testo visibile nella finestra. Se non serve, &egrave; possibile rimuovere il pulsante nella sezione delle <i>Preferenze</i> per la <a href="#preferenze.sintesivocale">sintesi vocale</a>. La sintesi vocale usa le impostazioni del computer, per cui se vuoi cambiare la voce utilizzata, la velocit&agrave;, o il volume, li devi modificare nelle <i>Impostazioni di Sistema</i> (sezione Accessibilit&agrave;).<br />
+<b>Preferiti:</b> aggiungere il versetto attuale nel testo attuale ai preferiti. Se non serve, &egrave; possibile rimuovere il pulsante nella sezione delle <i>Preferenze</i> per i <a href="#preferenze.preferiti">preferiti</a>. I preferiti salvati possono essere aperti da <a href="#preferiti">Preferiti</a> nella barra laterale.
+</p>
+
+<h3>Come fare ricerche</h3>
+<p>La ricerca pi&ugrave; semplice &egrave per una singola parola. Puoi anche mettere alcune parole, per trovare tutti i versetti che contengono tutte quelle parole in qualsiasi ordine. &Egrave; anche possibile aggiungere altri caratteri per eseguire ricerche pi&ugrave; complicate:</p>
+<p>Le parole possono anche contiene i simboli * e ?: * corrisponde a qualsiasi numero di lettere e ? corrisponde ad una lettera qualsiasi.</p>
+<p>Siccome le cifre sono usate per indicare il rapporto fra le parole ricercate, non possono essere ricercate come parole. Per&ograve;, se il numero o la parola che contiene un numero &egrave; messo fra i segni di minore e di maggiore (per esempio, &lt;12000&gt;), &egrave; possibile cercarli. Questo &egrave; utile soprattutto per ricercare i numeri Strongs (per esempio &lt;G446&gt;).</p>
+<p>Spazi (a parte di quelli fra le parole) e lettere maiuscole sono facoltativi.</p>
+<h4>Significato dei simboli</h4>
+<table>
+<tr><td colspan="2"><b>Fra le parole:</b></td></tr>
+<tr><td>spazio, 0</td><td>E</td></tr>
+<tr><td>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</td><td>E ENTRO: la seconda parola deve apparire entro questo numero di versetti<br />
+SALTA (dentro [...]): il numero massimo di parole che può essere saltato in una frase</td></tr>
+<tr><td>|, !</td><td>OPPURE</td></tr>
+<tr><td>:</td><td>SALTA QUALSIASI NUMERO (dentro [...]): qualsiasi numero di parole pu&ograve; essere fra le due parole</td></tr>
+<tr><td colspan="2"><b>Prima di una parola:</b></td></tr>
+<tr><td>/</td><td>Qualsiasi parola che ha questa radice</td></tr>
+<tr><td>\</td><td>Qualsiasi parola che ha la stessa radice di questa parola</td></tr>
+<tr><td>^, ~</td><td>NON questa parola (o parole se seguito da \ o /; deve seguire E o E ENTRO)</td></tr>
+<tr><td colspan="2"><b>Intorno ad espressioni:</b></td></tr>
+<tr><td>(...)</td><td>Trova prima i versetti che contengono l'espressione dentro le parentesi. Sono necessarie quando l'ordine in cui le parole sono analizzate (da sinistra a destra) non &egrave; l'ordine desiderato</td></tr>
+<tr><td>[...], "..."</td><td>Trova i versetti che contengono questa frase; cio&egrave;, queste parole in questo ordine.</td></tr>
+</table>
+
+<h4>Esempi</h4>
+
+<table>
+<tr><td>perdona peccatore</td><td>
+Un versetto che contiene le parole "perdona" e "peccatore"</td></tr>
+<tr><td>perdona | peccatore</td><td>
+Un versetto che contiene o la parola "perdona" o la parola "peccatore"</td></tr>
+<tr><td>/perdonare /peccare</td><td>
+Un versetto che contiene una parola con radice "perdonare" e una parola con radice "peccare"</td></tr>
+<tr><td>\perdona \peccatore</td><td>
+Uguale all'esempio precedente</td></tr>
+<tr><td>/pentire (/perdonare|/peccare)</td><td>
+Un versetto che contiene una parola da "pentire", e una parola da "perdonare" o una da "peccare"</td></tr>
+<tr><td>/pentire /perdonare | /peccare</td><td>
+Un versetto che contiene sia una parola da "pentire" sia una da "perdonare", oppure una parola da "peccare" (non &egrave; uguale all'esempio precedente)</td></tr>
+<tr><td>/perdonare 1 /peccare</td><td>
+Un versetto che contiene una parola da "perdonare", e nello stesso versetto o in quello primo o in quello dopo una parola da "peccare"</td></tr>
+<tr><td>/peccare 1 /perdonare</td><td>
+Un versetto che contiene una parola da "peccare", e nello stesso versetto o in quello primo o in quello dopo una parola da "perdonare" (i versetti saranno diversi da quelli elencati dall'esempio precedente, ma si riferiranno alle stesse paia di versetti)</td></tr>
+<tr><td>/perdonare ^ /peccare</td><td>
+Un versetto che contiene una parola da "perdonare" ma non una da "peccare"</td></tr>
+<tr><td>[/perdonare 2 /peccare]</td><td>
+Un versetto che contiene una parola da "perdonare" e non più di due parole dopo una parola da "peccare"</td></tr>
+<tr><td>[(peccato|peccati):/perdonare]</td><td>
+Un versetto che contiene la parola "peccato" o la parola "peccati" e più tardi nello stesso versetto una parola da "perdonare"</td></tr>
+<tr><td>/peccare7*pen*</td><td>
+Un versetto che contiene una parola da "peccare" ed entro sette versetti una parola che contiene le lettere "pen"</td></tr>
+</table>
+
+<h2 id="preferiti">Preferiti</h2>
+<p>Tutti i brani preferiti (salvati toccando la stella nella barra superiore dei testi) sono elencati qui. Tocca il riferimento per aprire il preferito, o il cestino per rimuoverlo.</p>
+<p>I preferiti sono condivisi fra tutti i dispositivi (Mac, iPad, iPhone) con lo stesso account di Apple, per cui preferiti salvati in un dispostivo appariranno anche negli altri.
+</p>
+
+<h2 id="biblioteca">Biblioteca</h2>
+<p>Tutte le versioni della Bibbia e tutti i commentari che possono essere aggiunti al programma sono elencati nella <b>Biblioteca</b>. Per i testi gi&agrave; installati puoi rimuoverli oppure vedere alcune informazioni sul testo. Per i testi non installati, puoi scaricarli, nasconderli affinch&eacute; non siano pi&ugrave; visualizzati nella <b>Biblioteca</b>, o vedere alcune informazioni.</p>
+<p>Puoi rivelare eventuali testi nascosti nelle <a href="#preferenze.nascosti">Preferenze</a>.</p>
+
+<h2 id="preferenze">Preferenze</h2>
+<h3>Testo biblico</h3>
+<p>Puoi scegliere di mostrare il testo come paragrafi (quando presenti nel testo cartaceo), con ogni versetto su una nuova riga, o senza testo e con solo i riferimenti. Puoi anche decidere se mostrare i titoli delle sezioni del testo o no.</p>
+
+<h3 id="preferenze.ricerche">Ricerche</h3>
+<p>Puoi scegliere lo stile applicato alle parole ricercate, e se un link ipertestuale al contesto &egrave; aggiunto ai versetti che sono i risultati delle ricerche.</p>
+
+<h3>Riferimenti</h3>
+<p>Ci sono diverse opzioni per il formato, la posizione, e lo stile dei riferimenti, e se vengono usati i nomi dei libri oppure le loro abbreviazioni.</p>
+
+<h3 id="preferenze.sintesivocale">Sintesi vocale</h3>
+<p>La sintesi vocale legge il testo che &egrave; visibile nello schermo. Per avviare la lettura, fai clic sul pulsante nella barra nella parte superiore dello schermo.</p>
+<p>Se non serve, puoi nascondere quel pulsante nelle <i>Preferenze</i>.</p>
+<p>Di solito, viene letto solo il testo visibile. Per&ograve;, se selezioni <i>Avanzamento automatico</i>, la lettura proseguir&agrave; con i capitoli successivi, fino a quando viene fermata.</p>
+<p>La sintesi vocale usa le impostazioni del dispositivo, per cui se vuoi cambiare la voce utilizzata, la velocit&agrave;, o il volume, li devi modificare nelle <i>Impostazioni</i> (sezione Accessibilit&agrave;).</p>
+
+<h3 id="preferenze.preferiti">Preferiti</h3>
+<p>Per avere pi&ugrave; spazio nella barra superiore, &egrave; possibile nascondere il pulsante dei preferiti se non lo usi.</p>
+<p>Puoi anche impostare se i preferiti vengono aperti sempre in una scheda nuova, oppure se riutilizzare un'eventuale scheda con la stessa versione che &egrave; gi&agrave; aperta.</p>
+
+<h3 id="preferenze.interfaccia">Interfaccia</h3>
+<p>Ci sono due modi per scegliere il riferimento a cui spostare il testo: con i libri, i capitoli, e i versetti in grigie oppure in elenchi verticali. Puoi scegliere quale modo visualizzare nella barra superiore dello schermo, o tutti e due i modi.</p>
+<p>Puoi anche rimuovere il pulsante per la sintesi vocale se non serve.</p>
+<p>Se <i>Schermo sempre acceso</i> &egrave; selezionato, lo schermo non si spegne dopo un periodo di inattivit&agrave; mentre l'app &egrave; in primo piano.</p>
+
+<h3>Carattere</h3>
+<p>Puoi scegliere fra alcuni font per visualizzare il testo, ed anche la dimensione (digitando il numero oppure spostando l'indicatore). &Egrave; anche possibile ingrandire o ridurre la dimensione del testo con il gesto di due dita che si allontanano o si avvicinano orizzontalmente, ma solo quando la barra laterale non &egrave; visibile.</p>
+
+<h3 id="preferenze.libri">Libri</h3>
+<p>Puoi cambiare il nome e l'abbreviazione usati per i libri della Bibbia. Le abbreviazioni riconosciute sono quelle che si possono usare per digitare un riferimento.</p>
+<p>I pulsanti <i>Predefiniti italiani</i> e <i>Predefiniti inglesi</i> impostano i valori predefiniti per i nomi e abbreviazioni dei libri in quelle lingue.</p>
+
+<h3 id="preferenze.versionepreferita">Testi</h3>
+<p>La <i>versione preferita</i> viene usata per visualizzare il testo nei link ipertestuali, da alcuni commentari e da <a href="#preferenze.ricerche">Contesto in link</a>.
+<p id="preferenze.nascosti">Il pulsante <i>Rivela testi nascosti</i> rimette tutti i testi che sono stati nascosti nella <a href="#biblioteca">Biblioteca</a>. &Egrave; visibile sono se ci sono dei testi nascosti.</p>
+<p></p>
+<p>Nota che &egrave; possibile in macOS cambiare la lingua dell'interfaccia dell'app LaParola (solo italiano o inglese). Apri <i>Impostazioni di sistema</i>, sezione <i>Generali</i>, poi <i>Lingua e zona</i>. Nella sezione <i>Applicazioni</i> clicca il pulsante + e scegli <i>LaParola.app</i> e la lingua che vuoi utilizzare. Infine clicca <i>Aggiungi</i> per salvare le modifiche. Se l'app &egrave; aperta, forse sar&agrave; necessario riavviarla.</p>
+
+<h2 id="guida">Guida</h2>
+<p>Apre questo testo.</p>
+</div></body></html>

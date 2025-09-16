@@ -1,0 +1,763 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8400743B2C022371008529EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400743A2C022371008529EE /* AppDelegate.swift */; };
+		8416D5DD2B4C103300151821 /* LaParolaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D5DC2B4C103300151821 /* LaParolaApp.swift */; };
+		8416D5DF2B4C103300151821 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D5DE2B4C103300151821 /* ContentView.swift */; };
+		8416D5E12B4C103300151821 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D5E02B4C103300151821 /* Item.swift */; };
+		8416D5E32B4C103400151821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8416D5E22B4C103400151821 /* Assets.xcassets */; };
+		8416D5E72B4C103400151821 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8416D5E62B4C103400151821 /* Preview Assets.xcassets */; };
+		8416D5F12B4C103400151821 /* LaParolaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D5F02B4C103400151821 /* LaParolaTests.swift */; };
+		8416D5FB2B4C103400151821 /* LaParolaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D5FA2B4C103400151821 /* LaParolaUITests.swift */; };
+		8416D5FD2B4C103400151821 /* LaParolaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D5FC2B4C103400151821 /* LaParolaUITestsLaunchTests.swift */; };
+		841A9C4A2BDFD13E00DE67FA /* Guida.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A9C492BDFD13E00DE67FA /* Guida.swift */; };
+		841A9C4C2BE1951A00DE67FA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 841A9C4B2BE1951A00DE67FA /* Localizable.xcstrings */; };
+		8421005D2B7CF8A600FF34B5 /* Riferimento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421005C2B7CF8A600FF34B5 /* Riferimento.swift */; };
+		8421005F2B7D034500FF34B5 /* FormatoTesto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421005E2B7D034500FF34B5 /* FormatoTesto.swift */; };
+		843FB3CE2C346D2600A4BD89 /* guida_ios.txt in Resources */ = {isa = PBXBuildFile; fileRef = 843FB3CC2C346D2600A4BD89 /* guida_ios.txt */; };
+		846B53882B7E150A0002CE0A /* Versione.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B53872B7E150A0002CE0A /* Versione.swift */; };
+		846B538A2B7E20070002CE0A /* OccorrenzaParola.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B53892B7E20070002CE0A /* OccorrenzaParola.swift */; };
+		8477E2002CF0DF5A00B87E78 /* Preferiti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477E1FF2CF0DF5A00B87E78 /* Preferiti.swift */; };
+		847CB8212C272252005AB41A /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CB8202C272252005AB41A /* WebView.swift */; };
+		84B2BCDF2B94EE1600823089 /* C.E.I..laparola in Resources */ = {isa = PBXBuildFile; fileRef = 84B2BCDD2B94EE1600823089 /* C.E.I..laparola */; };
+		84B2BCE02B94EE1600823089 /* Nuova Riveduta.laparola in Resources */ = {isa = PBXBuildFile; fileRef = 84B2BCDE2B94EE1600823089 /* Nuova Riveduta.laparola */; };
+		84B2BCE32B988F1900823089 /* Preferenze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2BCE22B988F1900823089 /* Preferenze.swift */; };
+		84B2BCE52B9A085200823089 /* Biblioteca.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2BCE42B9A085200823089 /* Biblioteca.swift */; };
+		84B2BCE72B9CA3B200823089 /* TestoDisponibile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2BCE62B9CA3B200823089 /* TestoDisponibile.swift */; };
+		84B944D12C11FA31001DF881 /* TestoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B944D02C11FA31001DF881 /* TestoView.swift */; };
+		84B944D62C12E135001DF881 /* guida_it.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B944D52C12E135001DF881 /* guida_it.txt */; };
+		84D9D7872B7BC3A900B437AD /* Testi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9D7862B7BC3A900B437AD /* Testi.swift */; };
+		84D9D7892B7BD4AE00B437AD /* VersioneInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9D7882B7BD4AE00B437AD /* VersioneInfo.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8416D5ED2B4C103400151821 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8416D5D12B4C103300151821 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8416D5D82B4C103300151821;
+			remoteInfo = LaParola;
+		};
+		8416D5F72B4C103400151821 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8416D5D12B4C103300151821 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8416D5D82B4C103300151821;
+			remoteInfo = LaParola;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8400743A2C022371008529EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8416D5D92B4C103300151821 /* LaParola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaParola.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8416D5DC2B4C103300151821 /* LaParolaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaParolaApp.swift; sourceTree = "<group>"; };
+		8416D5DE2B4C103300151821 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8416D5E02B4C103300151821 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		8416D5E22B4C103400151821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8416D5E42B4C103400151821 /* LaParola.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LaParola.entitlements; sourceTree = "<group>"; };
+		8416D5E62B4C103400151821 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8416D5EC2B4C103400151821 /* LaParolaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaParolaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8416D5F02B4C103400151821 /* LaParolaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaParolaTests.swift; sourceTree = "<group>"; };
+		8416D5F62B4C103400151821 /* LaParolaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaParolaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8416D5FA2B4C103400151821 /* LaParolaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaParolaUITests.swift; sourceTree = "<group>"; };
+		8416D5FC2B4C103400151821 /* LaParolaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaParolaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		841A9C492BDFD13E00DE67FA /* Guida.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guida.swift; sourceTree = "<group>"; };
+		841A9C4B2BE1951A00DE67FA /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		8421005C2B7CF8A600FF34B5 /* Riferimento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Riferimento.swift; sourceTree = "<group>"; };
+		8421005E2B7D034500FF34B5 /* FormatoTesto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatoTesto.swift; sourceTree = "<group>"; };
+		843FB3CD2C346D2600A4BD89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/guida_ios.txt; sourceTree = "<group>"; };
+		843FB3CF2C346D3700A4BD89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/guida_ios.txt; sourceTree = "<group>"; };
+		846B53872B7E150A0002CE0A /* Versione.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Versione.swift; sourceTree = "<group>"; };
+		846B53892B7E20070002CE0A /* OccorrenzaParola.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccorrenzaParola.swift; sourceTree = "<group>"; };
+		8477E1FF2CF0DF5A00B87E78 /* Preferiti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferiti.swift; sourceTree = "<group>"; };
+		847CB8202C272252005AB41A /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		84B2BCDD2B94EE1600823089 /* C.E.I..laparola */ = {isa = PBXFileReference; lastKnownFileType = text; path = C.E.I..laparola; sourceTree = "<group>"; };
+		84B2BCDE2B94EE1600823089 /* Nuova Riveduta.laparola */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Nuova Riveduta.laparola"; sourceTree = "<group>"; };
+		84B2BCE12B962C8800823089 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		84B2BCE22B988F1900823089 /* Preferenze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferenze.swift; sourceTree = "<group>"; };
+		84B2BCE42B9A085200823089 /* Biblioteca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biblioteca.swift; sourceTree = "<group>"; };
+		84B2BCE62B9CA3B200823089 /* TestoDisponibile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestoDisponibile.swift; sourceTree = "<group>"; };
+		84B944D02C11FA31001DF881 /* TestoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestoView.swift; sourceTree = "<group>"; };
+		84B944D42C12E135001DF881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/guida_it.txt; sourceTree = "<group>"; };
+		84B944D72C12E162001DF881 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/guida_it.txt; sourceTree = "<group>"; };
+		84D9D7862B7BC3A900B437AD /* Testi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testi.swift; sourceTree = "<group>"; };
+		84D9D7882B7BD4AE00B437AD /* VersioneInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioneInfo.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8416D5D62B4C103300151821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8416D5E92B4C103400151821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8416D5F32B4C103400151821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8416D5D02B4C103300151821 = {
+			isa = PBXGroup;
+			children = (
+				8416D5DB2B4C103300151821 /* LaParola */,
+				8416D5EF2B4C103400151821 /* LaParolaTests */,
+				8416D5F92B4C103400151821 /* LaParolaUITests */,
+				8416D5DA2B4C103300151821 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8416D5DA2B4C103300151821 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8416D5D92B4C103300151821 /* LaParola.app */,
+				8416D5EC2B4C103400151821 /* LaParolaTests.xctest */,
+				8416D5F62B4C103400151821 /* LaParolaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8416D5DB2B4C103300151821 /* LaParola */ = {
+			isa = PBXGroup;
+			children = (
+				84B2BCE12B962C8800823089 /* Info.plist */,
+				84B2BCDC2B94EE1600823089 /* Resources */,
+				8416D5DC2B4C103300151821 /* LaParolaApp.swift */,
+				8400743A2C022371008529EE /* AppDelegate.swift */,
+				8416D5DE2B4C103300151821 /* ContentView.swift */,
+				84B944D02C11FA31001DF881 /* TestoView.swift */,
+				847CB8202C272252005AB41A /* WebView.swift */,
+				8416D5E02B4C103300151821 /* Item.swift */,
+				8477E1FF2CF0DF5A00B87E78 /* Preferiti.swift */,
+				84B2BCE42B9A085200823089 /* Biblioteca.swift */,
+				84B2BCE22B988F1900823089 /* Preferenze.swift */,
+				841A9C492BDFD13E00DE67FA /* Guida.swift */,
+				84D9D7862B7BC3A900B437AD /* Testi.swift */,
+				846B53872B7E150A0002CE0A /* Versione.swift */,
+				8421005E2B7D034500FF34B5 /* FormatoTesto.swift */,
+				84D9D7882B7BD4AE00B437AD /* VersioneInfo.swift */,
+				8421005C2B7CF8A600FF34B5 /* Riferimento.swift */,
+				846B53892B7E20070002CE0A /* OccorrenzaParola.swift */,
+				84B2BCE62B9CA3B200823089 /* TestoDisponibile.swift */,
+				8416D5E22B4C103400151821 /* Assets.xcassets */,
+				8416D5E42B4C103400151821 /* LaParola.entitlements */,
+				8416D5E52B4C103400151821 /* Preview Content */,
+			);
+			path = LaParola;
+			sourceTree = "<group>";
+		};
+		8416D5E52B4C103400151821 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8416D5E62B4C103400151821 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8416D5EF2B4C103400151821 /* LaParolaTests */ = {
+			isa = PBXGroup;
+			children = (
+				8416D5F02B4C103400151821 /* LaParolaTests.swift */,
+			);
+			path = LaParolaTests;
+			sourceTree = "<group>";
+		};
+		8416D5F92B4C103400151821 /* LaParolaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8416D5FA2B4C103400151821 /* LaParolaUITests.swift */,
+				8416D5FC2B4C103400151821 /* LaParolaUITestsLaunchTests.swift */,
+			);
+			path = LaParolaUITests;
+			sourceTree = "<group>";
+		};
+		84B2BCDC2B94EE1600823089 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				843FB3CC2C346D2600A4BD89 /* guida_ios.txt */,
+				84B2BCDD2B94EE1600823089 /* C.E.I..laparola */,
+				84B2BCDE2B94EE1600823089 /* Nuova Riveduta.laparola */,
+				841A9C4B2BE1951A00DE67FA /* Localizable.xcstrings */,
+				84B944D52C12E135001DF881 /* guida_it.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8416D5D82B4C103300151821 /* LaParola */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8416D6002B4C103400151821 /* Build configuration list for PBXNativeTarget "LaParola" */;
+			buildPhases = (
+				8416D5D52B4C103300151821 /* Sources */,
+				8416D5D62B4C103300151821 /* Frameworks */,
+				8416D5D72B4C103300151821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LaParola;
+			productName = LaParola;
+			productReference = 8416D5D92B4C103300151821 /* LaParola.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8416D5EB2B4C103400151821 /* LaParolaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8416D6032B4C103400151821 /* Build configuration list for PBXNativeTarget "LaParolaTests" */;
+			buildPhases = (
+				8416D5E82B4C103400151821 /* Sources */,
+				8416D5E92B4C103400151821 /* Frameworks */,
+				8416D5EA2B4C103400151821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8416D5EE2B4C103400151821 /* PBXTargetDependency */,
+			);
+			name = LaParolaTests;
+			productName = LaParolaTests;
+			productReference = 8416D5EC2B4C103400151821 /* LaParolaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8416D5F52B4C103400151821 /* LaParolaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8416D6062B4C103400151821 /* Build configuration list for PBXNativeTarget "LaParolaUITests" */;
+			buildPhases = (
+				8416D5F22B4C103400151821 /* Sources */,
+				8416D5F32B4C103400151821 /* Frameworks */,
+				8416D5F42B4C103400151821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8416D5F82B4C103400151821 /* PBXTargetDependency */,
+			);
+			name = LaParolaUITests;
+			productName = LaParolaUITests;
+			productReference = 8416D5F62B4C103400151821 /* LaParolaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8416D5D12B4C103300151821 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					8416D5D82B4C103300151821 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+					8416D5EB2B4C103400151821 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 8416D5D82B4C103300151821;
+					};
+					8416D5F52B4C103400151821 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 8416D5D82B4C103300151821;
+					};
+				};
+			};
+			buildConfigurationList = 8416D5D42B4C103300151821 /* Build configuration list for PBXProject "LaParola" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = it;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				it,
+			);
+			mainGroup = 8416D5D02B4C103300151821;
+			productRefGroup = 8416D5DA2B4C103300151821 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8416D5D82B4C103300151821 /* LaParola */,
+				8416D5EB2B4C103400151821 /* LaParolaTests */,
+				8416D5F52B4C103400151821 /* LaParolaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8416D5D72B4C103300151821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8416D5E72B4C103400151821 /* Preview Assets.xcassets in Resources */,
+				841A9C4C2BE1951A00DE67FA /* Localizable.xcstrings in Resources */,
+				84B944D62C12E135001DF881 /* guida_it.txt in Resources */,
+				8416D5E32B4C103400151821 /* Assets.xcassets in Resources */,
+				84B2BCE02B94EE1600823089 /* Nuova Riveduta.laparola in Resources */,
+				843FB3CE2C346D2600A4BD89 /* guida_ios.txt in Resources */,
+				84B2BCDF2B94EE1600823089 /* C.E.I..laparola in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8416D5EA2B4C103400151821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8416D5F42B4C103400151821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8416D5D52B4C103300151821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8421005D2B7CF8A600FF34B5 /* Riferimento.swift in Sources */,
+				847CB8212C272252005AB41A /* WebView.swift in Sources */,
+				84B2BCE32B988F1900823089 /* Preferenze.swift in Sources */,
+				8416D5DF2B4C103300151821 /* ContentView.swift in Sources */,
+				8421005F2B7D034500FF34B5 /* FormatoTesto.swift in Sources */,
+				8400743B2C022371008529EE /* AppDelegate.swift in Sources */,
+				84D9D7892B7BD4AE00B437AD /* VersioneInfo.swift in Sources */,
+				84B944D12C11FA31001DF881 /* TestoView.swift in Sources */,
+				846B53882B7E150A0002CE0A /* Versione.swift in Sources */,
+				8416D5E12B4C103300151821 /* Item.swift in Sources */,
+				8477E2002CF0DF5A00B87E78 /* Preferiti.swift in Sources */,
+				8416D5DD2B4C103300151821 /* LaParolaApp.swift in Sources */,
+				84D9D7872B7BC3A900B437AD /* Testi.swift in Sources */,
+				846B538A2B7E20070002CE0A /* OccorrenzaParola.swift in Sources */,
+				841A9C4A2BDFD13E00DE67FA /* Guida.swift in Sources */,
+				84B2BCE72B9CA3B200823089 /* TestoDisponibile.swift in Sources */,
+				84B2BCE52B9A085200823089 /* Biblioteca.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8416D5E82B4C103400151821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8416D5F12B4C103400151821 /* LaParolaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8416D5F22B4C103400151821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8416D5FD2B4C103400151821 /* LaParolaUITestsLaunchTests.swift in Sources */,
+				8416D5FB2B4C103400151821 /* LaParolaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8416D5EE2B4C103400151821 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8416D5D82B4C103300151821 /* LaParola */;
+			targetProxy = 8416D5ED2B4C103400151821 /* PBXContainerItemProxy */;
+		};
+		8416D5F82B4C103400151821 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8416D5D82B4C103300151821 /* LaParola */;
+			targetProxy = 8416D5F72B4C103400151821 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		843FB3CC2C346D2600A4BD89 /* guida_ios.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843FB3CD2C346D2600A4BD89 /* Base */,
+				843FB3CF2C346D3700A4BD89 /* en */,
+			);
+			name = guida_ios.txt;
+			sourceTree = "<group>";
+		};
+		84B944D52C12E135001DF881 /* guida_it.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84B944D42C12E135001DF881 /* Base */,
+				84B944D72C12E162001DF881 /* en */,
+			);
+			name = guida_it.txt;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8416D5FE2B4C103400151821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = R85KBGEH9Q;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8416D5FF2B4C103400151821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = R85KBGEH9Q;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		8416D6012B4C103400151821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LaParola/LaParola.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 17;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"LaParola/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LaParola/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 8.05.00;
+				PRODUCT_BUNDLE_IDENTIFIER = net.laparola.LaParolaMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8416D6022B4C103400151821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LaParola/LaParola.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 17;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"LaParola/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LaParola/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 8.05.00;
+				PRODUCT_BUNDLE_IDENTIFIER = net.laparola.LaParolaMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8416D6042B4C103400151821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.laparola.LaParolaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LaParola.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LaParola";
+			};
+			name = Debug;
+		};
+		8416D6052B4C103400151821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.laparola.LaParolaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LaParola.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LaParola";
+			};
+			name = Release;
+		};
+		8416D6072B4C103400151821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.laparola.LaParolaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LaParola;
+			};
+			name = Debug;
+		};
+		8416D6082B4C103400151821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.laparola.LaParolaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LaParola;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8416D5D42B4C103300151821 /* Build configuration list for PBXProject "LaParola" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8416D5FE2B4C103400151821 /* Debug */,
+				8416D5FF2B4C103400151821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8416D6002B4C103400151821 /* Build configuration list for PBXNativeTarget "LaParola" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8416D6012B4C103400151821 /* Debug */,
+				8416D6022B4C103400151821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8416D6032B4C103400151821 /* Build configuration list for PBXNativeTarget "LaParolaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8416D6042B4C103400151821 /* Debug */,
+				8416D6052B4C103400151821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8416D6062B4C103400151821 /* Build configuration list for PBXNativeTarget "LaParolaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8416D6072B4C103400151821 /* Debug */,
+				8416D6082B4C103400151821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8416D5D12B4C103300151821 /* Project object */;
+}

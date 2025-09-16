@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html><head>
+<style>
+body { color: #222;background: #fff; }
+a { color: blue;}
+@media (prefers-color-scheme: dark) { body { color: #eee; background-color: #121212;background-color: #121212; } a {color: lightblue; }}
+</style>
+</head><body><div>
+<!--<h1>LaParola Help</h1>-->
+<p>The app <b>LaParola</b> contains two sections: the text of the Bible or of another book, and a list of the open books followed by a few tools (<a href="#biblioteca">Library</a>, <a href="#preferenze">Settings</a>, <a href="#guida">Help</a>).<br />
+With the iPhone, it is not possible to open the two sections at the same time. Touch the name of a text or of a tool to view its contents, or touch <i>&lt; LaParola</i> in the upper left corner of the screen to view the list.<br />
+With the iPad, you can view the two sections at the same time, but can also touch the icon in the upper left corner to hide or show the side bar with the list. In <i>Split View</i>, the app behaves like it does on an iPhone.</p>
+<h2>Texts</h2>
+<p>The text that you want to read is chosen from the list on the left.<br />
+To add or remove a text from this list, or to reorder them, use the + and <i>Edits</i>  buttons in the upper part of the screen.<br />
+To make other texts available to be read, or to remove some that are already available, use the <a href="#biblioteca">Library</a>.</p>
+
+<h2>Navigating in a Text</h2>
+<p>In the bar at the top of the screen, there are two ways to view another part of the text. The first is to choose the reference (book, chapter, verse). Depending upon the setting for the <a href="#preferenze.interfaccia">interface in the Settings</a>, there will be an icon with a book and/or three lists. For a Bible translation, you can only choose the books contained in that translation. For a commentary, you can choose any book that is present in the <a href="#preferenze.versionepreferita">preferred translation</a>, even if the commentary may not exist for that book.<br />
+The second way is to type a reference or a search phrase in the search box. If the search text ends with a number, it is considered a Bible reference, otherwise a search phrase. This means that to view all the text of a book of the Bible, you need to add some numbers for the chapters, for example <i>James 1-200</i>. Almost any form for the Bible reference and abbreviation for the Bible books are accepted; any other abbreviations you would like to use can be added in the <a href="#preferenze.libri">Settings</a>.<br />
+If the search box is not visible at the top of the screen (that happens when the screen is not wide enough to fit it), it is put above the text. You need to swipe down in order to show it.</p>
+<p>When the sidebar is not visible, you can also move the text to the previous or next chapter with a horizontal swipe gesture.</p>
+<p>In the top bar, there are also two other buttons:<br />
+<b>Speech synthesis:</b> start or stop the speech synthesis of the text that is visible in the window. If you do not need the button, you can remove it in the section of the <i>Settings</i> for the <a href="#preferenze.sintesivocale">speech synthesis</a>. The speech synthesis uses the settings of the computer, so if you want to change the voce, speed, or volume, you need to change them in the <i>System Settings</i> (Accessibility section).<br />
+<b>Favorites:</b> adds the current verse in the current text to the favorites. If you don't need it, you can remove the button in the section of the <i>Settings</i> for the <a href="#preferenze.preferiti">favorites</a>. The favorites that are created can be open from <a href="#preferiti">Favorites</a> in the side bar.
+</p>
+
+<h3>How to do Searches</h3>
+<p>The simplest search is for a single word. You can also put several words, to find all the verses that contain all of those words in any order. It is also possible to add other characters to execute more complicated searches:</p>
+<p>The words can also contain the symbols * and ?: * corresponds to any number of letters and ? corresponds to any single letter.</p>
+<p>Since numbers are used to indicate the relationship between the words that are searched for, they cannot be used in words to search for. However, if the number or the word that contains a number is put between signs of less than and greater than (for example, &lt;12000&gt;), you can search for them. This is useful to look for Strongs numbers (for example, &lt;G446&gt;).</p>
+<p>Spaces (apart from those between words) and capital letters are optional.</p>
+<h4>Meaning of the symbols</h4>
+<table>
+<tr><td colspan="2"><b>Between words:</b></td></tr>
+<tr><td>space, 0</td><td>AND</td></tr>
+<tr><td>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</td><td>AND WITHIN: the second word must appear with this number of verses<br />
+SKIP (inside [...]): the maximum number of words that can be skipped in a phrase</td></tr>
+<tr><td>|, !</td><td>OR</td></tr>
+<tr><td>:</td><td>SKIP ANY NUMBER (inside [...]): any number of words can be between the two words</td></tr>
+<tr><td colspan="2"><b>Before a word:</b></td></tr>
+<tr><td>/</td><td>Any word that has this root</td></tr>
+<tr><td>\</td><td>Any word that has the same root as this word</td></tr>
+<tr><td>^, ~</td><td>NOT this word (or words if followed by \ or /; it must follow AND or AND WITHIN)</td></tr>
+<tr><td colspan="2"><b>Around expressions:</b></td></tr>
+<tr><td>(...)</td><td>First find the verses that contain the expression inside the parentheses. They are necessary when the in which the words are analysed (from left to right) is not the desired order.</td></tr>
+<tr><td>[...], "..."</td><td>Find the verses that contain this phrase; that is, these words in this order.</td></tr>
+</table>
+
+<h4>Examples</h4>
+
+<table>
+<tr><td>loved life</td><td>
+The verses that contain the words "loved" and "life"</td></tr>
+<tr><td>loved | life</td><td>
+The verses that contain either the word "loved" or the word "life"</td></tr>
+<tr><td>/love /live</td><td>
+The verses that contain both a word from the root "love" and a word from the root "live"</td></tr>
+<tr><td>\loved \lives</td><td>
+The same as the previous example</td></tr>
+<tr><td>/repent (/forgive|/sin)</td><td>
+The verses that contain a word from the root "repent", and either a word from the root "forgive" or a word from the root "sin"</td></tr>
+<tr><td>/repent /forgive | /sin</td><td>
+The verses that contain both a word from the root "repent" and a word from the root "forgive", or a word from the root "sin" (it is not the same as the previous example</td></tr>
+<tr><td>/forgive 1 /sin</td><td>
+The verses that contain a word from the root "forgive", and in the same verse or in the previous or following verse and word from the root "sin"</td></tr>
+<tr><td>/sin 1 /forgive</td><td>
+The verses that contain a word from the root "sin", and in the same verse or in the previous or following verse and word from the root "forgive" (the verses will be different from those of the previous example, but they will refer to the same pairs of verses)</td></tr>
+<tr><td>/forgive ^ /sin</td><td>
+The verses that contain a word from the root "forgive", but not a word from the root "sin"</td></tr>
+<tr><td>[/forgive 2 /sin]</td><td>
+The verses that contain a word from the root "forgive" and not more than two words later a word from the root "sin"</td></tr>
+<tr><td>[(sin|sins):/forgive]</td><td>
+The verses that contain either the word "sin" or the word "sins", and later in the same verse a word from the root "forgive"</td></tr>
+</table>
+
+<h2 id="preferiti">Favorites</h2>
+<p>All the favorite passages (created by touching the star in the bar at the top of the screen) are listed here. Touch a reference to open the favorite, or the bin to remove it.</p>
+<p>The favorites are shared among all devices (Mac, iPad, iPhone) that have the same Apple account. This means that favorites created on one device appear automatically also on the others.
+</p>
+
+<h2 id="biblioteca">Library</h2>
+<p>All of the Bible translations and all of the commentaries that can be added to the program are listed in the <b>Library</b>. For the texts already installed, you can remove them or see some information about them. For the texts that are not installed, you can download them, hide them so that they are no longer listed in the <b>Library</b>, or see some information about them.</p>
+<p>You can reveal any texts that have been hidden in the <a href="#preferenze.nascosti">Settings</a>.</p>
+
+<h2 id="preferenze">Settings</h2>
+<h3>Bible Text</h3>
+<p>You can choose to show the text as paragraphs (when present in the printed text), with every verse on a new line, or without text and with only the references. You can also decide whether or not to show the section titles of the text.</p>
+
+<h3 id="preferenze.ricerche">Searches</h3>
+<p>You can choose the style to apply to the words that are searched for, and if a hypertext link is added to the verses that are the results of the searches.</p>
+
+<h3>References</h3>
+<p>There are several options for the format, position, and style of the Bible references, and whether the names of the books are used or their abbreviations.</p>
+
+<h3 id="preferenze.sintesivocale">Speech Synthesis</h3>
+<p>The Speech Synthesis function reads the text that is visible on the screen. To start the reading, click the button on the bar in the upper part of the screen.</p>
+<p>If you do not need it, you can hide that button in the <i>Settings</i>.</p>
+<p>Usually, only the visible text is read. However, if you select <i>Automatic Advancing</i>, the reading will continue with the following chapters, until it is stopped.</p>
+<p>The speech synthesis uses the settings of the device, so if you want to change the voce, speed, or volume, you need to change them in the <i>Settings</i> of the device (in the section Accessibility).</p>
+
+<h3 id="preferenze.preferiti">Favorites</h3>
+<p>To have more space in the bar at the top of the screen, you can hide the button of the favorites if you do not use it.</p>
+<p>You can also set if the favorites are always opened in a new tab, or if they should reuse any open tabs with the same text.</p>
+
+<h3 id="preferenze.interfaccia">Interface</h3>
+<p>There are two ways to choose the reference to move the text to: with the book, chapters, and verses in grids or in vertical lists. You can choose which way to show in the upper part of the window, or both ways.</p>
+<p>You can also remove the button for the speech synthesis if you do not need it.</p>
+<p>If <i>Screen always on</i> is selected, the screen will not be turned off after a period without interaction while the app is in the foreground.</p>
+
+<h3>Font</h3>
+<p>You can choose from various fonts to view the text, and also the font size (typing the number or moving the slider). You can also increase or decrease the size of the text with a pinch or magnification gesture in a horizontal direction, but only when the sidebar is not visible.</p>
+
+<h3 id="preferenze.libri">Books</h3>
+<p>You can change the name and the abbreviation that are used for the books of the Bible. The recognised abbreviations are those that can be used to type a reference.</p>
+<p>The buttons <i>Default in Italian</i> and <i>Default in English</i> reset the default names and abbreviations for the books in those languages.</p>
+
+<h3 id="preferenze.versionepreferita">Texts</h3>
+<p>The <i>preferred translation</i> is used to view the link in the hypertext links, from some commentaries and from <a href="#preferenze.ricerche">Context in link</a>.
+<p id="preferenze.nascosti">The button <i>Show hidden texts</i> puts back all the texts that were hidden in the <a href="#biblioteca">Library</a>. It is only visible if there are any hidden texts.</p>
+<p></p>
+<p>Note that in macOS you can change the language of the interface of the app LaParola (only Italian and English). Open <i>System Settings</i>, section <i>General</i>, then <i>Language & Region</i>. In the section <i>Applications</i> click the + button and choose <i>LaParola.app</i> and the language that you want to use. Then click <i>Add</i> to save the changes. If the app is open, it might be necessary to close and reopen it.</p>
+
+<h2 id="guida">Help</h2>
+<p>Opens this text.</p>
+</div></body></html>
