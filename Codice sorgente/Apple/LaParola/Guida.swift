@@ -14,8 +14,13 @@ struct Guida: View {
     @State private var webView: WKWebView? = nil
     
     var body: some View {
+#if os(iOS)
+        WebView(url:costruisciHtml(), anchor:.constant(""), viewModel: viewModel, onSwipe: { _ in })
+            .navigationTitle("Guida")
+        #else
         WebView(url:costruisciHtml(), anchor:.constant(""), viewModel: viewModel)
             .navigationTitle("Guida")
+        #endif
     }
     
     func costruisciHtml() -> String {

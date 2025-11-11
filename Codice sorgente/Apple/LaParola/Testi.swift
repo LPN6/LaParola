@@ -4808,7 +4808,8 @@ public class Texts
             let nomeFontStringa = (!formato.fontNome.isEmpty ? "font-family:" + fontNomeDaUsare + ";" : "");
             
             // dark mode da https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
-            let stile = "<style>body {color: #222;background: #fff;}a {color: #0033cc;}@media(prefers-color-scheme: dark){body {color: #eee;background: #121212;background-color: #121212;}body a {color: #809fff;}}</style>";
+            let stile = "<style>body {color: #222;background: #fff;overflow-x:hidden;max-width:100%;word-wrap:break-word;overflow-wrap:break-word;}a {color: #0033cc;}@media(prefers-color-scheme: dark){body {color: #eee;background: #121212;background-color: #121212;}body a {color: #809fff;}}</style>";
+            // <style>html, body {overflow-x: hidden;max-width: 100%;}</style>
             let script = """
     <script type='text/javascript'>
     function isElementInViewport(el) {

@@ -202,16 +202,26 @@ struct WebView: NSViewRepresentable {
     struct WebView: UIViewControllerRepresentable {
     
     let url: String
-        @State private var lastLoadedHtmlTimestamp: Date = .distantPast
+    @State private var lastLoadedHtmlTimestamp: Date = .distantPast
     @Binding var anchor: String
     @ObservedObject var viewModel: WebViewModel
+    var onSwipe: (CGFloat) -> Void // callback for horinzontal swipe
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self, viewModel: viewModel, anchor: $anchor)
     }
     
         func makeUIViewController(context: Context) -> WebViewController {
-            return WebViewController(url: url, viewModel: viewModel, coordinator: context.coordinator)
+            let controller = WebViewController(url: url, viewModel: viewModel, coordinator: context.coordinator)
+            
+            let swipeGesture = UIPanGestureRecognizer(target: controller, action: #selector(controller.handleHorizontalPan(_:)))
+            swipeGesture.delegate = controller // delegate to filter selection handles
+            controller.webView.addGestureRecognizer(swipeGesture)
+            
+            // Pass the swipe callback
+                   controller.onSwipe = onSwipe
+            
+            return controller
         }
 
         func updateUIViewController(_ webViewController: WebViewController, context: Context) {
@@ -236,7 +246,6 @@ struct WebView: NSViewRepresentable {
             lastLoadedHtmlTimestamp = viewModel.htmlTimestamp
             loadHTMLStringAsync(htmlString: url, baseURL: Bundle.main.resourceURL, webView: webView)
         }
-        //loadHTMLStringAsync(htmlString: url, baseURL: Bundle.main.resourceURL, webView: webView)
     }
     
     func loadHTMLStringAsync(htmlString: String, baseURL: URL?, webView: WKWebView) {
@@ -251,11 +260,12 @@ struct WebView: NSViewRepresentable {
 }
 
 // Create a ViewController to Manage WKWebView
-class WebViewController: UIViewController {
+class WebViewController: UIViewController, UIGestureRecognizerDelegate {
     var webView: WKWebView!
     var viewModel: WebViewModel
     var coordinator: Coordinator
     var lastHTML: String?
+    var onSwipe: ((CGFloat) -> Void)? // callback to SwiftUI
 
     init(url: String, viewModel: WebViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
@@ -264,6 +274,31 @@ class WebViewController: UIViewController {
         setupWebView()
         loadWebPage(url: url)
     }
+    
+    @objc func handleHorizontalPan(_ gesture: UIPanGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        let translation = gesture.translation(in: webView)
+        if abs(translation.x) > abs(translation.y) {
+            onSwipe?(translation.x) // call SwiftUI handler
+        }
+    }
+    
+    // Prevent swipe from triggering when user moves selection handles
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Get the start location of the gesture in the webView
+        let location = gestureRecognizer.location(in: webView)
+        
+        // Find the view under this point
+        if let hitView = webView.hitTest(location, with: nil) {
+            // Ignore gestures that start on the selection handles
+            if String(describing: type(of: hitView)) == "_UITextSelectionHandleView" {
+                return false
+            }
+        }
+        
+        return true
+    }
+
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
@@ -279,6 +314,13 @@ class WebViewController: UIViewController {
         webView = WKWebView()
         webView.navigationDelegate = coordinator
         webView.scrollView.delegate = nil // Disable SwiftUI observer conflict
+        
+        // fully disable horizontal scrolling:
+          webView.scrollView.showsHorizontalScrollIndicator = false
+          webView.scrollView.alwaysBounceHorizontal = false
+          webView.scrollView.bounces = false  // optional: removes elastic bounce
+          webView.scrollView.isScrollEnabled = true // still allows vertical scroll
+
         //viewModel.webView = webView - gives warning, moved to viewDidAppear
         view = webView
     }

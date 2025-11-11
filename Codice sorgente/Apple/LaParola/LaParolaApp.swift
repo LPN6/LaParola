@@ -8,8 +8,6 @@
 import SwiftUI
 import SwiftData
 
-// 
-
 public extension Character {
     func isLetterOrNumber() -> Bool {
         return self.isLetter || self.isNumber

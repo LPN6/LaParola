@@ -295,7 +295,7 @@ struct Preferenze: View {
                     }
                     HStack {
                         Text("Dimensione:")
-                        TextField("", value: $formato.fontDimensione, format: .number) // formatter: NumberFormatter())
+                        TextField("", value: $formato.fontDimensione, format: .number.precision(.fractionLength(0))) // formatter: NumberFormatter())
                             .fixedSize()
 #if os(iOS)
                             .keyboardType(.numberPad)

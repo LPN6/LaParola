@@ -55,6 +55,7 @@ struct TestoView: View {
     @State private var pickerVersettoOld = 0
     //@State private var tvancora = ""
     @State private var spostaTestoConPicker = true
+    @State private var dragStartTime: Date?
     @ObservedObject var viewModel: WebViewModel
     @Binding var selection:Item?
     var item: Item
@@ -64,7 +65,9 @@ struct TestoView: View {
     @Binding var sintesiVocaleAutomatico: Bool
     @StateObject private var tvAlertViewModel = AlertViewModel()
     @Environment(\.colorScheme) var colorScheme
+#if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+#endif
     
     let versioneDaUsare: String
 #if os(macOS)
@@ -115,7 +118,7 @@ struct TestoView: View {
     var body: some View {
         GeometryReader { geometry in
             //ZStack {
-            WebView(url:item.html, anchor:$viewModel.wvmancora, viewModel: viewModel)
+            contentWebView
                 .id(item.htmlTimestamp)
             /*
             .onAppear(perform: {
@@ -143,59 +146,12 @@ struct TestoView: View {
                     ricarica()
                 }
             )
-            .gesture(DragGesture(minimumDistance: 15, coordinateSpace: .local)
-                .onEnded { value in
-                    let horizontalAmount = value.translation.width
-                    let verticalAmount = value.translation.height
-                    
-                    if abs(horizontalAmount) > abs(verticalAmount) {
-                        let s = item.html
-                        let p = s.indexOf("<a id=")
-                        if p > -1 {
-                            let rif8=s[(p+7)..<(p+15)]
-                            var libro:Int = Int(rif8[0..<2]) ?? 0
-                            var cap:Int = Int(rif8[2..<5]) ?? 0
-                            if libro > 0 && cap > 0 {
-                                if horizontalAmount > 0 {
-                                    cap -= 1
-                                    if cap == 0 {
-                                        libro -= 1
-                                        while libro > 0 && ContentView.testi.capitoliInLibro(libro, versioneDaUsare) == 0 {
-                                            libro -= 1
-                                        }
-                                        if libro == 0 {
-                                            libro = 1
-                                            cap = 1
-                                        }
-                                        else {
-                                            cap = Int(ContentView.testi.capitoliInLibro(libro, versioneDaUsare))
-                                        }
-                                    }
-                                }
-                                else {
-                                    cap += 1
-                                    if cap > ContentView.testi.capitoliInLibro(libro, versioneDaUsare) {
-                                        libro += 1
-                                        while libro < 74 && ContentView.testi.capitoliInLibro(libro, versioneDaUsare) == 0 {
-                                            libro += 1
-                                        }
-                                        if libro == 74 {
-                                            libro = 73
-                                            cap = Int(ContentView.testi.capitoliInLibro(libro, versioneDaUsare))
-                                        }
-                                        else {
-                                            cap = 1
-                                        }
-                                    }
-                                }
-                                aggiornaTesto(libro, cap)
-                            }
-                        }
-                        //print(horizontalAmount < 0 ? "left swipe" : "right swipe")
-                    }
-                })
+#if os(macOS)
             .searchable(text: $searchText, placement: .toolbar, prompt: "riferimento o parole")
-            .searchPresentationToolbarBehavior(.avoidHidingContent)
+#else
+            .searchable(text: $searchText, placement: (horizontalSizeClass == .compact ?.navigationBarDrawer(displayMode: .always):.toolbar), prompt: "riferimento o parole")
+#endif
+            .searchPresentationToolbarBehavior(.automatic)
             .onSubmit(of: .search) {
                 searchTextSubmitted = searchText
                 item.espressione = (searchTextSubmitted.isEmpty ? " " : searchTextSubmitted)
@@ -217,10 +173,10 @@ struct TestoView: View {
                      arrowEdge:(horizontalSizeClass == .compact ? .top : .bottom)) {
                 if let riferimento = viewModel.clickedURL {
                     if horizontalSizeClass == .compact { // iPhone
-                        WebView(url:riferimentoURLATesto(riferimento), anchor:.constant(""), viewModel: viewModel)
+                        WebView(url:riferimentoURLATesto(riferimento), anchor:.constant(""), viewModel: viewModel, onSwipe: { _ in } )
                     }
                     else { // iPad
-                        WebView(url:riferimentoURLATesto(riferimento), anchor:.constant(""), viewModel: viewModel)
+                        WebView(url:riferimentoURLATesto(riferimento), anchor:.constant(""), viewModel: viewModel, onSwipe: { _ in } )
                             .frame(width: geometry.size.width / 2, height: geometry.size.height / 2)
                     }
                 }
@@ -354,7 +310,11 @@ struct TestoView: View {
                                          // TOD2 per commentari, se versetto non esiste, va all'inizio del capitolo, forse meglio versetto precedente (basterebbe creare tutti gli anchor dei versetti mancanti e aggiungerli in Versione.swift alla riga testoDelBrano.append("<a id=\""+titoloNota[1..<9]+"\"></a>")
                                          // TOD2 cambiare qui se testo spostato in altri modi; in ricerca cosa visualizzare?
                                          if ContentView.testi.capitoliInLibro(nLibro, versioneDaUsare) > 0 {
+#if os(iOS)
                                              Text(horizontalSizeClass == .compact ? ContentView.testi.formato.libriAbbreviazioniUsate[nLibro] : ContentView.testi.formato.libriNomi[nLibro]).tag(nLibro)
+                                             #else
+                                             Text(ContentView.testi.formato.libriNomi[nLibro]).tag(nLibro)
+                                             #endif
                                          }
                                      }
                                  }
@@ -452,7 +412,61 @@ struct TestoView: View {
              */ // TOD2 could not get it to work, because could not make progressVisibile usable in Item.swift
         }
     }
-    
+
+    @ViewBuilder
+    private var contentWebView: some View {
+#if os(iOS)
+        WebView(url: item.html, anchor: $viewModel.wvmancora, viewModel: viewModel, onSwipe: handleSwipe)
+#else
+        WebView(url: item.html, anchor: $viewModel.wvmancora, viewModel: viewModel)
+#endif
+    }
+
+private func handleSwipe(_ horizontalAmount:CGFloat) {
+    let s = item.html
+    let p = s.indexOf("<a id=")
+    if p > -1 {
+        let rif8=s[(p+7)..<(p+15)]
+        var libro:Int = Int(rif8[0..<2]) ?? 0
+        var cap:Int = Int(rif8[2..<5]) ?? 0
+        if libro > 0 && cap > 0 {
+            if horizontalAmount > 0 {
+                cap -= 1
+                if cap == 0 {
+                    libro -= 1
+                    while libro > 0 && ContentView.testi.capitoliInLibro(libro, versioneDaUsare) == 0 {
+                        libro -= 1
+                    }
+                    if libro == 0 {
+                        libro = 1
+                        cap = 1
+                    }
+                    else {
+                        cap = Int(ContentView.testi.capitoliInLibro(libro, versioneDaUsare))
+                    }
+                }
+            }
+            else {
+                cap += 1
+                if cap > ContentView.testi.capitoliInLibro(libro, versioneDaUsare) {
+                    libro += 1
+                    while libro < 74 && ContentView.testi.capitoliInLibro(libro, versioneDaUsare) == 0 {
+                        libro += 1
+                    }
+                    if libro == 74 {
+                        libro = 73
+                        cap = Int(ContentView.testi.capitoliInLibro(libro, versioneDaUsare))
+                    }
+                    else {
+                        cap = 1
+                    }
+                }
+            }
+            aggiornaTesto(libro, cap)
+        }
+    }
+}
+
     private func aggiungiPreferito() {
         let script = "findFirstVisibleTarget();"
         var risultato = ""
