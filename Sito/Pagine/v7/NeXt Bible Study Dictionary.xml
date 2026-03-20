@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>NeXt Bible Study Dictionary</name>
+<name language="it">NeXt Dizionario di studio biblico</name>
+<description>The word in five Bible encyclopedias</description>
+<description language="it">La parola in cinque dizionari biblici</description>
+<type>word</type>
+<language>en</language>
+<version>7.00.0</version>
+<url>http://net.bible.org/dictionary.php?word={word}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<image>NetBible.jpg</image>
+</link>

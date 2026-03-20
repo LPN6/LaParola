@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<image>
+<file>Viaggi di Paolo.gif</file>
+<collection>Enciclopedia biblica</collection>
+<links>
+<name x1="18" y1="18" x2="97" y2="42">Italia</name>
+<name x1="28" y1="66" x2="91" y2="91">Roma</name>
+<name x1="81" y1="86" x2="190" y2="107">Tre Taverne</name>
+<name x1="85" y1="109" x2="188" y2="130">Foro Appio</name>
+<name x1="51" y1="158" x2="139" y2="180">Pozzuoli</name>
+<name x1="123" y1="306" x2="198" y2="331">Reggio</name>
+<name x1="178" y1="352" x2="258" y2="378">Siracusa</name>
+<name x1="311" y1="6" x2="396" y2="30">Illiria</name>
+<name x1="294" y1="42" x2="392" y2="69">Dalmazia</name>
+<name x1="365" y1="120" x2="497" y2="142">Macedonia</name>
+<name x1="619" y1="118" x2="694" y2="142">Neapolis</name>
+<name x1="556" y1="104" x2="624" y2="126">Filippi</name>
+<name x1="497" y1="124" x2="582" y2="143">Amfipoli</name>
+<name x1="467" y1="140" x2="562" y2="161">Apollonia</name>
+<name x1="411" y1="157" x2="516" y2="176">Tessalonica</name>
+<name x1="455" y1="176" x2="517" y2="196">Berea</name>
+<name x1="447" y1="260" x2="524" y2="283">Acaia</name>
+<name x1="336" y1="251" x2="419" y2="273">Nicopoli</name>
+<name x1="557" y1="291" x2="614" y2="315">Atene</name>
+<name x1="527" y1="315" x2="605" y2="338">Cencrea</name>
+<name x1="459" y1="304" x2="534" y2="330">Corinto</name>
+<name x1="558" y1="160" x2="663" y2="182">Samotracia</name>
+<name x1="665" y1="173" x2="720" y2="195">Troas</name>
+<name x1="704" y1="191" x2="823" y2="212">Adramitto</name>
+<name x1="627" y1="197" x2="679" y2="220">Asso</name>
+<name x1="623" y1="222" x2="703" y2="242">Mitilene</name>
+<name x1="710" y1="210" x2="727" y2="229">Pergamo</name>
+<name x1="743" y1="226" x2="761" y2="251">Tiatiri</name>
+<name x1="716" y1="254" x2="734" y2="276">Smirne</name>
+<name x1="634" y1="262" x2="686" y2="281">Chio</name>
+<name x1="679" y1="285" x2="732" y2="306">Samo</name>
+<name x1="644" y1="312" x2="704" y2="333">Patmos</name>
+<name x1="743" y1="286" x2="800" y2="306">Efeso</name>
+<name x1="744" y1="303" x2="808" y2="326">Mileto</name>
+<name x1="705" y1="334" x2="742" y2="355">Cos</name>
+<name x1="765" y1="334" x2="821" y2="357">Cnido</name>
+<name x1="752" y1="383" x2="806" y2="404">Rodi</name>
+<name x1="769" y1="246" x2="786" y2="269">Sardi</name>
+<name x1="794" y1="251" x2="810" y2="273">Filadelfia</name>
+<name x1="796" y1="281" x2="814" y2="301">Laodicea</name>
+<name x1="830" y1="278" x2="903" y2="299">Colosse</name>
+<name x1="810" y1="258" x2="882" y2="278">Ierapoli</name>
+<name x1="837" y1="236" x2="901" y2="257">Frigia</name>
+<name x1="862" y1="204" x2="948" y2="227">Antiochia</name>
+<name x1="834" y1="179" x2="892" y2="202">Asia</name>
+<name x1="823" y1="96" x2="907" y2="121">Bitinia</name>
+<name x1="916" y1="24" x2="995" y2="46">Ponto</name>
+<name x1="846" y1="316" x2="908" y2="339">Licia</name>
+<name x1="823" y1="350" x2="878" y2="371">Patara</name>
+<name x1="879" y1="368" x2="926" y2="389">Mira</name>
+<name x1="888" y1="292" x2="985" y2="312">Panfilia</name>
+<name x1="926" y1="310" x2="977" y2="333">Perga</name>
+<name x1="906" y1="329" x2="974" y2="349">Attalia</name>
+<name x1="891" y1="258" x2="959" y2="278">Pisidia</name>
+<name x1="922" y1="242" x2="980" y2="261">Iconio</name>
+<name x1="964" y1="219" x2="1050" y2="243">Licaonia</name>
+<name x1="981" y1="254" x2="1033" y2="274">Listra</name>
+<name x1="988" y1="279" x2="1049" y2="302">Derba</name>
+<name x1="945" y1="103" x2="1041" y2="126">Galazia</name>
+<name x1="1073" y1="150" x2="1213" y2="177">Cappadocia</name>
+<name x1="1086" y1="231" x2="1169" y2="257">Cilicia</name>
+<name x1="1057" y1="257" x2="1112" y2="283">Tarso</name>
+<name x1="1176" y1="286" x2="1263" y2="310">Antiochia</name>
+<name x1="1069" y1="307" x2="1151" y2="334">Seleucia</name>
+<name x1="1189" y1="336" x2="1253" y2="361">Siria</name>
+<name x1="1178" y1="391" x2="1260" y2="416">Damasco</name>
+<name x1="1103" y1="415" x2="1167" y2="436">Sidone</name>
+<name x1="1165" y1="447" x2="1209" y2="470">Tiro</name>
+<name x1="1083" y1="519" x2="1159" y2="541">Cesarea</name>
+<name x1="1143" y1="581" x2="1263" y2="602">Gerusalemme</name>
+<name x1="1083" y1="651" x2="1144" y2="700">Rosso</name>
+<name x1="959" y1="588" x2="1064" y2="610">Alessandria</name>
+<name x1="832" y1="714" x2="916" y2="742">Egitto</name>
+<name x1="541" y1="581" x2="609" y2="607">Cirene</name>
+<name x1="497" y1="709" x2="569" y2="734">Libia</name>
+<name x1="87" y1="445" x2="156" y2="471">Malta</name>
+<name x1="287" y1="416" x2="391" y2="468">Adriatico</name>
+<name x1="372" y1="502" x2="435" y2="523">Paolo</name>
+<name x1="577" y1="442" x2="650" y2="464">Creta</name>
+<name x1="550" y1="466" x2="612" y2="487">Fenice</name>
+<name x1="548" y1="492" x2="613" y2="512">Clauda</name>
+<name x1="648" y1="453" x2="697" y2="471">Lasea</name>
+<name x1="646" y1="480" x2="724" y2="501">Beiporti</name>
+<name x1="720" y1="438" x2="799" y2="458">Salmone</name>
+<name x1="903" y1="471" x2="947" y2="491">Asia</name>
+<name x1="825" y1="493" x2="883" y2="516">Efeso</name>
+<name x1="825" y1="519" x2="897" y2="540">Smirne</name>
+<name x1="825" y1="542" x2="908" y2="561">Pergamo</name>
+<name x1="825" y1="564" x2="891" y2="585">Tiatiri</name>
+<name x1="825" y1="590" x2="881" y2="610">Sardi</name>
+<name x1="825" y1="613" x2="915" y2="633">Filadelfia</name>
+<name x1="825" y1="638" x2="911" y2="656">Laodicea</name>
+<name x1="999" y1="406" x2="1065" y2="427">Cipro</name>
+<name x1="953" y1="420" x2="1000" y2="442">Pafo</name>
+<name x1="1080" y1="379" x2="1163" y2="400">Salamina</name>
+<name x1="684" y1="157" x2="742" y2="175">Misia</name>
+</links>
+</image>

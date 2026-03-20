@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Google en-it</name>
+<description>Translate a word or frase from English to Italian</description>
+<description language="it">Traduce una parola o frase dall'inglese all'italiano.</description>
+<type>parola</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://translate.google.com/translate_t?langpair=en%7Cit&amp;text={parola}</url>
+<category>Translation</category>
+<category language="it">Traduzione</category>
+<image>Google.gif</image>
+</link>

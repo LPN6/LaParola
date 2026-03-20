@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Google Books</name>
+<description>Look for a word or words in books</description>
+<description language="it">Cerca una parola o parole in libri</description>
+<type>word</type>
+<version>7.00.0</version>
+<url>http://books.google.com/books?q={word}&amp;as_brr=1</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<image>Google.gif</image>
+</link>

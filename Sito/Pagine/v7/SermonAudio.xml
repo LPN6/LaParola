@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>SermonAudio</name>
+<description>Find sermons on a verse</description>
+<description language="it">Trova prediche su un versetto</description>
+<type>reference</type>
+<version>7.14.0</version>
+<url>http://www.sermonaudio.com/search.asp?keyword={book}&amp;chapter={chapter}&amp;verse={verse}&amp;BibleOnly=true</url>
+<category>Bible Commentary</category>
+<category language="it">Commentario biblico</category>
+<image>SermonAudio.png</image>
+</link>

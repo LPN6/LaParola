@@ -1,0 +1,21 @@
+<html>
+<body>
+<div id="testo"></div>
+<script language="JavaScript" type="text/javascript">
+obj = { "riferimento":"gv3:15-16" , "versione":"Nuova Riveduta"};
+param = JSON.stringify(obj);
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    res = this.responseText.replace("\\n","");
+    res = res.replace(/\\/g, "");
+    res = res.substring(1, res.length-1);
+    document.getElementById("testo").innerHTML = res;
+  }
+};
+//xmlhttp.open("GET", "https://www.laparola.net/js.php?q=" + param, true);
+xmlhttp.open("GET", "http://laparola/js.php?q=" + param, true);
+xmlhttp.send(); 
+</script>
+</body>
+</html>

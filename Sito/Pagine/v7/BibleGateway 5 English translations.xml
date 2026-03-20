@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>BibleGateway</name>
+<description>Shows 5 different English translations</description>
+<description language="it">Visualizza 5 diverse versioni inglesi</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://www.biblegateway.com/passage/?search={book} {chapter}:{verse}&amp;version=9;31;72;45;65;</url>
+<category>Bible Text</category>
+<category language="it">Testo biblico</category>
+</link>

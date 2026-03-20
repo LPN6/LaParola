@@ -1,0 +1,56 @@
+<?
+$descriz = "Guida allo studio della Bibbia: Sommario del Pentateuco";
+$key = "pentateuco,sommario,studio,studio biblico,guida,McGarvey";
+$titolo = "Guida allo studio della Bibbia 4. Sommario del Pentateuco";
+$sezione = "Articoli";
+$sezioneurl = "/intro/";
+require("../capo.php");
+include("../funzioni.php");
+?>
+<h1><a href="guida_studio_bibbia.php">Guida allo studio della Bibbia</a></h1>
+
+<h2>4. Sommario del Pentateuco</h2>
+<h3>1. Genesi</h3>
+<p>
+&Egrave; interessante che molti dei titoli dei libri ebraici sono parole greche. Questo &egrave; perch&eacute; gli ebrei antichi non davano titoli ai loro libri, ma quando furono tradotti in greco, i traduttori, secondo il costume della lingua, diedero ad essi dei titoli. Il titolo Genesi (creazione) fu dato al primo libro, perch&eacute; inizia con un racconto della creazione.
+</p><p>
+Iniziando con un breve racconto della creazione, la prima parte di questo libro parla di pochi eventi nella storia dell'umanit&agrave; fino alla nascita di Abraamo. Questa sezione include i primi 11 capitoli. Gli eventi che racconta hanno a che fare principalmente con la sempre maggiore malvagit&agrave; dell'umanit&agrave;, che fu la causa della distruzione di tutti, tranne la famiglia di No&egrave;, da parte di Dio in un diluvio. Dopo il racconto del diluvio c'&egrave; un racconto molto breve della crescita e diffusione dei discendenti di No&egrave;, e della loro dispersione come nazioni diverse tramite la confusione delle lingue. Durante questo breve racconto, troviamo due genealogie - quella di No&egrave;, che va fino ad Adamo, e quella di Abraamo, che va fino a No&egrave;; cos&igrave; sappiamo gli antenati di Abraamo fino ad Adamo. Alla fine del capitolo 11 la narrativa cambia da una storia generale dell'uomo, ad una biografia di un unico uomo. Questa biografia di un uomo, che visse per 175 anni, occupa pi&ugrave; del 50% dello spazio che tutta la storia precedente dell'umanit&agrave;. Scopriamo quindi che il tema principale dell'autore &egrave; il suo racconto di Abraamo, e che la parte precedente era principalmente un'introduzione a questo.
+</p><p>
+La storia di Abraamo contiene molte cose interessanti e edificanti; va studiata collegandola con i molti riferimenti ad essa nel Nuovo Testamento, che sono indicati in qualsiasi Bibbia di studio. Ma l'interesse principale dell'autore di Genesi sono certe promesse fattegli da Dio. Una era che Dio avrebbe dato a lui e alla sua discendenza la terra di Canaan, in cui a quel tempo abitava come straniero; un'altra era che la sua discendenza sarebbe stata numerosa quanto le stelle del cielo o la sabbia della spiaggia; un'altra che in lui e nella sua discendenza tutte le nazioni della terra sarebbero state benedette. Collegato alla seconda promessa era il comando di circoncidere tutti i maschi nati nella sua casa, o comprati con il suo denaro, e Dio gli disse che questo ordine andava osservato dalla sua discendenza per sempre. Questo rito serviva per distinguere la sua discendenza dagli altri popoli, affinch&eacute; si vedesse nelle generazioni future che le promesse di Dio si erano adempiute. Queste promesse guardavano in avanti, e l'autore pensava ad esse mentre scriveva il resto di questo e gli altri libri del Pentateuco.
+</p><p>
+Riguardo alla prima di queste promesse, Dio disse ad Abraamo che prima che la sua discendenza avrebbe posseduto il paese promesso, sarebbe stata in schiavit&ugrave; in un paese straniero per 400 anni, ma che sarebbe uscita come una grande nazione, per poi prendere possesso di Canaan. Il resto del libro racconta i diversi avvenimenti della vita dei suoi discendenti, molti di cui molto interessanti, fino a quando suo nipote, con una famiglia di 86 discendenti, viene portato da una serie di eventi provvidenziali in Egitto, dove abit&ograve; in preparazione per l'adempimento della profezia menzionata. Il libro chiude con la morte di Giuseppe, l'undicesimo figlio di Giacobbe, tramite cui la famiglia era stata portata in Egitto, e che morendo parl&ograve; del ritorno promesso in Canaan, e incaric&ograve; la sua famiglia di portare le sue ossa con loro per una sepoltura in quel paese.
+</p><p>
+Uno sguardo indietro mostrer&agrave; adesso al lettore che lo scopo principale dell'autore della Genesi era di raccontare la storia della famiglia di Abraamo fino all'emigrazione in Egitto; il racconto precedente della storia del mondo intero era preparatorio a questo; e tutto ci&ograve; era preparatorio ad un racconto futuro dell'adempimento delle profezie e promesse fatte ad Abraamo.
+</p><p>
+Troviamo che l'autore racconta in questo libro breve quasi 2500 anni della storia del mondo; eppure il libro, se stampato da solo, sarebbe solo un piccolo libretto.
+</p>
+<h3>2. Esodo</h3>
+<p>
+Questo libro si chiama Esodo (uscita) perch&eacute; un evento prominente &egrave; la partita di Israele dall'Egitto. Il nome, come Genesi, &egrave; greco. Il libro &egrave; diviso in tre parti diverse. La prima racconta come gli Ebrei, che erano stati accolti dal re d'Egitto, furono assoggettati come schiavi, e poi come, sotto la leadership di Mos&egrave;, furono liberati dopo aver abitato in Egitto per 430 anni. Quasi tutto il mondo di allora era caduto nell'idolatria, e il metodo scelto da Dio per la liberazione Israele aveva lo scopo di farsi conoscere di nuovo dagli Egiziani e dalle altre nazioni; in questo modo anche il suo popolo l'avrebbe conosciuto molto meglio. Mos&egrave; era il primo missionario dei pagani. La seconda parte del libro mostra il modo meraviglioso in cui Dio sostenne il popolo nel deserto, come lo guid&ograve; al monte Sinai, come entr&ograve; in quel luogo in un patto con loro, e diede loro delle leggi, civili e religiose, per governarli come nazione. La terza parte descrive un tabernacolo, o luogo di adorazione, che fece costruire loro, e che poteva essere facilmente trasportato con loro in tutti i loro viaggi. Con questi eventi fu adempiuta la promessa ad Abraamo, "Io giudicher&ograve; la nazione di cui saranno stati servi e, dopo questo, se ne partiranno con grandi ricchezze" (Genesi 15:14); l'adempimento delle diverse promesse ad Abraamo sono il filo conduttore che percorre tutta la storia del suo popolo.
+</p>
+<h3>3. Levitico</h3>
+<p>
+Questo libro contiene un codice di leggi, che regolavano i sacrifici e purificazioni che facevano parte dell'adorazione al santuario, con alcuni precetti etici per coltivare santit&agrave; e giustizia fra il popolo. Siccome questi riti erano amministrati dai sacerdoti, i figli di Aaronne ed altri Leviti, il libro fu chiamato dai traduttori greci, Levitico.
+</p>
+<h3>4. Numeri</h3>
+<p>
+Questo nome &egrave; stato dato perch&eacute; racconta due volte l'enumerazione di Israele, come comandato da Dio - la prima volta vicino all'inizio del libro, la seconda volta verso la fine. Il libro narra i viaggi ed altre esperienze di Israele, durante il periodo di circa 38 anni in cui girarono dal monte Sinai fino alla riva orientale del fiume Giordano, da cui entrarono finalmente in Canaan. Molte delle loro esperienze furono molto eccitanti, rendendo il libro molto interessante. Durante questi eventi, molte nuove leggi furono promulgate. Dio le aveva riservate per darle con gli eventi che le richiedevano. Fu un periodo di disciplina divina, durante cui tutta la generazione di adulti che attraversarono il mar Rosso (tranne due) per&igrave;, e una nuova generazione fu insegnata e formata dal Signore. Ci si poteva aspettare che questa avrebbe servito Dio nella loro nuova casa pi&ugrave; fedelmente che i loro padri. Addirittura Mos&egrave; e Aaronne morirono nel deserto. Dio allora, secondo la promessa ad Abraamo, li aveva liberati dalla loro schiavit&ugrave; in Egitto e giudicato quella nazione.
+</p>
+<h3>5. Deuteronomio</h3>
+<p>
+Questo nome la seconda legge. Fu dato perch&eacute; i traduttori greci trovarono in esso una ripetizione di alcune leggi gi&agrave; date, e la promulgazione di alcune nuove leggi. La parte principale del libro &egrave; composta da tre discorsi di Mos&egrave; nella pianura di Moab di fronte a Gerico, iniziando dal primo giorno dell'undicesimo mese del quarantesimo anno, cio&egrave; due mesi prima della fine dei quaranta anni dall'uscita dall'Egitto (Deuteronomio 1:3). Il primo discorso, in Deuteronomio 1:6-4:40, potrebbe essere chiamato un sermone storico, perch&eacute; narra tutti gli eventi principali dei precedenti 40 anni, con lezioni pratiche e esortazioni tratte da essi. &Egrave; un ottimo esemplare di quel genere di predicazione, e dovrebbe essere studiato come tale dai predicatori odierni.
+</p><p>
+Il discorso &egrave; seguito da una breve spiegazione delle citt&agrave; di rifugio all'est del Giordano, e questo d&agrave; un'introduzione al secondo discorso. Questo secondo discorso va dal quinto al ventisettesimo capitolo. Nel discorso Mos&egrave; ripeta molte delle leggi che erano state date negli anni nel deserto, partendo dai 10 comandamenti, aggiunge alcuni nuovi statuti, e calorosamente esorta il popolo ad osservarli tutti e insegnarli diligentemente ai loro figli. In questo discorso, pi&ugrave; che in qualsiasi altra parte del Pentateuco, c'&egrave; un costante appello ad amare Dio come la primaria motivazione per l'ubbidienza, e questa ragione di amore &egrave; vista nella continua bont&agrave; di Dio verso Israele.
+</p><p>
+Il terzo discorso, che inizia al ventisettesimo capitolo e si conclude con il trentesimo, &egrave; profetico. Proclama un elenco lungo e spaventoso di maledizioni che sarebbero cadute sul popolo se avesse lasciato il servizio di Yahweh, e delle benedizioni se fosse stato fedele a lui.
+Gli ultimi quattro capitoli parlano dell'annuncio imminente di Mos&egrave; e di come Giosu&egrave; fu incaricato come suo successore, descrivono come Mos&egrave; chiese ai Leviti di scrivere e preservare la legge, contengono due poemi, raccontano la morte di Mos&egrave;, e hanno alcuni commenti da uno scrittore posteriore alla sua vita.
+</p><p>
+Questi discorsi e poemi, come l'esortazione che conclude una lunga predica, porta il Pentateuco ad una conclusione adatta, perch&eacute; raccolgono e portano al cuore del lettore tutta la potenza morale della storia da Adamo fino a Mos&egrave;, esaltando il nome di Yahweh e riempiendo i cuori del suo popolo con gratitudine. Era cos&igrave; soprattutto con gli Israeliti, che avevano visto nel passato la rivelazione dei propositi di Dio verso di loro come aveva dichiarato nelle sue promesse al loro antenato Abraamo. Quando Mos&egrave; li lasci&ograve;, non avevano niente tranne il fiume Giordano fra loro e la terra promessa a cui Dio, dopo molti secoli, li port&ograve; in adempimento della sua parola. L'insegnamento di quell'adempimento costituisce l'unit&agrave; del Pentateuco.
+</p><p>
+Il periodo raccontato dal Pentateuco, secondo le cifre nelle sue pagine, &egrave; 2760 anni. Questo &egrave; quasi il doppio del periodo racconto da tutto il resto della Bibbia.
+</p>
+<p><a href="guida_domande.php#4">Domande di ripasso</a></p>
+<p>Continua: <a href="storia_israele_mose_davide.php">5. La storia di Israele dalla morte di Mos&egrave; a quella di Davide</a></p>
+<?
+require("../piede.php");
+?>

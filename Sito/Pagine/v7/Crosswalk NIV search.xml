@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Crosswalk NIV search</name>
+<name language="it">Crosswalk NIV ricerca</name>
+<description>Searches a word in the NIV</description>
+<description language="it">Cerca una parola nella NIV</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://bible.crosswalk.com/OnlineStudyBible/bible.cgi?word={word}&amp;version=niv&amp;showtools=1</url>
+<category>Bible Search</category>
+<category language="it">Ricerca biblica</category>
+<image>Crosswalk.gif</image>
+</link>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Dictionary</name>
+<name language="it">Dizionario</name>
+<description>The definition of a word</description>
+<description language="it">La definizione di una parola inglese</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://www.dictionary.com/search?q={word}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<image>Dictionary.gif</image>
+<shortcut>Ctrl+Alt+D</shortcut>
+</link>

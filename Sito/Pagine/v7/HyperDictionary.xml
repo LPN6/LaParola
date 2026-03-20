@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>HyperDictionary</name>
+<description>The definition of a word</description>
+<description language="it">La definizione di una parola inglese</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://www.hyperdictionary.com/search.aspx?define={word}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+</link>

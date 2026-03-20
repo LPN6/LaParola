@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>LaParola</name>
+<description>Some definitions of a word and how often it is used</description>
+<description language="it">Alcune definizioni di una parola e quante volte è usata</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>el</language>
+<url>http://www.laparola.net/greco/parola.php?p={wordlc}</url>
+<category>Greek Words</category>
+<category language="it">Parole greche</category>
+<image>LaParola.gif</image>
+</link>

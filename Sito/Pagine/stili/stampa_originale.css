@@ -1,0 +1,33 @@
+body {
+font-family: Times New Roman, serif;
+background: white;
+color: #000000;
+}
+p {
+font-size: 12pt;
+}
+code {
+font-size: 12pt;
+}
+td {
+font-size: 12pt;
+}
+li {
+font-size: 12pt;
+}
+.piccolo {
+font-size: 10pt;
+}
+.normale {
+font-size: 12pt;
+}
+.greco {
+font-family: Greek;
+font-size: 12pt;
+}
+
+.menu {display: none;}
+
+a:link, a:visited {background: white; color: #520; text-decoration: underline; font-weight: bold;}
+
+a[href^="/"]:after {content: " (http://www.laparola.net" attr(href) ") ";}

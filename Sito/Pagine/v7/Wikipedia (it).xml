@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Wikipedia</name>
+<description>The Italian word in the Wikipedia Encyclopedia</description>
+<description language="it">La parola italiana nell'enciclopedia Wikipedia</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>it</language>
+<url>http://it.wikipedia.org/wiki/{parola}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<image>Wikipedia.gif</image>
+</link>

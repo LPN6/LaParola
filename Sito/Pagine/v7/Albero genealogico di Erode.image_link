@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<image>
+<file>Albero genealogico di Erode.gif</file>
+<collection>Enciclopedia biblica</collection>
+<links>
+<name x1="354" y1="6" x2="495" y2="30">Erode</name>
+<name x1="306" y1="65" x2="387" y2="91">Archelao</name>
+<name x1="401" y1="65" x2="477" y2="91">Tetrarca</name>
+<name x1="487" y1="65" x2="629" y2="91">Filippo</name>
+<name x1="55" y1="128" x2="184" y2="157">Erode</name>
+<name x1="331" y1="128" x2="419" y2="157">Erodiade</name>
+<name x1="1" y1="195" x2="74" y2="221">Agrippa</name>
+<name x1="77" y1="195" x2="154" y2="221">Berenice</name>
+<name x1="155" y1="195" x2="227" y2="221">Drusilla</name>
+<name x1="260" y1="195" x2="318" y2="221">Felice</name>
+<name x1="344" y1="195" x2="416" y2="221">Erodiade</name>
+</links>
+</image>

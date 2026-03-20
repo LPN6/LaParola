@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>SermonCentral</name>
+<description>Find sermons on a verse</description>
+<description language="it">Trova prediche su un versetto</description>
+<type>reference</type>
+<version>7.14.0</version>
+<url>http://www.sermoncentral.com/Sermons/SearchResults.asp?ScriptureBookA={book}&amp;ScriptureVerse={chapter}:{verse}&amp;TopicID=0&amp;since=0&amp;IsOutline=2&amp;Category=2&amp;AdvancedSearch=1&amp;Submitted=1</url>
+<category>Bible Commentary</category>
+<category language="it">Commentario biblico</category>
+</link>

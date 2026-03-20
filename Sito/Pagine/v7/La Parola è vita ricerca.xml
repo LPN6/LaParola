@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<link>
+<name>La Parola è vita search</name>
+<name language="it">La Parola è vita ricerca</name>
+<description>Search for a word in this Italian translation</description>
+<description language="it">Ricerca una parola in questa versione</description>
+<type>parola</type>
+<version>7.00.0</version>
+<language>it</language>
+<url>http://www.biblegateway.com/keyword/?search={parola}&amp;version1=34&amp;searchtype=all&amp;wholewordsonly=yes</url>
+<category>Bible Search</category>
+<category language="it">Ricerca biblica</category>
+</link>

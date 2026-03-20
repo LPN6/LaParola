@@ -1,0 +1,30 @@
+<?
+include("../../conn.php");
+include("../../vistesto.php");
+
+$descriz = "Confinato ma coraggioso (Genesi 40)";
+$key = "Confinato ma coraggioso,Genesi 40,giuseppe,genesi,riflessioni";
+$titolo = "Confinato ma coraggioso (Genesi 40)";
+$sezione = "Strumenti";
+require("../../capo.php");
+?>
+<h1>Confinato ma coraggioso (Genesi 40)</h1>
+<p>Anche se Giuseppe sub&igrave; diversi disfatti finora, in questo capitolo (e i due anni che passano da questo capitolo al successivo) sub&igrave; un lungo periodo di sofferenza nella prigione. In questo studio vedremo diverse caratteristiche dell'atteggiamento di Giuseppe in questo tempo di difficolt&agrave; nella sia vita.</p>
+<p>Sappiamo dalla letteratura antica che il coppiere era quello che provava le bevande del re, per controllare che fossero buone e non avvelenate. Siccome doveva essere un uomo fidato dal re, spesso era vicino al re e un suo consigliere, che vediamo di Neemia e del re Artaserse (Ne 1:10-2:8). L'ufficio di panettiere del re, invece, non &egrave; menzionato, ma si pu&ograve; supporre che fosse qualcuno che preparava oppure assaggiava il cibo. Quando la Bibbia dice, quindi, che il coppiere e il panettiere offesero il faraone, che si indign&ograve; contro di loro, &egrave; possibile che il faraone si sia sentito male dopo un pasto e non sapeva a chi dare la colpa. Mentre si fecero ulteriori indagini, i due ufficiali erano rinchiusi.</p>
+<p>Per&ograve;, non furono mandati ad una prigione comune, erano troppo importanti e forse solo in custodia preventiva mentre il caso era esaminato. Furono mandati invece in un carcere (che potrebbe voler dire solo uno spazio chiuso) nella casa del capo delle guardie (Gen 40:3), che era Potifar (Gen 39:1). Anche Potifar aveva messo Giuseppe nella prigione (Gen 40:3), nel luogo dove si tenevano chiusi i carcerati del re (Gen 39:20), non una prigione per tutti i criminali. Anche se Giuseppe era ancora uno schiavo, gestiva lui la prigione (Gen 39:22-23) e cos&igrave; sorvegliava questi due ufficiali importanti, anche se voleva dire che li serviva (Gen 40:4).</p>
+<p>Tutti e due i prigionieri ebbero un sogno, e Giuseppe, che li serviva, cap&igrave; che erano turbati (Gen 40:6-7). I sogni di Giuseppe erano la causa dei suoi guai; i sogni degli altri saranno la sua liberazione.</p>
+<p><i>Cosa ci dice la risposta di Giuseppe riguardo al modo in cui viveva la sua prigionia? (Gen 40:8)</i></p>
+<p>Non aveva dimenticato Dio. Sapeva che solo Dio poteva interpretare i sogni (anche Gen 41:16). Ma sapeva anche di essere in un rapporto cos&igrave; stretto con Dio che Dio gli dava l'interpretazione che poi avrebbe dato agli altri. Non provava n&eacute; risentimento n&eacute; rancore nei confronti di Dio.</p>
+<p><i>Nella spiegazione del sogno del capo dei coppieri, c'&egrave; una delle poche riflessioni da parte di Giuseppe sulla sua situazione (Gen 40:14-15). Che cosa dice?</i></p>
+<p>Che non meritava quello che subiva: fu portato via di nascosto (e non, come molti schiavi, venduto a causa dei propri debiti) e che era innocente del crimine per cui fu messo in prigione. Confess&ograve; anche di essere un ebreo, e chiese al coppiere di farlo uscire.</p>
+<p>Credere nella provvidenza di Dio e nella sovranit&agrave; di Dio non le confonde con l'approvazione di Dio della situazione attuale n&eacute; con un fatalismo senza Dio. Giuseppe sapeva che la sua prigionia era per la volont&agrave; di Dio (riteneva ancora che Dio era supremo, perch&eacute; l'unico a interpretare i sogni) ma che era ingiusto dal punto di vista umano ed era giusto cercare di uscirne. Anche per noi nella sofferenza non dobbiamo rassegnarci all'ingiustizia, essendo passivi e affermando che "cos&igrave; sia". Certo, dobbiamo stare fermi e pazienti sapendo che &egrave; sotto il controllo di Dio, ma possiamo anche combattere contro l'ingiustizia dichiarando che non &egrave; giusto e cercando di uscirne. Perch&eacute; non sappiamo per quanto tempo le difficult&agrave; rimarranno nella volont&agrave; sovrana di Dio.</p>
+<p>Giuseppe sapeva la differenza fra quello che &egrave; e quello che deve essere. Aveva fiducia nella bont&agrave; del Dio sovrano, e anche combatteva il male che succedeva nel mondo caduto.</p>
+ 
+<p>Giuseppe poi rimase nella prigione per altri due anni (Gen 41:1). Si potrebbe creare una spiegazione per cui Giuseppe doveva finire in prigione; era un modo per un ebreo diventare il primo ministro del faraone, per essere poi in grado di salvare la sua famiglia (il popolo di Dio) durante la carestia. &Egrave; pi&ugrave; difficile dare una spiegazione perch&eacute; doveva aspettare in prigione per due anni. Non poteva Dio semplicemente fare in modo che i suoi fratelli lo vendessero come schiavo due anni pi&ugrave; tardi, affinch&eacute; Giuseppe fosse in prigione per poco quando faraone ebbe il suo sogno? Fa ricordare la prigionia di Paolo, che era un modo per portarlo a Roma, che era la volont&agrave; di Dio (At 23:11) e il desiderio di Paolo (Rom 15:24,28-29). In quel caso, perch&eacute; ci furono i due anni in prigione (At 24:27)? Il motivo umano era perch&eacute; Felice voleva un tangente (At 24:25), e dal punto di vista umano erano anni sprecati. Se fosse libero, Paolo avrebbe potuto predicare per altri due anni, e poi Dio avrebbe potuto farlo arrestare poco prima di quando doveva comparire davanti a Cesare. Comunque, anche Paolo us&ograve; i mezzi disponibili per cercare di uscirne (At 25:10-12).</p>
+<p>La risposta &egrave; che non lo sappiamo e non lo possiamo sapere. Nelle lunghe stagioni di difficolt&agrave;, possiamo solo continuare ad affermare come Dio &egrave; sovrano (come Giuseppe, che afferm&ograve; che solo lui interpretava i sogni) e rimanere in un buon rapporto con lui. Allo stesso tempo, non dobbiamo arrenderci al fatalismo n&eacute; credere che sia (necessariamente) un segno del disfavore divino. Invece dobbiamo dichiarare che &egrave; ingiusto e cercare il modo per uscirne.</p>
+
+<?
+$n=3;
+require("indice.php");
+require("../../piede.php");
+?>

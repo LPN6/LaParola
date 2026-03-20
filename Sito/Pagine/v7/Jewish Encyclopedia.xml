@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Jewish Encyclopedia</name>
+<name language="it">Enciclopedia giudaica</name>
+<description>The word in the Jewish Encyclopedia</description>
+<description language="it">La parola nell'enciclopedia giudaica</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://www.jewishencyclopedia.com/search_results.jsp?searchType=1&amp;pageNum=1&amp;search={word}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+</link>

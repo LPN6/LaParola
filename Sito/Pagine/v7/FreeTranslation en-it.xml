@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>FreeTranslation en-it</name>
+<description>Translates a word or phrase from English to Italian</description>
+<description language="it">Traduce una parola o frase dall'inglese all'italiano</description>
+<type>parola</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://ets.freetranslation.com/?sequence=core&amp;mode=html&amp;charset=UTF-8&amp;template=results_en-us.htm&amp;language=English/Italian&amp;srctext={parola}</url>
+<category>Translation</category>
+<category language="it">Traduzione</category>
+<image>FreeTranslation.gif</image>
+</link>

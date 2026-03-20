@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<link>
+<name>Notepad</name>
+<name language="it">Blocco note</name>
+<description>Shows a file in Notepad, when the name of the file is selected text</description>
+<description language="it">Visualizza un file in blocco note, quando il nome del file è selezionato</description>
+<type>parola</type>
+<version>7.00.0</version>
+<url>notepad</url>
+<parameters>{parola}</parameters>
+<image>Notepad.gif</image>
+<category>Computer</category>
+<category language="it">Computer locale</category>
+</link>

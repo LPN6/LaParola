@@ -1,0 +1,1981 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<readings>
+<name>Liturgical Calendar 2005</name>
+<name language="it">Calendario liturgico 2005</name>
+<version>7.00.0</version>
+<reading>
+<text>4 6:2-27</text>
+<text>23 67:2-8</text>
+<text>55 4:4-7</text>
+<text>49 2:16-21</text>
+</reading>
+<reading>
+<text>79 24:1-12</text>
+<text>23 147:12-20</text>
+<text>56 1:3-18</text>
+<text>50 1:1-18</text>
+</reading>
+<reading>
+<text>69 2:29-3:6</text>
+<text>23 98:1-6</text>
+<text>50 1:29-34</text>
+</reading>
+<reading>
+<text>69 3:7-10</text>
+<text>23 98:1.7-9</text>
+<text>50 1:35-42</text>
+</reading>
+<reading>
+<text>69 3:11-21</text>
+<text>23 100:2-5</text>
+<text>50 1:43-51</text>
+</reading>
+<reading>
+<text>29 60:1-6</text>
+<text>23 72:1-13</text>
+<text>56 3:2-5 6</text>
+<text>47 2:1-12</text>
+</reading>
+<reading>
+<text>69 3:22-4:6</text>
+<text>23 3:7-11</text>
+<text>47 4:12-25</text>
+</reading>
+<reading>
+<text>69 4:7-10</text>
+<text>23 72:1-8</text>
+<text>48 6:34-44</text>
+</reading>
+<reading>
+<text>29 42:1-7</text>
+<text>23 29:1-l0</text>
+<text>51 10:34-38</text>
+<text>47 3:13</text>
+</reading>
+<reading>
+<text>65 1:1-6</text>
+<text>23 97:1-9</text>
+<text>48 1:14-20</text>
+</reading>
+<reading>
+<text>65 2:5-12</text>
+<text>23 9:2-9</text>
+<text>48 1:21-28</text>
+</reading>
+<reading>
+<text>65 2:14-18</text>
+<text>23 105:1-9</text>
+<text>48 1:29-39</text>
+</reading>
+<reading>
+<text>65 3:7-14</text>
+<text>23 95:6-11</text>
+<text>48 1:40-45</text>
+</reading>
+<reading>
+<text>65 4:1-11</text>
+<text>23 78:3-8</text>
+<text>48 2:1-12</text>
+</reading>
+<reading>
+<text>65 4:12-16</text>
+<text>23 19:8-15</text>
+<text>48 2:13-17</text>
+</reading>
+<reading>
+<text>29 49:3.5-6</text>
+<text>23 40:2-10</text>
+<text>53 1:1-3</text>
+<text>50 1:29-34</text>
+</reading>
+<reading>
+<text>65 5:1-10</text>
+<text>23 110:1-4</text>
+<text>48 2:18-22</text>
+</reading>
+<reading>
+<text>65 6:10-20</text>
+<text>23 111:1-10</text>
+<text>48 223-28</text>
+</reading>
+<reading>
+<text>65 7:1-17</text>
+<text>23 110:1-4</text>
+<text>48 3:1-6</text>
+</reading>
+<reading>
+<text>65 7:25-8:6</text>
+<text>23 40:7-17</text>
+<text>48 3:7-12</text>
+</reading>
+<reading>
+<text>65 8:6-13</text>
+<text>23 85:8-14</text>
+<text>48 3:13-19</text>
+</reading>
+<reading>
+<text>65 9:2-3:11-14</text>
+<text>23 47:2-9</text>
+<text>48 3:20-21</text>
+</reading>
+<reading>
+<text>29 8:23-9:3</text>
+<text>23 27:1-14</text>
+<text>53 1:10-17</text>
+<text>47 4:12-23</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>65 9:15.24-28</text>
+<text>23 98:1-6</text>
+<text>48 3:22-30</text>
+</reading>
+<reading>
+<text>51 22:3-16</text>
+<text>23 117:1-2</text>
+<text>48 16:15-18</text>
+</reading>
+<reading>
+<text>62 1:1-8</text>
+<text>23 89:2-27</text>
+<text>49 22:24-30</text>
+</reading>
+<reading>
+<text>65 10:19-25</text>
+<text>23 24:1-6</text>
+<text>48 4:21-25</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>65 10:32-39</text>
+<text>23 37:3-40</text>
+<text>48 4:26-34</text>
+</reading>
+<reading>
+<text>65 11:1-19</text>
+<text>49 1:68-75</text>
+<text>48 4:35-41</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>43 2:3</text>
+<text>3</text>
+<text>23 146:7-10</text>
+<text>53 1:26-31</text>
+<text>47 5:1-12</text>
+</reading>
+<reading>
+<text>65 11:32-40</text>
+<text>23 31:20-24</text>
+<text>48 5:1-20</text>
+</reading>
+<reading>
+<text>65 12.1-4</text>
+<text>23 22:26-32</text>
+<text>48 5:21-43</text>
+</reading>
+<reading>
+<text>46 3:1-4</text>
+<text>23 24:7-10</text>
+<text>49 2:22-40</text>
+</reading>
+<reading>
+<text>65 12:18-24</text>
+<text>23 48:2-11</text>
+<text>48 6:7-13</text>
+</reading>
+<reading>
+<text>65 13:1-8</text>
+<text>23 27:1-5.8-9</text>
+<text>48 6:14-29</text>
+</reading>
+<reading>
+<text>65 13:15-21</text>
+<text>23 23:2-6</text>
+<text>48 6:30-34</text>
+</reading>
+<reading>
+<text>29 58:7-10</text>
+<text>23 112:4-9</text>
+<text>53 2:1-5</text>
+<text>47 5:13-16</text>
+</reading>
+<reading>
+<text>1 1:1-19</text>
+<text>23 104:l-35</text>
+<text>48 6:53-56</text>
+</reading>
+<reading>
+<text>1 1:20-2:4</text>
+<text>23 9:2.4-9</text>
+<text>48 7:1-13</text>
+</reading>
+<reading>
+<text>36 2:12-18</text>
+<text>23 51:3-17</text>
+<text>54 5:20-6:2</text>
+<text>47 6:1-18</text>
+</reading>
+<reading>
+<text>5 30:15-20</text>
+<text>23 2:1-6</text>
+<text>49 9:22-25</text>
+</reading>
+<reading>
+<text>29 58:1-9</text>
+<text>23 51:3-19</text>
+<text>47 9:14-15</text>
+</reading>
+<reading>
+<text>29 58:9-14</text>
+<text>23 86:1-6</text>
+<text>49 5:27-32</text>
+</reading>
+<reading>
+<text>1 2:7-3:7</text>
+<text>23 51:3-17</text>
+<text>52 5:12-19</text>
+<text>47 4:1-11</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>29 52:7-10</text>
+<text>23 96:1-10</text>
+<text>48 16:15-20</text>
+</reading>
+<reading>
+<text>29 55:10-11</text>
+<text>23 34:4-19</text>
+<text>47 6:7-15</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>39 3:1-10</text>
+<text>23 51:3-19</text>
+<text>49 11:29-32</text>
+</reading>
+<reading>
+<text>19 4:1.3-14</text>
+<text>23 138:1-8</text>
+<text>47 7:7-12</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>33 18:21-28</text>
+<text>23 130:1-8</text>
+<text>47 5:20-26</text>
+</reading>
+<reading>
+<text>5 26:16-19</text>
+<text>23 119:1-8</text>
+<text>47 5:43-48</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>1 12:1-4</text>
+<text>23 33:4-22</text>
+<text>62 l:8-10</text>
+<text>47 17:1-9</text>
+</reading>
+<reading>
+<text>34 9:4-10</text>
+<text>23 79:8-13</text>
+<text>49 6:36-38</text>
+</reading>
+<reading>
+<text>67 5:1-4</text>
+<text>23 23:2-6</text>
+<text>47 16:13-19</text>
+</reading>
+<reading>
+<text>30 18:18-20</text>
+<text>23 31:5-16</text>
+<text>47 20:17-28</text>
+</reading>
+<reading>
+<text>30 17:5-10</text>
+<text>23 2:1-6</text>
+<text>49 16:19-31</text>
+</reading>
+<reading>
+<text>1 37:3-28</text>
+<text>23 102:16-21</text>
+<text>47 21:33-45</text>
+</reading>
+<reading>
+<text>40 7:14-20</text>
+<text>23 103:1-12</text>
+<text>49 15:1-32</text>
+</reading>
+<reading>
+<text>2 17:3-7</text>
+<text>23 95:1-9</text>
+<text>52 5:1-8</text>
+<text>50 4:5-42</text>
+</reading>
+<reading>
+<text>12 5:1-15</text>
+<text>23 42:2-3</text>
+<text>23 42:3-4</text>
+<text>49 4:24-30</text>
+</reading>
+<reading>
+<text>34 3:25-43</text>
+<text>23 25:4-9</text>
+<text>47 l8:21-35</text>
+</reading>
+<reading>
+<text>5 4:1.5-9</text>
+<text>23 148:12-20</text>
+<text>47 5:17-19</text>
+</reading>
+<reading>
+<text>30 7:23-28</text>
+<text>23 95:1-9</text>
+<text>49 11:14-23</text>
+</reading>
+<reading>
+<text>35 14:2-10</text>
+<text>23 81:6-17</text>
+<text>48 12:28-34</text>
+</reading>
+<reading>
+<text>35 6:1-6</text>
+<text>23 51:3-21</text>
+<text>49 18:9-14</text>
+</reading>
+<reading>
+<text>1 16:l-13</text>
+<text>23 23:2-6</text>
+<text>56 5:8-14</text>
+<text>50 9:1-41</text>
+</reading>
+<reading>
+<text>29 65:17-21</text>
+<text>23 30:3-13</text>
+<text>50 4:43-54</text>
+</reading>
+<reading>
+<text>33 47:1-12</text>
+<text>23 46:2-9</text>
+<text>50 5:1-16</text>
+</reading>
+<reading>
+<text>29 49:8-15</text>
+<text>23 145:8-18</text>
+<text>50 517 30</text>
+</reading>
+<reading>
+<text>2 32:7-14</text>
+<text>23 106:19-23</text>
+<text>50 5:31-47</text>
+</reading>
+<reading>
+<text>78 2:1.12-22</text>
+<text>23 34:17-23</text>
+<text>50 7:1-30</text>
+</reading>
+<reading>
+<text>30 11:18-20</text>
+<text>23 8:2-18</text>
+<text>50 7:40-53</text>
+</reading>
+<reading>
+<text>33 37:12-14</text>
+<text>23 130:1-8</text>
+<text>52 8:8-11</text>
+<text>50 11:1-45</text>
+</reading>
+<reading>
+<text>34 13:1-33-62</text>
+<text>23 23:1-6</text>
+<text>50 8:1-11</text>
+</reading>
+<reading>
+<text>4 21:4-9</text>
+<text>23 102:1-21</text>
+<text>50 8:21-30</text>
+</reading>
+<reading>
+<text>34 3:14-95</text>
+<text>34 3:52-56</text>
+<text>50 8:31-42</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>1 17:3-9</text>
+<text>23 105:4-9</text>
+<text>50 8.91-99</text>
+</reading>
+<reading>
+<text>30 20:10-13</text>
+<text>23 18:2-7</text>
+<text>50 10:31-42</text>
+</reading>
+<reading>
+<text>10 7:4-16</text>
+<text>23 89</text>
+<text>52 4:l3.l6-22</text>
+<text>47 1:16.18-24</text>
+</reading>
+<reading>
+<text>29 50:4-7</text>
+<text>23 22:8-23-24</text>
+<text>57 2:6-11</text>
+<text>47 26:14-27:66</text>
+</reading>
+<reading>
+<text>29 42:1-7</text>
+<text>23 27:1-14</text>
+<text>50 12:1-11</text>
+</reading>
+<reading>
+<text>29 49:1-6</text>
+<text>23 71:1-17</text>
+<text>50 13:21-38</text>
+</reading>
+<reading>
+<text>29 50:4-9</text>
+<text>23 69:8-34</text>
+<text>47 26:14-25</text>
+</reading>
+<reading>
+<text>2 12:1-1 1-14</text>
+<text>23 116:12-18</text>
+<text>53 11:23-26</text>
+<text>50 13:1-15</text>
+</reading>
+<reading>
+<text>29 52:13-53:12</text>
+<text>23 31</text>
+<text>65 4:14-5:9</text>
+<text>50 18:1-19:42</text>
+</reading>
+<reading>
+<text>29 52:13-53:12</text>
+<text>23 31</text>
+<text>65 4:14-5:9</text>
+<text>50 18:1-19:42</text>
+</reading>
+<reading>
+<text>51 10:34-43</text>
+<text>23 118</text>
+<text>58 3:1-4</text>
+<text>50 20:1-9</text>
+</reading>
+<reading>
+<text>51 2:14 -32</text>
+<text>23 16:1-11</text>
+<text>47 28:8-15</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>51 2:36-41</text>
+<text>23 33:4-22</text>
+<text>50 20:11-18</text>
+</reading>
+<reading>
+<text>51 2:1-10</text>
+<text>23 105:1-9</text>
+<text>49 24:13-35</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>51 3:11-26</text>
+<text>23 9:2.5-9</text>
+<text>49 24:35-48</text>
+</reading>
+<reading>
+<text>51 4:l-12</text>
+<text>23 118:1-27</text>
+<text>50 21:1-14</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>51 4:13-21</text>
+<text>23 118:1.14-21</text>
+<text>48 16:9-15</text>
+</reading>
+<reading>
+<text>51 2:42-47</text>
+<text>23 118:1-24</text>
+<text>67 1:3-9</text>
+<text>50 20:19-31</text>
+</reading>
+<reading>
+<text>29 7:10-14</text>
+<text>23 40:7-11</text>
+<text>65 10:4-10</text>
+<text>49 1:26-38</text>
+</reading>
+<reading>
+<text>51 4:32-37</text>
+<text>23 93:1-5</text>
+<text>50 3:7-15</text>
+</reading>
+<reading>
+<text>51 5:17-26</text>
+<text>23 34:2-9</text>
+<text>50 3:16-21</text>
+</reading>
+<reading>
+<text>51 5:27-33</text>
+<text>23 34:2-20</text>
+<text>0 3:31-36</text>
+</reading>
+<reading>
+<text>51 5:34-42</text>
+<text>23 27</text>
+<text>1</text>
+<text>50 6:1-15</text>
+</reading>
+<reading>
+<text>51 6:1-7</text>
+<text>23 33:1-19</text>
+<text>50 6:16-21</text>
+</reading>
+<reading>
+<text>51 2:14.22-33</text>
+<text>23 16:1-ll</text>
+<text>67 1:17-21</text>
+<text>49 24:13-35</text>
+</reading>
+<reading>
+<text>51 6:8-15</text>
+<text>23 119:23-29-30</text>
+<text>50 6:22-29</text>
+</reading>
+<reading>
+<text>51 7:51-8:1</text>
+<text>23 31:3-21</text>
+<text>50 6:30-35</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>51 8:1-8</text>
+<text>23 66:1-7</text>
+<text>50 6:35-40</text>
+</reading>
+<reading>
+<text>51 8:26-40</text>
+<text>23 66:8-20</text>
+<text>50 6:44-51</text>
+</reading>
+<reading>
+<text>51 9:1-20</text>
+<text>23 117:1-2</text>
+<text>50 6:52-59</text>
+</reading>
+<reading>
+<text>51 9:1-20</text>
+<text>23 116:12-17</text>
+<text>50 6:60-69</text>
+</reading>
+<reading>
+<text>51 2:14.36-41</text>
+<text>23 23:2-6</text>
+<text>67 2:20-25</text>
+<text>50 10:1-10</text>
+</reading>
+<reading>
+<text>51 11:1-18</text>
+<text>23 12:2-3</text>
+<text>1949</text>
+<text>50 10:11-18</text>
+</reading>
+<reading>
+<text>51 11:19-26</text>
+<text>23 87:1-7</text>
+<text>50 10:22-30</text>
+</reading>
+<reading>
+<text>51 12:24-13:5</text>
+<text>23 67:2-8</text>
+<text>50 12:44-50</text>
+</reading>
+<reading>
+<text>51 13:13-25</text>
+<text>23 89:2-21 22-27</text>
+<text>50 13:16-20</text>
+</reading>
+<reading>
+<text>51 13:26-33</text>
+<text>23 3:6-11</text>
+<text>50 14:1-6</text>
+</reading>
+<reading>
+<text>51 13:44-52</text>
+<text>23 98:1-4</text>
+<text>50 14:7-14</text>
+</reading>
+<reading>
+<text>51 6:1-7</text>
+<text>23 33:1-19</text>
+<text>67 2:4-9</text>
+<text>50 14:1-12</text>
+</reading>
+<reading>
+<text>67 5:5-14</text>
+<text>23 89:2-17</text>
+<text>48 16:15-20</text>
+</reading>
+<reading>
+<text>51 14:19-28</text>
+<text>23 145:10-21</text>
+<text>50 14:27-31</text>
+</reading>
+<reading>
+<text>51 15:1-6</text>
+<text>23 122:1-5</text>
+<text>50 15:1-8</text>
+</reading>
+<reading>
+<text>51 15:7-21</text>
+<text>23 96:1-10</text>
+<text>50 15:9-11</text>
+</reading>
+<reading>
+<text>69 1:5-2:2</text>
+<text>23 45:11-16</text>
+<text>47 25:1-13</text>
+</reading>
+<reading>
+<text>51 16 1-10</text>
+<text>23 100:2-5</text>
+<text>50 15:18-21</text>
+</reading>
+<reading>
+<text>51 8:5-17</text>
+<text>23 66:1-20</text>
+<text>67 3:15-18</text>
+<text>50 14:15-21</text>
+</reading>
+<reading>
+<text>51 16:11-15</text>
+<text>23 150:1-9</text>
+<text>50 15:26-16:4</text>
+</reading>
+<reading>
+<text>53 15:1-8</text>
+<text>23 19:2-5</text>
+<text>4321</text>
+</reading>
+<reading>
+<text>51 17:15.22-18:1</text>
+<text>23 149:1-14</text>
+<text>50 16:12-15</text>
+</reading>
+<reading>
+<text>51 18:1-8</text>
+<text>23 98:1-4</text>
+<text>50 16:16-20</text>
+</reading>
+<reading>
+<text>51 18:9-18</text>
+<text>23 47:2-7</text>
+<text>50 16:20-23</text>
+</reading>
+<reading>
+<text>51 18:23-28</text>
+<text>23 47:2-10</text>
+<text>50 16:23-28</text>
+</reading>
+<reading>
+<text>51 1:1-11</text>
+<text>23 47:2-9</text>
+<text>56 1:17-23</text>
+<text>47 28:16-20</text>
+</reading>
+<reading>
+<text>51 19:1-8</text>
+<text>23 68:2-7</text>
+<text>50 16.29-33</text>
+</reading>
+<reading>
+<text>51 20:17-27</text>
+<text>23 68:10-21 43 17:1-11</text>
+</reading>
+<reading>
+<text>51 20:28-38</text>
+<text>23 68:29-36</text>
+<text>50 17:11-19</text>
+</reading>
+<reading>
+<text>51 22:30</text>
+<text>29</text>
+<text>23 16:1-11</text>
+<text>50 17:20-26</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>51 25:13-21</text>
+<text>23 103:1-20</text>
+<text>50 21:15-19</text>
+</reading>
+<reading>
+<text>51 1:15-26</text>
+<text>23 113:1-8</text>
+<text>50 5:9-17</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>51 2:1-11</text>
+<text>23 104:1-34</text>
+<text>53 12:3-13</text>
+<text>50 20:19-23</text>
+</reading>
+<reading>
+<text>79 1:1-10</text>
+<text>23 93:1-5</text>
+<text>48 9:14-29</text>
+</reading>
+<reading>
+<text>79 2.1-11</text>
+<text>23 37:3-39-40</text>
+<text>48 9:30-37</text>
+</reading>
+<reading>
+<text>79 4:11-19</text>
+<text>23 119:165.168.171-172.174-175</text>
+<text>48 9:38-40</text>
+</reading>
+<reading>
+<text>79 5:1-8</text>
+<text>23 2:1-6</text>
+<text>48 9:41-50</text>
+</reading>
+<reading>
+<text>79 6:5-17</text>
+<text>23 119:12-27.34-35</text>
+<text>48 10:1-12</text>
+</reading>
+<reading>
+<text>79 17:1-15</text>
+<text>23 103:13 18</text>
+<text>48 10:13-16</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>2 34:4-9</text>
+<text>34 3:59-56</text>
+<text>54 13:11-13</text>
+<text>50 3:16-18</text>
+</reading>
+<reading>
+<text>79 17:19-27</text>
+<text>23 32:1-7</text>
+<text>48 10:17-27</text>
+</reading>
+<reading>
+<text>79 35:1-12</text>
+<text>23 50:5-23</text>
+<text>48 10:28-31</text>
+</reading>
+<reading>
+<text>79 36:1.4-17</text>
+<text>23 79:8-13</text>
+<text>48 10:32-15</text>
+</reading>
+<reading>
+<text>79 42:15-25</text>
+<text>23 33:2-8</text>
+<text>48 10:46-52</text>
+</reading>
+<reading>
+<text>79 44:1.9-13</text>
+<text>23 150:1-9</text>
+<text>48 11.11-26</text>
+</reading>
+<reading>
+<text>79 51:12-20</text>
+<text>23 19:8-11</text>
+<text>48 11:27-33</text>
+</reading>
+<reading>
+<text>5 8:2-16</text>
+<text>23 148:12-20</text>
+<text>53 10:16-17</text>
+<text>50 6:51-58</text>
+</reading>
+<reading>
+<text>74 1:1-2</text>
+<text>2</text>
+<text>23 112:1-6</text>
+<text>48 12:1-12</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>43 3:14-18</text>
+<text>26 2:8.10-14</text>
+<text>49 1:39-56</text>
+</reading>
+<reading>
+<text>74 3.1-25</text>
+<text>23 25:2-9</text>
+<text>48 12:18-27</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>74 6:10-8:10</text>
+<text>23 128:1-6</text>
+<text>48 l2:28-34</text>
+</reading>
+<reading>
+<text>5 7:6-11</text>
+<text>23 103:1-10</text>
+<text>69 4.7-16</text>
+<text>47 11:25-30</text>
+</reading>
+<reading>
+<text>29 61:10-11</text>
+<text>37 2:1.4-8</text>
+<text>49 2:41-51</text>
+</reading>
+<reading>
+<text>35 6:3-6</text>
+<text>23 50:1-15</text>
+<text>52 4:18-25</text>
+<text>47 9:9-13</text>
+</reading>
+<reading>
+<text>54 1 1-7</text>
+<text>23 34:1-8</text>
+<text>47 5:1-12</text>
+</reading>
+<reading>
+<text>54 1:18-24</text>
+<text>23 119:129-134</text>
+<text>47 5:13-16</text>
+</reading>
+<reading>
+<text>54 3:4-11</text>
+<text>23 99:5-9</text>
+<text>47 5:17-19</text>
+</reading>
+<reading>
+<text>54 3:15</text>
+<text>4</text>
+<text>23 85:9-14</text>
+<text>47 5:20-26</text>
+</reading>
+<reading>
+<text>54 47-15</text>
+<text>23 116:10-16</text>
+<text>47 5:27-32</text>
+</reading>
+<reading>
+<text>51 11:21-13:3</text>
+<text>23 98:1-6</text>
+<text>47 10:7-13</text>
+</reading>
+<reading>
+<text>2 19:2-6</text>
+<text>23 100:2-5</text>
+<text>52 5:6-11</text>
+<text>47 9:36-10:8</text>
+</reading>
+<reading>
+<text>54 6:1-10</text>
+<text>23 98:1-4</text>
+<text>47 5:38-42</text>
+</reading>
+<reading>
+<text>54 8:1-9</text>
+<text>23 146:1-9</text>
+<text>47 5:43-48</text>
+</reading>
+<reading>
+<text>54 9:6-11</text>
+<text>23 112:1-9</text>
+<text>47 6:1-18</text>
+</reading>
+<reading>
+<text>54 11:1-11</text>
+<text>23 111:1-7 8</text>
+<text>47 6:7-15</text>
+</reading>
+<reading>
+<text>54 11:18.21-30</text>
+<text>23 34:2-7</text>
+<text>47 6:19-23</text>
+</reading>
+<reading>
+<text>54 12:1-10</text>
+<text>23 34:8-13</text>
+<text>47 6:24-34</text>
+</reading>
+<reading>
+<text>30 20:10-13</text>
+<text>23 69:8-17 33-35</text>
+<text>52 5:12-15</text>
+<text>47 10:26-33</text>
+</reading>
+<reading>
+<text>1 12:1-9</text>
+<text>23 33:12-22</text>
+<text>47 7:1-5</text>
+</reading>
+<reading>
+<text>1 13:2.5-18</text>
+<text>23 15:1-5</text>
+<text>47 7:6.12 14</text>
+</reading>
+<reading>
+<text>1 15:1-18</text>
+<text>23 105:1-9</text>
+<text>47 7:15-20</text>
+</reading>
+<reading>
+<text>1 16:1-16</text>
+<text>23 106:1-5</text>
+<text>47 7:21-29</text>
+</reading>
+<reading>
+<text>29 49:1-6</text>
+<text>23 139:1-13 15</text>
+<text>51 13:22-26</text>
+<text>49 1:57-80</text>
+</reading>
+<reading>
+<text>1 18:1-15</text>
+<text>49 1:46-55</text>
+<text>47 8:5-17</text>
+</reading>
+<reading>
+<text>12 4:8-16</text>
+<text>23 89:2-19</text>
+<text>52 6:3-11</text>
+<text>47 10:37-42</text>
+</reading>
+<reading>
+<text>1 18:16-33</text>
+<text>23 103:1-11</text>
+<text>47 8:18-22</text>
+</reading>
+<reading>
+<text>1 19:15-29</text>
+<text>23 26:2-12</text>
+<text>47 8:23-27</text>
+</reading>
+<reading>
+<text>51 12:1-11</text>
+<text>23 34:2-9</text>
+<text>62 4:6-18</text>
+<text>47 16:13 19	P</text>
+</reading>
+<reading>
+<text>1 22:1-19</text>
+<text>23 115:1-9</text>
+<text>47 9:1-8</text>
+</reading>
+<reading>
+<text>1 23:1-24:67</text>
+<text>23 106:1-5</text>
+<text>47 9:9-13</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>1 27:1 5.15-29</text>
+<text>23 135:1-6</text>
+<text>47 9:14-17</text>
+</reading>
+<reading>
+<text>45 9:9-10</text>
+<text>23 142:1-14</text>
+<text>52 8:9.11-13</text>
+<text>47 11:25-30</text>
+</reading>
+<reading>
+<text>1 28:10-22</text>
+<text>23 91:1-15</text>
+<text>47 9:18-26</text>
+</reading>
+<reading>
+<text>1 32:23-32</text>
+<text>23 17:1-15</text>
+<text>47 9:32-38</text>
+</reading>
+<reading>
+<text>1 44:55-57</text>
+<text>23 33:2-19</text>
+<text>47 10:1-7</text>
+</reading>
+<reading>
+<text>1 44:18-45:5</text>
+<text>23 105:16-21</text>
+<text>47 10:7-15</text>
+</reading>
+<reading>
+<text>1 46:1-30</text>
+<text>23 37:3-40</text>
+<text>47 10:16-23</text>
+</reading>
+<reading>
+<text>1 49:29-50:24</text>
+<text>23 105:1-7</text>
+<text>47 10:24-33</text>
+</reading>
+<reading>
+<text>29 55:10-11</text>
+<text>23 65:10-14</text>
+<text>52 8:18-23</text>
+<text>47 13:1-23</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>24 2:1-9</text>
+<text>23 112:1-9</text>
+<text>50 15:1-8</text>
+</reading>
+<reading>
+<text>2 2:1-15</text>
+<text>23 69:3-34</text>
+<text>47 1:20-24</text>
+</reading>
+<reading>
+<text>2 3:1-12</text>
+<text>23 103:1-7</text>
+<text>47 11:25-27</text>
+</reading>
+<reading>
+<text>2 3:13-20</text>
+<text>23 105:1-27</text>
+<text>47 11:28-30</text>
+</reading>
+<reading>
+<text>2 11:10-12:14</text>
+<text>23 116:12-18</text>
+<text>47 12:1-8</text>
+</reading>
+<reading>
+<text>2 12:37-42</text>
+<text>23 136:1-15</text>
+<text>47 12:14-21</text>
+</reading>
+<reading>
+<text>78 12:13.16-19</text>
+<text>23 86:3-16</text>
+<text>52 8:26-27</text>
+<text>47 13:21-43</text>
+</reading>
+<reading>
+<text>2 14:5-18</text>
+<text>2 15:1-6</text>
+<text>47 12:38-42</text>
+</reading>
+<reading>
+<text>2 14:21-31</text>
+<text>2 15:8-17</text>
+<text>47 12:46-50</text>
+</reading>
+<reading>
+<text>2 16:1-15</text>
+<text>23 78:18-23 27</text>
+<text>47 13:1-9</text>
+</reading>
+<reading>
+<text>2 19:1-20</text>
+<text>34 3:52-56</text>
+<text>47 13:10-17</text>
+</reading>
+<reading>
+<text>26 3:1-4a</text>
+<text>23 63:2.4-9</text>
+<text>50 20:1.11-18</text>
+</reading>
+<reading>
+<text>75 8:2-8</text>
+<text>23 11:4-7</text>
+<text>49 2:36-38</text>
+<text>0</text>
+</reading>
+<reading>
+<text>11 3:5-12</text>
+<text>23 119:57-130</text>
+<text>52 8:28-30</text>
+<text>47 13:44-52</text>
+</reading>
+<reading>
+<text>54 4:7-15</text>
+<text>23 126:1-6</text>
+<text>47 20.20-28</text>
+</reading>
+<reading>
+<text>2 33:7-34:28</text>
+<text>23 103:6-13</text>
+<text>47 13:36-43</text>
+</reading>
+<reading>
+<text>2 34:29-35</text>
+<text>23 99:5-9</text>
+<text>47 13:44-46</text>
+</reading>
+<reading>
+<text>2 40:14-36</text>
+<text>23 84:3-11</text>
+<text>47 13:47-53</text>
+</reading>
+<reading>
+<text>24 31:10-30-31</text>
+<text>23 15:1-5</text>
+<text>49 10:38-42</text>
+</reading>
+<reading>
+<text>3 25:1.8-17</text>
+<text>23 67:2-8</text>
+<text>47 11:1-12</text>
+</reading>
+<reading>
+<text>29 55:1-3</text>
+<text>23 145:8-18</text>
+<text>52 8:35-39</text>
+<text>47 14:13-21</text>
+</reading>
+<reading>
+<text>4 11:4-15</text>
+<text>23 81:12-17</text>
+<text>47 14:22-36</text>
+</reading>
+<reading>
+<text>4 12:1-13</text>
+<text>23 51:3-13</text>
+<text>47 15:1-14</text>
+</reading>
+<reading>
+<text>4 13:2-14:35</text>
+<text>23 106</text>
+<text>47 15:21-28</text>
+</reading>
+<reading>
+<text>4 20:1-13</text>
+<text>23 95:1-9</text>
+<text>47 16:13-23</text>
+</reading>
+<reading>
+<text>5 4:32-40</text>
+<text>23 77:12-21</text>
+<text>47 16:24-28</text>
+</reading>
+<reading>
+<text>34 7:16-19</text>
+<text>23 97:1-9</text>
+<text>47 17:1-9</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>11 l9:9-13</text>
+<text>23 85:9-14</text>
+<text>52 9:1-5</text>
+<text>47 14:22-33</text>
+</reading>
+<reading>
+<text>5 10:12-22</text>
+<text>23 148:12-20</text>
+<text>47 17:22-27</text>
+</reading>
+<reading>
+<text>19 4:17</text>
+<text>23 34:2-11</text>
+<text>50 4.19-24</text>
+</reading>
+<reading>
+<text>54 9:6-10</text>
+<text>23 112:1-9</text>
+<text>50 12:24-26</text>
+</reading>
+<reading>
+<text>6 3:7-17</text>
+<text>23 114:1-6</text>
+<text>47 18:21-19:1</text>
+</reading>
+<reading>
+<text>6 24:1-13</text>
+<text>23 136:1-17,21,24</text>
+<text>47 19:3-12</text>
+</reading>
+<reading>
+<text>6 24:14-29</text>
+<text>23 16:1-11 40 19:13-15</text>
+</reading>
+<reading>
+<text>29 56:1.6-7</text>
+<text>23 67:2-8</text>
+<text>52 11:13-32</text>
+<text>47 15:21-28</text>
+</reading>
+<reading>
+<text>73 11:19-12:10</text>
+<text>23 45</text>
+<text>53 15:20-26</text>
+<text>49 1:39-56</text>
+</reading>
+<reading>
+<text>7 6:11-24</text>
+<text>23 85:9-14</text>
+<text>47 19:23-30</text>
+</reading>
+<reading>
+<text>7 9:6-15</text>
+<text>23 21:2-7</text>
+<text>47 20:1-16</text>
+</reading>
+<reading>
+<text>7 11:29-39</text>
+<text>23 40:5.7-10</text>
+<text>47 22:1-14</text>
+</reading>
+<reading>
+<text>8 1:1-22</text>
+<text>23 146:5-10</text>
+<text>47 22:34-40</text>
+</reading>
+<reading>
+<text>8 2:1-4:17</text>
+<text>23 128:1-6</text>
+<text>47 23:1-12</text>
+</reading>
+<reading>
+<text>29 22:19-23</text>
+<text>23 138:1-8</text>
+<text>52 11:33-36</text>
+<text>47 16:13-20</text>
+</reading>
+<reading>
+<text>59 1:2-10</text>
+<text>23 150:1-9</text>
+<text>47 23:13-22</text>
+</reading>
+<reading>
+<text>59 2:1-8</text>
+<text>23 139:1-6</text>
+<text>47 23:23-26</text>
+</reading>
+<reading>
+<text>73 21:9-14</text>
+<text>23 145:10-18</text>
+<text>50 1:45-51</text>
+</reading>
+<reading>
+<text>59 3:7-13</text>
+<text>23 90:3-17</text>
+<text>47 24:42-51</text>
+</reading>
+<reading>
+<text>59 4:1-8</text>
+<text>23 97:1-12</text>
+<text>47 25:1-13</text>
+</reading>
+<reading>
+<text>59 4:9-12</text>
+<text>23 98:1.7-9</text>
+<text>47 25:14-30</text>
+</reading>
+<reading>
+<text>30 20:7-9</text>
+<text>23 63:2-9</text>
+<text>52 12:1-2</text>
+<text>47 16:21-27</text>
+</reading>
+<reading>
+<text>30 1:17-19</text>
+<text>23 71:l-17</text>
+<text>48 6:17-29</text>
+</reading>
+<reading>
+<text>59 5:1-11</text>
+<text>23 27:1-14</text>
+<text>49 4:31-37</text>
+</reading>
+<reading>
+<text>58 1:1-8</text>
+<text>23 52:10-11</text>
+<text>49 4:38 44</text>
+</reading>
+<reading>
+<text>58 1:19-14</text>
+<text>23 98:2-6</text>
+<text>49 5:1-11</text>
+</reading>
+<reading>
+<text>58 1:15-20</text>
+<text>23 100:2-5</text>
+<text>49 5:33-39</text>
+</reading>
+<reading>
+<text>58 1:21-23</text>
+<text>23 54:3-8</text>
+<text>49 61-5</text>
+</reading>
+<reading>
+<text>33 33:7-9</text>
+<text>23 95:1-9</text>
+<text>52 13:8-10</text>
+<text>47 18:15-20</text>
+</reading>
+<reading>
+<text>58 1:24 - 2:3</text>
+<text>23 62:6-9</text>
+<text>49 6:6-11</text>
+</reading>
+<reading>
+<text>58 2:6-15</text>
+<text>23 145:1-11</text>
+<text>49 6:12-19</text>
+</reading>
+<reading>
+<text>58 3:1-11</text>
+<text>23 145:2-13</text>
+<text>49 6:20-26</text>
+</reading>
+<reading>
+<text>40 5:1-4</text>
+<text>23 87:1-7</text>
+<text>47 1:1-23</text>
+</reading>
+<reading>
+<text>61 1:1-14</text>
+<text>23 16:1-11</text>
+<text>49 6:39-42</text>
+</reading>
+<reading>
+<text>61 1:15-17</text>
+<text>23 113:1-7</text>
+<text>49 6:43-49</text>
+</reading>
+<reading>
+<text>79 27:30-28:9</text>
+<text>23 103:1-12</text>
+<text>52 14:7-9</text>
+<text>47 18:21-35</text>
+</reading>
+<reading>
+<text>61 2:1-8</text>
+<text>23 28:2-9</text>
+<text>49 7:1-10</text>
+</reading>
+<reading>
+<text>61 3:1-13</text>
+<text>23 101:1-6</text>
+<text>49 7:11-17</text>
+</reading>
+<reading>
+<text>4 21:4-9</text>
+<text>23 78:1-38</text>
+<text>50 3:13-17</text>
+</reading>
+<reading>
+<text>65 5:7-9</text>
+<text>23 31:2-20</text>
+<text>50 19:25 27</text>
+</reading>
+<reading>
+<text>61 6:2-12</text>
+<text>23 49:6-20</text>
+<text>49 8:1-3</text>
+</reading>
+<reading>
+<text>61 6:13-16</text>
+<text>23 100:2-5</text>
+<text>49 8:4-15</text>
+</reading>
+<reading>
+<text>29 55:6-9</text>
+<text>23 145:2-18</text>
+<text>57 1:20-27</text>
+<text>47 20:1-16</text>
+</reading>
+<reading>
+<text>15 1:1-6</text>
+<text>23 126:1-6</text>
+<text>49 8:16-18</text>
+</reading>
+<reading>
+<text>15 6:7-20</text>
+<text>23 122:1-5</text>
+<text>49 8:19-21</text>
+</reading>
+<reading>
+<text>56 4:1-13</text>
+<text>23 19:2-5</text>
+<text>47 9:9-13</text>
+</reading>
+<reading>
+<text>44 1:1-8</text>
+<text>23 150:1-9</text>
+<text>49 9:7-9</text>
+</reading>
+<reading>
+<text>44 1:15-2:9</text>
+<text>23 43,1-4</text>
+<text>49 9:7-9</text>
+</reading>
+<reading>
+<text>45 2:5-15</text>
+<text>30 31:10-13</text>
+<text>49 9:43-45</text>
+</reading>
+<reading>
+<text>33 18:25-28</text>
+<text>23 25:4-9</text>
+<text>57 2:1-11</text>
+<text>47 21:28-32</text>
+</reading>
+<reading>
+<text>45 8:1-8</text>
+<text>23 102:16-22 23</text>
+<text>49 9:46-50</text>
+</reading>
+<reading>
+<text>45 8:20-23</text>
+<text>23 87:1-7</text>
+<text>49 9:51-56</text>
+</reading>
+<reading>
+<text>16 2:1-8</text>
+<text>23 137:1-6</text>
+<text>49 9:57-62</text>
+</reading>
+<reading>
+<text>34 7:9-14</text>
+<text>23 138:1-5</text>
+<text>50 1:47-51</text>
+</reading>
+<reading>
+<text>80 1:15-22</text>
+<text>23 79:1.3-9</text>
+<text>49 10:13-16</text>
+</reading>
+<reading>
+<text>80 4:5-29</text>
+<text>23 69:33 37</text>
+<text>49 10:17-24</text>
+</reading>
+<reading>
+<text>29 5:1-7</text>
+<text>23 80:9-20</text>
+<text>57 4:6-9</text>
+<text>47 21:33-43</text>
+</reading>
+<reading>
+<text>39 1:1-2:11</text>
+<text>39 2:3-8</text>
+<text>49 10:25-37</text>
+</reading>
+<reading>
+<text>55 6:14-18</text>
+<text>23 16:1-11</text>
+<text>47 11:25-30</text>
+</reading>
+<reading>
+<text>39 4:1-11</text>
+<text>23 56:3-10</text>
+<text>49 11:1-4</text>
+</reading>
+<reading>
+<text>46 3:13-20</text>
+<text>23 2:1-6</text>
+<text>49 11:5-13</text>
+</reading>
+<reading>
+<text>36 1:13-2:2</text>
+<text>23 10:2-9</text>
+<text>49 11:15-26</text>
+</reading>
+<reading>
+<text>36 4:12-21</text>
+<text>23 97:1-12</text>
+<text>49 11:27-28</text>
+</reading>
+<reading>
+<text>29 25:6-10</text>
+<text>23 23:1-6</text>
+<text>57 4:12-20</text>
+<text>47 22:1-14</text>
+</reading>
+<reading>
+<text>52 1:1-7</text>
+<text>23 98:1-4</text>
+<text>49 11:29-32</text>
+</reading>
+<reading>
+<text>52 1:16-25</text>
+<text>23 19:2-5</text>
+<text>49 11:37-41</text>
+</reading>
+<reading>
+<text>52 2:1-11</text>
+<text>23 62:2-9</text>
+<text>49 11:42-46</text>
+</reading>
+<reading>
+<text>52 3:21-30</text>
+<text>23 130:1-6</text>
+<text>49 11:47-54</text>
+</reading>
+<reading>
+<text>52 4:1-8</text>
+<text>23 32:1-13</text>
+<text>49 12:1-7</text>
+</reading>
+<reading>
+<text>52 4:13-18</text>
+<text>23 105:5-43</text>
+<text>49 12:8-12</text>
+</reading>
+<reading>
+<text>29 45:1.4-6</text>
+<text>23 96:1-10</text>
+<text>59 1:1-5</text>
+<text>47 22:15-21</text>
+</reading>
+<reading>
+<text>52 4:20-25</text>
+<text>49 1:69-75</text>
+<text>49 12:13-21</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>62 4:10-17</text>
+<text>23 145:10-18</text>
+<text>49 10:1-9</text>
+</reading>
+<reading>
+<text>52 6:12-18</text>
+<text>23 124:1-8</text>
+<text>49 12:39-48</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>52 6:19-23</text>
+<text>23 2:1-6</text>
+<text>0 12:49-53</text>
+</reading>
+<reading>
+<text>52 7:18-25</text>
+<text>23 119:66-93-94</text>
+<text>49 12:54-59</text>
+</reading>
+<reading>
+<text>52 8:1-11</text>
+<text>23 24:1-6</text>
+<text>49 13:1-9</text>
+</reading>
+<reading>
+<text>2 22:21-27</text>
+<text>23 18:3-47</text>
+<text>59 1:5-10</text>
+<text>47 22:34-40</text>
+</reading>
+<reading>
+<text>52 8:12-17</text>
+<text>23 68:2-21</text>
+<text>49 13:10-17</text>
+</reading>
+<reading>
+<text>52 8.18-25</text>
+<text>23 126.1-6</text>
+<text>49 13:18-21</text>
+</reading>
+<reading>
+<text>52 8:26-30</text>
+<text>23 13:4-6</text>
+<text>49 13:22-30</text>
+</reading>
+<reading>
+<text>52 8:31-39</text>
+<text>23 109:21-30-31</text>
+<text>49 13:31-35</text>
+</reading>
+<reading>
+<text>56 2:19-22</text>
+<text>23 19:2-5</text>
+<text>49 6:12-16</text>
+</reading>
+<reading>
+<text>52 11:1-29</text>
+<text>23 94:12-18</text>
+<text>49 14:1-11</text>
+</reading>
+<reading>
+<text>46 1:14-2:10</text>
+<text>23 131:1-3</text>
+<text>59 2:7-13</text>
+<text>47 23:1-12</text>
+</reading>
+<reading>
+<text>52 11:30-36</text>
+<text>23 69:30-36-37</text>
+<text>49 14:12-14</text>
+</reading>
+<reading>
+<text>73 7:2-14</text>
+<text>23 24:1-6</text>
+<text>69 3:1-3</text>
+<text>47 5:1-12</text>
+</reading>
+<reading>
+<text>22 19:1.23-27</text>
+<text>23 27:1-7.8-14</text>
+<text>52 5:5-11</text>
+<text>50 6:37-40</text>
+</reading>
+<reading>
+<text>52 14:7-12</text>
+<text>23 27:1-14</text>
+<text>49 15:1 10</text>
+</reading>
+<reading>
+<text>52 15:14-21</text>
+<text>23 98:1-4</text>
+<text>49 16:1 8</text>
+</reading>
+<reading>
+<text>52 16:3-27</text>
+<text>23 145:2-11</text>
+<text>49 16:9-15</text>
+</reading>
+<reading>
+<text>78 6:12-16</text>
+<text>23 63:2-8</text>
+<text>59 4:13-18</text>
+<text>47 25:1-13</text>
+</reading>
+<reading>
+<text>78 1:1-7</text>
+<text>23 139:1-10</text>
+<text>49 17:1-6</text>
+</reading>
+<reading>
+<text>78 2:23- 3:9</text>
+<text>23 34:2-19</text>
+<text>49 17:7-10</text>
+</reading>
+<reading>
+<text>11 8:22-30</text>
+<text>23 95:1-7</text>
+<text>50 4:19-24</text>
+</reading>
+<reading>
+<text>78 7:22-8:1</text>
+<text>23 119:89-175</text>
+<text>49 17:20-25</text>
+</reading>
+<reading>
+<text>78 13:1-9</text>
+<text>23 19:2-5</text>
+<text>49 17:26-37</text>
+</reading>
+<reading>
+<text>78 18:14-9:9</text>
+<text>23 105:2-43</text>
+<text>49 18:1-8</text>
+</reading>
+<reading>
+<text>24 31:10-31</text>
+<text>23 128:1-5</text>
+<text>59 5:1-6</text>
+<text>47 25:14-30</text>
+</reading>
+<reading>
+<text>76 1:10-64</text>
+<text>23 119</text>
+<text>49 18:35-43</text>
+</reading>
+<reading>
+<text>77 6:18-31</text>
+<text>23 4:2-7</text>
+<text>49 10:1 10</text>
+</reading>
+<reading>
+<text>77 7:1-31</text>
+<text>23 17:1-15</text>
+<text>49 19:11-28</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>76 2:15-29</text>
+<text>23 50:1-15</text>
+<text>49 19:41-44</text>
+</reading>
+<reading>
+<text>51 28:11-31</text>
+<text>23 98:1-6</text>
+<text>47 14:22-33</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>76 6:1-13</text>
+<text>23 10:2-19</text>
+<text>49 20:27-40</text>
+</reading>
+<reading>
+<text>33 34:11-17</text>
+<text>23 23:1-6</text>
+<text>53 15:20-28</text>
+<text>47 25:31-46</text>
+</reading>
+<reading>
+<text>34 1:1-20</text>
+<text>34 3:52-56</text>
+<text>49 21:1-4</text>
+</reading>
+<reading>
+<text>34 2:31 43</text>
+<text>34 3:57-61</text>
+<text>49 21:5-11</text>
+</reading>
+<reading>
+<text>34 5:1-28</text>
+<text>34 3:62-67</text>
+<text>49 21:12-19</text>
+</reading>
+<reading>
+<text>34 6:12-28</text>
+<text>34 3:68-74</text>
+<text>49 21:20 28</text>
+</reading>
+<reading>
+<text>34 7:2-14</text>
+<text>34 3:75-81</text>
+<text>49 21:29-33</text>
+</reading>
+<reading>
+<text>34 7:15-27</text>
+<text>34 3:82-87</text>
+<text>49 21:34-36</text>
+</reading>
+<reading>
+<text>29 63:16-19</text>
+<text>29 64:1-7</text>
+<text>23 80</text>
+<text>53 1:3-9</text>
+<text>48 13:33-37</text>
+</reading>
+<reading>
+<text>29 2:1-5</text>
+<text>23 122:1-9</text>
+<text>47 8:5-11</text>
+</reading>
+<reading>
+<text>29 11:1-9</text>
+<text>23 72:1-17</text>
+<text>49 10:21-24</text>
+</reading>
+<reading>
+<text>52 10:9-18</text>
+<text>23 19:2-5</text>
+<text>47 4:18-22</text>
+</reading>
+<reading>
+<text>29 26:1-6</text>
+<text>23 118:1.8-26</text>
+<text>47 7:21-27</text>
+</reading>
+<reading>
+<text>29 29:17-24</text>
+<text>23 27:1-14</text>
+<text>47 9:27-31</text>
+</reading>
+<reading>
+<text>29 30:19-26</text>
+<text>23 147:1-6</text>
+<text>47 9:35-10:1.5 8</text>
+</reading>
+<reading>
+<text>29 40:1-11</text>
+<text>23 85:9-14</text>
+<text>68 3:8-14</text>
+<text>48 1:1-8</text>
+</reading>
+<reading>
+<text>29 35:1-10</text>
+<text>23 85:9-14</text>
+<text>49 5:17-26</text>
+</reading>
+<reading>
+<text>29 40:1-11</text>
+<text>23 96:1-13</text>
+<text>47 18:12-14</text>
+</reading>
+<reading>
+<text>29 40:25-31</text>
+<text>23 103:1-10</text>
+<text>47 11:28-30</text>
+</reading>
+<reading>
+<text>1 3:9-20</text>
+<text>23 98:1-4</text>
+<text>56 1:3-12</text>
+<text>49 1:26-38</text>
+</reading>
+<reading>
+<text>29 48:17-19</text>
+<text>23 2:1-6</text>
+<text>47 11:16-19</text>
+</reading>
+<reading>
+<text>79 48:1-11</text>
+<text>23 80:2-19</text>
+<text>47 17:10-13</text>
+</reading>
+<reading>
+<text>29 61:1-11</text>
+<text>49 1:46-54</text>
+<text>59 5:16-24</text>
+<text>50 1:6-28</text>
+</reading>
+<reading>
+<text>4 24:2-17</text>
+<text>23 25:4-9</text>
+<text>47 21:23-27</text>
+</reading>
+<reading>
+<text>43 3.1-13</text>
+<text>23 34.2 3.6-23</text>
+<text>47 21:28-32</text>
+</reading>
+<reading>
+<text>29 45:6-25</text>
+<text>23 85:9-14</text>
+<text>49 7:19-23</text>
+</reading>
+<reading>
+<text>29 54:1-10</text>
+<text>23 30:2.4-13</text>
+<text>49 7:24-30</text>
+</reading>
+<reading>
+<text>29 56:1-8</text>
+<text>23 67:2-7 8</text>
+<text>50 5:33-36</text>
+</reading>
+<reading>
+<text>1 49:2.8-10</text>
+<text>23 72:1-17</text>
+<text>47 1:1-17</text>
+</reading>
+<reading>
+<text>10 7:1-16</text>
+<text>23 89:2-29</text>
+<text>52 16:25-27</text>
+<text>49 1:26-38</text>
+</reading>
+<reading>
+<text>0</text>
+</reading>
+<reading>
+<text>7 13:2-25</text>
+<text>23 71:3-17</text>
+<text>49 1:5-25</text>
+</reading>
+<reading>
+<text>29 7:10-14</text>
+<text>23 24.1-6</text>
+<text>49 1.26-38</text>
+</reading>
+<reading>
+<text>26 2:8-14</text>
+<text>23 33:2-21</text>
+<text>49 1:39-45</text>
+</reading>
+<reading>
+<text>37 1:24-28</text>
+<text>37 2:1-8</text>
+<text>49 1:46-55</text>
+</reading>
+<reading>
+<text>46 3:1-24</text>
+<text>23 25:4-11</text>
+<text>49 1:57-66</text>
+</reading>
+<reading>
+<text>10 7:1-16</text>
+<text>23 89:2-29</text>
+<text>49 1:67-79</text>
+</reading>
+<reading>
+<text>29 52:7-10</text>
+<text>23 98:1-6</text>
+<text>65 1:1-6</text>
+<text>50 1:1-18</text>
+</reading>
+<reading>
+<text>51 6:8-7:60</text>
+<text>23 31:3-21</text>
+<text>47 10:17-22</text>
+</reading>
+<reading>
+<text>69 1:1-4</text>
+<text>23 97:1-12</text>
+<text>50 20:2-8</text>
+</reading>
+<reading>
+<text>69 1:5 -2:2</text>
+<text>23 124:2-8</text>
+<text>47 2:13-18</text>
+</reading>
+<reading>
+<text>69 2:3-11</text>
+<text>23 96:1-6</text>
+<text>49 2:22-35</text>
+</reading>
+<reading>
+<text>1 15:1-21:3</text>
+<text>23 105:1-9</text>
+<text>65 11:8-19</text>
+<text>49 2:22-40</text>
+</reading>
+<reading>
+<text>50 2:18-21</text>
+<text>23 96:1 2:11-13</text>
+<text>50 1:1-18</text>
+</reading>
+</readings>

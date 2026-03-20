@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Manuscript Comparator</name>
+<description>Show a verse in various Greek texts, highlighting the words that are diffent</description>
+<description language="it">Mostra un versetto in diversi testi greci, evidenziando le parole che sono diverse</description>
+<type>reference</type>
+<version>7.09.0</version>
+<url>http://openscriptures.org/prototypes/manuscript-comparator/?passage={book}+{capitolo}:{versetto}&amp;view=parallel&amp;ins[]=1&amp;ins[]=2&amp;ins[]=3&amp;ins[]=4&amp;del[]=5&amp;del[]=6&amp;del[]=7&amp;strongs=1</url>
+<category>Hebrew and Greek texts</category>
+<category language="it">Testi ebraici e greci</category>
+<image>Manuscript Comparator.png</image>
+</link>

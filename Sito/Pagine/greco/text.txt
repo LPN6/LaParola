@@ -1,0 +1,234 @@
+("","Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1Samuel","2Samuel","1Kings","2Kings","1Chronicles","2Chronicles","Ezra","Nehemiah","Tobit","Judith","Esther","1Maccabees","2Maccabees","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Wisdom","Sirach","Isaiah","Jeremiah","Lamentations","Baruch","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi","Matthew","Mark","Luke","John","Acts","Romans","1Corinthians","2Corinthians","Galatians","Ephesians","Philippians","Colossians","1Thessalonians","2Thessalonians","1Timothy","2Timothy","Titus","Philemon","Hebrews","James","1Peter","2Peter","1John","2John","3John","Jude","Revelation");
+      $errfrase = "The expresion to search for is empty.";    
+      $errfrase = "The first character must be a letter, or one of the characters (, [, *, ?, /, #, /.";
+    	$errfrase = "NOT can not be used with OR or a number.";
+
+      $syntaxErrorPhrase="Syntax error in the search expression";
+      	$errfrase = "The first character after parenthesis must be a letter, or one of the characters (, [, *, ?, /, #, /, §.";
+      	$errfrase = "NOT can not be used inside square brackets.";
+          			$errfrase = "The square brackets are not correct.";            
+          	$errfrase = "The square brackets are not correct.";            
+          	$errfrase = "The parenthesis are not correct.";
+              			$errfrase = "The square brackets are not correct.";            
+              	$errfrase = "The square brackets are not correct.";            
+          			$errfrase = "The parenthesis are not correct.";
+							$errfrase = "I do not understand the character '$punteg' at this point in the expression.";
+        	echo "<p><strong>Syntax error in the search expression:</strong><br />".$errfrase."</p>";
+      	echo "<p><b>$nDiff</b> verses were found.</p>";
+          echo "<p>I could not understand the reference $rif_brano.</p>";
+echo "<th>Byzantine</th>";
+echo "<th>Interlinear</th>";
+echo "<th>Variants</th>";
+echo "<th>Allusions</th>";
+$titrif .="Byz";
+echo "<h4>Westcott and Hort</h4><p>";
+echo "<h4>Byzantine</h4><p>";
+echo "<h4>Interlinear</h4><p>";
+echo "<h4>Variant readings</h4><p>";
+$sSos.=" (<i>see parallel passage)</i>";
+$sSos .= "see";
+$tipovar = "Alex";
+$tipovar = "Alex/C&aelig;s";
+$tipovar = "Alex/West";
+$tipovar = "Alex/Byz";
+$tipovar = "C&aelig;s";
+$tipovar = "West/Byz";
+$tipovar = "C&aelig;s/Byz";
+$tipovar = "West";
+$tipovar = "Byz";
+$tipovar = "Mixed";
+"Date="
+"Text type="
+echo "<h4>Allusions</h4><p>";
+echo "None";
+echo "New Testament Greek";
+echo "The main variant readings of the manuscripts of the New Testament, for textual criticism; there are various fully searchable Greek texts";
+echo "Search in the New Testament";
+echo "adjective:";?>";
+echo "conjunction";?>";
+echo "adverb";?>";
+echo "interjection";?>";
+echo "noun:";?>";
+echo "preposition";?>";
+echo "article:";?>";
+echo "demonstrative pronoun:";?>";
+echo "interrogative/indefinite pronoun:";?>";
+echo "personal/possessive pronoun:";?>";
+echo "relative pronoun:";?>";
+echo "verb:";?>";
+echo "particle";?>";
+echo " 1st person";?>";
+echo " 2nd person";?>";
+echo " 3rd person";?>";
+echo " aorist";?>";
+echo " future";?>";
+echo " imperfect";?>";
+echo " present";?>";
+echo " perfect";?>";
+echo " pluperfect";?>";
+echo " active";?>";
+echo " middle";?>";
+echo " passive";?>";
+echo " imperative";?>";
+echo " indicative";?>";
+echo " infinitive";?>";
+echo " optative";?>";
+echo " participle";?>";
+echo " subjunctive";?>";
+echo " accusative";?>";
+echo " dative";?>";
+echo " genitive";?>";
+echo " nominative";?>";
+echo " vocative";?>";
+echo " plural";?>";
+echo " singular";?>";
+echo " feminine";?>";
+echo " masculine";?>";
+echo " neuter";?>";
+echo " comparative";?>";
+echo " superlative";?>";
+echo '<h1>Greek New Testament';
+In this site you can read the text of the Greek New Testament with the most important textual variants (alternative readings).
+Clicking on a Greek word in the text you can find some information about the word; hovering the cursor above a word gives a summary.</p>
+<p>The variant readings can also be read off line downloading and installing the free program <a href="http://www.laparola.net/program/">LaParola</a>. 
+"<h1>Comparison of $mss1 and $mss2";
+"<p>This comand is no longer available.</p>";
+echo "<p>I did not understand the code $mss1 - see the list of <a href=\"sigle.php\">permitted codes</a>.</p>";
+echo "<p>I did not understand the code $mss2 - see the list of <a href=\"sigle.php\">permitted codes</a>.</p>";
+echo "<p>Not all the verses where the manuscripts are equal or different are listed, because often the reading of a manuscript is not given, especially when it is the more common reading. ";
+echo "If there are variants in less than 30 verses, they are shown. If there are in less than 300, only the references are listed with a link to the page with the variants. ";
+echo "Otherwise, only the number of verses is given.</p>";
+echo "<h2>".($nDiff==1?"There is ":"There are ").$nDiff.($nDiff==1?" variant":" variants")." in which they have the same text</h2>";
+echo "<h2>There are variants in $nDiff ".($nDiff==1?"verse":"verses")." in which there is a different text</h2>";
+echo "<h1>Find verses</h1>";
+echo "<p>If the search expression appears in less than 30 verses, all the verses are shown. If it appears in less than 300 verses, only the references are listed with a link to the page with the text of the verse. ";
+echo "Otherwise, only the number of times that it appears is given.</p>";
+echo "</b> verses were found.</p>";
+echo "<h1>Find words</h1>";
+echo "Root";
+echo "Times in the NT";
+echo "Times in $TrovaPar_Rif2";
+echo "<tr><th>Total:</th>";
+echo "<p>No word was found with these characteristics.</p>";
+echo "Passage";
+echo "Type here the reference of a passage";
+echo "View text";
+echo "(No more than one chapter)";
+echo "Find verses";
+echo "Verses that contain ";
+echo "Type here the expression to search for";
+echo " in the passage ";
+echo "Type here the reference of the passage to search in; leave blank for all the NT";
+echo " in ";
+echo "Byzantine";
+echo "Find verses";
+echo "Explanation and examples";
+echo "Find words";
+echo "Every ";?>
+echo "root word";
+echo "verb";
+echo "noun";
+echo "adverb";
+echo "adjective";
+echo "article";
+echo "demonstrative pronoun";
+echo "interrogative/indefinite pronoun";
+echo "personal/possessive pronoun";
+echo "relative pronoun";
+echo "preposition";
+echo "conjunction";
+echo "interjection";
+echo "particle";
+echo "1st person";
+echo "2nd person";
+echo "3rd person";
+echo "present";
+echo "imperfect";
+echo "future";
+echo "aorist";
+echo "perfect";
+echo "pluperfect";
+echo "active";
+echo "middle";
+echo "passive";
+echo "indicative";
+echo "imperative";
+eecho "subjunctive";
+echo "optative";
+echo "infinitive";
+echo "participle";
+echo "nominative";
+echo "vocative";
+echo "accusative";
+echo "genitive";
+echo "dative";
+echo "singular";
+echo "plural";
+echo "masculine";
+echo "feminine";
+echo "neuter";
+echo "comparative";
+echo "superlative";
+echo "that appears in the passage ";
+echo "Type here the reference of the passage to search in; leave blank for all the NT";
+echo "and that appears at least ";
+echo "Type here the minimum number of times that the word must appear";
+echo "and not more than ";
+echo "Type here the maximum number of times that the word must appear";
+echo "times in the passage ";
+echo "Type here the reference of the passage to search in; leave blank for all the NT";
+echo " in ";
+echo "Byzantine";
+echo "Order";
+echo "alphabetical of the roots";
+echo "alphabetical of the words";
+echo "number of appearances";
+echo "Find words";
+echo "Search by first letter";
+echo "Search by Louw-Nida category or English gloss"
+echo "Options";
+echo "View the variant readings";
+echo "Yes";
+echo "No";
+echo "The order of the manuscripts in each variant reading";
+echo "By type of manuscript";
+echo "By date";
+echo "By text type";
+echo "Show the information on the manuscripts";
+echo "As a tooltip";
+echo "After the manuscripts";
+echo "Show the text of Westcott and Hort";
+echo "Yes";
+echo "No";
+echo "Show the text of Tischendorf";
+echo "Show the Byzantine text";
+echo "Show the Greek-Italian interlinear";
+echo "Show the allusions in the Fathers";
+echo "(from";
+echo "Show the texts";
+echo "Vertically";
+echo "Horizontally";
+echo "The language of the page";
+"English"
+"Italian"
+"Spanish"
+"Chinese"
+echo "Unicode font for the Greek text";
+echo "Default";
+echo "Information";
+
+Instructions and explanations
+Some of the Greek letters are not correct? Problems with the font?
+All the manuscripts
+Ideas for the future
+How to insert this site into the <i>BibleWorks</i> program
+How to insert this site into the <i>Logos</i> program
+
+<p>The Greek text is the <a href="http://www.sblgnt.com/">SBL Greek New Testamento</a>, with the parsing information by <a href="http://morphgnt.org/">MorphGNT</a>.<br />
+The text of Westcott and Hort (1881) is the union of the text of <a href="http://www.ccel.org/w/westcott/gnt/toc.htm">Christian Classics Ethereal Library</a> (with corrections), the text by <a href="http://www.perseus.tufts.edu/hopper/text.jsp?doc=Perseus:text:1999.01.0155">Perseus</a> with corrections by Charles Hill, the text of <a href="http://faculty.gordon.edu/hu/bi/Ted_Hildebrandt/New_Testament_Greek/Text/00-GreekArticlesWebBib.htm">Ted Hildebrandt</a> corrected and improved by Harmai G&aacute;bor, and the parsing information of Maurice A.&nbsp;Robinson.
+G&aacute;bor has this text as an <a href="http://www.ehf.hu/ujszov/letolthetok/GNT_WH_e_book.zip">e-book</a>.<br />
+The text of Tischendorf (8th edition; 1869-1872) is by <a href="http://ulrikp.org/Tischendorf/">Ulrik Petersen</a>.<br />
+The Byzantine text is by <a href="http://www.byztxt.com/">Maurice A.&nbsp;Robinson</a> (2005 edition).<br />
+The links to the three audio files are by <a href="http://www.greeklatinaudio.com/">greeklatinaudio.com</a> (Westcott and Hort text, modern pronunciation), <a href="http://kovacs.cc/Bible/GNT_Phemister/">Marilyn Phemister</a> (Westcott and Hort text, classical pronunciation), and <a href="http://www.bingo-ev.de/~ps2866/Byz/">Maurice Robinson</a> (Byzantine text).</p>
+
+<p>For comments and questions, write to <i>info</i> at this domain.</p>

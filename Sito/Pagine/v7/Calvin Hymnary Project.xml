@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Calvin Hymnary Project</name>
+<description>Finds hymns on a verse</description>
+<description language="it">Trova inni inglesi su un versetto</description>
+<type>reference</type>
+<version>7.04.0</version>
+<url>http://www.hymnary.org/?category=texts&amp;sub=scripture&amp;qu={book}{chapter}:{verse}&amp;hymnal=all</url>
+<category>Bible Commentary</category>
+<category language="it">Commentario biblico</category>
+<image>Christian Classics Etheral Library.gif</image>
+</link>

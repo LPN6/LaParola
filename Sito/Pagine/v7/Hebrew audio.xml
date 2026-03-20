@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Hebrew Audio</name>
+<name language="it">Ebraico audio</name>
+<description>Plays an MP3 file with the chapter of the Hebrew text</description>
+<description language="it">Fa sentire un file MP3 con il capitolo del testo ebraico</description>
+<type>reference</type>
+<version>7.04.0</version>
+<url>http://www.talkingbibles.com/Sound/{book}/{booknumber2}_{booklc}/{booknumber2}_{booklc}_{chapter3}.mp3</url>
+<category>Hebrew and Greek texts</category>
+<category language="it">Testi ebraici e greci</category>
+</link>

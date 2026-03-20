@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Search 4 English translations</name>
+<name language="it">Ricerca in 4 versioni inglesi</name>
+<description>Searches a word in the KJV, ASV, NASB, WEB</description>
+<description language="it">Cerca una parola nella KJV, ASV, NASB, WEB</description>
+<type>word</type>
+<version>7.00.0</version>
+<language>en</language>
+<url>http://unbound.biola.edu/index.cfm?method=searchResults.doSearch&amp;search_type=simple_search&amp;parallel_1=kjv_apocrypha_ucs2&amp;parallel_2=asv&amp;parallel_3=nasb&amp;parallel_4=web&amp;text_word={word}</url>
+<category>Bible Search</category>
+<category language="it">Ricerca biblica</category>
+</link>

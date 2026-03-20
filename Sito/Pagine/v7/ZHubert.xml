@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>ZHubert</name>
+<description>Shows a verse in various Greek and English texts</description>
+<description language="it">Mostra un versetto in diversi testi greci e inglesi</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://www.zhubert.com/bible?verseref={book}+{chapter}:{verse}</url>
+<category>Hebrew and Greek texts</category>
+<category language="it">Testi ebraici e greci</category>
+<image>ZHubert.png</image>
+</link>

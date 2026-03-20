@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<link>
+<name>Bible</name>
+<name language="it">Bibbia</name>
+<description>Show a passage in the Logos program</description>
+<description language="it">Mostra un brano nel programma Logos</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>libronixdls:keylink|ref=[en]bible:{reference}</url>
+<category>Logos</category>
+<image>Libronix.gif</image>
+</link>

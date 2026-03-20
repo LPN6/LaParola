@@ -1,0 +1,23 @@
+<?if ($n<>-1) echo "<p><a href=\"/panoramica/\">Inizio</a></p>";?>
+<ol start="0">
+<li><?if ($n<>0) echo "<a href=\"introduzione.php\">";?>Introduzione<?if ($n<>0) echo "</a>";?></li>
+<li><?if ($n<>1) echo "<a href=\"creazione.php\">";?>La creazione (Genesi 1-2)<?if ($n<>1) echo "</a>";?></li>
+<li><?if ($n<>2) echo "<a href=\"caduta.php\">";?>La caduta (Genesi 3)<?if ($n<>2) echo "</a>";?></li>
+<li><?if ($n<>3) echo "<a href=\"peccato.php\">";?>Il peccato (Genesi 4-11)<?if ($n<>3) echo "</a>";?></li>
+<li><?if ($n<>4) echo "<a href=\"patriarchi.php\">";?>I patriarchi (Genesi 12-50)<?if ($n<>4) echo "</a>";?></li>
+<li><?if ($n<>5) echo "<a href=\"esodo.php\">";?>L'esodo (Esodo 1-15)<?if ($n<>5) echo "</a>";?></li>
+<li><?if ($n<>6) echo "<a href=\"israele_a_sinai.php\">";?>Israele al Sinai e nel deserto (Esodo 16-Deuteronomio)<?if ($n<>6) echo "</a>";?></li>
+<li><?if ($n<>7) echo "<a href=\"conquista.php\">";?>La conquista (Giosu&egrave;)<?if ($n<>7) echo "</a>";?></li>
+<li><?if ($n<>8) echo "<a href=\"terra_promessa.php\">";?>La vita nella terra promessa (Giudici e Rut)<?if ($n<>8) echo "</a>";?></li>
+<li><?if ($n<>9) echo "<a href=\"regno.php\">";?>Il regno (1 e 2Samuele, 1Cronache)<?if ($n<>9) echo "</a>";?></li>
+<li><?if ($n<>10) echo "<a href=\"regni.php\">";?>I regni (1 e 2Re, 2Cronache)<?if ($n<>10) echo "</a>";?></li>
+<li><?if ($n<>11) echo "<a href=\"profeti.php\">";?>I profeti (Isaia-Lamentazioni, Osea-Sofonia)<?if ($n<>11) echo "</a>";?></li>
+<li><?if ($n<>12) echo "<a href=\"poesia.php\">";?>La poesia (Salmi)<?if ($n<>12) echo "</a>";?></li>
+<li><?if ($n<>13) echo "<a href=\"saggezza.php\">";?>La saggezza (Giobbe, Proverbi-Cantico)<?if ($n<>13) echo "</a>";?></li>
+<li><?if ($n<>14) echo "<a href=\"esilio.php\">";?>In esilio (Ester, Ezechiele, Daniele)<?if ($n<>14) echo "</a>";?></li>
+<li><?if ($n<>15) echo "<a href=\"ritorno.php\">";?>Il ritorno dall'esilio (Esdra e Neemia, Aggeo-Malachia)<?if ($n<>15) echo "</a>";?></li>
+<li><?if ($n<>16) echo "<a href=\"apocrifa.php\">";?>Fra i testamenti (L'apocrifa)<?if ($n<>16) echo "</a>";?></li>
+<li><?if ($n<>17) echo "<a href=\"dio_con_noi.php\">";?>Dio con noi (Matteo-Giovanni)<?if ($n<>17) echo "</a>";?></li>
+<li><?if ($n<>18) echo "<a href=\"chiesa.php\">";?>La chiesa (Atti e Lettere)<?if ($n<>18) echo "</a>";?></li>
+<li><?if ($n<>19) echo "<a href=\"fine.php\">";?>La fine (Apocalisse)<?if ($n<>19) echo "</a>";?></li>
+</ol>

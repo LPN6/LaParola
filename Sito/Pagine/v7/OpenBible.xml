@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>OpenBible</name>
+<description>A map of the area around a place name, with photos</description>
+<description language="it">Una cartina dell'area intorno ad un luogo, con foto (con il nome in inglese)</description>
+<type>word</type>
+<version>7.00.3</version>
+<language>en</language>
+<url>http://www.openbible.info/geo/atlas/{firstletterlc}#{wordlc}</url>
+<category>Atlas</category>
+<category language="it">Atlante</category>
+</link>

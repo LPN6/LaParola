@@ -1,0 +1,73 @@
+main {
+    margin-top: 60px;
+}
+
+.menulink a {
+  display: inline-block; 
+  min-height: 24px;
+}
+
+a:link{color: #445c88;
+    font-weight: bold;
+    text-decoration: none;}
+a:visited{color:black;}
+a:hover{color:#A32D00;}
+a.barra:link{color:aqua}
+a.barra:visited{color:aqua}
+a.barra:hover{color:red}
+.solonormale{display:none;}
+
+.button{
+	font-weight:bold;
+    color: #ffffff;
+    background: #2525ff;
+    border: 10px solid #2525ff;
+}
+.button:hover{background: #A32D00;border-color:#A32D00;}
+
+input.text{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:1.1em;color:#000000;background:#fff;}
+input.submit{
+	font-weight:bold;
+    color: #ffffff;
+    background: #2525ff;
+    border: 10px solid #2525ff;
+}
+input.tabella {
+    display:block;margin-left:auto;margin-right:auto;
+}
+input.reset{
+	font-weight:bold;
+    color: #fff;
+    background: #666;
+    border: 10px solid #666666;}
+input.seleziona{font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    color:#ffffff;
+    background: #2525ff;
+    border:4px solid #2525ff;
+    display:block;margin-left:auto;margin-right:auto;}
+input.grandezzatesto{
+	font-weight:bold;
+    color: #ffffff;
+    background: #2525ff;
+    border: 10px solid #2525ff;}
+input.submit:hover{background: #A32D00;border-color:#A32D00;}
+input.reset:hover{background: #A32D00;border-color:#A32D00;}
+input.seleziona:hover{background: #A32D00;border-color:#A32D00;}
+input.grandezzatesto:hover{background: #A32D00;border-color:#A32D00;}
+
+textarea{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:small;color:#111111;background:#68ffff;border:1px solid #666666;}
+select{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:small;color:#000000;border:0px;}
+h2 {display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+	font-style: italic;}
+legend {color: #A32D00;}
+fieldset {
+    border-width: 0px;
+    background: #dee5f1;
+}

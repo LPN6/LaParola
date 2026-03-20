@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Greek Strong's number</name>
+<name language="it">Numero Strong greco</name>
+<description>Look up the Strong number of a word in the Logos program</description>
+<description language="it">Cerca il numero Strong di una parola nel programma Logos</description>
+<type>word</type>
+<version>7.00.0</version>
+<url>libronixdls:keylink|ref=[en]strongs+g:{word}</url>
+<category>Logos</category>
+<image>Libronix.gif</image>
+</link>

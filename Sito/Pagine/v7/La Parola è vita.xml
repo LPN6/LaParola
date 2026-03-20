@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<link>
+<name>La Parola è vita</name>
+<description>Show the Bible text in this Italian translation</description>
+<description language="it">Visualizza il testo biblico in questa versione</description>
+<type>riferimento</type>
+<version>7.00.0</version>
+<url>http://www.biblegateway.com/passage/?search={book} {chapter}:{verse}&amp;version=34</url>
+<category>Bible Text</category>
+<category language="it">Testo biblico</category>
+</link>

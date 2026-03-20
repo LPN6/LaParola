@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Kata Biblon</name>
+<description>Show the chapter of a verse in the Robinson-Pierpont 2005 and (editable) WEB texts, with forum</description>
+<description language="it">Mostra il capitolo di un versetto nei testi Robinson-Pierpont 2005 e (modificabile) WEB, con forum</description>
+<type>reference</type>
+<version>7.01.0</version>
+<url>http://nt.katabiblon.com/?book={bookabbreviation}&amp;ch={chapter}</url>
+<category>Hebrew and Greek texts</category>
+<category language="it">Testi ebraici e greci</category>
+<image>Kata Biblon.gif</image>
+</link>

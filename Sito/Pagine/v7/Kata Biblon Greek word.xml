@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Kata Biblon</name>
+<description>Editable definitions and notes of a Greek word with all its occurrences</description>
+<description language="it">Definizioni e note modificabili di una parola greca con tutte le sue apparenze</description>
+<type>word</type>
+<version>7.01.0</version>
+<language>el</language>
+<url>http://lexicon.katabiblon.com/lemma.php?inflection={wordlc}</url>
+<category>Greek Words</category>
+<category language="it">Parole greche</category>
+<image>Kata Biblon.gif</image>
+</link>

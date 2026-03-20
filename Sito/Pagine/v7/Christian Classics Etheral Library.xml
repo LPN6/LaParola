@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Christian Classics Etheral Library</name>
+<description>Finds classic Christian literature on a verse</description>
+<description language="it">Trova letteratura classica cristiana su un versetto</description>
+<type>reference</type>
+<version>7.04.0</version>
+<url>http://www.ccel.org/search?category=scripture&amp;qu={book} {chapter}:{verse}</url>
+<category>Bible Commentary</category>
+<category language="it">Commentario biblico</category>
+<image>Christian Classics Etheral Library.gif</image>
+</link>

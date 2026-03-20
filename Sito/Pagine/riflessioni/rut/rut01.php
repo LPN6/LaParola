@@ -1,0 +1,67 @@
+<?
+include("../../conn.php");
+include("../../vistesto.php");
+
+$descriz = "L'amore nelle difficolt&agrave; (Rut 1:1-14)";
+$key = "amore,male,difficolt&agrave;,Rut 1:1-14";
+$titolo = "L'amore nelle difficolt&agrave; (Rut 1:1-14)";
+$sezione = "Strumenti";
+require("../../capo.php");
+?>
+<h1>L'amore nelle difficolt&agrave; (Rut 1:1-14)</h1>
+<p>Vorrei introdurre il tema dell'amore con il racconto di due donne. La prima &egrave; Biancaneve, del film d'animazione del 1937. Si innamora del Principale, alto, bello, affascinante, scappa dalla regina cattiva, e canta con la testa nelle nuvole, "Il mio amore un di verr&agrave;". Poi, dopo la morte della regina, viene risvegliata dal primo bacio d'amore, naturalmente dal principe innamorato, sposa il principe e si trasferisce al suo castello dove vissero felici e contenti. L'amore &egrave; vivere sempre felicemente con la persona dei sogni?</p>
+<p>La seconda donna &egrave; sempre Biancaneve, ma del film live action del 2025. Incontra un bandito che &egrave; stato arrestato per un furto, ma che libera. Scappa dalla regina cattiva e canta "Aspettando un desiderio", che &egrave; che diventi la donna che deve essere. Poi &egrave; risvegliata da un bacio (non d'amore), affronta la regina (che &egrave; una strega) in battaglia e vince, poi diventa la regina gentile e giusta e sposa il bandito. L'amore &egrave; prima di tutto essere s&eacute; stessi?</p>
+<h2>Prima difficolt&agrave; (Rut 1:1-2)</h2>
+<p>In queste riflessioni vedremo quello che il libro di Rut ci insegna dell'amore. In questa prima riflessione, vedremo l'amore che fiorisce nelle difficolt&agrave;. E subito leggiamo della prima difficolt&agrave;.</p>
+<p>Il racconto di Rut &egrave; ambientato, ci viene detto nel prima versetto, "al tempo di giudici", cio&egrave; durante i 350 anni all'incirca del libro precedente nella Bibbia. Quel libro conclude con il riassunto, "In quel tempo non c'era re in Israele; ognuno faceva quello che gli pareva meglio" (Giudici 21:25).</p>
+<p>A quel tempo, ci fu una carestia, per cui una famiglia di Betlemme, di una famiglia che era importante ma sarebbe diventata minore (quella di Efrata Michea 5:1) della trib&ugrave; di Giuda, si trasfer&igrave; a Moab: Elimelec e sua moglie Naomi, e i loro due figli. Questa fu la prima difficolt&agrave;. In una societ&agrave; agricola, come lo era quella dei Giudei, una mancanza di cibo creava seri problemi. Per&ograve;, Moab forse stava meglio al livello economico e per sopravvivere, ma era una nazione nemica ai Giudei. Erano discendenti e Lot (il nipote di Abraamo) e una sua figlia, e si opponeva sempre ai Giudei. Aveva il proprio Dio, Chemos. Soprattutto, non era il paese promesso da Dio. Elimelec e la sua famiglia potevano pensare di ricevere pane in Moab, ma non avrebbero ricevuto la benedizione di Dio in un paese che era contro di lui.</p>
+<h2>Seconda difficolt&agrave; (Rut 1:3-5)</h2>
+<p>Nonostante il fatto che siano stranieri, la famiglia viene integrata nella societ&agrave;, al punto che i figli sposano due donne del posto, Rut e Orpa. Ma il male colpisce ancora. Prima il marito muore. Ma ci sono ancora i figli sposati, magari un giorno ci saranno anche dei nipotini. Il sogno di Biancaneve (1937) &egrave; ancora vivo, c'&egrave; anche speranza. Ma dopo dieci anni, non c'&egrave; ancora nessun nipotino e per aggiungere alle difficolt&agrave; anche tutti e due i figli muoiono.</p>
+<p>La morte viene a tutti, ma c'&egrave; sempre il dolore. Inoltre, per queste tre donne &egrave; un disastro ancora maggiore, perch&eacute; sono in una societ&agrave; dove nessuno le difende e nessuno le sostiene. Naomi perse non solo il suo passato, ma anche il suo presente e futuro. Ora &egrave; senza speranza. Almeno, se fosse ancora in Giuda, ci sarebbe la famiglia allargata per prendere cura di lei.</p>
+<h2>L'amore cresce nelle difficolt&agrave; (Rut 1:6-7)</h2>
+<p>Le difficolt&agrave; non sono necessarie per amare, ma possono evidenziare o rendere pi&ugrave; chiaro l'amore, perch&eacute; vengono eliminate le cose superflue che possono essere confuse con l'amore. Nello stesso modo che il Signore Ges&ugrave; "impar&ograve; l'ubbidienza dalle cose che soffr&igrave;" (Ebr 5:8) - era ubbidiente prima, ma ha potuto manifestare la sua ubbidienza anche nelle difficolt&agrave;, quando la sua ubbidienza gli costava la sofferenza.</p>
+<p>Mentre il tuo rapporto con un'altra persona, o con Dio, ti d&agrave; quello che vuoi, felicit&agrave; e benessere, amare &egrave; pi&ugrave; facile.</p>
+<p>Quando ci sono le difficolt&agrave; esterne, quando non ricevi lo stesso amore che dai ma piuttosto indifferenza o critica, quando il sentimento di innamoramento &egrave; svanito, quando non vivi "felice e contento"... Quando non c'&egrave; speranza, c'&egrave; la tentazione di fuggire - forse letteralmente, come molti che lasciano un rapporto quando non d&agrave; pi&ugrave; soddisfazione o realizzazione, ma forse anche fuggire dall'impegno dell'amore mantenendo la farsa del rapporto.</p>
+<p>Noemi era quasi a questo punto. Nella prossima riflessione considereremo la sua amarezza (Rut 1:20-21). &Egrave; quasi fuggito al suo rapporto con Dio - ma c'era forse ancora un piccolo barlume di speranza. La speranza era di ritornare alla terra promessa da Dio, dove Dio benediceva il suo popolo, anche se l'attrazione del paese per Noemi era che c'era il pane di nuovo, forse non che c'era Dio (Rut 1:6-7). Cos&igrave; Noemi si mette in viaggio con le sue nuore.</p>
+<p>In questo vediamo sia la differenza sia le similitudini fra l'amore cristiano e l'amore secondo Disney.</p>
+<p>L'amore di Biancaneve (1937) &egrave; un ottimismo senza fondamento che andr&agrave; tutto bene una volta che abbiamo trovato l'amore della nostra vita, che vivremo sempre in uno stato idillico. Per&ograve;, &egrave; giusto se quando cantiamo con la testa fra le nuvole "il mio amore (o principe) un d&igrave; verr&agrave;" pensiamo al Principe dei principi (gridando forse <i>marana tha</i>, ossia <i>Signore, vieni</i>, al nostro Re Ges&ugrave;, che verr&agrave; un giorno affinch&eacute; viviamo per sempre felici e contenti in paradiso.</p>
+<p>L'amore di Biancaneve (2025) &egrave; il desiderio di essere quello che vuoi essere, e magari un'altra persona pu&ograve; aiutare a realizzarti. Per&ograve;, &egrave; giusto se il tuo desiderio &egrave; di essere quello che Dio vuole che sia, di diventare quello per cui Dio ti ha fatto nascere.</p>
+<p>L'amore del cristianesimo agisce nella sicurezza che Dio cambier&agrave; la tua storia, perch&eacute; nella risurrezione di Ges&ugrave; Cristo ha cambiato la storia del mondo. Attendi un cambio nella vita (di essere quello che Dio vuole che sia), e attendi la risurrezione finale in cui tutto il male e la sofferenza scompariranno. Puoi perseverare nell'amore perch&eacute; Dio agisce tutt'ora con il suo amore.</p>
+<h2>L'amore a senso unico (Rut 1:8-13)</h2>
+<p>Naomi e le nuore Rut e Opra partono insieme, ma Naomi vuole mandarle al loro paese. Augura che Dio sia buono con loro e che trovino riposo con un marito. Approfondiamo il primo desiderio, perch&eacute; introduce un concetto fondamentale per queste riflessioni.</p>
+<p>Quando Naomi chiese che il Signore fosse buono con loro, non era una bont&agrave; generica o d fare il bravo. La parola era molto pi&ugrave; forte: <i>hesed</i>. Chiese che Dio mostrasse <i>hesed</i>, che trattasse le nuore secondo il suo <i>hesed</i>.</p>
+<p>Che cosa &egrave; <i>hesed</i>? Hesed &egrave; una parola ebraica per l'amore, ma &egrave; un amore incrollabile, fedele e leale. &Egrave; un amore testardo, a senso unico, a prescindere dalla risposta. &Egrave; un amore di impegno e sacrificio per l'altro, che pensa solo al bene altrui e non ai propri interessi. &Egrave; simile alla parola greca "<i>agape</i>", che viene utilizzato nel Nuovo Testamento per descrivere questo tipo di amore fra credenti.</p>
+<p>Quando il coniuge ti rivolge una parola aspra, lo <i>hesed</i> non &egrave; rispondere male e n&eacute; di ritirarti in silenzio, non allontanandoti emotivamente dall'altro.<br />
+Quando il fratello non ti saluta, lo <i>hesed</i> non sparla n&eacute; evita, ma continuare a cercarlo per amarlo.<br />
+Quando il collega si approfitta di te, lo <i>hesed</i> fa il secondo miglio per lui (Mt 5:38-42).</p>
+<p>Lo <i>hesed</i> non vuol dire che non starai male per quello che gli altri ti fanno. Che non ci saranno giornate "no" nel rapporto. Ma vuol dire che non lascerai che i tuoi sentimenti decideranno come agirai. Il tuo impegno per gli altri decider&agrave;, che farai dei sacrifici personali per loro. Costi quello che costi.</p>
+<p>Naomi ci fa vedere questo amore fedele. Ha perso tutto, tranne le due nuore. Invece di tenerle per s&eacute;, le esorta a partire, a trovare un nuovo marito e riposo nel proprio paese, perch&eacute; era la loro unica speranza.</p>
+<p>Non c'&egrave; speranza invece per Naomi: Anche se ci fossero diversi miracoli (risposarsi quel giorno stesso, rimanere incinta subito, fra nove mesi partorire due gemelli maschi), fra 18 anni sarebbe troppo tardi per Rut e Orpa sposare questi figli e avere anche loro una famiglia (avevano gi&agrave; quasi 30 anni).</p>
+<p>Per il suo amore per loro, Naomi deve rinunciare a quello che ama di pi&ugrave;, per dare a loro quello che lei non ha.</p>
+<p>Naomi ha aggravato la morte nella sua vita affinch&eacute; le nuore potessero avere una nuova vita.</p>
+<p>Cos&igrave; anticipa lo <i>hesed</i> di Cristo, che alla croce ha scelto la solitudine e la morte per darti una nuova vita.</p>
+<p>Non solo Ges&ugrave;, ma anche Paolo ci d&agrave; l'esempio di <i>hesed</i>:</p>
+<blockquote>Noi che viviamo siamo sempre esposti alla morte per amore di Ges&ugrave;, affinch&eacute; anche la vita di Ges&ugrave; si manifesti nella nostra carne mortale, di modo che la morte opera in noi, ma la vita in voi. (2Corinzi 4:11-12)</blockquote>
+<p>Al centro dell'amore <i>hesed</i> / <i>agape</i>, amore a senso unico, ci sono impegno e sacrifico.</p>
+<p>C.S. Lewis nel suo libro "I quattro amori" ha descritto questo amore in questo modo:</p>
+<blockquote>Non esistono investimenti sicuri. Amare significa essere vulnerabili. Se ami qualcosa, il tuo cuore sar&agrave; sicuramente tormentato e forse spezzato. Se vuoi essere sicuro di mantenerlo intatto, non devi dare il tuo cuore a nessuno, nemmeno a un animale. Avvolgilo con cura con hobby e piccoli lussi; evita ogni coinvolgimento; chiudilo al sicuro nello scrigno o nella bara del tuo egoismo. Ma in quella bara - sicura, buia, immobile, senza aria - cambier&agrave;. Non sar&agrave; spezzato; diventer&agrave; indistruttibile, impenetrabile, irredimibile. Morto. L'unico posto al di fuori del Paradiso dove puoi essere perfettamente al sicuro da tutti i pericoli e le perturbazioni dell'amore &egrave; l'Inferno.</blockquote>
+<h2>Lamento (Rut 1:13-14)</h2>
+<p>Il lamento in mezzo al male &egrave; giusto. &Egrave; una forma di fiducia nella sovranit&agrave; di Dio (perch&eacute; sappiamo che la vita non dovrebbe essere cos&igrave;) e una richiesto che Dio manifesti il suo <i>hesed</i> nuovamente. Perch&eacute; per Noemi, come pure per noi, &egrave; difficile portare il peso dello <i>hesed</i>. Anche lo era anche per Ges&ugrave; Cristo, che grid&ograve; il suo lamento "perch&eacute; mi hai abbandonato?".</p>
+<p>Quello che &egrave; sbagliato &egrave; l'autocommiserazione, oppure dare la colpa a Dio. Nel caso di Noemi, non doveva partire dal paese promesso per cominciare.</p>
+<p>Dio poi risponde al lamento di Naomi con lo <i>hesed</i> di Rut.</p>
+<h2>Rispondere all'amore con l'amore (Rut 1:10,14)</h2>
+<p>Rut ama (nel senso dello <i>hesed</i>) Naomi pi&ugrave; di s&eacute; stessa. Accetta di vivere nella morte e senza speranza, per stare accanto a Naomi. Per Rut, ci sono solo sacrificio e impegno verso Noemi, fino alla fine, non solo mentre sta bene.</p>
+<p>Ci dovrebbe essere fra due Cristiani una forma di stallo, come ad una porta dove uno dice, "Dopo di te" o l'altro risponde, "No, dopo di te". Ma in questo caso, come vedremo nei versetti seguenti, sembra che Rut capisca meglio lo <i>hesed</i> di Naomi, che mostra un amore non perfetto. Cos&igrave; il sacrificio di Rut prevale su quello di Naomi, e ritornano a Betlemme insieme.</p>
+<h2>Conclusione</h2>
+<p>Con quel pensiero voglio concludere. L'apostolo Paolo scrive,</p>
+<blockquote>L'amore sia senza ipocrisia. Aborrite il male e attenetevi fermamente al bene. Quanto all'amore fraterno, siate pieni di affetto gli uni per gli altri. Quanto all'onore, fate a gara nel rendervelo reciprocamente (Rom 12:9-10).</blockquote>
+<p>Cerca questa settimana ad amare dove &egrave; difficile, con qualcuno con cui non hai un buon rapporto per un torto fatto nel passato, o semplicemente perch&eacute; non lo conosci bene. Sarebbe una comunit&agrave; fantastica se ci fosse sempre una gara per mostrare pi&ugrave; <i>hesed</i> al prossimo! Ma soprattutto fate a gara con Ges&ugrave; Cristo. Perderai, ma lo <i>hesed</i> o l'<i>agape</i> di Ges&ugrave; per noi deve essere sempre la nostra motivazione.</p>
+<blockquote>Infatti l'amore di Cristo ci costringe, perch&eacute; siamo giunti a questa conclusione: che uno solo mor&igrave; per tutti, quindi tutti morirono; e che egli mor&igrave; per tutti, affinch&eacute; quelli che vivono non vivano pi&ugrave; per se stessi, ma per colui che &egrave; morto e risuscitato per loro (2Cor 5:14-15).</blockquote>
+
+</p>
+
+<?
+$n=1;
+require("indice.php");
+require("../../piede.php");
+?>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Word Study</name>
+<name language="it">Studio di una parola</name>
+<description>Produces a study of a word in the Logos program.</description>
+<description language="it">Produce uno studio di una parola nel programma Logos</description>
+<type>word</type>
+<version>7.00.0</version>
+<url>libronixdls:report|ActiveWord={word}|name=Libronix.BibleStudy.BibleWordStudy</url>
+<category>Logos</category>
+<image>Libronix.gif</image>
+</link>

@@ -1,0 +1,89 @@
+ErrorDocument 400 /errore.php
+ErrorDocument 401 /errore.php
+ErrorDocument 403 /errore.php
+ErrorDocument 404 /errore.php
+ErrorDocument 500 /serverrore.php
+ErrorDocument 501 /serverrore.php
+ErrorDocument 502 /serverrore.php
+ErrorDocument 503 /serverrore.php
+
+#GZIP
+SetOutputFilter DEFLATE
+AddOutputFilter DEFLATE text/plain
+AddOutputFilter DEFLATE text/xml
+AddOutputFilter DEFLATE application/xhtml+xml
+AddOutputFilter DEFLATE text/css
+AddOutputFilter DEFLATE application/xml
+AddOutputFilter DEFLATE image/svg+xml
+AddOutputFilter DEFLATE application/rss+xml
+AddOutputFilter DEFLATE application/atom_xml
+AddOutputFilter DEFLATE application/x-javascript
+AddOutputFilter DEFLATE application/x-httpd-php
+AddOutputFilter DEFLATE application/x-httpd-fastphp
+AddOutputFilter DEFLATE application/x-httpd-eruby
+AddOutputFilter DEFLATE text/html
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.pdf$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.avi$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.mov$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.mp3$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.mp4$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.rm$ no-gzip dont-vary
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch ^MSIE !no-gzip !gzip-only-text/html
+SetEnvIfNoCase Request_URI \.iso$ no-gzip dont-vary
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Video
+  ExpiresByType video/webm "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/mpeg "access plus 1 year"
+
+  # Fonts
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+
+  # CSS, JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+
+  # Others
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+    <filesmatch "\.(ico|flv|swf|eot|woff|otf|ttf|svg)$">
+        Header set Cache-Control "max-age=1209600, public"
+    </filesmatch>
+    <filesmatch "\.(jpg|jpeg|png|gif)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </filesmatch>
+    # css and js should use private for proxy caching https://developers.google.com/speed/docs/best-practices/caching#LeverageProxyCaching
+    <filesmatch "\.(css)$">
+        Header set Cache-Control "max-age=31536000, private"
+    </filesmatch>
+    <filesmatch "\.(js)$">
+        Header set Cache-Control "max-age=5000000, private"
+    </filesmatch>
+    <filesMatch "\.(x?html?|php)$">
+        Header set Cache-Control "max-age=600, private, must-revalidate"
+      </filesMatch>
+</IfModule>

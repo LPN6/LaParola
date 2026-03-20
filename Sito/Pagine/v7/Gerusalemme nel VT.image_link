@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<image>
+<file>Gerusalemme nel VT.gif</file>
+<collection>Enciclopedia biblica</collection>
+<links>
+<name x1="75" y1="39" x2="293" y2="94">Gerusalemme</name>
+<name x1="372" y1="186" x2="464" y2="211">Salomone</name>
+<name x1="640" y1="339" x2="735" y2="368">Salomone</name>
+<name x1="809" y1="263" x2="844" y2="431">Ulivi</name>
+<name x1="184" y1="446" x2="274" y2="473">Manasse</name>
+<name x1="654" y1="485" x2="728" y2="514">Neemia</name>
+<name x1="779" y1="461" x2="813" y2="622">Chidron</name>
+<name x1="473" y1="621" x2="542" y2="649">Davide</name>
+<name x1="473" y1="672" x2="524" y2="692">Ezechia</name>
+<name x1="565" y1="666" x2="587" y2="721">Siloe</name>
+<name x1="558" y1="773" x2="608" y2="793">Davide</name>
+<name x1="378" y1="5" x2="476" y2="59">Cananeel</name>
+<name x1="514" y1="545" x2="540" y2="587">Ofel</name>
+<name x1="614" y1="517" x2="714" y2="561">Ghion</name>
+<name x1="112" y1="755" x2="268" y2="785">Innom</name>
+<name x1="466" y1="915" x2="562" y2="939">En-Roghel</name>
+</links>
+</image>

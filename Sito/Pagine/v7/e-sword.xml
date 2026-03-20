@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<link>
+<name>e-sword</name>
+<description>Opens the program e-sword (if it is not open) at the current verse</description>
+<description language="it">Apri il programma e-sword (se non è aperto) al versetto attuale</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>"C:\Program Files\e-Sword\e-Sword.exe"</url>
+<url language="it">"C:\Programmi\e-Sword\e-Sword.exe"</url>
+<parameters>-v {book} {chapter}:{verse}</parameters>
+<category>Computer</category>
+<category language="it">Computer locale</category>
+<image>e-sword.gif</image>
+</link>

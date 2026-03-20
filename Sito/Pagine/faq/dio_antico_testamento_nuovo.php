@@ -1,0 +1,18 @@
+<?
+$descriz = "Il Dio dell'Antico Testamento &egrave; diverso dal Dio del Nuovo Testamento?";
+$key = "dio,antico testamento,nuovo testamento,testamento,odio,amorefaq,domande,domande comuni";
+$titolo = "Il Dio dell'Antico Testamento &egrave; diverso dal Dio del Nuovo Testamento?";
+$sezione = "Domande comuni";
+$sezioneurl = "/faq/";
+require("../capo.php");
+?>
+<h1>Il Dio dell'Antico Testamento &egrave; diverso dal Dio del Nuovo Testamento?</h1>
+<p class="primalettera">A molti sembra che il Dio nell'Antico Testamento sia un Dio di odio, di giudizio, e di guerre, mentre il Dio del Nuovo Testamento (e il messaggio di Ges&ugrave;) sia un Dio di amore, di perdono, e di pace. Mentre ci sono delle differenze nel modo in cui Dio si manifesta all'umanit&agrave; prima e dopo la venuta di Ges&ugrave; Cristo, possiamo dire che Dio &egrave; diverso nei due Testamenti sono con una lettura selettiva dei testi.</p>
+<p>Il primo giudizio da parte di Dio &egrave; la risposta al primo peccato, quello di Adamo ed Eva. Per&ograve; in mezzo all'elenco di punizioni, c'&egrave; la prima promessa della liberazione dal male (Gen 3:15). Caino &egrave; scacciato per aver ucciso suo fratello, ma Dio lo protegge dall'essere ucciso (Gen 4:15). Dio manda il diluvio perch&eacute; la terra era corrotta e piena di violenza, ma non distrugge tutto salvando la famiglia di No&egrave; e gli animali (Gen 6:8-13). Dio disperde le nazioni che vogliono giungere Dio (Gen 11:1-9), ma chiama Abramo e tramite lui fonda un nuovo popolo che sar&agrave; il suo (Gen 12:1-3; 15:4-6). Abramo e i suoi discendenti Isacco e Giacobbe sbagliano spesso, ma Dio non viene mai meno alla sua promessa. Gli Israeliti, anche dopo la loro salvezza dall'Egitto, continuano a ribellarsi a Dio, ma Dio provvede un sistema (sacrifici, sacerdoti, tabernacolo) per essere perdonati e dimorare insieme con il Dio santissimo. Il proposito di Dio per Israele era di essere una luce per le nazioni, affinch&eacute; attraverso Israele tutte le nazioni fossero benedette (Gen 12:3). Tuttavia, Israele non &egrave; mai stato quello che doveva essere, e dopo quasi 1000 anni di grazia e pazienza, Dio distrugge la nazione e fa deportare gli Israeliti. Ma la promessa e l'amore di Dio continuano, e li fa ritornare alla loro terra per un nuovo inizio.</p>
+<p>Oltre al racconto dell'amore di Dio attraverso la storia, possiamo anche elencare tanti versetti che lo esprimono esplicitamente. Solo pochissimi esempi sono Es 34:6-7; Ne 9:17; Sal 145:14-17; 146:7-9; Is 43:1-3; 54:10; Ger 17:9-10; 32:40-41; Os 3:1; Gion 3:8-10; Mi 7:18-19; Na 1:7.</p>
+<p>Dall'altra parte, nel Nuovo Testamento leggiamo della condanna e del giudizio delle persone, da parte di Ges&ugrave; e da Dio, in Mt 23; Mt 25:31-46; Lu 12:5; At 5:1-11; 2Tess 1:5-10; Ebr 10:31; 12:29; Ap 20:1-15 e molti altri brani.</p>
+<p>Tutto questo non &egrave; sorprendente, perch&eacute; tutta la Bibbia afferma che Dio non cambia (Sal 102:25-27; Mal 3:6; Giac 1:17), e gli autori del Nuovo Testamento hanno mantenuto l'insegnamento dell'Antico Testamento. La differenza fra i Testamenti &egrave; che la suprema manifestazione dell'amore e della santit&agrave; di Dio &egrave; la vita e la morte di suo Figlio, Ges&ugrave; Cristo. Per questo vediamo pi&ugrave; chiaramente nel Nuovo Testamento sia la grazia di Dio sia la sua opposizione a tutto quello che si oppone a lui e che risulta nell'eterna separazione da lui. Dio sta aspettando con pazienza che ritorniamo a lui affinch&eacute; non periamo come quelli dell'Antico Testamento (2P 3:9-10).</p>
+
+<?
+require("../piede.php");
+?>

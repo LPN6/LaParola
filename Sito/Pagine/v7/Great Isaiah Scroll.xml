@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Great Isaiah Scroll</name>
+<name language="it">Rotolo di Isaia</name>
+<description>Shows the page of this Dead Sea scroll if a reference in Isaiah is chosen, otherwise the index</description>
+<description language="it">Visualizza la pagina di questo manoscritto del Mar Morto se un riferimento in Isaia è scelto, altrimenti l'indice</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://www.ao.net/~fmoeller/qumdir.htm#Directory</url>
+<map>
+<page start="29001001" end="29001026">http://www.ao.net/~fmoeller/qum-1.htm</page>
+<page start="29001027" end="29002021">http://www.ao.net/~fmoeller/qum-2.htm</page>
+<page start="29002022" end="29003024">http://www.ao.net/~fmoeller/qum-3.htm</page>
+<page start="29003025" end="29005014">http://www.ao.net/~fmoeller/qum-4.htm</page>
+<page start="29005015" end="29006007">http://www.ao.net/~fmoeller/qum-5.htm</page>
+<page start="29006008" end="29007015">http://www.ao.net/~fmoeller/qum-6.htm</page>
+<page start="29007016" end="29008008">http://www.ao.net/~fmoeller/qum-7.htm</page>
+<page start="29008009" end="29009011">http://www.ao.net/~fmoeller/qum-8.htm</page>
+<page start="29009012" end="29010014">http://www.ao.net/~fmoeller/qum-9.htm</page>
+<page start="29010015" end="29011012">http://www.ao.net/~fmoeller/qum-10.htm</page>
+<page start="29011013" end="29014001">http://www.ao.net/~fmoeller/qum-11.htm</page>
+<page start="29014002" end="29014029">http://www.ao.net/~fmoeller/qum-12.htm</page>
+<page start="29014030" end="29016014">http://www.ao.net/~fmoeller/qum-13.htm</page>
+<page start="29016015" end="29018017">http://www.ao.net/~fmoeller/qum-14.htm</page>
+<page start="29018018" end="29019023">http://www.ao.net/~fmoeller/qum-15.htm</page>
+<page start="29019024" end="29021015">http://www.ao.net/~fmoeller/qum-16.htm</page>
+<page start="29021016" end="29022024">http://www.ao.net/~fmoeller/qum-17.htm</page>
+<page start="29022025" end="29024004">http://www.ao.net/~fmoeller/qum-18.htm</page>
+<page start="29024005" end="29025005">http://www.ao.net/~fmoeller/qum-19.htm</page>
+<page start="29025006" end="29026018">http://www.ao.net/~fmoeller/qum-20.htm</page>
+<page start="29026019" end="29028002">http://www.ao.net/~fmoeller/qum-21.htm</page>
+<page start="29028003" end="29028024">http://www.ao.net/~fmoeller/qum-22.htm</page>
+<page start="29028025" end="29029021">http://www.ao.net/~fmoeller/qum-23.htm</page>
+<page start="29029022" end="29030020">http://www.ao.net/~fmoeller/qum-24.htm</page>
+<page start="29030021" end="29031004">http://www.ao.net/~fmoeller/qum-25.htm</page>
+<page start="29031005" end="29033001">http://www.ao.net/~fmoeller/qum-26.htm</page>
+<page start="29033002" end="29033024">http://www.ao.net/~fmoeller/qum-27.htm</page>
+<page start="29034001" end="29036002">http://www.ao.net/~fmoeller/qum-28.htm</page>
+<page start="29036003" end="29036020">http://www.ao.net/~fmoeller/qum-29.htm</page>
+<page start="29036021" end="29037024">http://www.ao.net/~fmoeller/qum-30.htm</page>
+<page start="29037025" end="29038008">http://www.ao.net/~fmoeller/qum-31.htm</page>
+<page start="29038009" end="29040002">http://www.ao.net/~fmoeller/qum-32.htm</page>
+<page start="29040003" end="29040028">http://www.ao.net/~fmoeller/qum-33.htm</page>
+<page start="29040029" end="29041023">http://www.ao.net/~fmoeller/qum-34.htm</page>
+<page start="29041024" end="29042017">http://www.ao.net/~fmoeller/qum-35.htm</page>
+<page start="29042018" end="29043020">http://www.ao.net/~fmoeller/qum-36.htm</page>
+<page start="29043021" end="29044023">http://www.ao.net/~fmoeller/qum-37.htm</page>
+<page start="29044024" end="29045021">http://www.ao.net/~fmoeller/qum-38.htm</page>
+<page start="29045022" end="29047011">http://www.ao.net/~fmoeller/qum-39.htm</page>
+<page start="29047012" end="29049004">http://www.ao.net/~fmoeller/qum-40.htm</page>
+<page start="29049005" end="29050001">http://www.ao.net/~fmoeller/qum-41.htm</page>
+<page start="29050002" end="29051013">http://www.ao.net/~fmoeller/qum-42.htm</page>
+<page start="29051014" end="29052012">http://www.ao.net/~fmoeller/qum-43.htm</page>
+<page start="29052013" end="29054004">http://www.ao.net/~fmoeller/qum-44.htm</page>
+<page start="29054005" end="29055008">http://www.ao.net/~fmoeller/qum-45.htm</page>
+<page start="29055009" end="29057002">http://www.ao.net/~fmoeller/qum-46.htm</page>
+<page start="29057003" end="29058006">http://www.ao.net/~fmoeller/qum-47.htm</page>
+<page start="29058007" end="29059017">http://www.ao.net/~fmoeller/qum-48.htm</page>
+<page start="29059018" end="29061004">http://www.ao.net/~fmoeller/qum-49.htm</page>
+<page start="29061005" end="29063004">http://www.ao.net/~fmoeller/qum-50.htm</page>
+<page start="29063005" end="29065004">http://www.ao.net/~fmoeller/qum-51.htm</page>
+<page start="29065005" end="29065018">http://www.ao.net/~fmoeller/qum-52.htm</page>
+<page start="29065019" end="29066014">http://www.ao.net/~fmoeller/qum-53.htm</page>
+<page start="29066015" end="29066024">http://www.ao.net/~fmoeller/qum-54.htm</page>
+</map>
+<category>Manuscripts</category>
+<category language="it">Manoscritti</category>
+</link>

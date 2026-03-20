@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Google</name>
+<description>The word or words in Google</description>
+<description language="it">La parola o parole in Google</description>
+<type>word</type>
+<version>7.00.0</version>
+<url>http://www.google.com/search?q={word}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<image>Google.gif</image>
+</link>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<image>
+<file>Palestina nel VT.gif</file>
+<collection>Enciclopedia biblica</collection>
+<links>
+<name x1="268" y1="28" x2="341" y2="56">Sidone</name>
+<name x1="589" y1="64" x2="689" y2="94">Damasco</name>
+<name x1="431" y1="158" x2="526" y2="218">Dan</name>
+<name x1="474" y1="262" x2="591" y2="287">Manasse</name>
+<name x1="451" y1="379" x2="554" y2="406">Galilea</name>
+<name x1="235" y1="168" x2="286" y2="194">Tiro</name>
+<name x1="243" y1="270" x2="323" y2="295">Ascer</name>
+<name x1="325" y1="317" x2="430" y2="343">Neftali</name>
+<name x1="235" y1="412" x2="355" y2="437">Zabulon</name>
+<name x1="334" y1="481" x2="439" y2="504">Issacar</name>
+<name x1="238" y1="575" x2="360" y2="575">Manasse</name>
+<name x1="317" y1="630" x2="394" y2="658">Sichem</name>
+<name x1="425" y1="590" x2="525" y2="640">Giordano</name>
+<name x1="450" y1="680" x2="506" y2="706">Gad</name>
+<name x1="583" y1="686" x2="685" y2="714">Ammon</name>
+<name x1="301" y1="718" x2="397" y2="744">Efraim</name>
+<name x1="63" y1="693" x2="125" y2="724">Ioppe</name>
+<name x1="123" y1="752" x2="180" y2="780">Dan</name>
+<name x1="248" y1="735" x2="300" y2="760">Betel</name>
+<name x1="242" y1="780" x2="379" y2="801">Beniamino</name>
+<name x1="252" y1="823" x2="384" y2="845">Gerusalemme</name>
+<name x1="390" y1="786" x2="455" y2="808">Gerico</name>
+<name x1="470" y1="875" x2="558" y2="900">Ruben</name>
+<name x1="563" y1="1044" x2="641" y2="1071">Moab</name>
+<name x1="367" y1="919" x2="434" y2="972">Morto</name>
+<name x1="368" y1="1202" x2="444" y2="1229">Esaù</name>
+<name x1="1" y1="899" x2="96" y2="924">Filistia</name>
+<name x1="28" y1="935" x2="79" y2="960">Gaza</name>
+<name x1="268" y1="854" x2="370" y2="875">Betlemme</name>
+<name x1="176" y1="928" x2="254" y2="949">Giuda</name>
+<name x1="261" y1="927" x2="322" y2="961">Ebron</name>
+<name x1="91" y1="1022" x2="200" y2="1045">Simeone</name>
+<name x1="373" y1="33" x2="507" y2="83">Libano</name>
+<name x1="447" y1="85" x2="531" y2="107">Ivveo</name>
+<name x1="515" y1="115" x2="603" y2="143">Ermon</name>
+<name x1="524" y1="355" x2="608" y2="377">Astarot</name>
+<name x1="508" y1="487" x2="588" y2="513">Ramot</name>
+<name x1="119" y1="381" x2="209" y2="411">Carmelo</name>
+<name x1="137" y1="449" x2="183" y2="475">Dor</name>
+<name x1="359" y1="215" x2="427" y2="241">Cades</name>
+<name x1="352" y1="285" x2="424" y2="311">Asor</name>
+<name x1="356" y1="411" x2="418" y2="435">Tabor</name>
+<name x1="353" y1="439" x2="427" y2="459">En-Dor</name>
+<name x1="325" y1="459" x2="405" y2="479">Sunem</name>
+<name x1="271" y1="487" x2="331" y2="505">Izreel</name>
+<name x1="197" y1="451" x2="297" y2="481">Meghiddo</name>
+<name x1="277" y1="507" x2="361" y2="525">Ghilboa</name>
+<name x1="305" y1="527" x2="417" y2="547">Bet-Sean</name>
+<name x1="256" y1="617" x2="308" y2="637">Ebal</name>
+<name x1="221" y1="637" x2="305" y2="657">Gherizim</name>
+<name x1="420" y1="563" x2="476" y2="587">Iabes</name>
+<name x1="582" y1="605" x2="656" y2="659">Iabboc</name>
+<name x1="560" y1="735" x2="628" y2="761">Rabba</name>
+<name x1="179" y1="691" x2="269" y2="735">Timnat-Sera</name>
+<name x1="329" y1="697" x2="371" y2="717">Silo</name>
+<name x1="328" y1="745" x2="406" y2="769">Ghilgal</name>
+<name x1="126" y1="783" x2="198" y2="803">Ghezer</name>
+<name x1="191" y1="801" x2="267" y2="817">Gabaon</name>
+<name x1="287" y1="761" x2="313" y2="781">Ai</name>
+<name x1="306" y1="801" x2="370" y2="821">Gheba</name>
+<name x1="473" y1="803" x2="575" y2="831">Bet-Peor</name>
+<name x1="461" y1="981" x2="529" y2="1033">Arnon</name>
+<name x1="101" y1="809" x2="165" y2="831">Ecron</name>
+<name x1="75" y1="831" x2="139" y2="851">Asdod</name>
+<name x1="56" y1="869" x2="160" y2="889">Ascalon</name>
+<name x1="98" y1="891" x2="140" y2="911">Gat</name>
+<name x1="165" y1="849" x2="227" y2="875">Libna</name>
+<name x1="169" y1="905" x2="241" y2="927">Lachis</name>
+<name x1="129" y1="949" x2="189" y2="975">Debir</name>
+<name x1="261" y1="953" x2="359" y2="977">En-Ghedi</name>
+<name x1="173" y1="1045" x2="287" y2="1063">Beer-Sceba</name>
+<name x1="219" y1="1063" x2="297" y2="1085">Corma</name>
+<name x1="55" y1="1177" x2="137" y2="1207">Neghev</name>
+</links>
+</image>

@@ -1,0 +1,43 @@
+<?
+$descriz = "10 motivi per credere che la Bibbia sia vera";
+$key = "affidabilità, verità, apologetica";
+$titolo = "10 motivi per credere nella Bibbia";
+$sezione = "Articoli";
+$sezioneurl = "/intro/";
+require("../capo.php");
+include("../funzioni.php");
+?>
+<h1>10 motivi per credere nella Bibbia</h1>
+<h2>1. La sua onest&agrave;</h2>
+<p>La Bibbia &egrave; molto onesta. Parla di Giacobbe, il padre del suo &quot;popolo scelto&quot;, come ingannatore. Descrive Mos&egrave;, che ha dato la legge, come un leader riluttante e insicuro di s&eacute;, e che, nel suo primo tentativo di aiutare il suo popolo, uccise un uomo e poi fugg&igrave; nel deserto. Racconta di Davide, non solo come re, generale e leader spirituale di Israele, ma anche come uno che ha preso la moglie di un altro e poi, per coprire il suo peccato, cospir&ograve; per far uccidere il marito. Ad un punto, le Scritture accusano il popolo di Dio, la nazione di Israele, di essere cos&igrave; malvagio che Sodoma e Gomorra sono bravi in confronto (Ezechiele 16:46-52). La Bibbia rappresenta la natura umana come ostile a Dio. Predice un futuro pieno di guai. Insegna che la via al cielo &egrave; stretta e che la via per l'inferno &egrave; larga. Le Scritture chiaramente non sono state scritte per quelli che vogliono risposte semplici, o un punto di vista facile e ottimista della religione e della natura umana.</p>
+
+<h2>2. La sua preservazione</h2>
+<p>Mentre lo stato moderno di Israele nasceva dopo migliaia di anni di dispersione, un pastore beduino scopr&igrave; uno dei tesori archeologici pi&ugrave; importanti. In una grotta nella parte nord-occidentale del mar Morto, un vaso rotto rese documenti che erano rimasti nascosti per due millenni. Altre scoperte produssero manoscritti che risalivano a 1.000 anni prima delle copie che erano le pi&ugrave; vecchie conosciute in precedenza. Uno dei pi&ugrave; importanti era una copia di Isaia. Rivel&ograve; un documento che &egrave; in pratica uguale al libro di Isaia che appare nelle nostre Bibbie. I rotoli del mar Morto screditarono le affermazioni di quelli che credevano che la Bibbia originale era stata persa e manomessa.</p>
+
+<h2>3. Le sue affermazioni su s&eacute; stessa</h2>
+<p>&Egrave; importante sapere quello che la Bibbia dice di s&eacute; stessa. Se gli autori delle Scritture non hanno creduto di parlare per Dio, sarebbe presuntuoso da parte nostra credere cos&igrave; di loro. Avremmo anche un problema diverso. Avremmo una raccolta di misteri non risolti, inclusi in una letteratura storica e etica, ma non avremmo un libro che ha ispirato la costruzioni di migliaia di chiese e di sinagoghe in tutto il mondo. Una Bibbia che non affermasse di parlare per Dio non potrebbe essere il fondamento della fede di miriadi di Cristiani e Giudei (2Pietro 1:16-21). Ma con molta evidenza e tanti argomenti, gli scrittori della Bibbia affermavano di essere stati ispirati da Dio. Siccome milioni hanno affidato il loro presente e il loro futuro a queste affermazioni, la Bibbia non pu&ograve; essere una 'buon libro' se i suoi scrittori hanno sempre mentito sulla fonte delle loro informazioni e ingannato i loro lettori.</p>
+
+<h2>4. I suoi miracoli</h2>
+<p>L'esodo di Israele dall'Egitto d&agrave; una base storica per credere che Dio abbia rivelato s&eacute; stesso a Israele. Se il mar Rosso non fosse diviso come Mos&egrave; disse che era successo, l'Antico Testamento perderebbe la sua autorit&agrave; di parlare da parte di Dio. Il Nuovo Testamento dipende ugualmente sui miracoli. Se Ges&ugrave; non fosse risorto dai morti, l'apostolo Paolo ammise che la fede cristiana sarebbe stata costruita su una bugia (1Corinzi 15:14-17). Per dimostrare la sua credibilit&agrave;, il Nuovo Testamento nomin&ograve; i suoi testimoni, e fece cos&igrave; in un periodo che rendeva possibile il controllo di queste affermazioni (1Corinzi 15:1-8). Molti dei testimoni furono martirizzati, non per convinzioni astratti di moralit&agrave; o di spiritualit&agrave;, ma per la loro affermazione che Ges&ugrave; era risorto dai morti. Mentre il martirio non &egrave; insolito, quello che &egrave; importante &egrave; la base di quello per cui queste persone diedero la propria vita. Molti muoiono per quello che credono di essere la verit&agrave;. Ma persone non muoiono per quello che sanno di essere una bugia.</p>
+
+<h2>5. La sua unit&agrave;</h2>
+<p>40 scrittori diversi scrissero i libri della Bibbia in un periodo di circa 1.600 anni. 400 anni di silenzio separano i libri dell'Antico Testamento da quelli del Nuovo Testamento. Eppure, da Genesi ad Apocalisse, tutti gli scrittori e tutti i libri racconto un'unica storia, che man mano si sviluppa. Insieme, danno rispose coerenti alle domande pi&ugrave; importanti che possiamo porre: Perch&eacute; ci siamo? Come possiamo affrontare le nostre paure? Come possiamo vivere in pace con gli altri? Come possiamo alzarci sopra le nostre circostanze e tenere viva la speranza? Come possiamo fare pace con il nostro Creatore? Le risposte costanti della Bibbia a queste domande dimostrano che le Scritture non sono molti libri, ma uno solo.</p>
+
+<h2>6. La sua esattezza storica e geografica</h2>
+<p>Nel passato, molti hanno dubitato dell'esattezza storica e geografica della Bibbia. Per&ograve;, archeologici moderni hanno ripetutamente trovato evidenza delle persone, dei luoghi e delle societ&agrave; menzionati nelle Scritture. Diverse volte, le descrizioni nel racconto biblico si sono dimostrati pi&ugrave; affidabili delle speculazioni degli studiosi. Il visitatore moderno ai musei e ai paesi della Bibbia non pu&ograve; non essere impressionato dallo sfondo geografico e storico del testo biblico che veramente esisteva.</p>
+
+<h2>7. La sua approvazione da parte di Cristo</h2>
+<p>Molti hanno parlato bene della Bibbia, ma nessuna approvazione &egrave; cos&igrave; forte quanto quella di Ges&ugrave; di Nazaret. Raccomand&ograve; la Bibbia non solo con le sue parole, ma anche con la sua vita. In momenti di tentazione personale, di insegnamento pubblico e di sofferenza personale, rese chiaro il fatto che credeva che l'Antico Testamento era pi&ugrave; di una tradizione nazionale (Matteo 4:1-11; 5:17-19). Credeva che la Bibbia fosse un libro che parlava di s&eacute; stesso. Ai Giudei disse, &quot;Voi investigate le Scritture, perch&eacute; pensate d'aver per mezzo di esse vita eterna, ed esse sono quelle che rendono testimonianza di me; eppure non volete venire a me per aver la vita!&quot; (Giovanni 5:39-40).</p>
+
+<h2>8. Le sue profezie</h2>
+<p>Fin dal tempo di Mos&egrave;, la Bibbia predisse degli eventi in cui nessuno voleva credere. Prima che Israele entrasse nella terra promessa, Mos&egrave; predisse che Israele sarebbe stato infedele, che avrebbe perso la terra che Dio gli dava, che sarebbe disperso in tutto il mondo, raccolto e poi ristabilito (Deuteronomio 28-31). Centrale alle profezie dell'Antico Testamento era la promessa di un Messia che avrebbe salvato il popolo di Dio dai loro peccati e poi portare il giudizio e la pace al mondo intero.</p>
+
+<h2>9. La sua sopravvivenza</h2>
+<p>I libri di Mos&egrave; furono scritti 500 anni prima delle prime scritture ind&ugrave;. Mos&egrave; scrisse il libro della Genesi 2000 anni prima che Muhammad scrivesse il Corano. In tutto questo periodo, nessun libro &egrave; stato cos&igrave; amato e cos&igrave; odiato quanto la Bibbia. Nessun altro libro &egrave; stato comprato, studiato e citato quanto la Bibbia. Mentre milioni di altri libri sono stampati e dimenticati, la Bibbia &egrave; ancora il libro con cui gli altri sono misurati. Bench&eacute; sia trascurata da quelli a cui non piace il suo insegnamento, la Bibbia &egrave; tutt'oggi il libro fondamentale dalla civilizzazione occidentale - anche se in realt&agrave; &egrave; un libro del Medio Oriente.</p>
+
+<h2>10. Il suo potere di cambiare vite</h2>
+<p>In tutta la storia, ci sono state delle persone che la Bibbia ha cambiato. I Dieci Comandamenti sono stati una fonte di guida morale per milioni di persone. I Salmi di Davide hanno confortato in periodi di difficolt&agrave; e perdita. Il Sermone sul Monte di Ges&ugrave; ha dato a molti l'antidoto all'orgoglio e al legalismo. La descrizione dell'amore da parte di Paolo in (1Corinzi 13) ha ammorbidito cuori arrabbiati. Le vite cambiate di persone come l'apostolo Paolo, san Agostino, Martino Lutero, John Newton e Lev Tolstoj illustrano la differenza che la Bibbia pu&ograve; fare. Addirittura intere nazioni e trib&ugrave;, come i Celti dell'Irlanda, i Vichinghi della Norvegia, o gli Indiani Auca dell'Ecuador, sono state trasformate dalla Parola di Dio e dalla vita unica e dal significato di Ges&ugrave; Cristo.</p>
+
+<?
+require("../piede.php");
+?>

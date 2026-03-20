@@ -1,0 +1,60 @@
+<?
+include("../../conn.php");
+include("../../vistesto.php");
+
+$descriz = "Salmo 71";
+$key = "Salmo 71";
+$titolo = "Salmo 71";
+$sezione = "Strumenti";
+require("../../capo.php");
+?>
+<h1>Salmo 71</h1>
+
+
+<p>In questo Salmo, un uomo anziano che si trova in difficolt&agrave; medita sul suo rapporto con Dio. Forse molti che leggono questo testo ritengono che i sentimenti espressi non sono i loro. Dopo tutto, pochi si considerano vecchi; sia che siamo adolescenti sia che siamo in pensione, i vecchi sono sempre quelli con 10 o 20 anni pi&ugrave; di noi! In ogni caso, questo Salmo pu&ograve; anche aiutare i giovani in due modi. Prima di tutto, per preparare per il futuro. Molti Cristiani, dopo aver seguito Dio fedelmente per tanti anni, cadono all'ultimo ostacolo. Le tentazioni o le preoccupazioni della vecchiaia prendono il sopravvento, e non vivono pi&ugrave; in modo santo. In secondo luogo, questo Salma pu&ograve; aiutare i giovani a avere un giusto rapporto con gli anziani, per capire l'aiuto di cui hanno bisogno e l'incoraggiamento che possono dare ai giovani.</p>
+<p>Come &egrave; essere anziano? Secondo un sondaggio, le pi&ugrave; grandi preoccupazioni erano la perdita della memoria, non poter guidare, e la malattia grave. Dall'altra parte, c'erano gli aspetti positivi di avere pi&ugrave; tempo libero per passatempi, per il volontariato, e per viaggiare. Gli anziani cristiani, comunque, devono avere sentimenti e atteggiamenti diversi verso la vecchiaia. Nel Salmo 71, l'autore riflette sul suo rapporto con Dio e scrive di sei cose che fa, sei cose che anche noi dobbiamo fare da vecchi.</p>
+
+<h2>1. Rifugiarsi nella rocca di Dio (Salmo 71:1-4)</h2>
+<p>Questa prima parte &egrave; gi&agrave; stata approfondita in Salmo 46 e tutti, non solo gli anziani, possono e devono rifugiarsi nella rocca che &egrave; Dio. Per&ograve;, gli anziani hanno spesso delle difficolt&agrave; addizionali, alcuni di cui sono state menzionate nel sondaggio. Per esempio, la salute, la famiglia, la solitudine, e la nostalgia della giovinezza. Nel caso del Salmista, c'erano le difficolt&agrave; causate dalle persone empie, perverse, e violente (Sal 71:4). In queste difficolt&agrave;, confida in Dio, chiedendo:
+<ol><li>di non essere confuso (Sal 71:1), cio&egrave; che non vengano i dubbi se Dio ci sia o se Dio possa aiutare nei momenti difficili, o se vinceranno gli empi o quelli che confidano in Dio</li>
+<li>di essere liberato (Sal 71:2,4)</li>
+<li>che Dio sia una rocca in cui pu&ograve; trovare rifugiare, anche se sa gi&agrave; che Dio &egrave; la sua fortezza (Sal 71:3)</li></ol>
+<p>L'anziano, nonostante le difficolt&agrave; fisiche dovute all'et&agrave;, dovr&agrave; sempre cantare il Salmo 73:26.</p>
+<blockquote>La mia carne e il mio cuore possono venir meno,<br />
+ma Dio &egrave; la rocca del mio cuore e la mia parte di eredit&agrave;, in eterno.</blockquote>
+
+<h2>2. Riflettere sui ricordi di Dio (Salmo 71:5-8)</h2>
+<p>Il sondaggio ha dato alcuni vantaggi degli anziani. Per gli anziani, ce n'&egrave; uno ancora pi&ugrave; importante e utile.</p>
+<p>L'anziano cristiano ha accumulato tante esperienze nella vita, non solo nell'ambito lavorativo e familiare, ma soprattutto nella vita spirituale (supponendo che segue Ges&ugrave; Cristo da molti anni, invece di essere convertito da poco). Pu&ograve; guardare indietro alla sua infanzia e affermare che Dio &egrave; sempre stato la sua speranza e la sua fiducia (Salmo 71:5). In migliaia di circostanze diverse, nel bene e nel male, Dio l'ha sempre sostenuto. Anzi, anche prima della sua infanzia, quando non era cosciente da Dio, gi&agrave; dal grembo della madre, Dio &egrave; stato il sostegno del Salmista (Salmo 71:6). La dipendenza da Dio e l'aiuto di Dio erano cos&igrave; forti e cos&igrave; evidenti che il Salmista era considerato un prodigio per molti (Salmo 71:7). Anch'io conosco delle persone che sono rimaste fedeli e ferme nella fede per decenni, nonostante il fatto che avevano vissuto con malattie e difficolt&agrave; familiari e altro. Dio &egrave; sempre stato il loro rifugio sicuro e sono prodigi! Spero che anche tu conosca tali persone, che ti possono essere un esempio e un incoraggiamento nella vita. Spero ancora di pi&ugrave; che tu sia o sarai un tale prodigio della fede.</p>
+<p>Il Salmista ricorda tutto questo, per dirsi: ora che sono vecchio, perch&eacute; dovrei pensare che Dio non mi sosterr&agrave;? Che non sar&agrave; un rifugio sicuro? Che la mia speranza in lui sar&agrave; delusa? Se Dio ha gi&agrave; provveduto sempre, sapr&agrave; e vorr&agrave; provvedere nel futuro. Se Dio mi ha gi&agrave; protetto sempre, sapr&agrave; e vorr&agrave; proteggermi nel futuro.</p>
+<p>Il Salmista si ricorda, per continuare a porre la speranza. Si ricorda anche per avere pi&ugrave; motivi di lode, per non cadere nella tentazione di pensare di farcela da solo, di vantarsi della sua bravura, affinch&eacute; a Dio vada sempre la sua lode (Salmo 71:6) e affinch&eacute; la sua bocca sia piena della lode di Dio e esalti ogni giorno la gloria di Dio (Salmo 71:8).</p> 
+
+<h2>3. Richiedere di rimanere con Dio (Salmo 71:9-13)</h2>
+<p>Il Salmista era in difficolt&agrave;, i suoi nemici e avversari sparlavano di lui e tramavano contro di lui. &ldquo;A Dio non interesse un povero vecchietto come lui. &Egrave; il tempo dei giovani!&rdquo; (Salmo 71:10-11).</p>
+<p>Il Salmista sapeva che le calunnie non erano vere. Dio l'aveva sostenuto fin dalla giovent&ugrave;, l'avrebbe sostenuto ancora. Quindi lui prega che Dio rimanga con lui (Salmo 71:9,12), sapendo che era la volont&agrave; di Dio di non abbandonarlo. A Dio piace la preghiera di dipendenza, piuttosto della presunzione di prendere per scontato la sua presenza.</p>
+<p>Non sappiamo le circostanze in cui il Salmo &egrave; stato scritto, e neanche l'autore. Per&ograve;, un esempio dell'insegnamento del Salmo &egrave; la vecchiaia di Davide. Fu incoronato a 30 anni e regn&ograve; 40, per cui mor&igrave; a 70 anni (2Sam 5:4). Negli ultimi 10 anni del suo regno, cio&egrave; nella sua vecchiaia di pi&ugrave; di 60 anni, sub&igrave; due ribellioni, una del figlio Absalom e una di Seba. In tutte e due le ribellioni Davide fu scacciato da Gerusalemme, lontano dalla presenza di Dio nel tabernacolo. Possiamo immaginare che i ribelli sparlavano di Davide, affermando che non era pi&ugrave; degno o capace di regnare, che ci voleva un re pi&ugrave; giovane, che Dio l'aveva abbandonato. Per&ograve;, in quei periodi di difficolt&agrave;, Dio rimase fedele a Dio, e Dio rimase fedele a Davide non abbandonandolo ma invece soccorrendolo.</p>
+<p>Molti anziani al giorno d'oggi sono veramente abbandonati da tutti, soprattutto dalla famiglia. Se tu, da anziano, ti trovi o ti troverai abbandonato da tutti, ricordati e richiedere di rimanere con Dio, e Dio non ti abbandoner&agrave;. E se hai familiari anziani, ricorda che &ldquo;se uno non provvede ai suoi, e in primo luogo a quelli di casa sua, ha rinnegato la fede ed &egrave; peggiore di un incredulo&rdquo; (1Tim 5:8, parlando delle vedove ma il principio vale per tutta la famiglia).</p>
+
+<h2>4. Raccontare i prodigi di Dio (Salmo 71:14-18)</h2>
+<p>Come scritto qui sopra nella seconda sezione, un vantaggio dell'anziano &egrave; che ha pi&ugrave; ricordi del sostegno di Dio, e quindi ha pi&ugrave; motivi per lodare Dio a cui aggiunger&agrave; innumerevoli altri. Poveri giovani, che hanno potuto abbracciare poco di quale sia la larghezza, la lunghezza, l'altezza e la profondit&agrave; dell'amore di Cristo che sorpassa ogni conoscenza (Ef 3:19-20). I giovani hanno un gran banchetto sul tavolo a cui sono seduti, ma sanno mangiare solo il pane e l'acqua che si trovano proprio davanti a s&eacute;.</p>
+<p>Per questo motivo, aver sperimentato di pi&ugrave; della bont&agrave; e della grandezza di Dio non &egrave; solo un vantaggio dell'anziano e un motivo di pi&ugrave; lode, ma un compito e una responsabilit&agrave; di insegnare alla prossima generazione (ai giovani) e a quelle successive i prodigi e la potenza di Dio (Salmo 71:18). Ai figli e ai nipoti, a altri nella chiesa e alle persone pi&ugrave; lontane.</p>
+<p>Il sondaggio citato nell'introduzione aveva ragione, gli anziani (se in pensione) hanno pi&ugrave; tempo. Ma purtroppo questo tempo &egrave; spesso speso male sui propri piaceri o sulla oziosit&agrave;. Non devi dire, &ldquo;Finalmente sono in pensione, posso rilassarmi, guardare pi&ugrave; TV, dedicarmi ai passatempi, fare dei viaggi divertenti&rdquo;, ma, &ldquo;Finalmente sono in pensione, posso impegnarmi di pi&ugrave;, pregare di pi&ugrave;, dedicarmi all'incoraggiamento dei giovani, fare dei viaggi per aiutare altri Cristiani&rdquo;.</p>
+<p>Paolo, quando stava per essere ucciso, aveva finito la sua corsa, aveva solo la corona davanti a s&eacute; (2Tim 4:6-8). Ma non smise di insegnare e di incoraggiare i giovani: il resto di 2Tim 4 &egrave; pieno di istruzioni per i colleghi, e scrisse a Timoteo per incoraggiarlo. Il principio che segu&igrave; fino al giorno della sua morte &egrave; quello che spieg&ograve; a Timoteo: &ldquo;Le cose che hai udite da me in presenza di molti testimoni, affidale a uomini fedeli, che siano capaci di insegnarle anche ad altri.&rdquo; (2Tim 2:2).</p>
+
+<h2>5. Risalire per la risurrezione di Dio (Salmo 71:19-21)</h2>
+<p>Non possiamo parlare dei sentimenti della vecchiaia senza parlare anche della morte. Cosa ne pensava il Salmista, ora che la sua morte era pi&ugrave; vicina e pi&ugrave; sentita che da giovane?</p>
+<p>Prima di tutto, il Salmista si ricorda la giustizia e le grandi cose di Dio (Salmo 71:19). Perch&eacute;?</p>
+<p>Se ricordi tutte le grandi cose fatte da Dio, perch&eacute; dovresti pensare che la morte &egrave; troppo grande per Dio? Dio che ha creato tutto, Dio che ha dato a te la vita, non lo potr&agrave; fare di nuovo? Dio che ha risuscitato Ges&ugrave; Cristo dai morti, non lo potr&agrave; fare anche per te?</p>
+<p>Se ricordi la giustizia di Dio, perch&eacute; dovresti pensare che non mostrer&agrave; la sua giustizia verso di te anche dopo la tua morte? Se Dio ha fatto delle promesse di non abbandonarti mai, che sarai suo figlio per sempre, che ha fatto attraversare molte e gravi difficolt&agrave; nonostante questo rapporto, non potr&agrave; darti di nuovo la vita, farti risalire dalla morte (Salmo 71:20), e consolarti anche nella tua morte (Salmo 71:21)?</p>
+<p>Ges&ugrave; disse ai sadducei, cio&egrave; dei sacerdoti che non credevano nella risurrezione, che Dio aveva detto a Mos&egrave;, "Io sono il Dio di Abraamo, il Dio di Isacco e il Dio di Giacobbe". Poi Ges&ugrave; comment&ograve;, &ldquo;egli non &egrave; il Dio dei morti, ma dei vivi&rdquo; (Mt 22:32). Se Dio ha mostrato per tutta la tua vita di voler essere il tuo Dio, non lascer&agrave; che un piccolo impedimento come la morte terminer&agrave; il suo progetto. E non vuole un rapporto con dei morti, ma con i vivi.</p>
+
+<h2>6. Rallegrarsi per il riscatto di Dio (Salmo 71:22-24)</h2>
+<p>Ci sono tante cose che i giovani possono fare meglio o di pi&ugrave; che gli anziani: correre, riflettere, stare in salute, prendersi cura degli altri, e cos&igrave; via. Per&ograve;, gli anziani possono ricordare pi&ugrave; esperienze della benedizione di Dio, della sua grazia, grandezza, e giustizia, e quindi possono celebrare Dio meglio, possono cantare, lodare, esultare, e raccontare agli altri di pi&ugrave; dei giovani (Salmo 71:24).</p>
+<p>Forse conosci degli anziani cinici, brontoloni, o scontrosi. O degli anziani passivi, annoiati, che aspettano solo la morte. Non deve essere cos&igrave; se rifugi nella rocca di Dio, rifletti sui ricordi di Dio, richiedi di rimanere con Dio, racconti i prodigi di Dio, sai che risalirai per la risurrezione di Dio, e ti rallegri per il riscatto di Dio. Se hai avuto 1000 motivi per rallegrarti per la fedelt&agrave; di Dio in tutta la vita, ne avrai ancora altri nel tramonto della tua vita, e infinitamente di pi&ugrave; durante l'eternit&agrave; in cui canterai le sue lodi e lo glorificherai.</p>
+
+<?
+$n=3;
+require("indice.php");
+require("../../piede.php");
+?>
+

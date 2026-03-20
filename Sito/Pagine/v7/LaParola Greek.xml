@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>LaParola</name>
+<description>Show a verse in various Greek texts, with variants and allusions in the Fathers</description>
+<description language="it">Mostra un versetto in diversi testi greci, con varianti e allusioni nei Padri</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://www.laparola.net/greco/index.php?rif1={libronumero73}&amp;rif2={capitolo}:{versetto}</url>
+<category>Hebrew and Greek texts</category>
+<category language="it">Testi ebraici e greci</category>
+<image>LaParola.gif</image>
+</link>

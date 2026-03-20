@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Dictionary</name>
+<name language="it">Dizionario</name>
+<description>Look up word in the default dictionary of the Logos program</description>
+<description language="it">Cerca una parola nel dizionario predefinito del programma Logos</description>
+<type>word</type>
+<version>7.00.0</version>
+<url>libronixdls:keylink|ref=[en]text:{word}</url>
+<language>en</language>
+<category>Logos</category>
+<image>Libronix.gif</image>
+</link>

@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE versioni [
+<!ELEMENT versioni (file+)>
+<!ELEMENT file (nomeFile, componente, versione, url, dimensione, tipo)>
+<!ELEMENT componente (#PCDATA)>
+<!ELEMENT descrizione (#PCDATA)>
+<!ELEMENT versione (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT dimensione (#PCDATA)>
+<!ELEMENT tipo (#PCDATA)> 
+]> 
+<versioni>
+<cache>false</cache>
+<file>
+<componente>Nuova Riveduta</componente>
+<descrizione>La Nuova Riveduta sui testi originali (edizione del 2006), a cura della Società Biblica di Ginevra.</descrizione>
+<versione>1.1.48</versione>
+<motivo>Diverse correzioni</motivo>
+<url>https://www.laparola.net/javafile/nuova_riveduta.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/nuova_riveduta.zip</url2>
+<dimensione>2523425</dimensione>
+<dimensione2>3543752</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Nuova Riveduta (1994)</componente>
+<descrizione>La Nuova Riveduta sui testi originali (edizione del 1994), a cura della Società Biblica di Ginevra.</descrizione>
+<versione>1.1.49</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/nuova_riveduta_(1994).lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/nuova_riveduta_(1994).zip</url2>
+<dimensione>2790910</dimensione>
+<dimensione2>3642753</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>C.E.I.</componente>
+<descrizione>La versione C.E.I., seconda edizione (1974), a cura della Conferenza Episcopale Italiana. La Bibbia di Gerusalemme ha lo stesso testo, con l'aggiunta di alcune note prese dalla Bibbia di Gerusalemme francese. È una versione approvata dalla Chiesa cattolica romana.</descrizione>
+<versione>1.1.40</versione>
+<motivo>Diverse correzioni</motivo>
+<url>https://www.laparola.net/javafile/c.e.i..lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/c.e.i..zip</url2>
+<dimensione>2829939</dimensione>
+<dimensione2>3945672</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Nuova Diodati</componente>
+<descrizione>La Nuova Diodati, Revisione (1991), edizione La Buona Novella - Brindisi.</descrizione>
+<versione>1.1.42</versione>
+<motivo>Una correzione ai numeri dei versetti</motivo>
+<url>https://www.laparola.net/javafile/nuova_diodati.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/nuova_diodati.zip</url2>
+<dimensione>2554087</dimensione>
+<dimensione2>3613508</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Riveduta 2020</componente>
+<descrizione>Una revisione del testo della versione Riveduta. Copyright 2020, ADI-Media.</descrizione>
+<versione>1.1.51</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/riveduta_2020.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/riveduta_2020.zip</url2>
+<dimensione>2752820</dimensione>
+<dimensione2>3582041</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Riveduta (Luzzi)</componente>
+<descrizione>La Versione Riveduta in testo originale dal Dott. GIOVANNI LUZZI, già Prof. alla Facoltà Teologica Valdese di Roma. Stampato a cura della Società Biblica Britannica e Forestiera (1925). Il testo segue l'edizione della Libreria Sacre Scritture Roma 1990.</descrizione>
+<versione>1.1.40</versione>
+<motivo>Diverse correzioni</motivo>
+<url>https://www.laparola.net/javafile/riveduta_(luzzi).lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/riveduta_(luzzi).zip</url2>
+<dimensione>2572673</dimensione>
+<dimensione2>3631899</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Ricciotti</componente>
+<descrizione>Traduzione dal latino (cioè, della Vulgata) di Giuseppe Bonaccorsi, Giovanni Castoldi, Giovanni Giovannozzi, Giacomo Mezzacasa, Felice Ramorino, Giuseppe Ricciotti, e G. M. Zampini. Introduzione e note di Giuseppe Ricciotti. Completata nel 1940.</descrizione>
+<versione>1.1.49</versione>
+<motivo>Numerose correzioni</motivo>
+<url>https://www.laparola.net/javafile/ricciotti.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/ricciotti.zip</url2>
+<dimensione>2972508</dimensione>
+<dimensione2>4116388</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Tintori</componente>
+<descrizione>Una traduzione dal latino del minorita Eusebio Tintori a cura della Pia Società San Paolo, Alba (Cuneo), completata nel 1931.</descrizione>
+<versione>1.1.49</versione>
+<motivo>Numerose correzioni</motivo>
+<url>https://www.laparola.net/javafile/tintori.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/tintori.zip</url2>
+<dimensione>2881427</dimensione>
+<dimensione2>3995099</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Martini</componente>
+<descrizione>Una traduzione dal latino (cioè, della Vulgata) da Antonio Martini (1720-1809), arcivescovo di Firenze.</descrizione>
+<versione>1.1.48</versione>
+<motivo>Diverse correzioni</motivo>
+<url>https://www.laparola.net/javafile/martini.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/martini.zip</url2>
+<dimensione>3050143</dimensione>
+<dimensione2>4254818</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Diodati</componente>
+<descrizione>La traduzione di Giovanni Diodati del 1607, riveduta nel 1821. Questa è l'edizione: La Sacra Bibbia ossia L'Antico e il Nuovo Testamento; Tradotti da Giovanni Diodati; Stampato per
+La Società Biblica Britannica e Forestiera; 1877</descrizione>
+<versione>1.1.42</versione>
+<motivo>I titoli di alcuni Salmi corretti</motivo>
+<url>https://www.laparola.net/javafile/diodati.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/diodati.zip</url2>
+<dimensione>2610594</dimensione>
+<dimensione2>3682387</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>King James Version</componente>
+<descrizione>Del 1611. Questa è l'edizione di Oxford del testo standard del 1769.
+</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/king_james_version.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/king_james_version.zip</url2>
+<dimensione>2390925</dimensione>
+<dimensione2>3912973</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>King James Version with Strongs</componente>
+<descrizione>Del 1611. Questa è l'edizione di Oxford del testo standard del 1769. Con i numeri si Strong delle parola nelle lingue originali.
+</descrizione>
+<versione>1.1.22</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/king_james_version_with_strongs.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/king_james_version_with_strongs.zip</url2>
+<dimensione>3625136</dimensione>
+<dimensione2>6244302</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>American Standard Version</componente>
+<descrizione>The Holy Bible, Containing the Old and New Testaments, Translated out of the Original Tongues, Being the Version Set Forth A.D. 1611, Compared with the Most Ancient Authorities and Revised A.D. 1881-1885, Newly Edited by the American Revision Committee A.D. 1901, Standard Edition.</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/american_standard_version.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/american_standard_version.zip</url2>
+<dimensione>2332577</dimensione>
+<dimensione2>3870882</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>World English Bible</componente>
+<descrizione>The World English Bible (WEB) is a Public Domain (no copyright) Modern English translation of the Holy Bible. That means that you may freely copy it in any form, including electronic and print formats. The World English Bible is based on the American Standard Version of the Holy Bible first published in 1901, the Biblia Hebraica Stutgartensa Old Testament, and the Greek Majority Text New Testament.</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/world_english_bible.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/world_english_bible.zip</url2>
+<dimensione>2302929</dimensione>
+<dimensione2>3784476</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Lexham English Bible</componente>
+<descrizione>The LEB achieves an unparalleled level of transparency with the original language text and is designed from the beginning to make extensive use of the most up-to-date lexical reference works available.</descrizione>
+<versione>1.1.48</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/lexham_english_bible.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/lexham_english_bible.zip</url2>
+<dimensione>2467759</dimensione>
+<dimensione2>3566302</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Literal Standard Version</componente>
+<descrizione>The purpose behind the LSV is to provide readers with a modern, easy-to-read, literal, and accurate translation of the Bible that is free to read, distribute, and translate from. To learn more, visit lsvbible.com.</descrizione>
+<versione>1.1.22</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/literal_standard_version.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/literal_standard_version.zip</url2>
+<dimensione>2324412</dimensione>
+<dimensione2>3366240</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Sicilianu</componente>
+<descrizione>Traduzioni in siciliano di Ruth, Cantico e Matteo di Luigi Scalia, commissionate dal principe Luigi Luciano Bonaparte (1860-1861).</descrizione>
+<versione>1.1.48</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/sicilianu.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/sicilianu.zip</url2>
+<dimensione>108528</dimensione>
+<dimensione2>143042</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Louis Segond</componente>
+<descrizione>La versione francese Louis Segond. Equivalente alla versione inglese del Re Giacomo, tradotta da Louis Segond (1810-1885). C'è stata una revisione da diversi esperti, e la revisione è stata pubblicata nel 1910 dall'Alliance Biblique Universelle.</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/louis_segond.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/louis_segond.zip</url2>
+<dimensione>2448291</dimensione>
+<dimensione2>4004828</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Reina Valera</componente>
+<descrizione>La versione spagnola Reina Valera (1909).</descrizione>
+<versione>1.1.40</versione>
+<motivo>Diverse correzioni</motivo>
+<url>https://www.laparola.net/javafile/reina_valera.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/reina_valera.zip</url2>
+<dimensione>2355161</dimensione>
+<dimensione2>3332352</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>João Ferreira de Almeida Atualizada</componente>
+<descrizione>La versione portoghese João Ferreira de Almeida Atualizada.</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/joao_ferreira_de_almeida_atualizada.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/joao_ferreira_de_almeida_atualizada.zip</url2>
+<dimensione>2443824</dimensione>
+<dimensione2>3366617</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Darby Elberfelder</componente>
+<descrizione>La versione tedesca Darby Elberfelder (NT 1855, AT 1871).</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/darby_elberfelder.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/darby_elberfelder.zip</url2>
+<dimensione>2425601</dimensione>
+<dimensione2>3882168</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Statenvertaling</componente>
+<descrizione>Una versione olandese tradotta in 1637. Bijbel, dat is de ganse Heilige Schrift bevattende al de kanonieke boeken Van het Oude en Nieuwe Testament. Door last van de Hoog-mogende. Heren Staten-Generaal der Verenigde Nederlanden, en volgens het besluit van de Synode Nationaal, gehouden te Dordrecht in de jaren 1618 en 1619. Uit de oorspronkelijke talen in onze nederlandse taal getrouwelijk overgezet. Da https://www.coas.nl/bijbel.</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/statenvertaling.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/statenvertaling.zip</url2>
+<dimensione>2444070</dimensione>
+<dimensione2>3947210</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Albanian Translation</componente>
+<descrizione>Bibla; Dhjata e vjetër dhedhjata e re; Diodati i Ri; Përkthimi 1991-1994. Shoqata Shqipëtare e Biblës; The Albanian Bible Society; Rr. 'Frosina Plaki' Nr. 36 Tirana, Albania</descrizione>
+<versione>1.1.7</versione>
+<motivo>Correzione: i numeri dei versetti da Galati ad Apocalisse erano sbagliati</motivo>
+<url>https://www.laparola.net/javafile/albanian_translation.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/albanian_translation.zip</url2>
+<dimensione>2550369</dimensione>
+<dimensione2>4089890</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Cornilescu</componente>
+<descrizione>La Bibbia in rumeno. Tradotta da Dumitru Cornilescu nel 1921 e pubblicata nel 1928.</descrizione>
+<versione>1.1.42</versione>
+<motivo>Aggiunto del testo mancante in 1Pietro</motivo>
+<url>https://www.laparola.net/javafile/cornilescu.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/cornilescu.zip</url2>
+<dimensione>2454563</dimensione>
+<dimensione2>3497271</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Updated Gdańsk Bible</componente>
+<descrizione>In lingua polacca</descrizione>
+<versione>1.1.51</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/updated_gdansk_bible.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/updated_gdansk_bible.zip</url2>
+<dimensione>2369900</dimensione>
+<dimensione2>3261303</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Russian Synodal Bible</componente>
+<descrizione>Del 1876; edizione del 1956</descrizione>
+<versione>1.1.20</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/russian_synodal_bible.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/russian_synodal_bible.zip</url2>
+<dimensione>2623833</dimensione>
+<dimensione2>4654401</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Versione ucraina</componente>
+<descrizione>In lingua ucraina</descrizione>
+<versione>1.1.20</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/versione_ucraina.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/versione_ucraina.zip</url2>
+<dimensione>2674475</dimensione>
+<dimensione2>4775170</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Vulgate</componente>
+<descrizione>La Vulgata: la Bibbia in lingua latina, l'edizione critica dalla Beuron/Stuttgart Bible Societies, Bonifatius Fischer e Wilhelm Ott, Tuebingen, 1975. Il testo del Salmi è quello che fu tradotto dalla LXX, la versione greca dell'AT, e che è entrato nella Vulgata (il Salterio gallicano).</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/vulgate.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/vulgate.zip</url2>
+<dimensione>2501003</dimensione>
+<dimensione2>3678297</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Biblia Hebraica Stuttgartensia</componente>
+<descrizione>L'Antico Testamento in ebraico. Stuttgart: Deutsche Bibelstiftung, 1977.</descrizione>
+<versione>1.1.14</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/biblia_hebraica_stuttgartensia.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/biblia_hebraica_stuttgartensia.zip</url2>
+<dimensione>1929318</dimensione>
+<dimensione2>2727596</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Biblia Hebraica Stuttgartensia transliterated</componente>
+<descrizione>L'Antico Testamento in ebraico traslitterato. Stuttgart: Deutsche Bibelstiftung, 1977.</descrizione>
+<versione>1.1.14</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/biblia_hebraica_stuttgartensia_transliterated.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/biblia_hebraica_stuttgartensia_transliterated.zip</url2>
+<dimensione>1780453</dimensione>
+<dimensione2>2758212</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>SBL Greek New Testament</componente>
+<descrizione>Pubblicato da Logos Bible Software, Society of Biblical Literature (2010). Redatto da Michael W. Holmes. Vedi https://sblgnt.com/ per ulteriori informazioni.</descrizione>
+<versione>1.1.50</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/sbl_greek_new_testament.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/sbl_greek_new_testament.zip</url2>
+<dimensione>720768</dimensione>
+<dimensione2>1029626</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>SBL Greek New Testament transliterated</componente>
+<descrizione>Pubblicato da Logos Bible Software, Society of Biblical Literature (2010). Redatto da Michael W. Holmes. Vedi https://sblgnt.com/ per ulteriori informazioni. Questo testo ha i caratteri latini invece di greci.</descrizione>
+<versione>1.1.50</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/sbl_greek_new_testament_transliterated.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/sbl_greek_new_testament_transliterated.zip</url2>
+<dimensione>626036</dimensione>
+<dimensione2>826393</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Westcott and Hort</componente>
+<descrizione>The New Testament in the Original Greek. The text revised by Brooke Foss Westcott D.D. and Fenton John Anthony Hort D.D.</descrizione>
+<versione>1.1.9</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/westcott_and_hort.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/westcott_and_hort.zip</url2>
+<dimensione>742753</dimensione>
+<dimensione2>1309046</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Westcott and Hort transliterated</componente>
+<descrizione>The New Testament in the Original Greek. The text revised by Brooke Foss Westcott D.D. and Fenton John Anthony Hort D.D. Questo testo ha i caratteri latini invece di greci.</descrizione>
+<versione>1.0.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/westcott_and_hort_transliterated.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/westcott_and_hort_transliterated.zip</url2>
+<dimensione>655617</dimensione>
+<dimensione2>960279</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Westcott and Hort morfologico</componente>
+<descrizione>The New Testament in the Original Greek. Questo testo include la parola radice e le informazioni morfologiche delle parole. Per una spiegazione dei codici vedi https://www.byztxt.com/download/</descrizione>
+<versione>1.1.14</versione>
+<motivo>Visualizzazione migliore delle informazioni morfologiche</motivo>
+<url>https://www.laparola.net/javafile/westcott_and_hort_morfologico.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/westcott_and_hort_morfologico.zip</url2>
+<dimensione>1514889</dimensione>
+<dimensione2>3078919</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Interlineare Nuova Riveduta</componente>
+<descrizione>Il testo greco del Nuovo Testamento con la sua traduzione nella versione Nuova Riveduta</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/interlineare_nuova_riveduta.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/interlineare_nuova_riveduta.zip</url2>
+<dimensione>1566738</dimensione>
+<dimensione2>2334080</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Interlineare Nuova Riveduta (1994)</componente>
+<descrizione>Il testo greco del Nuovo Testamento con la sua traduzione nella versione Nuova Riveduta (1994)</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/interlineare_nuova_riveduta_(1994).lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/interlineare_nuova_riveduta_(1994).zip</url2>
+<dimensione>1585737</dimensione>
+<dimensione2>2340847</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Interlineare Riveduta 2020</componente>
+<descrizione>Il testo greco del Nuovo Testamento con la sua traduzione nella versione Riveduta 2020</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/interlineare_riveduta_2020.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/interlineare_riveduta_2020.zip</url2>
+<dimensione>1582529</dimensione>
+<dimensione2>2339775</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Interlineare greco-italiano</componente>
+<descrizione>Il testo greco del Nuovo Testamento, parola per parola, con la traduzione della Nuova Riveduta di ogni parola.</descrizione>
+<versione>1.1.17</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/interlineare_greco-italiano.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/interlineare_greco-italiano.zip</url2>
+<dimensione>1330201</dimensione>
+<dimensione2>2364963</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Interlineare italiano-greco</componente>
+<descrizione>Il Nuovo Testamento della Nuova Riveduta, parola per parola, con la parola greca che ogni parola traduce.</descrizione>
+<versione>1.1.17</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/interlineare_greco-italiano.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/interlineare_greco-italiano.zip</url2>
+<dimensione>1326834</dimensione>
+<dimensione2>2323423</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Septuagint</componente>
+<descrizione>La traduzione dell'Antico Testamento in greco.</descrizione>
+<versione>1.1.11</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/septuagint.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/septuagint.zip</url2>
+<dimensione>2494868</dimensione>
+<dimensione2>4574722</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Septuagint transliterated</componente>
+<descrizione>La traduzione dell'Antico Testamento in greco. Questo testo ha i caratteri latini invece di greci.</descrizione>
+<versione>1.1.11</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/septuagint_transliterated.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/septuagint_transliterated.zip</url2>
+<dimensione>2189973</dimensione>
+<dimensione2>3367298</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>Commentario completo di Matthew Henry</componente>
+<descrizione>Una traduzione del commentario, Matthew Henry's Commentary on the Whole Bible (1714)</descrizione>
+<versione>1.1.52</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/commentario_completo_di_matthew_henry.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commentario_completo_di_matthew_henry.zip</url2>
+<dimensione>22026580</dimensione>
+<dimensione2>31122432</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Commentario del Nuovo Testamento</componente>
+<descrizione>Commentario esegetico-pratico del Nuovo Testamento, di Stewart e Bosio (1900-1924)</descrizione>
+<versione>1.1.22</versione>
+<motivo>Alcune piccole correzioni.</motivo>
+<url>https://www.laparola.net/javafile/commentario_del_nuovo_testamento.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commentario_del_nuovo_testamento.zip</url2>
+<dimensione>9463118</dimensione>
+<dimensione2>12937907</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Commentario abbreviato di Matthew Henry</componente>
+<descrizione>La traduzione del commentario, Matthew Henry's Concise Commentary.</descrizione>
+<versione>1.1.49</versione>
+<motivo>Include tutta la Bibbia</motivo>
+<url>https://www.laparola.net/javafile/commentario_abbreviato_di_matthew_henry.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commentario_abbreviato_di_matthew_henry.zip</url2>
+<dimensione>2653691</dimensione>
+<dimensione2>3622955</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Commentario di Giovanni Calvino</componente>
+<descrizione>Una traduzione del commentario da Giovanni Calvino (1550-1564), di Genesi e Matteo-1Giovanni.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/commentario_di_giovanni_calvino.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commentario_di_giovanni_calvino.zip</url2>
+<dimensione>7112342</dimensione>
+<dimensione2>9788383</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Esposizione della Bibbia di Gill</componente>
+<descrizione>Una traduzione del commentario, John Gill's Exposition of the Bible.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/esposizione_della_bibbia_di_gill.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/esposizione_della_bibbia_di_gill.zip</url2>
+<dimensione>28508199</dimensione>
+<dimensione2>39559568</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Commentario sul testo greco delle epistole di Paolo</componente>
+<descrizione>Una traduzione del commentario di John Eadie (1869-1884), di Galati-Colossesi.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/commentario_sul_testo_greco_delle_epistole_di_paolo.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commentario_sul_testo_greco_delle_epistole_di_paolo.zip</url2>
+<dimensione>2572088</dimensione>
+<dimensione2>3421827</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Note di Albert Barnes sulla Bibbia</componente>
+<descrizione>Una traduzione del commentario, Albert Barnes' Notes on the Bible (1885)</descrizione>
+<versione>1.1.51</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/note_di_albert_barnes_sulla_bibbia.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/note_di_albert_barnes_sulla_bibbia.zip</url2>
+<dimensione>22213503</dimensione>
+<dimensione2>30320136</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Note della Bibbia di Ginevra</componente>
+<descrizione>Una traduzione delle note marginali della Bibbia di Ginevra (560)</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/note_della_bibbia_di_ginevra.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/note_della_bibbia_di_ginevra.zip</url2>
+<dimensione>2710246</dimensione>
+<dimensione2>3808900</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Commentario del pulpito</componente>
+<descrizione>Una traduzione del commentario, the Pulpit Commentary.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/commentario_del_pulpito.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commentario_del_pulpito.zip</url2>
+<dimensione>75210131</dimensione>
+<dimensione2>104318517</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Illustratore biblico</componente>
+<descrizione>Una traduzione del commentario, the Bible Illustrator.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/illustratore_biblico.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/illustratore_biblico.zip</url2>
+<dimensione>106620074</dimensione>
+<dimensione2>144852479</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Commento di Frederick Brotherton Meyer</componente>
+<descrizione>Una traduzione di Through the Bible Day by Day: A Devotional Commentary (1918)</descrizione>
+<versione>1.1.51</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/commento_di_frederick_brotherton_meyer.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/commento_di_frederick_brotherton_meyer.zip</url2>
+<dimensione>1712787</dimensione>
+<dimensione2>2321141</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Tesoro di Davide</componente>
+<descrizione>Una traduzione di Treasury of David, un commentario da Charles Spurgeon suiu Salmi (1885)</descrizione>
+<versione>1.1.52</versione>
+<motivo>Alcune correzioni</motivo>
+<url>https://www.laparola.net/javafile/tesoro_di_davide.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/tesoro_di_davide.zip</url2>
+<dimensione>8322405</dimensione>
+<dimensione2>11360301</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Riferimenti incrociati</componente>
+<descrizione>I riferimenti incrociati del Treasury di Scriptual Knowledge in italiano</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/riferimenti_incrociati.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/riferimenti_incrociati.zip</url2>
+<dimensione>4407462</dimensione>
+<dimensione2>8377267</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Note della Nuova Riveduta</componente>
+<descrizione>Le note in piè di pagina della versione Nuova Riveduta.</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/note_della_nuova_riveduta.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/note_della_nuova_riveduta.zip</url2>
+<dimensione>238879</dimensione>
+<dimensione2>353374</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Note della Luzzi</componente>
+<descrizione>Le note in piè di pagina della versione Riveduta/Luzzi.</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/note_della_luzzi.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/note_della_luzzi.zip</url2>
+<dimensione>39825</dimensione>
+<dimensione2>59886</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Brani difficili della Bibbia</componente>
+<descrizione>Una spiegazione dei versetti più difficili da capire.</descrizione>
+<versione>1.1.32</versione>
+<motivo>Più spiegazioni aggiunte, per avere commenti su tutti i libri della Bibbia.</motivo>
+<url>https://www.laparola.net/javafile/brani_difficili_della_bibbia.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/brani_difficili_della_bibbia.zip</url2>
+<dimensione>600428</dimensione>
+<dimensione2>765005</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Riassunti</componente>
+<descrizione>Riassunti di ogni capitolo della Bibbia, generati da un'intelligenza artifiale.</descrizione>
+<versione>1.1.50</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/riassunti.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/riassunti.zip</url2>
+<dimensione>1640592</dimensione>
+<dimensione2>2215786</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Aiuto Biblico</componente>
+<descrizione>Sermoni tratti dal sito https://www.aiutobiblico.org/</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/aiuto_biblico.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/aiuto_biblico.zip</url2>
+<dimensione>3348241</dimensione>
+<dimensione2>4922042</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Jamieson-Fausset-Brown</componente>
+<descrizione>Commentary Critical and Explanatory on the Whole Bible (1871)</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/jamieson-fausset-brown.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/jamieson-fausset-brown.zip</url2>
+<dimensione>7742293</dimensione>
+<dimensione2>12146354</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Albert Barnes' Notes</componente>
+<descrizione>Albert Barnes' Notes on the Old and New Testaments by Albert Barnes (1798-1870)</descrizione>
+<versione>1.1.16</versione>
+<motivo>Delle correzioni per alcune note che mostravano il testo sbagliato</motivo>
+<url>https://www.laparola.net/javafile/albert_barnes'_notes.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/albert_barnes'_notes.zip</url2>
+<dimensione>21590645</dimensione>
+<dimensione2>32342079</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Matthew Henry's Commentary</componente>
+<descrizione>Matthew Henry's Commentary on the Whole Bible (1708-1710)</descrizione>
+<versione>1.1.1</versione>
+<motivo>Prima versione, con correzione di un errore che creava un problema nel programma</motivo>
+<url>https://www.laparola.net/javafile/matthew_henry's_commentary.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/matthew_henry's_commentary.zip</url2>
+<dimensione>20647486</dimensione>
+<dimensione2>31358385</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Matthew Henry's Concise Commentary</componente>
+<descrizione>Una riduzione di Matthew Henry's Commentary on the Whole Bible; una traduzione italiana di alcuni libri è nel Commentario abbreviato di Matthew Henry</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/matthew_henry's_concise_commentary.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/matthew_henry's_concise_commentary.zip</url2>
+<dimensione>2493918</dimensione>
+<dimensione2>3819223</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>People's New Testament</componente>
+<descrizione>Un commentario inglese del Nuovo Testamento; di B. W. Johnson (1891)</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/people's_new_testament.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/people's_new_testament.zip</url2>
+<dimensione>1653959</dimensione>
+<dimensione2>2520323</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>Vincent's Word Studies</componente>
+<descrizione>Un'analisi delle parole del Nuovo Testamento; di M. R. Vincent (1887)</descrizione>
+<versione>1.1.48</versione>
+<motivo>Caratteri greci leggibili; molte correzioni</motivo>
+<url>https://www.laparola.net/javafile/vincent's_word_studies.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/vincent's_word_studies.zip</url2>
+<dimensione>3239685</dimensione>
+<dimensione2>4516033</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>King James Version Footnotes</componente>
+<descrizione>Le note a piè di pagina della King James Version</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/king_james_version_footnotes.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/king_james_version_footnotes.zip</url2>
+<dimensione>156584</dimensione>
+<dimensione2>252862</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+<file>
+<componente>ASV Footnotes</componente>
+<descrizione>Le note a piè di pagina della American Standard Versione</descrizione>
+<versione>1.1.0</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/asv_footnotes.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/asv_footnotes.zip</url2>
+<dimensione>231365</dimensione>
+<dimensione2>371381</dimensione2>
+<tipo>Commentario</tipo>
+</file>
+</versioni>

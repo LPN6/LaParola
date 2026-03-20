@@ -1,0 +1,328 @@
+body{font-family:'Lato', sans-serif;font-display: swap;background:white;color:#000000;margin-right:10pt;margin-top:0pt}
+body{font-size:120%;}@media(min-width:768px){body{font-size:medium;}} 
+main {
+    margin-top: 60px;
+}
+
+li{line-height:1.8;}@media(min-width:768px){li {line-height:1.2;}} // era 1024px
+.menulink a {
+  display: inline-block; 
+  min-height: 24px;
+}
+hr{width:80%;}
+.contrario{font-weight:bold;color:#FFFFFF;background:#2525ff;padding:8px 0px 5px 12px;}
+.piccolo{font-size:smaller;}
+.B{font-weight:bold;color:#FFFFFF;background:#2525ff;position:relative;display:inline-block;}
+.B .B2{font-weight:normal;visibility:hidden; width:200px;padding: 5px 0;bottom: 100%;
+  left: 50%;
+  margin-left: -100px;border-radius: 6px;background-color:yellow;color:black;text-align: center;position:absolute;z-index:1;}
+.B:hover .B2 {
+  visibility: visible;
+}
+
+.moduli {display:table;border:0;border-spacing:3;margin-left:auto;margin-right:auto;}
+.modulo {
+  display: table-cell;
+  vertical-align: top;
+  white-space: nowrap;
+}
+@media (max-width:900px) {
+  .modulo {
+    display: block;
+    width: 100%;
+  }
+}
+
+.greco{font-family:Greek;font-size:medium;}
+.uni{font-family:Galatia SIL,Gentium,Cardo,Oxoniensis,Vusillus Old Face,Athena,Caslon,Hindsight Unicode,Chrysanthi Unicode,Monospace,OldStandard,Palatino Linotype,Tahoma;font-size:small;}
+.unimed{font-family:Galatia SIL,Gentium,Cardo,Oxoniensis,Vusillus Old Face,Athena,Caslon,Hindsight Unicode,Chrysanthi Unicode,Monospace,OldStandard,Palatino Linotype,Tahoma;font-size:medium;}
+.unigs{font-family:Galatia SIL;font-size:small;}
+.unig{font-family:Gentium;font-size:small;}
+.unic{font-family:Cardo;font-size:small;}
+.unio{font-family:Oxoniensis;font-size:small;}
+.univof{font-family:Vusillus Old Face;font-size:small;}
+.unia{font-family:Athena;font-size:small;}
+.unic2{font-family:Caslon;font-size:small;}
+.unihu{font-family:Hindsight Unicode;font-size:small;}
+.unicu{font-family:Chrysanthi Unicode;font-size:small;}
+.unim{font-family:Monospace;font-size:small;}
+.unios{font-family:OldStandard;font-size:small;}
+.unipl{font-family:Palatino Linotype;font-size:small;}
+.unit{font-family:Tahoma;font-size:small;}
+a:link{color: #445c88;
+    font-weight: bold;
+    text-decoration: none;}
+a:visited{color:black;}
+a:hover{color:#A32D00;}
+a.barra:link{color:aqua}
+a.barra:visited{color:aqua}
+a.barra:hover{color:red}
+.solonormale{display:none;}
+
+.selectInterlineare {
+    font-weight: bold;
+    color: #ffffff;
+    background: #2525ff; /* Same blue as button */
+    border: 10px solid #2525ff; /* Thick border like the button */
+//    padding: 10px;
+//    font-size: 16px;
+//    border-radius: 5px;
+//    cursor: pointer;
+//    width: 220px; /* Adjust as needed */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+//    text-align: center;
+}
+
+/* Custom dropdown arrow */
+//.selectInterlineare {
+//    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>');
+//    background-repeat: no-repeat;
+//    background-position: right 0px center;
+//    background-size: 16px;
+//}
+
+/* Hover Effect */
+.selectInterlineare:hover {
+    background: #A32D00; /* Same hover color as button */
+    border-color: #A32D00;
+}
+
+/* Dropdown Options */
+.selectInterlineare option {
+    background: white;
+    color: black;
+    font-weight: bold;
+}
+
+.button{
+	font-weight:bold;
+    color: #ffffff;
+    background: #2525ff;
+    border: 10px solid #2525ff;
+}
+.button:hover{background: #A32D00;border-color:#A32D00;}
+
+input.text{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:1.1em;color:#000000;background:#fff;}
+input.submit{
+	font-weight:bold;
+    color: #ffffff;
+    background: #2525ff;
+    border: 10px solid #2525ff;
+}
+input.tabella {
+    display:block;margin-left:auto;margin-right:auto;
+}
+input.reset{
+	font-weight:bold;
+    color: #fff;
+    background: #666;
+    border: 10px solid #666666;}
+input.seleziona{font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    color:#ffffff;
+    background: #2525ff;
+    border:4px solid #2525ff;
+    display:block;margin-left:auto;margin-right:auto;}
+input.grandezzatesto{
+	font-weight:bold;
+    color: #ffffff;
+    background: #2525ff;
+    border: 10px solid #2525ff;}
+input.submit:hover{background: #A32D00;border-color:#A32D00;}
+input.reset:hover{background: #A32D00;border-color:#A32D00;}
+input.seleziona:hover{background: #A32D00;border-color:#A32D00;}
+input.grandezzatesto:hover{background: #A32D00;border-color:#A32D00;}
+
+#dropdownMenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #2525ff;
+    border: 4px solid #2525ff;
+    padding: 5px;
+    z-index: 100;
+}
+
+#dropdownMenu a {
+    display: block;
+    color: #ffffff;
+    font-weight:bold;
+    padding: 5px o;
+}
+
+#dropdownMenu a:hover {
+    background: #A32D00;
+    border-color:#A32D00;
+}
+#dropdownMenu a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+
+textarea{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:small;color:#111111;background:#68ffff;border:1px solid #666666;}
+select{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:small;color:#000000;border:0px;}
+h2 {display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+	font-style: italic;}
+legend {color: #A32D00;}
+fieldset {
+    border-width: 0px;
+    background: #dee5f1;
+}
+
+/* General styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #2525ff;//#333;
+    padding: 10px;
+}
+
+.navbar-brand {
+    margin-right: 20px;
+    -webkit-user-select: none; /* For Safari */
+    -moz-user-select: none; /* For Firefox */
+    -ms-user-select: none; /* For Internet Explorer and Edge */
+    user-select: none; /* Standard syntax */
+}
+
+.navbar-brand a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+}
+
+.navbar-item {
+    position: relative;
+    -webkit-user-select: none; /* For Safari */
+    -moz-user-select: none; /* For Firefox */
+    -ms-user-select: none; /* For Internet Explorer and Edge */
+    user-select: none; /* Standard syntax */
+}
+
+.navbar-link {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar-link:hover,
+.navbar-link:focus {
+    background-color: #A32D00;//#555;
+}
+
+.navbar-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #2525ff;//#333;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.navbar-subitem a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+}
+
+.navbar-subitem a:hover,
+.navbar-subitem a:focus {
+    background-color: #A32D00;//#555;
+}
+
+.navbar-item:hover .navbar-submenu,
+.navbar-item:focus-within .navbar-submenu {
+    display: block;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .navbar-toggle {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .navbar-toggle-icon {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 4px 0;
+    }
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        width: auto;
+        background-color: #2525ff;//#333;
+        position: absolute;
+        top: 60px;//0;//100%;
+        left: 0;//50px;//0;
+        z-index: 1;
+    }
+
+    .navbar-menu.active {
+        display: flex; 
+    }
+
+    .navbar-item {
+        width: auto;
+    }
+
+    .navbar-submenu {
+        position: absolute;
+        top: -60px;//0;
+        left: 100%;
+        display: none;
+        width: 260px; 
+    }
+
+    .navbar-item.active .navbar-submenu {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-brand {
+        order: 1; 
+        margin-left: 10px;
+    }
+
+    .navbar-toggle {
+        order: 0;
+    }
+}
+

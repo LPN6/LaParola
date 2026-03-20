@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Encyclopedia</name>
+<name language="it">Enciclopedia</name>
+<description>Lots of different information on a word</description>
+<description language="it">Diverse informazioni su una parola inglese</description>
+<type>word</type>
+<version>7.07.0</version>
+<language>en</language>
+<url>http://www.encyclopedia.com/searchresults.aspx?q={word}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<image>Encyclopedia.gif</image>
+</link>

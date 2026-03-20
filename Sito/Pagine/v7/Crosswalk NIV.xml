@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Crosswalk NIV</name>
+<description>Shows the NIV and some study tools</description>
+<description language="it">Mostra la NIV e alcuni strumenti di studio</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://bible.crosswalk.com/OnlineStudyBible/bible.cgi?word={book} {chapter}:{verse}&amp;version=niv&amp;showtools=1</url>
+<category>Bible Text</category>
+<category language="it">Testo biblico</category>
+<image>Crosswalk.gif</image>
+</link>

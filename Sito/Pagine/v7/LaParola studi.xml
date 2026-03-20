@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>LaParola Studies</name>
+<name language="it">LaParola studi</name>
+<description>Finds Bible studies in Italian on a verse in Internet</description>
+<description language="it">Trova studi su un versetto in Internet</description>
+<type>reference</type>
+<version>7.04.0</version>
+<url>http://www.laparola.net/studi/studi.php?brano={riferimento}</url>
+<category>Bible Commentary</category>
+<category language="it">Commentario biblico</category>
+<image>LaParola.gif</image>
+</link>

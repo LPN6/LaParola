@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Greek Audio</name>
+<name language="it">Greco audio</name>
+<description>Plays an MP3 file with the chapter of the Greek text</description>
+<description language="it">Fa sentire un file MP3 con il capitolo del testo greco</description>
+<type>reference</type>
+<version>7.04.0</version>
+<url>http://www.helding.net/greeklatinaudio/greek/</url>
+<map>
+<page start="47001001" end="47255255">http://www.helding.net/greeklatinaudio/greek/matthew/MAT{chapter2}G.mp3</page>
+<page start="48001001" end="48255255">http://www.helding.net/greeklatinaudio/greek/mark/mrk{chapter2}g.mp3</page>
+<page start="49001001" end="49255255">http://www.helding.net/greeklatinaudio/greek/luke/luk{chapter2}g.mp3</page>
+<page start="50001001" end="50255255">http://www.helding.net/greeklatinaudio/greek/john/joh{chapter2}g.mp3</page>
+<page start="51001001" end="51255255">http://www.helding.net/greeklatinaudio/greek/acts/act{chapter2}g.mp3</page>
+<page start="52001001" end="52255255">http://www.helding.net/greeklatinaudio/greek/romans/rom{chapter2}g.mp3</page>
+<page start="53001001" end="53255255">http://www.helding.net/greeklatinaudio/greek/1corinthians/1co{chapter2}g.mp3</page>
+<page start="54001001" end="54255255">http://www.helding.net/greeklatinaudio/greek/2corinthians/2co{chapter2}g.mp3</page>
+<page start="55001001" end="55255255">http://www.helding.net/greeklatinaudio/greek/galatians/gal{chapter2}g.mp3</page>
+<page start="56001001" end="56255255">http://www.helding.net/greeklatinaudio/greek/ephesians/eph{chapter2}g.mp3</page>
+<page start="57001001" end="57255255">http://www.helding.net/greeklatinaudio/greek/philippians/phi{chapter2}g.mp3</page>
+<page start="58001001" end="58255255">http://www.helding.net/greeklatinaudio/greek/colossians/col{chapter2}g.mp3</page>
+<page start="59001001" end="59255255">http://www.helding.net/greeklatinaudio/greek/1thessalonians/1th{chapter2}g.mp3</page>
+<page start="60001001" end="60255255">http://www.helding.net/greeklatinaudio/greek/2thessalonians/2th{chapter2}g.mp3</page>
+<page start="61001001" end="61255255">http://www.helding.net/greeklatinaudio/greek/1timothy/1ti{chapter2}g.mp3</page>
+<page start="62001001" end="62255255">http://www.helding.net/greeklatinaudio/greek/2timothy/2ti{chapter2}g.mp3</page>
+<page start="63001001" end="63255255">http://www.helding.net/greeklatinaudio/greek/titus/tit{chapter2}g.mp3</page>
+<page start="64001001" end="64255255">http://www.helding.net/greeklatinaudio/greek/philemon/phe{chapter2}g.mp3</page>
+<page start="65001001" end="65255255">http://www.helding.net/greeklatinaudio/greek/hebrews/heb{chapter2}g.mp3</page>
+<page start="66001001" end="66255255">http://www.helding.net/greeklatinaudio/greek/james/jam{chapter2}g.mp3</page>
+<page start="67001001" end="67255255">http://www.helding.net/greeklatinaudio/greek/1peter/1pe{chapter2}g.mp3</page>
+<page start="68001001" end="68255255">http://www.helding.net/greeklatinaudio/greek/2peter/2pe{chapter2}g.mp3</page>
+<page start="69001001" end="69255255">http://www.helding.net/greeklatinaudio/greek/1john/1jo{chapter2}g.mp3</page>
+<page start="70001001" end="70255255">http://www.helding.net/greeklatinaudio/greek/2john/2jo{chapter2}g.mp3</page>
+<page start="71001001" end="71255255">http://www.helding.net/greeklatinaudio/greek/3john/3jo{chapter2}g.mp3</page>
+<page start="72001001" end="72255255">http://www.helding.net/greeklatinaudio/greek/jude/jud{chapter2}g.mp3</page>
+<page start="73001001" end="73255255">http://www.helding.net/greeklatinaudio/greek/revelation/REV{chapter2}G.mp3</page>
+</map>
+<category>Hebrew and Greek texts</category>
+<category language="it">Testi ebraici e greci</category>
+</link>

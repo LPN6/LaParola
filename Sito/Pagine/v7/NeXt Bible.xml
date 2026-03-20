@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>NeXt Bible</name>
+<description>NET Bible, Greek/Hebrew, articles</description>
+<description language="it">La versione NET della Bibbia, greco/ebraico, articoli</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://net.bible.org/bible.php?book={book}&amp;chapter={chapter}</url>
+<category>Bible Text</category>
+<category language="it">Testo biblico</category>
+<image>NetBible.jpg</image>
+</link>

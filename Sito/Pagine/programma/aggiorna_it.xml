@@ -1,0 +1,2131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE versioni
+[<!ELEMENT versioni (file+)>
+<!ELEMENT file (nome+, componente, versione, url+, dimensione?, tipo)>
+<!ELEMENT nome (#PCDATA)>
+<!ELEMENT componente (#PCDATA)>
+<!ELEMENT versione (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT dimensione (#PCDATA)>
+<!ELEMENT tipo (#PCDATA)>
+<!ATTLIST nome language CDATA #IMPLIED>]>
+<versioni>
+<file>
+<nome>Program</nome>
+<nome language="it">Programma</nome>
+<componente>programma</componente>
+<versione>7.20.6</versione>
+<url>https://www.laparola.net/v7/LaParola.exe.gz</url>
+<dimensione>2227 Kb</dimensione>
+<tipo>programma</tipo>
+</file>
+<file>
+<nome>aggiornamento</nome>
+<componente>aggiornamento</componente>
+<versione>7.20.6</versione>
+<url>https://www.laparola.net/v7/</url>
+<tipo>aggiornamento</tipo>
+</file>
+<file>
+<nome>A Conservative Version</nome>
+<nome language="it">A Conservative Version</nome>
+<componente>A Conservative Version</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/A Conservative Version.laparola.gz</url>
+<dimensione>3663 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>American King James Version</nome>
+<nome language="it">American King James Version</nome>
+<componente>American King James Version</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/American King James Version.laparola.gz</url>
+<dimensione>3674 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>American Standard Version</nome>
+<nome language="it">American Standard Version</nome>
+<componente>American Standard Version</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/American Standard Version.laparola.gz</url>
+<dimensione>4053 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Apostolic Bible (English)</nome>
+<nome language="it">Apostolic Bible (English)</nome>
+<componente>Apostolic Bible (English)</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/Apostolic Bible (English).laparola.gz</url>
+<dimensione>7412 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Bible in Basic English</nome>
+<nome language="it">Bible in Basic English</nome>
+<componente>Bible in Basic English</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Bible in Basic English.laparola.gz</url>
+<dimensione>3782 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Brenton's English Septuagint</nome>
+<nome language="it">Brenton's English Septuagint</nome>
+<componente>Brenton's English Septuagint</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/Brenton's English Septuagint.laparola.gz</url><url>https://www.laparola.net/v7/Brenton's English Septuagint Additional.laparola.gz</url>
+<dimensione>3669 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Darby</nome>
+<nome language="it">Darby</nome>
+<componente>Darby</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Darby.laparola.gz</url>
+<dimensione>3680 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Douay-Rheims</nome>
+<nome language="it">Douay-Rheims</nome>
+<componente>Douay-Rheims</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Douay-Rheims.laparola.gz</url>
+<dimensione>4200 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Godbey New Testament</nome>
+<nome language="it">Godbey New Testament</nome>
+<componente>Godbey New Testament</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/Godbey New Testament.laparola.gz</url>
+<dimensione>864 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Grammar Uses Version</nome>
+<nome language="it">Grammar Uses Version</nome>
+<componente>Grammar Uses Version</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/Grammar Uses Version.laparola.gz</url>
+<dimensione>864 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>King James Version</nome>
+<nome language="it">King James Version</nome>
+<componente>King James Version</componente>
+<versione>7.06.0</versione>
+<url>https://www.laparola.net/v7/King James Version.laparola.gz</url>
+<dimensione>3991 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>King James Version with Strongs</nome>
+<nome language="it">King James Version with Strongs</nome>
+<componente>King James Version with Strongs</componente>
+<versione>7.07.0</versione>
+<url>https://www.laparola.net/v7/King James Version with Strongs.laparola.gz</url>
+<dimensione>6146 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>King James Version 1850</nome>
+<nome language="it">King James Version 1850</nome>
+<componente>King James Version 1850</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/King James Version 1850.laparola.gz</url>
+<dimensione>3748 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Lexham English Bible</nome>
+<nome language="it">Lexham English Bible</nome>
+<componente>Lexham English Bible</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Lexham English Bible.laparola.gz</url><url>https://www.laparola.net/v7/Lexham English Bible Notes.laparola.gz</url>
+<dimensione>3753 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Literal Standard Version</nome>
+<nome language="it">Literal Standard Version</nome>
+<componente>Literal Standard Version</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Literal Standard Version.laparola.gz</url>
+<dimensione>3335 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Webster Bible</nome>
+<nome language="it">Webster Bible</nome>
+<componente>Webster Bible</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Webster Bible.laparola.gz</url>
+<dimensione>3720 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Weymouth's New Testament in Modern Speech</nome>
+<nome language="it">Weymouth's New Testament in Modern Speech</nome>
+<componente>Weymouth's New Testament in Modern Speech</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Weymouth's New Testament in Modern Speech.laparola.gz</url>
+<dimensione>1004 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>William Tyndale</nome>
+<nome language="it">William Tyndale</nome>
+<componente>William Tyndale</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/William Tyndale.laparola.gz</url>
+<dimensione>1614 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>World English Bible</nome>
+<nome language="it">World English Bible</nome>
+<componente>World English Bible</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/World English Bible.laparola.gz</url>
+<dimensione>3621 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Young's Literal Translation</nome>
+<nome language="it">Young's Literal Translation</nome>
+<componente>Young's Literal Translation</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Young's Literal Translation.laparola.gz</url>
+<dimensione>3687 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Nuova Riveduta (Italian Bible)</nome>
+<nome language="it">Nuova Riveduta</nome>
+<componente>Nuova Riveduta</componente>
+<versione>7.20.1</versione>
+<url>https://www.laparola.net/v7/Nuova Riveduta.laparola.gz</url>
+<dimensione>3497 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>C.E.I. (Italian Bible)</nome>
+<nome language="it">C.E.I.</nome>
+<componente>C.E.I.</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/C.E.I..laparola.gz</url>
+<dimensione>3886 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Nuova Riveduta (1994) (Italian Bible)</nome>
+<nome language="it">Nuova Riveduta (1994)</nome>
+<componente>Nuova Riveduta (1994)</componente>
+<versione>7.20.2</versione>
+<url>https://www.laparola.net/v7/Nuova Riveduta (1994).laparola.gz</url>
+<dimensione>3589 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Nuova Diodati (Italian Bible)</nome>
+<nome language="it">Nuova Diodati</nome>
+<componente>Nuova Diodati</componente>
+<versione>7.20.2</versione>
+<url>https://www.laparola.net/v7/Nuova Diodati.laparola.gz</url>
+<dimensione>3563 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Riveduta 2020 (Italian Bible)</nome>
+<nome language="it">Riveduta 2020</nome>
+<componente>Riveduta 2020</componente>
+<versione>7.20.3</versione>
+<url>https://www.laparola.net/v7/Riveduta 2020.laparola.gz</url>
+<dimensione>3528 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Riveduta (Luzzi) (Italian Bible)</nome>
+<nome language="it">Riveduta (Luzzi)</nome>
+<componente>Riveduta (Luzzi)</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Riveduta (Luzzi).laparola.gz</url>
+<dimensione>3582 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Ricciotti (Italian Bible)</nome>
+<nome language="it">Ricciotti</nome>
+<componente>Ricciotti</componente>
+<versione>7.20.1</versione>
+<url>https://www.laparola.net/v7/Ricciotti.laparola.gz</url>
+<dimensione>4057 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Tintori (Italian Bible)</nome>
+<nome language="it">Tintori</nome>
+<componente>Tintori</componente>
+<versione>7.20.1</versione>
+<url>https://www.laparola.net/v7/Tintori.laparola.gz</url>
+<dimensione>3946 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Martini (Italian Bible)</nome>
+<nome language="it">Martini</nome>
+<componente>Martini</componente>
+<versione>7.20.2</versione>
+<url>https://www.laparola.net/v7/Martini.laparola.gz</url>
+<dimensione>4197 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Diodati (Italian Bible)</nome>
+<nome language="it">Diodati</nome>
+<componente>Diodati</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Diodati.laparola.gz</url>
+<dimensione>3632 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Sicilianu (Sicilian Bible)</nome>
+<nome language="it">Sicilianu</nome>
+<componente>Sicilianu</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Sicilianu.laparola.gz</url>
+<dimensione>140 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Reina Valera (Spanish)</nome>
+<nome language="it">Reina Valera (spagnolo)</nome>
+<componente>Reina Valera</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Reina Valera.laparola.gz</url>
+<dimensione>3266 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Sagradas Escrituras (Spanish)</nome>
+<nome language="it">Sagradas Escrituras (spagnolo)</nome>
+<componente>Sagradas Escrituras</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Sagradas Escrituras.laparola.gz</url>
+<dimensione>3601 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Louis Segond (French)</nome>
+<nome language="it">Louis Segond (francese)</nome>
+<componente>Louis Segond</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Louis Segond.laparola.gz</url>
+<dimensione>3780 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>French Darby Bible</nome>
+<nome language="it">Bibbia Darby francese</nome>
+<componente>French Darby</componente>
+<versione>7.07.0</versione>
+<url>https://www.laparola.net/v7/French Darby.laparola.gz</url>
+<dimensione>3872 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Ostervald 1996 (French)</nome>
+<nome language="it">Ostervald 1996 (francese)</nome>
+<componente>Ostervald 1996</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/Ostervald 1996.laparola.gz</url>
+<dimensione>3865 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>João Ferreira de Almeida Atualizada (Portuguese)</nome>
+<nome language="it">João Ferreira de Almeida Atualizada (portoghese)</nome>
+<componente>João Ferreira de Almeida Atualizada</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/João Ferreira de Almeida Atualizada.laparola.gz</url>
+<dimensione>3542 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Cornilescu (Romanian)</nome>
+<nome language="it">Cornilescu (rumeno)</nome>
+<componente>Cornilescu</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Cornilescu.laparola.gz</url>
+<dimensione>3384 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Luther Translation (German)</nome>
+<nome language="it">Versione Luther (tedesco)</nome>
+<componente>Luther Translation</componente>
+<versione>7.02.0</versione>
+<url>https://www.laparola.net/v7/Luther Translation.laparola.gz</url>
+<dimensione>3546 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Darby Elberfelder (German)</nome>
+<nome language="it">Darby Elberfelder (tedesco)</nome>
+<componente>Darby Elberfelder</componente>
+<versione>7.07.0</versione>
+<url>https://www.laparola.net/v7/Darby Elberfelder.laparola.gz</url>
+<dimensione>3682 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Statenvertaling (Dutch Bible)</nome>
+<nome language="it">Statenvertaling (Bibbia olandese)</nome>
+<componente>Statenvertaling</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Statenvertaling.laparola.gz</url>
+<dimensione>3771 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Swedish Bible 1917</nome>
+<nome language="it">Bibbia svedese 1917</nome>
+<componente>Swedish Bible 1917</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Swedish Bible 1917.laparola.gz</url>
+<dimensione>3799 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file><file>
+<nome>Det Norsk Bibelselskap (Norvegian Bible)</nome>
+<nome language="it">Det Norsk Bibelselskap (Bibbia norvegese)</nome>
+<componente>Det Norsk Bibelselskap</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Det Norsk Bibelselskap.laparola.gz</url>
+<dimensione>3527 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Albanian Translation</nome>
+<nome language="it">Versione albanese</nome>
+<componente>Albanian Translation</componente>
+<versione>7.17.1</versione>
+<url>https://www.laparola.net/v7/Albanian Translation.laparola.gz</url>
+<dimensione>3786 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Updated Gdańsk Bible</nome>
+<nome language="it">Updated Gdańsk Bible (Bibbia polacca)</nome>
+<componente>Updated Gdańsk Bible</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Updated Gdansk Bible.laparola.gz</url>
+<dimensione>3161 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Ukrainian Translation</nome>
+<nome language="it">Versione ucraina</nome>
+<componente>Versione ucraina</componente>
+<versione>7.19.3</versione>
+<url>https://www.laparola.net/v7/Versione ucraina.laparola.gz</url>
+<dimensione>3614 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Russian Synodal Bible</nome>
+<nome language="it">Russian Synodal Bible (Bibbia russa)</nome>
+<componente>Russian Synodal Bible</componente>
+<versione>7.19.3</versione>
+<url>https://www.laparola.net/v7/Russian Synodal Bible.laparola.gz</url>
+<dimensione>3495 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Smith and Van Dyke Arabic Bible</nome>
+<nome language="it">Versione araba (Smith e Van Dyke)</nome>
+<componente>Smith and Van Dyke Arabic Bible</componente>
+<versione>7.06.0</versione>
+<url>https://www.laparola.net/v7/Smith and Van Dyke Arabic Bible.laparola.gz</url>
+<dimensione>2745 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Biblia Hebraica Stuttgartensia (Hebrew OT)</nome>
+<nome language="it">Biblia Hebraica Stuttgartensia (AT ebraico)</nome>
+<componente>Biblia Hebraica Stuttgartensia</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/Biblia Hebraica Stuttgartensia.laparola.gz</url>
+<dimensione>2422 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Biblia Hebraica Stuttgartensia transliterated (Hebrew OT)</nome>
+<nome language="it">Biblia Hebraica Stuttgartensia traslitterato (AT ebraico)</nome>
+<componente>Biblia Hebraica Stuttgartensia transliterated</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Biblia Hebraica Stuttgartensia transliterated.laparola.gz</url>
+<dimensione>2264 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>SBL Greek New Testament</nome>
+<nome language="it">SBL Nuovo Testamento greco</nome>
+<componente>SBL Greek New Testament</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/SBL Greek New Testament.laparola.gz</url>
+<dimensione>917 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>SBL Greek New Testament transliterated</nome>
+<nome language="it">SBL Nuovo Testamento greco traslitterato</nome>
+<componente>SBL Greek New Testament transliterated</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/SBL Greek New Testament transliterated.laparola.gz</url>
+<dimensione>803 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Byzantine (Greek NT)</nome>
+<nome language="it">Byzantine (NT greco)</nome>
+<componente>Byzantine</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Byzantine.laparola.gz</url>
+<dimensione>1000 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Byzantine transliterated (Greek NT)</nome>
+<nome language="it">Byzantine traslitterato (NT greco)</nome>
+<componente>Byzantine transliterated</componente>
+<versione>7.03.0</versione>
+<url>https://www.laparola.net/v7/Byzantine transliterated.laparola.gz</url>
+<dimensione>871 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Westcott and Hort (Greek NT)</nome>
+<nome language="it">Westcott and Hort (NT greco)</nome>
+<componente>Westcott and Hort</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/Westcott and Hort.laparola.gz</url>
+<dimensione>999 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Westcott and Hort transliterated (Greek NT)</nome>
+<nome language="it">Westcott and Hort traslitterato (NT greco)</nome>
+<componente>Westcott and Hort transliterated</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/Westcott and Hort transliterated.laparola.gz</url>
+<dimensione>871 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Tischendorf (Greek NT)</nome>
+<nome language="it">Tischendorf (NT greco)</nome>
+<componente>Tischendorf</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Tischendorf.laparola.gz</url>
+<dimensione>977 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Tischendorf transliterated (Greek NT)</nome>
+<nome language="it">Tischendorf traslitterato (NT greco)</nome>
+<componente>Tischendorf transliterated</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Tischendorf transliterated.laparola.gz</url>
+<dimensione>851 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Tregelles (Greek NT)</nome>
+<nome language="it">Tregelles (NT greco)</nome>
+<componente>Tregelles</componente>
+<versione>7.11.0</versione>
+<url>https://www.laparola.net/v7/Tregelles.laparola.gz</url>
+<dimensione>975 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Tregelles transliterated (Greek NT)</nome>
+<nome language="it">Tregelles traslitterato (NT greco)</nome>
+<componente>Tregelles transliterated</componente>
+<versione>7.11.0</versione>
+<url>https://www.laparola.net/v7/Tregelles transliterated.laparola.gz</url>
+<dimensione>845 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Apostolic Bible (Greek)</nome>
+<nome language="it">Apostolic Bible (Greek)</nome>
+<componente>Apostolic Bible (Greek)</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/Apostolic Bible (Greek).laparola.gz</url>
+<dimensione>6706 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Interlinear Nuova Riveduta</nome>
+<nome language="it">Interlineare Nuova Riveduta</nome>
+<componente>Interlineare Nuova Riveduta</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Interlineare Nuova Riveduta.laparola.gz</url>
+<dimensione>2168 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Interlinear Nuova Riveduta (1994)</nome>
+<nome language="it">Interlineare Nuova Riveduta (1994)</nome>
+<componente>Interlineare Nuova Riveduta (1994)</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Interlineare Nuova Riveduta (1994).laparola.gz</url>
+<dimensione>2175 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Interlinear Riveduta 2020</nome>
+<nome language="it">Interlineare Riveduta 2020</nome>
+<componente>Interlineare Riveduta 2020</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Interlineare Riveduta 2020.laparola.gz</url>
+<dimensione>2175 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Italian NT Interlinear</nome>
+<nome language="it">Interlineare greco-italiano del NT</nome>
+<componente>Interlineare greco-italiano</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/Interlineare greco-italiano.laparola.gz</url>
+<dimensione>1948 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Italian-Greek NT Interlinear</nome>
+<nome language="it">Interlineare italiano-greco del NT</nome>
+<componente>Interlineare italiano-greco</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/Interlineare italiano-greco.laparola.gz</url>
+<dimensione>1953 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Septuagint (OT in Greek)</nome>
+<nome language="it">Septuaginta (AT in greco)</nome>
+<componente>Septuagint</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Septuagint.laparola.gz</url><url>https://www.laparola.net/v7/Septuagint Additional.laparola.gz</url>
+<dimensione>4068 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Septuagint transliterated (OT in Greek)</nome>
+<nome language="it">Septuaginta traslitterato (AT in greco)</nome>
+<componente>Septuagint transliterated</componente>
+<versione>7.03.0</versione>
+<url>https://www.laparola.net/v7/Septuagint transliterated.laparola.gz</url>
+<dimensione>3100 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Vulgate (Latin Bible)</nome>
+<nome language="it">Vulgata (Bibbia latina)</nome>
+<componente>Vulgate</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Vulgate.laparola.gz</url><url>https://www.laparola.net/v7/Vulgate (Roman Psalter).laparola.gz</url>
+<dimensione>3650 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Vulgate (Sistine)</nome>
+<nome language="it">Vulgata (Sistina)</nome>
+<componente>Vulgate (Sistine)</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Vulgate (Sistine).laparola.gz</url>
+<dimensione>3560 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Codex Bobbiensis (Old Italian)</nome>
+<nome language="it">Codice Bobbiensis (italiano antico)</nome>
+<componente>Codex Bobbiensis</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Codex Bobbiensis.laparola.gz</url>
+<dimensione>91 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Codex Vercellensis (Old Italian)</nome>
+<nome language="it">Codex Vercellensis (italiano antico)</nome>
+<componente>Codex Vercellensis</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Codex Vercellensis.laparola.gz</url>
+<dimensione>193 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>Codex Veronensis (Old Italian)</nome>
+<nome language="it">Codice Veronensis (italiano antico)</nome>
+<componente>Codex Veronensis</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Codex Veronensis.laparola.gz</url>
+<dimensione>192 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<nome>ASV Footnotes</nome>
+<nome language="it">ASV Footnotes</nome>
+<componente>ASV Footnotes</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/ASV Footnotes.laparola.gz</url>
+<dimensione>342 Kb</dimensione>
+<tipo>note</tipo>
+</file>
+<file>
+<nome>King James Version Footnotes</nome>
+<nome language="it">King James Version Footnotes</nome>
+<componente>King James Version Footnotes</componente>
+<versione>7.05.0</versione>
+<url>https://www.laparola.net/v7/King James Version Footnotes.laparola.gz</url>
+<dimensione>234 Kb</dimensione>
+<tipo>note</tipo>
+</file>
+<file>
+<nome>Lexham English Bible Notes</nome>
+<nome language="it">Lexham English Bible Notes</nome>
+<componente>Lexham English Bible Notes</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/Lexham English Bible Notes.laparola.gz</url>
+<dimensione>258 Kb</dimensione>
+<tipo>note</tipo>
+</file>
+<file>
+<nome>Note della Nuova Riveduta (translators' notes)</nome>
+<nome language="it">Note della Nuova Riveduta</nome>
+<componente>Note della Nuova Riveduta</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/Note della Nuova Riveduta.laparola.gz</url>
+<dimensione>350 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>note</tipo>
+</file>
+<file>
+<nome>Note della Luzzi (translator's notes)</nome>
+<nome language="it">Note della Luzzi</nome>
+<componente>Note della Luzzi</componente>
+<versione>7.00.2</versione>
+<url>https://www.laparola.net/v7/Note della Luzzi.laparola.gz</url>
+<dimensione>55 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>note</tipo>
+</file>
+<file>
+<nome>Matthew Henry's Commentary</nome>
+<nome language="it">Matthew Henry's Commentary (commentario inglese)</nome>
+<componente>Matthew Henry's Commentary</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Matthew Henry's Commentary.laparola.gz</url>
+<dimensione>31159 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Matthew Henry's Concise Commentary</nome>
+<nome language="it">Matthew Henry's Concise Commentary (commentario inglese)</nome>
+<componente>Matthew Henry's Concise Commentary</componente>
+<versione>7.03.0</versione>
+<url>https://www.laparola.net/v7/Matthew Henry's Concise Commentary.laparola.gz</url>
+<dimensione>3811 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Albert Barnes' Notes</nome>
+<nome language="it">Albert Barnes' Notes (commentario inglese)</nome>
+<componente>Albert Barnes' Notes</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Albert Barnes' Notes.laparola.gz</url>
+<dimensione>32158 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Jamieson-Fausset-Brown</nome>
+<nome language="it">Jamieson-Fausset-Brown (commentario inglese)</nome>
+<componente>Jamieson-Fausset-Brown</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Jamieson-Fausset-Brown.laparola.gz</url>
+<dimensione>12013 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Vincent's Word Studies</nome>
+<nome language="it">Vincent's Word Studies (commentario inglese)</nome>
+<componente>Vincent's Word Studies</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Vincent's Word Studies.laparola.gz</url>
+<dimensione>4565 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>People's New Testament</nome>
+<nome language="it">People's New Testament (commentario inglese)</nome>
+<componente>People's New Testament</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/People's New Testament.laparola.gz</url>
+<dimensione>2547 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>From The Talmud And Hebraica</nome>
+<nome language="it">From The Talmud And Hebraica (commentario inglese)</nome>
+<componente>From The Talmud And Hebraica</componente>
+<versione>7.09.0</versione>
+<url>https://www.laparola.net/v7/From The Talmud And Hebraica.laparola.gz</url>
+<dimensione>2143 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>The Gospel According to St. Mark</nome>
+<nome language="it">The Gospel According to St. Mark (commentario inglese)</nome>
+<componente>The Gospel According to St. Mark</componente>
+<versione>7.09.0</versione>
+<url>https://www.laparola.net/v7/The Gospel According to St. Mark.laparola.gz</url>
+<dimensione>712 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>McGarvey Commentaries</nome>
+<nome language="it">Commentari di McGarvey (commentario inglese)</nome>
+<componente>McGarvey Commentaries</componente>
+<versione>7.03.0</versione>
+<url>https://www.laparola.net/v7/McGarvey Commentaries.laparola.gz</url>
+<dimensione>4750 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Expositions of Holy Scripture - Romans and Corinthians</nome>
+<nome language="it">Expositions of Holy Scripture - Romans and Corinthians (commentario inglese)</nome>
+<componente>Expositions of Holy Scripture - Romans and Corinthians</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Expositions of Holy Scripture - Romans and Corinthians.laparola.gz</url>
+<dimensione>1190 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Romans Verse-by-Verse</nome>
+<nome language="it">Romans Verse-by-Verse (commentario inglese)</nome>
+<componente>Romans Verse-by-Verse</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Romans Verse-by-Verse.laparola.gz</url>
+<dimensione>1244 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>A Commentary on the Epistle to the Ephesians</nome>
+<nome language="it">A Commentary on the Epistle to the Ephesians (commentario inglese)</nome>
+<componente>A Commentary on the Epistle to the Ephesians</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/A Commentary on the Epistle to the Ephesians.laparola.gz</url>
+<dimensione>573 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>The General Epistles - James, Peter, and Judas</nome>
+<nome language="it">The General Epistles - James, Peter, and Judas (commentario inglese)</nome>
+<componente>The General Epistles - James, Peter, and Judas</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/The General Epistles - James, Peter, and Judas.laparola.gz</url>
+<dimensione>429 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Treasury of Scriptural Knowledge</nome>
+<nome language="it">Treasury of Scriptural Knowledge (Riferimenti incrociati in inglese)</nome>
+<componente>Treasury of Scriptural Knowledge</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Treasury of Scriptural Knowledge.laparola.gz</url>
+<dimensione>10796 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Manuscripts of the NT</nome>
+<nome language="it">Manuscripts of the NT (inglese)</nome>
+<componente>Manuscripts of the NT</componente>
+<versione>7.18.0</versione>
+<url>https://www.laparola.net/v7/Manuscripts of the NT.laparola.gz</url>
+<dimensione>2148 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Allusions in the Fathers</nome>
+<nome language="it">Allusions in the Fathers (inglese)</nome>
+<componente>Allusions in the Fathers</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Allusions in the Fathers.laparola.gz</url>
+<dimensione>3043 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Doré Bible Illustrations</nome>
+<nome language="it">Doré Bible Illustrations (inglese)</nome>
+<componente>Doré Bible Illustrations</componente>
+<versione>7.04.1</versione>
+<url>https://www.laparola.net/v7/Doré Bible Illustrations.laparola.gz</url><url>https://www.laparola.net/v7/Doré Bible Illustrations.lptar</url>
+<dimensione>5970 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>International Standard Bible Encyclopedia</nome>
+<nome language="it">International Standard Bible Encyclopedia (enciclopedia biblica in inglese)</nome>
+<componente>International Standard Bible Encyclopedia</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/International Standard Bible Encyclopedia.laparola.gz</url>
+<dimensione>20605 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Smith's Bible Dictionary</nome>
+<nome language="it">Smith's Bible Dictionary (enciclopedia biblica in inglese)</nome>
+<componente>Smith's Bible Dictionary</componente>
+<versione>7.02.0</versione>
+<url>https://www.laparola.net/v7/Smith's Bible Dictionary.laparola.gz</url>
+<dimensione>2969 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Easton's Bible Dictionary</nome>
+<nome language="it">Easton's Bible Dictionary (enciclopedia biblica in inglese)</nome>
+<componente>Easton's Bible Dictionary</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Easton's Bible Dictionary.laparola.gz</url>
+<dimensione>2915 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Nave's Topical Bible</nome>
+<nome language="it">Nave's Topical Bible (enciclopedia biblica in inglese)</nome>
+<componente>Nave's Topical Bible</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Nave's Topical Bible.laparola.gz</url>
+<dimensione>2536 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Torrey's New Topical Textbook</nome>
+<nome language="it">Torrey's New Topical Textbook (enciclopedia biblica in inglese)</nome>
+<componente>Torrey's New Topical Textbook</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Torrey's New Topical Textbook.laparola.gz</url>
+<dimensione>1461 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Hitchcock's Bible Names Dictionary</nome>
+<nome language="it">Hitchcock's Bible Names Dictionary (dizionario di nomi inglese)</nome>
+<componente>Hitchcock's Bible Names Dictionary</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Hitchcock's Bible Names Dictionary.laparola.gz</url>
+<dimensione>122 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Strong's Hebrew Dictionary</nome>
+<nome language="it">Strong's Hebrew Dictionary (dizionario ebraico-inglese)</nome>
+<componente>Strong's Hebrew Dictionary</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/Strong's Hebrew Dictionary.laparola.gz</url>
+<dimensione>1501 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Strong's Greek Dictionary</nome>
+<nome language="it">Strong's Greek Dictionary (dizionario greco-inglese)</nome>
+<componente>Strong's Greek Dictionary</componente>
+<versione>7.05.0</versione>
+<url>https://www.laparola.net/v7/Strong's Greek Dictionary.laparola.gz</url>
+<dimensione>1123 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Commentario completo di Matthew Henry (Italian commentary)</nome>
+<nome language="it">Commentario completo di Matthew Henry</nome>
+<componente>Commentario completo di Matthew Henry</componente>
+<versione>7.19.2</versione>
+<url>https://www.laparola.net/v7/Commentario completo di Matthew Henry.laparola.gz</url>
+<dimensione>30324 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commentario del Nuovo Testamento (Italian commentary)</nome>
+<nome language="it">Commentario del Nuovo Testamento</nome>
+<componente>Commentario del Nuovo Testamento</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Commentario del Nuovo Testamento.laparola.gz</url>
+<dimensione>12953 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commentario abbreviato di Matthew Henry (Italian commentary)</nome>
+<nome language="it">Commentario abbreviato di Matthew Henry</nome>
+<componente>Commentario abbreviato di Matthew Henry</componente>
+<versione>7.20.1</versione>
+<url>https://www.laparola.net/v7/Commentario abbreviato di Matthew Henry.laparola.gz</url>
+<dimensione>3577 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commentario di Giovanni Calvino (Italian commentary)</nome>
+<nome language="it">Commentario di Giovanni Calvino</nome>
+<componente>Commentario di Giovanni Calvino</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Commentario di Giovanni Calvino.laparola.gz</url>
+<dimensione>9604 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commentario sul testo greco delle epistole di Paolo (Italian commentary)</nome>
+<nome language="it">Commentario sul testo greco delle epistole di Paolo</nome>
+<componente>Commentario sul testo greco delle epistole di Paolo</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Commentario sul testo greco delle epistole di Paolo.laparola.gz</url>
+<dimensione>3329 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Note di Albert Barnes sulla Bibbia (Italian commentary)</nome>
+<nome language="it">Note di Albert Barnes sulla Bibbia</nome>
+<componente>Note di Albert Barnes sulla Bibbia</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Note di Albert Barnes sulla Bibbia.laparola.gz</url>
+<dimensione>29703 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Note della Bibbia di Ginevra (Italian commentary)</nome>
+<nome language="it">Note della Bibbia di Ginevra</nome>
+<componente>Note della Bibbia di Ginevra</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Note della Bibbia di Ginevra.laparola.gz</url>
+<dimensione>3833 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Esposizione della Bibbia di Gill (Italian commentary)</nome>
+<nome language="it">Esposizione della Bibbia di Gill</nome>
+<componente>Esposizione della Bibbia di Gill</componente>
+<versione>7.19.2</versione>
+<url>https://www.laparola.net/v7/Esposizione della Bibbia di Gill.laparola.gz</url>
+<dimensione>38831 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commentario del pulpito (Italian commentary)</nome>
+<nome language="it">Commentario del pulpito</nome>
+<componente>Commentario del pulpito</componente>
+<versione>7.19.2</versione>
+<url>https://www.laparola.net/v7/Commentario del pulpito.laparola.gz</url>
+<dimensione>101872 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Illustratore biblico (Italian commentary)</nome>
+<nome language="it">Illustratore biblico</nome>
+<componente>Illustratore biblico</componente>
+<versione>7.19.2</versione>
+<url>https://www.laparola.net/v7/Illustratore biblico.laparola.gz</url>
+<dimensione>141289 Kb</dimensione>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commento di Frederick Brotherton Meyer (Italian commentary)</nome>
+<nome language="it">Commento di Frederick Brotherton Meyer</nome>
+<componente>Commento di Frederick Brotherton Meyer</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Commento di Frederick Brotherton Meyer.laparola.gz</url>
+<dimensione>2270 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Tesoro di Davide (Italian commentary)</nome>
+<nome language="it">Tesoro di Davide</nome>
+<componente>Tesoro di Davide</componente>
+<versione>7.19.2</versione>
+<url>https://www.laparola.net/v7/Tesoro di Davide.laparola.gz</url>
+<dimensione>11054 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Riferimenti incrociati (Treasury of Scriptural Knowledge in Italan)</nome>
+<nome language="it">Riferimenti incrociati</nome>
+<componente>Riferimenti incrociati</componente>
+<versione>7.00.2</versione>
+<url>https://www.laparola.net/v7/Riferimenti incrociati.laparola.gz</url>
+<dimensione>7857 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Hard passages in the Bible (Italian)</nome>
+<nome language="it">Brani difficili della Bibbia</nome>
+<componente>Brani difficili della Bibbia</componente>
+<versione>7.19.2</versione>
+<url>https://www.laparola.net/v7/Brani difficili della Bibbia.laparola.gz</url>
+<dimensione>772 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Manoscritti del NT (Italian)</nome>
+<nome language="it">Manoscritti del NT</nome>
+<componente>Manoscritti del NT</componente>
+<versione>7.18.0</versione>
+<url>https://www.laparola.net/v7/Manoscritti del NT.laparola.gz</url>
+<dimensione>2149 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Summaries (Italian)</nome>
+<nome language="it">Riassunti</nome>
+<componente>Riassunti</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Riassunti.laparola.gz</url>
+<dimensione>2160 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Aiuto Biblico (Italian sermons)</nome>
+<nome language="it">Aiuto Biblico</nome>
+<componente>Aiuto Biblico</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Aiuto Biblico.laparola.gz</url>
+<dimensione>4897 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Illustrazioni bibliche di Doré (Italian)</nome>
+<nome language="it">Illustrazioni bibliche di Doré</nome>
+<componente>Illustrazioni bibliche di Doré</componente>
+<versione>7.04.1</versione>
+<url>https://www.laparola.net/v7/Illustrazioni bibliche di Doré.laparola.gz</url><url>https://www.laparola.net/v7/Illustrazioni bibliche di Doré.lptar</url>
+<dimensione>5976 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Enciclopedia biblica (Italian encyclopedia)</nome>
+<nome language="it">Enciclopedia biblica (con cartine)</nome>
+<componente>Enciclopedia biblica</componente>
+<versione>7.20.5</versione>
+<url>https://www.laparola.net/v7/Enciclopedia biblica.laparola.gz</url><url>https://www.laparola.net/v7/Albero genealogico di Erode.gif</url><url>https://www.laparola.net/v7/Esodo.gif</url><url>https://www.laparola.net/v7/Gerusalemme nel NT.gif</url><url>https://www.laparola.net/v7/Gerusalemme nel VT.gif</url><url>https://www.laparola.net/v7/Mondo dei patriarchi.gif</url><url>https://www.laparola.net/v7/Palestina nel NT.gif</url><url>https://www.laparola.net/v7/Palestina nel VT.gif</url><url>https://www.laparola.net/v7/Regni di Israele.gif</url><url>https://www.laparola.net/v7/Tempio nel NT.gif</url><url>https://www.laparola.net/v7/Viaggi di Paolo.gif</url><url>https://www.laparola.net/v7/Albero genealogico di Erode.image_link</url><url>https://www.laparola.net/v7/Esodo.image_link</url><url>https://www.laparola.net/v7/Gerusalemme nel NT.image_link</url><url>https://www.laparola.net/v7/Gerusalemme nel VT.image_link</url><url>https://www.laparola.net/v7/Mondo dei patriarchi.image_link</url><url>https://www.laparola.net/v7/Palestina nel NT.image_link</url><url>https://www.laparola.net/v7/Palestina nel VT.image_link</url><url>https://www.laparola.net/v7/Regni di Israele.image_link</url><url>https://www.laparola.net/v7/Tempio nel NT.image_link</url><url>https://www.laparola.net/v7/Viaggi di Paolo.image_link</url>
+<dimensione>1205 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Vocabolario del Nuovo Testamento (Italian)</nome>
+<nome language="it">Vocabolario del Nuovo Testamento</nome>
+<componente>Vocabolario del Nuovo Testamento</componente>
+<versione>7.16.1</versione>
+<url>https://www.laparola.net/v7/Vocabolario del Nuovo Testamento.laparola.gz</url>
+<dimensione>2098 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Words Latin Dictionary</nome>
+<nome language="it">Words Dizionario latino-inglese</nome>
+<componente>Words Latin Dictionary</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Words Latin Dictionary.laparola.gz</url>
+<dimensione>3148 Kb</dimensione>
+<tipo>dizionario</tipo>
+</file>
+<file>
+<nome>Panoramica della Bibbia (Italian)</nome>
+<nome language="it">Panoramica della Bibbia</nome>
+<componente>Panoramica della Bibbia</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Panoramica della Bibbia.laparola.gz</url>
+<dimensione>284 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Guida alla Bibbia (Italian)</nome>
+<nome language="it">Guida alla Bibbia</nome>
+<componente>Guida alla Bibbia</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Guida alla Bibbia.laparola.gz</url>
+<dimensione>337 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Istituzione della religione cristiana (Italian)</nome>
+<nome language="it">Istituzione della religione cristiana</nome>
+<componente>Istituzione della religione cristiana</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Istituzione della religione cristiana.laparola.gz</url>
+<dimensione>2725 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Sommario della dottrina cristiana (Italian)</nome>
+<nome language="it">Sommario della dottrina cristiana</nome>
+<componente>Sommario della dottrina cristiana</componente>
+<versione>7.19.3</versione>
+<url>https://www.laparola.net/v7/Sommario della dottrina cristiana.laparola.gz</url>
+<dimensione>252 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Racconti della Giustizia (Italian)</nome>
+<nome language="it">Racconti della Giustizia</nome>
+<componente>Racconti della Giustizia</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Racconti della Giustizia.laparola.gz</url>
+<dimensione>279 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Apostolic Fathers (Greek)</nome>
+<nome language="it">Padri apostolici (greco)</nome>
+<componente>Apostolic Fathers (Greek)</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Apostolic Fathers (Greek).laparola.gz</url>
+<dimensione>472 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>An Introduction to the Old Testament in Greek</nome>
+<nome language="it">An Introduction to the Old Testament in Greek</nome>
+<componente>An Introduction to the Old Testament in Greek</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/An Introduction to the Old Testament in Greek.laparola.gz</url>
+<dimensione>1352 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Grammar of Septuagint Greek</nome>
+<nome language="it">Grammar of Septuagint Greek</nome>
+<componente>Grammar of Septuagint Greek</componente>
+<versione>7.11.0</versione>
+<url>https://www.laparola.net/v7/Grammar of Septuagint Greek.laparola.gz</url>
+<dimensione>264 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Grammar of New Testament Greek in Light of Historical Research</nome>
+<nome language="it">Grammar of New Testament Greek in Light of Historical Research</nome>
+<componente>Grammar of New Testament Greek in Light of Historical Research</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/Grammar of New Testament Greek in Light of Historical Research.laparola.gz</url>
+<dimensione>4226 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Introduction to the New Testament</nome>
+<nome language="it">Introduction to the New Testament</nome>
+<componente>Introduction to the New Testament</componente>
+<versione>7.08.0</versione>
+<url>https://www.laparola.net/v7/Introduction to the New Testament.laparola.gz</url>
+<dimensione>583 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Institutes of the Christian Religion</nome>
+<nome language="it">Institutes of the Christian Religion</nome>
+<componente>Institutes of the Christian Religion</componente>
+<versione>7.03.0</versione>
+<url>https://www.laparola.net/v7/Institutes of the Christian Religion.laparola.gz</url>
+<dimensione>3310 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Systematic Theology (Finney)</nome>
+<nome language="it">Systematic Theology (Finney)</nome>
+<componente>Systematic Theology (Finney)</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/Systematic Theology (Finney).laparola.gz</url>
+<dimensione>1380 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Death of Death in the Death of Christ</nome>
+<nome language="it">The Death of Death in the Death of Christ</nome>
+<componente>The Death of Death in the Death of Christ</componente>
+<versione>7.07.0</versione>
+<url>https://www.laparola.net/v7/The Death of Death in the Death of Christ.laparola.gz</url>
+<dimensione>760 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Work of the Holy Spirit</nome>
+<nome language="it">The Work of the Holy Spirit</nome>
+<componente>The Work of the Holy Spirit</componente>
+<versione>7.07.0</versione>
+<url>https://www.laparola.net/v7/The Work of the Holy Spirit.laparola.gz</url>
+<dimensione>1262 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Reformed Doctrine of Predestination</nome>
+<nome language="it">The Reformed Doctrine of Predestination</nome>
+<componente>The Reformed Doctrine of Predestination</componente>
+<versione>7.11.0</versione>
+<url>https://www.laparola.net/v7/The Reformed Doctrine of Predestination.laparola.gz</url>
+<dimensione>786 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>History of the Christian Church</nome>
+<nome language="it">History of the Christian Church (storia in inglese)</nome>
+<componente>History of the Christian Church</componente>
+<versione>7.00.2</versione>
+<url>https://www.laparola.net/v7/History of the Christian Church.laparola.gz</url>
+<dimensione>13894 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>A Dictionary of Christian Biography and Literature</nome>
+<nome language="it">A Dictionary of Christian Biography and Literature</nome>
+<componente>A Dictionary of Christian Biography and Literature</componente>
+<versione>7.05.0</versione>
+<url>https://www.laparola.net/v7/A Dictionary of Christian Biography and Literature.laparola.gz</url>
+<dimensione>5929 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Temple-Its Ministry and Services</nome>
+<nome language="it">The Temple-Its Ministry and Services (inglese)</nome>
+<componente>The Temple-Its Ministry and Services</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/The Temple-Its Ministry and Services.laparola.gz</url>
+<dimensione>568 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Sketches of Jewish Social Life</nome>
+<nome language="it">Sketches of Jewish Social Life (inglese)</nome>
+<componente>Sketches of Jewish Social Life</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/Sketches of Jewish Social Life.laparola.gz</url>
+<dimensione>530 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Life and Times of Jesus the Messiah</nome>
+<nome language="it">The Life and Times of Jesus the Messiah (inglese)</nome>
+<componente>The Life and Times of Jesus the Messiah</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/The Life and Times of Jesus the Messiah.laparola.gz</url>
+<dimensione>3832 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Training of the Twelve</nome>
+<nome language="it">The Training of the Twelve (inglese)</nome>
+<componente>The Training of the Twelve</componente>
+<versione>7.07.1</versione>
+<url>https://www.laparola.net/v7/The Training of the Twelve.laparola.gz</url>
+<dimensione>1090 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>St. Paul the Traveler and the Roman Citizen</nome>
+<nome language="it">St. Paul the Traveler and the Roman Citizen (inglese)</nome>
+<componente>St. Paul the Traveler and the Roman Citizen</componente>
+<versione>7.06.0</versione>
+<url>https://www.laparola.net/v7/St. Paul the Traveler and the Roman Citizen.laparola.gz</url>
+<dimensione>597 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Reformed Pastor</nome>
+<nome language="it">The Reformed Pastor (inglese)</nome>
+<componente>The Reformed Pastor</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/The Reformed Pastor.laparola.gz</url>
+<dimensione>420 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Pilgrim's Progress</nome>
+<nome language="it">The Pilgrim's Progress</nome>
+<componente>The Pilgrim's Progress</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/The Pilgrim's Progress.laparola.gz</url>
+<dimensione>529 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>A Body of Practical Divinity</nome>
+<nome language="it">A Body of Practical Divinity</nome>
+<componente>A Body of Practical Divinity</componente>
+<versione>7.15.0</versione>
+<url>https://www.laparola.net/v7/A Body of Practical Divinity.laparola.gz</url>
+<dimensione>1357 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Imitation of Christ</nome>
+<nome language="it">The Imitation of Christ</nome>
+<componente>The Imitation of Christ</componente>
+<versione>7.09.0</versione>
+<url>https://www.laparola.net/v7/The Imitation of Christ.laparola.gz</url>
+<dimensione>302 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Deeper Christian Life</nome>
+<nome language="it">The Deeper Christian Life</nome>
+<componente>The Deeper Christian Life</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/The Deeper Christian Life.laparola.gz</url>
+<dimensione>124 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Sovereignty of God</nome>
+<nome language="it">The Sovereignty of God</nome>
+<componente>The Sovereignty of God</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/The Sovereignty of God.laparola.gz</url>
+<dimensione>505 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>The Practice of the Presence of God</nome>
+<nome language="it">The Practice of the Presence of God</nome>
+<componente>The Practice of the Presence of God</componente>
+<versione>7.05.0</versione>
+<url>https://www.laparola.net/v7/The Practice of the Presence of God.laparola.gz</url>
+<dimensione>69 Kb</dimensione>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Uniformità alla Volontà di Dio</nome>
+<nome language="it">Uniformità alla Volontà di Dio</nome>
+<componente>Uniformità alla Volontà di Dio</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/Uniformità alla Volontà di Dio.laparola.gz</url>
+<dimensione>63 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>libro</tipo>
+</file>
+<file>
+<nome>Samuel-Kings-Chronicles</nome>
+<nome language="it">Samuele-Re-Cronache</nome>
+<componente>Samuel-Kings-Chronicles</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Samuel-Kings-Chronicles.xml</url>
+<dimensione>15 Kb</dimensione>
+<tipo>parallelo</tipo>
+</file>
+<file>
+<nome>Quotations</nome>
+<nome language="it">Citazioni</nome>
+<componente>Quotations</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Quotations.xml</url>
+<dimensione>50 Kb</dimensione>
+<tipo>parallelo</tipo>
+</file>
+<file>
+<nome>Prophecies Fulfilled by Jesus</nome>
+<nome language="it">Profezie adempiute da Gesù</nome>
+<componente>Prophecies Fulfilled by Jesus</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Prophecies Fulfilled by Jesus.xml</url>
+<dimensione>12 Kb</dimensione>
+<tipo>parallelo</tipo>
+</file>
+<file>
+<nome>Harmony of the Gospels</nome>
+<nome language="it">Armonia dei Vangeli</nome>
+<componente>Harmony of the Gospels</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Harmony of the Gospels.xml</url>
+<dimensione>65 Kb</dimensione>
+<tipo>parallelo</tipo>
+</file>
+<file>
+<nome>Hebrew audio</nome>
+<nome language="it">Audio ebraico</nome>
+<componente>Hebrew audio</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/Hebrew audio.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Greek audio</nome>
+<nome language="it">Audio greco</nome>
+<componente>Greek audio</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/Greek audio.xml</url>
+<dimensione>4 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>LaParola Greek (with variants and allusions)</nome>
+<nome language="it">LaParola greco (con varianti e allusioni)</nome>
+<componente>LaParola</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/LaParola Greek.xml</url><url>https://www.laparola.net/v7/LaParola.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Kata Biblon (Majority Greek and English WEB texts)</nome>
+<nome language="it">Kata Biblon (testo greco e versione inglese WEB)</nome>
+<componente>Kata Biblon</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Kata Biblon.xml</url><url>https://www.laparola.net/v7/Kata Biblon.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Kata Biblon Greek word</nome>
+<nome language="it">Kata Biblon parola greca</nome>
+<componente>Kata Biblon Greek word</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Kata Biblon Greek word.xml</url><url>https://www.laparola.net/v7/Kata Biblon.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Manuscript Comparator (Greek NT texts)</nome>
+<nome language="it">Manuscript Comparator (testi greci del NT)</nome>
+<componente>Manuscript Comparator</componente>
+<versione>7.09.0</versione>
+<url>https://www.laparola.net/v7/Manuscript Comparator.xml</url><url>https://www.laparola.net/v7/Manuscript Comparator.png</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Christian Classics Etheral Library</nome>
+<componente>Christian Classics Etheral Library</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/Christian Classics Etheral Library.xml</url><url>https://www.laparola.net/v7/Christian Classics Etheral Library.gif</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Calvin Hymnary Project (hymns)</nome>
+<nome language="it">Calvin Hymnary Project (inni in inglese)</nome>
+<componente>Calvin Hymnary Project</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/Calvin Hymnary Project.xml</url><url>https://www.laparola.net/v7/Christian Classics Etheral Library.gif</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Bible Gateway (5 English translations)</nome>
+<nome language="it">Bible Gateway (5 versioni inglesi)</nome>
+<componente>BibleGateway 5 English translations</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/BibleGateway 5 English translations.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Crosswalk NIV</nome>
+<componente>Crosswalk NIV</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Crosswalk NIV.xml</url><url>https://www.laparola.net/v7/Crosswalk.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>NeXt Bible</nome>
+<componente>NeXt Bible</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/NeXt Bible.xml</url><url>https://www.laparola.net/v7/NetBible.jpg</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>LaParola (5 Italian versions)</nome>
+<nome language="it">LaParola (5 versioni)</nome>
+<componente>LaParola</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/LaParola.xml</url><url>https://www.laparola.net/v7/LaParola.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>La Parola è vita (Italian version)</nome>
+<nome language="it">La Parola è vita</nome>
+<componente>La Parola è vita</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/La Parola è vita.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>SermonCentral</nome>
+<nome language="it">SermonCentral (prediche in inglese)</nome>
+<componente>SermonCentral</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/SermonCentral.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>SermonAudio</nome>
+<nome language="it">SermonAudio (prediche in inglese)</nome>
+<componente>SermonAudio</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/SermonAudio.xml</url><url>https://www.laparola.net/v7/SermonAudio.png</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>LaParola studi (Italian Bible studies)</nome>
+<nome language="it">LaParola studi</nome>
+<componente>LaParola studi</componente>
+<versione>7.04.0</versione>
+<url>https://www.laparola.net/v7/LaParola studi.xml</url><url>https://www.laparola.net/v7/LaParola.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Aleppo Codex</nome>
+<nome language="it">Codice Aleppo</nome>
+<componente>Aleppo Codex</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Aleppo Codex.xml</url>
+<dimensione>48 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Great Isaiah Scroll</nome>
+<nome language="it">Rotolo di Isaia</nome>
+<componente>Great Isaiah Scroll</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Great Isaiah Scroll.xml</url>
+<dimensione>6 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>p46</nome>
+<componente>p46</componente>
+<versione>7.14.0</versione>
+<url>https://www.laparola.net/v7/p46.xml</url>
+<dimensione>16 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Sinaiticus</nome>
+<componente>Sinaiticus</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Sinaiticus.xml</url>
+<dimensione>25 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Alexandrinus</nome>
+<componente>Alexandrinus</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Alexandrinus.xml</url>
+<dimensione>28 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Vaticanus</nome>
+<componente>Vaticanus</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Vaticanus.xml</url>
+<dimensione>28 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Codex Bezae Greek</nome>
+<nome language="it">Codex Bezae greco</nome>
+<componente>Codex Bezae Greek</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Codex Bezae Greek.xml</url>
+<dimensione>46 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Codex Bezae Latin</nome>
+<nome language="it">Codex Bezae latino</nome>
+<componente>Codex Bezae Latin</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Codex Bezae Latin.xml</url>
+<dimensione>46 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Washingtonensis</nome>
+<componente>Washingtonensis</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Washingtonensis.xml</url>
+<dimensione>38 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Münster</nome>
+<componente>Münster</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Münster.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Tischendorf</nome>
+<componente>Tischendorf</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Tischendorf.xml</url>
+<dimensione>222 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Logos Bible</nome>
+<componente>Logos Bible</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Logos Bible.xml</url><url>https://www.laparola.net/v7/Libronix.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>E-sword</nome>
+<componente>e-sword</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/e-sword.xml</url><url>https://www.laparola.net/v7/e-sword.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>LaParola Greek word</nome>
+<nome language="it">LaParola parola greca</nome>
+<componente>LaParola Greek word</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/LaParola Greek word.xml</url><url>https://www.laparola.net/v7/LaParola.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Logos Greek Strongs</nome>
+<componente>Logos Greek Strongs</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Logos Greek Strongs.xml</url><url>https://www.laparola.net/v7/Libronix.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Logos Word Study</nome>
+<componente>Logos Word Study</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Logos Word Study.xml</url><url>https://www.laparola.net/v7/Libronix.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>4 English translations search</nome>
+<componente>4 English translations search</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/4 English translations search.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Crosswalk NIV search</nome>
+<componente>Crosswalk NIV search</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Crosswalk NIV search.xml</url><url>https://www.laparola.net/v7/Crosswalk.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>La Parola è vita search (in this Italian translation)</nome>
+<nome language="it">La Parola è vita ricerca</nome>
+<componente>La Parola è vita ricerca</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/La Parola è vita ricerca.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Google</nome>
+<componente>Google</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Google.xml</url><url>https://www.laparola.net/v7/Google.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Google Books</nome>
+<componente>Google Books</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Google Books.xml</url><url>https://www.laparola.net/v7/Google.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>NeXt Bible Study Dictionary</nome>
+<componente>NeXt Bible Study Dictionary</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/NeXt Bible Study Dictionary.xml</url><url>https://www.laparola.net/v7/NetBible.jpg</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Jewish Encyclopedia</nome>
+<nome language="it">Enciclopedia giudaica (in inglese)</nome>
+<componente>Jewish Encyclopedia</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Jewish Encyclopedia.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>OpenBible</nome>
+<componente>OpenBible</componente>
+<versione>7.00.3</versione>
+<url>https://www.laparola.net/v7/OpenBible.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Logos Dictionary</nome>
+<componente>Logos Dictionary</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Logos Dictionary.xml</url><url>https://www.laparola.net/v7/Libronix.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Logos Search Topic</nome>
+<componente>Logos Search Topic</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Logos Search Topic.xml</url><url>https://www.laparola.net/v7/Libronix.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Wikipedia (English)</nome>
+<nome language="it">Wikipedia (inglese)</nome>
+<componente>Wikipedia (en)</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Wikipedia (en).xml</url><url>https://www.laparola.net/v7/Wikipedia.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Wikipedia (Italian)</nome>
+<nome language="it">Wikipedia (italiano)</nome>
+<componente>Wikipedia (it)</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Wikipedia (it).xml</url><url>https://www.laparola.net/v7/Wikipedia.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Encyclopedia</nome>
+<componente>Encyclopedia</componente>
+<versione>7.07.0</versione>
+<url>https://www.laparola.net/v7/Encyclopedia.xml</url><url>https://www.laparola.net/v7/Encyclopedia.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Dictionary</nome>
+<componente>Dictionary</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Dictionary.xml</url><url>https://www.laparola.net/v7/Dictionary.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>HyperDictionary</nome>
+<componente>HyperDictionary</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/HyperDictionary.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>DeMauro (Italian dictionary)</nome>
+<nome language="it">DeMauro (dizionario italiano)</nome>
+<componente>DeMauro</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/DeMauro.xml</url>
+<dimensione>1 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Notepad</nome>
+<nome language="it">Blocco note</nome>
+<componente>Notepad</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Notepad.xml</url><url>https://www.laparola.net/v7/Notepad.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>FreeTranslation (English-Italian)</nome>
+<nome language="it">FreeTranslation (inglese-italiano)</nome>
+<componente>FreeTranslation en-it</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/FreeTranslation en-it.xml</url><url>https://www.laparola.net/v7/FreeTranslation.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>FreeTranslation (Italian-English)</nome>
+<nome language="it">FreeTranslation (italiano-inglese)</nome>
+<componente>FreeTranslation it-en</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/FreeTranslation it-en.xml</url><url>https://www.laparola.net/v7/FreeTranslation.gif</url>
+<dimensione>2 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Google Translation (English-Italian)</nome>
+<nome language="it">Google Translation (inglese-italiano)</nome>
+<componente>Google en-it</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Google en-it.xml</url><url>https://www.laparola.net/v7/Google.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Google Translation (Italian-English)</nome>
+<nome language="it">Google Translation (italiano-inglese)</nome>
+<componente>Google it-en</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Google it-en.xml</url><url>https://www.laparola.net/v7/Google.gif</url>
+<dimensione>3 Kb</dimensione>
+<tipo>collegamento</tipo>
+</file>
+<file>
+<nome>Well-known Passages</nome>
+<nome language="it">Brani noti</nome>
+<componente>Well-known Passages</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Well-known Passages.xml</url>
+<dimensione>4 Kb</dimensione>
+<tipo>segnalibro</tipo>
+</file>
+<file>
+<nome>Prayers</nome>
+<nome language="it">Preghiere</nome>
+<componente>Prayers</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Prayers.xml</url>
+<dimensione>3 Kb</dimensione>
+<tipo>segnalibro</tipo>
+</file>
+<file>
+<nome>Miracles</nome>
+<nome language="it">Miracoli</nome>
+<componente>Miracles</componente>
+<versione>7.17.0</versione>
+<url>https://www.laparola.net/v7/Miracles.xml</url>
+<dimensione>16 Kb</dimensione>
+<tipo>segnalibro</tipo>
+</file>
+<file>
+<nome>Jesus' Parables</nome>
+<nome language="it">Parabole di Gesù</nome>
+<componente>Jesus' Parables</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Jesus' Parables.xml</url>
+<dimensione>5 Kb</dimensione>
+<tipo>segnalibro</tipo>
+</file>
+<file>
+<nome>Prophecies about Jesus</nome>
+<nome language="it">Profezie che riguardano Gesù</nome>
+<componente>Prophecies about Jesus</componente>
+<versione>7.17.0</versione>
+<url>https://www.laparola.net/v7/Prophecies about Jesus.xml</url>
+<dimensione>21 Kb</dimensione>
+<tipo>segnalibro</tipo>
+</file>
+<file>
+<nome>Message of the Gospel</nome>
+<nome language="it">Messaggio del Vangelo</nome>
+<componente>Message of the Gospel</componente>
+<versione>7.01.0</versione>
+<url>https://www.laparola.net/v7/Message of the Gospel.xml</url>
+<dimensione>2 Kb</dimensione>
+<tipo>segnalibro</tipo>
+</file>
+<file>
+<nome>All the Bible in a Year, 4 Readings per Day</nome>
+<nome language="it">Tutta la Bibbia in un anno, 4 letture per giorno</nome>
+<componente>All the Bible in a Year, 4 Readings per Day</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/All the Bible in a Year, 4 Readings per Day.xml</url>
+<dimensione>41 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>7 Sections, 1 for Every Day of the Week</nome>
+<nome language="it">7 sezioni, una per ogni giorno della settimana</nome>
+<componente>7 Sections, 1 for Every Day of the Week</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/7 Sections, 1 for Every Day of the Week.xml</url>
+<dimensione>17 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>Bible with Apocrypha in a Year, 2 Readings per Day</nome>
+<nome language="it">Tutta la CEI in un anno, 2 letture al giorno</nome>
+<componente>Bible with Apocrypha in a Year, 2 Readings per Day</componente>
+<versione>7.15.2</versione>
+<url>https://www.laparola.net/v7/Bible with Apocrypha in a Year, 2 Readings per Day.xml</url>
+<dimensione>24 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>From the Beginning to the End</nome>
+<nome language="it">Dall'inizio alla fine</nome>
+<componente>From the Beginning to the End</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/From the Beginning to the End.xml</url>
+<dimensione>17 Kb</dimensione>
+<tipo>lettura</tipo>
+</file><file><nome>In Chronological Order</nome>
+<nome language="it">In ordine cronologico</nome>
+<componente>In Chronological Order</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/In Chronological Order.xml</url>
+<dimensione>19 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>Liturgical Calendar 2004</nome>
+<nome language="it">Calendario liturgico 2004</nome>
+<componente>Liturgical Calendar 2004</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Liturgical Calendar 2004.xml</url>
+<dimensione>37 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>Liturgical Calendar 2005</nome>
+<nome language="it">Calendario liturgico 2005</nome>
+<componente>Liturgical Calendar 2005</componente>
+<versione>7.00.0</versione>
+<url>https://www.laparola.net/v7/Liturgical Calendar 2005.xml</url>
+<dimensione>38 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>OT once, NT and Psalms twice (McCheyne)</nome>
+<nome language="it">AT una volta, NT e Salmi due volte (McCheyne)</nome>
+<componente>OT once, NT and Psalms twice (McCheyne)</componente>
+<versione>7.05.0</versione>
+<url>https://www.laparola.net/v7/OT once, NT and Psalms twice (McCheyne).xml</url>
+<dimensione>37 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>OT, NT, Psalm, Proverb</nome>
+<nome language="it">AT, NT, Salmo, Proverbio</nome>
+<componente>OT, NT, Psalm, Proverb</componente>
+<versione>7.13.0</versione>
+<url>https://www.laparola.net/v7/OT, NT, Psalm, Proverb.xml</url>
+<dimensione>43 Kb</dimensione>
+<tipo>lettura</tipo>
+</file>
+<file>
+<nome>English Bibles</nome>
+<nome language="it">Versioni inglesi</nome>
+<componente>English Bibles</componente>
+<versione>7.12.0</versione>
+<url>https://www.laparola.net/v7/English Bibles</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+<file>
+<nome>English Commentaries</nome>
+<nome language="it">Commentari inglesi</nome>
+<componente>English Commentaries</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/English Commentaries</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+<file>
+<nome>English Dictionaries</nome>
+<nome language="it">Dizionari inglesi</nome>
+<componente>English Dictionaries</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/English Dictionaries</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+<file>
+<nome>Italian Bibles</nome>
+<nome language="it">Versioni italiane</nome>
+<componente>Versioni italiane</componente>
+<versione>7.20.3</versione>
+<url>https://www.laparola.net/v7/Versioni italiane</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+<file>
+<nome>Italian Commentaries</nome>
+<nome language="it">Commentari italiani</nome>
+<componente>Commentari italiani</componente>
+<versione>7.17.3</versione>
+<url>https://www.laparola.net/v7/Commentari italiani</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+<file>
+<nome>Italian Dictionaries</nome>
+<nome language="it">Dizionari italiani</nome>
+<componente>Dizionari italiani</componente>
+<versione>7.10.0</versione>
+<url>https://www.laparola.net/v7/Dizionari italiani</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+<file>
+<nome>Greek New Testament</nome>
+<nome language="it">Nuovo Testamento greco</nome>
+<componente>Greek New Testament</componente>
+<versione>7.16.0</versione>
+<url>https://www.laparola.net/v7/Greek New Testament</url>
+<dimensione>1 Kb</dimensione>
+<tipo>testiparalleli</tipo>
+</file>
+</versioni>

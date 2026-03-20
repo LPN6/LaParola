@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Dictionary De Mauro</name>
+<name language="it">Dizionario De Mauro</name>
+<description>Gives the definition of an Italian word</description>
+<description language="it">Dà la definizione di una parola italiana</description>
+<type>parola</type>
+<version>7.00.0</version>
+<language>it</language>
+<url>http://www.demauroparavia.it/cerca?stringa={parola}</url>
+<category>Dictionary</category>
+<category language="it">Dizionario</category>
+<shortcut>Ctrl+Alt+D</shortcut>
+</link>

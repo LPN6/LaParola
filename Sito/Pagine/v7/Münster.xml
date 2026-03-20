@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Münster NT Transcripts</name>
+<name language="it">Transcrizioni dei manoscritti del NT da Münster</name>
+<description>The Greek text of important manuscripts</description>
+<description language="it">Il testo greco di manoscritti importanti</description>
+<type>reference</type>
+<version>7.00.0</version>
+<url>http://nttranscripts.uni-muenster.de/AnaServer?NTtranscripts+0+wordcoll.anv+book={booknumberNT}&amp;chapter={chapter}&amp;verse={verse}</url>
+<category>Manuscripts</category>
+<category language="it">Manoscritti</category>
+</link>

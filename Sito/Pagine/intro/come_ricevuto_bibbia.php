@@ -1,0 +1,126 @@
+<?
+$descriz = "Come abbiamo ricevuto la Bibbia";
+$key = "macarthur,rivelazione,ispirazione,canonicità,preservazione,trasmissione";
+$titolo = "Come abbiamo ricevuto la Bibbia";
+$sezione = "Articoli";
+$sezioneurl = "/intro/";
+require("../capo.php");
+include("../funzioni.php");
+?>
+<h1>Come abbiamo ricevuto la Bibbia</h1>
+<h3>di John F. MacArthur, Jr., The MacArthur Study Bible, (Dallas: Word Publishing) 1997</h3>
+
+<p class="primalettera">Fin da quando Eva incontr&ograve; la marea di dubbio e di rinnegamento di Satana (Genesi 3:1-7), l'umanit&agrave; ha continuato a dubitare della Parola di Dio. Purtroppo, Eva ebbe poco aiuto per superare i suoi ostacoli intellettuali nella piena fiducia nell'auto-rivelazione di Dio (Genesi 2:16-17).</p>
+<p>Senz'altro, le Scritture hanno abbastanza contenuto per essere interrogate, dato che sono composte da 66 libri, 1189 capitoli, 31173 versetti, e pi&ugrave; di 750.000 parole. Quando apri la tua Bibbia per leggerla o studiarla, forse ti chiedi o ti sei chiesto nel passato, "Come possiamo essere sicuri che questa &egrave; la Parola di Dio?" Una domanda del genere non &egrave; del tutto sbagliata, soprattutto quando si cerca con una mente aperta (Atti 17:11). Le Scritture sono aperte alle domande che uno studente sincero si pone. C'&egrave; un sacco di domande che possono venire in mente, per esempio:</p>
+<ul>
+<li>Da dove viene la Bibbia?</li>
+<li>Di chi d&agrave; il pensiero?</li>
+<li>Sono stati persi dei libri della Bibbia nel passato?</li>
+<li>Che cosa affermano le Scritture riguardo s&eacute; stesse?</li>
+<li>&Egrave; all'altezza delle sue affermazioni?</li>
+<li>Chi ha scritto la Bibbia - Dio o l'uomo?</li>
+<li>Le Scritture sono state protette da modifiche umane durante i secoli?</li>
+<li>Quanto vicino ai manoscritti originali sono le traduzioni moderne?</li>
+<li>Come &egrave; arrivata la Bibbia alla nostra era e nella nostra lingua?</li>
+<li>Ci sono pi&ugrave; Scritture future, oltre gli attuali 66 libri?</li>
+<li>Chi ha deciso, e con quale basi, che la Bibbia &egrave; composta dell'elenco tradizionale di 66 libri?</li>
+<li>Se le Scritture furono scritte in un periodo di circa 1500 anni (dal 1400 a.C. al 100 d.C. all'incirca), tramandate per 2000 anni, e tradotte in migliaia di lingue, che cosa impediva che la Bibbia fosse alterata da persone, o per sbaglio o per cattivi motivi?</li>
+<li>La Bibbia di oggi merita veramente il titolo "La Parola di Dio"?</li>
+</ul>
+<p>Senza dubbio, queste domande hanno assillato la mente di molti. Uno studio delle Scritture risolve tutte queste questioni, in modo che non ci sia pi&ugrave; bisogno di essere preoccupato da esse. La Bibbia d&agrave; questa sicurezza.</p>
+
+<h2>Le affermazioni delle Scritture riguardo s&eacute; stesse</h2>
+
+<p>Prendi la Bibbia e lascia che parli per s&eacute; stessa. Afferma di essere la Parola di Dio? S&igrave;! Pi&ugrave; di 2.000 volte solo nell'Antico Testamento, la Bibbia afferma che Dio ha detto quello che &egrave; scritto nelle sue pagine. Dall'inizio (Genesi 1:3) alla fine (Malachia 4:3), questo &egrave; quello che le Scritture affermano. La frase "la Parola di Dio" occorre pi&ugrave; di 40 volte nel Nuovo Testamento. &Egrave; identificata con l'Antico Testamento (Marco 7:13). &Egrave; quella che Ges&ugrave; predic&ograve; (Luca 5:1). &Egrave; il messaggio che gli apostoli insegnarono (Atti 4:31; 6:2). &Egrave; la Parola che i Samaritani ricevettero (Atti 8:14) come trasmessa dagli apostoli (Atti 8:25). &Egrave; il messaggio che i Gentili ricevettero come predicato da Pietro (Atti 11:1). &Egrave; la Parola che Paolo predic&ograve; durante il suo primo viaggio missionario (Atti 13:5,7,44,48-49; 15:35-36). &Egrave; il messaggio predicato durante il secondo viaggio missionario di Paolo (Atti 16:32; 17:13; 18:11). &Egrave; il messaggio che Paolo predic&ograve; durante il suo terzo viaggio missionario (Atti 19:10). &Egrave; il punto centrale del libro degli Atti in quanto si diffondeva dappertutto rapidamente (Atti 6:7; 12:24; 19:20). Paolo era attento quando disse ai Corinzi che parlava la Parola come datagli da Dio, che non era stata adulterata, e che era una manifestazione della verit&agrave; (2Corinzi 2:17; 4:2). Paolo riconobbe che era la fonte della sua predicazione (Colossesi 1:25; 1Tessalonicesi 2:13). I Salmi 19; 119, come pure Proverbi 30:5-6, fanno affermazioni potenti sulla Parola di Dio che la distinguono da qualsiasi altra istruzione religiosa nella storia dell'umanit&agrave;. Questi brani dimostrano la correttezza di chiamare la Bibbia 'sacra' (2Timoteo 3:15) e 'santa' (Romani 1:2). La Bibbia afferma di essere la definitiva autorit&agrave; spirituale per quanto riguardo la dottrina, la riprensione, la correzione e l'educazione alla giustizia, perch&eacute; &egrave; l'ispirata Parola di Dio onnipotente (2Timoteo 3:16-17). Le Scritture asseriscono la loro sufficienza spirituale, e similmente affermano l'esclusivit&agrave; del loro insegnamento (vedi Isaia 55:11; 2Pietro 1:3-4).</p>
+<p>La Parola di Dio dichiara di essere inerrante (Salmi 12:6; 119:140; Proverbi 30:5; Giovanni 10:35) e infallibile (2Timoteo 3:16-17). In altre parole, &egrave; vera e quindi affidabile. Tutte queste qualit&agrave; dipendono dal fatto che le Scritture sono date da Dio (2Timoteo 3:16; 2Pietro 1:20-21), che garantisce la sua qualit&agrave; alla fonte e quando &egrave; stata originalmente scritta.</p>
+<p>Nelle Scritture, la persona di Dio e la Parola di Dio sono dappertutto collegate, in modo che quello che &egrave; vero del carattere di Dio sia vero anche della natura della Parola di Dio. Dio &egrave; vero, impeccabile e affidabile; quindi cos&igrave; anche &egrave; la sua Parola. Quello che una persona pensa della Parola riflette, in realt&agrave;, quello che la persona pensa di Dio.</p>
+<p>Dunque, le Scritture possono fare queste rivendicazioni ai suoi lettori.</p>
+<p><cite>"Dio dunque ti ha umiliato, ti ha fatto provare la fame, poi ti ha nutrito di manna, che tu non conoscevi e che i tuoi padri non avevano mai conosciuto, per insegnarti che l'uomo non vive soltanto di pane, ma che vive di tutto quello che procede dalla bocca del Signore."</cite> Deuteronomio 8:3</p>
+<p><cite>"Non mi sono scostato dai comandamenti delle sue labbra, ho custodito nel mio cuore le parole della sua bocca."</cite> Giobbe 23:12</p>
+
+<h2>Il processo di pubblicazione</h2>
+
+<p>La Bibbia non si aspetta che il lettore speculasse su come queste divine qualit&agrave; fossero trasferite da Dio alla sua Parola, ma piuttosto anticipa le domande con risposte convincenti. Ogni generazione di scettici ha assalito le affermazioni della Bibbia, ma le sue spiegazioni e risposte sono state pi&ugrave; che sufficienti. La Bibbia ha passato per il processo di pubblicazione divina quando &egrave; stata data e distribuita all'umanit&agrave;. Le sue caratteristiche sono discusse qui sotto.</p>
+
+<h2>Rivelazione</h2>
+
+<p>Dio prese l'iniziativa di spiegare e di rivelare s&eacute; stesso all'umanit&agrave; (Ebrei 1:1). Le modalit&agrave; erano diverse: a volte tramite la creazione, a volte tramite visioni o sogni o i discorsi dei profeti. Per&ograve;, la pi&ugrave; completa e comprensibile auto-rivelazione fu tramite le proposizioni delle Scritture (1Corinzi 2:6-16). La rivelata e scritta Parola &egrave; unica in quanto &egrave; l'unica rivelazione di Dio che &egrave; completa e che cos&igrave; chiaramente dichiara il peccato dell'umanit&agrave; e la provvisione da parte di Dio del Salvatore.</p>
+
+<h2>Ispirazione</h2>
+
+<p>La rivelazione divina fu catturata negli scritti della Bibbia tramite l'ispirazione. Questa ha a che fare pi&ugrave; con il processo per cui Dio si &egrave; rivelato che con il fatto della sua auto-rivelazione. "Ogni Scrittura &egrave; ispirata da Dio..." (2Timoteo 3:16) lo afferma. Pietro ne spiega il processo, "Sappiate prima di tutto questo: che nessuna profezia della Scrittura proviene da un'interpretazione personale; infatti nessuna profezia venne mai dalla volont&agrave; dell'uomo, ma degli uomini hanno parlato da parte di Dio, perch&eacute; sospinti dallo Spirito Santo" (2Pietro 1:20-21). Cos&igrave; la Parola di Dio fu protetta da errore umano durante la sua scrittura originale dal ministero dello Spirito Santo (vedi Deuteronomio 18:18; Matteo 1:22). Una sezione di Zaccaria 7:12 lo descrive chiaramente: "...la legge e le parole che il Signore degli eserciti rivolgeva per mezzo del suo Spirito, per mezzo dei profeti del passato". Questo ministero dello Spirito era esteso sia alle parti (le parole) sia alla totalit&agrave; degli scritti originali.</p>
+
+<h2>Canonicit&agrave;</h2>
+
+<p>Dobbiamo capire che la Bibbia &egrave; in realt&agrave; un unico libro con uno solo autore divino, bench&eacute; fosse scritta in un periodo di 1.500 anni tramite le penne di una quarantina di autori umani. La Bibbia inizia con il racconto della creazione scritto da Mos&egrave; nel 1405 a.C. all'incirca, e continua al racconto dell'eternit&agrave; futura di Apocalisse 21-22, scritto dall'apostolo Giovanni nel 95 d.C. Durante questo periodo, Dio rivel&ograve; in modo progressivo s&eacute; stesso e i suoi propositi nelle Scritture ispirate. Ma ci&ograve; solleva una domanda significativa: "Come sappiamo quali scritti dovevano essere inclusi nel canone delle Scritture e quali erano da escludere?"</p>
+<p>Nella storia, tre principi generalmente riconosciuti furono usati per convalidare quelli scritti che furono un risultato di rivelazione e di ispirazione divina. Prima di tutto, l'autore del libro doveva avere un profeta o un apostolo riconosciuto (o qualcuno associato con un apostolo, come i casi di Marco, Luca, Ebrei, Giacomo e Giuda). Secondo, il libro non poteva essere in disaccordo con o contraddire le Scritture precedentemente scritte. Terzo, il libro doveva generare il consenso generale della chiesa come libro ispirato. Cos&igrave;, quando i diversi concili si svolsero nella storia della chiesa per considerare il canone, non votarono per la canonicit&agrave; di un libro, ma piuttosto riconobbero, dopo il fatto, quello che Dio aveva gi&agrave; scritto.</p>
+<p>Per quanto riguardo l'Antico Testamento, al tempo di Ges&ugrave; tutto l'Antico Testamento era scritto e accettato dai Giudei. L'ultimo libro, Malachia, fu completato nel 430 a.C. Non solo il canone dell'Antico Testamento di Cristo &egrave; conforme all'Antico Testamento usato per tutti i secoli dopo, ma non contiene la non ispirata Apocrifa, un gruppo di 14 libri scritti dopo Malachia e aggiunti all'Antico Testamento all'inizio del secondo secolo a.C. nella traduzione greca dell'Antico Testamento ebraico chiamato la Septuaginta (LXX), e che appare tuttora in alcune versioni della Bibbia. Per&ograve;, neanche un brano dall'Apocrifa &egrave; citato da uno scrittore del Nuovo Testamento, e Ges&ugrave; non incluse nessuna parte di essa quando riconobbe il canone dell'Antico Testamento del suo tempo (vedi Luca 24:27,44).</p>
+<p>Al tempo di Cristo, l'Antico Testamento era diviso in due liste di 22 o di 24 libri, che contenevano lo stesso materiale dei 39 libri delle versioni moderne. Nella lista di 22 libri, Geremia e Lamentazioni furono considerati come un unico libro, come pure Giudici e Rut. La lista di 24 libri era divisa in questo modo:</p>
+<h3>La legge</h3>
+<p>Genesi, Esodo, Levitico, Numeri, Deuteronomio</p>
+
+<h3>I profeti</h3>
+<p><strong>I profeti anteriori:</strong> Giosu&egrave;, Giudici, Samuele (1 e 2), Re (1 e 2)</p>
+<p><strong>I profeti posteriori:</strong> Isaia, Geremia, Ezechiele, i dodici (profeti minori)</p>
+
+<h3>Gli scritti</h3>
+<p><strong>Libri poetici:</strong> Salmi, Proverbi, Giobbe</p>
+<p><strong>I cinque rotoli (Megilloth):</strong> Cantico dei cantici, Rut, Lamentazioni, Ecclesiaste, Ester</p>
+<p><strong>Libri storici:</strong> Daniele, Ezra-Neemia, Cronache (1 e 2)</p>
+
+<p>Gli stessi tre test di canonicit&agrave; usati per l'Antico Testamento vanno usati anche per il Nuovo. Nel caso di Marco e di Luca/Atti, i libri sono considerati come se fossero l'opera di Pietro e di Paolo rispettivamente. Giacomo e Giuda furono scritti dai fratellastri di Ges&ugrave;. Mentre Ebrei &egrave; l'unico libro del Nuovo Testamento di cui non si sa l'autore, il suo contenuto &egrave; cos&igrave; simile a quello dell'Antico e del Nuovo Testamento che la chiesa primitiva decise che doveva essere scritto da un collega di un apostolo. I 27 libri de Nuovo Testamento sono universalmente accettati come ispirati da Dio dalla fine del quarto secolo d.C.</p>
+
+<h2>Preservazione</h2>
+
+<p>Come si pu&ograve; essere sicuri che la rivelata e ispirata Parola di Dio scritta, che fu riconosciuta come canonica dalla chiesa primitiva, &egrave; stata tramandata fino ad oggi senza la perdita di niente? Inoltre, siccome uno degli scopi principali del Diavolo &egrave; di minare la Bibbia, sono sopravvissute le Scritture a questo assalto distruttivo? Nel principio, neg&ograve; la Parola di Dio a Eva (Genesi 3:4). Pi&ugrave; tardi Satana tent&ograve; di storcere le Scritture nel suo incontro nel deserto con Cristo (Matteo 4:6-7). Tramite il re Ioiachim, cerc&ograve; letteralmente di distruggere la Parola (Geremia 36:23). La battaglia per la Bibbia continua, ma le Scritture hanno e continueranno a sopravvivere ai suoi nemici.</p>
+<p>Dio anticip&ograve; la malignit&agrave; dell'umanit&agrave; e di Satana verso le Scritture con le sue promesse di preservare la sua Parola. L'esistenza continuata delle Scritture &egrave; garantita in Isaia 40:8, "L'erba si secca, il fiore appassisce, ma la parola del nostro Dio dura per sempre" (vedi anche 1Pietro 1:25). Questo significa che nessuna Scrittura ispirata &egrave; stata persa nel passato o &egrave; da scoprire ancora.</p>
+<p>Il contenuto delle Scritture sar&agrave; conservato, sia in cielo (Salmo 119:89) sia sulla terra (Isaia 59:21). Cos&igrave; i propositi di Dio, come pubblicizzati negli scritti sacri, non saranno mai frustrati, neanche nel pi&ugrave; piccolo dettaglio (vedi Matteo 5:18; 24:25; Marco 13:3; Luca 16:17).</p>
+<p><cite>"Cos&igrave; &egrave; della mia parola, uscita dalla mia bocca: essa non torna a me vuoto, senza aver compiuto ci&ograve; che io voglio e condotto a buon fine ci&ograve; per cui l'ho mandata."</cite> (Isaia 55:11)</p>
+
+<h2>Trasmissione</h2>
+
+<p>Siccome la Bibbia &egrave; stata tradotta frequentemente in diverse lingue e distribuita in tutto il mondo, come possiamo sapere che nessun errore &egrave; stato introdotto, neanche per sbaglio? Mentre il cristianesimo si &egrave; diffuso, &egrave; certamente vero che la gente abbia voluto avere la Bibbia tradotta nella propria lingua, che richiedeva traduzioni dalle lingue originali, l'ebraico e l'aramaico per l'Antico Testamento e il greco per il Nuovo Testamento. Non solo il processo di traduzione dava un'opportunit&agrave; per errori, ma anche il processo di pubblicazione, che era per mano fino all'invenzione della stampa nel 1450 all'incirca, dava continue possibilit&agrave; di errore.</p>
+<p>Durante i secoli, gli studiosi della scienza di critica testuale hanno scoperto, conservato, catalogato, valutato e pubblicato un numero enorme di manoscritti biblici da tutti e due i Testamenti. Infatti, il numero di manoscritti biblici drammaticamente superano in numero i frammenti esistenti di qualsiasi altra letteratura antica. Confrontando testo con testo, il critico testuale pu&ograve; determinare con molta fiducia quello che lo scritto originale e ispirato conteneva.</p>
+<p>Bench&eacute; le copie esistenti del principale antico testo ebraico (masoretico) risalgono solo al decimo secolo d.C., due altre linee importanti di evidenza testuale aumentano la fiducia dei critici testuali che possono scoprire il testo originale. Prima di tutto, l'Antico Testamento ebraico del decimo secolo d.C. pu&ograve; essere confrontato con la traduzione greca chiamata la Septuaginta o LXX (scritta dal 200 a.C. al 150 a.C. all'incirca; i manoscritti pi&ugrave; vecchi ancora esistenti risalgono al 325 d.C. all'incirca). C'&egrave; un consistenza meravigliosa fra i due, che attesta l'esattezza del processo di copiatura dei testi ebraici durante i secoli. Secondo, la scoperta dei rotoli del mar Morto dal 1947 al 1956 (manoscritti datati dal periodo 200-100 a.C.) &egrave; stata estremamente importante. Dopo aver confrontato i testi ebraici pi&ugrave; vecchi con quelli pi&ugrave; recenti, sono alcune piccole variante sono state scoperte, nessuna di cui cambia il significato di un brano. Bench&eacute; l'Antico Testamento &egrave; stato tradotto e copiato da secoli, la versione pi&ugrave; recente &egrave; essenzialmente la stessa di quelle di prima.</p>
+<p>I risultati per il Nuovo Testamento sono ancora pi&ugrave; decisivi perch&eacute; una quantit&agrave; maggiore di materiale &egrave; disponibile per lo studio; ci sono pi&ugrave; di 5000 manoscritti greci del Nuovo Testamento che vanno dall'intero testamento a frammenti di papiri che contengono una parte di un versetto. Alcuni frammenti esistenti risalgono al periodo da 25 a 50 anni dopo la scrittura. Gli studiosi del testo del Nuovo Testamento hanno concluso che 1) il 99,99% del testo originale &egrave; stato ritrovato e 2) nell'altro centesimo di una percentuale non ci sono variante che influenzano in modo sostanziale qualsiasi dottrina cristiana.</p>
+<p>Con questo ricchezza di manoscritti biblici nelle lingue originali e con l'attivit&agrave; disciplinata dei critici testuali per stabilire con quasi totale esattezza il contenuto dei testi originali, qualsiasi errore introdotto e/o perpetuato dalle migliaia di traduzioni nei secoli pu&ograve; essere identificato e corretto paragonando la traduzione o copia con l'originale ricostruito. Tramite questo mezzo provvidenziale, Dio ha adempiuto la sua promessa di preservare le Scritture. Possiamo essere sicuri che ci sono traduzioni disponibili oggi che sono veramente degne del titolo, la Parola di Dio.</p>
+
+<h2>Riassunto</h2>
+
+<p>Dio voleva che la sua parola durasse per sempre (preservazione). Quindi la sua auto-rivelazione scritta e proposizionale (rivelazione) fu protetta da errore quando originalmente scritto (ispirazione) e raccolta nei 66 libri dell'Antico e del Nuovo Testamento (canonicit&agrave;). Durante i secoli, decine di migliaia di copie e migliaia di traduzioni sono state fatte (trasmissione) che hanno introdotto qualche errore. Ma siccome esiste ancora un'abbondanza di manoscritti dei due Testamenti nelle lingue originali, la scienza della critica testuale &egrave; stata in grado di ritrovare gli scritti originali (rivelazione e ispirazione) fino al 99,99%, e il rimanente centesimo di una percentuale non ha nessun effetto sul suo contenuto (preservazione).</p>
+<p>Il sacro libro che leggiamo, studiamo, ubbidiamo e predichiamo merita di essere chiamato, senza riserva, la Bibbia o 'Il libro senza pari', siccome il suo autore &egrave; Dio e ha le qualit&agrave; di totale verit&agrave; ed &egrave; completamente veritiero, che sono caratteristiche anche della sua fonte divina.</p>
+
+<h2>Ci sar&agrave; ancora di pi&ugrave; nel futuro?</h2>
+
+<p>Come possiamo sapere che Dio non emender&agrave; la nostra Bibbia attuale con un 67o libro ispirato? O, in altre parole, "&Egrave; il canone chiuso per sempre?"</p>
+<p>I testi delle Scritture ci avvertono che nessuno deve togliere o aggiungere alle Scritture (Deuteronomio 4:2; 12:32; Proverbi 30:6). Consapevoli del fatto che altri libri canonici furono scritti dopo queste parole di avvertimento, possiamo solo concludere che mentre nessuna cancellatura era mai permessa, in realt&agrave; scritti autorizzati e ispirati potevano essere aggiunti per completare il canone protetto da questi brani.</p>
+<p>Il testo pi&ugrave; impellente sul canone chiuso &egrave; le Scritture stesse, a cui niente &egrave; stato aggiunto da quasi 2.000 anni.</p>
+<p><cite>"Io lo dichiaro a chiunque ode le parole della profezia di questo libro: se qualcuno vi aggiunge qualcosa, Dio aggiunger&agrave; ai suoi mali i flagelli descritti in questo libro; se qualcuno toglie qualcosa dalle parole del libro di questa profezia, Dio gli toglier&agrave; la sua parte dell'albero della vita e della santa citt&agrave; che sono descritti in questo libro."</cite> (Apocalisse 22:18-19)</p>
+<p>Alcune osservazioni significative, prese insieme, hanno convinto la chiesa durante i secoli che il canone di Scrittura &egrave; veramente chiuso e che non sar&agrave; mai riaperto.</p>
+<ol>
+<li>Il libro di Apocalisse &egrave; unico nelle Scritture in quanto descrive dettagliatamente gli eventi della fine della storia e che precedono il futuro eterno. Siccome Genesi inizia le Scritture collegando il passato eterno con la nostra esistenza nel tempo con il solo racconto dettagliato della creazione (Genesi 1-2), c'&egrave; un silenzio parallelo dopo che Giovanni ha scritto l'Apocalisse. Questo ci porta anche alla conclusione che il canone del Nuovo Testamento fu allora chiuso.</li>
+<li>Come ci fu un silenzio profetico dopo che Malachia complet&ograve; il canone dell'Antico Testamento, cos&igrave; ci fu un silenzio parallelo dopo che Giovanni scrisse l'Apocalisse. Ci&ograve; porta alla conclusione che il canone del Nuovo Testamento fu allora chiuso anche.</li>
+<li>Siccome non ci sono stati, n&eacute; ci sono, dei profeti o apostoli nel senso dell'Antico o del Nuovo Testamento, non ci sono pi&ugrave; possibili autori di futuri scritti ispirati e canonici. La Parola di Dio "&egrave; stata trasmessa ai santi una volta per sempre", e non si deve aggiungere ad essa, ma invece combattere strenuamente per essa (Giuda 3).</li>
+<li>Delle quattro esortazioni bibliche di non cambiare le Scritture, solo quella in Apocalisse 22:18-19 contiene avvertimenti di severo giudizio divino per la disubbidienza. Inoltre, l'Apocalisse &egrave; l'unico libro del Nuovo Testamento che conclude con questo tipo di ammonizione e fu scritto pi&ugrave; di 20 anni dopo il resto del Nuovo Testamento. I fatti suggeriscono quindi che l'Apocalisse &egrave; l'ultimo libro del canone e che la Bibbia &egrave; completa; aggiungere o togliere sarebbe contro la volont&agrave; di Dio.</li>
+<li>Infine, la chiesa primitiva, quella pi&ugrave; vicino nel tempo agli apostoli, credeva che l'Apocalisse concludesse gli scritti ispirati di Dio, le Scritture.</li>
+</ol>
+</p>Possiamo dunque concludere, con un ragionamento biblico, che il canone &egrave; e rimarr&agrave; chiuso. Non ci sar&agrave; nel futuro un 67o libro della Bibbia.</p>
+
+<h2>Dove stiamo fermi?</h2>
+
+<p>In aprile 1521, Martin Lutero apparse davanti ai suoi accusatori ecclesiastici alla Dieta di Worms. Gli avevano dato un ultimatum di rinunciare alla sua fede solida nella sufficienza e nella perspicuit&agrave; delle Scritture. Lutero rispose, "Finch&eacute; la testimonianza della Scrittura o la forza trasparente del ragionamento non mi convinceranno di essere in errore - non accetto l'autorit&agrave; dei papi e dei concili, in quanto si contraddicono - io mi atterr&ograve; a quei passi della Scrittura a cui ho fatto appello. La mia coscienza &egrave; prigioniera della Parola di Dio... Qui sto fermo. Non posso fare altro. Dio mi aiuti."</p>
+<p>Come Martin Lutero, possiamo anche noi alzarci sopra i dubbi interiori e affrontare le minacce esteriori quando la Parola di Dio &egrave; assillata. Possa Dio aiutarci ad essere combattenti leali per la fede. Sta' fermo in Dio e nella sola Scrittura.</p>
+
+<h2>La Bibbia</h2>
+
+<p>Questo libro contiene: la mente di Dio, lo stato dell'uomo, la via di salvezza, la condanna dei peccatori, e la felicit&agrave; dei credenti.</p>
+<p>La sua dottrina &egrave; santa, i suoi precetti sono obbligatori, la sua storia &egrave; vera, e le sue decisioni sono immutabili. Leggila per essere saggio, credila per essere salvato, e mettila in pratica per essere santo.</p>
+<p>Contiene luce per guidarti, cibo per sostenerti e conforto per rallegrarti. &Egrave; la cartina del viaggiatore, il bastone del pellegrino, la bussola del pilota, la spada del soldato e lo statuto del Cristiano. Qui il cielo &egrave; aperto e le porte dell'inferno sono svelate.</p>
+<p>Cristo &egrave; il suo tema, il nostro bene il suo disegno e la gloria di Dio il suo scopo. Dovrebbe riempire la memoria, governare il cuore e guidare i piedi.</p>
+<p>Leggila lentamente, spesso e in preghiera. &Egrave; una miniera di ricchezze, salute per l'anima e un fiume di piacere. &Egrave; data a te qui in questa vita, sar&agrave; aperta al giudizio ed &egrave; stabilita per sempre.</p>
+<p>Coinvolge la pi&ugrave; grande responsabilit&agrave;, ricompenser&agrave; il lavoro pi&ugrave; grande e condanner&agrave; tutti quelli che si prendono gioco del suo contenuto.</p>
+<p><cite>"Per questa ragione anche noi ringraziamo sempre Dio: perch&eacute; quando riceveste da noi la parola della predicazione di Dio, voi l'accettaste non come parola di uomini, ma, quale essa &egrave; veramente, come parola di Dio, la quale opera efficacemente in voi che credete."</cite> 1Tessalonicesi 2:13</p>
+
+<?
+require("../piede.php");
+?>

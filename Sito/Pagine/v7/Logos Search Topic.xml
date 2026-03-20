@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<link>
+<name>Search Topic</name>
+<name language="it">Ricerca tema</name>
+<description>Look up a word or words in the resources of the Logos program</description>
+<description language="it">Cerca una parola o parole nelle risorse del programma Logos</description>
+<type>word</type>
+<version>7.00.0</version>
+<url>libronixdls:dialog|name=SearchBasic|search={word}</url>
+<language>en</language>
+<category>Logos</category>
+<image>Libronix.gif</image>
+</link>
