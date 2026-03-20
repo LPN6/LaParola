@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageButton
+        android:id="@+id/help_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/help"
+        android:src="@drawable/ic_action_help" />
+
+    <EditText
+        android:id="@+id/expression_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help_button"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_toStartOf="@+id/help_button"
+        android:inputType="textNoSuggestions"
+        android:hint="@string/expression" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageButton
+        android:id="@+id/more_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/help_button"
+        android:layout_toEndOf="@+id/expression_text"
+        android:contentDescription="@string/more"
+        app:srcCompat="@drawable/ic_more_vert"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
+    <EditText
+        android:id="@+id/reference_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/more_button"
+        android:layout_alignStart="@+id/expression_text"
+        android:layout_toStartOf="@+id/more_button"
+        android:inputType="textNoSuggestions"
+        android:hint="@string/search_in_hint" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/reference_text"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/list_divider_holo_light" />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="fill_parent"
+        style="@style/ButtonHoloLight.Borderless.Small"
+        android:textSize="14sp"
+        android:minHeight="@dimen/alert_dialog_button_bar_height"
+        android:layout_below="@+id/view1"
+        android:layout_height="wrap_content"
+        android:text="@string/search" />
+
+</RelativeLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="library">Libreria</string>
+    <string name="version_management">Gestione libreria</string>
+    <string name="install">Installa</string>
+    <string name="delete">Elimina</string>
+    <string name="update">Aggiorna</string>
+    <string name="downloading">Scaricamento in corso&#8230;</string>
+    <string name="confirm_delete">Il testo sarà eliminato.</string>
+    <string name="cannot_download_updates">Impossibile scaricare le informazioni sugli aggiornamenti. Controllare la connessione ad internet.</string>
+    <string name="error_parsing_updates">Errore nell\'analisi del file degli aggiornamenti.</string>
+    <string name="update_not_compatible">Aggiornare il programma per poter installare il testo.</string>
+    <string name="installed">Installato (%1$.2f MB).</string>
+    <string name="installed_manually">Installato manualmente (%1$.2f MB).</string>
+    <string name="update_available">Installato (%1$.2f MB). È disponibile un aggiornamento (download: %2$.2f MB).</string>
+    <string name="cannot_download_update_information">Impossibile scaricare le informazioni sugli aggiornamenti. Controllare la connessione ad internet. (%1$.2f MB)</string>
+    <string name="not_installed">Non installato (download: %1$.2f MB).</string>
+    <string name="error">Errore</string>
+    <string name="component_details">%1$s\n\n%2$s\n\nTipo: %3$s\nVersione: %4$s%5$s</string>
+    <string name="update_reason">\nMotivo aggiornamento: %s</string>
+    <string name="type_bible">Bibbia</string>
+    <string name="type_commentario">Commentario</string>
+    <string name="type_dictionary">Dizionario</string>
+    <string name="type_book">Libro</string>
+    <string name="type_unknown">Sconosciuto</string>
+    <string name="market">Aggiorna applicazione</string>
+    <string name="no_bible_installed">Non ci sono versioni della Bibbia installate. Scaricarne almeno una per continuare.</string>
+    <string name="error_delete_last_bible">Per eliminare questa versione, è necessario prima installarne un\'altra.</string>
+    <string name="notification_download_complete">Installazione completata.</string>
+    <string name="notification_download_failed">Installazione fallita. Riprovare.</string>
+    <string name="cannot_load_file">Impossibile caricare il file (%1$.2f MB).</string>
+    <string name="confirm_download_cancel">Il download sarà interrotto.</string>
+    <string name="download_cancel">Interrompi download</string>
+    <string name="no_market_installed">Impossibile avviare Google Play. Procedere all\'aggiornamento manualmente.</string>
+    <string name="book">Libro</string>
+    <string name="preferences">Impostazioni</string>
+    <string name="decompressing">Decompressione&#8230;</string>
+    <string name="storage_error">Impossibile accedere alla cartella di archiviazione.\nLa scheda SD potrebbe essere mancante o disattivata perché il telefono è collegato alla porta USB.\nRendere disponibile la cartella e riavviare il programma.</string>
+    <string name="error_decompressing_resource">Impossibile decomprimere il testo. Riavvia il dispositivo e riprova, oppure usa la libreria per scaricare un testo.</string>
+    <!-- string name="error_decompressing_download">Impossibile decomprimere il testo. Potresti installare il testo con un download alternativo (circa %1$f MB).</string -->
+</resources>

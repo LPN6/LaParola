@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_action_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    
+    <EditText android:id="@+id/search_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/search_hint" 
+        android:saveEnabled="true"
+        android:scrollHorizontally="true"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:imeOptions="actionSearch"
+        android:inputType="textNoSuggestions"
+        />
+
+    <ImageButton android:id="@+id/search_go_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        style="?attr/actionBarItemBackground"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_action_search"
+        android:focusable="true"
+        android:contentDescription="@string/search"
+        android:visibility="gone"
+        />
+    
+    <ImageButton android:id="@+id/search_advanced_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        style="?attr/actionBarItemBackground"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_action_search_plus"
+        android:focusable="true"
+        android:contentDescription="@string/advanced_search"
+        />
+    
+</LinearLayout>

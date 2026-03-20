@@ -1,0 +1,1583 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<segnalibri>
+	<gruppo>
+		<nome>Il messaggio del vangelo</nome>
+		<descrizione>Un riassunto di quello che la Bibbia insegna su come
+			diventare un amico di Dio</descrizione>
+		<segnalibro>
+			<nome>Chi ha peccato?</nome>
+			<riferimento>52 3 23</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Cosa ha fatto il peccato nella tua vita?</nome>
+			<riferimento>29 59 2</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Cosa succede quando muori?</nome>
+			<riferimento>65 9 27</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Che cosa non ti aiuterà ad essere salvato?</nome>
+			<riferimento>56 2 8</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Che cosa ha fatto Cristo per noi?</nome>
+			<riferimento>52 5 8</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Cosa dobbiamo fare per far parte della famiglia di Dio?</nome>
+			<riferimento>50 1 12</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Dove è Gesù adesso? Cosa sta facendo? Cosa devi fare tu? Lo
+				farai?</nome>
+			<riferimento>73 3 20</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Cosa succede quando ascolti e credi?</nome>
+			<riferimento>50 5 24</riferimento>
+		</segnalibro>
+	</gruppo>
+	<gruppo>
+		<nome>Brani noti</nome>
+		<descrizione>Alcuni brani famosi nella Bibbia</descrizione>
+		<segnalibro>
+			<nome>I 10 comandamenti</nome>
+			<riferimento>2 20 1 2 20 17</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La benedizione sacerdotale</nome>
+			<riferimento>4 6 24 4 6 26</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il salmo del pastore</nome>
+			<riferimento>23 23 1 23 23 6</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il salmo del ravvedimento</nome>
+			<riferimento>23 51 1 23 51 21</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il servo sofferente</nome>
+			<riferimento>29 52 13 29 53 12</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La nascita di Gesù</nome>
+			<riferimento>47 1 1 47 2 23; 49 2 1 49 2 38</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il Sermone sul monte</nome>
+			<riferimento>47 5 1 47 7 29</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il Padre nostro</nome>
+			<riferimento>47 6 5 47 6 15; 49 11 1 49 11 13</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La regola d'oro</nome>
+			<riferimento>47 7 12</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il seminatore</nome>
+			<riferimento>48 4 1 48 4 20; 49 8 4 49 8 15</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il buon samaritano</nome>
+			<riferimento>49 10 25 49 10 37</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il figlio prodigo</nome>
+			<riferimento>49 15 11 49 15 32</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il buon pastore</nome>
+			<riferimento>50 10 1 50 10 16</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il gran comandamento</nome>
+			<riferimento>48 12 29 48 12 31</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>L'ultimo giudizio</nome>
+			<riferimento>47 25 1 47 25 46</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La morte e risurrezione di Gesù</nome>
+			<riferimento>47 26 1 47 28 20</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il gran mandato</nome>
+			<riferimento>47 28 18 47 28 20</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>L'inno all'amore</nome>
+			<riferimento>53 13 1 53 13 13</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La risurrezione</nome>
+			<riferimento>53 15 1 53 15 58</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il frutto dello Spirito</nome>
+			<riferimento>55 5 22 55 5 23</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>L'armatura di Dio</nome>
+			<riferimento>56 6 10 56 6 18</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Gli eroi della fede</nome>
+			<riferimento>65 11 1 65 11 40</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La Bibbia in un versetto</nome>
+			<riferimento>50 3 16</riferimento>
+		</segnalibro>
+	</gruppo>
+	<gruppo>
+		<nome>Alcune preghiere della Bibbia</nome>
+		<segnalibro>
+			<nome>Mosè</nome>
+			<riferimento>5 9 25 5 9 29</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Davide (per suo figlio)</nome>
+			<riferimento>10 7 18 10 7 29</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Davide (per il tempio)</nome>
+			<riferimento>13 29 10 13 29 19</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Salomone</nome>
+			<riferimento>11 8 22 11 8 61</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Esdra</nome>
+			<riferimento>15 9 5 15 9 15</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Neemia</nome>
+			<riferimento>16 1 5 16 1 11</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Isaia</nome>
+			<riferimento>29 64 1 29 64 12</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Geremia</nome>
+			<riferimento>30 20 7 30 20 18</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Daniele</nome>
+			<riferimento>34 9 4 34 9 19</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Giona</nome>
+			<riferimento>39 2 2 39 2 10</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Gesù</nome>
+			<riferimento>50 17 1 50 17 20</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La chiesa di Gerusalemme</nome>
+			<riferimento>51 4 24 51 4 30</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Paolo per gli Efesini (1)</nome>
+			<riferimento>56 1 15 56 1 23</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Paolo per gli Efesini (2)</nome>
+			<riferimento>56 3 14 56 3 21</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Paolo per i Tessalonicesi</nome>
+			<riferimento>59 3 11 59 3 13</riferimento>
+		</segnalibro>
+	</gruppo>
+	<gruppo>
+		<nome>Miracoli nella Bibbia</nome>
+		<sottogruppo>
+			<nome>Di Mosè ed Aaronne</nome>
+			<segnalibro>
+				<nome>Bastone diventa un serpente (1)</nome>
+				<riferimento>2 4 3 2 4 4</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Bastone diventa un serpente (2)</nome>
+				<riferimento>2 7 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Acqua diventa sangue</nome>
+				<riferimento>2 7 20 2 7 21</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Rane</nome>
+				<riferimento>2 8 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Zanzare</nome>
+				<riferimento>2 8 16 2 8 17</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Mosche</nome>
+				<riferimento>2 8 20 2 8 24</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Contro il bestiame</nome>
+				<riferimento>2 9 1 2 9 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Ulceri</nome>
+				<riferimento>2 9 8 2 9 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Gradine</nome>
+				<riferimento>2 9 22 2 9 26</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Cavallette</nome>
+				<riferimento>2 10 12 2 10 15</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Tenebre</nome>
+				<riferimento>2 10 21 2 10 23</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Morte dei primogeniti</nome>
+				<riferimento>2 12 29</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Divisione del mar Rosso</nome>
+				<riferimento>2 14 21 2 14 29</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Acqua diventa dolce</nome>
+				<riferimento>2 15 25</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Acqua dalla roccia</nome>
+				<riferimento>2 17 5 2 17 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Vittoria su Amalec</nome>
+				<riferimento>2 17 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Distruzione di Core</nome>
+				<riferimento>4 16 31 4 16 35</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>La verga d'Aaronne</nome>
+				<riferimento>4 17 1 4 17 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Serpente di rame</nome>
+				<riferimento>4 21 8 4 21 9</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Giosuè</nome>
+			<segnalibro>
+				<nome>Divisione del Giordano</nome>
+				<riferimento>6 3 1 6 3 17</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Gerico catturata</nome>
+				<riferimento>6 6 20</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Sole fermato</nome>
+				<riferimento>6 10 12 6 10 14</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Sansone</nome>
+			<segnalibro>
+				<nome>Uccide un leone</nome>
+				<riferimento>7 14 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Uccide dei Filistei</nome>
+				<riferimento>7 14 19</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Porta via la porta</nome>
+				<riferimento>7 16 3</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Distrugge la casa di Dagon</nome>
+				<riferimento>7 16 30</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Samuele</nome>
+			<segnalibro>
+				<nome>Tuono e pioggia</nome>
+				<riferimento>9 12 18</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di un profeta di Giuda</nome>
+			<segnalibro>
+				<nome>La mano del re</nome>
+				<riferimento>11 13 4 11 13 5</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Elia</nome>
+			<segnalibro>
+				<nome>Siccità</nome>
+				<riferimento>11 17 1</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Moltiplicazione della farina e dell'olio</nome>
+				<riferimento>11 17 14 11 17 16</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Bambino risuscitato</nome>
+				<riferimento>11 17 22</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Sacrificio consumato dal fuoco</nome>
+				<riferimento>11 18 38</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Pioggia</nome>
+				<riferimento>11 18 41 11 18 46</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Soldati consumati dal fuoco</nome>
+				<riferimento>12 1 9 12 1 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Divisione del Giordano</nome>
+				<riferimento>12 2 8</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Eliseo</nome>
+			<segnalibro>
+				<nome>Divisione del Giordano</nome>
+				<riferimento>12 2 14</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Acque sanate</nome>
+				<riferimento>12 2 21 12 2 22</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Bambini uccisi da orsi</nome>
+				<riferimento>12 2 24</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Acqua provveduta</nome>
+				<riferimento>12 3 14 12 3 20</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Moltiplicazione dell'olio</nome>
+				<riferimento>12 4 5 12 4 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Bambino risuscitato</nome>
+				<riferimento>12 4 34 12 4 35</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Minestra risanata</nome>
+				<riferimento>12 4 41</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Moltiplicazione del pane</nome>
+				<riferimento>12 4 43 12 4 44</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Naaman guarito</nome>
+				<riferimento>12 5 10 12 5 14</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Gheazi diventa lebbroso</nome>
+				<riferimento>12 5 27</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Ferro viene a galla</nome>
+				<riferimento>12 6 6 12 6 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Siri accecati</nome>
+				<riferimento>12 6 18</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Uomo risuscitato</nome>
+				<riferimento>12 13 21</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Isaia</nome>
+			<segnalibro>
+				<nome>Ezechia guarito</nome>
+				<riferimento>12 20 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Ombra retrocede</nome>
+				<riferimento>12 20 11</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Gesù: Guarigioni</nome>
+			<segnalibro>
+				<nome>Figlio dell'ufficiale del re</nome>
+				<riferimento>50 4 46 50 4 54</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Indemoniato nella sinagoga</nome>
+				<riferimento>48 1 23 48 1 28</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Suocera di Pietro</nome>
+				<riferimento>48 1 30 48 1 31</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Lebbroso</nome>
+				<riferimento>48 1 40 48 1 45</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Paralitico</nome>
+				<riferimento>48 2 3 48 2 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Infermo</nome>
+				<riferimento>50 5 1 50 5 16</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Uomo con mano paralizzata</nome>
+				<riferimento>48 3 1 48 3 5</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Servo di un centurione</nome>
+				<riferimento>49 7 2 49 7 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Indemoniato cieco e muto</nome>
+				<riferimento>47 12 22 47 12 23</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Due indemoniati</nome>
+				<riferimento>47 8 28 47 8 34</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Donna con flusso di sangue</nome>
+				<riferimento>49 8 43 49 8 48</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Due ciechi</nome>
+				<riferimento>47 9 27 47 9 31</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Indemoniato muto</nome>
+				<riferimento>47 9 32 47 9 34</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Figlia di una cananea</nome>
+				<riferimento>48 7 24 48 7 30</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Sordomuto</nome>
+				<riferimento>48 7 32 48 7 37</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Cieco</nome>
+				<riferimento>48 8 22 48 8 26</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Ragazzo epilettico</nome>
+				<riferimento>48 9 17 48 9 27</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Donna paralitica</nome>
+				<riferimento>49 13 11 49 13 17</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Idropico</nome>
+				<riferimento>49 14 1 49 14 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Dieci lebbrosi</nome>
+				<riferimento>49 17 11 49 17 19</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Uomo nato cieco</nome>
+				<riferimento>50 9 1 50 9 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Due ciechi</nome>
+				<riferimento>47 20 29 47 20 34</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Malco</nome>
+				<riferimento>49 22 50 49 22 51</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Gesù: Sulla natura</nome>
+			<segnalibro>
+				<nome>Acqua cambiata in vino</nome>
+				<riferimento>50 2 1 50 2 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Pesca miracolosa</nome>
+				<riferimento>49 5 1 49 5 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Tempesta calmata</nome>
+				<riferimento>48 4 37 48 4 41</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>>Moltiplicazione del cibo per 5000</nome>
+				<riferimento>48 6 35 48 6 44</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Moltiplicazione del cibo per 4000</nome>
+				<riferimento>48 8 1 48 8 9</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Cammina sul mare</nome>
+				<riferimento>48 6 47 48 6 52</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Moneta del tributo</nome>
+				<riferimento>47 17 24 47 17 27</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Fico maledetto</nome>
+				<riferimento>47 21 18 47 21 19</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Pesca miracolosa</nome>
+				<riferimento>50 21 2 50 21 11</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Gesù: Risurrezioni</nome>
+			<segnalibro>
+				<nome>Figlio di una vedova</nome>
+				<riferimento>49 7 11 49 7 17</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Figlia di Iairo</nome>
+				<riferimento>48 5 38 48 5 43</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Lazzaro</nome>
+				<riferimento>50 11 1 50 11 46</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Dei 70 discepoli</nome>
+			<segnalibro>
+				<nome>Demoni sono sottoposti</nome>
+				<riferimento>49 10 17</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Pietro</nome>
+			<segnalibro>
+				<nome>Zoppo guarito</nome>
+				<riferimento>51 3 1 51 3 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Anania e Saffira</nome>
+				<riferimento>51 5 1 51 5 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>A Gerusalemme</nome>
+				<riferimento>51 5 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Enea</nome>
+				<riferimento>51 9 32 51 9 35</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Tabita</nome>
+				<riferimento>51 9 36 51 9 43</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Stefano</nome>
+			<segnalibro>
+				<nome>Grandi prodigi e segni</nome>
+				<riferimento>51 6 8</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Filippo</nome>
+			<segnalibro>
+				<nome>Indemoniati, paralitici e zoppi</nome>
+				<riferimento>51 8 6 51 8 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Miracoli e opere potenti</nome>
+				<riferimento>51 8 13</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Di Paolo</nome>
+			<segnalibro>
+				<nome>Elima accecato</nome>
+				<riferimento>51 13 6 51 13 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Segni e prodigi ad Iconio</nome>
+				<riferimento>51 14 3</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Zoppo guarito</nome>
+				<riferimento>51 14 8 51 14 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Serva posseduta</nome>
+				<riferimento>51 16 16 51 16 18</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Miracoli straordinari ad Efeso</nome>
+				<riferimento>51 19 11 51 19 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Eutico risuscitato</nome>
+				<riferimento>51 20 7 51 20 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Mosso da una vipera</nome>
+				<riferimento>51 28 2 51 28 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Padre di Publio guarito</nome>
+				<riferimento>51 28 7 51 28 10</riferimento>
+			</segnalibro>
+		</sottogruppo>
+	</gruppo>
+	<gruppo>
+		<nome>Le parabole di Gesù</nome>
+		<segnalibro>
+			<nome>Sale e luce</nome>
+			<riferimento>47 5 13 47 5 16</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Due costruttori di case</nome>
+			<riferimento>47 7 24 47 7 27</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il seminatore e i suoli</nome>
+			<riferimento>47 13 1 47 13 9; 47 13 18 47 13 23</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Le zizzanie</nome>
+			<riferimento>47 13 24 47 13 30; 47 13 36 47 13 43</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il granello di senape</nome>
+			<riferimento>47 13 31 47 13 32</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il lievito</nome>
+			<riferimento>47 13 33 47 13 35</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il tesoro e la perla</nome>
+			<riferimento>47 13 44 47 13 46</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La rete</nome>
+			<riferimento>47 13 47 47 13 50</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il servo senza pietà</nome>
+			<riferimento>47 18 23 47 18 35</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>I lavoratori nella vigna</nome>
+			<riferimento>47 20 1 47 20 16</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>I due figli</nome>
+			<riferimento>47 21 28 47 21 32</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>I vignaioli</nome>
+			<riferimento>47 21 33 47 21 44</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il banchetto delle nozze</nome>
+			<riferimento>47 22 1 47 22 14</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Le dieci vergini</nome>
+			<riferimento>47 25 1 47 25 13</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>I talenti</nome>
+			<riferimento>47 25 14 47 25 30</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Le pecore e i capri</nome>
+			<riferimento>47 25 31 47 25 46</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il creditore</nome>
+			<riferimento>49 7 41 49 7 43</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il buon Samaritano</nome>
+			<riferimento>49 10 25 49 10 37</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il ricco stolto</nome>
+			<riferimento>49 12 16 49 12 21</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il gran convito</nome>
+			<riferimento>49 14 15 49 14 24</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il costo del discepolato</nome>
+			<riferimento>49 14 28 49 14 33</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La pecora smarrita</nome>
+			<riferimento>49 15 1 49 15 7</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La moneta smarrita</nome>
+			<riferimento>49 15 8 49 15 10</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il figlio smarrito (prodigo)</nome>
+			<riferimento>49 15 11 49 15 32</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il fattore infedele</nome>
+			<riferimento>49 16 1 49 16 13</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il ricco e Lazzaro</nome>
+			<riferimento>49 16 19 49 16 31</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La vedova persistente</nome>
+			<riferimento>49 18 1 49 18 18</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il fariseo e il pubblicano</nome>
+			<riferimento>49 18 9 49 18 14</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>Il buon pastore</nome>
+			<riferimento>50 10 1 50 10 16</riferimento>
+		</segnalibro>
+		<segnalibro>
+			<nome>La vite e i tralci</nome>
+			<riferimento>50 15 1 50 15 8</riferimento>
+		</segnalibro>
+	</gruppo>
+	<gruppo>
+		<nome>Profezie che riguardano Gesù</nome>
+		<descrizione>Quello che l'Antico Testamento predisse di Gesù, e
+			l'adempimento nel Nuovo Testamento</descrizione>
+		<sottogruppo>
+			<nome>Seme di una donna</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>1 3 15</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>55 4 4; 49 2 7; 73 12 5</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Discendente di Abraamo</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>1 18 18; 1 12 3</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>51 3 25; 47 1 1; 49 3 34</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Discendente di Isaaco</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>1 17 19</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 1 2; 49 3 34</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Discendente di Giacobbe</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>4 13 17; 1 28 14</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 1 2; 49 3 34</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Della tribù di Giuda</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>1 49 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 1 2 47 1 3; 49 3 33</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Erede del trono di Davide</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 9 7; 29 11 1 29 11 5; 10 7 13</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 1 1; 47 1 6</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Nato a Betlemme</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>40 5 1</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 2 1; 49 2 4 49 2 7</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Tempo di nascita</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>34 9 25</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>49 2 1 49 2 7</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Nato di una vergine</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 7 14</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 1 18; 49 1 26 49 1 35</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Strage degli innocenti</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>30 31 15</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 2 16 47 2 18</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Fuga in Egitto</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>35 11 1</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 2 14 47 2 15</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Ministero in Galilea</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 9 1 29 9 2</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 4 12 47 4 16</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Profeta</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>5 18 15</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 6 14; 50 1 45; 51 3 19 51 3 26</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Sacerdote come Melchisedec</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 110 4</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>65 6 20; 65 5 5 65 5 6; 65 7 15 65 7 17</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Respinto dai Giudei</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 53 3; 23 2 2</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 1 1; 50 5 43; 49 9 29; 49 17 25; 49 23 18
+				</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Saggezza</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 11 2 29 11 4;23 45 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>49 2 52; 49 4 18</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Entrata trionfale</nome>
+			<segnalibro>
+				<nome>Profezia 1</nome>
+				<riferimento>45 9 9; 29 62 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 12 12 50 12 14; 47 21 1 47 21 11</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Tradito da un amico</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 41 9</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>48 14 10; 47 26 14 47 26 16; 48 14 43 48 14 45
+				</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Venduto per 30 pezzi d'argento</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>45 11 12 45 11 13</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 26 15; 47 27 3 47 27 10</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>>Denaro usato per il campo del vasaio</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>45 11 13; 47 27 3 47 27 10</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Giuda sostituito da un altro</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 109 7 23 109 8</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>51 1 16 51 1 20</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Falsi testimoni</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 27 12; 23 35 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 26 60 47 26 61</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Non rispose alle accuse</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 53 7;23 38 13 23 38 14</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 26 62 47 26 63; 47 27 12 47 27 14</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>L'hanno colpito e gli hanno sputato addosso</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 50 6</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>48 14 65; 48 15 17; 50 19 1 50 19 3; 50 18 22
+				</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Odiato senza motivo</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 69 4; 23 109 3 23 109 5</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 15 23 50 15 25</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Sofferto per altri</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 53 4 29 53 6; 29 53 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 8 16 47 8 17; 52 4 25; 53 15 3</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Crocifisso con peccatori</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 53 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 27 38; 48 15 27 48 15 28; 49 23 33</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Mani e piedi trasfissi</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 22 16; 45 12 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 20 25 50 20 27; 50 19 37</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Schernito e insultato</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 22 6 23 22 8</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 27 39 47 27 44; 48 15 29 48 15 32</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Dato fiele e aceto</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 69 21</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 19 29; 47 27 34; 47 27 48</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Sentite parole profetiche lo presero in giro</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 22 8</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 27 43</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Preghiera per i suoi nemici</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 109 4; 29 53 12</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>49 23 34</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Fianco trasfisso</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>45 12 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 19 34</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Tirarono a sorte per i vestiti</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 22 18</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>48 15 24; 50 19 24</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Nessun osso rotto</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 34 20; 2 12 46</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>50 19 33</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Sepolto con i ricchi</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>29 53 9</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 27 57 47 27 60</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Risurrezione</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 16 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>47 16 21; 47 28 9; 49 24 36 49 24 48</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Ascensione</nome>
+			<segnalibro>
+				<nome>Profezia</nome>
+				<riferimento>23 68 18</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Adempimento</nome>
+				<riferimento>49 24 50 49 24 51; 51 1 9</riferimento>
+			</segnalibro>
+		</sottogruppo>
+	</gruppo>
+	<gruppo>
+		<nome>In diverse circostanze personali</nome>
+		<descrizione>Brani utili in certe situazioni</descrizione>
+		<sottogruppo>
+			<nome>Se tu...</nome>
+			<segnalibro>
+				<nome>ce l'hai con qualcuno</nome>
+				<riferimento>49 6 1 49 6 255; 56 4 1 56 4 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>hai avuto una perdita severa</nome>
+				<riferimento>58 1 1 58 1 255; 67 1 1 67 1 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei stato disubbidiente</nome>
+				<riferimento>29 6 1 29 6 255; 48 12 1 48 12 11; 49 5 1 49 5 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>hai bisogno del perdono</nome>
+				<riferimento>69 1 9 69 1 9; 49 15 1 49 15 255; 64 1 1 64 1 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei malato o addolorato</nome>
+				<riferimento>23 6 1 23 6 255; 23 39 1 23 39 255; 23 41 1 23 41 255;
+					23 67 1 23 67 255; 29 26 1 29 26 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei sfidato da forze che si oppongono a te</nome>
+				<riferimento>56 6 1 56 6 255; 57 4 1 57 4 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>stai affrontando una crisi</nome>
+				<riferimento>22 28 12 22 28 28; 24 8 1 24 8 255; 29 55 1 29 55 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei geloso</nome>
+				<riferimento>23 49 1 23 49 255; 66 3 1 66 3 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei impaziente</nome>
+				<riferimento>23 40 1 23 40 255; 23 90 1 23 90 255; 65 12 1 65 12 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei in lutto</nome>
+				<riferimento>53 15 1 53 15 255; 59 4 13 59 5 28; 73 21 1 73 22 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei annoiato</nome>
+				<riferimento>12 5 1 12 5 14; 22 38 1 22 38 255; 23 103 1 23 104 255;
+					56 3 1 56 3 255</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Quando...</nome>
+			<segnalibro>
+				<nome>desideri la pace interiore</nome>
+				<riferimento>50 14 1 50 14 255; 52 8 1 52 8 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>tutto va bene</nome>
+				<riferimento>23 33 12 23 33 22; 23 100 1 23 100 255; 61 6 1 61 6
+					255; 66 2 1 66 2 17</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei soddisfatto con te stesso</nome>
+				<riferimento>24 11 1 24 11 255; 49 16 1 49 16 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>cerchi il migliore investimento</nome>
+				<riferimento>47 7 1 47 7 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>cominci un nuovo lavoro</nome>
+				<riferimento>23 1 1 23 1 255; 24 16 1 24 16 255; 57 3 7 57 3 21
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>hai una posizione di responsabilità</nome>
+				<riferimento>6 1 19 6 1 19; 24 2 1 24 2 255; 54 8 1 54 8 15
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ti traslochi</nome>
+				<riferimento>23 127 1 23 127 255; 24 17 1 24 17 255; 56 5 1 56 5
+					255; 58 3 1 58 3 255; 67 3 1 67 3 17; 69 4 1 69 4 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>vuoi divertirti</nome>
+				<riferimento>47 15 1 47 15 20; 54 3 1 54 3 255; 55 5 1 55 5 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>vuoi vivere bene con i tuoi connazionali</nome>
+				<riferimento>52 12 1 52 12 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei ansioso per i tuoi cari</nome>
+				<riferimento>23 121 1 23 121 255; 49 17 1 49 17 19</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>gli affari stanno andando male</nome>
+				<riferimento>23 37 1 23 37 255; 23 92 1 23 92 255; 25 5 1 25 5 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei scoraggiato</nome>
+				<riferimento>23 23 1 23 23 255; 23 42 1 23 43 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>tutto va di male in peggio</nome>
+				<riferimento>62 3 1 62 3 255; 65 13 1 65 13 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>gli amici ti deludono</nome>
+				<riferimento>47 5 1 47 5 255; 53 13 1 53 13 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ti sei addolorato</nome>
+				<riferimento>23 46 1 23 46 255; 47 28 1 47 28 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei tentato di fare del male</nome>
+				<riferimento>23 15 1 23 15 255; 23 19 1 23 19 255; 23 139 1 23 139
+					255; 47 4 1 47 4 255; 66 1 1 66 1 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei depresso</nome>
+				<riferimento>23 34 1 23 34 255; 23 71 1 23 71 255; 29 40 1 29 40 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei troppo occupato</nome>
+				<riferimento>25 3 1 25 3 15</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>non riesci a addormentarti</nome>
+				<riferimento>23 4 1 23 4 255; 23 56 1 23 56 255; 23 130 1 23 130 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>hai litigato</nome>
+				<riferimento>47 18 1 47 18 255; 56 4 1 56 4 255; 66 4 1 66 4 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei stanco</nome>
+				<riferimento>23 95 1 23 95 7; 47 11 28 47 11 30</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>preoccupazioni ti opprimono</nome>
+				<riferimento>23 46 1 23 46 255; 47 6 1 47 6 255</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Quando tu...</nome>
+			<segnalibro>
+				<nome>senti che la tua fede è debole</nome>
+				<riferimento>23 126 1 23 126 255; 23 146 1 23 146 255; 65 11 1 65 11
+					255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>pensi che Dio sembri lontano</nome>
+				<riferimento>23 25 1 23 25 255; 23 125 1 23 125 255; 23 138 1 23 138
+					255; 49 10 1 49 10 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>stai per lasciare casa</nome>
+				<riferimento>23 119 1 23 119 255; 24 3 1 24 4 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>stai per sposarti</nome>
+				<riferimento>1 2 18 1 2 24; 24 18 22 24 18 22; 25 4 9 25 4 12; 47 19
+					3 47 19 9; 53 13 1 53 13 255; 56 5 22 56 5 33; 73 19 6 73 19 9
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>fai la contabilità di casa</nome>
+				<riferimento>49 19 1 49 19 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei negligente o indifferente</nome>
+				<riferimento>47 25 1 47 25 255; 73 3 1 73 3 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ti senti solo o sei timoroso</nome>
+				<riferimento>23 27 1 23 27 255; 23 91 1 23 91 255; 49 8 1 49 8 255;
+					67 4 1 67 4 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>hai paura della morte</nome>
+				<riferimento>50 11 1 50 11 255; 50 17 1 50 17 255; 50 20 1 50 20
+					255; 54 5 1 54 5 255; 69 3 1 69 3 255; 73 14 1 73 14 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>hai peccato</nome>
+				<riferimento>23 51 1 23 51 255; 29 51 1 29 51 255; 50 3 1 50 3 255;
+					69 1 1 69 1 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>vuoi sapere come pregare</nome>
+				<riferimento>11 8 12 11 8 61; 49 11 1 49 11 255; 49 18 1 49 18 255
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>desideri un'atmosfera di adorazione</nome>
+				<riferimento>23 24 1 23 24 255; 23 84 1 23 84 255; 23 116 1 23 116
+					255; 29 1 10 29 1 20; 50 4 1 50 4 45</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sei preoccupato con Dio per la vita nazionale</nome>
+				<riferimento>5 8 1 5 8 255; 23 85 1 23 85 255; 23 118 1 23 118 255;
+					23 124 1 23 124 255; 29 41 8 29 41 20; 40 4 1 40 4 255; 40 6 6 40 6
+					16</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>Cosa posso leggere quando...</nome>
+			<segnalibro>
+				<nome>sono scoraggiato?</nome>
+				<riferimento>31 3 19 31 3 26; 29 41 10 29 41 10; 29 57 15 29 57 15;
+					52 8 31 52 8 39; 56 3 16 56 3 21; 60 2 16 60 2 17</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono stanco?</nome>
+				<riferimento>47 11 28 47 11 30; 29 40 28 29 40 31; 23 23 1 23 23 3
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ho paura?</nome>
+				<riferimento>29 41 10 29 41 13; 23 56 3 23 56 4; 23 118 5 23 118 9;
+					50 14 1 50 14 1; 50 14 27 50 14 27; 50 16 33 50 16 33</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono felice?</nome>
+				<riferimento>23 34 1 23 34 255; 23 138 1 23 138 255; 23 145 1 23 145
+					255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono preoccupato?</nome>
+				<riferimento>29 43 1 29 43 5; 29 43 10 29 43 13; 49 12 22 49 12 31;
+					57 4 6 57 4 7; 67 5 7 67 5 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono solo?</nome>
+				<riferimento>1 28 15 1 28 15; 5 31 8 5 31 8; 23 25 16 23 25 16; 23
+					27 7 23 27 10; 29 49 15 29 49 16</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono tentato?</nome>
+				<riferimento>53 10 13 53 10 13; 65 2 18 65 2 18; 66 1 12 66 1 16; 67
+					1 6 67 1 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sto per fare una scelta importante?</nome>
+				<riferimento>47 6 33 47 6 33; 6 24 14 6 24 15; 23 37 5 23 37 5; 30
+					17 1 30 17 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono debole?</nome>
+				<riferimento>53 1 26 53 1 31; 54 12 9 54 12 10; 23 138 3 23 138 8
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>non sono sicuro della salvezza?</nome>
+				<riferimento>50 5 24 50 5 24; 50 6 47 50 6 47; 52 10 9 52 10 10; 69
+					5 11 69 5 13</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ho bisogno del perdono?</nome>
+				<riferimento>69 1 9 69 1 9; 29 1 18 29 1 18; 23 51 1 23 51 255; 23
+					32 1 23 32 255; 23 130 1 23 130 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono annoiato?</nome>
+				<riferimento>24 11 25 24 11 25; 25 3 1 25 3 8; 47 7 12 47 7 12; 52
+					12 2 52 12 2</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ho bisogno della pace?</nome>
+				<riferimento>4 6 24 4 6 26; 23 85 8 23 85 8; 31 3 21 31 3 26; 55 14
+					27 55 14 27; 55 16 33 55 16 33; 57 4 6 57 4 7</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono deluso?</nome>
+				<riferimento>23 27 7 23 27 14; 23 118 5 23 118 8; 23 9 10 23 9 10;
+					29 49 14 29 49 16</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ho dubbi?</nome>
+				<riferimento>50 20 24 50 20 29; 48 9 23 48 9 24; 47 11 2 47 11 6; 54
+					4 18 54 4 18; 54 5 7 54 5 7; 29 45 9 29 45 12; 5 29 29 5 29 29
+				</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono in pericolo?</nome>
+				<riferimento>23 91 1 23 91 255; 23 118 5 23 118 9; 23 18 2 23 18 3;
+					23 121 5 23 121 8; 52 8 35 52 8 39</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>penso che Dio sia distante?</nome>
+				<riferimento>5 4 7 5 4 7; 29 57 15 29 57 15; 66 4 8 66 4 8; 31 3 57
+					31 3 57; 23 145 18 23 145 18; 23 139 1 23 139 18</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono invidioso?</nome>
+				<riferimento>23 37 1 23 37 13; 24 14 30 24 14 30; 55 5 25 55 5 26;
+					66 3 13 66 3 18</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>sono ammalato e impotente?</nome>
+				<riferimento>23 6 1 23 6 255; 23 42 1 23 42 255; 23 86 1 23 86 255;
+					54 12 9 54 12 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>ho paura della morte?</nome>
+				<riferimento>23 23 4 23 23 4; 50 11 25 50 11 26; 50 14 1 50 14 14;
+					52 8 31 52 8 39; 52 14 8 52 14 8</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>non so la volontà di Dio?</nome>
+				<riferimento>30 29 11 30 29 13; 23 25 4 23 25 14; 23 32 8 23 32 10;
+					24 3 1 24 3 6; 29 58 11 29 58 11</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>desidero adorare Dio?</nome>
+				<riferimento>23 103 1 23 103 255; 23 111 1 23 111 255; 23 145 1 23
+					145 255; 13 29 10 13 29 13</riferimento>
+			</segnalibro>
+		</sottogruppo>
+		<sottogruppo>
+			<nome>In giorni scuri:</nome>
+			<segnalibro>
+				<nome>Nessuno si preoccupa di me</nome>
+				<riferimento>23 142 1 23 142 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Disprezzato e respinto</nome>
+				<riferimento>23 88 1 23 88 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Ascolta il mio grido, Signore!</nome>
+				<riferimento>23 102 1 23 102 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>A volte vorrei morire...</nome>
+				<riferimento>22 3 1 22 3 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>...ma c'è speranza</nome>
+				<riferimento>31 3 21 31 3 26</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Mi conosci, Signore</nome>
+				<riferimento>23 139 1 23 139 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Dove posso trovare aiuto?</nome>
+				<riferimento>23 121 1 23 121 255</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Scoraggiato</nome>
+				<riferimento>54 4 7 54 5 10</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Forza della volontà</nome>
+				<riferimento>29 40 25 29 40 31</riferimento>
+			</segnalibro>
+			<segnalibro>
+				<nome>Contro ogni possibilità</nome>
+				<riferimento>52 8 31 52 8 39</riferimento>
+			</segnalibro>
+		</sottogruppo>
+	</gruppo>
+</segnalibri>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Liturgia del giorno</title>
+        <style type="text/css">
+            h3 {
+                line-height: 1.0;
+                margin-top: 2em;
+                margin-bottom: 0em;
+                text-align: center;
+            }
+            p {
+                margin-top: 0.5em;
+                margin-bottom: 0em;
+            }
+            .pannello_opzionale {
+                display: none;
+            }
+        </style>
+        <script type='text/javascript' src='file:///android_asset/utils.js'></script>
+        <!--[LaParolaHeader]-->
+    </head>
+    <body>
+        <h3 style="margin-top: 0em;">Liturgia del giorno<br />
+            <span id="liturgia_data"></span> <a href="javascript:(function(){LaParola.sceltaDataLiturgia();})();">(cambia)</a></h3>
+        <p id="liturgia_errore">La liturgia della data scelta non &egrave; disponibile.</p>
+        <div id="liturgia_contenuto">
+            <p>Rito romano:</p>
+            <p><span id="liturgia_giorno_romana"></span>, <span id="liturgia_descrizione_romana"></span></p>
+            <p><i><span id="liturgia_versetto_romana"></span></i></p>
+            <p><span id="liturgia_letture_romana"></span></p>
+            <br />
+            <p>Rito ambrosiano:</p>
+            <p><span id="liturgia_giorno_ambrosiana"></span>, <span id="liturgia_descrizione_ambrosiana"></span></p>
+            <p><i><span id="liturgia_versetto_ambrosiana"></span></i></p>
+            <p><span id="liturgia_letture_ambrosiana"></span></p>
+            <br />
+            <p>La liturgia del giorno &egrave; tratta dai siti 
+                <a href='lpcomando:link:http://liturgia.silvestrini.org'>liturgia.silvestrini.org</a> e 
+                <a href='lpcomando:link:http://www.carbonate.it'>www.carbonate.it</a>.            <p>In caso di problemi con questa funzionalit&agrave; scrivere a <img src="file:///android_asset/email.png" width="15" height="11" />
+    <a href='lpcomando:link:mailto:neclepsio%40gmail.com%3fsubject=LaParola%20Android'>Ignazio Di Napoli</a>.</p>
+        </div>
+
+        <script type="text/javascript" charset="UTF-8" src="file:///android_asset/liturgia.js"></script>
+        <script type="text/javascript">
+            liturgia(LaParola.getUltimaDataLiturgia());
+        </script>
+    </body>
+</html>

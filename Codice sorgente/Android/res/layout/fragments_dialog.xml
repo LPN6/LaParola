@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/fragments_1"
+            style="@style/Widget.TabPageIndicatorLightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fragments_1"
+            tools:ignore="ContentDescription,ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/fragments_2v"
+            style="@style/Widget.TabPageIndicatorLightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fragments_2v"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/fragments_2h"
+            style="@style/Widget.TabPageIndicatorLightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fragments_2h"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/fragments_3v"
+            style="@style/Widget.TabPageIndicatorLightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fragments_3v"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/fragments_3h"
+            style="@style/Widget.TabPageIndicatorLightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fragments_3h"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/fragments_4"
+            style="@style/Widget.TabPageIndicatorLightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/fragments_4"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <net.laparola.ui.android.FourPanesLayout
+        android:id="@+id/four_panes_layout"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        tools:ignore="InefficientWeight" >
+
+    </net.laparola.ui.android.FourPanesLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/sync_guide" />
+
+</LinearLayout>

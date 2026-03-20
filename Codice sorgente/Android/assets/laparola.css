@@ -1,0 +1,85 @@
+p {
+    margin-top: 0;
+}
+
+h2 {
+    font-size:   1.125em;
+    font-weight: bold;
+    margin:      .50em 0;
+}
+
+.versetto {
+    text-decoration: none;
+    color:           black;
+    font-weight:     bold;
+    vertical-align:  super;
+    font-size:       80%%;
+    white-space:     nowrap;
+}
+
+.ricerca {
+    text-decoration: underline;
+}
+
+.ricerca_note {
+    text-decoration: underline;
+}
+
+.posizione_versetto {
+    vertical-align:  super;  /* questi due servono ad assicurarsi che */
+    font-size:       80%%;   /* la posizione verticale sia corretta   */
+
+    display: inline-block;
+    width: 0px;
+    background-color: #ff0000;
+}
+
+.titolo_nota {
+    font-size:       1.125em;
+    font-weight:     bold;
+    margin:          .50em 0;
+    text-decoration: none;
+    color:           black;
+}
+
+.rimando_nota {
+    text-decoration: none;
+    color:           red;
+    font-weight:     bold;
+    vertical-align:  super;
+    font-size:       80%%;
+}
+
+.m {
+  text-decoration:	none;
+  font-style:		normal;
+  color:			blue;
+  vertical-align:	super;
+  font-size:		80%%;
+}
+
+.r {
+  text-decoration:	none;
+  font-style:		normal;
+  color:			green;
+  vertical-align:	super;
+  font-size:		80%%;
+}
+
+.ora {
+    display: inline-block;
+    color:   #9a9a9a;
+}
+.oracella {
+    width: 3em;
+}
+
+.gruppo_nome {
+    font-weight : bold;
+    cursor      : pointer;
+}
+
+.gruppo_div {
+    display     : none;
+    margin-left : 2em;
+}

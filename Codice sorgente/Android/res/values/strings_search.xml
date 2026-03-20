@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search">Cerca</string>
+   
+    <string name="search_hint">Testo da cercare</string>
+    <string name="reference_hint">Riferimento</string>
+    <string name="titolo_hint">Titolo</string>
+    <string name="search_in_hint">Cerca in</string>
+    <string name="more">Altro</string>
+    <string name="help">Aiuto</string>
+    
+    <string name="advanced_search">Ricerca avanzata</string>
+    <string name="expression">Espressione da cercare</string>
+    
+    <string-array name="advanced_search_ref_names">
+        <item>Tutta la Bibbia</item>
+        <item>Antico Testamento</item>
+        <item>Nuovo Testamento</item>
+        <item>Pentateuco</item>
+        <item>Libro storici</item>
+        <item>Scritti</item>
+        <item>Profeti</item>
+        <item>Vangeli</item>
+        <item>Vangeli e Atti</item>
+        <item>Lettere di Paolo</item>
+        <item>Lettere di altri</item>
+    </string-array>
+    
+    <string-array name="advanced_search_ref_values">
+        <item></item>
+        <item>Gen-Mal</item>
+        <item>Mt-Ap</item>
+        <item>Gen-Deut</item>
+        <item>Gen-2Macc</item>
+        <item>Giobbe-Siracide</item>
+        <item>Isaia-Malachia</item>
+        <item>Mt-Gv</item>
+        <item>Mt-At</item>
+        <item>Rom-Filemone</item>
+        <item>Ebrei-Apoc</item>
+    </string-array>
+</resources>

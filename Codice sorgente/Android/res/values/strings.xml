@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">LaParola</string>
+    <string name="permission_write_storage">LaParola ha bisogno di poter scrivere sullo spazio di archiviazione esterno per salvare i testi della Bibbia, i preferiti, i versetti evidenziati, ecc.\n\nPer favore, autorizza l\'accesso nella prossima finestra.</string>
+    <string name="permission_write_storage_denied">Hai negato l\'autorizzazione a scrivere sullo spazio di archiviazione esterno. L\'applicazione non può procedere senza, e pertanto verrà chiusa.\n\nSe hai negato l\'autorizzazione in maniera permanente Android non mostrerà la finestra per consentirla. In questo caso sarà necessario concedere l\'autorizzazione usando le impostazioni di sistema.\nIn alternativa, più semplicemente, si può disinstallare e reinstallare LaParola.</string>
+
+    <string name="reference">Riferimento</string>
+    <!-- string name="back">Indietro</string -->
+    <string name="share">Condividi</string>
+    <string name="forward">Avanti</string>
+    <string name="copy">Copia</string>
+    <string name="star">Aggiungi a preferiti</string>
+    <string name="zoom_percent" tools:ignore="StringFormatInvalid">Zoom: %d%%</string>
+    <string name="zoom_in">Ingrandisci</string>
+    <string name="zoom_out">Riduci</string>
+    <string name="night_mode_on">Modo notte</string>
+    <string name="night_mode_off">Modo giorno</string>
+    <string name="bookmarks">Preferiti</string>
+    <string name="history">Cronologia</string>
+    <string name="highlighter">Evidenziatore</string>
+    
+    <string name="market_url">market://details?id=net.laparola</string>
+    <string name="laparola_url">https://www.laparola.net/programma/android.php</string>
+    <string name="no_version_installed">(nessun libro installato)</string>
+    
+    <string name="star_added">Aggiunto a preferiti</string>
+    <string name="delete_starred">Il preferito sta per essere rimosso.</string>
+    <string name="remove">Rimuovi</string>
+    <string name="description">Descrizione</string>
+    <string name="clear_history">La cronologia sta per essere pulita.</string>
+    <string name="clear">Pulisci</string>
+    <string name="select_text_copy">Seleziona il testo da copiare.</string>
+    <string name="select_text_share">Seleziona il testo da condividere.</string>
+    <string name="share_with">Condividi con</string>
+    <string name="share_subject">Condivisione da LaParola</string>
+    <string name="sync_guide">Il contenuto dei pannelli dello stesso colore sarà sincronizzato.</string>
+    <string name="fragments_management">Gestione pannelli</string>
+    <string name="no_book">Nessun libro di questo tipo disponibile</string>
+    <string name="loading">Caricamento dei libri installati in corso&#8230;</string>
+
+    <string name="open_here">Apri qui</string>
+    <string name="open_new_panel">In un nuovo pannello</string>
+    <string name="open_in_panel">In un pannello aperto</string>
+    <string name="switch_panel">Scambia pannelli</string>
+    <string name="open_popup">In una finestra popup</string>
+    <string name="error_open_new_panel">Impossibile creare un nuovo pannello</string>
+    <string name="close">Chiudi</string>
+    <string name="close_panel">Chiudi pannello</string>
+    <string name="select_panel">Seleziona il pannello in cui aprire il brano.</string> <!--Verrà usata la versione nel pannello.-->
+    <string name="duplicate_panel">Duplica pannello</string>
+    <string name="link_broken">Il collegamento tra i pannelli è stato interrotto.</string>
+
+    <string name="select_text">Seleziona testo</string>
+    <string name="highlighter_title">Tocca per evidenziare</string>
+    <string name="highlighter_error">Nessuna Bibbia aperta: viene visualizzata la lista dei versetti evidenziati.</string>
+    <string name="open_list">Visualizza o aggiorna la lista completa</string>
+    
+    <string name="tts_init_failed">Inizializzazione del motore TTS fallita.</string>
+    <string name="tts_unsupported_language">La lingua %s non è installata.</string>
+    <string name="tts">Sintesi vocale</string>
+    <string name="tts_read">Leggi</string>
+    <string name="tts_rewind">Indietro</string>
+    <string name="tts_ff">Avanti</string>
+    <string name="tts_stop">Fermati</string>
+    <string name="tts_settings">Impostazioni</string>
+    <string name="tts_speed">Velocità</string>
+    <string name="tts_pitch">Tono</string>
+    <string name="tts_stop_end_chapter">Interrompi alla fine del capitolo</string>
+    <string name="tts_follow_verse">Avanza automaticamente i versetti</string>
+    
+    <string name="home_preferences">Personalizzazione home page</string>
+    <string name="home_show_start">Inizia subito a leggere la Bibbia</string>
+    <string name="home_show_random">Versetti casuali</string>
+    <string name="home_show_random_at_nt">Versetti casuali per AT e NT</string>
+    <string name="home_show_library">Installa altri testi</string>
+    <string name="home_show_pdg">Parola del giorno</string>
+    <string name="home_show_liturgy">Liturgia cattolica</string>
+    <string name="home_show_bookmarks">Segnalibri</string>
+    <string name="home_show_about">Informazioni su LaParola</string>
+    
+    <string name="greek_font_url">https://www.laparola.net/javafile/GentiumPlus-1.508.zip</string>
+    <string name="greek_not_installed">Per installare un carattere greco migliore, usa il link in testa alla pagina.</string>
+    <string name="greek_install">Installa il carattere greco</string>
+    <string name="greek_installing">Alla fine dell\'installazione la pagina sarà aggiornata automaticamente.</string>
+    <string name="greek_not_supported" tools:ignore="Typos">Spiacente, non è possibile utilizzare un carattere adeguato per la versione di Android in uso.</string>
+    
+    <string name="change_color">Cambia colore</string>
+    
+    <string name="error_book_already_loaded">Impossibile caricare i seguenti file perché i relativi testi sono già caricati: %s.</string>
+
+    <string name="basic">Semplice</string>
+    <string name="advanced">Avanzato</string>
+    
+    <string name="drawer_open">Apri menu</string>
+    <string name="drawer_close">Chiudi menu</string>
+    <string name="version">Versione</string>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.IgnazioHolo" parent="Widget.MaterialCompoents.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabSelectedTextColor">?attr/colorAccent</item>
+        <item name="tabTextColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="Theme.IgnazioHolo.Dialog"      parent="android:Theme.Holo.Light.Dialog" />
+    <style name="Theme.IgnazioHolo.Preferences" parent="android:Theme.Holo.Light" />
+</resources>

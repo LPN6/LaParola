@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tts_action_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    >
+
+    <Button android:id="@+id/tts_read_button"
+        android:background="?attr/actionBarItemBackground"
+        android:minWidth="0dp"
+        android:padding="12dp"
+        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tts_read"
+        android:focusable="true" />
+        
+    <Button android:id="@+id/tts_stop_button"
+        android:background="?attr/actionBarItemBackground"
+        android:minWidth="0dp"
+        android:padding="12dp"
+        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tts_stop"
+        android:focusable="true" />
+   
+    <View
+        android:layout_width="1dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:background="@drawable/list_divider_holo_light"
+        />
+        
+    <!-- Button android:id="@+id/tts_read_button"
+        android:background="?attr/actionBarItemBackground"
+        android:minWidth="0dp"
+        android:padding="12dp"
+        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tts_read"
+        android:focusable="true" /-->
+    
+    
+    <!--
+    <ImageButton android:id="@+id/tts_read_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_action_play"
+            android:focusable="true"
+            android:contentDescription="@string/tts_read"
+            />
+    -->
+    
+    <ImageButton android:id="@+id/tts_rewind_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_rewind"
+            android:focusable="true"
+            android:contentDescription="@string/tts_rewind"
+        android:scaleType="centerInside"
+            />
+
+    <!-- 
+    <ImageButton android:id="@+id/tts_stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_pause"
+            android:focusable="true"
+            android:contentDescription="@string/tts_stop"
+            android:scaleType="centerInside"
+            />
+    -->
+    
+    <ImageButton android:id="@+id/tts_ff_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_fast_forward"
+            android:focusable="true"
+            android:contentDescription="@string/tts_ff"
+        android:scaleType="centerInside"
+            />
+    
+    <ImageButton android:id="@+id/tts_settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_settings"
+            android:focusable="true"
+            android:contentDescription="@string/tts_settings"
+        android:scaleType="centerInside"
+            />
+    
+        
+</LinearLayout>

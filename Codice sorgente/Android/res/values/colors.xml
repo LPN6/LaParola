@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <color name="bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+    <color name="background_holo_light">?android:attr/windowBackground</color>
+    <color name="transparent">#00000000</color>
+   
+</resources>

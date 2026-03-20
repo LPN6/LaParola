@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="layout">Impaginazione</string>
+    <string name="show_paragraphs">Mostra paragrafi</string>
+    <string name="show_verses">Mostra versetti</string>
+    <string name="show_paragraphs_or_verses">Testo in paragrafi</string>
+    <string name="show_titles">Mostra titoli</string>
+    <string name="references">Riferimenti</string>
+    <string name="reference_type">Tipo riferimenti</string>
+    <string name="reference_placement">Posizione riferimento</string>
+    <string name="reference_superscript">Riferimenti in apice</string>
+    
+    <string-array name="reference_types_descr" tools:ignore="TypographyDashes">
+        <item>1P 5:2,6-7</item>
+        <item>1P 5,2.6-7</item>
+        <item>1P. 5,2.6-7</item>
+        <item>1Pietro 5:2,6-7</item>
+        <item>1Pietro 5,2.6-7</item>
+    </string-array>
+
+    <string-array name="reference_types">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    
+    <string-array name="reference_placement_descr">
+        <item>Non visualizzare</item>
+        <item>Prima del versetto, stessa riga</item>
+        <item>Prima del versetto, riga diversa</item>
+        <item>Dopo il versetto</item>
+    </string-array>
+
+    <string-array name="reference_placement">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string name="home_at_start">Mostra home all\'avvio</string>
+    <string name="last_page">Mostra ultima pagina caricata</string>
+    <string name="home">Mostra home</string>
+    <string name="use_volume_keys">Tasti volume</string>
+    <string name="use_volume_keys_descr">Usa i tasti del volume per scorrere il testo</string>
+    <string name="swipe_chapters">Trascina per cambiare capitolo</string>
+    <string name="swipe_chapters_descr">Trascina a sinistra e destra per cambiare capitolo</string>
+    <string name="keep_screen_on">Mantieni lo schermo acceso</string>
+
+    <string name="use_lzma">Scarica file piccoli</string>    
+    <string name="use_lzma_yes">Scarica meno dati dalla rete, ma impiega più tempo a decomprimerli. In caso di problemi, che si verificano principalmente con dispositivi poco prestanti, scarica automaticamente anche l\'altro file.</string>    
+    <string name="use_lzma_no">Scarica più dati dalla rete, ma impiega meno tempo a decomprimerli.</string>    
+
+    <string name="accessibility">Usa riferimenti accessibili</string>
+    <string name="accessibility_descr">Usa caratteri grandi per la selezione dei riferimenti.</string>
+    
+    <string name="auto_open_ref">Selezione rapida riferimenti</string>
+    <string name="auto_open_ref_descr">Apre automaticamente i menu di capitolo e versetto durante la selezione dei riferimenti.</string>
+    <string name="oneHandZoom">Attiva lo zoom con doppio tocco</string>
+    <string name="oneHandZoom_descr">Zoom con una mano</string>
+    <string name="menuZoom">Zoom nel menu</string>
+    <string name="menuZoom_descr">Mostra i comandi per lo zoom nel menu</string>
+
+</resources>

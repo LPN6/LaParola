@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tts_action_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    >
+        
+    <net.laparola.ui.android.actionbar.bibleversionspinner.BibleVersionSpinner
+        android:id="@+id/version_spinner"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="?attr/dropdownListPreferredItemHeight"
+        android:dropDownWidth="300dp"
+        android:layout_gravity="center" />
+        
+    <!-- ImageButton android:id="@+id/version_management_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_action_download"
+        android:focusable="true"
+        android:contentDescription="@string/version_management"
+        / -->      
+        
+    <ImageButton android:id="@+id/panels_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_action_panels"
+        android:contentDescription="@string/fragments_management"    
+        android:focusable="true"
+        android:visibility="gone" />
+   
+</LinearLayout>

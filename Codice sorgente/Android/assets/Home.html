@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>LaParola home</title>
+        <style type="text/css">
+            h3 {
+                line-height: 1.0;
+                margin-top: 2em;
+                margin-bottom: 0em;
+                text-align: center;
+            }
+            p {
+                margin-top: 0.5em;
+                margin-bottom: 0em;
+            }
+            .pannello_opzionale {
+                display: none;
+            }
+        </style>
+        <script type='text/javascript' src='file:///android_asset/utils.js'></script>
+        <!--[LaParolaHeader]-->
+    </head>
+    <body>
+        <script type="text/javascript">
+        <!--
+        if (LaParola.getAggionamentiDisponibiliDebole()) {
+            document.write("<p align='center'>");
+            document.write("Sono disponibili aggiornamenti dei testi installati.<br/>");
+            document.write("<a href='lpcomando:versioni'>Apri la libreria.</a>");
+            document.write("<br/>&nbsp;");
+            document.write("</p>");
+        }
+        -->
+        </script>
+        
+        <div id='div_loading'>
+            <!-- p align='center'>Caricamento home page...</p -->
+        </div>
+        
+        <div id='div_debug' class='pannello_opzionale'>
+            <p align='center'><b>--- Inizio Debug</b></p>
+            <p align='center'><a href='laparola:$$@Note della Nuova Riveduta'>Elenco note della NR</a></p>
+            <p align='center'><b>--- Fine Debug</b></p>
+        </div>
+
+        <p>Per aprire il menu, trascinare il dito dal bordo sinistro verso destra.</p>
+
+        <script type="text/javascript">
+            document.write(LaParola.leggiFile("about.html"));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- The main content view -->
+	<FrameLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical" 
+	    android:id="@+id/main_activity_container" >
+	
+	    <TextView
+	        android:id="@+id/loading"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:gravity="center"
+	        android:text="@string/loading"
+	        android:visibility="visible" />
+	    
+	    <net.laparola.ui.android.FourPanesLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/four_panes_layout" />
+	</FrameLayout>
+
+    <!-- The navigation drawer -->
+    <ExpandableListView android:id="@+id/left_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:background="#efefef"
+        android:groupIndicator="@null" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
+

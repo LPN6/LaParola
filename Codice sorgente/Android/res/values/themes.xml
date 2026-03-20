@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.IgnazioHolo" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@drawable/background_holo_light</item>
+        <item name="android:buttonStyle">@style/ButtonHoloLight</item>
+        <item name="android:imageButtonStyle">@style/ButtonHoloLight</item>
+        <item name="android:editTextStyle">@style/EditTextHoloLight</item>
+        <item name="android:seekBarStyle">@style/Holo.SeekBar.Light</item>
+        <!-- item name="android:alertDialogStyle">@style/alertDialogHoloLight</item>
+        <item name="android:radioButtonStyle">@style/radioHoloLight</item -->
+
+    	<!-- item name="absForceOverflow">true</item -->
+       <!-- <item name="tabStyle">@style/Widget.TabPageIndicatorLight</item>-->
+	</style>
+
+    <style name="Theme.IgnazioHolo.Dialog" parent="android:Theme.Light">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle.IgnazioHolo.Light</item>
+        <!--item name="android:windowBackground">@drawable/abs__dialog_full_holo_light</item-->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+
+        <item name="android:windowActionBar" tools:ignore="NewApi">false</item>
+        <item name="android:windowActionModeOverlay" tools:ignore="NewApi">true</item>
+        <item name="android:windowCloseOnTouchOutside" tools:ignore="NewApi">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+
+        <item name="android:colorBackgroundCacheHint">@null</item>
+
+        <item name="android:textColorPrimary">?android:attr/textColorPrimary</item>
+        <item name="android:textColorPrimaryInverse">?android:attr/textColorPrimaryInverse</item>
+
+        <item name="windowActionBar">false</item>
+        
+        <item name="android:windowBackground">@drawable/background_holo_light</item>
+        <item name="android:buttonStyle">@style/ButtonHoloLight</item>
+        <item name="android:imageButtonStyle">@style/ButtonHoloLight</item>
+        <item name="android:editTextStyle">@style/EditTextHoloLight</item>
+        <item name="android:seekBarStyle">@style/Holo.SeekBar.Light</item>
+        <!-- item name="android:alertDialogStyle">@style/alertDialogHoloLight</item>
+        <item name="android:radioButtonStyle">@style/radioHoloLight</item -->
+        </style>
+    
+    <style name="Theme.IgnazioHolo.Preferences" parent="android:Theme.Light.NoTitleBar" />
+</resources>
