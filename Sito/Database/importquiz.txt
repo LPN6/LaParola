@@ -1,0 +1,11 @@
+USE laparola_testo;
+
+DROP TABLE IF EXISTS Quiz;
+CREATE TABLE Quiz (id_d MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, id_t MEDIUMINT UNSIGNED NOT NULL, domanda VARCHAR(255) NOT NULL, risposta1 VARCHAR(255) NOT NULL, risposta2 VARCHAR(255) NOT NULL, risposta3 VARCHAR(255) NOT NULL, risposta4 VARCHAR(255) NOT NULL, risposta TINYINT UNSIGNED NOT NULL, spiegazione VARCHAR(5000) NOT NULL, giuste INT UNSIGNED NOT NULL DEFAULT 0, sbagliate INT UNSIGNED NOT NULL DEFAULT 0);
+
+DROP TABLE IF EXISTS QuizTemi;
+CREATE TABLE QuizTemi (id_t MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, tema VARCHAR(255) NOT NULL);
+
+LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\quiz.sql" INTO TABLE Quiz FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' (id_t,domanda,risposta1,risposta2,risposta3,risposta4,risposta,spiegazione);
+
+LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\quiztemi.sql" INTO TABLE QuizTemi LINES TERMINATED BY '\r\n' (tema);

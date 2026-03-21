@@ -1,0 +1,23 @@
+Nuova Riveduta|66|it|v|
+C.E.I.|73|it|v|
+Nuova Diodati|66|it|v|
+Riveduta|66|it|v|
+Diodati|66|it|v|
+Commentario|66|it|c|
+Riferimenti incrociati|66|it|c|
+Bibbia della Gioia|66|it|v|
+Martini|73|it|v|
+Riveduta 2020|66|it|v|
+Ricciotti|73|it|v|
+Tintori|73|it|v|
+CommentarioNT|66|it|c|
+CommentarioPulpito|66|it|c|
+CommentarioIllustratore|66|it|c|
+CommentarioGill|66|it|c|
+Nuova Riveduta 1994|66|it|v|
+CommentarioHenry|66|it|c|
+CommentarioBarnes|66|it|c|
+CommentarioMeyer|66|it|c|
+CommentarioTesoro|66|it|c|
+CommentarioCalvino|66|it|c
+CommentarioGinevra|66|it|c
