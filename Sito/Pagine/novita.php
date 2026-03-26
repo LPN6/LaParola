@@ -14,6 +14,11 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260321"></a>
+<h2>21 marzo 2026</h2>
+<p>Per conservare tutto il materiale di LaParola, ho trasferito una copia di tutto a <a href="https://github.com/LPN6/LaParola">GitHub</a>. Ci sono tutte le risorse disponibili, il codice sorgente delle app, e le pagine e il database del sito.  
+</p>
+
 <a name="20260320"></a>
 <h2>20 marzo 2026</h2>
 <p>Alcuni nuovi testi sono stati aggiunti. Sul sito e nelle app ci sono i commentari di Calvino (attualmente Genesi e il Nuovo Testamento) e le <i>Note della Bibbia di Ginevra<i>.

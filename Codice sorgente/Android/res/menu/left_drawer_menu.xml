@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_bible"
+        android:title="@string/menu_leggi_bibbia"
+        android:icon="@drawable/ic_action_reference" />
+
+    <item
+        android:id="@+id/nav_parola_giorno"
+        android:title="@string/menu_parola_giorno" />
+
+    <item
+        android:id="@+id/nav_liturgia"
+        android:title="@string/menu_liturgia" />
+
+    <item
+        android:id="@+id/nav_casuale"
+        android:title="@string/menu_casuale" />
+
+    <item
+        android:id="@+id/nav_casuale_at"
+        android:title="@string/menu_casuale_at" />
+
+    <item
+        android:id="@+id/nav_casuale_nt"
+        android:title="@string/menu_casuale_nt" />
+
+    <item
+        android:id="@+id/nav_bookmarks"
+        android:title="@string/menu_segnalibri"
+        android:icon="@drawable/ic_action_bookmarks" />
+
+    <item
+        android:id="@+id/nav_starred"
+        android:title="@string/menu_preferiti"
+        android:icon="@drawable/ic_action_starred" />
+
+    <item
+        android:id="@+id/nav_highlight_color"
+        android:title="@string/menu_versetti_evidenziati"
+        android:icon="@drawable/ic_action_highlight_color" />
+
+    <item
+        android:id="@+id/nav_history"
+        android:title="@string/menu_cronologia"
+        android:icon="@drawable/outline_history_24" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/menu_impostazioni"
+        android:icon="@drawable/ic_action_settings" />
+
+    <item
+        android:id="@+id/nav_help"
+        android:title="@string/menu_guida"
+        android:icon="@drawable/ic_action_help" />
+</menu>

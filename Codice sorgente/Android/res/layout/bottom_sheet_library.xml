@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?attr/colorSurface">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/library"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:paddingBottom="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_text"
+        android:paddingBottom="4dp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <net.laparola.ui.android.actionbar.bibleversionspinner.BibleVersionSpinner
+        android:id="@+id/version_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        style="@style/Widget.AppCompat.Spinner.DropDown"
+/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/dividerVertical"
+        android:layout_marginVertical="16dp"/>
+
+    <Button
+        android:id="@+id/version_management_button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version_management"
+        android:gravity="start|center_vertical"
+        android:textColor="?attr/colorOnSurface"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/panels_button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragments_management"
+        android:gravity="start|center_vertical"
+        android:textColor="?attr/colorOnSurface"
+        android:textAllCaps="false"
+        android:visibility="gone"/>
+</LinearLayout>

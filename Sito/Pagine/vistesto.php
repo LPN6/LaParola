@@ -392,7 +392,7 @@ if ($ris=mysqli_query($conn, "$sql")) {
   $num_rows_sql2 = 0;
   $versetto_precedente_trovato = 0;
   if (mysqli_num_rows($ris)==0 && $vtipo=='c') {
-    $sql = "SELECT Libro,Capitolo,Versetto,Testo FROM Versetti WHERE id_t=$versione AND Libro=$l1 AND Capitolo=$c1 AND Versetto<$v1 ORDER BY Versetto aSC";
+    $sql = "SELECT Libro,Capitolo,Versetto,Testo FROM Versetti WHERE id_t=$versione AND Libro=$l1 AND Capitolo=$c1 AND Versetto<$v1 ORDER BY Versetto ASC";
     $ris=mysqli_query($conn, "$sql");
     if (mysqli_num_rows($ris)>0)
       mysqli_data_seek($ris, mysqli_num_rows($ris)-1);

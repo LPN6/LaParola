@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel_menu_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?attr/colorSurface">
+
+    <TextView
+        android:id="@+id/menu_close_panel"
+        style="@style/BottomSheetMenuItem"
+        android:text="@string/close_panel"
+        android:layout_height="48dp"
+        />
+
+    <TextView
+        android:id="@+id/menu_duplicate_panel"
+        style="@style/BottomSheetMenuItem"
+        android:text="@string/duplicate_panel"
+        android:layout_height="48dp"
+        />
+
+    <TextView
+        android:id="@+id/menu_switch_panel"
+        style="@style/BottomSheetMenuItem"
+        android:text="@string/switch_panel"
+        android:layout_height="48dp"
+        />
+
+    <TextView
+        android:id="@+id/menu_manage_panels"
+        style="@style/BottomSheetMenuItem"
+        android:text="@string/fragments_management"
+        android:layout_height="48dp"
+        />
+</LinearLayout>

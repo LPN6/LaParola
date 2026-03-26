@@ -7,7 +7,7 @@
     <description>Novità a LaParola.Net - il centro per lo studio della Sacra Bibbia in italiano in Internet</description>
     <language>it</language>
     <copyright>Copyright 2026, laparola.net</copyright> 
-    <pubDate>Fri, 20 Mar 2026 02:00:00 +0100</pubDate>
+    <pubDate>Sab, 21 Mar 2026 02:00:00 +0100</pubDate>
     <atom:link href="https://www.laparola.net/feed.xml" rel="self" type="application/rss+xml" /> 
     <image>
       <title>La Parola - la Bibbia italiana</title> 
@@ -17,7 +17,14 @@
       <height>32</height> 
       <description>Il centro per lo studio della Sacra Bibbia in italiano in Internet</description> 
     </image>
-    <lastBuildDate>Fri, 20 Mar 2026 01:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Sab, 21 Mar 2026 01:30:00 +0100</lastBuildDate>
+    <item>
+      <title>Sorgente e risorse</title>
+      <link>https://www.laparola.net/sorgente.php</link>
+      <description>Per conservare tutto il materiale di LaParola, ho trasferito una copia di tutto a <a href="https://github.com/LPN6/LaParola">GitHub</a>. Ci sono tutte le risorse disponibili, il codice sorgente delle app, e le pagine e il database del sito.
+      </description>
+      <pubDate>Sab, 21 Mar 2026 01:01:00 +0100</pubDate> 
+    </item>
     <item>
       <title>Interlineare</title>
       <link>https://www.laparola.net/</link>

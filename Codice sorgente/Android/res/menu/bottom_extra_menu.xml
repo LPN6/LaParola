@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_item_highlighter"
+        android:visible="true"
+        android:title="@string/highlighter" />
+
+    <item
+        android:id="@+id/menu_item_tts"
+        android:visible="true"
+        android:title="@string/tts"/>
+
+    <item
+        android:id="@+id/menu_item_night_mode_bottom"
+        android:title="@string/night_mode_on"
+        android:visible="true"/>
+    <item
+        android:id="@+id/menu_item_zoom_in"
+        android:title="@string/zoom_in"
+        android:visible="false"/>
+    <item
+        android:id="@+id/menu_item_zoom_out"
+        android:title="@string/zoom_out"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/menu_item_panels"
+        android:title="@string/fragments_management"
+        android:visible="true"/>
+    <item
+        android:id="@+id/menu_item_library_management"
+        android:title="@string/version_management"
+        android:visible="true"/>
+
+</menu>

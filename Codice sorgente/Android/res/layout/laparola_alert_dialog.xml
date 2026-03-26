@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/parentPanel"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:background="?attr/colorSurface"
+	android:paddingHorizontal="24dp"
+	android:paddingTop="16dp"
+	android:paddingBottom="8dp">
+
+	<!-- Title -->
+	<LinearLayout
+		android:id="@+id/topPanel"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical">
+
+		<ImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="8dp"
+			tools:ignore="ContentDescription" />
+
+		<TextView
+			android:id="@+id/alertTitle"
+			style="?attr/textAppearanceHeadlineSmall"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?attr/colorOnSurface"
+			tools:text="Dialog title" />
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginVertical="8dp"
+		android:background="?attr/colorOutline" />
+
+	<!-- Content -->
+	<LinearLayout android:id="@+id/contentPanel"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:layout_marginLeft="8dip"
+		android:layout_marginRight="8dip"
+		android:orientation="vertical">
+	<ScrollView
+		android:id="@+id/scrollView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:clipToPadding="false"
+		android:paddingVertical="8dp">
+
+		<TextView
+			android:id="@+id/message"
+			style="?attr/textAppearanceBodyMedium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			tools:text="This is the dialog message." />
+	</ScrollView>
+
+	<FrameLayout
+		android:id="@+id/custom"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+	</LinearLayout>
+
+	<!-- Buttons -->
+	<LinearLayout
+		android:id="@+id/buttonPanel"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="end"
+		android:paddingTop="8dp">
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/button2"
+			style="@style/Widget.Material3.Button.TextButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/annulla" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/button3"
+			style="@style/Widget.Material3.Button.TextButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/button1"
+			style="@style/Widget.Material3.Button.TextButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/ok" />
+	</LinearLayout>
+</LinearLayout>

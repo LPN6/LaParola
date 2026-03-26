@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/fullref_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/reference_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:hint="@string/reference"
+            android:imeOptions="actionGo"
+            android:inputType="text" />
+        <ImageButton
+            android:id="@+id/reference_go_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/go_to"
+            android:src="@android:drawable/ic_menu_send" />
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+        android:background="#CCCCCC" android:layout_marginVertical="12dp"/>
+
+    <LinearLayout
+        android:id="@+id/bcv_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <net.laparola.ui.android.ignspinner.ListSpinner
+            android:id="@+id/book_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <net.laparola.ui.android.ignspinner.GridSpinner
+                android:id="@+id/chapter_spinner"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+
+            <View android:layout_width="8dp" android:layout_height="0dp"/>
+
+            <net.laparola.ui.android.ignspinner.GridSpinner
+                android:id="@+id/verse_spinner"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

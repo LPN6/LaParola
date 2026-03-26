@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+
+    <!-- Material Components required colors -->
+    <color name="colorPrimary">#121212</color>       <!-- dark surface (near black) -->
+    <color name="colorOnPrimary">#FFFFFF</color>     <!-- text/icons on primary -->
+    <color name="colorSecondary">#03DAC6</color>     <!-- teal accent (works in both modes) -->
+    <color name="colorOnSecondary">#000000</color>   <!-- text/icons on secondary -->
+    <color name="colorSurface">#121212</color>       <!-- dark surface -->
+    <color name="colorOnSurface">#FFFFFF</color>     <!-- text/icons on surface -->
+    <color name="colorBackground">#121212</color>    <!-- dark background -->
+    <color name="colorOnBackground">#FFFFFF</color>  <!-- text/icons on background -->
+    <color name="colorError">#CF6679</color>         <!-- material dark theme error red -->
+    <color name="colorOnError">#000000</color>       <!-- text/icons on error -->
+    <color name="btn_background_color">#404040</color> <!-- dark grey -->
+</resources>
