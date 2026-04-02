@@ -191,6 +191,17 @@ La Società Biblica Britannica e Forestiera; 1877</descrizione>
 <tipo>Bibbia</tipo>
 </file>
 <file>
+<componente>Darby</componente>
+<descrizione>The New Testament was translated by Darby himself in John Nelson Darby, The Gospels, Acts, Epistles, and Book of Revelation: Commonly called the New Testament. A New Translation from a Revised Text of the Greek Original. London: G. Morrish, 1867. Second edition 1872. Third edition 1884. After his death in 1882, some of his followers brought out a translation of the Old Testament based on Darby's translations into French and German.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/darby.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/darby.zip</url2>
+<dimensione>2359667</dimensione>
+<dimensione2>3400109</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
 <componente>Sicilianu</componente>
 <descrizione>Traduzioni in siciliano di Ruth, Cantico e Matteo di Luigi Scalia, commissionate dal principe Luigi Luciano Bonaparte (1860-1861).</descrizione>
 <versione>1.1.48</versione>
@@ -210,6 +221,17 @@ La Società Biblica Britannica e Forestiera; 1877</descrizione>
 <url2>https://www.laparola.net/javafile/louis_segond.zip</url2>
 <dimensione>2448291</dimensione>
 <dimensione2>4004828</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
+<componente>French Darby</componente>
+<descrizione>William Joseph Lowe (1838–1927) and Mons. Schlumberger were in the translation team for the Pau-Vevey French translation which was first issued in 1859. The title page read, 'Les LIVRES SAINTS CONNUS SOUS LE NOM DE NOUVEAU TESTAMENT. Version nouvelle.' Darby worked on this project in Pau, Southern France but the work was done primarily for the numerous Brethren in French-Switzerland. The translation of the New Testament was reissued in 1872, 1875 and 1878. The complete Bible appeared in 1885.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/french_darby.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/french_darby.zip</url2>
+<dimensione>2482831</dimensione>
+<dimensione2>3636036</dimensione2>
 <tipo>Bibbia</tipo>
 </file>
 <file>
@@ -378,14 +400,14 @@ La Società Biblica Britannica e Forestiera; 1877</descrizione>
 <tipo>Bibbia</tipo>
 </file>
 <file>
-<componente>Westcott and Hort</componente>
-<descrizione>The New Testament in the Original Greek. The text revised by Brooke Foss Westcott D.D. and Fenton John Anthony Hort D.D.</descrizione>
-<versione>1.1.9</versione>
+<componente>Westcott and Hort transliterated</componente>
+<descrizione>The New Testament in the Original Greek. The text revised by Brooke Foss Westcott D.D. and Fenton John Anthony Hort D.D. Questo testo ha i caratteri latini invece di greci.</descrizione>
+<versione>1.0.0</versione>
 <motivo>Prima versione</motivo>
-<url>https://www.laparola.net/javafile/westcott_and_hort.lpj.lzma</url>
-<url2>https://www.laparola.net/javafile/westcott_and_hort.zip</url2>
-<dimensione>742753</dimensione>
-<dimensione2>1309046</dimensione2>
+<url>https://www.laparola.net/javafile/westcott_and_hort_transliterated.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/westcott_and_hort_transliterated.zip</url2>
+<dimensione>655617</dimensione>
+<dimensione2>960279</dimensione2>
 <tipo>Bibbia</tipo>
 </file>
 <file>
