@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/component_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/item_background_holo_light" >
+    android:background="?attr/colorSurface">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -24,46 +25,64 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/colorOnSurface"/>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?attr/colorOnSurface" />
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/install"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
+            android:background="@drawable/btn_icon_background"
+            android:padding="4dp"
+            android:scaleType="centerInside"
             android:contentDescription="@string/install"
-            android:src="@drawable/ic_action_download" />
+            android:src="@drawable/ic_action_download"
+            app:tint="?attr/colorOnSurface" />
         
         <ImageButton
             android:id="@+id/update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
+            android:background="@drawable/btn_icon_background"
+            android:padding="4dp"
+            android:scaleType="centerInside"
             android:contentDescription="@string/update"
-            android:src="@drawable/ic_action_update" />
+            android:src="@drawable/ic_action_update"
+            app:tint="?attr/colorOnSurface" />
 
         <ImageButton
             android:id="@+id/market"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
+            android:background="@drawable/btn_icon_background"
+            android:padding="4dp"
+            android:scaleType="centerInside"
             android:contentDescription="@string/market"
-            android:src="@drawable/ic_action_shop" />
+            android:src="@drawable/ic_action_shop"
+            app:tint="?attr/colorOnSurface" />
 
         <ImageButton
             android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
+            android:background="@drawable/btn_icon_background"
+            android:padding="4dp"
+            android:scaleType="centerInside"
             android:contentDescription="@string/delete"
-            android:src="@drawable/ic_action_delete" />
+            android:src="@drawable/ic_action_delete"
+            app:tint="?attr/colorOnSurface" />
     </LinearLayout>
 
 </FrameLayout>

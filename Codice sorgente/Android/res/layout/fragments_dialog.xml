@@ -1,84 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" xmlns:tools="http://schemas.android.com/tools">
+    android:layout_gravity="center"
+    android:padding="16dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="?attr/colorSurface"
+    tools:ignore="ContentDescription">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/fragments_1"
-            style="@style/Widget.TabPageIndicatorLightIcon"
-            android:layout_width="wrap_content"
+        <!-- Fragment layout selector row -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/fragments_toggle_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/fragments_1"
-            tools:ignore="ContentDescription,ContentDescription" />
+            android:layout_marginBottom="16dp"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:checkedButton="@id/fragments_1">
 
-        <ImageButton
-            android:id="@+id/fragments_2v"
-            style="@style/Widget.TabPageIndicatorLightIcon"
-            android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragments_1"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/fragments_1"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                app:strokeColor="?attr/colorOutline"
+                android:padding="0dp"
+                android:contentDescription="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragments_2v"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/fragments_2v"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                app:strokeColor="?attr/colorOutline"
+                android:padding="0dp"
+                android:contentDescription="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragments_2h"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/fragments_2h"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                app:strokeColor="?attr/colorOutline"
+                android:padding="0dp"
+                android:contentDescription="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragments_3v"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/fragments_3v"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                app:strokeColor="?attr/colorOutline"
+                android:padding="0dp"
+                android:contentDescription="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragments_3h"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/fragments_3h"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                app:strokeColor="?attr/colorOutline"
+                android:padding="0dp"
+                android:contentDescription="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragments_4"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/fragments_4"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                app:strokeColor="?attr/colorOutline"
+                android:padding="0dp"
+                android:contentDescription="" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- Custom content layout -->
+        <net.laparola.ui.android.FourPanesLayout
+            android:id="@+id/four_panes_layout"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/fragments_toggle_group"
+            tools:ignore="InefficientWeight" />
+
+        <!-- Bottom helper text -->
+        <TextView
+            android:id="@+id/textView1"
+            style="?attr/textAppearanceBodyMedium"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/fragments_2v"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/fragments_2h"
-            style="@style/Widget.TabPageIndicatorLightIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/fragments_2h"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/fragments_3v"
-            style="@style/Widget.TabPageIndicatorLightIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/fragments_3v"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/fragments_3h"
-            style="@style/Widget.TabPageIndicatorLightIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/fragments_3h"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/fragments_4"
-            style="@style/Widget.TabPageIndicatorLightIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/fragments_4"
-            tools:ignore="ContentDescription" />
-
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/sync_guide"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:gravity="center_horizontal"
+            android:paddingBottom="8dp" />
     </LinearLayout>
-
-    <net.laparola.ui.android.FourPanesLayout
-        android:id="@+id/four_panes_layout"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_margin="20dp"
-        android:layout_weight="1"
-        tools:ignore="InefficientWeight" >
-
-    </net.laparola.ui.android.FourPanesLayout>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/sync_guide" />
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

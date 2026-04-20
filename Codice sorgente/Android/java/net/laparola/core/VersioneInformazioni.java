@@ -189,6 +189,6 @@ public class VersioneInformazioni {
 	}
 
 	public String getVersione() {
-		return Integer.toString(getVersione1()) + "." + Integer.toString(getVersione2()) + "." + Integer.toString(getVersione3());
+		return getVersione1() + "." + getVersione2() + "." + getVersione3();
 	}
 }

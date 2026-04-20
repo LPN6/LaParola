@@ -3,29 +3,41 @@ package net.laparola.ui.android;
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Gravity;
+import android.text.Editable;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
+import timber.log.Timber;
 
 import net.laparola.BuildConfig;
 import net.laparola.R;
@@ -37,13 +49,11 @@ import net.laparola.ui.LaParolaBrowser.LaParolaBrowserStaticClient;
 import net.laparola.ui.LaParolaEvidenziatore;
 import net.laparola.ui.LaParolaSegnalibri.Segnalibro;
 import net.laparola.ui.LaParolaUrl;
-import net.laparola.ui.android.LaParolaFragment.MyRunnable;
 import net.laparola.ui.android.actionbar.LibraryActionItemManager;
 import net.laparola.ui.android.actionbar.ReferenceActionItemManager;
 import net.laparola.ui.android.actionbar.SearchActionItemManager;
 import net.laparola.ui.android.actionbar.TTSActionItemManager;
 import net.laparola.ui.android.dialogs.AccessibilityDialog;
-import net.laparola.ui.android.dialogs.HoloDialog;
 import net.laparola.ui.android.dialogs.MessageDialog;
 import net.laparola.ui.android.dialogs.PanelsDialog;
 import net.laparola.ui.android.dialogs.PopupDialog;
@@ -58,12 +68,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
-public class LaParolaActivity extends FragmentActivity implements LaParolaBrowserStaticClient, ExpandableListView.OnChildClickListener, ExpandableListView.OnGroupClickListener {
+public class LaParolaActivity extends AppCompatActivity implements LaParolaBrowserStaticClient {
     public static final int MAX_PANELS = 4;
     public static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
@@ -79,10 +89,8 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         }
     }
 
-    private DrawerLayout mDrawerLayout;
+    private DrawerLayout mLeftDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private ExpandableListView mDrawerList;
-    private DrawerAdapter mDrawerAdapter;
 
     private LaParolaFragment activeFragment;
 
@@ -91,22 +99,24 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     private LibraryActionItemManager libraryActionItemManager;
     private TTSActionItemManager ttsActionItemManager;
 
-    private MenuItem forwardActionItem;
-    private MenuItem nightModeActionItem;
-    private MenuItem starActionItem;
-    private MenuItem searchActionItem;
     private MenuItem referenceActionItem;
+    private MenuItem searchActionItem;
     private MenuItem libraryActionItem;
+    private MenuItem starActionItem;
+    private MenuItem forwardActionItem;
+    private MenuItem highlighterActionItem;
+    private MenuItem nightModeActionItem;
     private MenuItem zoomInActionItem;
     private MenuItem zoomOutActionItem;
-    private MenuItem highlighterActionItem;
+
+    private MenuItem forwardBottomItem;
+    private MenuItem starBottomItem;
 
     //private boolean firstReferenceClicked = true;
 
     private boolean mGoingBack;
     private long lastBackPressedTime = 0;
     private boolean mFinishedLoading = false;
-    private boolean firstLoading = true;
 
     protected boolean isPaused;
     private FourPanesLayout fourPanesLayout;
@@ -121,83 +131,86 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     private LaParolaFragment mSwitchingPanels;
     /* package */ ActionMode actionMode;
 
-    private View mPanelContextMenuView;
+    public boolean isTablet;
 
-    private boolean checkPermissions () {
+    private void checkAllPermissions() {
+        // Handle Storage (Android 12 and below)
+        // We only need this if we are writing to shared/external storage
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) { // 33
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Trigger the storage permission popup for the old tablet
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        LaParolaActivity.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            }
+        }
+    }
+
+    /* no longer necessary, actually blocks the program on old Android versions
+    private boolean checkPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("LaParola","Non ho l'autorizzazione per WAKE_LOCK");
+            Timber.tag("LaParola").d("Non ho l'autorizzazione per WAKE_LOCK");
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("LaParola","Non ho l'autorizzazione per INTERNET");
+            Timber.tag("LaParola").d("Non ho l'autorizzazione per INTERNET");
         }
         if (Build.VERSION.SDK_INT < 33 && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("LaParola","Non ho l'autorizzazione per WRITE_EXTERNAL_STORAGE");
+            Timber.tag("LaParola").d("Non ho l'autorizzazione per WRITE_EXTERNAL_STORAGE");
 
             // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
 
                 if (!this.isFinishing()) {
                     this.runOnUiThread(() -> {
-                        HoloDialog d = new MessageDialog(this, R.string.error, R.string.permission_write_storage);
-                        d.setOnDismissListener((dialog) -> {
-                            ActivityCompat.requestPermissions(this,
-                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                    LaParolaActivity.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                        });
+                        LaParolaDialog d = new MessageDialog(this, R.string.error, R.string.permission_write_storage);
+                        d.setOnDismissListener((dialog) -> ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LaParolaActivity.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE));
                         d.show();
                     });
                 }
             } else {
                 // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        LaParolaActivity.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LaParolaActivity.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
 
             return false;
         } else {
-            //Log.d("LaParola","Autorizzazione per WRITE_EXTERNAL_STORAGE accordata");
+            Timber.tag("LaParola").d("Autorizzazione per WRITE_EXTERNAL_STORAGE accordata");
         }
         return true;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    onFinishedLoadingActivity();
-                } else {
-                    if (!this.isFinishing()) {
-                        this.runOnUiThread(() -> {
-                            HoloDialog d = new MessageDialog(this, R.string.error, R.string.permission_write_storage_denied);
-                            d.setOnDismissListener((dialog) -> this.finish());
-                            d.show();
-                        });
-                    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {// If request is canceled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                onFinishedLoadingActivity();
+            } else {
+                if (!this.isFinishing()) {
+                    this.runOnUiThread(() -> {
+                        LaParolaDialog d = new MessageDialog(this, R.string.error, R.string.permission_write_storage_denied);
+                        d.setOnDismissListener((dialog) -> this.finish());
+                        d.show();
+                    });
                 }
-                return;
             }
         }
     }
-
+*/
     @Override
     public InputStream apriFile(String filename) {
         try {
-            if ((new File(filename)).exists())
-                return new FileInputStream(filename);
+            if ((new File(filename)).exists()) return new FileInputStream(filename);
             return getAssets().open(filename);
         } catch (Exception e) {
             if (!(e instanceof FileNotFoundException)) {
-                e.printStackTrace();
+                Timber.e(e, "Unexpected IO error occurred while opening file.");
             }
         }
 
@@ -218,6 +231,10 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if (isFinishing() || isDestroyed()) {
+            return super.dispatchKeyEvent(event);
+        }
+
         int keyCode = event.getKeyCode();
 
         if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -229,7 +246,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
                     if (activeFragment != null && activeFragment.isCreated() && activeFragment.precedenteEsiste()) {
                         mGoingBack = true;
                         activeFragment.vaiAPrecendente();
-                        forwardActionItem.setEnabled(true);
+                        setEnabledForward(true);
                         return true;
                     }
                     // lo lascia gestire al S.O.
@@ -250,23 +267,36 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
                     activeFragment.goToNextUrl();
                 return true;
             }
-        } else if (LaParolaPreferences.useVolumeKeys &&
-                (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
-                        keyCode == KeyEvent.KEYCODE_VOLUME_UP) && !ttsActionItemManager.isExpanded()) {
+        } else if (LaParolaPreferences.useVolumeKeys && (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) && !ttsActionItemManager.isExpanded()) {
             return true;
         }
+
         return super.dispatchKeyEvent(event);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main_activity);
-        fourPanesLayout = (FourPanesLayout) findViewById(R.id.four_panes_layout);
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
+        isTablet = getResources().getBoolean(R.bool.isTablet);
 
-        fragments = new ArrayList<LaParolaFragment>();
+        setContentView(R.layout.main_activity);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setTitle(getTitle());
+
+        CircularProgressIndicator progressIndicator = findViewById(R.id.progressIndicator);
+        progressIndicator.setVisibility(VISIBLE);
+        progressIndicator.show();
+
+        fourPanesLayout = findViewById(R.id.four_panes_layout);
+
+        fragments = new ArrayList<>();
 
         LaParolaPreferences.load(this);
 
@@ -274,95 +304,284 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
         /*
          * TODO : usare risorse mLaParolaBrowser.Stringhe.Errore_Nessuna_versione = getContext().getString(R.string.no_version_present);
-		 * mLaParolaBrowser.Stringhe.Errore_Non_presente = getContext().getString(R.string.not_present);
-		 */
+         * mLaParolaBrowser.Stringhe.Errore_Non_presente = getContext().getString(R.string.not_present);
+         */
+
+        progressIndicator.hide();
+        progressIndicator.setVisibility(GONE);
+    }
+
+    private void showExtraMenu(View anchor) {
+        // 1. Create the PopupMenu anchored to the "More" icon
+        androidx.appcompat.widget.PopupMenu popup = new androidx.appcompat.widget.PopupMenu(this, anchor);
+
+        // 2. Inflate your menu resource
+        popup.getMenuInflater().inflate(R.menu.bottom_extra_menu, popup.getMenu());
+
+        MenuItem nightmodeItem = popup.getMenu().findItem(R.id.menu_item_night_mode_bottom);
+        if (nightmodeItem != null) {
+            nightmodeItem.setTitle(LaParolaPreferences.nightMode ? R.string.night_mode_off : R.string.night_mode_on);
+        }
+        MenuItem zoomInItem = popup.getMenu().findItem(R.id.menu_item_zoom_in);
+        if (zoomInItem != null) {
+            zoomInItem.setVisible(LaParolaPreferences.menuZoom);
+        }
+        MenuItem zoomOutItem = popup.getMenu().findItem(R.id.menu_item_zoom_out);
+        if (zoomOutItem != null) {
+            zoomOutItem.setVisible(LaParolaPreferences.menuZoom);
+        }
+
+        // 3. Handle clicks by routing them to your existing onOptionsItemSelected
+        // This keeps your logic centralized!
+        popup.setOnMenuItemClickListener(this::onOptionsItemSelected);
+
+        // 4. Show the menu
+        popup.show();
     }
 
     private void setupDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarSherlockDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description */
-                R.string.drawer_close  /* "close drawer" description */
-        ) {
+        mLeftDrawerLayout = findViewById(R.id.left_drawer_layout);
 
-            /** Called when a drawer has settled in a completely closed state. */
+        NavigationView mNavigationView = findViewById(R.id.navigation_view);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mLeftDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
                 setActivityTitle();
             }
 
-            /** Called when a drawer has settled in a completely open state. */
             @Override
             public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
                 setActivityTitle();
             }
         };
 
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mLeftDrawerLayout.addDrawerListener(mDrawerToggle);
+        mLeftDrawerLayout.post(() -> mDrawerToggle.syncState());
+
+        // Enable home button and "hamburger" icon
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        mNavigationView.setNavigationItemSelectedListener(item -> {
+            handleNavigationItem(item.getItemId());
+            DrawerLayout drawer = mLeftDrawerLayout;
+            drawer.closeDrawers();
+            return true;
+        });
+    }
 
-        mDrawerList = mDrawerLayout.findViewById(R.id.left_drawer);
-        mDrawerAdapter = new DrawerAdapter(this);
-        mDrawerList.setAdapter(mDrawerAdapter);
+    private void handleNavigationItem(int itemId) {
+        String link = getLink(itemId);
+        executeNavigationLink(link);
+    }
 
-        mDrawerList.setOnChildClickListener(this);
-        mDrawerList.setOnGroupClickListener(this);
+    private void executeNavigationLink(String link) {
+        LaParolaFragment activeFragment = getActiveFragment();
+        if (activeFragment != null && !link.isEmpty()) {
+            activeFragment.vaiAdUrl(link);
+        }
+    }
+
+    private static String getLink(int itemId) {
+        String link = "";
+        if (itemId == R.id.nav_bible) {
+            link = "laparola:@*bibbia";
+        } else if (itemId == R.id.nav_parola_giorno) {
+            link = "lpfile:Parola del giorno.html";
+        } else if (itemId == R.id.nav_liturgia) {
+            link = "lpfile:Liturgia del giorno.html";
+        } else if (itemId == R.id.nav_casuale) {
+            link = "lpcomando:casuale";
+        } else if (itemId == R.id.nav_casuale_at) {
+            link = "lpcomando:casualeat";
+        } else if (itemId == R.id.nav_casuale_nt) {
+            link = "lpcomando:casualent";
+        } else if (itemId == R.id.nav_bookmarks) {
+            link = "lpsegnalibri:";
+        } else if (itemId == R.id.nav_starred) {
+            link = "lppreferiti:";
+        } else if (itemId == R.id.nav_highlight_color) {
+            link = "lpevidenziati:";
+        } else if (itemId == R.id.nav_history) {
+            link = "lpcronologia:";
+        } else if (itemId == R.id.nav_settings) {
+            link = "lpcomando:impostazioni";
+        } else if (itemId == R.id.nav_help) {
+            link = "lpfile:Guida.html";
+        }
+        return link;
+    }
+
+    /**
+     * Navigates to a specific reference and hides the selection UI.
+     *
+     * @param reference The text reference (e.g., "John 3:16")
+     * @param dialog    The BottomSheetDialog to dismiss (can be null if in tablet mode)
+     */
+    public void executeAndClose(String reference, BottomSheetDialog dialog) {
+        if (reference != null && !reference.isEmpty()) {
+            // 1. Navigate using your existing fragment method
+            if (getActiveFragment() != null) {
+                getActiveFragment().vaiARiferimento(Editable.Factory.getInstance().newEditable(reference));
+            }
+
+            // 2. Hide keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            View view = getCurrentFocus();
+            if (view != null) imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+            // 3. Close the UI
+            if (isTablet) {
+                // Your collapse method requires a MenuItem parameter
+                referenceActionItemManager.collapse(null);
+            } else if (dialog != null) {
+                dialog.dismiss();
+            }
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.action_bar, menu);
-
-        searchActionItem = menu.findItem(R.id.menu_item_seach);
+        getMenuInflater().inflate(R.menu.action_bar, menu);
+        searchActionItem = menu.findItem(R.id.menu_item_search);
         referenceActionItem = menu.findItem(R.id.menu_item_reference);
         libraryActionItem = menu.findItem(R.id.menu_item_library);
+        starActionItem = menu.findItem(R.id.menu_item_star);
+        forwardActionItem = menu.findItem(R.id.menu_item_forward);
+        highlighterActionItem = menu.findItem(R.id.menu_item_highlighter);
+        nightModeActionItem = menu.findItem(R.id.menu_item_night_mode);
         MenuItem ttsActionItem = menu.findItem(R.id.menu_item_tts);
+        zoomInActionItem = menu.findItem(R.id.menu_item_zoom_in);
+        zoomOutActionItem = menu.findItem(R.id.menu_item_zoom_out);
 
-        searchActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-        referenceActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-        libraryActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-        ttsActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        zoomInActionItem.setVisible(true);
+        zoomOutActionItem.setVisible(true);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setVisibility(isTablet ? GONE : VISIBLE);
+        Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
+        forwardBottomItem = bottomNavigationViewMenu.findItem(R.id.bottom_item_forward);
+        starBottomItem = bottomNavigationViewMenu.findItem(R.id.bottom_item_star);
+
+        if (!isTablet) {
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.bottom_item_reference) {
+                    if (LaParolaPreferences.accessibilityMode) {
+                        showAccessibilityDialog();
+                    } else {
+                        referenceActionItemManager.expandActionView();
+                    }
+                    return true;
+                } else if (itemId == R.id.bottom_item_search) {
+                    searchActionItemManager.expandActionView();
+                    return true;
+                } else if (itemId == R.id.bottom_item_library) {
+                    libraryActionItemManager.expandActionView();
+                    return true;
+                } else if (itemId == R.id.bottom_item_star) {
+                    showStarredBottomSheet();
+                    return true;
+                } else if (itemId == R.id.bottom_item_forward) {
+                    eseguiForward();
+                    return true;
+                } else if (itemId == R.id.bottom_item_extra) {
+                    View anchor = findViewById(R.id.bottom_item_extra);
+                    showExtraMenu(anchor);
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        if (isTablet) {
+            searchActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+            referenceActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+            libraryActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+            forwardActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            starActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        } else {
+            nascondiAction();
+            forwardActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            referenceActionItem.setVisible(false);
+            searchActionItem.setVisible(false);
+            libraryActionItem.setVisible(false);
+            starActionItem.setVisible(false);
+            forwardActionItem.setVisible(false);
+            highlighterActionItem.setVisible(false);
+            ttsActionItem.setVisible(false);
+            nightModeActionItem.setVisible(false);
+            zoomInActionItem.setVisible(false);
+            zoomOutActionItem.setVisible(false);
+            MenuItem panelsItem = menu.findItem(R.id.menu_item_panels);
+            if (panelsItem != null) panelsItem.setVisible(false);
+            MenuItem libraryItem = menu.findItem(R.id.menu_item_library_management);
+            if (libraryItem != null) libraryItem.setVisible(false);
+
+        }
 
         searchActionItem.setActionView(R.layout.search_action_view);
         referenceActionItem.setActionView(R.layout.reference_action_view);
         libraryActionItem.setActionView(R.layout.version_action_view);
-        ttsActionItem.setActionView(R.layout.tts_action_view);
 
         searchActionItemManager = new SearchActionItemManager(this, searchActionItem);
         referenceActionItemManager = new ReferenceActionItemManager(this, referenceActionItem);
         libraryActionItemManager = new LibraryActionItemManager(this, libraryActionItem);
-        ttsActionItemManager = new TTSActionItemManager(this, ttsActionItem);
 
-        forwardActionItem = menu.findItem(R.id.menu_item_forward);
-        starActionItem = menu.findItem(R.id.menu_item_star);
-        nightModeActionItem = menu.findItem(R.id.menu_item_night_mode);
-        highlighterActionItem = menu.findItem(R.id.menu_item_highlighter);
-        forwardActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        starActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        if (referenceActionItemManager != null) {
+            // We override the default behavior to check for Accessibility Mode
+            View actionView = referenceActionItem.getActionView();
 
-        zoomInActionItem = menu.findItem(R.id.menu_item_zoom_in);
-        zoomOutActionItem = menu.findItem(R.id.menu_item_zoom_out);
-
-        nightModeActionItem.setTitle(LaParolaPreferences.nightMode ? R.string.night_mode_off : R.string.night_mode_on);
-
-        if (Build.VERSION.SDK_INT <= 10) {
-            menu.findItem(R.id.menu_item_copy).setVisible(true);
-            menu.findItem(R.id.menu_item_share).setVisible(true);
+            if (actionView != null) {
+                actionView.setOnClickListener(v -> {
+                    if (LaParolaPreferences.accessibilityMode) {
+                        showAccessibilityDialog();
+                    } else {
+                        referenceActionItemManager.expandActionView();
+                    }
+                });
+            }
         }
 
-        // if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH)) {
-        menu.findItem(R.id.menu_item_zoom_in).setVisible(true);
-        menu.findItem(R.id.menu_item_zoom_out).setVisible(true);
-        // }
+
+        ttsActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        ttsActionItem.setActionView(R.layout.tts_action_view);
+        ttsActionItemManager = new TTSActionItemManager(this, this, ttsActionItem);
+
+        nightModeActionItem.setTitle(LaParolaPreferences.nightMode ? R.string.night_mode_off : R.string.night_mode_on);
 
         onFinishedLoadingActivity();
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void nascondiAction() {
+        if (mLeftDrawerLayout != null && mLeftDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // Skip changes while drawer is open
+            return;
+        }
+
+        if (referenceActionItemManager != null) referenceActionItemManager.resettaView();
+        searchActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        referenceActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        libraryActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        starActionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (!isTablet) {
+            menu.findItem(R.id.menu_item_search).setVisible(false);
+            menu.findItem(R.id.menu_item_reference).setVisible(false);
+            menu.findItem(R.id.menu_item_library).setVisible(false);
+            menu.findItem(R.id.menu_item_star).setVisible(false);
+            menu.findItem(R.id.menu_item_forward).setVisible(false);
+        }
+        return true;
     }
 
     @Override
@@ -376,34 +595,26 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     }
 
     private void updateStar() {
-        LaParolaUrl currentUrl = activeFragment.getUrlCorrente();
-
         starActionItem.setEnabled(true);
         starActionItem.setIcon(R.drawable.ic_action_unstarred);
+        starBottomItem.setIcon(R.drawable.ic_action_unstarred);
 
+        LaParolaUrl currentUrl = activeFragment.getUrlCorrente();
         if (currentUrl == null) {
             return;
         }
 
-        /*
-        if (currentUrl.schema.equals("lppreferiti") ||
-                currentUrl.schema.equals("lpcronologia") ||
-                currentUrl.schema.equals("lpevidenziati")) {
-            starActionItem.setEnabled(false);
-        }
-        */
-
         Segnalibro s = LaParolaBrowser.cercaUrlTraPreferiti(currentUrl);
         if (s != null) {
             starActionItem.setIcon(R.drawable.ic_action_starred);
+            starBottomItem.setIcon(R.drawable.ic_action_starred);
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (initUtility != null) {
-            if (initUtility.isWorking())
-                return true;
+            if (initUtility.isWorking()) return true;
         }
 
         // Pass the event to ActionBarDrawerToggle, if it returns
@@ -418,28 +629,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         int itemId = item.getItemId();
 
         if (itemId == R.id.menu_item_forward) {
-            if (activeFragment != null) {
-                activeFragment.vaiASuccessivo();
-            }
-            return true;
-        /*
-        } else if (itemId == R.id.menu_item_bookmarks) {
-            activeFragment.vaiAdUrl("lppreferiti:");
-            return true;
-        } else if (itemId == R.id.menu_item_history) {
-            activeFragment.vaiAdUrl("lpcronologia:");
-            return true;
-        */
-        /*
-        } else if (itemId == R.id.menu_item_settings) {
-            startActivity(new Intent(this, LaParolaPreferencesActivity.class));
-            return true;
-        } else if (itemId == R.id.menu_item_help) {
-            activeFragment.vaiAdUrl("lpfile:Guida.html");
-            return true;
-        */
-        } else if (itemId == R.id.menu_item_copy) {
-            copy(R.string.select_text_copy);
+            eseguiForward();
             return true;
         } else if (itemId == R.id.menu_item_highlighter) {
             if (!startHighlighter()) {
@@ -458,7 +648,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
                 activeFragment.setTextZoom(activeFragment.getTextZoom() + 10);
             }
             return true;
-        } else if (itemId == R.id.menu_item_night_mode) {
+        } else if (itemId == R.id.menu_item_night_mode || itemId == R.id.menu_item_night_mode_bottom) {
             setNightMode(!LaParolaPreferences.nightMode);
             return true;
         } else if (itemId == R.id.menu_item_zoom_out) {
@@ -466,36 +656,32 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
                 activeFragment.setTextZoom(activeFragment.getTextZoom() - 10);
             }
             return true;
-        } else if (itemId == R.id.menu_item_share) {
-            share();
-            return true;
         } else if (itemId == R.id.menu_item_panels) {
             showPanelsManagment();
             return true;
         } else if (itemId == R.id.menu_item_library_management) {
             startActivity(new Intent(this, LibraryActivity.class));
             return true;
-		/*
-		} else if (itemId == android.R.id.home) {
-			activeFragment.vaiAHome();
-			return true;
-		*/
         } else {
             // workaround per bug di actionbarsherlock
-
-            if (itemId == R.id.menu_item_seach) {
+// todo probabilmente da cancellare
+            if (itemId == R.id.menu_item_search) {
+                collapseActionViewsExcept(searchActionItem);
                 searchActionItemManager.expandActionView();
                 return true;
             } else if (itemId == R.id.menu_item_library) {
+                collapseActionViewsExcept(libraryActionItem);
                 libraryActionItemManager.expandActionView();
                 return true;
             } else if (itemId == R.id.menu_item_reference) {
-                EnumSet<Testi.TestoTipi> tipoTesto= getActiveFragment().getInformazioniVersione().getTipo();
-                // rmw1024 referenceActionItemManager.setDizionario(tipoTesto.contains(Testi.TestoTipi.DIZIONARIO));
+                if (getActiveFragment() != null) {
+                    EnumSet<Testi.TestoTipi> tipoTesto = getActiveFragment().getInformazioniVersione().getTipo();
+                    // rmw1024 referenceActionItemManager.setDizionario(tipoTesto.contains(Testi.TestoTipi.DIZIONARIO));
+                }
 
-                if (LaParolaPreferences.accessibilityMode)
-                    showAccessibilityDialog();
+                if (LaParolaPreferences.accessibilityMode) showAccessibilityDialog();
 
+                collapseActionViewsExcept(referenceActionItem);
                 referenceActionItemManager.expandActionView();
                 return true;
             } else if (itemId == R.id.menu_item_tts) {
@@ -507,81 +693,105 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         return super.onOptionsItemSelected(item);
     }
 
+    private void eseguiForward() {
+        if (activeFragment != null) {
+            activeFragment.vaiASuccessivo();
+        }
+    }
+
+    private void setEnabledForward(boolean value) {
+        forwardActionItem.setEnabled(value);
+        if (forwardBottomItem != null) {
+            forwardBottomItem.setEnabled(value);
+            if (forwardBottomItem.isEnabled()) {
+                forwardBottomItem.setIcon(R.drawable.ic_action_forward_enabled);
+            } else {
+                forwardBottomItem.setIcon(R.drawable.ic_action_forward_disabled);
+            }
+        }
+    }
+
     public boolean startHighlighter() {
         LaParolaHighlighterActionModeCallback acc = new LaParolaHighlighterActionModeCallback(this);
         if (acc.setup()) {
-            actionMode = startActionMode(acc);
-            actionMode.setTitle(R.string.highlighter_title);
+            actionMode = startSupportActionMode(acc);
+            if (actionMode != null)
+                actionMode.setTitle(R.string.highlighter_title);
             return true;
         }
         return false;
     }
 
-    private void copy(int id) {
-        Toast.makeText(this, id, Toast.LENGTH_LONG).show();
-        activeFragment.selectAndCopyText();
-    }
+    private void showStarredBottomSheet() {
+        LaParolaFragment fragment = getActiveFragment();
+        if (fragment == null) return;
 
-    @SuppressWarnings("deprecation")
-    private void share() {
-        final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        final LaParolaUrl url = fragment.getUrlCorrente();
+        final BottomSheetDialog starDialog = new BottomSheetDialog(this);
+        View sheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_starred, null, false);
 
-        final String t = "--";
-        clipboard.setText(t);
+        EditText descriptionInput = sheetView.findViewById(R.id.starred_description);
+        Button saveBtn = sheetView.findViewById(R.id.starred_save_btn);
+        Button removeBtn = sheetView.findViewById(R.id.starred_remove_btn);
 
-        copy(R.string.select_text_share);
+        final net.laparola.ui.LaParolaSegnalibri.Segnalibro s = net.laparola.ui.LaParolaBrowser.cercaUrlTraPreferiti(url);
 
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                CharSequence text = t;
-                while (text.equals(t)) {
-                    text = clipboard.getText();
-                    try {
-                        Thread.sleep(1000);
-                        if (isPaused) {
-                            return;
-                        }
-                    } catch (InterruptedException e) {
-                        //
-                    }
+        if (s != null) {
+            descriptionInput.setText(s.nome);
+            removeBtn.setVisibility(View.VISIBLE);
+        } else {
+            if (url != null && url.getDescrizione() != null)
+                descriptionInput.setText(url.getDescrizione());
+            else
+                descriptionInput.setText("");
+        }
+
+        saveBtn.setOnClickListener(v -> {
+            if (url!=null) {
+                String desc = descriptionInput.getText().toString();
+                if (s == null) {
+                    LaParolaBrowser.aggiungiPreferito("Preferiti", desc, url);
+                } else {
+                    s.setAncoraggio(url.ancoraggio);
+                    s.nome = desc;
                 }
-
-                if (text != null) {
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_SUBJECT, R.string.share_subject);
-                    intent.putExtra(Intent.EXTRA_TEXT, text);
-                    startActivity(Intent.createChooser(intent, getString(R.string.share_with)));
-                }
+                LaParolaBrowser.salvaPreferitiSuFile();
             }
-        };
+            starDialog.dismiss();
+        });
 
-        new Thread(r).start();
+        removeBtn.setOnClickListener(v -> {
+            if (s != null) {
+                LaParolaBrowser.rimuoviPreferito(url);
+                LaParolaBrowser.salvaPreferitiSuFile();
+            }
+            starDialog.dismiss();
+        });
+
+        starDialog.setContentView(sheetView);
+        starDialog.show();
+        starDialog.setOnDismissListener(dialog -> updateStar());
     }
 
     private void showStarDialog() {
-        if (isFinishing())
-            return;
+        if (isFinishing()) return;
 
-        if (activeFragment == null)
-            return;
+        if (activeFragment == null) return;
         LaParolaUrl urlCorrente = activeFragment.getUrlCorrente();
-        if (urlCorrente == null)
-            return;
+        if (urlCorrente == null) return;
 
         Segnalibro s = LaParolaBrowser.cercaUrlTraPreferiti(urlCorrente);
 
         StarredDialog bookmark = new StarredDialog(this);
         bookmark.show();
-        bookmark.setDescription(s == null ? urlCorrente.getDescrizione() : s.nome);
+        if (s == null) {
+            bookmark.setDescription(urlCorrente.getDescrizione());
+            bookmark.setSegnalibroNonEsiste();
+        } else {
+            bookmark.setDescription(s.nome);
+        }
         bookmark.url = urlCorrente;
-        bookmark.setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                updateStar();
-            }
-        });
+        bookmark.setOnDismissListener(dialog -> updateStar());
     }
 
     private void setNightMode(boolean b) {
@@ -634,12 +844,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
     private void applyPreferences() {
         if (!hasFinishedLoading()) {
-            fourPanesLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    applyPreferences();
-                }
-            }, 100);
+            fourPanesLayout.postDelayed(this::applyPreferences, 100);
             return;
         }
 
@@ -666,9 +871,11 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         LaParolaBrowser.setRiferimentoInApice(LaParolaPreferences.referenceSuperscript);
 
         setNightMode(LaParolaPreferences.nightMode);
-        mDrawerLayout.setKeepScreenOn(LaParolaPreferences.keepScreenOn);
-        zoomInActionItem.setVisible(LaParolaPreferences.menuZoom);
-        zoomOutActionItem.setVisible(LaParolaPreferences.menuZoom);
+        mLeftDrawerLayout.setKeepScreenOn(LaParolaPreferences.keepScreenOn);
+        if (isTablet) {
+            zoomInActionItem.setVisible(LaParolaPreferences.menuZoom);
+            zoomOutActionItem.setVisible(LaParolaPreferences.menuZoom);
+        }
 
         for (LaParolaFragment f : fragments) {
             f.aggiornaPreferenze();
@@ -724,12 +931,9 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     @Override
     public void mostraPulisciCronologia() {
         MessageDialog m = new MessageDialog(this, R.string.history, R.string.clear_history);
-        m.setYesNo(R.string.clear, android.R.string.cancel, new Runnable() {
-            @Override
-            public void run() {
-                LaParolaBrowser.pulisciCronologia();
-                activeFragment.aggiornaPagina();   // la pagina della cronologia
-            }
+        m.setYesNo(R.string.clear, android.R.string.cancel, () -> {
+            LaParolaBrowser.pulisciCronologia();
+            activeFragment.aggiornaPagina();   // la pagina della cronologia
         }, null);
         m.show();
     }
@@ -751,9 +955,6 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
         if (!show) {
             setActivityTitle();
-            if (!firstLoading)
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-            firstLoading = false;
         }
     }
 
@@ -761,7 +962,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         referenceActionItemManager.updateBooks();
 
         mGoingBack = false;
-        forwardActionItem.setEnabled(activeFragment.successivoEsiste());
+        setEnabledForward(activeFragment.successivoEsiste());
 
         LaParolaUrl currentUrl = activeFragment.getUrlCorrente();
 
@@ -776,12 +977,6 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
                 int v = lcv[2];
 
                 referenceActionItemManager.select(b, c, v);
-				/*
-				if (firstReferenceClicked) {
-					referenceActionItemManager.expand();
-					firstReferenceClicked = false;
-				}
-				*/
             } else {
                 referenceActionItemManager.select(0, 0, 0);
             }
@@ -799,66 +994,67 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
         updateStar();
 
-        if (currentUrl != null && currentUrl.gestito) {
+        if (isTablet && currentUrl != null && currentUrl.gestito) {
             libraryActionItem.setVisible(true);
             referenceActionItem.setVisible(true);
+            searchActionItem.setVisible(true);
             starActionItem.setVisible(true);
             highlighterActionItem.setVisible(true);
             if (currentUrl.schema.equals("lpsegnalibri")) {
                 referenceActionItem.setVisible(false);
+                libraryActionItem.setVisible(false);
+                searchActionItem.setVisible(false);
                 starActionItem.setVisible(false);
                 highlighterActionItem.setVisible(false);
             }
             if (currentUrl.schema.equals("lpsegnalibro")) {
                 referenceActionItem.setVisible(false);
+                libraryActionItem.setVisible(false);
+                searchActionItem.setVisible(false);
                 starActionItem.setVisible(false);
                 highlighterActionItem.setVisible(false);
             }
             if (currentUrl.schema.equals("lppreferiti")) {
                 referenceActionItem.setVisible(false);
+                libraryActionItem.setVisible(false);
+                searchActionItem.setVisible(false);
                 starActionItem.setVisible(false);
                 highlighterActionItem.setVisible(false);
             }
             if (currentUrl.schema.equals("lpevidenziati")) {
                 referenceActionItem.setVisible(false);
+                libraryActionItem.setVisible(false);
+                searchActionItem.setVisible(false);
                 starActionItem.setVisible(false);
             }
             if (currentUrl.schema.equals("lpcronologia")) {
                 libraryActionItem.setVisible(false);
+                searchActionItem.setVisible(false);
                 referenceActionItem.setVisible(false);
                 starActionItem.setVisible(false);
                 highlighterActionItem.setVisible(false);
             }
             if (currentUrl.schema.equals("lpfile")) {
                 libraryActionItem.setVisible(false);
+                searchActionItem.setVisible(false);
                 referenceActionItem.setVisible(false);
                 starActionItem.setVisible(false);
                 highlighterActionItem.setVisible(false);
             }
         }
-	
-		/*
-		if (initUtility.isWorking() || activeFragment.inHome()) {
-			getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		} else {
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-		*/
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        if (mDrawerToggle != null)
-            mDrawerToggle.syncState();
+        if (mDrawerToggle != null) mDrawerToggle.syncState();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (mDrawerToggle != null)
-            mDrawerToggle.onConfigurationChanged(newConfig);
+        if (mDrawerToggle != null) mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     public void onVersionChanged() {
@@ -869,51 +1065,38 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     }
 
     private void onFinishedLoadingActivity() {
-        boolean ok = checkPermissions();
-        if (!ok) {
-            return;   // verrà richiamato da checkPermissions
-        }
+        //checkAllPermissions();
 
-        if (hasFinishedLoading())
-            return;
+        if (hasFinishedLoading()) return;
 
         if (initUtility == null) {
             initUtility = new LaParolaActivityInitUtility(this);
-            fourPanesLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    // non so esattamente quando possa accadere, ma dai log accade
-                    // immagino quando si chiude l'applicazione prima che sia terminato il
-                    // caricamento
-                    if (initUtility == null) {
-                        initUtility = new LaParolaActivityInitUtility(LaParolaActivity.this);
-                    }
-                    initUtility.init();
+            fourPanesLayout.post(() -> {
+                // non so esattamente quando possa accadere, ma dai log accade
+                // immagino quando si chiude l'applicazione prima che sia terminato il
+                // caricamento
+                if (initUtility == null) {
+                    initUtility = new LaParolaActivityInitUtility(LaParolaActivity.this);
                 }
+                initUtility.init();
             });
         }
 
         if (initUtility.isWorking()) {
-            fourPanesLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    onFinishedLoadingActivity();
-                }
-            }, 100);
+            fourPanesLayout.postDelayed(this::onFinishedLoadingActivity, 100);
             return;
         }
 
         if (LaParolaPreferences.homeAtStart) {
             // TODO : se è la prima volta, mostrare help
-            mDrawerLayout.openDrawer(GravityCompat.START);
+            mLeftDrawerLayout.openDrawer(GravityCompat.START);
         }
 
         setFinishedLoading(true);
     }
 
     public void setActiveFragment(LaParolaFragment value) {
-        if (activeFragment == value || value == null || !fragments.contains(value))
-            return;
+        if (activeFragment == value || value == null || !fragments.contains(value)) return;
 
         activeFragment = value;
         fourPanesLayout.setSelectedPane(fragments.indexOf(value));
@@ -924,10 +1107,12 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
             updateActionBar();
 
             LaParolaUrl url = activeFragment.getUrlCorrente();
-            if (!getUltimaBibbiaSalvata().equals(url.versione)) {
-                VersioneInformazioni informazioniTesto = LaParolaBrowser.getInformazioniTesto(url.versione);
-                if (informazioniTesto != null && informazioniTesto.getTipo().contains(TestoTipi.BIBBIA)) {
-                    setUltimaBibbiaSalvata(url.versione);
+            if (url != null) {
+                if (!getUltimaBibbiaSalvata().equals(url.versione)) {
+                    VersioneInformazioni informazioniTesto = LaParolaBrowser.getInformazioniTesto(url.versione);
+                    if (informazioniTesto != null && informazioniTesto.getTipo().contains(TestoTipi.BIBBIA)) {
+                        setUltimaBibbiaSalvata(url.versione);
+                    }
                 }
             }
         }
@@ -965,14 +1150,9 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
                     goToUrl = LaParolaPreferences.lastUrl[position];
                 }
             } else {
-                // String defUrl = getActiveFragment().inHome() ? null : getActiveFragment().getUrlCorrente().getUrl();
-                //String defUrl = null; //getActiveFragment().getUrlCorrente().getUrl();
                 goToUrl = LaParolaPreferences.lastUrl[position];
-                //if (goToUrl == null)
-                //	goToUrl = defUrl;
             }
         } else {
-            // lastUrl = getActiveFragment().inHome() ? null : getActiveFragment().getUrlCorrente().getUrl();
             goToUrl = getActiveFragment().getUrlCorrente().getUrl();
             zoom = getActiveFragment().getTextZoom();
         }
@@ -980,24 +1160,21 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         final String ultimaBibbia = LaParolaBrowser.getUltimaBibbia();
 
         fragment.onCreateGoToUrl = goToUrl;
-        fragment.onCreateViewRunnable = new MyRunnable() {
-            @Override
-            public void run(LaParolaFragment self) {
-                self.setTextZoom(zoom, false);
-                self.setVersione(version);
-                if (self.onCreateGoToUrl != null) {
-                    self.vaiAdUrl(self.onCreateGoToUrl);
-                } else if (position == 0) {
-                    self.setVersione(ultimaBibbia);
-                    self.vaiAHome();
-                }
-				
-				/*
-				if (myRunnable != null)
-					myRunnable.run(self);
-				}
-				*/
+        fragment.onCreateViewRunnable = self -> {
+            self.setTextZoom(zoom, false);
+            self.setVersione(version);
+            if (self.onCreateGoToUrl != null) {
+                self.vaiAdUrl(self.onCreateGoToUrl);
+            } else if (position == 0) {
+                self.setVersione(ultimaBibbia);
+                self.vaiAHome();
             }
+
+            /*
+            if (myRunnable != null)
+                myRunnable.run(self);
+            }
+            */
         };
 
         fragments.add(fragment);
@@ -1006,7 +1183,8 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         transaction.commit();
     }
 
-    public void onZoomChanged(LaParolaFragment fragment, int zoom) {
+    //    public void onZoomChanged(LaParolaFragment fragment, int zoom) {
+    public void onZoomChanged(int zoom) {
         for (LaParolaFragment f : fragments) {
             if (f.isCreated()) {
                 f.setTextZoom(zoom, false);
@@ -1031,9 +1209,8 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
         fourPanesLayout.setPanes(numberPanes, orientation);
 
-        if (synccolors != null)
-            for (int i = 0; i < fragments.size(); i++)
-                fragments.get(i).setSyncColor(synccolors[i]);
+        if (synccolors != null) for (int i = 0; i < fragments.size(); i++)
+            fragments.get(i).setSyncColor(synccolors[i]);
         //setActiveFragment(fragment);
     }
 
@@ -1042,7 +1219,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
 
         if (value) {
             setSupportProgressBarIndeterminateVisibility(false);
-            findViewById(R.id.loading).setVisibility(View.GONE);
+            findViewById(R.id.loading).setVisibility(GONE);
         }
     }
 
@@ -1120,8 +1297,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     }
 
     public void switchPanels() {
-        if (getPanesNumber() == 1)
-            return;
+        if (getPanesNumber() == 1) return;
 
         (Toast.makeText(this, R.string.select_panel, Toast.LENGTH_LONG)).show();
         mSwitchingPanels = getActiveFragment();
@@ -1134,9 +1310,6 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     public void selectPanelForOpening(LaParolaUrl url) {
         if (getPanesNumber() == 1) {
             LaParolaFragment f = getActiveFragment();
-            //String versione = f.getUrlCorrente().versione;
-            //f.vaiAdUrl(url.getUrlConAltraVersione(versione));
-
             f.vaiAdUrl(url);
         } else {
             (Toast.makeText(this, R.string.select_panel, Toast.LENGTH_LONG)).show();
@@ -1148,8 +1321,6 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
         setActiveFragment(mFragment);
 
         if (mSelectingPanelForOpeningUrl != null) {
-            //String versione = mFragment.getUrlCorrente().versione;
-            //mFragment.vaiAdUrl(mSelectingPanelForOpening.getUrlConAltraVersione(versione));
             mFragment.vaiAdUrl(mSelectingPanelForOpeningUrl);
 
             for (int i = 0; i < fragments.size(); i++) {
@@ -1201,8 +1372,7 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     }
 
     public void showPanelsManagment() {
-        if (isFinishing())
-            return;
+        if (isFinishing()) return;
 
         PanelsDialog diag = new PanelsDialog(this);
         diag.show();
@@ -1211,15 +1381,12 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     @Override
     public void mostraEliminaPreferito(final LaParolaUrl nuovoUrl) {
         MessageDialog m = new MessageDialog(this, 0, R.string.delete_starred);
-        m.setYesNo(R.string.delete, android.R.string.cancel, new Runnable() {
-            @Override
-            public void run() {
-                LaParolaBrowser.rimuoviPreferito(nuovoUrl);
-                LaParolaBrowser.salvaPreferitiSuFile();
-                LaParolaFragment fragment = getActiveFragment();
-                if (fragment != null) {
-                    fragment.aggiornaPagina();
-                }
+        m.setYesNo(R.string.delete, android.R.string.cancel, () -> {
+            LaParolaBrowser.rimuoviPreferito(nuovoUrl);
+            LaParolaBrowser.salvaPreferitiSuFile();
+            LaParolaFragment fragment = getActiveFragment();
+            if (fragment != null) {
+                fragment.aggiornaPagina();
             }
         }, null);
         m.show();
@@ -1256,135 +1423,82 @@ public class LaParolaActivity extends FragmentActivity implements LaParolaBrowse
     }
 
     private void setActivityTitle() {
-        setTitle(R.string.app_name);
-        if (!mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (!mLeftDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             LaParolaFragment af = getActiveFragment();
             if (af != null) {
                 LaParolaUrl url = af.getUrlCorrente();
                 if (url != null && !af.inHome()) {
                     setTitle(url.getDescrizione());
+                    return;
                 }
             }
         }
+        setTitle(R.string.app_name);
     }
 
     public int getPanelsOrientation() {
         return fourPanesLayout.getOrientation() == FourPanesLayout.HORIZONTAL ? FourPanesLayout.VERTICAL : FourPanesLayout.HORIZONTAL;
     }
 
-    private void showAccessibilityDialog() {
-        if (isFinishing())
-            return;
+    public void showAccessibilityDialog() {
+        if (isFinishing()) return;
 
-        AccessibilityDialog d = new AccessibilityDialog(this);
-        d.show();
+        AccessibilityDialog dialog = new AccessibilityDialog();
+        dialog.show(getSupportFragmentManager(), "accessibility_dialog");
     }
 
     public void showSearch() {
         searchActionItemManager.expandActionView();
     }
 
-    public void toggleDrawerGroupExpansion(int id) {
-        if (mDrawerList.isGroupExpanded(id)) {
-            mDrawerList.collapseGroup(id);
-        } else {
-            mDrawerList.expandGroup(id);
-        }
-    }
+    public void showPanelBottomSheet() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
 
-    @Override
-    public boolean onChildClick(ExpandableListView expandableListView, View view, int g, int i, long l) {
-        int id = (int)mDrawerAdapter.getChildId(g, i);
-        String link = mDrawerAdapter.getLink(id);
-        LaParolaFragment activeFragment = getActiveFragment();
-        if (activeFragment != null) {
-            activeFragment.vaiAdUrl(link);
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        }
+        LayoutInflater inflater = LayoutInflater.from(bottomSheetDialog.getContext());
+        View sheetView = inflater.inflate(R.layout.bottom_sheet_panel_menu, null, false);
+        bottomSheetDialog.setContentView(sheetView);
 
-        /*
-        if (link.startsWith("laparola:")) {
-            referenceActionItemManager.expandActionView();
-        }
-        */
+        // Hide unused options based on panel count
+        int paneCount = getPanesNumber();
 
-        return true;
-    }
+        TextView closePanel = sheetView.findViewById(R.id.menu_close_panel);
+        TextView duplicatePanel = sheetView.findViewById(R.id.menu_duplicate_panel);
+        TextView switchPanel = sheetView.findViewById(R.id.menu_switch_panel);
+        TextView managePanels = sheetView.findViewById(R.id.menu_manage_panels);
 
-    @Override
-    public boolean onGroupClick(ExpandableListView expandableListView, View view, int g, long l) {
-        return onChildClick(expandableListView, view, g, -1, l);
-    }
+        if (paneCount <= 1) closePanel.setVisibility(GONE);
+        if (paneCount >= LaParolaActivity.MAX_PANELS) duplicatePanel.setVisibility(GONE);
+        if (paneCount <= 1) switchPanel.setVisibility(GONE);
 
-    public void showPanelContextMenu() {
-        if (mPanelContextMenuView == null) {
-            mPanelContextMenuView = new View(this) {
-                @Override
-                protected void onCreateContextMenu(ContextMenu menu) {
-                    super.onCreateContextMenu(menu);
-                    createBibleViewContextMenu(menu);
-                }
-            };
+        closePanel.setOnClickListener(v -> {
+            closeActivePanel();
+            bottomSheetDialog.dismiss();
+        });
 
-            fourPanesLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    mPanelContextMenuView.setVisibility(View.GONE);
-                    ((FrameLayout)findViewById(R.id.main_activity_container)).addView(mPanelContextMenuView);
-                    registerForContextMenu(mPanelContextMenuView);
-                }
-            });
-        }
+        duplicatePanel.setOnClickListener(v -> {
+            openInNewPanel(getActiveFragment().getUrlCorrente());
+            bottomSheetDialog.dismiss();
+        });
 
-        fourPanesLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mPanelContextMenuView.showContextMenu();
+        switchPanel.setOnClickListener(v -> {
+            switchPanels();
+            bottomSheetDialog.dismiss();
+        });
+
+        managePanels.setOnClickListener(v -> {
+            showPanelsManagment();
+            bottomSheetDialog.dismiss();
+        });
+
+// Force expand
+        sheetView.post(() -> {
+            View bottomSheetInternal = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheetInternal != null) {
+                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheetInternal);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
-    }
 
-    public void createBibleViewContextMenu(ContextMenu menu) {
-        final int ID_CHIUDI = 10;
-        final int ID_APRI_NUOVO_PANNELLO = 11;
-        final int ID_APRI_PANNELLO_ESISTENTE = 12;
-        final int ID_GESTIONE_PANNELLI = 13;
-        //final int ID_SELEZIONE = 14;
-
-        final android.view.MenuItem.OnMenuItemClickListener handler = new android.view.MenuItem.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(android.view.MenuItem item) {
-                if (item.getItemId() == ID_CHIUDI) {
-                    closeActivePanel();
-                } else if (item.getItemId() == ID_APRI_NUOVO_PANNELLO) {
-                    openInNewPanel(getActiveFragment().getUrlCorrente());
-                } else if (item.getItemId() == ID_APRI_PANNELLO_ESISTENTE) {
-                    switchPanels();
-                } else if (item.getItemId() == ID_GESTIONE_PANNELLI) {
-                    showPanelsManagment();
-                } /*else if (item.getItemId() == ID_SELEZIONE) {
-                        copy(R.string.select_text_copy);
-                    }*/
-                return true;
-            }
-        };
-
-        if (getPanesNumber() > 1) {
-            menu.add(0, ID_CHIUDI, 0, R.string.close_panel).setOnMenuItemClickListener(handler);
-        }
-        if (getPanesNumber() < LaParolaActivity.MAX_PANELS) {
-            menu.add(0, ID_APRI_NUOVO_PANNELLO, 0, R.string.duplicate_panel).setOnMenuItemClickListener(handler);
-        }
-        if (getPanesNumber() > 1) {
-            menu.add(0, ID_APRI_PANNELLO_ESISTENTE, 0, R.string.switch_panel).setOnMenuItemClickListener(handler);
-        }
-        menu.add(0, ID_GESTIONE_PANNELLI, 0, R.string.fragments_management).setOnMenuItemClickListener(handler);
-
-        /* Prima di Honeycomb bisogna usare "copia" e "condividi" dal menù, se si usa il
-         * context menu è come se la webview non ricevesse il "action_up"
-         *
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            menu.add(0, ID_SELEZIONE, 0, R.string.select_text).setOnMenuItemClickListener(handler);
-        }
-        */
+        bottomSheetDialog.show();
     }
 }

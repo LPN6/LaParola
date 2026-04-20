@@ -6,18 +6,18 @@
         android:actionLayout="@layout/reference_action_view"
         android:icon="@drawable/ic_action_reference"
         android:title="@string/reference"
-        app:showAsAction="always|collapseActionView" />
+        app:showAsAction="ifRoom|collapseActionView" />
     <item
-        android:id="@+id/menu_item_seach"
+        android:id="@+id/menu_item_search"
         android:actionLayout="@layout/search_action_view"
         android:icon="@drawable/ic_action_search"
-        app:showAsAction="always|collapseActionView"
+        app:showAsAction="ifRoom|collapseActionView"
         android:title="@string/search"/>
     <item
         android:id="@+id/menu_item_library"
         android:actionLayout="@layout/version_action_view"
         android:icon="@drawable/ic_action_library"
-        app:showAsAction="always|collapseActionView"
+        app:showAsAction="ifRoom|collapseActionView"
         android:title="@string/version"/>
 
     <item
@@ -26,45 +26,17 @@
         app:showAsAction="ifRoom"
         android:title="@string/star"/>
 
-    
-    <!-- similmente al browser, torno indietro col tasto fisico -->
-    <!--
-         item android:id="@+id/menu_item_back"
-        android:icon="@drawable/ic_action_back"
-        android:title="@string/back"
-        android:showAsAction="ifRoom"
-        /
-    -->
-
     <item
         android:id="@+id/menu_item_forward"
         android:enabled="false"
         android:icon="@drawable/ic_action_forward"
         app:showAsAction="ifRoom"
         android:title="@string/forward"/>
-    <item
-        android:id="@+id/menu_item_share"
-        android:title="@string/share"
-        android:visible="false"/>
-    <!--
-        android:icon="@drawable/ic_action_share"
-        android:showAsAction="ifRoom" 
-        /
-    -->
 
     <item
         android:id="@+id/menu_item_highlighter"
         android:title="@string/highlighter"
         android:visible="true"/>
-    <item
-        android:id="@+id/menu_item_copy"
-        android:title="@string/copy"
-        android:visible="false"/>
-    <!--
-        android:icon="@drawable/ic_action_copy"
-        android:showAsAction="ifRoom"
-
-    -->
 
     <!--
     <item

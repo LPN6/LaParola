@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="holo_blue_light">#ff33b5e5</color>
-    <color name="bright_foreground_disabled_holo_light">#ffb2b2b2</color>
-    <color name="background_holo_light">?android:attr/windowBackground</color>
     <color name="transparent">#00000000</color>
-   
+
+    <!-- Material Components required colors -->
+    <color name="colorPrimary">#D3D3D3</color>       <!-- light gray -->
+    <color name="colorOnPrimary">#000000</color>       <!-- text/icon color on primary -->
+    <color name="colorSecondary">#03DAC6</color>       <!-- accent color -->
+    <color name="colorOnSecondary">#000000</color>     <!-- text/icon color on secondary -->
+    <color name="colorSurface">#FFFFFF</color>         <!-- background for surfaces like cards -->
+    <color name="colorOnSurface">#000000</color>       <!-- text/icons on surface -->
+    <color name="colorSurfaceVariant">#E0E0E0</color>
+    <color name="colorOnSurfaceVariant">#212121</color>
+    <color name="colorNonActive">#888888</color>
+    <color name="colorBackground">#FFFFFF</color>      <!-- app background -->
+    <color name="colorOnBackground">#000000</color>    <!-- text/icons on background -->
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="btn_background_color">#E0E0E0</color> <!-- light gray -->
 </resources>

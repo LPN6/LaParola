@@ -18,41 +18,37 @@ package net.laparola.ui.android.bibleview;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
-import android.util.FloatMath;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
+import androidx.annotation.NonNull;
+
 /**
  * Detects scaling transformation gestures using the supplied {@link MotionEvent}s.
  * The {@link OnScaleGestureListener} callback will notify users when a particular
  * gesture event has occurred.
- *
  * This class should only be used with {@link MotionEvent}s reported via touch.
- *
  * To use this class:
  * <ul>
  *  <li>Create an instance of the {@code ScaleGestureDetector} for your
- *      {@link View}
- *  <li>In the {@link View#onTouchEvent(MotionEvent)} method ensure you call
+ *  <li>In the { View#onTouchEvent(MotionEvent)} method ensure you call
  *          {@link #onTouchEvent(MotionEvent)}. The methods defined in your
  *          callback will be executed when the events occur.
  * </ul>
  */
 public class ScaleGestureDetector {
-    private static final String TAG = "ScaleGestureDetector";
+    //private static final String TAG = "ScaleGestureDetector";
 
     /**
      * The listener for receiving notifications when gestures occur.
      * If you want to listen for all the different gestures then implement
      * this interface. If you only want to listen for a subset it might
      * be easier to extend {@link SimpleOnScaleGestureListener}.
-     *
      * An application will receive events in the following order:
      * <ul>
      *  <li>One {@link OnScaleGestureListener#onScaleBegin(ScaleGestureDetector)}
@@ -67,7 +63,7 @@ public class ScaleGestureDetector {
          *
          * @param detector The detector reporting the event - use this to
          *          retrieve extended info about event state.
-         * @return Whether or not the detector should consider this event
+         * @return Whether the detector should consider this event
          *          as handled. If an event was not handled, the detector
          *          will continue to accumulate movement until an event is
          *          handled. This can be useful if an application, for example,
@@ -82,9 +78,9 @@ public class ScaleGestureDetector {
          *
          * @param detector The detector reporting the event - use this to
          *          retrieve extended info about event state.
-         * @return Whether or not the detector should continue recognizing
+         * @return Whether the detector should continue recognizing
          *          this gesture. For example, if a gesture is beginning
-         *          with a focal point outside of a region where it makes
+         *          with a focal point outside a region where it makes
          *          sense, onScaleBegin() may return false to ignore the
          *          rest of the gesture.
          */
@@ -93,11 +89,9 @@ public class ScaleGestureDetector {
         /**
          * Responds to the end of a scale gesture. Reported by existing
          * pointers going up.
-         *
-         * Once a scale has ended, {@link ScaleGestureDetector#getFocusX()}
-         * and {@link ScaleGestureDetector#getFocusY()} will return focal point
+         * Once a scale has ended, ScaleGestureDetector#getFocusX()
+         * and ScaleGestureDetector#getFocusY() will return focal point
          * of the pointers remaining on the screen.
-         *
          * @param detector The detector reporting the event - use this to
          *          retrieve extended info about event state.
          */
@@ -132,23 +126,14 @@ public class ScaleGestureDetector {
     private final Context mContext;
     private final OnScaleGestureListener mListener;
 
-    private float mFocusX;
-    private float mFocusY;
-
     private boolean mQuickScaleEnabled;
 
     private float mCurrSpan;
     private float mPrevSpan;
     private float mInitialSpan;
-    private float mCurrSpanX;
-    private float mCurrSpanY;
-    private float mPrevSpanX;
-    private float mPrevSpanY;
-    private long mCurrTime;
-    private long mPrevTime;
     private boolean mInProgress;
-    private int mSpanSlop;
-    private int mMinSpan;
+    private final int mSpanSlop;
+    private final int mMinSpan;
 
     // Bounds for recently seen values
     private float mTouchUpper;
@@ -156,7 +141,7 @@ public class ScaleGestureDetector {
     private float mTouchHistoryLastAccepted;
     private int mTouchHistoryDirection;
     private long mTouchHistoryLastAcceptedTime;
-    private int mTouchMinMajor;
+    private final int mTouchMinMajor;
     private MotionEvent mDoubleTapEvent;
     private int mDoubleTapMode = DOUBLE_TAP_MODE_NONE;
     private final Handler mHandler;
@@ -203,13 +188,10 @@ public class ScaleGestureDetector {
 
         final Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
-        mTouchMinMajor = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, dm);   // 48dp == res.getDimensionPixelSize(com.android.internal.R.dimen.config_minScalingTouchMajor);
-        mMinSpan = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 27, dm);          // 27mm == res.getDimensionPixelSize(com.android.internal.R.dimen.config_minScalingSpan);
+        mTouchMinMajor = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, dm);   // 48dp == res.getDimensionPixelSize(com.android.internal.R.dimen.config_minScalingTouchMajor);
+        mMinSpan = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 27, dm);          // 27mm == res.getDimensionPixelSize(com.android.internal.R.dimen.config_minScalingSpan);
         mHandler = handler;
-        // Quick scale is enabled by default after JB_MR2
-        if (context.getApplicationInfo().targetSdkVersion > Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            setQuickScaleEnabled(true);
-        }
+        setQuickScaleEnabled(true);
     }
 
     /**
@@ -242,12 +224,10 @@ public class ScaleGestureDetector {
 
                 if (hasLastAccepted) {
                     final int directionSig = (int) Math.signum(major - mTouchHistoryLastAccepted);
-                    if (directionSig != mTouchHistoryDirection ||
-                            (directionSig == 0 && mTouchHistoryDirection == 0)) {
+                    if (directionSig != mTouchHistoryDirection) {
                         mTouchHistoryDirection = directionSig;
-                        final long time = h < historySize ? ev.getHistoricalEventTime(h)
+                        mTouchHistoryLastAcceptedTime = h < historySize ? ev.getHistoricalEventTime(h)
                                 : ev.getEventTime();
-                        mTouchHistoryLastAcceptedTime = time;
                         accept = false;
                     }
                 }
@@ -268,15 +248,11 @@ public class ScaleGestureDetector {
     }
 
     private float getMajor(MotionEvent ev, int i, int h, int historySize) {
-        if (Build.VERSION.SDK_INT >= 9) {
             if (h < historySize) {
                 return ev.getHistoricalTouchMajor(i, h);
             } else {
                 return ev.getTouchMajor(i);
             }
-        } else {
-            return 0;
-        }
     }
 
     /**
@@ -304,7 +280,6 @@ public class ScaleGestureDetector {
      *         rest of the MotionEvents in this event stream.
      */
     public boolean onTouchEvent(MotionEvent event) {
-        mCurrTime = event.getEventTime();
 
         final int action = event.getAction() & MotionEvent.ACTION_MASK;
         final int actionIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
@@ -396,8 +371,6 @@ public class ScaleGestureDetector {
         // If the configuration changes, notify the app to reset its current state by beginning
         // a fresh scale event stream.
         final boolean wasInProgress = mInProgress;
-        mFocusX = focusX;
-        mFocusY = focusY;
         if (!inDoubleTapMode() && mInProgress && (span < mMinSpan || configChanged)) {
             mListener.onScaleEnd(this);
             mInProgress = false;
@@ -405,25 +378,18 @@ public class ScaleGestureDetector {
             mDoubleTapMode = DOUBLE_TAP_MODE_NONE;
         }
         if (configChanged) {
-            mPrevSpanX = mCurrSpanX = spanX;
-            mPrevSpanY = mCurrSpanY = spanY;
             mInitialSpan = mPrevSpan = mCurrSpan = span;
         }
 
         final int minSpan = inDoubleTapMode() ? mSpanSlop : mMinSpan;
         if (!mInProgress && span >=  minSpan &&
                 (wasInProgress || Math.abs(span - mInitialSpan) > mSpanSlop)) {
-            mPrevSpanX = mCurrSpanX = spanX;
-            mPrevSpanY = mCurrSpanY = spanY;
             mPrevSpan = mCurrSpan = span;
-            mPrevTime = mCurrTime;
             mInProgress = mListener.onScaleBegin(this);
         }
 
         // Handle motion; focal point and span/scale factor are changing.
         if (action == MotionEvent.ACTION_MOVE) {
-            mCurrSpanX = spanX;
-            mCurrSpanY = spanY;
             mCurrSpan = span;
 
             boolean updatePrev = true;
@@ -433,10 +399,7 @@ public class ScaleGestureDetector {
             }
 
             if (updatePrev) {
-                mPrevSpanX = mCurrSpanX;
-                mPrevSpanY = mCurrSpanY;
                 mPrevSpan = mCurrSpan;
-                mPrevTime = mCurrTime;
             }
         }
 
@@ -460,7 +423,7 @@ public class ScaleGestureDetector {
             GestureDetector.SimpleOnGestureListener gestureListener =
                     new GestureDetector.SimpleOnGestureListener() {
                         @Override
-                        public boolean onDoubleTap(MotionEvent e) {
+                        public boolean onDoubleTap(@NonNull MotionEvent e) {
                             // Double tap: start watching for a swipe
                             mDoubleTapEvent = e;
                             mDoubleTapMode = DOUBLE_TAP_MODE_IN_PROGRESS;
@@ -471,113 +434,90 @@ public class ScaleGestureDetector {
         }
     }
 
-    /**
+    /*
      * Return whether the quick scale gesture, in which the user performs a double tap followed by a
      * swipe, should perform scaling. {@see #setQuickScaleEnabled(boolean)}.
      */
-    public boolean isQuickScaleEnabled() {
-        return mQuickScaleEnabled;
-    }
+//    public boolean isQuickScaleEnabled() {        return mQuickScaleEnabled;    }
 
-    /**
+    /*
      * Returns {@code true} if a scale gesture is in progress.
      */
-    public boolean isInProgress() {
-        return mInProgress;
-    }
+    //public boolean isInProgress() {        return mInProgress;    }
 
-    /**
+    /*
      * Get the X coordinate of the current gesture's focal point.
      * If a gesture is in progress, the focal point is between
      * each of the pointers forming the gesture.
-     *
      * If {@link #isInProgress()} would return false, the result of this
      * function is undefined.
-     *
      * @return X coordinate of the focal point in pixels.
      */
-    public float getFocusX() {
-        return mFocusX;
-    }
+    //public float getFocusX() {        return mFocusX;    }
 
-    /**
+    /*
      * Get the Y coordinate of the current gesture's focal point.
      * If a gesture is in progress, the focal point is between
      * each of the pointers forming the gesture.
-     *
      * If {@link #isInProgress()} would return false, the result of this
      * function is undefined.
      *
      * @return Y coordinate of the focal point in pixels.
      */
-    public float getFocusY() {
-        return mFocusY;
-    }
+    //public float getFocusY() {        return mFocusY;    }
 
-    /**
+    /*
      * Return the average distance between each of the pointers forming the
      * gesture in progress through the focal point.
      *
      * @return Distance between pointers in pixels.
      */
-    public float getCurrentSpan() {
-        return mCurrSpan;
-    }
+    //public float getCurrentSpan() {        return mCurrSpan;    }
 
-    /**
+    /*
      * Return the average X distance between each of the pointers forming the
      * gesture in progress through the focal point.
      *
      * @return Distance between pointers in pixels.
      */
-    public float getCurrentSpanX() {
-        return mCurrSpanX;
-    }
+    //public float getCurrentSpanX() { return mCurrSpanX;}
 
-    /**
+    /*
      * Return the average Y distance between each of the pointers forming the
      * gesture in progress through the focal point.
      *
      * @return Distance between pointers in pixels.
      */
-    public float getCurrentSpanY() {
-        return mCurrSpanY;
-    }
+    //public float getCurrentSpanY() {        return mCurrSpanY;    }
 
-    /**
+    /*
      * Return the previous average distance between each of the pointers forming the
      * gesture in progress through the focal point.
      *
      * @return Previous distance between pointers in pixels.
      */
-    public float getPreviousSpan() {
-        return mPrevSpan;
-    }
+    //public float getPreviousSpan() {        return mPrevSpan;    }
 
-    /**
+    /*
      * Return the previous average X distance between each of the pointers forming the
      * gesture in progress through the focal point.
      *
      * @return Previous distance between pointers in pixels.
      */
-    public float getPreviousSpanX() {
-        return mPrevSpanX;
-    }
+    //public float getPreviousSpanX() {        return mPrevSpanX;    }
 
-    /**
+    /*
      * Return the previous average Y distance between each of the pointers forming the
      * gesture in progress through the focal point.
      *
      * @return Previous distance between pointers in pixels.
      */
-    public float getPreviousSpanY() {
-        return mPrevSpanY;
-    }
+    //public float getPreviousSpanY() {        return mPrevSpanY;    }
 
     /**
      * Return the scaling factor from the previous scale event to the current
      * event. This value is defined as
-     * ({@link #getCurrentSpan()} / {@link #getPreviousSpan()}).
+     * ( #getCurrentSpan() /  #getPreviousSpan()).
      *
      * @return The current scaling factor.
      */
@@ -595,22 +535,18 @@ public class ScaleGestureDetector {
         return mPrevSpan > 0 ? mCurrSpan / mPrevSpan : 1;
     }
 
-    /**
+    /*
      * Return the time difference in milliseconds between the previous
      * accepted scaling event and the current scaling event.
      *
      * @return Time difference since the last scaling event in milliseconds.
      */
-    public long getTimeDelta() {
-        return mCurrTime - mPrevTime;
-    }
+    //public long getTimeDelta() {        return mCurrTime - mPrevTime;    }
 
-    /**
+    /*
      * Return the event time of the current event being processed.
      *
      * @return Current event time in milliseconds.
      */
-    public long getEventTime() {
-        return mCurrTime;
-    }
+    //public long getEventTime() {        return mCurrTime;    }
 }

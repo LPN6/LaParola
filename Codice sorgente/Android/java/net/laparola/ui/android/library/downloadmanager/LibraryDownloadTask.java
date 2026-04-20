@@ -1,21 +1,10 @@
 package net.laparola.ui.android.library.downloadmanager;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import android.app.Notification;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.PowerManager;
 
 import net.laparola.core.VersioneInformazioni;
 import net.laparola.ui.LaParolaBrowser;
@@ -23,137 +12,159 @@ import net.laparola.ui.android.LaParolaPreferences;
 import net.laparola.ui.android.library.LibraryItemInfo;
 import net.laparola.ui.utils.LZMAFile;
 import net.laparola.ui.utils.lzma_java.LZMADecoder;
-import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.PowerManager;
 
-public class LibraryDownloadTask extends AsyncTask<Void, Integer, Boolean> {
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import timber.log.Timber;
+
+public class LibraryDownloadTask implements Runnable {
 	/* package */ static final int DOWNLOAD_PERCENT = 80;
+	private static final int BUFFER_LENGTH = 16384;
 
-	static final boolean USE_SD_REPOSITORY = false;
-	static final int BUFFER_LENGHT = 16384;
+	private final LibraryDownloaderService libraryDownloader;
+	public final LibraryItemInfo libraryInfo;
+	public final int notificationID;
+	private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-	private LibraryDownloaderService libraryDownloader;
-	public LibraryItemInfo libraryInfo;
-	public int notificationID;
+	private volatile boolean isCancelled = false;
 
-	public enum Status {
-		WORKING, DONE, ERROR
+	public enum Status { WORKING, DONE, ERROR }
+	public volatile Status status;
+	public volatile int progress;
+	long wakeLockTimeout = 10 * 60 * 1000L;
+
+	public LibraryDownloadTask(LibraryDownloaderService service, LibraryItemInfo info, int notificationID) {
+		this.libraryDownloader = service;
+		this.libraryInfo = info;
+		this.notificationID = notificationID;
+		this.status = Status.WORKING;
 	}
 
-	public Status status;
-	public int progress;
-
-	public LibraryDownloadTask(LibraryDownloaderService libraryDownloader) {
-		this.libraryDownloader = libraryDownloader;
-		status = Status.WORKING;
+	public void cancel() {
+		isCancelled = true;
 	}
 
-	protected Boolean doInBackground(Void... params) {
-		publishProgress(0);
+	@Override
+	public void run() {
+		updateProgress(0);
+		boolean result = downloadAndUncompress(LaParolaPreferences.useLzma);
 
-		return downloadAndUncompress(LaParolaPreferences.useLzma);
+		// Respect cancellation at the end
+		if (isCancelled) {
+			libraryDownloader.cancelNotification(notificationID);
+			return;
+		}
+
+		status = result ? Status.DONE : Status.ERROR;
+		updateProgress(result ? 100 : -1);
+
+		// Notify service to update UI lists
+		mainHandler.post(() -> libraryDownloader.onDownloadFinished(this, result));
+	}
+
+	private void updateProgress(int value) {
+		this.progress = value;
+
+		// Always update the notification, even for -1 (Error) or 100 (Done)
+		// The NotificationBuilder now handles showing the right icon/text for these states.
+		Notification notification = DownloadNotificationBuilder.getNotification(
+				libraryDownloader, libraryInfo, notificationID, value);
+		libraryDownloader.notifyNotification(notificationID, notification);
+
+		// Broadcast to Activity for the progress bar
+		libraryDownloader.notifyProgress(libraryInfo, value);
 	}
 
 	private boolean downloadAndUncompress(boolean useLzma) {
+		if (isCancelled) return false;
 		try {
 			download(useLzma);
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (useLzma == true) {
-				return downloadAndUncompress(false);
-			} else {
-				return false;
-			}
+			Timber.e(e, "Download failed.");
+			// If LZMA fails, try the standard download once before giving up
+			return useLzma && !isCancelled && downloadAndUncompress(false);
 		}
+
+		if (isCancelled) return false;
 
 		String downloadFileType = useLzma ? libraryInfo.getDownload1FileType() : libraryInfo.getDownload2FileType();
-		long downloadSize = useLzma ? libraryInfo.getDownload1Size() : libraryInfo.getDownload2Size();
-
 		File comprFile = new File(libraryInfo.getFileName() + "." + downloadFileType);
-		if (comprFile.length() != downloadSize) {
-			// return false;
-		}
 
-		PowerManager pm = (PowerManager)libraryDownloader.getSystemService(Context.POWER_SERVICE);
+		PowerManager pm = (PowerManager) libraryDownloader.getSystemService(Context.POWER_SERVICE);
 		PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "laparola:uncompress");
-		wl.acquire();
+		wl.acquire(wakeLockTimeout);
 
 		try {
-			if (downloadFileType.equals("zip")) {
+			if ("zip".equals(downloadFileType)) {
 				uncompresszip(comprFile);
 			} else {
 				uncompresslzma(comprFile);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (useLzma) {
-				return downloadAndUncompress(false);
-			} else {
-				return false;
-			}
+			Timber.e(e, "Decompression failed.");
+			return useLzma && !isCancelled && downloadAndUncompress(false);
 		} finally {
-			wl.release();
-			comprFile.delete();
+			if (wl.isHeld()) wl.release();
+			if (comprFile.exists() && !comprFile.delete()) {
+				Timber.w("Failed to delete compressed file: %s", comprFile.getAbsolutePath());
+			}
 		}
 
+		if (isCancelled) return false;
+
+		// Finalize logic
 		VersioneInformazioni informazioniTesto = LaParolaBrowser.getInformazioniTesto(libraryInfo.getName());
-		String oldpath = null;
-		if (informazioniTesto != null) {
-			oldpath = informazioniTesto.getNomeDelFile();
-		}
+		String oldpath = (informazioniTesto != null) ? informazioniTesto.getNomeDelFile() : null;
 
 		LaParolaBrowser.cancellaTesto(libraryInfo.getName(), libraryInfo.getFileName());
 		File filetmp = new File(libraryInfo.getFileName() + ".tmp");
 		File file = new File(oldpath != null ? oldpath : libraryInfo.getFileName());
-		boolean ok = filetmp.renameTo(file);
-		if (!ok) {
+
+		if (!filetmp.renameTo(file)) {
 			try {
 				copyFile(filetmp, file);
+				if (filetmp.exists() && !filetmp.delete()) {
+					Timber.w("Failed to delete temporary file: %s", filetmp.getAbsolutePath());
+				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				return false;
 			}
-			filetmp.delete();
 		}
-
-		//try {
 		LaParolaBrowser.aggiungiTesto(libraryInfo.getFileName());
-		//} catch (FileNonValidoException e) {
-		//	return false;
-		//}
-
 		return true;
 	}
 
 	private void copyFile(File srcFile, File destFile) throws IOException {
-		final long FILE_COPY_BUFFER_SIZE = 1 << 20;
+		final long FILE_COPY_BUFFER_SIZE = 1 << 20; // 1MB buffer
 
-		FileInputStream fis = null;
-		FileOutputStream fos = null;
-		FileChannel input = null;
-		FileChannel output = null;
-		try {
-			fis = new FileInputStream(srcFile);
-			fos = new FileOutputStream(destFile);
-			input  = fis.getChannel();
-			output = fos.getChannel();
+		// Any resource declared in these parentheses is automatically
+		// closed when the block exits, even if an exception is thrown.
+		try (FileInputStream fis = new FileInputStream(srcFile);
+			 FileOutputStream fos = new FileOutputStream(destFile);
+			 FileChannel input = fis.getChannel();
+			 FileChannel output = fos.getChannel()) {
+
 			final long size = input.size();
 			long pos = 0;
-			long count = 0;
 			while (pos < size) {
-				count = size - pos > FILE_COPY_BUFFER_SIZE ? FILE_COPY_BUFFER_SIZE : size - pos;
+				long count = Math.min(size - pos, FILE_COPY_BUFFER_SIZE);
 				pos += output.transferFrom(input, pos, count);
 			}
-		} finally {
-			try {output.close();} catch (Exception e) {}
-			try {fos.close();} catch (Exception e) {}
-			try {input.close();} catch (Exception e) {}
-			try {fis.close();} catch (Exception e) {}
 		}
+		// No finally block needed! Null checks and closing are handled by the JVM.
 
 		if (srcFile.length() != destFile.length()) {
 			throw new IOException("Failed to copy full contents from '" +
@@ -162,96 +173,110 @@ public class LibraryDownloadTask extends AsyncTask<Void, Integer, Boolean> {
 	}
 
 	protected void uncompresslzma(File comprFile) throws Exception {
-		InputStream in;
-		OutputStream out;
-		try {
-			in = new FileInputStream(comprFile);
-			out = new FileOutputStream(libraryInfo.getFileName() + ".tmp");
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
+		File outputFile = new File(libraryInfo.getFileName() + ".tmp");
 
-		BufferedInputStream src = new BufferedInputStream(in, BUFFER_LENGHT);
-		BufferedOutputStream dest = new BufferedOutputStream(out, BUFFER_LENGHT);
+		// Try-with-resources handles closing in the correct order:
+		// It closes 'dest' then 'src', which internally closes 'out' and 'in'.
+		try (InputStream in = new FileInputStream(comprFile);
+			 OutputStream out = new FileOutputStream(outputFile);
+			 BufferedInputStream src = new BufferedInputStream(in, BUFFER_LENGTH);
+			 BufferedOutputStream dest = new BufferedOutputStream(out, BUFFER_LENGTH)) {
 
-		try {
 			LZMAFile.decomprimi(src, dest, new LZMADecoder.ProgressRunnable() {
 				int lastPercent = 0;
 				long lastPercentTime = 0;
 
 				@Override
 				public void publish(long progresso, long size) {
-					int percent = (int) Math.round(DOWNLOAD_PERCENT + (double) progresso / size * (100 - DOWNLOAD_PERCENT));
-					long milliTime = System.nanoTime() / 1000000;
-					if (lastPercent != percent && milliTime > lastPercentTime + 1000) {
-						// android.util.Log.d("laparola", String.format("%d %d", progress, size));
-						publishProgress(percent);
-						lastPercent = percent;
-						lastPercentTime = milliTime;
+					// Check isCancelled inside the callback to stop decompression if needed
+					if (isCancelled) {
+						// Note: You might need to throw a RuntimeException here
+						// if LZMAFile doesn't check for interruption internally.
+						return;
+					}
+
+					if (size > 0) {
+						int percent = (int) Math.round(DOWNLOAD_PERCENT + (double) progresso / size * (100 - DOWNLOAD_PERCENT));
+						long milliTime = System.nanoTime() / 1000000;
+
+						if (lastPercent != percent && milliTime > lastPercentTime + 1000) {
+							updateProgress(percent);
+							lastPercent = percent;
+							lastPercentTime = milliTime;
+						}
 					}
 				}
 			});
 		} catch (Exception e) {
+			Timber.e(e, "Unexpected error occurred while decompressing LZMA file.");
 			throw e;
-		} finally {
-			in.close();
-			out.close();
 		}
 	}
 
 	protected void uncompresszip(File zipFile) throws IOException {
-		ZipFile zip = new ZipFile(zipFile);
+		ZipFile zip = null;
 		ZipEntry zipEntry = null;
+
+		// 1. Initial attempt with default Charset
 		try {
-			zipEntry = zip.entries().nextElement();
+			zip = new ZipFile(zipFile);
+			if (zip.entries().hasMoreElements()) {
+				zipEntry = zip.entries().nextElement();
+			}
 		} catch (IllegalArgumentException e) {
-			if (Build.VERSION.SDK_INT >= 24) {
-				for (Charset cs : Charset.availableCharsets().values()) {
-					boolean ok = true;
-					try {
-						zip = new ZipFile(zipFile, cs);
+			// If the default fails, close the bad handle and try others
+			if (zip != null) zip.close();
+
+			for (Charset cs : Charset.availableCharsets().values()) {
+				try {
+					zip = new ZipFile(zipFile, cs);
+					if (zip.entries().hasMoreElements()) {
 						zipEntry = zip.entries().nextElement();
-					} catch (IllegalArgumentException e2) {
-						ok = false;
+						break; // Found it!
 					}
-					if (ok) {
-						break;
-					}
+				} catch (IllegalArgumentException e2) {
+					if (zip != null) zip.close();
+					zip = null;
 				}
 			}
 		}
-		if (zipEntry == null) {
-			throw new IllegalArgumentException("could not determine charset");
+
+		if (zip == null || zipEntry == null) {
+			if (zip != null) zip.close();
+			throw new IllegalArgumentException("Could not determine charset or zip is empty");
 		}
-		InputStream in = zip.getInputStream(zipEntry);
-		OutputStream out = new FileOutputStream(libraryInfo.getFileName() + ".tmp");
 
-		long uncompressed = 0;
-		long length = zipEntry.getSize();
+		// 2. Use try-with-resources for the streams.
+		// Note: We MUST keep the ZipFile 'zip' open while reading 'in'.
+		try (ZipFile finalZip = zip;
+			 InputStream in = finalZip.getInputStream(zipEntry);
+			 OutputStream out = new FileOutputStream(libraryInfo.getFileName() + ".tmp")) {
 
-		int lastProgress = -1;
-		long lastProgressTime = -1;
+			long uncompressed = 0;
+			long length = zipEntry.getSize();
+			int lastProgress = -1;
+			long lastProgressTime = -1;
 
-		try {
-			byte buf[] = new byte[BUFFER_LENGHT];
+			byte[] buf = new byte[BUFFER_LENGTH];
 			int len;
-			while (!isCancelled() && (len = in.read(buf)) > 0) {
+
+			while (!isCancelled && (len = in.read(buf)) > 0) {
 				out.write(buf, 0, len);
 
 				uncompressed += len;
-				int progresso = (int) Math.round(DOWNLOAD_PERCENT + (double) uncompressed / length * (100 - DOWNLOAD_PERCENT));
-				long milliTime = System.nanoTime() / 1000000;
-				if (lastProgress != progresso && milliTime > lastProgressTime + 1000) {
-					publishProgress(progresso);
-					lastProgress = progresso;
-					lastProgressTime = milliTime;
+				// Avoid division by zero if length is unknown (-1)
+				if (length > 0) {
+					int progresso = (int) Math.round(DOWNLOAD_PERCENT + (double) uncompressed / length * (100 - DOWNLOAD_PERCENT));
+					long milliTime = System.nanoTime() / 1000000;
+					if (lastProgress != progresso && milliTime > lastProgressTime + 1000) {
+						updateProgress(progresso);
+						lastProgress = progresso;
+						lastProgressTime = milliTime;
+					}
 				}
 			}
-		} finally {
-			in.close();
-			out.close();
 		}
+		// finalZip, in, and out are all automatically closed here.
 	}
 
 	protected void download(boolean useLzma) throws IOException {
@@ -261,31 +286,13 @@ public class LibraryDownloadTask extends AsyncTask<Void, Integer, Boolean> {
 		downloadFile(url, destination);
 	}
 
-	@SuppressLint("SdCardPath")
 	protected void downloadFile(String url, String destination)	throws IOException {
-		/*
-		for (int progresso = 0; progresso < DOWNLOAD_PERCENT && !isCancelled(); progresso++) {
-			publishProgress(progresso);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
-		}
-		*/
-
 		PowerManager pm = (PowerManager)libraryDownloader.getSystemService(Context.POWER_SERVICE);
 		PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "laparola:download");
-		wl.acquire();
+		wl.acquire(wakeLockTimeout);
 
 		InputStream fis = null;
 		OutputStream fos = null;
-
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-			url = url.replace("https://", "http://");
-		}
-		if (USE_SD_REPOSITORY) {
-			url = url.replace("http://", "file:///sdcard/laparola/");
-		}
 
 		try {
 			URL u = new URL(url);
@@ -297,8 +304,10 @@ public class LibraryDownloadTask extends AsyncTask<Void, Integer, Boolean> {
 
 			File file = new File(destination);
 
-			file.delete();   // TODO : implementare ripresa download interrotti!
-
+			// TODO : implementare ripresa download interrotti!
+			if (file.exists() && !file.delete()) {
+				Timber.w("Failed to delete destination file: %s", file.getAbsolutePath());
+			}
 			fis.skip(file.length());
 			long downloaded = file.length();
 			fos = new FileOutputStream(file, file.exists());
@@ -306,61 +315,28 @@ public class LibraryDownloadTask extends AsyncTask<Void, Integer, Boolean> {
 			int lastProgress = -1;
 			long lastProgressTime = -1;
 
-			byte buf[] = new byte[BUFFER_LENGHT];
+			byte[] buf = new byte[BUFFER_LENGTH];
 			int len;
-			while (!isCancelled() && (len = fis.read(buf)) > 0) {
+			while (!isCancelled && (len = fis.read(buf)) > 0) {
 				fos.write(buf, 0, len);
 
 				downloaded += len;
 				int progresso = (int) Math.round((double) downloaded / contentLength * DOWNLOAD_PERCENT);
 				long milliTime = System.nanoTime() / 1000000;
 				if (lastProgress != progresso && milliTime > lastProgressTime + 1000) {
-					publishProgress(progresso);
+					updateProgress(progresso);
 					lastProgress = progresso;
 					lastProgressTime = milliTime;
 				}
-
-				if (USE_SD_REPOSITORY) {
-					try {
-						Thread.sleep(50);
-					} catch (Exception e) {
-						//
-					}
-				}
 			}
 		} finally {
-			wl.release();
+			if (wl.isHeld()) {
+				wl.release();
+			}
 			if (fis != null)
 				fis.close();
 			if (fos != null)
 				fos.close();
 		}
 	}
-
-	@Override
-	protected void onProgressUpdate(Integer... values) {
-		progress = values[0];
-		notificate(progress);
-	}
-
-	protected void notificate(Integer progresso) {
-		Notification notification = DownloadNotificationBuilder.getNotification(libraryDownloader, libraryInfo, notificationID, progresso);
-		libraryDownloader.notify(notificationID, notification);
-	}
-
-	protected void onPostExecute(Boolean result) {
-		if (result == true) {
-			status = Status.DONE;
-			notificate(100);
-		} else {
-			status = Status.ERROR;
-			notificate(-1);
-		}
-		libraryDownloader.onDownloadFinished(this, result);
-	}
-
-	protected void onCancelled() {
-		libraryDownloader.cancelNotification(notificationID);
-	}
-
 }

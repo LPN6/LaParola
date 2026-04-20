@@ -20,7 +20,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
-import android.os.Build;
+import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -32,12 +32,9 @@ import android.widget.SpinnerAdapter;
 /**
  * An abstract base class for spinner widgets. SDK users will probably not
  * need to use this class.
- *
- * @attr ref android.R.styleable#AbsSpinner_entries
+ * attr ref android.R.styleable#AbsSpinner_entries
  */
 public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
-    private static final boolean IS_HONEYCOMB = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-
     SpinnerAdapter mAdapter;
 
     int mHeightMeasureSpec;
@@ -68,22 +65,6 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
     public IgnAbsAbsSpinner(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initAbsSpinner();
-
-        /*
-        TypedArray a = context.obtainStyledAttributes(attrs,
-                com.android.internal.R.styleable.AbsSpinner, defStyle, 0);
-
-        CharSequence[] entries = a.getTextArray(R.styleable.AbsSpinner_entries);
-        if (entries != null) {
-            ArrayAdapter<CharSequence> adapter =
-                    new ArrayAdapter<CharSequence>(context,
-                            R.layout.simple_spinner_item, entries);
-            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-            setAdapter(adapter);
-        }
-
-        a.recycle();
-        */
     }
 
     /**
@@ -176,14 +157,10 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
         final int mPaddingRight = getPaddingRight();
         final int mPaddingBottom = getPaddingBottom();
 
-        mSpinnerPadding.left = mPaddingLeft > mSelectionLeftPadding ? mPaddingLeft
-                : mSelectionLeftPadding;
-        mSpinnerPadding.top = mPaddingTop > mSelectionTopPadding ? mPaddingTop
-                : mSelectionTopPadding;
-        mSpinnerPadding.right = mPaddingRight > mSelectionRightPadding ? mPaddingRight
-                : mSelectionRightPadding;
-        mSpinnerPadding.bottom = mPaddingBottom > mSelectionBottomPadding ? mPaddingBottom
-                : mSelectionBottomPadding;
+        mSpinnerPadding.left = Math.max(mPaddingLeft, mSelectionLeftPadding);
+        mSpinnerPadding.top = Math.max(mPaddingTop, mSelectionTopPadding);
+        mSpinnerPadding.right = Math.max(mPaddingRight, mSelectionRightPadding);
+        mSpinnerPadding.bottom = Math.max(mPaddingBottom, mSelectionBottomPadding);
 
         if (mDataChanged) {
             handleDataChanged();
@@ -233,13 +210,8 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
         preferredHeight = Math.max(preferredHeight, getSuggestedMinimumHeight());
         preferredWidth = Math.max(preferredWidth, getSuggestedMinimumWidth());
 
-        if (IS_HONEYCOMB) {
             heightSize = resolveSizeAndState(preferredHeight, heightMeasureSpec, 0);
             widthSize = resolveSizeAndState(preferredWidth, widthMeasureSpec, 0);
-        } else {
-            heightSize = resolveSize(preferredHeight, heightMeasureSpec);
-            widthSize = resolveSize(preferredWidth, widthMeasureSpec);
-        }
 
         setMeasuredDimension(widthSize, heightSize);
         mHeightMeasureSpec = heightMeasureSpec;
@@ -263,14 +235,13 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
 
     void recycleAllViews() {
         final int childCount = getChildCount();
-        final IgnAbsAbsSpinner.RecycleBin recycleBin = mRecycler;
         final int position = mFirstPosition;
 
         // All views go in recycler
         for (int i = 0; i < childCount; i++) {
             View v = getChildAt(i);
             int index = position + i;
-            recycleBin.put(index, v);
+            mRecycler.put(index, v);
         }
     }
 
@@ -329,7 +300,14 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
     @Override
     public void requestLayout() {
         if (!mBlockLayoutRequests) {
-            super.requestLayout();
+            // Check if we are on the UI thread
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                super.requestLayout();
+            } else {
+                // We are on a background thread!
+                // Redirect the call to the UI thread.
+                post(this::requestLayout);
+            }
         }
     }
 
@@ -376,7 +354,7 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
         int position;
 
         /**
-         * Constructor called from {@link AbsSpinner#onSaveInstanceState()}
+         * Constructor called from {link AbsSpinner#onSaveInstanceState()}
          */
         SavedState(Parcelable superState) {
             super(superState);
@@ -407,7 +385,7 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR
-                = new Parcelable.Creator<SavedState>() {
+                = new Parcelable.Creator<>() {
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
             }
@@ -448,7 +426,7 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
     }
 
     class RecycleBin {
-        private final SparseArray<View> mScrapHeap = new SparseArray<View>();
+        private final SparseArray<View> mScrapHeap = new SparseArray<>();
 
         public void put(int position, View v) {
             mScrapHeap.put(position, v);
@@ -458,10 +436,7 @@ public abstract class IgnAbsAbsSpinner extends IgnAdapterView<SpinnerAdapter> {
             // System.out.print("Looking for " + position);
             View result = mScrapHeap.get(position);
             if (result != null) {
-                // System.out.println(" HIT");
                 mScrapHeap.delete(position);
-            } else {
-                // System.out.println(" MISS");
             }
             return result;
         }

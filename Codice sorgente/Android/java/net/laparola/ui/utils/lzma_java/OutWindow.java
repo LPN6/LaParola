@@ -12,7 +12,7 @@ public class OutWindow
 	int _streamPos;
 	java.io.OutputStream _stream;
 	
-	public void Create(int windowSize)
+	public void Create(int windowSize) throws OutOfMemoryError
 	{
 		if (_buffer == null || _windowSize != windowSize)
 			_buffer = new byte[windowSize];

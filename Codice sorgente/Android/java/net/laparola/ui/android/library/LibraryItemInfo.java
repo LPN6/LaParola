@@ -3,6 +3,7 @@ package net.laparola.ui.android.library;
 import java.io.File;
 import java.util.EnumSet;
 import java.util.Locale;
+import java.util.Objects;
 
 import android.content.Context;
 import net.laparola.R;
@@ -15,7 +16,7 @@ import net.laparola.ui.android.LaParolaPreferences;
 public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 	private ComponenteInformazioni mInfo;
 	private String mBroken;
-	private Context mContext;
+	private final Context mContext;
 
 	public LibraryItemInfo(Context context, ComponenteInformazioni info) {
 		mContext = context;
@@ -58,7 +59,7 @@ public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 	public String getFileName() {
 		// Potrebbe essere sbagliato, ma è sempre corretto per i file corrotti.
 
-		return String.format("%s/%s.lpj", LaParolaPreferences.writeStoragePath, getName());
+		return String.format(Locale.getDefault(),"%s/%s.lpj", LaParolaPreferences.writeStoragePath, getName());
 	}
 
 	public float getFileSizeMB() {
@@ -82,7 +83,9 @@ public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 		String message;
 		if (!getTipo().contains(Testi.TestoTipi.NESSUNO)) {
 			String r = getUpdateReason();
-			String updateReason = r.length() != 0 ? mContext.getString(R.string.update_reason, r) : "";
+			String updateReason="";
+			if (r != null && !r.isEmpty())
+            	updateReason =  mContext.getString(R.string.update_reason, r);
 
 			message = mContext.getString(R.string.component_details, getStateString(), getDescription(), getTipoString(), getVersion(), updateReason);
 		} else {
@@ -105,25 +108,18 @@ public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 	}
 
 	public String getStateString() {
-		switch (getStatoAggiornamento()) {
-		case AGGIORNAMENTO_NON_COMPATIBILE:
-			return mContext.getString(R.string.update_not_compatible);
-		case AGGIORNATO:
-			return mContext.getString(R.string.installed, getFileSizeMB());
-		case DA_AGGIORNARE:
-			return mContext.getString(R.string.update_available, getFileSizeMB(), getDownloadSizeMB());
-		case INSTALLAZIONE_NON_COMPATIBILE:
-			return mContext.getString(R.string.update_not_compatible);
-		case NON_INSTALLATO:
-			return mContext.getString(R.string.not_installed, getDownloadSizeMB());
-		case FILE_CORROTTO:
-			return mContext.getString(R.string.cannot_load_file, getFileSizeMB());
-		case SENZA_INTERNET:
-			return mContext.getString(R.string.cannot_download_update_information, getFileSizeMB());
-		case NON_DISPONIBILE:
-		default:
-			return mContext.getString(R.string.installed_manually, getFileSizeMB());
-		}
+        return switch (getStatoAggiornamento()) {
+            case AGGIORNAMENTO_NON_COMPATIBILE, INSTALLAZIONE_NON_COMPATIBILE ->
+                    mContext.getString(R.string.update_not_compatible);
+            case AGGIORNATO -> mContext.getString(R.string.installed, getFileSizeMB());
+            case DA_AGGIORNARE ->
+                    mContext.getString(R.string.update_available, getFileSizeMB(), getDownloadSizeMB());
+            case NON_INSTALLATO -> mContext.getString(R.string.not_installed, getDownloadSizeMB());
+            case FILE_CORROTTO -> mContext.getString(R.string.cannot_load_file, getFileSizeMB());
+            case SENZA_INTERNET ->
+                    mContext.getString(R.string.cannot_download_update_information, getFileSizeMB());
+            default -> mContext.getString(R.string.installed_manually, getFileSizeMB());
+        };
 	}
 
 	private float getDownloadSizeMB() {
@@ -138,25 +134,16 @@ public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 	}
 
 	private int getStatoAggiornamentoOrder() {
-		switch (getStatoAggiornamento()) {
-		case DA_AGGIORNARE:
-			return 0;
-		case AGGIORNAMENTO_NON_COMPATIBILE:
-			return 1;
-		case INSTALLAZIONE_NON_COMPATIBILE:
-			return 2;
-		case AGGIORNATO:
-			return 3;
-		case NON_INSTALLATO:
-			return 4;
-		case NON_DISPONIBILE:
-			return 5;
-		case SENZA_INTERNET:
-			return 6;
-		case FILE_CORROTTO:
-		default:
-			return 7;
-		}
+        return switch (getStatoAggiornamento()) {
+            case DA_AGGIORNARE -> 0;
+            case AGGIORNAMENTO_NON_COMPATIBILE -> 1;
+            case INSTALLAZIONE_NON_COMPATIBILE -> 2;
+            case AGGIORNATO -> 3;
+            case NON_INSTALLATO -> 4;
+            case NON_DISPONIBILE -> 5;
+            case SENZA_INTERNET -> 6;
+            default -> 7;
+        };
 	}
 
 	public EnumSet<TestoTipi> getTipo() {
@@ -211,45 +198,30 @@ public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 
 	@SuppressWarnings("incomplete-switch")
 	public boolean showDelete() {
-		switch (getStatoAggiornamento()) {
-		case AGGIORNAMENTO_NON_COMPATIBILE:
-		case AGGIORNATO:
-		case DA_AGGIORNARE:
-		case NON_DISPONIBILE:
-		case FILE_CORROTTO:
-		case SENZA_INTERNET:
-			return true;
-		}
-		return false;
-	}
+        return switch (getStatoAggiornamento()) {
+            case AGGIORNAMENTO_NON_COMPATIBILE, AGGIORNATO, DA_AGGIORNARE, NON_DISPONIBILE,
+                 FILE_CORROTTO, SENZA_INTERNET -> true;
+            default -> false;
+        };
+    }
 
 	@SuppressWarnings("incomplete-switch")
 	public boolean showInstall() {
-		switch (getStatoAggiornamento()) {
-		case NON_INSTALLATO:
-			return true;
-		}
-		return false;
-	}
+        return Objects.requireNonNull(getStatoAggiornamento()) == StatoAggiornamento.NON_INSTALLATO;
+    }
 
 	@SuppressWarnings("incomplete-switch")
 	public boolean showUpdate() {
-		switch (getStatoAggiornamento()) {
-		case DA_AGGIORNARE:
-			return true;
-		}
-		return false;
-	}
+        return Objects.requireNonNull(getStatoAggiornamento()) == StatoAggiornamento.DA_AGGIORNARE;
+    }
 	
 	@SuppressWarnings("incomplete-switch")
 	public boolean showMarket() {
-		switch (getStatoAggiornamento()) {
-		case AGGIORNAMENTO_NON_COMPATIBILE:
-		case INSTALLAZIONE_NON_COMPATIBILE:
-			return true;
-		}
-		return false;
-	}
+        return switch (getStatoAggiornamento()) {
+            case AGGIORNAMENTO_NON_COMPATIBILE, INSTALLAZIONE_NON_COMPATIBILE -> true;
+            default -> false;
+        };
+    }
 
 	public long getDownload1Size() {
 		if (mInfo == null)
@@ -284,5 +256,4 @@ public class LibraryItemInfo implements Comparable<LibraryItemInfo> {
 			return "lzma";
 		return null;
 	}
-
 }

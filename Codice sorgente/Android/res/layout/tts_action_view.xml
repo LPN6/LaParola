@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tts_action_view"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:baselineAligned="false"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="4dp"
+    android:background="?attr/colorPrimary"
     >
 
-    <Button android:id="@+id/tts_read_button"
-        android:background="?attr/actionBarItemBackground"
-        android:minWidth="0dp"
-        android:padding="12dp"
-        
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tts_read_button"
+        style="?attr/materialButtonTonalStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="@string/tts_read"
-        android:focusable="true" />
-        
-    <Button android:id="@+id/tts_stop_button"
-        android:background="?attr/actionBarItemBackground"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
         android:minWidth="0dp"
-        android:padding="12dp"
-        
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tts_stop"
+        app:cornerRadius="16dp"
         android:focusable="true" />
+        
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tts_stop_button"
+        style="?attr/materialButtonTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/tts_stop"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:minWidth="0dp"
+        app:cornerRadius="16dp"
+        android:focusable="true"
+        android:layout_marginStart="8dp" />
    
     <View
         android:layout_width="1dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center"
-        android:background="@drawable/list_divider_holo_light"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/colorOutlineVariant"
         />
         
     <!-- Button android:id="@+id/tts_read_button"
@@ -56,14 +66,27 @@
             />
     -->
     
-    <ImageButton android:id="@+id/tts_rewind_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_action_rewind"
-            android:focusable="true"
-            android:contentDescription="@string/tts_rewind"
-        android:scaleType="centerInside"
-            />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tts_rewind_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:icon="@drawable/ic_action_rewind"
+        app:iconSize="24dp"
+        android:layout_marginStart="0dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/tts_rewind"
+        android:focusable="true"
+        app:cornerRadius="50dp"
+        app:iconTint="?attr/colorOnSurface"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        app:iconPadding="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        />
 
     <!-- 
     <ImageButton android:id="@+id/tts_stop_button"
@@ -76,23 +99,48 @@
             />
     -->
     
-    <ImageButton android:id="@+id/tts_ff_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_action_fast_forward"
-            android:focusable="true"
-            android:contentDescription="@string/tts_ff"
-        android:scaleType="centerInside"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tts_ff_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:icon="@drawable/ic_action_fast_forward"
+        app:iconSize="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/tts_ff"
+        android:focusable="true"
+        app:cornerRadius="50dp"
+        app:iconTint="?attr/colorOnSurface"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        app:iconPadding="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
             />
     
-    <ImageButton android:id="@+id/tts_settings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_action_settings"
-            android:focusable="true"
-            android:contentDescription="@string/tts_settings"
-        android:scaleType="centerInside"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tts_settings_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:icon="@drawable/ic_action_settings"
+        app:iconSize="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/tts_settings"
+        android:focusable="true"
+        app:cornerRadius="50dp"
+        app:iconTint="?attr/colorOnSurface"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        app:iconPadding="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
             />
-    
-        
+
 </LinearLayout>

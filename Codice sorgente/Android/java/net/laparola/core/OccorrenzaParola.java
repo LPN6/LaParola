@@ -38,12 +38,7 @@ class OccorrenzaParola implements Comparable<OccorrenzaParola> {
 		else if (this.voce > op.voce)
 			return 1;
 		else {
-			if (this.parola < op.parola)
-				return -1;
-			else if (this.parola > op.parola)
-				return 1;
-			else
-				return 0;
+            return Integer.compare(this.parola, op.parola);
 		}
 	}
 

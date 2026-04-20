@@ -33,9 +33,15 @@
     <string name="download_cancel">Interrompi download</string>
     <string name="no_market_installed">Impossibile avviare Google Play. Procedere all\'aggiornamento manualmente.</string>
     <string name="book">Libro</string>
+    <string name="chapter">Capitolo</string>
+    <string name="verse">Versetto</string>
     <string name="preferences">Impostazioni</string>
     <string name="decompressing">Decompressione&#8230;</string>
     <string name="storage_error">Impossibile accedere alla cartella di archiviazione.\nLa scheda SD potrebbe essere mancante o disattivata perché il telefono è collegato alla porta USB.\nRendere disponibile la cartella e riavviare il programma.</string>
     <string name="error_decompressing_resource">Impossibile decomprimere il testo. Riavvia il dispositivo e riprova, oppure usa la libreria per scaricare un testo.</string>
     <!-- string name="error_decompressing_download">Impossibile decomprimere il testo. Potresti installare il testo con un download alternativo (circa %1$f MB).</string -->
+
+    <string name="notifiche">Notifiche</string>
+    <string name="notifiche_richiesta">"L'app usa le notifiche per indicare il progresso e il risultato degli scaricamenti. Autorizzi l'app a inviare notifiche?\r\nLa scelta può essere modificata nelle Impostazioni di Android."</string>
+
 </resources>

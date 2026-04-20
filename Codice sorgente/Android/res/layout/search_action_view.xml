@@ -10,7 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="@string/search_hint" 
+        android:autofillHints=""
+        android:hint="@string/search_hint"
         android:saveEnabled="true"
         android:scrollHorizontally="true"
         android:selectAllOnFocus="true"
@@ -38,6 +39,8 @@
         android:src="@drawable/ic_action_search_plus"
         android:focusable="true"
         android:contentDescription="@string/advanced_search"
+        android:scaleType="centerInside"
+        android:padding="8dp"
         />
     
 </LinearLayout>

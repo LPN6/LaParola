@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 public class LibraryFragment extends Fragment {
@@ -21,16 +22,16 @@ public class LibraryFragment extends Fragment {
     }
     
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
     
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View res = inflater.inflate(R.layout.components_fragment, container, false);
         mListView = res.findViewById(R.id.listView);
         mNoBookTextView = res.findViewById(R.id.no_book_available);
-        
+
         if (mLibraryAdapter != null)
         	setAdapter(mLibraryAdapter);
         

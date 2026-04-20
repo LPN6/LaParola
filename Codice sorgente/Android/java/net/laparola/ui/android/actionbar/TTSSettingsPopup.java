@@ -14,24 +14,21 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.SeekBar;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class TTSSettingsPopup extends IgnPopupWindow implements OnSeekBarChangeListener, OnCheckedChangeListener, OnClickListener {
+import com.google.android.material.slider.Slider;
+
+public class TTSSettingsPopup extends IgnPopupWindow implements OnCheckedChangeListener, OnClickListener {
     /**
 	 * 
 	 */
 	private final TTSActionItemManager ttsActionItemManager;
 	private View mDropDownView;
-	private SeekBar mPitchSeekBar;
-	private SeekBar mSpeedSeekBar;
-	private Button mSettingsButton;
-	private CheckBox mStopEndChapter;
+    private CheckBox mStopEndChapter;
 	private CheckBox mFollowVerse;
 	
     public TTSSettingsPopup(TTSActionItemManager ttsActionItemManager, Context context) {
-        super(context);
+		super(context);
 		this.ttsActionItemManager = ttsActionItemManager;
         
         setAnchorView(this.ttsActionItemManager.settingsButton);
@@ -86,7 +83,7 @@ public class TTSSettingsPopup extends IgnPopupWindow implements OnSeekBarChangeL
 	    final int maxHeight = /*mPopup.*/getMaxAvailableHeight(
 	            mDropDownAnchorView, mDropDownVerticalOffset, ignoreBottomDecorations);
 	
-	    if (mDropDownHeight == ViewGroup.LayoutParams.MATCH_PARENT) {
+		if (mDropDownHeight == ViewGroup.LayoutParams.MATCH_PARENT) {
 	        return maxHeight + padding;
 	    }
 	
@@ -94,42 +91,34 @@ public class TTSSettingsPopup extends IgnPopupWindow implements OnSeekBarChangeL
 	}
 
 	private void setEventHandlers() {
-		mPitchSeekBar = mDropDownView.findViewById(R.id.tts_pitch_seekbar);
-		mSpeedSeekBar = mDropDownView.findViewById(R.id.tts_speed_seekbar);
+        Slider mPitchSlider = mDropDownView.findViewById(R.id.tts_pitch_slider);
+        Slider mSpeedSlider = mDropDownView.findViewById(R.id.tts_speed_slider);
+		mPitchSlider.addOnChangeListener((slider, value, fromUser) -> {
+
+			LaParolaPreferences.ttsPitch = (int)value;
+			this.ttsActionItemManager.loadPreferences(true);
+		});
+
+		mSpeedSlider.addOnChangeListener((slider, value, fromUser) -> {
+			LaParolaPreferences.ttsSpeed = (int)value;
+			this.ttsActionItemManager.loadPreferences(true);
+		});
+
 		mStopEndChapter = mDropDownView.findViewById(R.id.stop_end_chapter_checkbox);
 		mFollowVerse = mDropDownView.findViewById(R.id.follow_verse_checkbox);
-		mSettingsButton = mDropDownView.findViewById(R.id.tts_settings_button);
+        Button mSettingsButton = mDropDownView.findViewById(R.id.tts_settings_button);
 		
-		mPitchSeekBar.setProgress(LaParolaPreferences.ttsPitch);
-		mSpeedSeekBar.setProgress(LaParolaPreferences.ttsSpeed);
+		mPitchSlider.setValue(LaParolaPreferences.ttsPitch);
+		mSpeedSlider.setValue(LaParolaPreferences.ttsSpeed);
 		mStopEndChapter.setChecked(LaParolaPreferences.ttsStopEndChapter);
 		mFollowVerse.setChecked(LaParolaPreferences.ttsFollowVerse);
 		
-		mPitchSeekBar.setOnSeekBarChangeListener(this);
-		mSpeedSeekBar.setOnSeekBarChangeListener(this);
 		mStopEndChapter.setOnCheckedChangeListener(this);
 		mFollowVerse.setOnCheckedChangeListener(this);
 		
 		mSettingsButton.setOnClickListener(this);
 	}
 
-	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		if (seekBar == mPitchSeekBar) {
-			LaParolaPreferences.ttsPitch = progress;
-		} else if (seekBar == mSpeedSeekBar) {
-			LaParolaPreferences.ttsSpeed = progress;
-		}
-		
-		this.ttsActionItemManager.loadPreferences(true);
-	}
-
-	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) {}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) {}
-	
 	@Override
 	public void onClick(View v) {
 		this.ttsActionItemManager.startTtsSettings();				
@@ -142,7 +131,6 @@ public class TTSSettingsPopup extends IgnPopupWindow implements OnSeekBarChangeL
 		} else if (view == mFollowVerse) {
 			LaParolaPreferences.ttsFollowVerse = value;
 		}
-		
 		
 		this.ttsActionItemManager.loadPreferences(false);
 	}

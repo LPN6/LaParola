@@ -1,58 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="UselessParent" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="0dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:strokeWidth="0dp"
+    tools:ignore="ContentDescription">
 
-    <RelativeLayout
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:columnCount="2"
+        android:rowCount="2"
+        android:alignmentMode="alignBounds"
+        android:useDefaultMargins="false"
+        android:columnOrderPreserved="false">
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/color_orange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:padding="12dp"
-            android:src="@drawable/color_orange"
-            tools:ignore="ContentDescription" />
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            app:icon="@drawable/color_orange"
+            app:iconTint="@null"
+            android:contentDescription="@string/arancione"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/color_green"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/color_orange"
-            android:background="@null"
-            android:padding="12dp"
-            android:src="@drawable/color_green"
-            tools:ignore="ContentDescription" />
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            app:icon="@drawable/color_green"
+            app:iconTint="@null"
+            android:contentDescription="@string/verde"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/color_purple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/color_orange"
-            android:layout_toStartOf="@+id/color_green"
-            android:background="@null"
-            android:padding="12dp"
-            android:src="@drawable/color_purple"
-            tools:ignore="ContentDescription" />
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            app:icon="@drawable/color_purple"
+            app:iconTint="@null"
+            android:contentDescription="@string/viola"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/color_cyan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/color_orange"
-            android:layout_toEndOf="@+id/color_orange"
-            android:background="@null"
-            android:padding="12dp"
-            android:src="@drawable/color_cyan"
-            tools:ignore="ContentDescription" />
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            app:icon="@drawable/color_cyan"
+            app:iconTint="@null"
+            android:contentDescription="@string/ciano"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
-    </RelativeLayout>
+    </GridLayout>
 
-</RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

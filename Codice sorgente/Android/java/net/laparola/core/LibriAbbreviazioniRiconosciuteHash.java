@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 class LibriAbbreviazioniRiconosciuteHash {
 
-	private HashMap<String, Integer> libriAbbreviazioniRiconosciute;
+	private final HashMap<String, Integer> libriAbbreviazioniRiconosciute;
 
 	LibriAbbreviazioniRiconosciuteHash() {
 		libriAbbreviazioniRiconosciute = new HashMap<String, Integer>(256);

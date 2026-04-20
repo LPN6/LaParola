@@ -8,14 +8,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
+import java.util.Objects;
+
+import timber.log.Timber;
 
 public class LaParolaCronologia {
-	public class ElementoCronologia implements Comparable<ElementoCronologia> {
+	public static class ElementoCronologia implements Comparable<ElementoCronologia> {
 		public LaParolaUrl url;
 		public Date data;
 
@@ -35,21 +39,21 @@ public class LaParolaCronologia {
             if (obj.getClass() != this.getClass())
                 return false;
             ElementoCronologia e = (ElementoCronologia)obj;
-            return (e.url.getUrl() == this.url.getUrl()) && e.data == this.data;
+            return (Objects.equals(e.url.getUrl(), this.url.getUrl())) && e.data == this.data;
         }
     }
 
-	private static int CONSERVA_PER_GIORNI = 30;
-	private static int SPAZIO_TRA_MINUTI = 10;
+	private static final int CONSERVA_PER_GIORNI = 30;
+	private static final int SPAZIO_TRA_MINUTI = 10;
 
-	private static final long CONSERVA_PER = CONSERVA_PER_GIORNI * 24l * 60 * 60 * 1000;
+	private static final long CONSERVA_PER = CONSERVA_PER_GIORNI * 24L * 60 * 60 * 1000;
 	private static final long SPAZIO_TRA = SPAZIO_TRA_MINUTI * 60 * 1000;
 
-	private List<ElementoCronologia> mLista = new ArrayList<ElementoCronologia>();
+	private final List<ElementoCronologia> mLista = new ArrayList<>();
 
 	public void aggiungi(LaParolaUrl url, Date data) {
         synchronized (mLista) {
-            ElementoCronologia e =  new ElementoCronologia(url, data);
+            ElementoCronologia e = new ElementoCronologia(url, data);
             // potrebbe essere troppo lento controllare per ciascuno
             // li aggiungo tutti, poi dopo l'ordinamento elimino i duplicati
 
@@ -96,7 +100,7 @@ public class LaParolaCronologia {
             res.append("</h2>\n");
             res.append("</td>");
             res.append("<td valign='baseline' align='right'>");
-            if (mLista.size() > 0) {
+            if (!mLista.isEmpty()) {
                 res.append(LaParolaStringhe.get(LaParolaStringhe.PULISCI_CRONOLOGIA));
             }
             res.append("</td>");
@@ -157,7 +161,7 @@ public class LaParolaCronologia {
             synchronized (LaParolaBrowser.DataLock) {
                 BufferedReader reader;
                 try {
-                    reader = new BufferedReader(new InputStreamReader(LaParolaBrowser.apriFile(nomeFile), "UTF-8"));
+                    reader = new BufferedReader(new InputStreamReader(LaParolaBrowser.apriFile(nomeFile), StandardCharsets.UTF_8));
                     String strLine;
                     while ((strLine = reader.readLine()) != null) {
                         int i = strLine.indexOf(',');
@@ -172,7 +176,7 @@ public class LaParolaCronologia {
                         }
                     }
                 } catch (Exception e) {
-                    return;
+                    //
                 }
             }
             }
@@ -183,7 +187,7 @@ public class LaParolaCronologia {
             synchronized (LaParolaBrowser.DataLock) {
                 Writer writer;
                 try {
-                    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nomeFile), "UTF-8"));
+                    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nomeFile), StandardCharsets.UTF_8));
                 } catch (Exception e1) {
                     return;
                 }
@@ -202,7 +206,7 @@ public class LaParolaCronologia {
                     }
                     writer.flush();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e, "Unexpected IO error occurred while salving Cronolgia.");
                 } finally {
                     if (writer != null) {
                         try {

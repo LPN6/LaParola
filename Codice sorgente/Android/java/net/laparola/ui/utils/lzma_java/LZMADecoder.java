@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class LZMADecoder
 {
-	class LenDecoder
+	static class LenDecoder
 	{
 		short[] m_Choice = new short[2];
 		BitTreeDecoder[] m_LowCoder = new BitTreeDecoder[Base.kNumPosStatesMax];
@@ -45,9 +45,9 @@ public class LZMADecoder
 		}
 	}
 	
-	class LiteralDecoder
+	static class LiteralDecoder
 	{
-		class Decoder2
+		static class Decoder2
 		{
 			short[] m_Decoders = new short[0x300];
 			
@@ -199,9 +199,7 @@ public class LZMADecoder
 		void publish(long progress, long size);
 	}
 	
-	public boolean Code(java.io.InputStream inStream, java.io.OutputStream outStream, long outSize) throws IOException {
-		return Code(inStream, outStream, outSize, null);
-	}
+	//public boolean Code(java.io.InputStream inStream, java.io.OutputStream outStream, long outSize) throws IOException {	//	return Code(inStream, outStream, outSize, null);	//}
 	
 	public boolean Code(java.io.InputStream inStream, java.io.OutputStream outStream, long outSize, ProgressRunnable progress) throws IOException {
 		m_RangeDecoder.SetStream(inStream);

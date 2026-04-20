@@ -14,6 +14,8 @@ import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 import android.os.ParcelFileDescriptor;
 
+import timber.log.Timber;
+
 @SuppressLint("NewApi")
 public class LaParolaBackupAgent extends BackupAgentHelper {
 	private final static String[] PREFS = new String[] {LaParolaPreferences.LAPAROLA_PREFERENCES};
@@ -37,7 +39,7 @@ public class LaParolaBackupAgent extends BackupAgentHelper {
 			try {
 				Files.copyFileIfExists(from + "/" + name, to + "/" + name);
 			} catch (IOException e) {
-				e.printStackTrace();
+				Timber.e(e, "Unexpected IO error occurred while copying directory.");
 			}
 		}
 	}

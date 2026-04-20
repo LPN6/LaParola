@@ -3,14 +3,11 @@ package net.laparola.ui.android.ignspinner;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import java.lang.reflect.Method;
-
+import net.laparola.R;
 import net.laparola.ui.android.ignspinner.IgnAbsSpinner.SpinnerPopup;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +20,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SpinnerAdapter;
-import android.widget.AdapterView.OnItemClickListener;
+
+import androidx.core.content.ContextCompat;
 
 public abstract class IgnDropdownPopup extends IgnPopupWindow implements SpinnerPopup {
 	protected class SpinnerResizePopupRunnable extends ResizePopupRunnable {
@@ -40,7 +38,7 @@ public abstract class IgnDropdownPopup extends IgnPopupWindow implements Spinner
 	protected class SpinnerShowPopupRunnable extends ShowPopupRunnable {
         public void run() {
         	final AbsListView listView = getListView();
-        	listView.setSelection(ListView.INVALID_POSITION);
+			listView.setSelection(ListView.INVALID_POSITION);
 	        
 	        if (!mModal || listView.isInTouchMode()) {
 	            clearListSelection();
@@ -77,22 +75,24 @@ public abstract class IgnDropdownPopup extends IgnPopupWindow implements Spinner
         setAnchorView(mIgnSpinner);
         setModal(true);
         setPromptPosition(POSITION_PROMPT_ABOVE);
-        setOnItemClickListener(new OnItemClickListener() {
-            @SuppressWarnings("rawtypes")
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-            	//mAdapter.sendChanged();
-            	mIgnSpinner.setSelection(position);
-                dismiss();
-                mIgnSpinner.requestLayout();
-    			mIgnSpinner.invalidate();
-    	        mIgnSpinner.selectionChanged();
-            }
+        setOnItemClickListener((parent, v, position, id) -> {
+            //mAdapter.sendChanged();
+            mIgnSpinner.setSelection(position);
+            dismiss();
+            mIgnSpinner.requestLayout();
+            mIgnSpinner.invalidate();
+            mIgnSpinner.selectionChanged();
         });
     }
 
 	@Override
     public void show() {
         boolean wasShown = isShowing();
+
+        // Force opaque background that respects day/night mode
+        mPopup.setBackgroundDrawable(
+                ContextCompat.getDrawable(mContext, R.drawable.spinner_popup_background)
+        );
 
         final int spinnerPaddingLeft = mIgnSpinner.getPaddingLeft();
         final int spinnerPaddingRight = mIgnSpinner.getPaddingRight();
@@ -124,28 +124,14 @@ public abstract class IgnDropdownPopup extends IgnPopupWindow implements Spinner
         //mIgnSpinner.setSelection(mIgnSpinner.getSelectedItemPosition());
     }
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setChoiceMode() {
 		AbsListView listView = getListView();
-		if (Build.VERSION.SDK_INT >= 11) {
-			listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		} else {
-			if (listView instanceof ListView) {
-                listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-			} else {
-				try {
-					Method m = listView.getClass().getDeclaredMethod("setChoiceMode", Integer.class);
-					m.invoke(listView, ListView.CHOICE_MODE_SINGLE);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    }
 
 	@Override
 	protected void initRunnables() {
-        mResizePopupRunnable = new SpinnerResizePopupRunnable();
+    	mResizePopupRunnable = new SpinnerResizePopupRunnable();
     	mShowPopupRunnable = new SpinnerShowPopupRunnable();
 	}
 
@@ -199,19 +185,17 @@ public abstract class IgnDropdownPopup extends IgnPopupWindow implements Spinner
     
     @Override
     public void dismiss() {
-    	super.dismiss();
+	    super.dismiss();
 	    if (mPromptView != null) {
 	        final ViewParent parent = mPromptView.getParent();
-	        if (parent instanceof ViewGroup) {
-	            final ViewGroup group = (ViewGroup) parent;
-	            group.removeView(mPromptView);
+	        if (parent instanceof ViewGroup group) {
+                group.removeView(mPromptView);
 	        }
 	    }
 	    if (mDropDownList != null) {
 	        final ViewParent parent = mDropDownList.getParent();
-	        if (parent instanceof ViewGroup) {
-	            final ViewGroup group = (ViewGroup) parent;
-	            group.removeView(mDropDownList);
+        if (parent instanceof ViewGroup group) {
+                group.removeView(mDropDownList);
 	        }
     	    mDropDownList = null;
 	    }
@@ -274,8 +258,8 @@ public abstract class IgnDropdownPopup extends IgnPopupWindow implements Spinner
 	
 	        View hintView = mPromptView;
 	        if (hintView != null) {
-	            // if an hint has been specified, we accomodate more space for it and
-	            // add a text view in the drop down menu, at the bottom of the list
+	            // if a hint has been specified, we accomodate more space for it and
+	            // add a text view in the drop-down menu, at the bottom of the list
 	            LinearLayout hintContainer = new LinearLayout(context);
 	            hintContainer.setOrientation(LinearLayout.VERTICAL);
 	
@@ -299,7 +283,7 @@ public abstract class IgnDropdownPopup extends IgnPopupWindow implements Spinner
 	            }
 	
 	            // measure the hint's height to find how much more vertical space
-	            // we need to add to the drop down's height
+	            // we need to add to the drop-down's height
 	            int widthSpec = MeasureSpec.makeMeasureSpec(mDropDownWidth, MeasureSpec.AT_MOST);
 	            int heightSpec = MeasureSpec.UNSPECIFIED;
 	            hintView.measure(widthSpec, heightSpec);

@@ -39,8 +39,8 @@ import android.widget.ListView;
  * An AdapterView is a view whose children are determined by an {@link Adapter}.
  *
  * <p>
- * See {@link ListView}, {@link GridView}, {@link Spinner} and
- *      {@link Gallery} for commonly used subclasses of AdapterView.
+ * See {@link ListView}, {link GridView}, {link Spinner} and
+ *      {link Gallery} for commonly used subclasses of AdapterView.
  *
  * <div class="special reference">
  * <h3>Developer Guides</h3>
@@ -222,7 +222,7 @@ public abstract class IgnAdapterView<T extends Adapter> extends ViewGroup {
     private SelectionNotifier mSelectionNotifier;
     /**
      * When set to true, calls to requestLayout() will not propagate up the parent hierarchy.
-     * This is used to layout the children during a layout pass.
+     * This is used to lay out the children during a layout pass.
      */
     boolean mBlockLayoutRequests = false;
 
@@ -286,7 +286,6 @@ public abstract class IgnAdapterView<T extends Adapter> extends ViewGroup {
         /**
          * Callback method to be invoked when an item in this view has been
          * clicked and held.
-         *
          * Implementers can call getItemAtPosition(position) if they need to access
          * the data associated with the selected item.
          *
@@ -370,7 +369,7 @@ public abstract class IgnAdapterView<T extends Adapter> extends ViewGroup {
 
     /**
      * Extra menu information provided to the
-     * {@link android.view.View.OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo) }
+     * {link android.view.View.OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo) }
      * callback when a context menu is brought up for this AdapterView.
      *
      */
@@ -558,7 +557,7 @@ public abstract class IgnAdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * Get the position within the adapter's data set for the view, where view is a an adapter item
+     * Get the position within the adapter's data set for the view, where view is an adapter item
      * or a descendant of an adapter item.
      *
      * @param view an adapter item, or a descendant of an adapter item. This must be visible in this
@@ -691,7 +690,7 @@ public abstract class IgnAdapterView<T extends Adapter> extends ViewGroup {
     }
 
     /**
-     * Update the status of the list based on the empty parameter.  If empty is true and
+     * Update the status of the list based on the empty parameter.  If empty is true, and
      * we have an empty view, display it.  In all the other cases, make sure that the listview
      * is VISIBLE and that the empty view is GONE (if it's not null).
      */
@@ -1080,7 +1079,6 @@ public abstract class IgnAdapterView<T extends Adapter> extends ViewGroup {
                 // Try going down next time
                 next = true;
             }
-
         }
 
         return INVALID_POSITION;

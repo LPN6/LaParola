@@ -1,9 +1,12 @@
 package net.laparola.core;
 
+import java.io.Serial;
+
 public class TestoNonEsisteException extends Exception {
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public TestoNonEsisteException(String s) {
-		super(s);
+		super(s, null, false, false);
 	}
 }

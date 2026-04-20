@@ -7,8 +7,11 @@ import net.laparola.ui.LaParolaUrl;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.EditText;
+import androidx.core.content.ContextCompat;
 
-public class StarredDialog extends HoloDialog {
+import static android.view.View.INVISIBLE;
+
+public class StarredDialog extends LaParolaDialog {
 	private EditText description;
 	public LaParolaUrl url;
 
@@ -25,18 +28,9 @@ public class StarredDialog extends HoloDialog {
 		setIcon(R.drawable.ic_icon_star);
 
 		description = findViewById(R.id.description);
+		button2.setTextColor(ContextCompat.getColor(getContext(), R.color.colorError));
 
-		setYesNo(android.R.string.ok, R.string.remove, new Runnable() {
-			@Override
-			public void run() {
-				onOkClick();
-			}
-		}, new Runnable() {
-			@Override
-			public void run() {
-				onRemoveClick();
-			}
-		});
+		setYesNo(android.R.string.ok, R.string.remove, this::onOkClick, this::onRemoveClick);
 	}
 
 	private void onOkClick() {
@@ -58,5 +52,9 @@ public class StarredDialog extends HoloDialog {
 	public void setDescription(String descrizione) {
 		description.setText(descrizione);
 		description.setSelection(descrizione.length());
+	}
+
+	public void setSegnalibroNonEsiste() {
+		button2.setVisibility(INVISIBLE);
 	}
 }

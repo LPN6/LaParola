@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
-import android.widget.DatePicker;
 
+import net.laparola.R;
 import net.laparola.ui.LaParolaBrowser;
 import net.laparola.ui.LaParolaJavascriptInterface;
 import net.laparola.ui.LaParolaSegnalibri;
@@ -20,14 +19,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import timber.log.Timber;
+
 public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInterface {
-	private BibleView mBibleView;
+	private final BibleView mBibleView;
 	private long mUltimaDataLiturgia = 0;
 	
 	public LaParolaJavascriptInterfaceAndroid(BibleView bibleView) {
@@ -42,7 +44,7 @@ public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInt
 
 		if (g.size() < n) return "";
 		
-		List<Integer> fatti = new ArrayList<Integer>();
+		List<Integer> fatti = new ArrayList<>();
 		int s;
 		for (int i = 0; i < n; i++) {
 			do {
@@ -128,16 +130,13 @@ public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInt
 	@Override
 	@JavascriptInterface
 	public void cambiaEvidenziatore (final String versetto) {
-		mBibleView.post(new Runnable() {
-			@Override
-			public void run() {
-				boolean e = mBibleView.getBrowser().Evidenziatore.cambiaEvidenziazioneVersetto(versetto);
-				
-				LaParolaActivity laParolaActivity = (LaParolaActivity)mBibleView.getContext();
-				for (int i = 0; i < laParolaActivity.fragments.size(); i++)
-					laParolaActivity.fragments.get(i).evidenziaVersetto(versetto, e, mBibleView.getNightMode());
-			}
-		});
+		mBibleView.post(() -> {
+            boolean e = mBibleView.getBrowser().Evidenziatore.cambiaEvidenziazioneVersetto(versetto);
+
+            LaParolaActivity laParolaActivity = (LaParolaActivity)mBibleView.getContext();
+            for (int i = 0; i < laParolaActivity.fragments.size(); i++)
+                laParolaActivity.fragments.get(i).evidenziaVersetto(versetto, e, mBibleView.getNightMode());
+        });
 	}
 
 	@Override
@@ -164,24 +163,19 @@ public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInt
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);		
         
-        DatePickerDialog.OnDateSetListener l = new DatePickerDialog.OnDateSetListener() {
-			@Override
-			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				Calendar c = Calendar.getInstance();
-				c.set(year, monthOfYear, dayOfMonth);
-				mUltimaDataLiturgia = c.getTimeInMillis();
-				
-				mBibleView.post(new Runnable() {
-					@Override
-					public void run() {
-						mBibleView.executeJavascript("liturgia(" + String.valueOf(mUltimaDataLiturgia) + ");");
-					}
-				});
-			}
-		};
+        DatePickerDialog.OnDateSetListener l = (view, year1, monthOfYear, dayOfMonth) -> {
+            Calendar c1 = Calendar.getInstance();
+            c1.set(year1, monthOfYear, dayOfMonth);
+            mUltimaDataLiturgia = c1.getTimeInMillis();
+
+            mBibleView.post(() -> mBibleView.executeJavascript("liturgia(" + mUltimaDataLiturgia + ");"));
+        };
         
         DatePickerDialog d = new DatePickerDialog(context, l, year, month, day);
-        d.show();
+		int alertColor = androidx.core.content.ContextCompat.getColor(context, R.color.colorOnSurface);
+		d.show();
+		d.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(alertColor);
+		d.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(alertColor);
 	}
 	
 	@Override
@@ -189,15 +183,15 @@ public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInt
 	public void scriviFile(String nome, String contenuto) {
 		nome = Environment.getExternalStorageDirectory() + "/" + nome;
 
-		BufferedWriter writer = null;
-		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nome), "utf-8"));
-		    writer.write(contenuto);
-		} catch (IOException ex){
-			ex.printStackTrace();
-		} finally {
-		   try {writer.close();} catch (Exception ex) {}
-		}
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nome), StandardCharsets.UTF_8))) {
+            try {
+                writer.write(contenuto);
+            } catch (IOException ex) {
+				Timber.e(ex, "Unexpected IO error occurred while writing file.");
+            }
+        } catch (Exception e) {
+			Timber.e(e, "Unexpected  error occurred while creating write buffer.");
+        }
 	}
 
     @Override
@@ -213,12 +207,12 @@ public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInt
     @JavascriptInterface
     public void toccoLungoSuSfondo() {
         LaParolaActivity activity = (LaParolaActivity)mBibleView.getContext();
-        activity.showPanelContextMenu();
+		activity.runOnUiThread(activity::showPanelBottomSheet);
     }
 
     @Override
     @JavascriptInterface
     public void logd(String s) {
-        Log.d("laparola", s);
+        Timber.tag("laparola").d(s);
     }
 }

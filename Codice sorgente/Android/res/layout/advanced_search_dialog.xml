@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.android.dialogs.SearchDialog" >
 
-    <ImageButton
-        android:id="@+id/help_button"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/dialog_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/help"
-        android:src="@drawable/ic_action_help" />
+        app:title="@string/advanced_search"
+        app:titleCentered="true"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
     <EditText
         android:id="@+id/expression_text"
+        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/help_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
+        android:layout_below="@id/dialog_toolbar"
+        android:layout_marginEnd="8dp"
         android:layout_toStartOf="@+id/help_button"
+        android:autofillHints=""
         android:inputType="textNoSuggestions"
         android:hint="@string/expression" >
-
         <requestFocus />
     </EditText>
 
-    <ImageButton
-        android:id="@+id/more_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/help_button"
-        android:layout_toEndOf="@+id/expression_text"
-        android:contentDescription="@string/more"
-        app:srcCompat="@drawable/ic_more_vert"
-        android:background="?attr/selectableItemBackgroundBorderless" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/help_button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/dialog_toolbar"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/help"
+        app:icon="@drawable/ic_action_help"
+        app:iconTint="?attr/colorOnSurface"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="24dp"
+ />
 
     <EditText
         android:id="@+id/reference_text"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/more_button"
-        android:layout_alignStart="@+id/expression_text"
+        android:layout_below="@id/expression_text"
+        android:layout_marginEnd="8dp"
         android:layout_toStartOf="@+id/more_button"
+        android:autofillHints=""
         android:inputType="textNoSuggestions"
         android:hint="@string/search_in_hint" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/more_button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/expression_text"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/more"
+        app:icon="@drawable/ic_more_vert"
+        app:iconTint="?attr/colorOnSurface"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"/>
 
     <View
         android:id="@+id/view1"
@@ -56,16 +77,20 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/reference_text"
         android:layout_marginTop="8dp"
-        android:background="@drawable/list_divider_holo_light" />
+        android:background="?attr/colorOnSurface"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/search_button"
-        android:layout_width="fill_parent"
-        style="@style/ButtonHoloLight.Borderless.Small"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="14sp"
         android:minHeight="@dimen/alert_dialog_button_bar_height"
         android:layout_below="@+id/view1"
-        android:layout_height="wrap_content"
-        android:text="@string/search" />
+        android:text="@string/search"
+        android:textColor="?attr/colorOnSurface"
+        android:background="?attr/colorSurface"
+        app:rippleColor="?attr/colorControlHighlight"/>
 
 </RelativeLayout>

@@ -1,5 +1,17 @@
-<html>
+<html lang="it">
     <head>
+        <title>Preparazione</title>
+        <style>
+            img.immagine {
+              width: 15px;
+              height: 11px;
+            }
+            @media (prefers-color-scheme: dark) {
+              img.immagine {
+                filter: invert(1) brightness(1.8);
+              }
+            }
+        </style>
         <script type="text/javascript">
         <!--
         function publishProgress (value) {
@@ -19,13 +31,13 @@
                 <td style="width: 10%;"></td>
                 <td style="vertical-align: middle; text-align: center">
                     <p>
-                        <img src="file:///android_asset/loading.gif" />
+                        <img class="immagine" src="file:///android_asset/loading.gif" alt="Sto preparando" />
                     </p>
                     <p>
-                        È in corso la preparazione del testo. Questa operazione viene eseguita 
+                        &Egrave; in corso la preparazione del testo. Questa operazione viene eseguita
                         solo al primo avvio del programma o dopo un aggiornamento.
-                    <p>
                     </p>
+                    <p>
                         <span id="progress">0%</span> completato.
                     </p>
                 </td>

@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import net.laparola.ui.android.ignspinner.IgnDropdownPopup;
-import net.laparola.ui.android.ignspinner.IgnHijackFocusListView;
-import net.laparola.ui.android.ignspinner.IgnAbsSpinner;
 
 public class ListSpinner extends IgnAbsSpinner {
 	public ListSpinner(Context context, AttributeSet attrs) {
@@ -24,7 +21,7 @@ public class ListSpinner extends IgnAbsSpinner {
 		return new ListDropDownPopup(context, attrs, defStyle, this);
 	}
 	
-	class IgnListView extends IgnHijackFocusListView {
+	static class IgnListView extends IgnHijackFocusListView {
 		public IgnListView(Context context, boolean hijackfocus) {
 			super(context, hijackfocus);
 		}
@@ -45,7 +42,7 @@ public class ListSpinner extends IgnAbsSpinner {
 		}
 	}
 	
-	class ListDropDownPopup extends IgnDropdownPopup {
+	static class ListDropDownPopup extends IgnDropdownPopup {
 	    public ListDropDownPopup(Context context, AttributeSet attrs, int defStyleAttr, IgnAbsSpinner ignSpinner) {
 	    	super(context, attrs, defStyleAttr, ignSpinner);
 	    }

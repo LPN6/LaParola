@@ -5,67 +5,67 @@ import java.util.EnumSet;
 import net.laparola.core.Testi.*;
 
 public class ComponenteInformazioni {
-	private String componente;
+	private final String componente;
 
 	public String getComponente() {
 		return componente;
 	}
 
-	private String descrizione;
+	private final String descrizione;
 
 	public String getDescrizione() {
 		return descrizione;
 	}
 
-	private int versione1;
+	private final int versione1;
 
 	public int getVersione1() {
 		return versione1;
 	}
 
-	private int versione2;
+	private final int versione2;
 
 	public int getVersione2() {
 		return versione2;
 	}
 
-	private int versione3;
+	private final int versione3;
 
 	public int getVersione3() {
 		return versione3;
 	}
 
-	private String motivo;
+	private final String motivo;
 
 	public String getMotivo() {
 		return motivo;
 	}
 
-	private String url;
+	private final String url;
 
 	public String getUrl() {
 		return url;
 	}
 
-	private long dimensione;
+	private final long dimensione;
 
 	public long getDimensione() {
 		return dimensione;
 	}
 
-	private String url2;
+	private final String url2;
 	
 	public String getUrl2() {
 		return url2;
 	}
 
-	private long dimensione2;
+	private final long dimensione2;
 
 	public long getDimensione2() {
 		return dimensione2;
 	}
 
-	private EnumSet<TestoTipi> tipo;
+	private final EnumSet<TestoTipi> tipo;
 
 	public EnumSet<TestoTipi> getTipo() {
 		return tipo;

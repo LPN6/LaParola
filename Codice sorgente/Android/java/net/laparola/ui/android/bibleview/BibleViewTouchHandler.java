@@ -8,22 +8,23 @@ import android.view.MotionEvent;
 import net.laparola.ui.android.LaParolaPreferences;
 import net.laparola.ui.android.bibleview.ScaleGestureDetector.OnScaleGestureListener;
 
+import androidx.annotation.NonNull;
+
 /* package */class BibleViewTouchHandler implements OnScaleGestureListener {
 	private static final int SWIPE_MIN_DISTANCE = 120;
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
-	private BibleView mBibleView;
-	private Context mContext;
-	private boolean mZooming;
+	private final BibleView mBibleView;
+    private boolean mZooming;
 	private MotionEvent mLastMotionEventWithOnePointer;
 
-	private ScaleGestureDetector mScaleGestureDetector;
-	private GestureDetector mSwipeGestureDetector;
+	private final ScaleGestureDetector mScaleGestureDetector;
+	private final GestureDetector mSwipeGestureDetector;
 
 	public BibleViewTouchHandler(BibleView bibleView) {
 		mBibleView = bibleView;
-		mContext = mBibleView.getContext();
+        Context mContext = mBibleView.getContext();
 
 		mScaleGestureDetector = new ScaleGestureDetector(mContext, this);
         updatePreferences();
@@ -96,7 +97,7 @@ import net.laparola.ui.android.bibleview.ScaleGestureDetector.OnScaleGestureList
 
 	private class SwipeGestureDetector extends SimpleOnGestureListener {
 		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
 			try {
 				if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
 					return false;

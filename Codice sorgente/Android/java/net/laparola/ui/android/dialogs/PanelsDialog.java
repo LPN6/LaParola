@@ -2,23 +2,23 @@ package net.laparola.ui.android.dialogs;
 
 import net.laparola.R;
 import net.laparola.ui.android.FourColorSwitcher;
-import net.laparola.ui.android.FourColorSwitcher.OnColorClickListener;
 import net.laparola.ui.android.FourPanesLayout;
 import net.laparola.ui.android.LaParolaActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 
-public class PanelsDialog extends HoloDialog {
-	private ImageButton mButton1;
-	private ImageButton mButton2h;
-	private ImageButton mButton2v;
-	private ImageButton mButton3h;
-	private ImageButton mButton3v;
-	private ImageButton mButton4;
+import com.google.android.material.button.MaterialButton;
+
+public class PanelsDialog extends LaParolaDialog {
+	private MaterialButton mButton1;
+	private MaterialButton mButton2h;
+	private MaterialButton mButton2v;
+	private MaterialButton mButton3h;
+	private MaterialButton mButton3v;
+	private MaterialButton mButton4;
 	private FourPanesLayout mPanels;
-	private LaParolaActivity mParent;
+	private final LaParolaActivity mParent;
 	private FourColorSwitcher[] mColorSwitchers;
 
 	public PanelsDialog(LaParolaActivity context) {
@@ -57,22 +57,19 @@ public class PanelsDialog extends HoloDialog {
 			
 			mColorSwitchers[i] = new FourColorSwitcher(mParent, null, 0);
 			mPanels.getFrame(i).addView(mColorSwitchers[i]);
-			mColorSwitchers[i].setOnColorClickListener(new OnColorClickListener() {
-				@Override
-				public void OnColorClicked (int color, int index) {
-					int r = Color.red(color);
-					int g = Color.green(color);
-					int b = Color.blue(color);
-					
-					r = (r + 3 * 0xff) / 4;
-					g = (g + 3 * 0xff) / 4;
-					b = (b + 3 * 0xff) / 4;
-					
-					int dimColor = Color.rgb(r, g, b);
-					
-					mPanels.getFrame(ii).setBackgroundColor(dimColor);
-				}
-			});
+			mColorSwitchers[i].setOnColorClickListener((color, index) -> {
+                int r = Color.red(color);
+                int g = Color.green(color);
+                int b = Color.blue(color);
+
+                r = (r + 3 * 0xff) / 4;
+                g = (g + 3 * 0xff) / 4;
+                b = (b + 3 * 0xff) / 4;
+
+                int dimColor = Color.rgb(r, g, b);
+
+                mPanels.getFrame(ii).setBackgroundColor(dimColor);
+            });
 			
 			mColorSwitchers[i].setIndex(mParent.getSyncColor(i));
 		}
@@ -97,17 +94,7 @@ public class PanelsDialog extends HoloDialog {
 			onClick(mButton4);
 		}
 		
-		setYesNo(android.R.string.ok, android.R.string.cancel, new Runnable() {
-			@Override
-			public void run() {
-				onOkClick();
-			}
-		}, new Runnable() {
-			@Override
-			public void run() {
-				onCancelClick();
-			}
-		});	
+		setYesNo(android.R.string.ok, android.R.string.cancel, this::onOkClick, this::onCancelClick);
 	}
 	
 	protected void onOkClick() {

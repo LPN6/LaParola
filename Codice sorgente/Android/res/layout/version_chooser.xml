@@ -1,46 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+>
 
 	<LinearLayout
+		android:id="@+id/buttons"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" 
-	    android:id="@+id/buttons">
+	    android:orientation="horizontal"
+		android:divider="?attr/colorOutlineVariant"
+		android:showDividers="middle"
+		>
 
-		<Button
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/button_bible"
-			style="@style/Widget.TabPageIndicatorLight"
+			style="?attr/materialButtonOutlinedStyle"
+			app:strokeWidth="0dp"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:paddingLeft="12dip"
-			android:paddingRight="12dip"
-			android:text="@string/type_bible" />
+			android:paddingHorizontal="12dp"
+			android:text="@string/type_bible"
+			android:textStyle="bold"
+			android:textAllCaps="false"
+			android:minHeight="48dp"
+			android:textColor="?attr/colorOnSurface"
+			/>
 
-		<Button
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/button_commentario"
-			style="@style/Widget.TabPageIndicatorLight"
+			style="?attr/materialButtonOutlinedStyle"
+			app:strokeWidth="0dp"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:paddingLeft="6dip"
-			android:paddingRight="6dip"
-			android:text="@string/type_commentario" />
+			android:paddingHorizontal="12dp"
+			android:text="@string/type_commentario"
+			android:textStyle="bold"
+			android:textAllCaps="false"
+			android:minHeight="48dp"
+			android:textColor="?attr/colorOnSurface"
+			/>
 
 		<!--
 		//rmw1024
-		<Button
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/button_dizionario"
-			style="@style/Widget.TabPageIndicatorLight"
+			style="?attr/materialButtonOutlinedStyle"
+			app:strokeWidth="0dp"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:paddingLeft="12dip"
-			android:paddingRight="12dip"
-			android:text="@string/type_dictionary" />
+			android:paddingHorizontal="12dp"
+			android:text="@string/type_dictionary"
+			android:textAllCaps="false"
+            android:minHeight="48dp"
+            android:textColor="?attr/colorOnSurface"
+            />
 			-->
 
 	</LinearLayout>
@@ -48,24 +67,33 @@
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp" 
-        android:layout_weight="1" 
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="?attr/colorOutlineVariant"
+		android:dividerHeight="1dp"
         />
 
     <View
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/list_divider_holo_light" />
+		android:background="?attr/colorOutlineVariant"
+		/>
     
-    <Button 
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/library_button"
-        android:text="@string/version_management"
-        android:layout_width="match_parent"
-        android:layout_gravity="start"
+		style="?attr/materialButtonOutlinedStyle"
+		android:text="@string/version_management"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="start"
         android:maxLines="2"
-        style="@style/ButtonHoloLight.Borderless.Small"
-        android:textSize="14sp"
-        android:minHeight="@dimen/alert_dialog_button_bar_height"
-        android:layout_height="wrap_content" />
+		android:textSize="14sp"
+		android:minHeight="@dimen/alert_dialog_button_bar_height"
+		app:iconGravity="textStart"
+		android:background="?attr/colorSurface"
+		android:textColor="?attr/colorOnSurface"
+		android:textAllCaps="false"
+         />
+
 </LinearLayout>

@@ -1,93 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="16dp">
 
- <!-- min width: 90dp -->
-
-<TabHost
-    android:id="@android:id/tabhost"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <LinearLayout
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleGroup"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:checkedButton="@id/btnTabBasic"
+        app:singleSelection="true">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTabBasic"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:text="@string/basic" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTabAdvanced"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:text="@string/advanced" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <TabWidget
-            android:id="@android:id/tabs"
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            >
-        </TabWidget>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/selectionHeader"
+                style="@style/TextAppearance.Material3.TitleLarge.Emphasized"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/book" />
 
-        <FrameLayout
-            android:id="@android:id/tabcontent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/selectionRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:padding="4dp" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
-                android:id="@+id/tab1"
+            android:layout_height="wrap_content"
+            android:hint="@string/reference_hint"
+            app:hintTextColor="?attr/colorOnSurface">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reference_edittext"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
-
-                <Spinner
-                    android:id="@+id/book_spinner"
-                    style="@android:style/Widget.DeviceDefault.Spinner.DropDown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </Spinner>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <Spinner
-                        android:id="@+id/chapter_spinner"
-                        style="@android:style/Widget.DeviceDefault.Spinner.DropDown"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:dropDownWidth="264dp" >
-                    </Spinner>
-
-                    <Spinner
-                        android:id="@+id/verse_spinner"
-                        style="@android:style/Widget.DeviceDefault.Spinner.DropDown"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:dropDownWidth="264dp" >
-                    </Spinner>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <EditText
-                    android:id="@+id/reference_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="@string/reference_hint"
-                    android:imeOptions="actionGo"
-                    android:inputType="textNoSuggestions"
-                    android:saveEnabled="true"
-                    android:scrollHorizontally="true"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true" />
-
-            </LinearLayout>
-        </FrameLayout>
-    </LinearLayout>
-</TabHost>
-<View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"></View>
+                android:layout_height="wrap_content"
+                android:imeOptions="actionGo"
+                android:inputType="textNoSuggestions"
+                android:textSize="32sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </ViewFlipper>
 </LinearLayout>

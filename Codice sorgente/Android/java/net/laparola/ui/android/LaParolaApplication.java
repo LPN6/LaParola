@@ -13,11 +13,5 @@ import org.acra.annotation.*;
 )
 */
 public class LaParolaApplication extends Application {
-	/*
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		ACRA.init(this);
-	}
-	*/
+
 }

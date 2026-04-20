@@ -113,26 +113,16 @@ public class FormatoTesto {
 	}
 
 	public FormatoTesto() {
-		// fontNome = "Times New Roman";
-		// fontDimensione = 12;
-		// fontColore = Color.Black;
-
-		// fontRiferimentoNome = fontNome;
-		// fontRiferimentoDimensione = 12;
 		fontRiferimentoGrassetto = true;
 		fontRiferimentoCorsivo = false;
 		fontRiferimentoSottolineato = false;
+
 		riferimentoApice = true;
 		titoliVisualizzati = true;
-		// riferimentoContestoRicerche = false;
-		// fontRiferimentoColore = Color.Black;
 
-		// fontRicercaNome = fontNome;
-		// fontRicercaDimensione = 12;
 		fontRicercaGrassetto = false;
 		fontRicercaCorsivo = false;
 		fontRicercaSottolineato = true;
-		// fontRicercaColore = Color.Black;
 
 		riferimentoTipo = RiferimentoTipo.DUE_PUNTI;
 		riferimentoFormato = RiferimentoFormato.ABBREVIAZIONE;
@@ -143,32 +133,14 @@ public class FormatoTesto {
 	// Copia tutte le caratteristiche di un formato ad un altro.
 	// formato: Il formato a cui copiare le caratteristiche.
 	public void copiaA(FormatoTesto formato) {
-		// formato.fontNome = fontNome;
-		// formato.fontDimensione = fontDimensione;
-		// formato.fontGrassetto = fontGrassetto;
-		// formato.fontCorsivo = fontCorsivo;
-		// formato.fontSottolineato = fontSottolineato;
-		// formato.fontColore = fontColore;
-
-		// formato.fontGrecoNome = fontGrecoNome; formato.fontGrecoDimensione = fontGrecoDimensione; formato.fontGrecoColore = fontGrecoColore;
-
-		// formato.fontEbraicoNome = fontEbraicoNome; formato.fontEbraicoDimensione = fontEbraicoDimensione; formato.fontEbraicoColore = fontEbraicoColore;
-
-		// formato.fontRiferimentoNome = fontRiferimentoNome;
-		// formato.fontRiferimentoDimensione = fontRiferimentoDimensione;
 		formato.setFontRiferimentoGrassetto(fontRiferimentoGrassetto);
 		formato.setFontRiferimentoCorsivo(fontRiferimentoCorsivo);
 		formato.setFontRiferimentoSottolineato(fontRiferimentoSottolineato);
-		// formato.fontRiferimentoColore =fontRiferimentoColore;
 		formato.setRiferimentoApice(riferimentoApice);
-		// formato.riferimentoContestoRicerche = riferimentoContestoRicerche;
 
-		// formato.fontRicercaNome = fontRicercaNome;
-		// formato.fontRicercaDimensione = fontRicercaDimensione;
 		formato.setFontRicercaGrassetto(fontRicercaGrassetto);
 		formato.setFontRicercaCorsivo(fontRicercaCorsivo);
 		formato.setFontRicercaSottolineato(fontRicercaSottolineato);
-		// formato.fontRicercaColore = fontRicercaColore;
 
 		formato.setTitoliVisualizzati(titoliVisualizzati);
 		formato.setRiferimentoTipo(riferimentoTipo);

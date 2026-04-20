@@ -20,7 +20,7 @@ $titolo = $riferimento." (".implode(", ",$versioni).")";
 $sezione = "Testo della Bibbia";
 ?>
 <title>La Sacra Bibbia - <?echo $titolo?></title>
-<meta name="description" content="Il testo di <?echo $riferimento?> nella Bibbia, nelle versioni C.E.I. (1976), Nuova Riveduta, Nuova Diodati e Riveduta 2020, per i link che vengono da Wikipedia" />
+<meta name="description" content="Il testo di <?echo $riferimento?> nella Bibbia, nelle versioni C.E.I. (1974), Nuova Riveduta, Nuova Diodati e Riveduta 2020, per i link che vengono da Wikipedia" />
 <style>
 body{font-size:120%;}@media(min-width:768px){body{font-size:medium;}}
 </style>

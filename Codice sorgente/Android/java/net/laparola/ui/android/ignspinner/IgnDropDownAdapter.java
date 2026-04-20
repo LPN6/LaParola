@@ -7,7 +7,7 @@ import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 
 public class IgnDropDownAdapter implements ListAdapter, SpinnerAdapter {
-    private SpinnerAdapter mAdapter;
+    private final SpinnerAdapter mAdapter;
     private ListAdapter mListAdapter;
 
     /**

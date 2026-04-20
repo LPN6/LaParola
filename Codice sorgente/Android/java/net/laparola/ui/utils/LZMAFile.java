@@ -6,18 +6,6 @@ import java.io.OutputStream;
 import net.laparola.ui.utils.lzma_java.LZMADecoder;
 
 public class LZMAFile {
-	/*
-	public static void decomprimi (String inFileName, String outFileName) throws Exception {
-		File inFile = new File(inFileName);
-		File outFile = new File(outFileName);
-		
-		BufferedInputStream inStream  = new BufferedInputStream(new FileInputStream(inFile));
-		BufferedOutputStream outStream = new BufferedOutputStream(new FileOutputStream(outFile));
-		
-		decomprimi(inStream, outStream);
-	}
-	 */
-	
 	public static void decomprimi(InputStream inStream, OutputStream outStream, LZMADecoder.ProgressRunnable progress) throws Exception {
 		int propertiesSize = 5;
 		byte[] properties = new byte[propertiesSize];

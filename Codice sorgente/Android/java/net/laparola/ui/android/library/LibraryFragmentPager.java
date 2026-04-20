@@ -4,16 +4,18 @@ import java.util.Locale;
 
 import net.laparola.R;
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
-public class LibraryFragmentPager extends FragmentPagerAdapter {
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+public class LibraryFragmentPager extends FragmentStateAdapter {
     protected static String[] TABNAMES = null;
     
     protected LibraryFragment[] mFragments; 
     
-    public LibraryFragmentPager(FragmentManager fm, Context context) {
+    public LibraryFragmentPager(FragmentActivity fm, Context context) {
         super(fm);
         
         if (TABNAMES == null) {
@@ -32,23 +34,36 @@ public class LibraryFragmentPager extends FragmentPagerAdapter {
         //rmw1024 mFragments[2] = new LibraryFragment();
     }
 
+    @NonNull
     @Override
+    public Fragment createFragment(int position) {
+        // return a new Fragment instance for each page
+        return switch (position) {
+            case 0 -> mFragments[0];
+            case 1 -> mFragments[1];
+            //rmw1024 case 2: return mFragments[2];
+            default -> mFragments[0];
+        };
+    }
+
     public Fragment getItem(int position) {
     	return mFragments[position];
     }
 
-    @Override
     public CharSequence getPageTitle(int position) {
         return TABNAMES[position % TABNAMES.length].toUpperCase(Locale.getDefault());
     }
-    
-    @Override
+
     public int getCount() {
         return TABNAMES.length;
     }
 
+    @Override
+    public int getItemCount() {
+        return TABNAMES.length;
+    }
 
-	public void setAdapters(LibraryAdapter bibbieAdapter, LibraryAdapter commentariAdapter, LibraryAdapter dizionariAdapter) {
+    public void setAdapters(LibraryAdapter bibbieAdapter, LibraryAdapter commentariAdapter, LibraryAdapter dizionariAdapter) {
 		mFragments[0].setAdapter(bibbieAdapter);
 		mFragments[1].setAdapter(commentariAdapter);
         //rmw1024 mFragments[2].setAdapter(dizionariAdapter);

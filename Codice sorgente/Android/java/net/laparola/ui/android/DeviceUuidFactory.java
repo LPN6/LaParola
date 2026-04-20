@@ -17,12 +17,10 @@ public class DeviceUuidFactory {
 		String id = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
 
 		if (id == null || id.length() < 15 || "9774d56d682e549c".equals(id)) {
-			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-				id = android.os.Build.SERIAL;
-			}
-		}
+            id = android.os.Build.SERIAL;
+        }
 
-		if (id == null || id.equals("") || "9774d56d682e549c".equals(id))
+		if (id == null || id.isEmpty() || "9774d56d682e549c".equals(id))
 			id = "lpnj";
 
 		uuid = UUID.nameUUIDFromBytes(id.getBytes());

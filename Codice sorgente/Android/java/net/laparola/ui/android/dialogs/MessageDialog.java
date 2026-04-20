@@ -3,7 +3,7 @@ package net.laparola.ui.android.dialogs;
 import android.content.Context;
 import android.view.View;
 
-public class MessageDialog extends HoloDialog {
+public class MessageDialog extends LaParolaDialog {
 	private MessageDialog(Context context) {
 		super(context, true);
 

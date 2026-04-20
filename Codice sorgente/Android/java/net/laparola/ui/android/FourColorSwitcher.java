@@ -6,18 +6,19 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.view.View.OnClickListener;
+
+import com.google.android.material.button.MaterialButton;
 
 public class FourColorSwitcher extends FrameLayout implements OnClickListener {
 	public interface OnColorClickListener {
 		void OnColorClicked(int color, int index);
 	}
 	
-	private ImageButton mButtonCyan;
-	private ImageButton mButtonGreen;
-	private ImageButton mButtonOrange;
-	private ImageButton mButtonPurple;
+	private final MaterialButton mButtonCyan;
+	private final MaterialButton mButtonGreen;
+	private final MaterialButton mButtonOrange;
+	private final MaterialButton mButtonPurple;
 	private OnColorClickListener mListener;
 	private int mIndex;
 	private int mColor;

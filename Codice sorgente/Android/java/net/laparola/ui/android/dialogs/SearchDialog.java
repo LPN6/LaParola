@@ -10,14 +10,15 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.view.View;
 
-public class SearchDialog extends HoloDialog implements android.content.DialogInterface.OnClickListener {
+import com.google.android.material.button.MaterialButton;
+
+public class SearchDialog extends LaParolaDialog implements android.content.DialogInterface.OnClickListener {
 	public EditText expressionText;
 	public EditText referenceText;
-	public ImageButton helpButton;
-	public ImageButton moreButton;
+	public MaterialButton helpButton;
+	public MaterialButton moreButton;
 	public Button searchButton;
 	public boolean searchOk;
 
@@ -59,7 +60,7 @@ public class SearchDialog extends HoloDialog implements android.content.DialogIn
 
 	private void showDropDown() {
 		if (mPopup == null) {
-			ArrayAdapter<String> mListAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_dropdown_item);
+			ArrayAdapter<String> mListAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item);
 
 			Resources res = mContext.getResources();
 			String[] stringArray = res.getStringArray(R.array.advanced_search_ref_names);

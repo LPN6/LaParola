@@ -53,7 +53,7 @@ import java.lang.reflect.Modifier;
 
     // riprendi da 38
 		
-	private static String[] stringhe;
+	private static final String[] stringhe;
 
 	private LaParolaStringhe () {}
 	
@@ -83,21 +83,25 @@ import java.lang.reflect.Modifier;
 		stringhe[ERRORE_RICERCA_ERRORE_SINTASSI_PROPONI_RIFERIMENTO] = "Errore di sintassi nell'espressione da ricercare al carattere numero %1$s.<br/>Intendevi forse andare al <a href='laparola:%2$s'>riferimento %2$s</a>?<br/><br/><a href='lpcomando:aiuto_ricerca'>Mostra guida.</a>";
 		stringhe[ERRORE_RICERCA_PARENTESI]           = "Errore nell'espressione da ricercare: le parentesi non corrispondono.<br/><a href='lpcomando:aiuto_ricerca'>Mostra guida.</a>";
 		stringhe[ERRORE_RICERCA_PARENTESI_QUADRATE]  = "Errore nell'espressione da ricercare: le parentesi quadrate non corrispondono.<br/><a href='lpcomando:aiuto_ricerca'>Mostra guida.</a>";
-        stringhe[ERRORE_RICERCA]                     = "Errore nella ricerca.<br/><a href='lpcomando:aiuto_ricerca'>Mostra guida.</a>";
+		stringhe[ERRORE_RICERCA]                     = "Errore nella ricerca.<br/><a href='lpcomando:aiuto_ricerca'>Mostra guida.</a>";
 		stringhe[ERRORE_RICERCA_PROPONI_RIFERIMENTO] = "Errore nella ricerca.<br/>Intendevi forse andare al <a href='laparola:%1$s'>riferimento %1$s</a>?<br/><br/><a href='lpcomando:aiuto_ricerca'>Mostra guida.</a>";
                 
         stringhe[HTML_HEADER] =
-            "<html>\n" +
-            "  <head>\n" + 
-            "    %s" +
-            "  </head>\n"+
-            "  <body>\n" +
-            "    <span id='bodystart'></span>\n" +
-            "    <p>\n";
-        stringhe[HTML_FOOTER] = 
-        	"    </p>\n" + 
-    		"  </body>\n" + 
-        	"</html>\n";
+                """
+                        <html>
+                          <head>
+                            %s\
+                          </head>
+                          <body>
+                            <span id='bodystart'></span>
+                            <p>
+                        """;
+        stringhe[HTML_FOOTER] =
+                """
+                            </p>
+                          </body>
+                        </html>
+                        """;
         
         stringhe[DESCRIZIONE_URL_RICERCA]           = "Ricerca di \"%1$s\" (%2$s)";
         stringhe[DESCRIZIONE_URL_RICERCA_IN]        = "Ricerca di \"%1$s\" in %2$s (%3$s)";

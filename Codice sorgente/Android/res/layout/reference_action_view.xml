@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/reference_action_view"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:baselineAligned="false"
-    >
+    android:baselineAligned="false">
 
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/bcv_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:visibility="visible"
-        >
-    
-        <Spinner
-            android:id="@+id/book_spinner"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="?attr/dropdownListPreferredItemHeight"
-            android:layout_gravity="center" 
-            /> <!-- min width: 90dp -->
+        android:visibility="visible">
 
-        <Spinner
-            android:id="@+id/chapter_spinner"
-            android:layout_width="64dp"
-            android:layout_height="?attr/dropdownListPreferredItemHeight"
-            android:layout_gravity="center" 
-            android:dropDownWidth="264dp"
-            />
+		<net.laparola.ui.android.ignspinner.ListSpinner
+			android:id="@+id/book_spinner"
+			style="@style/Widget.AppCompat.Spinner.DropDown"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="?attr/dropdownListPreferredItemHeight"
+			android:layout_gravity="center"
+			/> <!-- min width: 90dp -->
 
-        <Spinner
-            android:id="@+id/verse_spinner"
-            android:layout_width="64dp"
-            android:layout_height="?attr/dropdownListPreferredItemHeight"
-            android:layout_gravity="center"
-            android:dropDownWidth="264dp"
-            />
-        
-	    <ImageButton android:id="@+id/reference_edit_btn"
-	        android:layout_width="wrap_content"
-	        android:layout_height="match_parent"
-			android:scaleType="centerInside"
-	        android:src="@drawable/ic_action_edit"
-	        android:focusable="true"
-	        android:contentDescription="@string/search"
-	        />
+		<net.laparola.ui.android.ignspinner.GridSpinner
+			android:id="@+id/chapter_spinner"
+			style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="wrap_content"
+			android:layout_height="?attr/dropdownListPreferredItemHeight"
+            android:minWidth="64dp"
+			android:layout_gravity="center"
+			android:dropDownWidth="264dp"
+			/>
+
+		<net.laparola.ui.android.ignspinner.GridSpinner
+			android:id="@+id/verse_spinner"
+			style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="wrap_content"
+			android:layout_height="?attr/dropdownListPreferredItemHeight"
+            android:minWidth="64dp"
+			android:layout_gravity="center"
+			android:dropDownWidth="264dp"
+			/>
+
+        <ImageButton
+            android:id="@+id/reference_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_action_edit"
+            android:focusable="true"
+            android:contentDescription="@string/modifica"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="?attr/colorOnPrimary"
+			android:padding="8dp" />
     </LinearLayout>
         
     <LinearLayout 
@@ -81,6 +88,5 @@
 	        android:visibility="gone"
 	        />    
     </LinearLayout>
-    
-    
+
 </LinearLayout>

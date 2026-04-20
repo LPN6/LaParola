@@ -1,7 +1,7 @@
-<html>
+<html lang="it">
 <head>
 <!--[LaParolaHeader]-->
-    <style type="text/css">
+    <style>
         h2 {
             text-align: center;
         }
@@ -14,7 +14,17 @@
             margin-top: 0.5em;
             margin-bottom: 0em;
         }
+                    img.immagine {
+              width: 15px;
+              height: 11px;
+            }
+            @media (prefers-color-scheme: dark) {
+              img.immagine {
+                filter: invert(1) brightness(1.8);
+              }
+            }
     </style>
+    <title>Guida</title>
 </head>
 <body>
 <h2>Guida di LaParola</h2>
@@ -26,56 +36,46 @@
     <a href="#codice">Codice sorgente</a><br/>
 </p>
 
-<a name="informazioni"></a>
+<div id="informazioni"></div>
 <script type="text/javascript">
     document.write(LaParola.leggiFile("about.html"));
 </script>
 
-<a name="altri_testi"></a>
-<h3>Installazione di altri testi</h3>
+<h3 id="altri_testi">Installazione di altri testi</h3>
 
-<p>Il file del programma che si scarica include la versione <i>Nuova Riveduta</i>. Il modo pi&ugrave; facile per installare 
+<p>Il file del programma che si scarica include la versione <i>Nuova Riveduta 2006</i>. Il modo pi&ugrave; facile per installare
 altre versioni della Bibbia &egrave; con la <i>Libreria</i> del programma - vedi le <a href="#libreria">istruzioni</a> qui 
 sotto.</p>
 
-<p>&Egrave; anche possibile fare un'installazione manuale di altri testi. Questo pu&ograve; essere utile se, per esempio, 
-il collegamento con Internet dall'Android &egrave; costoso o lento. Per installare altri testi, vai con il computer 
-di casa alla pagina con i file per Java (<a href="lpcomando:link:https://www.laparola.net/javafile/">https://www.laparola.net/javafile/</a>). Scarica
+<p>&Egrave; anche possibile fare un'installazione manuale di altri testi. Per installare altri testi, vai con il computer
+alla pagina con i file per Java (<a href="lpcomando:link:https://www.laparola.net/javafile/">https://www.laparola.net/javafile/</a>). Scarica
 i file desiderati e scompattali, per creare dei file con estensione .lpj. Questi file vanno copiati nella cartella 
-dell'Android in cui si trovano i file del programma, che &egrave; la cartella <i>laparola</i> nella scheda SD,
-oppure in una cartella chiamata <i>laparola</i> in qualsiasi scheda. Poi &egrave;
-necessario riavviare il programma.</p>
+dell'Android in cui si trovano i file del programma, che dipende dal dispositivo, ma che spesso &egrave; una cartella <i>laparola</i> nella memoria.
+Poi &egrave; necessario riavviare il programma.</p>
 
-<a name="istruzioni"></a>
-<h3>Istruzioni per l'uso</h3>
+<h3 id="istruzioni">Istruzioni per l'uso</h3>
 
 <p>Descrivo qui le funzioni principale del programma. Con schermi piccoli, non &egrave; possibile visualizzare tutte le
-icone dei comandi. In quel caso, puoi visualizzare le altre icone toccando i tre quadratini verticali (overflow) oppure 
-toccando il pulsante <i>menu</i> dell'Android.</p>
+icone dei comandi. In quel caso, puoi visualizzare gli altri comandi  toccando i tre quadratini verticali (overflow) .</p>
 
 <ol>
 
-<li><b>Ricerche:</b> Tocca la lente di ingrandimento, e nella casella che appare digita l'espressione di ricercare. 
-Pu&ograve; essere semplicemente una parola, ma sono ammesse anche espressione pi&ugrave; complicate. Per effettuare una 
-ricerca avanzata tocca la lente di ingrandimento col "+" accanto alla casella; nella schermata troverai anche l'aiuto per 
+    <li><b>Visualizzare un brano:</b> Tocca il libro con tre quadratini a destra. Puoi scegliere il libro/capitolo/versetto
+        da visualizzare, oppure digitare il riferimento di qualsiasi brano da visualizzare (sul tablet, dopo aver toccato la matita), anche con
+        versetti non consecutivi.<br />
+        Durante la lettura di commentari, &egrave; possibile trovare dei collegamenti ipertestuali a brani biblici oppure ad altre
+        voci nel commentario.
+        Se &egrave; un collegamento ad un'altra voce, tocca il collegamento per aprire il testo, oppure tieni premuto il dito sul collegamento
+        per ulteriori opzioni.
+        Se &egrave; un collegamento ad un brano della Bibbia, tocca il collegamento per vedere il testo con ulteriori opzioni.</li>
+
+    <li><b>Ricerche:</b> Tocca la lente di ingrandimento, e nella casella che appare digita l'espressione di ricercare.
+Pu&ograve; essere semplicemente una parola, ma sono ammesse anche espressione pi&ugrave; complicate. Per effettuare una
+ricerca avanzata tocca il pulsante (cellulare) o la lente di ingrandimento con il "+" accanto alla casella (tablet); nella schermata troverai anche l'aiuto per
 le espressioni di ricerca.</li>
 
-<li><b>Visualizzare un brano:</b> Tocca il libro con tre quadratini a destra. Puoi scegliere il libro/capitolo/versetto 
-da visualizzare, oppure toccando la matita puoi digitare il riferimento di qualsiasi brano da visualizzare, anche con 
-versetti non consecutivi.<br />
-Durante la lettura di commentari, &egrave; possibile trovare dei collegamenti ipertestuali a brani biblici oppure ad altre
-voci nel commentario.
-Se &egrave; un collegamento ad un'altra voce, tocca il collegamento per aprire il testo, oppure tieni premuto il dito sul collegamento
-per ulteriori opzioni.
-Se &egrave; un collegamento ad un brano della Bibbia, tocca il collegamento per vedere il testo con ulteriori opzioni.</li>
-
-<li><b>Dimensione del testo:</b> Ci sono tre modi per impostare la dimensione del testo. Si possono usare i comandi
-<i>Ingrandisci</i> e <i>Riduci</i> del menu; oppure si possono usare due dita sullo schermo, avvicinandole ed allontanandole;
-infine si pu&ograve; toccare lo schermo due volte rapidamente, tenendo premuto la seconda volta e muovendo il dito in alto
-ed in basso. Nelle <i>Impostazioni</i> del programma &egrave; possibile rimuovere alcune di queste possibilit&agrave;.</li>
-
-<li><b>Libreria:</b> Tocca l'icona con tre libri. Se tocchi il nome della versione della Bibbia, puoi scegliere di 
-usare un'altra delle versioni installate per visualizzare il testo, oppure un commentario. Se tocchi &quot;Gestione libreria&quot;, 
+<li id="libreria"><b>Libreria:</b> Tocca l'icona con tre libri. Se tocchi il nome della versione della Bibbia, puoi scegliere di
+usare un'altra delle versioni installate per visualizzare il testo. Puoi anche aprire la scheda dei commentari e aprirne uno. Se tocchi &quot;Gestione libreria&quot;,
 c'&egrave; una lista delle versioni della Bibbia e dei commentari attualmente installati e quelli che possono essere
 scaricati e installati da Internet. 
 Puoi anche toccare sul nome di una versione per ulteriori informazioni.<br />
@@ -83,20 +83,24 @@ I libri sono installati nella cartella che il sistema segnala per il salvataggio
 su alcuni dispositivi, questa pu&ograve; non essere la scheda di memoria esterna.
 Tuttavia, il programma cerca i testi anche nella cartella "laparola" delle schede di memoria,
 quindi &egrave; sufficiente spostarli manualmente. 
-Le preferenze, invece, vengono lette solo dalla cartella principale e pertanto bisogna lasciarle l&igrave;. </li>
+Le preferenze, invece, vengono lette solo dalla cartella principale e pertanto bisogna lasciarle l&igrave;.</li>
 
-<li><b>Preferiti:</b> Puoi toccare la stella per aggiungere la pagina attualmente visualizzata ai preferiti. Per visualizzare
+    <li><b>Preferiti:</b> Puoi toccare la stella per aggiungere la pagina attualmente visualizzata ai preferiti. Per visualizzare
 una pagina salvata nei preferiti, tocca la voce <i>Preferiti</i> del menu a sinistra. Per togliere una pagina dai preferiti, prima devi
 aprire la pagina, toccare la stella, e poi scegliere <i>Rimuovi</i>.</li>
 
 <li><b>Avanti/indietro:</b> Per vedere il brano o la ricerca precedenti, tocca il pulsante <i>indietro</i> dell'Android. 
-Dopo sar&agrave; possibile toccare la freccia verso destra o la voce <i>Avanti</i> per ritornare al brano o alla ricerca. 
-Il pulsante con l'icona del programma chiude la barra aperta e ritorna alla home.</li>
+Dopo sar&agrave; possibile toccare la freccia verso destra o la voce <i>Avanti</i> per ritornare al brano o alla ricerca.</li>
 
-<li><b>Evidenziatore:</b> Per evidenziare dei versetti, scegli la voce <i>Evidenziatore</i> dal menu.
-Poi scegli uno dei quattro colori disponibili toccando l'icona della mattina. Tocca un versetto per evidenziarlo, o per rimuovere l'evidenziazione.
+    <li><b>Dimensione del testo:</b> Ci sono tre modi per impostare la dimensione del testo. Si possono usare i comandi
+        <i>Ingrandisci</i> e <i>Riduci</i> del menu; oppure si possono usare due dita sullo schermo, avvicinandole ed allontanandole;
+        infine si pu&ograve; toccare lo schermo due volte rapidamente, tenendo premuto la seconda volta e muovendo il dito in alto
+        ed in basso. Nelle <i>Impostazioni</i> del programma &egrave; possibile rimuovere alcune di queste possibilit&agrave;.</li>
+
+    <li><b>Evidenziatore:</b> Per evidenziare dei versetti, scegli la voce <i>Evidenziatore</i> dal menu.
+Poi scegli uno dei quattro colori disponibili toccando l'icona della mattita. Tocca un versetto per evidenziarlo, o per rimuovere l'evidenziazione.
 Infine, tocca il punto di spunta per chiedere la finestra.
-In quella finestra &egrave; anche possibile visualizzare tutti i versetti evidenziati.
+In quella finestra &egrave; anche possibile visualizzare tutti i versetti evidenziati.</li>
 
 <li><b>Sintesi vocale:</b> fa leggere il testo, usando la sintesi vocale di Android. L'impostazione predefinita &egrave; di continuare la lettura,
 anche dopo la fine del capitolo. Per interrompere alla fine del capitolo, clicca il pulsante delle impostazioni
@@ -106,37 +110,32 @@ accanto al pulsante <i>Leggi</i> dopo aver aperto la sintesi vocale.</li>
 
 <li><b>Gestione pannelli:</b> In questa finestra puoi decidere quanti pannelli di testi da visualizzare,
 e se i pannelli devono essere sincronizzati fra loro.
-Un altro modo per gestire i pannelli &egrave; di tenere premuto il dito su uno spazio di un testo, dove non c'&egrave; una parola.<br/>
+Un altro modo per gestire i pannelli &egrave; di tenere premuto il dito su uno spazio di un testo, dove non c'&egrave; una parola.</li>
 
 <li><b>Impostazioni:</b> cambia alcune impostazioni del programma.</li>
 
 <li><b>Cronologia:</b> elenca le pagine aperte recentemente. Toccando il nome di una pagina, &egrave; possibile riaprirla.</li>
 
-<li><b>Condividi:</b> su Android 3.0 e successivi, tieni premuto il dito sul testo.
-Poi trascina le freccette per seleziona tutto il testo desiderato. Nel menu del programma seleziona <i>Condividi</i> (eventualmente
-sotto il pulsante overflow), e ti sar&agrave; chiesto come vuoi condividere il testo selezionato.<br />
-Per Android 2.3 e precedenti, tocca la voce <i>Condividi</i>, poi seleziona il testo da copiare. Ti sar&agrave; chiesto come vuoi 
-condividere il testo selezionato.</li>
+<li><b>Condividi:</b> Tieni premuto il dito sul testo.
+Poi trascina le freccette per seleziona tutto il testo desiderato. Nel menu del programma seleziona <i>Condividi</i>, e ti sar&agrave; chiesto come vuoi condividere il testo selezionato.</li>
 
-<li><b>Copia:</b> su Android 3.0 e successivi, tieni premuto il dito sul testo.
-Poi trascina le freccette per seleziona tutto il testo desiderato. Nel menu del programma seleziona <i>Copia</i> (eventualmente
-sotto il pulsante overflow).<br />
-Per Android 2.3 e precedenti, tocca la voce <i>Copia</i>, poi seleziona il testo da copiare.</li>
+<li><b>Copia:</b> Tieni premuto il dito sul testo.
+Poi trascina le freccette per seleziona tutto il testo desiderato. Nel menu del programma seleziona <i>Copia</i>.</li>
 
 </ol>
 
-<a name="backup"></a>
-<h3>Backup dei dati</h3>
-<p>I dati vengono salvati in automatico sui server Google in automatico con Android 2.2 e superiori. Perch&eacute; il backup funzioni, assicurarsi che sia attivo per il dispositivo: avviare l'applicazione "Impostazioni", selezionare "Backup e ripristino" (Android 4+) oppure "Privacy" (Android 2), attivare "Backup dei dati" e "Ripristino automatico".
+<h3 id="backup">Backup dei dati</h3>
+<p>I dati vengono salvati in automatico sui server Google. Perch&eacute; il backup funzioni, assicurarsi che sia attivo per il dispositivo:
+    avviare l'applicazione "Impostazioni", selezionare "Backup e ripristino", attivare "Backup dei dati" e "Ripristino automatico".
 Verranno salvati in automatico le preferenze, i versetti evidenziati, i preferiti e la cronologia.</p>
-<p>Per il backup manuale, copiare il contenuto della cartella <i>laparola</i> dalla scheda di memoria. Poich&eacute; &egrave; possibile che ci siano pi&ugrave; cartelle nelle diverse schede del
+<p>Per il backup manuale, copiare il contenuto della cartella <i>laparola</i> dalla scheda di memoria.
+    Poich&eacute; &egrave; possibile che ci siano pi&ugrave; cartelle nelle diverse schede del
 dispositivo, assicurarsi di aver copiato i file <i>cronologia</i>, <i>evidenziati</i> e <i>preferiti.xml</i>.</p>
 
-<a name="codice"></a>
-<h3>Codice sorgente</h3>
+<h3 id="codice">Codice sorgente</h3>
 
 <p>Se vuoi vedere come &egrave; stato scritto il programma, e forse contribuire al suo sviluppo, il codice sorgente
 &egrave; disponibile sul <a href="lpcomando:sito">sito</a> internet di LaParola.</p>
 
-<p align='center'><a href='lpfile:Home.html'>Torna a home</a></p>
+<p style="text-align: center;"><a href='lpfile:Home.html'>Torna a home</a></p>
 </body></html>

@@ -5,10 +5,9 @@ import net.laparola.core.Testi.StatoAggiornamento;
 import net.laparola.core.Testi.TestoTipi;
 import net.laparola.ui.LaParolaBrowser;
 import net.laparola.ui.android.LaParolaActivity;
-import net.laparola.ui.android.dialogs.HoloDialog;
+import net.laparola.ui.android.dialogs.LaParolaDialog;
 import net.laparola.ui.android.dialogs.MessageDialog;
 import net.laparola.ui.android.library.ClickableListAdapter.ViewHolder;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -66,18 +65,13 @@ class LibraryItemViewHolder extends ViewHolder implements View.OnClickListener {
 		final LibraryItemInfo info = (LibraryItemInfo) data;
 
 		if (v == component_list_item) {
-			HoloDialog d = new MessageDialog(mLibraryActivity, info.getName(), info.getMessage());
+			LaParolaDialog d = new MessageDialog(mLibraryActivity, info.getName(), info.getMessage());
 			d.show();
 		} else if (v == market) {
 			boolean ok = LaParolaActivity.apriLink(mLibraryActivity, mLibraryActivity.getString(R.string.market_url));
 			if (!ok) {
-				HoloDialog d = new MessageDialog(mLibraryActivity, R.string.error, R.string.no_market_installed);
-				d.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						LaParolaActivity.apriLink(mLibraryActivity, mLibraryActivity.getString(R.string.laparola_url));
-					}
-				});
+				LaParolaDialog d = new MessageDialog(mLibraryActivity, R.string.error, R.string.no_market_installed);
+				d.setOnDismissListener(dialog -> LaParolaActivity.apriLink(mLibraryActivity, mLibraryActivity.getString(R.string.laparola_url)));
 				d.show();
 			}
 		} else if (v == install || v == update) {
@@ -85,17 +79,14 @@ class LibraryItemViewHolder extends ViewHolder implements View.OnClickListener {
 			bind();
 		} else if (v == delete) {
 			if (mLibraryActivity.getInstalledBibleCount() <= 1 && info.getStatoAggiornamento() != StatoAggiornamento.FILE_CORROTTO && info.getTipo().contains(TestoTipi.BIBBIA)) {
-				HoloDialog md = new MessageDialog(mLibraryActivity, R.string.error, R.string.error_delete_last_bible);
+				LaParolaDialog md = new MessageDialog(mLibraryActivity, R.string.error, R.string.error_delete_last_bible);
 				md.show();
 			} else {
-				HoloDialog md = new MessageDialog(mLibraryActivity, R.string.delete, R.string.confirm_delete);
-				md.setYesNo(R.string.delete, android.R.string.cancel, new Runnable() {
-					@Override
-					public void run() {
-						LaParolaBrowser.cancellaTesto(info.getName(), info.getFileName());
-						mLibraryActivity.refreshLibrary(false);
-					}
-				}, null);
+				LaParolaDialog md = new MessageDialog(mLibraryActivity, R.string.delete, R.string.confirm_delete);
+				md.setYesNo(R.string.delete, android.R.string.cancel, () -> {
+                    LaParolaBrowser.cancellaTesto(info.getName(), info.getFileName());
+                    mLibraryActivity.refreshLibrary(false);
+                }, null);
 				md.show();
 			}
 		}

@@ -3,14 +3,15 @@ package net.laparola.ui.android.dialogs;
 import net.laparola.R;
 import net.laparola.ui.LaParolaUrl;
 import net.laparola.ui.android.LaParolaActivity;
+import net.laparola.ui.android.LaParolaPreferences;
 import net.laparola.ui.android.bibleview.BibleView;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
-public class PopupDialog extends HoloDialog {
+public class PopupDialog extends LaParolaDialog {
 	private BibleView mBibleView;
 	private LaParolaUrl mUrl;
 	
@@ -22,17 +23,14 @@ public class PopupDialog extends HoloDialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (Build.VERSION.SDK_INT >= 11) {
-			// la webview ha dei bug su ics legati all'accelerazione
-			// grafica: niente sfondo trasparente e problemi con il
-			// pulsante sottostante
-			setSoftwareRendererV11();
-		}
-		
-		mBibleView = new BibleView(mContext, null);
+		setSoftwareRendererV11();
+
+		mBibleView = new BibleView(getContext(), null);
+		mBibleView.setNightMode(LaParolaPreferences.nightMode);
+
 		mBibleView.setVisibility(View.GONE);   // per evitare glitch, sarà visualizzato a pagina caricata
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		layoutParams.weight = 1;
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		//layoutParams.weight = 1;
 		setContentView(mBibleView, layoutParams);
 		
 		setTitle(mUrl.versione);
@@ -42,13 +40,13 @@ public class PopupDialog extends HoloDialog {
 		boolean t = laParolaActivity.getPanesNumber() < LaParolaActivity.MAX_PANELS;
 		
 		setButtons(R.string.open_in_panel, R.string.close, t ? R.string.open_new_panel : 0);
-		
-		mBibleView.post(new Runnable() {
-			@Override
-			public void run() {
-				mBibleView.getBrowser().vaiAdUrl(mUrl);
-			}
-		});
+
+		mBibleView.post(() -> mBibleView.getBrowser().vaiAdUrl(mUrl));
+
+		// Force the dialog window to match the parent's height
+		if (getWindow() != null) {
+			getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		}
 	}
 	
 	@Override
@@ -69,7 +67,7 @@ public class PopupDialog extends HoloDialog {
 		dismiss();
 	}
 
-	protected void onCancelClick() {}
+	//protected void onCancelClick() {} non usato più
 
 	public void setUrl(LaParolaUrl url) {
 		mUrl = url;

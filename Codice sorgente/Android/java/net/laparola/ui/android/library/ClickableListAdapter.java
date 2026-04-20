@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public abstract class ClickableListAdapter<T> extends BaseAdapter {
-	private LayoutInflater mInflater;
+	private final LayoutInflater mInflater;
 	protected List<T> mDataObjects; // our generic object list
-	private int mViewId;
+	private final int mViewId;
 
 	/**
 	 * This is the holder will provide fast access to arbitrary objects and views. Use a subclass to adapt it for your personal needs.
@@ -27,7 +27,7 @@ public abstract class ClickableListAdapter<T> extends BaseAdapter {
 	 */
 	public static abstract class OnClickListener implements View.OnClickListener {
 
-		private ViewHolder mViewHolder;
+		private final ViewHolder mViewHolder;
 
 		/**
 		 * @param holder
@@ -55,7 +55,7 @@ public abstract class ClickableListAdapter<T> extends BaseAdapter {
 	 * The long click listener base class.
 	 */
 	public static abstract class OnLongClickListener implements View.OnLongClickListener {
-		private ViewHolder mViewHolder;
+		private final ViewHolder mViewHolder;
 
 		/**
 		 * @param holder
@@ -96,7 +96,7 @@ public abstract class ClickableListAdapter<T> extends BaseAdapter {
 		mViewId = viewid;
 
 		if (objects == null) {
-			mDataObjects = new ArrayList<T>();
+			mDataObjects = new ArrayList<>();
 		}
 	}
 
@@ -161,8 +161,8 @@ public abstract class ClickableListAdapter<T> extends BaseAdapter {
 	 * Creates your custom holder, that carries reference for e.g. ImageView and/or TextView. If necessary connect your clickable View object with the PrivateOnClickListener, or
 	 * PrivateOnLongClickListener
 	 * 
-	 * @param vThe
-	 *            view for the new holder object
+	 * @param v
+	 *            The view for the new holder object
 	 */
 	protected abstract ViewHolder createHolder(View v);
 

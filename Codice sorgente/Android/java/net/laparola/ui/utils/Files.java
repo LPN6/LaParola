@@ -1,7 +1,5 @@
 package net.laparola.ui.utils;
 
-import android.util.Log;
-
 import net.laparola.ui.android.LaParolaPreferences;
 
 import java.io.BufferedInputStream;
@@ -10,8 +8,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.channels.FileChannel;
+import java.util.Objects;
+
+import timber.log.Timber;
 
 public class Files {
     private Files() {}
@@ -25,10 +25,10 @@ public class Files {
         try {
             boolean res = file.delete();
             if (!res) {
-                //Log.d("laparola", "impossibile eliminare " + fname);
+                //Timber.tag("laparola").d("impossibile eliminare %s", fname);
             }
         } catch (SecurityException e) {
-            //Log.d("laparola", "security exception eliminando " + fname);
+            //Timber.tag("laparola").d("security exception eliminando %s", fname);
         }
     }
 
@@ -44,11 +44,11 @@ public class Files {
     }
 
     public static boolean fileIsEqualToInternalStorage(String filename) {
-        //Log.d("LaParola", "is same as internal? " + filename);
+        //Timber.tag("LaParola").d("is same as internal? %s", filename);
         File f = new File(filename);
 
         if (!f.exists()) {
-            // Log.d("LaParola", "no, does not exits");
+            //Timber.tag("LaParola").d("no, does not exist");
             return false;
         }
 
@@ -61,7 +61,7 @@ public class Files {
         try {
             absPath = f.getCanonicalPath();   // dovrebbe gestire soft e hard link
         } catch (Exception e) {
-            // Log.d("LaParola", "no, error getting canonical path");
+            //Timber.tag("LaParola").d("no, error getting canonical path");
             return false;
         }
 
@@ -72,37 +72,36 @@ public class Files {
         try {
             internalAbsPath = new File(internalPath).getCanonicalPath();   // dovrebbe gestire soft e hard link
         } catch (Exception e) {
-            //Log.d("LaParola", "no, error getting internal canonical path");
+            //Timber.tag("LaParola").d("no, error getting internal canonical path");
             return false;
         }
 
         if (absPath.equals(internalAbsPath)) {
-            //Log.d("LaParola", "no, it IS internal");
+            //Timber.tag("LaParola").d("no, it IS internal");
             return true;
         }
 
         File ifile = new File(internalPath);
 
         if (!ifile.exists()) {
-            // Log.d("LaParola", "no, no internal file");
+            //Timber.tag("LaParola").d("no, no internal file");
             return false;
         }
 
         if (f.length() != ifile.length()) {
-            // Log.d("LaParola", String.format("no, different length %d, %d", f.length(), ifile.length()));
+            //Timber.tag("LaParola").d("no, different length %d, %d", f.length(), ifile.length());
             return false;
         }
 
-        boolean ret = compareContents(filename, internalPath);
-        return ret;
+        return compareContents(filename, internalPath);
     }
 
     public static boolean compareContents(String p1, String p2) {
         FileInputStream fis1 = null, fis2 = null;
 
         try {
-            fis1 = new FileInputStream(new File(p1));
-            fis2 = new FileInputStream(new File(p2));
+            fis1 = new FileInputStream(p1);
+            fis2 = new FileInputStream(p2);
             byte[] buf1 = new byte[1024];
             byte[] buf2 = new byte[1024];
 
@@ -123,7 +122,7 @@ public class Files {
             }
         } catch (Exception e) {
             if (! (e instanceof FileNotFoundException)) {
-                e.printStackTrace();
+                Timber.e(e, "Unexpected File Not Found error occurred while comparing contents.");
             }
             return false;
         } finally {
@@ -150,7 +149,7 @@ public class Files {
             return new String(buf);
         } catch (Exception e) {
             if (! (e instanceof FileNotFoundException)) {
-                e.printStackTrace();
+                Timber.e(e, "Unexpected File Not Found error occurred while reading files.");
             }
             return null;
         }
@@ -158,7 +157,7 @@ public class Files {
 
     //@SuppressWarnings("resource")
     public static void copyFileIfExists(String sourceFileName, String destFileName) throws IOException {
-        if (sourceFileName == destFileName) {
+        if (Objects.equals(sourceFileName, destFileName)) {
             return;
         }
 
@@ -173,25 +172,13 @@ public class Files {
             destFile.createNewFile();
         }
 
-        FileChannel source = null;
-        FileChannel destination = null;
-        try {
-            source = new FileInputStream(sourceFile).getChannel();
-            destination = new FileOutputStream(destFile).getChannel();
+        try (FileChannel source = new FileInputStream(sourceFile).getChannel(); FileChannel destination = new FileOutputStream(destFile).getChannel()) {
 
             // previous code: destination.transferFrom(source, 0, source.size());
             // to avoid infinite loops, should be:
             long count = 0;
             long size = source.size();
-            while((count += destination.transferFrom(source, count, size-count))<size);
-        }
-        finally {
-            if(source != null) {
-                source.close();
-            }
-            if(destination != null) {
-                destination.close();
-            }
+            while ((count += destination.transferFrom(source, count, size - count)) < size) ;
         }
     }
 }

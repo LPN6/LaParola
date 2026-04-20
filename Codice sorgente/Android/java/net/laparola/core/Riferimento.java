@@ -20,13 +20,13 @@ public class Riferimento {
 	public Riferimento(int libro, int capitolo, int versetto) {
 		costruttoreComune();
 		brani.add(new int[] { libro, capitolo, versetto, libro, capitolo, versetto });
-		numeroParola.add(new ArrayList<Integer>());
+		numeroParola.add(new ArrayList<>());
 	}
 
 	public Riferimento(int[] brano) {
 		costruttoreComune();
 		brani.add(brano);
-		numeroParola.add(new ArrayList<Integer>());
+		numeroParola.add(new ArrayList<>());
 	}
 
 	public Riferimento(boolean brano) {
@@ -43,20 +43,19 @@ public class Riferimento {
 			for (int i = 0; i < riferimento.getBrani().size(); ++i) {
 				brani.add(new int[] { riferimento.getBrani().get(i)[0], riferimento.getBrani().get(i)[1], riferimento.getBrani().get(i)[2], riferimento.getBrani().get(i)[3],
 						riferimento.getBrani().get(i)[4], riferimento.getBrani().get(i)[5] });
-				numeroParola.add(new ArrayList<Integer>());
+				numeroParola.add(new ArrayList<>());
 				for (int j = 0; j < riferimento.numeroParola.get(i).size(); ++j)
 					numeroParola.get(i).add(riferimento.numeroParola.get(i).get(j));
 			}
 		} else {
-			for (int i = 0; i < riferimento.getNote().size(); ++i)
-				note.add(riferimento.getNote().get(i));
+            note.addAll(riferimento.getNote());
 		}
 	}
 
 	private void costruttoreComune() {
-		brani = new ArrayList<int[]>();
-		note = new ArrayList<String>();
-		numeroParola = new ArrayList<List<Integer>>();
+		brani = new ArrayList<>();
+		note = new ArrayList<>();
+		numeroParola = new ArrayList<>();
 	}
 
 	public List<int[]> getBrani() {
@@ -90,11 +89,11 @@ public class Riferimento {
 	}
 
 	public void aggiungiBrano(int[] brano) {
-		aggiungiBranoNumeroParola(brano, new ArrayList<Integer>());
+		aggiungiBranoNumeroParola(brano, new ArrayList<>());
 	}
 
 	public void aggiungiBrano8Int(int[] brano) {
-		List<Integer> listaParole = new ArrayList<Integer>();
+		List<Integer> listaParole = new ArrayList<>();
 		if (brano[3] != 0 || brano[7] != 0) {
 			listaParole.add(brano[3]);
 			listaParole.add(brano[7]);
@@ -166,7 +165,7 @@ public class Riferimento {
 	}
 
 	public void ordinaNote(Collator coll) {
-		Collections.sort(note, coll);
+		note.sort(coll);
 	}
 
 	/*
@@ -191,7 +190,7 @@ public class Riferimento {
 	// Restituisce una string che rappresenta come tutto il riferimento è mostrato quando è il titolo di una nota.
 	public String comeNotaTuttoRiferimento() {
 		// vedi ConvertiTitoloNotaARiferimento per l'altra direzione
-		if (brani.size() > 0) {
+		if (!brani.isEmpty()) {
 			StringBuilder comeNota = new StringBuilder(26 * brani.size());
 			for (int i = 0; i < brani.size(); ++i)
 				comeNota.append(comeNotaUnBrano(i));
@@ -203,7 +202,7 @@ public class Riferimento {
 	// Restituisce una string che rappresenta come il primo brano nel riferimento è mostrato quando è il titolo di una nota.
 	public String comeNotaPrimoRiferimento() {
 		// vedi ConvertiTitoloNotaARiferimento per l'altra direzione
-		if (brani.size() > 0)
+		if (!brani.isEmpty())
 			return comeNotaUnBrano(0);
 		return "";
 	}
@@ -211,36 +210,36 @@ public class Riferimento {
 	private String comeNotaUnBrano(int numeroBrano) {
 		StringBuilder comeNota = new StringBuilder("#");
 		String temp;
-		temp = "0" + Integer.toString(brani.get(numeroBrano)[0]);
+		temp = "0" + brani.get(numeroBrano)[0];
 		temp = temp.substring(temp.length() - 2);
 		comeNota.append(temp);
-		temp = "00" + Integer.toString(brani.get(numeroBrano)[1]);
+		temp = "00" + brani.get(numeroBrano)[1];
 		temp = temp.substring(temp.length() - 3);
 		comeNota.append(temp);
-		temp = "00" + Integer.toString(brani.get(numeroBrano)[2]);
+		temp = "00" + brani.get(numeroBrano)[2];
 		temp = temp.substring(temp.length() - 3);
 		comeNota.append(temp);
 		if (numeroParola.get(numeroBrano).size() < 2)
 			comeNota.append("0000-");
 		else {
-			temp = "0000" + Integer.toString(numeroParola.get(numeroBrano).get(0));
+			temp = "0000" + numeroParola.get(numeroBrano).get(0);
 			temp = temp.substring(temp.length() - 4);
 			comeNota.append(temp).append("-");
 		}
 
-		temp = "0" + Integer.toString(brani.get(numeroBrano)[3]);
+		temp = "0" + brani.get(numeroBrano)[3];
 		temp = temp.substring(temp.length() - 2);
 		comeNota.append(temp);
-		temp = "00" + Integer.toString(brani.get(numeroBrano)[4]);
+		temp = "00" + brani.get(numeroBrano)[4];
 		temp = temp.substring(temp.length() - 3);
 		comeNota.append(temp);
-		temp = "00" + Integer.toString(brani.get(numeroBrano)[5]);
+		temp = "00" + brani.get(numeroBrano)[5];
 		temp = temp.substring(temp.length() - 3);
 		comeNota.append(temp);
 		if (numeroParola.get(numeroBrano).size() < 2)
 			comeNota.append("0000");
 		else {
-			temp = "0000" + Integer.toString(numeroParola.get(numeroBrano).get(1));
+			temp = "0000" + numeroParola.get(numeroBrano).get(1);
 			temp = temp.substring(temp.length() - 4);
 			comeNota.append(temp);
 		}

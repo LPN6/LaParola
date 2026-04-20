@@ -43,7 +43,7 @@ import android.widget.SpinnerAdapter;
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-spinner.html">Spinner
  * tutorial</a>.</p>
  *
- * @attr ref android.R.styleable#Spinner_prompt
+ * attr ref android.R.styleable#Spinner_prompt
  */
 public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickListener {
     //private static final String TAG = "Spinner";
@@ -51,7 +51,7 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
     // Only measure this many items to get a decent max width.
     private static final int MAX_ITEMS_MEASURED = 200; //15;
 
-    /**
+    /*
      * Use a dialog window for selecting spinner options.
      */
     //public static final int MODE_DIALOG = 0;
@@ -71,9 +71,9 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
     int mDropDownWidth;
 
     private int mGravity;
-    private boolean mDisableChildrenWhenDisabled;
+    private final boolean mDisableChildrenWhenDisabled;
 
-    private Rect mTempRect = new Rect();
+    private final Rect mTempRect = new Rect();
 
     public abstract IgnDropdownPopup createPopup(Context context, AttributeSet attrs, int defStyle);
 
@@ -96,8 +96,6 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
     public IgnAbsSpinner(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        //TypedArray a = context.obtainStyledAttributes(attrs,
-         //       R.styleable.SherlockSpinner, defStyle, 0);
         TypedArray a = context.obtainStyledAttributes(attrs,
                 new int[] {
                         android.R.attr.dropDownWidth,
@@ -111,30 +109,21 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
 
         IgnDropdownPopup popup = createPopup(context, attrs, defStyle);
 
-        //mDropDownWidth = a.getLayoutDimension(
-        //        R.styleable.SherlockSpinner_android_dropDownWidth,
-        //        ViewGroup.LayoutParams.WRAP_CONTENT);
         mDropDownWidth = a.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         popup.setBackgroundDrawable(a.getDrawable(1));
         final int verticalOffset = a.getDimensionPixelOffset(2, 0);
-        //final int verticalOffset = a.getDimensionPixelOffset(
-        //        R.styleable.SherlockSpinner_android_dropDownVerticalOffset, 0);
         if (verticalOffset != 0) {
             popup.setVerticalOffset(verticalOffset);
         }
 
         final int horizontalOffset = a.getDimensionPixelOffset(3, 0);
-        //final int horizontalOffset = a.getDimensionPixelOffset(
-        //        R.styleable.SherlockSpinner_android_dropDownHorizontalOffset, 0);
         if (horizontalOffset != 0) {
             popup.setHorizontalOffset(horizontalOffset);
         }
 
         mPopup = popup;
 
-        //mGravity = a.getInt(R.styleable.SherlockSpinner_android_gravity, Gravity.CENTER);
-        //mPopup.setPromptText(a.getString(R.styleable.SherlockSpinner_android_prompt));
         mGravity = a.getInt(4, Gravity.CENTER);
         mPopup.setPromptText(a.getString(5));
 
@@ -167,12 +156,12 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
      *
      * @param gravity See {@link android.view.Gravity}
      *
-     * @attr ref android.R.styleable#Spinner_gravity
+     * attr ref android.R.styleable#Spinner_gravity
      */
     public void setGravity(int gravity) {
         if (mGravity != gravity) {
             if ((gravity & Gravity.HORIZONTAL_GRAVITY_MASK) == 0) {
-                gravity |= Gravity.LEFT;
+                gravity |= Gravity.START;
             }
             mGravity = gravity;
             requestLayout();
@@ -294,14 +283,11 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
         View sel = makeAndAddView(mSelectedPosition);
         int width = sel.getMeasuredWidth();
         int selectedOffset = childrenLeft;
-        switch (mGravity & Gravity.HORIZONTAL_GRAVITY_MASK) {
-            case Gravity.CENTER_HORIZONTAL:
-                selectedOffset = childrenLeft + (childrenWidth / 2) - (width / 2);
-                break;
-            case Gravity.RIGHT:
-                selectedOffset = childrenLeft + childrenWidth - width;
-                break;
-        }
+        selectedOffset = switch (mGravity & Gravity.HORIZONTAL_GRAVITY_MASK) {
+            case Gravity.CENTER_HORIZONTAL -> childrenLeft + (childrenWidth / 2) - (width / 2);
+            case Gravity.END -> childrenLeft + childrenWidth - width;
+            default -> selectedOffset;
+        };
         sel.offsetLeftAndRight(selectedOffset);
 
         // Flush any cached views that did not get reused above
@@ -356,7 +342,7 @@ public abstract class IgnAbsSpinner extends IgnAbsAbsSpinner implements OnClickL
      */
     private void setUpChild(View child) {
 
-        // Respect layout params that are already in the view. Otherwise
+        // Respect layout params that are already in the view. Otherwise,
         // make some up...
         ViewGroup.LayoutParams lp = child.getLayoutParams();
         if (lp == null) {

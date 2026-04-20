@@ -1,238 +1,232 @@
 package net.laparola.ui.android.dialogs;
 
-import net.laparola.R;
-import net.laparola.ui.android.LaParolaActivity;
-import net.laparola.ui.android.actionbar.ReferenceActionItemManager.BookSpinnerAdapter;
-import net.laparola.ui.android.actionbar.ReferenceActionItemManager.ChapterSpinnerAdapter;
-import net.laparola.ui.android.actionbar.ReferenceActionItemManager.VerseSpinnerAdapter;
-import net.laparola.ui.android.ignspinner.GridSpinner;
-import net.laparola.ui.android.ignspinner.IgnAdapterView;
-import net.laparola.ui.android.ignspinner.IgnAdapterView.OnItemSelectedListener;
-import net.laparola.ui.android.ignspinner.ListSpinner;
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.TabHost.TabSpec;
-import android.widget.TextView.OnEditorActionListener;
+import android.widget.*;
 
-public class AccessibilityDialog extends HoloDialog implements android.content.DialogInterface.OnClickListener, OnItemSelectedListener, OnEditorActionListener {
-	private ListSpinner bookSpinner;
-	private BookSpinnerAdapter bookSpinnerAdapter;
-	private GridSpinner chapterSpinner;
-	private ChapterSpinnerAdapter chapterSpinnerAdapter;
-	private GridSpinner verseSpinner;
-	private VerseSpinnerAdapter verseSpinnerAdapter;
-	private LaParolaActivity parent;
-	private boolean ignoreBookSelection;
-	private boolean ignoreChapterSelection;
-	private boolean ignoreVerseSelection;
-	private EditText referenceEditText;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-	public AccessibilityDialog(LaParolaActivity context) {
-		super(context, true);
-		parent = context;
-	}
+import com.google.android.material.button.MaterialButtonToggleGroup;
 
-	@SuppressLint("InlinedApi")
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		float scaledDensity = parent.getResources().getDisplayMetrics().scaledDensity;
-		float fs = parent.getResources().getConfiguration().fontScale;
-		int textSize = 48;
-		int columnWidth = Math.round(2.0f * textSize * scaledDensity * fs);
-		
-		setContentView(R.layout.accessibility_dialog);
-		setTitle(R.string.reference);
-		setYesNo(R.string.close, 0, null, null);
-		button1.setTextSize(textSize);
+import net.laparola.R;
+import net.laparola.ui.LaParolaUrl;
+import net.laparola.ui.android.LaParolaActivity;
+import net.laparola.ui.android.LaParolaFragment;
+import net.laparola.ui.android.actionbar.ReferenceActionItemManager.*;
 
-		bookSpinnerAdapter = new BookSpinnerAdapter(parent);
-		chapterSpinnerAdapter = new ChapterSpinnerAdapter(parent);
-		verseSpinnerAdapter = new VerseSpinnerAdapter(parent);
-		
-		bookSpinnerAdapter.setTextSize(textSize);
-		chapterSpinnerAdapter.setTextSize(textSize);
-		verseSpinnerAdapter.setTextSize(textSize);
-		
-		bookSpinner = findViewById(R.id.book_spinner);
-		bookSpinner.setAdapter(bookSpinnerAdapter);
-		bookSpinner.setOnItemSelectedListener(this);
+import java.util.Optional;
 
-		chapterSpinner = findViewById(R.id.chapter_spinner);
-		chapterSpinner.setAdapter(chapterSpinnerAdapter);
-		chapterSpinner.setOnItemSelectedListener(this);
-		chapterSpinner.setColumnWidth(columnWidth);
-		
-		verseSpinner = findViewById(R.id.verse_spinner);
-		verseSpinner.setAdapter(verseSpinnerAdapter);
-		verseSpinner.setOnItemSelectedListener(this);
-		verseSpinner.setColumnWidth(columnWidth);
-		
-		bookSpinner.setSelection(0);
-		chapterSpinner.setEnabled(false);
-		verseSpinner.setEnabled(false);
+public class AccessibilityDialog extends DialogFragment {
+    private LaParolaActivity parent;
+    private RecyclerView recyclerView;
+    private TextView header;
+    private EditText referenceEditText;
+    private ViewFlipper viewFlipper;
 
-		bookSpinner.setPopupCentered(true);
-		chapterSpinner.setPopupCentered(true);
-		verseSpinner.setPopupCentered(true);
+    private BookSpinnerAdapter bookAdapter;
+    private ChapterSpinnerAdapter chapterAdapter;
+    private VerseSpinnerAdapter verseAdapter;
 
-		referenceEditText = findViewById(R.id.reference_edittext);
-		referenceEditText.setOnEditorActionListener(this);
-		referenceEditText.setTextSize(textSize);
-		
-		
-		getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT);
-		
+    private int selectedBook = 0;
+    private int selectedChapter = 0;
 
-		int[] lcv = null;
-        try {
-        	lcv = parent.getActiveFragment().getUrlCorrente().getLCV();
-        } catch (NullPointerException e) {}
-		if (lcv != null) {
-			int b = lcv[0];
-			int c = lcv[1];
-			int v = lcv[2];
+    // Fragments require an empty constructor
+    public AccessibilityDialog() {
+    }
 
-			select(b, c, v);
-		} else {
-			select(0, 0, 0);
-		}
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.parent = (LaParolaActivity) context;
+    }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setCancelable(true);
+        View view = inflater.inflate(R.layout.accessibility_dialog, container, false);
 
-		TabHost tabHost = findViewById(android.R.id.tabhost);
-		tabHost.setup();
-		
-		String t1name = parent.getString(R.string.basic);
-        TabSpec t1spec = tabHost.newTabSpec(t1name);
-        t1spec.setIndicator(t1name);
-        t1spec.setContent(R.id.tab1);
-        tabHost.addTab(t1spec);
-        
-		String t2name = parent.getString(R.string.advanced);
-        TabSpec t2spec = tabHost.newTabSpec(t2name);
-        t2spec.setIndicator(t2name);
-        t2spec.setContent(R.id.tab2);
-        tabHost.addTab(t2spec);
-	}
-	
-	@Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if ((event != null &&
-             event.getAction() == KeyEvent.ACTION_DOWN && 
-             event.getKeyCode() == KeyEvent.KEYCODE_ENTER) ||
-            (actionId == EditorInfo.IME_ACTION_GO)) {
-            
-            parent.getActiveFragment().vaiARiferimento(referenceEditText.getText());
+        recyclerView = view.findViewById(R.id.selectionRecyclerView);
+        header = view.findViewById(R.id.selectionHeader);
+        referenceEditText = view.findViewById(R.id.reference_edittext);
+        viewFlipper = view.findViewById(R.id.viewFlipper);
+        MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.toggleGroup);
+
+        bookAdapter = new BookSpinnerAdapter(parent);
+        bookAdapter.togliLibroZero();
+        chapterAdapter = new ChapterSpinnerAdapter(parent);
+        chapterAdapter.togliCapitoloZero();
+        verseAdapter = new VerseSpinnerAdapter(parent);
+        verseAdapter.togliVersettoZero();
+
+        setupTabs(toggleGroup);
+        setupAdvancedInput();
+
+        // Start the sequence: Book -> Chapter -> Verse
+        showBookSelection();
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Make the dialog fill the screen width
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            //if (!parent.isTablet)  if not full width, some book names wrap. the alternative is to have only two columns
+//            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+    }
+
+    private void resetScroll() {
+        if (recyclerView != null) {
+            recyclerView.scrollToPosition(0);
+        }
+    }
+
+    private void showBookSelection() {
+        resetScroll();
+        int libroAttuale = Optional.ofNullable(parent.getActiveFragment())
+                .map(LaParolaFragment::getUrlCorrente)
+                .map(LaParolaUrl::getLCV)
+                .filter(lcv -> lcv.length > 0) // Ensure the array isn't empty
+                .map(lcv -> lcv[0])           // Get the first element
+                .orElse(0); // Default to 0 if anything above was null/empty
+
+        header.setText(R.string.book);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), parent.isTablet ? 3 : 1));
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), parent.isTablet ? 3 : 1);
+        recyclerView.setLayoutManager(layoutManager);
+
+        SelectionAdapter adapter = new SelectionAdapter(bookAdapter, true, position -> {
+            selectedBook = (int) bookAdapter.getItemId(position);
+            chapterAdapter.setBook(selectedBook);
+            showChapterSelection();
+            parent.getActiveFragment().vaiALibroCapitoloVersetto(selectedBook, 1, 1);
+        });
+        recyclerView.setAdapter(adapter);
+
+        int position = -1;
+        // necessario, perché non tutte le versioni hanno tutti i libri,
+        // quindi cerchiamo la posizione del libro desiderato
+        for (int i = 0; i < bookAdapter.getCount(); i++) {
+            if (bookAdapter.getItemId(i) == libroAttuale) {
+                position = i;
+                break;
+            }
+        }
+
+        int positionInAdapter = position;
+        if (position >= 0 && position < adapter.getItemCount()) {
+            recyclerView.post(() -> layoutManager.scrollToPositionWithOffset(positionInAdapter, 0));
+        }
+    }
+
+    private void showChapterSelection() {
+        resetScroll();
+        header.setText(R.string.chapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), parent.isTablet ? 5 : 3));
+
+        SelectionAdapter adapter = new SelectionAdapter(chapterAdapter, position -> {
+            selectedChapter = (int) chapterAdapter.getItemId(position);
+            verseAdapter.setBookAndChapter(selectedBook, selectedChapter);
+            showVerseSelection();
+            parent.getActiveFragment().vaiALibroCapitoloVersetto(selectedBook, selectedChapter, 1);
+        });
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void showVerseSelection() {
+        resetScroll();
+        header.setText(R.string.verse);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), parent.isTablet ? 5 : 3));
+
+        SelectionAdapter adapter = new SelectionAdapter(verseAdapter, position -> {
+            int verse = (int) verseAdapter.getItemId(position);
+            // Navigate using the method from your uploaded file
+            parent.getActiveFragment().vaiALibroCapitoloVersetto(selectedBook, selectedChapter, verse);
             dismiss();
-            return true;
-        }
-
-        return false;
-    }
-    
-	@Override
-	public void onClick(DialogInterface arg0, int arg1) {}
-    
-    protected void onItemSelectedGeneric(Object view, View itemview, int position, long id) {
-    	int b = (int)bookSpinner.getSelectedItemId();
-    	int c = (int)chapterSpinner.getSelectedItemId();
-    	int v = (int)verseSpinner.getSelectedItemId();
-    	boolean load = false;        
-        
-        if (view == bookSpinner) {
-        	if (!ignoreBookSelection) {
-	        	chapterSpinnerAdapter.setBook(b);
-	        	if (b == 0) {
-	        		chapterSpinner.setEnabled(false);
-	        		chapterSpinner.setSelection(0);
-	        		verseSpinner.setEnabled(false);
-	        		verseSpinner.setSelection(0);
-	        	} else {
-	        		chapterSpinner.setEnabled(true);
-	        		chapterSpinner.setSelection(1);
-	        		verseSpinner.setEnabled(true);
-	        		verseSpinner.setSelection(1);
-                    load = true;
-	        	}
-        	}
-        	ignoreBookSelection = false;
-        } else if (view == chapterSpinner) {
-        	if (!ignoreChapterSelection) {
-	    		verseSpinnerAdapter.setBookAndChapter(b, c);
-	        	if (b == 0 || c == 0) {
-	        		verseSpinner.setEnabled(false);
-	        		verseSpinner.setSelection(0);
-	        	} else {
-	        		verseSpinner.setEnabled(true);
-	        		verseSpinner.setSelection(1);
-                    load = true;
-	        	}
-        	}
-        	ignoreChapterSelection = false;
-        } else if (view == verseSpinner) {
-        	if (!ignoreVerseSelection) {
-                load = true;
-	    	}
-        	ignoreVerseSelection = false;
-        }
-        
-        if (load && b != 0 && c != 0 && v != 0) {
-            parent.getActiveFragment().vaiALibroCapitoloVersetto(b, c, v);
-        }
+        });
+        recyclerView.setAdapter(adapter);
     }
 
-	@Override
-	public void onItemSelected(IgnAdapterView<?> parent, View view,	int position, long id) {
-    	onItemSelectedGeneric(parent, view, position, id);
-	}
+    private void setupTabs(MaterialButtonToggleGroup group) {
+        group.addOnButtonCheckedListener((tg, checkedId, isChecked) -> {
+            if (isChecked) {
+                resetScroll();
+                viewFlipper.setDisplayedChild(checkedId == R.id.btnTabBasic ? 0 : 1);
+            }
+        });
+    }
 
-	@Override
-	public void onNothingSelected(IgnAdapterView<?> parent) {}
+    private void setupAdvancedInput() {
+        referenceEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_GO ||
+                    (event != null && event.getKeyCode() == android.view.KeyEvent.KEYCODE_ENTER)) {
+                parent.getActiveFragment().vaiARiferimento(referenceEditText.getText());
+                dismiss();
+                return true;
+            }
+            return false;
+        });
+    }
 
-    public void select (int b, int c, int v) {
-    	chapterSpinnerAdapter.setBook(b);
-		verseSpinnerAdapter.setBookAndChapter(b, c); 
-		
-        if (bookSpinner.getSelectedItemId() != b) {
-        	ignoreBookSelection = true;
-        	boolean ok = false;
-	        for (int pos = 0; pos < bookSpinnerAdapter.getCount(); pos++) {
-	        	if (bookSpinnerAdapter.getItemId(pos) == b) { 
-	        		bookSpinner.setSelection(pos);
-	        		ok = true;
-	        		break;
-	        	}
-	        }
-	        if (ok == false) {
-	        	b = (int)bookSpinner.getSelectedItemId();
-	        	c = (b != 0) ? 1 : 0;
-	        	v = c;
-	        }
+    // Bridge for BaseAdapters
+    private static class SelectionAdapter extends RecyclerView.Adapter<SelectionAdapter.ViewHolder> {
+        private final SpinnerAdapter adapter;
+        private final OnClickListener listener;
+        private final boolean piuSpazio;
+
+        interface OnClickListener {
+            void onClick(int position);
         }
-        
-        if (b != 0 && c != 0 && v != 0) {
-            chapterSpinner.setEnabled(true);
-            verseSpinner.setEnabled(true);
-    	}
-        
-        if (chapterSpinner.getSelectedItemId() != c) {
-        	ignoreChapterSelection = true;
-	        chapterSpinner.setSelection(c);
-        } 
 
-        if (verseSpinner.getSelectedItemId() != v) {
-        	ignoreVerseSelection = true;
-	        verseSpinner.setSelection(v);
+        SelectionAdapter(SpinnerAdapter adapter, boolean piuSpazio, OnClickListener listener) {
+            this.adapter = adapter;
+            this.listener = listener;
+            this.piuSpazio = piuSpazio;
+        }
+
+        SelectionAdapter(SpinnerAdapter adapter, OnClickListener listener) {
+            this(adapter, false, listener);
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_accessibility_button, parent, false);
+            if (piuSpazio) { // mettiamo più spazio fra i libri che fra i numeri
+                v.setMinimumHeight(v.getMinimumHeight() + 12);
+            }
+            return new ViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Button btn = (Button) holder.itemView;
+            btn.setText(adapter.getItem(position).toString());
+            btn.setOnClickListener(v -> listener.onClick(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return adapter.getCount();
+        }
+
+        static class ViewHolder extends RecyclerView.ViewHolder {
+            ViewHolder(View v) {
+                super(v);
+            }
         }
     }
 }

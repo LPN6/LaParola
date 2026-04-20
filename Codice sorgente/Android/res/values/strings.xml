@@ -4,11 +4,12 @@
     <string name="permission_write_storage">LaParola ha bisogno di poter scrivere sullo spazio di archiviazione esterno per salvare i testi della Bibbia, i preferiti, i versetti evidenziati, ecc.\n\nPer favore, autorizza l\'accesso nella prossima finestra.</string>
     <string name="permission_write_storage_denied">Hai negato l\'autorizzazione a scrivere sullo spazio di archiviazione esterno. L\'applicazione non può procedere senza, e pertanto verrà chiusa.\n\nSe hai negato l\'autorizzazione in maniera permanente Android non mostrerà la finestra per consentirla. In questo caso sarà necessario concedere l\'autorizzazione usando le impostazioni di sistema.\nIn alternativa, più semplicemente, si può disinstallare e reinstallare LaParola.</string>
 
+    <string name="no">No</string>
+
     <string name="reference">Riferimento</string>
     <!-- string name="back">Indietro</string -->
-    <string name="share">Condividi</string>
     <string name="forward">Avanti</string>
-    <string name="copy">Copia</string>
+    <string name="lpn_copy">Copia</string>
     <string name="star">Aggiungi a preferiti</string>
     <string name="zoom_percent" tools:ignore="StringFormatInvalid">Zoom: %d%%</string>
     <string name="zoom_in">Ingrandisci</string>
@@ -18,21 +19,20 @@
     <string name="bookmarks">Preferiti</string>
     <string name="history">Cronologia</string>
     <string name="highlighter">Evidenziatore</string>
+    <string name="menu_more">Ancora</string>
     
     <string name="market_url">market://details?id=net.laparola</string>
     <string name="laparola_url">https://www.laparola.net/programma/android.php</string>
     <string name="no_version_installed">(nessun libro installato)</string>
-    
+
+    <string name="go_to">Vai</string>
+
     <string name="star_added">Aggiunto a preferiti</string>
     <string name="delete_starred">Il preferito sta per essere rimosso.</string>
     <string name="remove">Rimuovi</string>
     <string name="description">Descrizione</string>
     <string name="clear_history">La cronologia sta per essere pulita.</string>
     <string name="clear">Pulisci</string>
-    <string name="select_text_copy">Seleziona il testo da copiare.</string>
-    <string name="select_text_share">Seleziona il testo da condividere.</string>
-    <string name="share_with">Condividi con</string>
-    <string name="share_subject">Condivisione da LaParola</string>
     <string name="sync_guide">Il contenuto dei pannelli dello stesso colore sarà sincronizzato.</string>
     <string name="fragments_management">Gestione pannelli</string>
     <string name="no_book">Nessun libro di questo tipo disponibile</string>
@@ -94,5 +94,25 @@
     <string name="drawer_open">Apri menu</string>
     <string name="drawer_close">Chiudi menu</string>
     <string name="version">Versione</string>
+    <string name="modifica">Modifica</string>
+    <string name="annulla">Annulla</string>
+    <string name="ok">OK</string>
+    <string name="ciano">ciano</string>
+    <string name="viola">viola</string>
+    <string name="verde">verde</string>
+    <string name="arancione">arancione</string>
+
+    <string name="menu_leggi_bibbia">Leggi la Bibbia</string>
+    <string name="menu_parola_giorno">-  Parola del giorno</string>
+    <string name="menu_liturgia">-  Liturgia del giorno</string>
+    <string name="menu_casuale">-  Versetto casuale</string>
+    <string name="menu_casuale_at">-  -  Versetto casuale (AT)</string>
+    <string name="menu_casuale_nt">-  -  Versetto casuale (NT)</string>
+    <string name="menu_segnalibri">Segnalibri</string>
+    <string name="menu_preferiti">Preferiti</string>
+    <string name="menu_versetti_evidenziati">Versetti evidenziati</string>
+    <string name="menu_cronologia">Cronologia</string>
+    <string name="menu_impostazioni">Impostazioni</string>
+    <string name="menu_guida">Guida</string>
 
 </resources>

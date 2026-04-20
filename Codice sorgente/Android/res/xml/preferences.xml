@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="homeAtStart"
         android:persistent="true"
         android:summaryOff="@string/last_page"
         android:summaryOn="@string/home"
         android:title="@string/home_at_start" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="useVolumeKeys"
         android:persistent="true"
         android:summary="@string/use_volume_keys_descr"
         android:title="@string/use_volume_keys" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="swipeChapters"
         android:persistent="true"
         android:summary="@string/swipe_chapters_descr"
         android:title="@string/swipe_chapters" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="keepScreenOn"
         android:persistent="true"
         android:title="@string/keep_screen_on" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="useLzma"
         android:persistent="true"
         android:summaryOff="@string/use_lzma_no"
         android:summaryOn="@string/use_lzma_yes"
         android:title="@string/use_lzma" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="autoOpenRef"
         android:persistent="true"
         android:summary="@string/auto_open_ref_descr"
         android:title="@string/auto_open_ref" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="oneHandZoom"
         android:persistent="true"
         android:summary="@string/oneHandZoom"
         android:title="@string/oneHandZoom_descr" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="menuZoom"
         android:persistent="true"
         android:summary="@string/menuZoom"
         android:title="@string/menuZoom_descr" />
-    <CheckBoxPreference
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="accessibilityMode"
         android:persistent="true"
@@ -58,14 +59,14 @@
         android:title="@string/accessibility" />
 
     <PreferenceCategory android:title="@string/layout" >
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="paragraphOrVerses"
             android:persistent="true"
             android:summaryOff="@string/show_verses"
             android:summaryOn="@string/show_paragraphs"
             android:title="@string/show_paragraphs_or_verses" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="showTitles"
             android:persistent="true"
@@ -79,16 +80,18 @@
             android:entryValues="@array/reference_placement"
             android:key="referencePlacement"
             android:persistent="true"
-            android:title="@string/reference_placement" />
+            android:title="@string/reference_placement"
+            app:useSimpleSummaryProvider="true" />
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/reference_types_descr"
             android:entryValues="@array/reference_types"
             android:key="referenceType"
             android:persistent="true"
+            app:useSimpleSummaryProvider="true"
             android:title="@string/reference_type" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="referenceSuperscript"
             android:persistent="true"
@@ -96,36 +99,36 @@
     </PreferenceCategory>
     
     <!--PreferenceCategory android:title="@string/home_preferences" >
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="home_show_start"
             android:title="@string/home_show_start" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="home_show_random"
             android:title="@string/home_show_random" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:dependency="home_show_random"
             android:key="home_show_random_at_nt"
             android:title="@string/home_show_random_at_nt" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="home_show_library"
             android:title="@string/home_show_library" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="home_show_pdg"
             android:title="@string/home_show_pdg" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="home_show_liturgy"
             android:title="@string/home_show_liturgy" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="home_show_bookmarks"
             android:title="@string/home_show_bookmarks" />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="home_show_about"
             android:title="@string/home_show_about" />

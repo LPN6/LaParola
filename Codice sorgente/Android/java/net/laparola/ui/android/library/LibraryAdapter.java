@@ -8,28 +8,18 @@ import net.laparola.core.Testi.TestoTipi;
 import android.content.Context;
 import android.view.View;
 
-/* package */ class LibraryAdapter extends ClickableListAdapter<LibraryItemInfo> {
-	private LibraryActivity libraryActivity;
+/* package */ public class LibraryAdapter extends ClickableListAdapter<LibraryItemInfo> {
+	LibraryActivity libraryActivity;
 
 	public LibraryAdapter(LibraryActivity libraryActivity, Context context, List<LibraryItemInfo> components) {
 		super(context, R.layout.component_list_item, components);
 		this.libraryActivity = libraryActivity;
 		
 		//long availableMegs = freeMemoryMB();
-		//android.util.Log.d("laparola", String.format("free ram: %d MB", availableMegs));
+        //Timber.tag("laparola").d(String.format("free ram: %d MB", availableMegs));
 		// zip : +60% (errore su libreria 21 maggio 2012: -9%/+5%)
 		// nuova riveduta: lzma 2.5 MB -> finestra 8.8 MB
 	}
-
-	/*
-	private long freeMemoryMB() {
-		MemoryInfo mi = new MemoryInfo();
-		ActivityManager activityManager = (ActivityManager) this.libraryActivity.getSystemService(LibraryActivity.ACTIVITY_SERVICE);
-		activityManager.getMemoryInfo(mi);
-		long availableMegs = mi.availMem / 1048576L;
-		return availableMegs;
-	}
-	*/
 
 	@Override
 	protected void bindHolder(ClickableListAdapter.ViewHolder h) {

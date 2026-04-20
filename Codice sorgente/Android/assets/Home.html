@@ -17,6 +17,15 @@
             .pannello_opzionale {
                 display: none;
             }
+            img.immagine {
+              width: 15px;
+              height: 11px;
+            }
+            @media (prefers-color-scheme: dark) {
+              img.immagine {
+                filter: invert(1) brightness(1.8);
+              }
+            }
         </style>
         <script type='text/javascript' src='file:///android_asset/utils.js'></script>
         <!--[LaParolaHeader]-->
@@ -39,9 +48,9 @@
         </div>
         
         <div id='div_debug' class='pannello_opzionale'>
-            <p align='center'><b>--- Inizio Debug</b></p>
-            <p align='center'><a href='laparola:$$@Note della Nuova Riveduta'>Elenco note della NR</a></p>
-            <p align='center'><b>--- Fine Debug</b></p>
+            <p style="text-align: center;"><b>--- Inizio Debug</b></p>
+            <p style="text-align: center;"><a href='laparola:$$@Note della Nuova Riveduta'>Elenco note della NR</a></p>
+            <p style="text-align: center;"><b>--- Fine Debug</b></p>
         </div>
 
         <p>Per aprire il menu, trascinare il dito dal bordo sinistro verso destra.</p>

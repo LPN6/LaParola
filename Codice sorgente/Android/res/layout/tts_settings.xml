@@ -2,73 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="260dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="?attr/colorSurface">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/tts_speed"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurface" />
 
-    <SeekBar
-        android:id="@+id/tts_speed_seekbar"
+    <com.google.android.material.slider.Slider
+        android:id="@+id/tts_speed_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:max="6"
-        android:progress="3" />
+        android:valueFrom="0"
+        android:valueTo="6"
+        android:stepSize="1"
+        android:value="3"
+        app:labelBehavior="floating"
+        android:layout_marginBottom="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:text="@string/tts_pitch"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurface"/>
 
-    <SeekBar
-        android:id="@+id/tts_pitch_seekbar"
+    <com.google.android.material.slider.Slider
+        android:id="@+id/tts_pitch_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:max="6"
-        android:progress="3" />
+        android:valueFrom="0"
+        android:valueTo="6"
+        android:stepSize="1"
+        android:value="3"
+        app:labelBehavior="floating"
+        android:layout_marginBottom="8dp" />
 
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/stop_end_chapter_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tts_stop_end_chapter"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurface" />
     
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/follow_verse_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tts_follow_verse"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurface" />
     
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/list_divider_holo_light" />
+        android:layout_marginVertical="8dp"
+        android:background="?attr/colorOutlineVariant" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tts_settings_button"
-        style="@style/ButtonHoloLight.Borderless.Small"
+        style="?attr/materialButtonTonalStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/alert_dialog_button_bar_height"
+        android:layout_height="wrap_content"
         android:maxLines="2"
         android:text="@string/tts_settings"
-        android:textSize="14sp" />
+        android:textAppearance="?attr/textAppearanceLabelLarge"
+        app:iconGravity="textStart"
+        app:cornerRadius="8dp" />
 
 </LinearLayout>

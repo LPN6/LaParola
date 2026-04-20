@@ -17,6 +17,15 @@
             .pannello_opzionale {
                 display: none;
             }
+            img.immagine {
+              width: 15px;
+              height: 11px;
+            }
+            @media (prefers-color-scheme: dark) {
+              img.immagine {
+                filter: invert(1) brightness(1.8);
+              }
+            }
         </style>
         <script type='text/javascript' src='file:///android_asset/utils.js'></script>
         <!--[LaParolaHeader]-->
@@ -38,7 +47,8 @@
             <br />
             <p>La liturgia del giorno &egrave; tratta dai siti 
                 <a href='lpcomando:link:http://liturgia.silvestrini.org'>liturgia.silvestrini.org</a> e 
-                <a href='lpcomando:link:http://www.carbonate.it'>www.carbonate.it</a>.            <p>In caso di problemi con questa funzionalit&agrave; scrivere a <img src="file:///android_asset/email.png" width="15" height="11" />
+                <a href='lpcomando:link:http://www.carbonate.it'>www.carbonate.it</a>.
+            <p>In caso di problemi con questa funzionalit&agrave; scrivere a <img class="immagine" src="file:///android_asset/email.png" width="15" height="11" alt="email" />
     <a href='lpcomando:link:mailto:neclepsio%40gmail.com%3fsubject=LaParola%20Android'>Ignazio Di Napoli</a>.</p>
         </div>
 

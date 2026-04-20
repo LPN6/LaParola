@@ -7,24 +7,29 @@ import net.laparola.ui.LaParolaEvidenziatore;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.ActionMode;
-import android.view.ActionMode.Callback;
+import android.graphics.drawable.Drawable;
+import androidx.appcompat.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class LaParolaHighlighterActionModeCallback implements Callback {
-	private LaParolaActivity mParentActivity;
+import com.google.android.material.color.MaterialColors;
+
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
+public class LaParolaHighlighterActionModeCallback implements ActionMode.Callback {
+	private final LaParolaActivity mParentActivity;
 	private MenuItem mColorMenuItem;
 	
 	private final static HashMap<String, Integer> COLORS;
 	static {
-		COLORS = new HashMap<String, Integer>();   // htmlName, androidColor 
+		COLORS = new HashMap<>();   // htmlName, androidColor
 		COLORS.put("yellow",  0xffffff00);
 		COLORS.put("lime",    0xff00ff00);
 		COLORS.put("cyan",    0xff00ffff);
@@ -48,7 +53,12 @@ public class LaParolaHighlighterActionModeCallback implements Callback {
 	
 	@Override
 	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        MenuInflater inflater = mode.getMenuInflater();
+		// Hide the ActionBar when the contextual mode starts
+		if (mParentActivity.getSupportActionBar() != null) {
+			mParentActivity.getSupportActionBar().hide();
+		}
+
+		MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.highlighter, menu);
         return true;
 	}
@@ -56,8 +66,31 @@ public class LaParolaHighlighterActionModeCallback implements Callback {
 	private BitmapDrawable getPenBitmap (int color) {
 		Resources resources = mParentActivity.getResources();
 		float density = resources.getDisplayMetrics().density;
-		BitmapDrawable penDrawable = (BitmapDrawable)resources.getDrawable(R.drawable.ic_action_highlight_color);
-		
+
+		Drawable drawable = ResourcesCompat.getDrawable(
+				resources, R.drawable.ic_action_highlight_color, mParentActivity.getTheme() );
+
+		if (drawable == null) {
+			throw new IllegalArgumentException("Drawable non trovato in LaParolaHighlighterActionModeCallback");
+		}
+
+		Drawable wrapped = DrawableCompat.wrap(drawable).mutate();
+		DrawableCompat.setTint(wrapped, MaterialColors.getColor(mParentActivity, R.attr.colorOnSurface, Color.WHITE));
+		drawable = wrapped;
+
+		Bitmap bitmap;
+		if (drawable instanceof BitmapDrawable) {
+			bitmap = ((BitmapDrawable) drawable).getBitmap();
+		} else {
+			int w = drawable.getIntrinsicWidth() > 0 ? drawable.getIntrinsicWidth() : (int)(48 * density);
+			int h = drawable.getIntrinsicHeight() > 0 ? drawable.getIntrinsicHeight() : (int)(48 * density);
+
+			bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmap);
+			drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+			drawable.draw(canvas);
+		}
+
 		Paint fillPaint = new Paint();
 		fillPaint.setColor(color);
 		fillPaint.setStyle(Style.FILL);
@@ -66,15 +99,19 @@ public class LaParolaHighlighterActionModeCallback implements Callback {
 		strokePaint.setColor(0x99333333);
 		strokePaint.setStrokeWidth(density);
 		strokePaint.setStyle(Style.STROKE);
+
+		int squareSize = (int)(16 * density);
+		int margin = (int)(4 * density);
+
+		int left = bitmap.getWidth() - squareSize -  margin;  // margin from right
+		int top  = bitmap.getHeight() - squareSize -  margin;  // margin from bottom
+		int right = bitmap.getWidth() -  margin;
+		int bottom = bitmap.getHeight() -  margin;
 		
-		int w = penDrawable.getIntrinsicWidth();
-		int h = penDrawable.getIntrinsicHeight();
-		
-		Bitmap myBmp = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+		Bitmap myBmp = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 		Canvas canvas = new Canvas(myBmp);
-		canvas.drawBitmap(penDrawable.getBitmap(), 0, 0, null);
-		canvas.drawRect(density * 20, density * 20, density * 28, density * 28, fillPaint);
-		canvas.drawRect(density * 20, density * 20, density * 28, density * 28, strokePaint);
+		canvas.drawRect(left, top, right, bottom, fillPaint);
+		canvas.drawRect(left, top, right, bottom, strokePaint);
 		
 		return new BitmapDrawable(resources, myBmp);
 	}
@@ -93,25 +130,22 @@ public class LaParolaHighlighterActionModeCallback implements Callback {
 
 	@Override
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.change_color:
-    		if (LaParolaPreferences.highlighColor.equals("yellow"))
-    			setColor("lime");
-    		else if (LaParolaPreferences.highlighColor.equals("lime"))
-    			setColor("cyan");
-    		else if (LaParolaPreferences.highlighColor.equals("cyan"))
-    			setColor("magenta");
-    		else
-    			setColor("yellow");
-    			
-            return true;
-        case R.id.highlighted_list:
-            mParentActivity.getActiveFragment().vaiAdUrl("lpevidenziati:");        	
-            //mode.finish();   // Action picked, so close the CAB
-            return true;
-        default:
-            return false;
-        }
+		int id = item.getItemId();
+		if (id == R.id.change_color) {
+			switch (LaParolaPreferences.highlighColor) {
+				case "yellow" -> setColor("lime");
+				case "lime" -> setColor("cyan");
+				case "cyan" -> setColor("magenta");
+				default -> setColor("yellow");
+			}
+			return true;
+		}
+		if (id == R.id.highlighted_list) {
+			mParentActivity.getActiveFragment().vaiAdUrl("lpevidenziati:");
+			//mode.finish();   // Action picked, so close the CAB
+			return true;
+		}
+		return false;
     }
 
 	private void setColor(String name) {
@@ -133,10 +167,15 @@ public class LaParolaHighlighterActionModeCallback implements Callback {
 
 	@Override
 	public void onDestroyActionMode(ActionMode mode) {
+		// Show the ActionBar again when the contextual mode ends
+		if (mParentActivity.getSupportActionBar() != null) {
+			mParentActivity.getSupportActionBar().show();
+		}
+
 		for (int i = 0; i < mParentActivity.fragments.size(); i++)
 			mParentActivity.fragments.get(i).attivaEvidenziatore(false);
 		
-		String storagePath = LaParolaPreferences.writeStoragePath;
+		//String storagePath = LaParolaPreferences.writeStoragePath;
 		LaParolaEvidenziatore.salvaVersettiEvidenziatiSuFile();
 		
 		mParentActivity.actionMode = null;

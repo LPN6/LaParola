@@ -23,17 +23,15 @@ public abstract class TaskAsincrono<T> {
 	public void esegui () {
         mAnnullato = false;
         mFinito = false;
-		Thread t = new Thread(new Runnable() {
-			public void run() {
-				T res = lavoraInBackground();
-                mFinito = true;
-				if (!mAnnullato) {
-					onFinito(res);
-				} else {
-					onAnnullato();
-				}
-			}
-		});
+		Thread t = new Thread(() -> {
+            T res = lavoraInBackground();
+			mFinito = true;
+            if (!mAnnullato) {
+                onFinito(res);
+            } else {
+                onAnnullato();
+            }
+        });
 		t.start();
 	}
 }
