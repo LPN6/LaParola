@@ -1,0 +1,139 @@
+body {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #FFCC66;
+}
+
+td {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+
+}
+
+th {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.bodystyle {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color: #000099;
+
+}
+
+.small {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	font-variant: normal;
+	color: #000000;
+	text-align: center;
+
+}
+
+.medium {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	text-align: justify;
+
+}
+
+.big {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: normal;
+
+}
+
+.xbig {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	color: #333333;
+	font-variant: normal;
+	text-align: center;
+	vertical-align: top;
+
+}
+
+.expanded {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	letter-spacing: 2px;
+	font-weight: bold;
+	text-align: justify;
+	background-color: #FFFFCC;
+
+}
+
+.justified {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align: justify;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color: #FF0000;
+
+}
+
+.footer {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	color: #0000FF;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+
+
+}
+
+.box1 {
+	padding: 3px;
+	border-width: thin;
+	border-style: solid;
+	border-color: #CCCCCC #666666 #666666 #CCCCCC;
+	background-color: #999999;
+
+}
+
+.box2 {
+	font-style: italic;
+	word-spacing: normal;
+	padding: 3px;
+	border: thin none;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000000;
+	text-align: justify;
+
+
+}
+
+/*.bosco {
+	background-attachment: fixed;
+	background-image: url(/vvv/immagini/BoscoDiRododendri130x120.JPG);
+	background-repeat: no-repeat;
+
+}
+*/
+.over {
+	font-weight: bold;
+	color: navy;
+}
+.oversmall {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: navy;
+}

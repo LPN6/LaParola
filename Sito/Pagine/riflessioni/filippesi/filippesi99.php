@@ -49,7 +49,7 @@ si adopera per la propria santificazione - vuole che il vangelo (la sua salvezza
 ama altri come li ama Ges&ugrave; - che significa condividere il vangelo con loro</p>
 <h2>12. Giusti in Cristo</h2>
 <p>considera tutto quello che fa un danno in confronto con Cristo e quello che Cristo ha fatto (cio&egrave;, il vangelo)</p>
-<h2>13. La sovranit&agrave; di Cristo</h2>
+<h2>13. La giustizia di Cristo</h2>
 <p>sottomette tutta la vita alla sovranit&agrave; di Cristo</p>
 <h2>14. Conoscere Cristo</h2>
 <p>si impegna a conoscere Cristo sempre di pi&ugrave;<br />

@@ -1,0 +1,188 @@
+body {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-attachment: fixed;
+	background-image:url(../vvv/immagini/cielostellato.gif);
+	background-repeat:repeat
+	background-position: left top;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+
+}
+
+a{
+color: #4BACC6; /*azzurro*/
+text-decoration: none; /*nessuno*/
+}
+
+a:link{
+color: #FF00FF; /*lilla*/
+text-decoration: underline; /*sottolinea*/
+}
+
+a:visited{
+color: #4BACC6; /*azzurro*/
+text-decoration: underline; /*sottolinea*/
+}
+
+a:hover{
+color: #000080; /*blu marino (o navy)*/
+text-decoration: underline; /*sottolinea*/
+background-color: #FFFF00; /*giallo*/
+}
+
+
+td {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	color: #00FFFF;
+	text-align: justify;
+}
+
+th {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+}
+
+.bodystyle {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #000000;
+	background-image:url(../vvv/immagini/cielostellato.gif);
+	background-repeat:repeat
+	background-attachment: fixed;
+	background-repeat: repeat;
+	background-position: left top;
+	font-style: normal;
+	font-weight: normal;
+
+
+}
+
+.small {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #FFFF00;
+	font-weight: normal;
+	font-style: normal;
+
+
+
+
+}
+
+.medium {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color: #996633;
+
+
+}
+
+.big {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-align: center;
+	vertical-align: top;
+	color: #0033FF;
+
+}
+
+.xbig {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	color: #FF0000;
+	text-align: center;
+	vertical-align: top;
+	font-weight: bold;
+
+}
+
+.expanded {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	letter-spacing: 2px;
+	font-weight: bold;
+	text-align: justify;
+	background-color: #FFFFCC;
+
+}
+
+.justified {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	color: #FFFF00;
+	text-align: justify;
+
+
+}
+
+.footer {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #FF0000;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-align: justify;
+
+
+}
+
+.box1 {
+	padding: 3px;
+	border-width: thin;
+	border-style: solid;
+	border-color: #CCCCCC #666666 #666666 #CCCCCC;
+	background-color: #999999;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-style: normal;
+	color: #000000;
+
+
+}
+
+.box2 {
+	font-style: italic;
+	word-spacing: 2pt;
+	padding: 3px;
+	border: thin none;
+
+}
+
+.over {
+	font-weight: bold;
+	color: navy;
+
+}
+
+.cielostellato {
+	background-image:url(../vvv/immagini/cielostellato.gif)
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #00FF00;
+
+}
+.oversmall {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: navy;
+}

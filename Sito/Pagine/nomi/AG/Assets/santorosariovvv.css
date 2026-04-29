@@ -1,0 +1,696 @@
+/***********************************************/
+/* santorosariovvv.css                             */
+/***********************************************/
+
+/***********************************************/
+/* HTML tag styles                             */
+/***********************************************/ 
+
+html {
+height: 100%;
+} 
+
+body {
+background-image: url(../vvv/immagini/BoscoDiRododendri.jpg);
+background-attachment: fixed;
+font-family: Verdana, Arial, sans-serif;
+color: #FFFFFF;
+line-height: 1.166;	
+margin: 0px;
+padding: 0px;
+}
+
+a{
+	color: #0099FF;
+	text-decoration: none;
+}
+
+a:link{
+	color: #0099FF;
+	text-decoration: none;
+}
+
+a:visited{
+	color: #0000FF;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #0000FF;
+	text-decoration: underline;
+	background-color: #999999;
+}
+
+form {
+margin: 0px;
+padding: 0px;
+}
+
+input {
+vertical-align: middle;
+}
+
+h1{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 120%;
+ color: #334d55;
+ margin: 0px;
+ padding: 0px;
+}
+
+h2{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 114%;
+ color: #006699;
+ margin: 0px;
+ padding: 0px;
+}
+
+h3{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 100%;
+ color: #334d55;
+ margin: 0px;
+ padding: 0px;
+}
+
+h4{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 100%;
+ font-weight: normal;
+ color: #333333;
+ margin: 0px;
+ padding: 0px;
+}
+
+h5{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 100%;
+ color: #334d55;
+ margin: 0px;
+ padding: 0px;
+}
+
+ul{
+ list-style-type: square;
+}
+
+ul ul{
+ list-style-type: disc;
+}
+
+ul ul ul{
+ list-style-type: none;
+}
+
+label{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 100%;
+ font-weight: bold;
+ color: #334d55;
+}
+
+/***********************************************/
+/* Layout Divs                                 */
+/***********************************************/
+
+#top {
+height: auto;
+width: 768px;
+}
+
+#left {
+float: left;
+width: 150px;
+height: 100%;
+margin: 0px;
+padding-top: 10px;
+}
+
+#middle {
+width: 410px;
+float: left;
+height: auto;
+padding-top: 10px;
+}
+
+#right {
+width: 190px;
+height: 100%;
+margin: 0px;
+position: relative;
+float: right;
+padding-top: 10px;
+}
+
+/***********************************************/
+/* Components                                  */
+/***********************************************/
+
+#titolosito {
+width: 480px;
+float: left;
+height: 16px;
+padding: 0px;
+margin-top: 9px;
+margin-right: 0px;
+margin-bottom: 9px;
+}
+
+#lingue {
+position: relative;
+width: 480px;
+height: 21px;
+margin-bottom: 9px;
+float: left;
+padding: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-left: 0px;
+}
+
+#banner {
+position: relative;
+width: 480px;
+height: 60px;
+margin-bottom: 9px;
+float: left;
+}
+
+#jesus {
+position: relative;
+top: 0px;
+width: 146px;
+height: auto;
+margin: 0px;
+float: right;
+padding: 0px;
+}
+
+#logo {
+float: left;
+height: auto;
+width: 142px;
+top: 0px;
+margin: 0px;
+}
+
+#avemaria {
+position: absolute;
+left: 81px;
+width: 60px;
+font-family: Verdana,Arial,sans-serif;
+font-style: italic;
+top: 13px;
+}
+
+#intestazione {
+width: 480px;
+float: left;
+height: auto;
+}
+
+#percorso {
+position: absolute;
+left: 134px;
+top: 127px;
+width: 487px;
+}
+
+#navigazioneglobale {
+	top: 191px;
+	float: left;
+	width: 100%;
+	font-size: 14px;
+	color: #5A798E;
+	font-weight: bold;
+	margin: 0px;
+}
+
+#navigazioneglobale legend{
+font-size: 12px;
+color: #FFFFFF;
+font-weight: bold;
+}
+
+/***********************************************/
+/* #barretta styles                            */
+/***********************************************/
+
+#barretta {
+font-family: Verdana,Arial,sans-serif;
+font-size: 9px;
+font-weight: bold;
+color: #FFFFFF;
+border-top: 2px solid #CCCCCC;
+border-bottom: 2px solid #CCCCCC;
+padding-left: 1px;
+padding-top: 2px;
+padding-bottom: 2px;
+}
+
+#barretta a {
+font-family: Verdana,Arial,sans-serif;
+font-size: 9px;
+font-weight: bold;
+color: #FFFFFF;
+text-decoration: none;
+background-color: #000000;
+margin-right: 2px; 
+}
+
+#barretta a:hover {
+color: #000000;
+background-color: #FFFF66;
+text-decoration: none;
+}
+
+/***********************************************/
+/* .homepage styles                            */
+/***********************************************/
+
+.homepage {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+padding-left: 1px;
+border-bottom: 1px solid #000000;
+}
+
+/***********************************************/
+/* .menu styles                                */
+/***********************************************/
+
+.menu {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+height: auto;
+width: 150px;
+}
+
+.menu a {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+text-decoration: none;
+background-color: #6699FF;
+display:block;
+width: auto;
+border-bottom: 1px solid #000000;
+border-right: 0px solid #000000;
+border-left: 0px solid #000000;
+border-top: 1px solid #FFFFFF;
+padding: 1px;
+}
+
+.menu a:hover {
+background-color: #FFFF66;
+}
+
+/***********************************************/
+/* .preferiti styles                           */
+/***********************************************/
+
+.preferiti {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+padding: 5px 1px 1px 1px;
+border-top: 1px solid #000000;
+border-bottom: 1px solid #000000;
+line-height: 1.5em;
+}
+
+.testopref {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	padding-top: 10px;
+	padding-right: 1px;
+	padding-bottom: 2px;
+	padding-left: 1px;
+}
+
+.testopref legend {
+font-size: 12px;
+font-weight: bold;
+color: #FFFFFF;
+padding: 2px 1px 2px 1px;
+}
+
+/***********************************************/
+/* #ricerca styles                             */
+/***********************************************/
+
+#ricerca {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #FFFFFF;
+background-color: #21528e;
+text-align: center;
+margin: 0px;
+width: auto;
+padding-top: 2px;
+padding-bottom: 5px;
+}
+
+#ricerca img {
+vertical-align: middle;
+}
+
+/***********************************************/
+/* #box styles                                 */
+/***********************************************/
+
+#box {
+background-color: #FFFFFF;
+text-align: left;
+width: 770px;
+margin-top: 0px;
+margin-right: auto;
+margin-bottom: 0px;
+margin-left: auto; 
+height: 100%; 
+}
+
+/***********************************************/
+/* #pillola styles                             */
+/***********************************************/
+
+#pillola {
+font-family: Verdana,Arial,sans-serif;
+font-size: 13px;
+font-weight: bold;
+color: #000000;
+width: 480px;
+float: left;
+height: 12px;
+margin-bottom: 9px;
+padding: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-left: 0px;
+}
+
+/***********************************************/
+/* #contenuto styles                           */
+/***********************************************/
+
+#contenuto {
+width: 400px;
+}
+
+#contenuto img {
+float: right;
+margin-left: 3px;
+}
+
+/***********************************************/
+/* .titoletto styles                           */
+/***********************************************/
+
+.titoletto {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 12px;
+	color: #0099FF;
+	padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+/***********************************************/
+/* #info styles                         */
+/***********************************************/
+
+#info {
+font-family: Verdana,Arial,sans-serif;
+font-size: 9px;
+padding-top: 3px;
+padding-bottom: 2px;
+padding-left: 1px;
+margin-top: 12px;
+}
+#info a {
+font-family: Verdana,Arial,sans-serif;
+font-size: 9px;
+font-weight: bold;
+color: #0099FF;
+text-decoration: none;
+background-color: #000000;
+margin-right: 2px; 
+}
+
+#info a:hover {
+color: #000000;
+background-color: #FFFF66;
+text-decoration: none;
+}
+
+/***********************************************/
+/* .small styles                               */
+/***********************************************/
+
+.small {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 9px;
+	color: #FFFF00;
+	font-weight: normal;
+	font-style: normal;
+	padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+
+}
+
+/***********************************************/
+/* .medium styles                              */
+/***********************************************/
+
+.medium {
+font-family: Verdana,Arial,sans-serif;
+font-size: 14px;
+font-style: italic;
+font-weight: bold;
+color: #996633;
+margin-top: 12px;
+
+}
+
+/***********************************************/
+/* .big styles                                 */
+/***********************************************/
+
+.big {
+font-family: Verdana,Arial,sans-serif;
+font-size: 12px;
+font-style: normal;
+font-weight: bold;
+font-variant: normal;
+text-align: center;
+color: #0033FF;
+
+}
+
+/***********************************************/
+/* .xbig styles                                */
+/***********************************************/
+
+.xbig {
+font-family: Verdana,Arial,sans-serif;
+font-size: 16px;
+color: #FF0000;
+text-align: center;
+font-weight: bold;
+margin-top: 12px;
+height: 38px;
+width: 480px;
+
+}
+
+/***********************************************/
+/* .expanded styles                            */
+/***********************************************/
+
+.expanded {
+font-family: Verdana,Arial,sans-serif;
+font-size: 12px;
+line-height: normal;
+letter-spacing: 2px;
+font-weight: bold;
+text-align: justify;
+background-color: #FFFFCC;
+
+}
+
+/***********************************************/
+/* .footer styles                              */
+/***********************************************/
+
+.footer {
+font-family: Verdana,Arial,sans-serif;
+font-size: 14px;
+color: #FF0000;
+font-style: normal;
+line-height: normal;
+font-weight: bold;
+font-variant: normal;
+text-align: justify;
+margin-top: 12px;
+
+}
+
+/***********************************************/
+/* .over styles                                */
+/***********************************************/
+
+.over {
+font-weight: bold;
+color: navy;
+
+}
+
+/***********************************************/
+/* .justified styles                           */
+/***********************************************/
+
+.justified {
+font-family: Verdana,Arial,sans-serif;
+font-size: 12px;
+color: #FFFF00;
+text-align: justify;
+margin-top: 12px;
+
+}
+
+/***********************************************/
+/* .bodystyle styles                           */
+/***********************************************/
+
+.bodystyle {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 12px;
+	color: #00FFFF;
+	margin-top: 0px;
+	padding-top: 12px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+/***********************************************/
+/* .enunciazione styles                        */
+/***********************************************/
+
+.enunciazione {
+	color: #CDFDCD;
+	font-weight: bold;
+	padding-bottom: 0px;
+	margin: 0px;
+	padding-top: 10px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+/***********************************************/
+/* #veritas styles                             */
+/***********************************************/
+
+#veritas {
+width: 400px;
+margin-right: 5px;
+margin-top: 0px;
+margin-bottom: 12px;
+margin-left: 5px;
+}
+
+/***********************************************/
+/* #via styles                                 */
+/***********************************************/
+
+#via {
+width: 400px;
+margin-right: 5px;
+margin-top: 0px;
+margin-bottom: 12px;
+margin-left: 5px;
+padding-top: 12px;
+padding-right: 0px;
+padding-bottom: 0px;
+padding-left: 0px;
+}
+
+/***********************************************/
+/* #vita styles                                */
+/***********************************************/
+
+#vita {
+width: 400px;
+margin-right: 5px;
+margin-top: 0px;
+margin-bottom: 12px;
+margin-left: 5px;
+}
+
+/***********************************************/
+/* .menuglob styles                            */
+/***********************************************/
+
+.menuglob {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+height: auto;
+width: 195px;
+}
+
+.menuglob a {
+font-family: Verdana,Arial,sans-serif;
+font-size: 10px;
+font-weight: bold;
+color: #000000;
+text-decoration: none;
+background-color: #6699FF;
+display:block;
+width: auto;
+border-bottom: 1px solid #000000;
+border-right: 0px solid #000000;
+border-left: 0px solid #000000;
+border-top: 1px solid #FFFFFF;
+padding: 1px;
+}
+
+.menuglob a:hover {
+background-color: #FFFF66;
+}
+/*************** #pageName styles **************/
+
+#pageName{
+	margin: 0px;
+	color: #6C8894;
+	font-weight: bold;
+	font-size: 16px;
+	padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+.pageName {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #6C8894;
+	padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}

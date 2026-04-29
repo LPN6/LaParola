@@ -22,6 +22,7 @@ Altri sono studi biblici, che contengono spiegazioni ma anche domande e risposte
 <li><a href="rut/" title="Riflessioni su Rut">Rut</a></li>
 <li><a href="salmi/" title="Riflessioni su Salmi">Salmi</a></li>
 <li><a href="isaia/" title="Riflessioni su Isaia">Isaia</a></li>
+<li><a href="geremia/" title="Riflessioni su Geremia">Geremia</a></li>
 <li><a href="matteo/" title="Riflessioni su Matteo">Matteo</a> (il <i>Padre nostro</i>)</li>
 <li><a href="filippesi/" title="Riflessioni su Filippesi">Filippesi</a> (il discepolato missionale)</li>
 <li><a href="discepoli/" title="Riflessioni su Ges&ugrave; e i suoi discepoli">Ges&ugrave; e i suoi discepoli</a></li>
