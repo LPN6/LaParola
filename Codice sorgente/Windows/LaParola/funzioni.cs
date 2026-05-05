@@ -85,9 +85,9 @@ namespace LaParola
 
     public class BarraConEtichetta
     {
-        private ToolStripProgressBar barra;
-        private ToolStripStatusLabel etichetta;
-        private ToolStripStatusLabel etichettaMessaggio;
+        private readonly ToolStripProgressBar barra;
+        private readonly ToolStripStatusLabel etichetta;
+        private readonly ToolStripStatusLabel etichettaMessaggio;
 
         public int Valore
         {
@@ -483,8 +483,7 @@ namespace LaParola
             finally
             {
                 Cursor.Current = cursoreAttuale;
-                if (cursoreAttuale != null)
-                    cursoreAttuale.Dispose();
+                cursoreAttuale?.Dispose();
             }
         }
 

@@ -38,9 +38,9 @@ namespace LaParola
         private int childFormNumber = 1;
         private bool aggiornaFont = true;
         private readonly int massimoFontPreferiti = 5;
-        private List<string> fontPreferiti;
+        private readonly List<string> fontPreferiti;
         private bool fontApplied;
-        private string redoCaption, undoCaption;
+        private readonly string redoCaption, undoCaption;
         private int pulsanteUDGiu;
         private bool faBrowseIndiceCambio = true;
         private bool nonAggiornareBrowseBookmarkBookmark = false;
@@ -51,8 +51,8 @@ namespace LaParola
         private RichTextBoxFinds trovaOpzioni = RichTextBoxFinds.None;
 
         //        private string urlAggiornamenti = @"c:\users\richard\documents\aggiorna2.xml";
-        private string urlAggiornamenti = "https://www.laparola.net/programma/aggiorna.xml";
-        private int LUNGHEZZA_MASSIMA_PER_MOSTRARE_LINK = 1000000;
+        private readonly string urlAggiornamenti = "https://www.laparola.net/programma/aggiorna.xml";
+        private readonly int LUNGHEZZA_MASSIMA_PER_MOSTRARE_LINK = 1000000;
 
         internal Collection<Riferimento> cronologia;
         internal int numeroInCronologia = -1;
@@ -1145,8 +1145,7 @@ namespace LaParola
                     }
                     catch { } // file non trovato o formato invalido; andiamo avanti senza icona
                     ToolStripMenuItem voce = new ToolStripMenuItem(nome, iconaCopiata, externalLinkVoceToolStripMenuItem_Click);
-                    if (iconaDaImmagine != null)
-                        iconaDaImmagine.Dispose(); // facendo in questo modo permette al programma di chiudere il file che contiene l'immagine
+                    iconaDaImmagine?.Dispose(); // facendo in questo modo permette al programma di chiudere il file che contiene l'immagine
                     shortcut = shortcut.ToUpperInvariant().Replace('-', '+');
                     shortcut = shortcut.Replace("CTRL+", "CONTROL+").Replace("MAIUS+", "SHIFT+").Replace("MAIUSC+", "SHIFT+");
                     shortcut = shortcut.Replace("CONTROL+", "Control+").Replace("ALT+", "Alt+").Replace("SHIFT+", "Shift+");
@@ -1676,8 +1675,7 @@ namespace LaParola
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
-                ActiveMdiChild.Close();
+            ActiveMdiChild?.Close();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2697,8 +2695,7 @@ namespace LaParola
                         break;
                 }
 
-                if (fontPerDialog != null)
-                    fontPerDialog.Dispose();
+                fontPerDialog?.Dispose();
             }
         }
 
@@ -3327,8 +3324,7 @@ namespace LaParola
 
                 Settings.Default.AggiornamentoUltimo = DateTime.Now;
                 Cursor.Current = cursoreAttuale;
-                if (cursoreAttuale != null)
-                    cursoreAttuale.Dispose();
+                cursoreAttuale?.Dispose();
 
                 if (listaFileDaAggiornare.Count > 0)
                 {
@@ -3348,8 +3344,7 @@ namespace LaParola
             finally
             {
                 Cursor.Current = cursoreAttuale;
-                if (cursoreAttuale != null)
-                    cursoreAttuale.Dispose();
+                cursoreAttuale?.Dispose();
             }
             return (listaFileDaAggiornare.Count > 0);
         }
@@ -6019,8 +6014,7 @@ namespace LaParola
             finally
             {
                 Cursor.Current = cursoreAttuale;
-                if (cursoreAttuale != null)
-                    cursoreAttuale.Dispose();
+                cursoreAttuale?.Dispose();
             }
             /*
             if (titolo.StartsWith("#",StringComparison.InvariantCulture) && formEditor.rtEditor.Text.IndexOf(RichTextBoxEx.InizioRiferimento) < 0)

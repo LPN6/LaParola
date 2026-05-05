@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LaParola (https://www.laparola.net/)")]
 [assembly: AssemblyProduct("LaParola")]
-[assembly: AssemblyCopyright("Copyright © 2024")]
+[assembly: AssemblyCopyright("Copyright © 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("7.20.6.0")]
-[assembly: AssemblyFileVersion("7.20.6.0")]
+[assembly: AssemblyVersion("7.20.7.0")]
+[assembly: AssemblyFileVersion("7.20.7.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

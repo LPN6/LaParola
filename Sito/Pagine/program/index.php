@@ -23,7 +23,7 @@
 
 <p>(<a href="/programma/">Questa pagina in italiano</a>)</p>
 
-<h1>LaParola 7.20.6: A Free Computer Program to Study the Bible</h1>
+<h1>LaParola 7.20.7: A Free Computer Program to Study the Bible</h1>
 
 <h2>Why another Bible study program?</h2>
 <p class="primalettera">There are already many free Bible study programs available. <i>LaParola</i> has a few characteristics that few or no others have, that may make it worth trying.

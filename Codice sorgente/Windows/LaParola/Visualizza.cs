@@ -153,13 +153,13 @@ namespace LaParola
                 set { tipoConfronta = value; }
             }
 
-            private TestoTipi tipoTesto;
+            private readonly TestoTipi tipoTesto;
             public TestoTipi TipoTesto
             {
                 get { return tipoTesto; }
             }
 
-            private bool tuttiTesti = false;
+            private readonly bool tuttiTesti = false;
             public TestoTipi TuttiTesti
             {
                 get { return tuttiTesti ? tipoTesto : TestoTipi.None; }
@@ -501,52 +501,29 @@ namespace LaParola
 
             protected virtual void Dispose(bool disposing)
             {
-                if (font != null)
-                    font.Dispose();
-                if (noteOnWordToolStripMenuItem != null)
-                    noteOnWordToolStripMenuItem.Dispose();
-                if (noteOnVerseToolStripMenuItem != null)
-                    noteOnVerseToolStripMenuItem.Dispose();
-                if (etiAbbreviazione != null)
-                    etiAbbreviazione.Dispose();
-                if (popupToolStripSeparatorGeneralWord != null)
-                    popupToolStripSeparatorGeneralWord.Dispose();
-                if (popupToolStripSeparatorWordVerse != null)
-                    popupToolStripSeparatorWordVerse.Dispose();
-                if (informationOnWordToolStripMenuItem != null)
-                    informationOnWordToolStripMenuItem.Dispose();
-                if (informationOnVerseToolStripMenuItem != null)
-                    informationOnVerseToolStripMenuItem.Dispose();
-                if (searchWordToolStripMenuItem != null)
-                    searchWordToolStripMenuItem.Dispose();
-                if (searchSelectionToolStripMenuItem != null)
-                    searchSelectionToolStripMenuItem.Dispose();
-                if (searchToolStripMenuItem != null)
-                    searchToolStripMenuItem.Dispose();
-                if (searchRadiceToolStripMenuItem != null)
-                    searchRadiceToolStripMenuItem.Dispose();
-                if (copyToolStripMenuItem != null)
-                    copyToolStripMenuItem.Dispose();
-                if (bookmarkVerseToolStripMenuItem != null)
-                    bookmarkVerseToolStripMenuItem.Dispose();
-                if (printToolStripMenuItem != null)
-                    printToolStripMenuItem.Dispose();
-                if (sbRtf != null)
-                    sbRtf.Dispose();
-                if (rtfTesto != null)
-                    rtfTesto.Dispose();
-                if (pulRimuovi != null)
-                    pulRimuovi.Dispose();
-                if (pulNote != null)
-                    pulNote.Dispose();
-                if (pulSinc != null)
-                    pulSinc.Dispose();
-                if (pmTesto != null)
-                    pmTesto.Dispose();
-                if (pmCollezioni != null)
-                    pmCollezioni.Dispose();
-                if (panComponenti != null)
-                    panComponenti.Dispose();
+                font?.Dispose();
+                noteOnWordToolStripMenuItem?.Dispose();
+                noteOnVerseToolStripMenuItem?.Dispose();
+                etiAbbreviazione?.Dispose();
+                popupToolStripSeparatorGeneralWord?.Dispose();
+                popupToolStripSeparatorWordVerse?.Dispose();
+                informationOnWordToolStripMenuItem?.Dispose();
+                informationOnVerseToolStripMenuItem?.Dispose();
+                searchWordToolStripMenuItem?.Dispose();
+                searchSelectionToolStripMenuItem?.Dispose();
+                searchToolStripMenuItem?.Dispose();
+                searchRadiceToolStripMenuItem?.Dispose();
+                copyToolStripMenuItem?.Dispose();
+                bookmarkVerseToolStripMenuItem?.Dispose();
+                printToolStripMenuItem?.Dispose();
+                sbRtf?.Dispose();
+                rtfTesto?.Dispose();
+                pulRimuovi?.Dispose();
+                pulNote?.Dispose();
+                pulSinc?.Dispose();
+                pmTesto?.Dispose();
+                pmCollezioni?.Dispose();
+                panComponenti?.Dispose();
             }
 
             #endregion
@@ -1665,15 +1642,15 @@ namespace LaParola
         private const int LARGHEZZA_MINIMA_PANE = 135;
         private const int LARGHEZZA_SPLITTER = 1;
 
-        private Principale genitore;
+        private readonly Principale genitore;
 
         public List<Pane> panes = new List<Pane>();
         public Pane paneAttivo = null;
 
-        private List<Splitter> splitters = new List<Splitter>();
+        private readonly List<Splitter> splitters = new List<Splitter>();
 
         private int ultimoTab = -1;
-        private int massimoNumeroPane = (SystemInformation.MaxWindowTrackSize.Width - LARGHEZZA_PULSANTI) / LARGHEZZA_MINIMA_PANE;
+        private readonly int massimoNumeroPane = (SystemInformation.MaxWindowTrackSize.Width - LARGHEZZA_PULSANTI) / LARGHEZZA_MINIMA_PANE;
         private bool noResize = false;
         private int larghezzaVecchia;
 

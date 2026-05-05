@@ -12,11 +12,11 @@ namespace LaParola
 {
     public partial class Aggiorna : Template
     {
-        private Collection<FileDaAggiornare> fileDaAggiornare = null;
-        private string aggiornaProgrammaAggiornamentoCartella;
+        private readonly Collection<FileDaAggiornare> fileDaAggiornare = null;
+        private readonly string aggiornaProgrammaAggiornamentoCartella;
         // se cambi la seguente riga, bisogna anche cambiare UpdateComponentTypes nelle risorse
-        private string[] componenteTipiXML = { "programma", "aggiornamento", "testo", "Bibbia", "commentario", "dizionario", "note", "libro", "parallelo", "collegamento", "segnalibro", "lettura", "video", "testiparalleli" };
-        private string[] componentoTipi;
+        private readonly string[] componenteTipiXML = { "programma", "aggiornamento", "testo", "Bibbia", "commentario", "dizionario", "note", "libro", "parallelo", "collegamento", "segnalibro", "lettura", "video", "testiparalleli" };
+        private readonly string[] componentoTipi;
 
         public Aggiorna(Principale formGenitore, Collection<FileDaAggiornare> listaFileDaAggiornare, string aggiornaUpdateInternetCartella)
         {

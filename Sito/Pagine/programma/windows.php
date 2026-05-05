@@ -6,7 +6,7 @@ $sezione = "Programma";
 require("../capo.php");
 ?>
 <h1>Windows</h1>
-<h2>La versione 7.20.6</h2>
+<h2>La versione 7.20.7</h2>
 
 <h2>Scaricamento e installazione</h2>
 

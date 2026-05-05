@@ -21,7 +21,7 @@ require("capo.php");
 
 <a name="20260320"></a>
 <h2>20 marzo 2026</h2>
-<p>Alcuni nuovi testi sono stati aggiunti. Sul sito e nelle app ci sono i commentari di Calvino (attualmente Genesi e il Nuovo Testamento) e le <i>Note della Bibbia di Ginevra<i>.
+<p>Alcuni nuovi testi sono stati aggiunti. Sul sito e nelle app ci sono i commentari di Calvino (attualmente Genesi e il Nuovo Testamento) e le <i>Note della Bibbia di Ginevra</i>.
 Solo nelle app ci sono <i>Commentario sul testo greco delle epistole di Paolo</i> di John Eadie e <i>Istituzione della religione cristiana</i> di Giovanni Calvino.  
 </p>
 

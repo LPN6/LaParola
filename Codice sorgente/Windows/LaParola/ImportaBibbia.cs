@@ -2479,8 +2479,7 @@ namespace LaParola
                         finally
                         {
                             Cursor.Current = cursoreAttuale;
-                            if (cursoreAttuale != null)
-                                cursoreAttuale.Dispose();
+                            cursoreAttuale?.Dispose();
                         }
                         break;
                     #endregion
@@ -2557,8 +2556,7 @@ namespace LaParola
                         finally
                         {
                             Cursor.Current = cursoreAttuale;
-                            if (cursoreAttuale != null)
-                                cursoreAttuale.Dispose();
+                            cursoreAttuale?.Dispose();
                         }
                         break;
                     #endregion
@@ -2581,8 +2579,7 @@ namespace LaParola
                         finally
                         {
                             Cursor.Current = cursoreAttuale;
-                            if (cursoreAttuale != null)
-                                cursoreAttuale.Dispose();
+                            cursoreAttuale?.Dispose();
                         }
                         break;
                     #endregion
@@ -2611,8 +2608,7 @@ namespace LaParola
                         finally
                         {
                             Cursor.Current = cursoreAttuale;
-                            if (cursoreAttuale != null)
-                                cursoreAttuale.Dispose();
+                            cursoreAttuale?.Dispose();
                         }
                         break;
                     #endregion
@@ -2711,8 +2707,7 @@ namespace LaParola
                         finally
                         {
                             Cursor.Current = cursoreAttuale;
-                            if (cursoreAttuale != null)
-                                cursoreAttuale.Dispose();
+                            cursoreAttuale?.Dispose();
                         }
                         break;
                     #endregion
@@ -2793,8 +2788,7 @@ namespace LaParola
                     #endregion
                     case TipoImportazione.NuovaNote:
                         Cursor.Current = cursoreAttuale;
-                        if (cursoreAttuale != null)
-                            cursoreAttuale.Dispose();
+                        cursoreAttuale?.Dispose();
                         break;
                     default:
                         break;
