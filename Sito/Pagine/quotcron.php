@@ -53,15 +53,39 @@ global $conn;
       $tok = strtok(" ");
     }
 
-    $headers = "From:";
+    $headers = "From: LaParola.Net <info@laparola.net>";
     $headers .= "\nContent-Type: text/plain; charset=iso-8859-1";
     $headers .= "\nContent-Transfer-Encoding: 8bit";
 	$headers .= "\nX-Mailer: PHP " . phpversion();
 
+// metodo alternativo
+/*
+    if ($_SERVER["HTTP_HOST"]!="localhost") {
+      for ($i=1; $i<sizeof($arr_abbonati); $i++) {
+        mail($arr_abbonati[$i], "Lettura quotidiana", $messdaspedire, $headers);
+      }
+    }
+*/
+
+//      $headersBcc = "\nBcc: ";
+//      $headersBcc .= "\n";
       if ($_SERVER["HTTP_HOST"]!="localhost") {
+//      echo $_SERVER["HTTP_HOST"];
+//      ini_set("SMTP", "laparola");
+//	  	ini_set("sendmail_from", "info@laparola.net");
         if (!mail ("lettura-quotidiana2@googlegroups.com", "Lettura quotidiana ".$mandatogiorno."/".$mandatomese, $messdaspedire, $headers, "-finfo@laparola.net")) {
+// per provare
+//echo "<p>"."Lettura quotidiana ".$mandatogiorno."/".$mandatomese."</p>";
+//echo "<p>$messdaspedire</p>";
+//echo "<p>$headers</p>";
+//        if (!mail ("info@laparola.net", "Lettura quotidiana ".$mandatogiorno."/".$mandatomese, $messdaspedire, $headers, "-finfo@laparola.net")) {
           mail("info@laparola.net", "Errore in LQ", "Non spedito", "From: LaParola.Net <info@laparola.net>");
+		  //echo "errore";
 		}
+      //else {
+      //  echo "<html><body><p>Messaggio spedito<br>";
+      //  echo $mandatogiorno."/".$mandatomese."</p></body></html>";
+      //}
       }
       else {
         echo "Messaggio spedito<br>";

@@ -6,6 +6,14 @@ $sezione = "Programma";
 require("../capo.php");
 ?>
 <h1>Windows</h1>
+
+<h2>Versione 8 beta</h2>
+
+<p>Ho cominciato a scrivere una nuova, pi&ugrave; moderna, versione dell'app.
+Attualmente c'&egrave; una versione di prova (beta) che non ha tutte le funzionalit&agrave;
+della versione 7.20.7. Per provare questa nuova versione e eventualmente darmi
+suggerimenti e probelmi che trovi, vai alla pagina della <a href="windowsbeta.php">versione beta</a>. 
+
 <h2>La versione 7.20.7</h2>
 
 <h2>Scaricamento e installazione</h2>

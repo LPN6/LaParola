@@ -153,6 +153,7 @@ Per installare questi componenti, usa il comando di aggiornamento nel programma,
 <h2>Other languages</h2>
 <h3>Bibles</h3>
 <p><a href="/v7/Biblia Hebraica Stuttgartensia.laparola.gz">Biblia Hebraica Stuttgartensia</a> (Hebrew OT) (with Hebrew and <a href="/v7/Biblia Hebraica Stuttgartensia transliterated.laparola.gz">transliterated characters</a>)</p>
+<p><a href="/v7/Westminster Leningrad Codex.laparola.gz">Westminster Leningrad Codex</a> (Hebrew OT)</p>
 <p><a href="/v7/SBL Greek New Testament.laparola.gz">SBL Greek New Testamento</a> (Greek NT) (with Greek and <a href="/v7/SBL Greek New Testament transliterated.laparola.gz">transliterated characters</a>)</p>
 <p><a href="/v7/Byzantine.laparola.gz">Byzantine</a> (Greek NT) (with Greek and <a href="/v7/Byzantine transliterated.laparola.gz">transliterated characters</a>)</p>
 <p><a href="/v7/Westcott and Hort.laparola.gz">Westcott and Hort</a> (Greek NT) (with Greek and <a href="/v7/Westcott and Hort transliterated.laparola.gz">transliterated characters</a>)</p>

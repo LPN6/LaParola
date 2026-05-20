@@ -367,6 +367,17 @@ La Società Biblica Britannica e Forestiera; 1877</descrizione>
 <tipo>Bibbia</tipo>
 </file>
 <file>
+<componente>Westminster Leningrad Codex morphological</componente>
+<descrizione>L'Antico Testamento in ebraico, con l'analisi grammaticale delle parole.</descrizione>
+<versione>1.1.52</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/westminster_leningrad_codex_morphological.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/westminster_leningrad_codex_morphological.zip</url2>
+<dimensione>3379138</dimensione>
+<dimensione2>5207769</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
 <componente>SBL Greek New Testament</componente>
 <descrizione>Pubblicato da Logos Bible Software, Society of Biblical Literature (2010). Redatto da Michael W. Holmes. Vedi https://sblgnt.com/ per ulteriori informazioni.</descrizione>
 <versione>1.1.50</versione>

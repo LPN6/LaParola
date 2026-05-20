@@ -23,8 +23,10 @@ $riferimento = str_replace(">", "", $riferimento);
 $riferimento = str_replace("\"", "", $riferimento);
 $titolo = $riferimento;
 $sezione = "Testo della Bibbia";
+$descriz = "Il testo di ".$riferimento.", un versetto o brano della Bibbia, nella/e versione/i ".implode(", ",$versioni).". Puoi visualizzare il testo anche in altre versioni e leggere diversi commentari.";
 ?>
 <title>La Sacra Bibbia - <?echo $titolo?></title>
+<meta name="description" content="<?echo $descriz?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head><body>

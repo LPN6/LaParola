@@ -486,6 +486,15 @@
 <tipo>Bibbia</tipo>
 </file>
 <file>
+<nome>Westminster Leningrad Codex (Hebrew OT)</nome>
+<nome language="it">Westminster Leningrad Codex (AT ebraico)</nome>
+<componente>Westminster Leningrad Codex</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Westminster Leningrad Codex.laparola.gz</url>
+<dimensione>2908 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
 <nome>SBL Greek New Testament</nome>
 <nome language="it">SBL Nuovo Testamento greco</nome>
 <componente>SBL Greek New Testament</componente>
