@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.laparola.R;
-import net.laparola.ui.android.ignspinner.GridSpinner;
-import net.laparola.ui.android.ignspinner.ListSpinner;
+import net.laparola.ui.android.lpnspinner.GridSpinner;
+import net.laparola.ui.android.lpnspinner.ListSpinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

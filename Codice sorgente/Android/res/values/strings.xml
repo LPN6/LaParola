@@ -115,4 +115,6 @@
     <string name="menu_impostazioni">Impostazioni</string>
     <string name="menu_guida">Guida</string>
 
+    <string name="error_text_too_long">Errore nella visualizzazione del testo - troppo lungo</string>
+    <string name="error_text_file_error">Errore nella visualizzazione del testo - errore di lettura o scrittura file</string>
 </resources>

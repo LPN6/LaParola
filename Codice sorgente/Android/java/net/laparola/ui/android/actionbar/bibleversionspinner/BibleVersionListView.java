@@ -2,7 +2,7 @@ package net.laparola.ui.android.actionbar.bibleversionspinner;
 
 import net.laparola.R;
 import net.laparola.core.Testi.TestoTipi;
-import net.laparola.ui.android.ignspinner.IgnHijackFocusListView;
+import net.laparola.ui.android.lpnspinner.LpnHijackFocusListView;
 import net.laparola.ui.android.library.LibraryActivity;
 
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-class BibleVersionListView extends IgnHijackFocusListView implements OnClickListener {
+class BibleVersionListView extends LpnHijackFocusListView implements OnClickListener {
     public interface OnTypeChangedListener {
         void OnTypeChanged(TestoTipi tipo);
     }

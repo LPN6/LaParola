@@ -661,7 +661,7 @@ public class Testo {
                                 if (nomeCommentario != null && !nomeCommentario.isEmpty()) {
                                     String notaStringa;
                                     int numeroNote = noteDaVisualizzare.count();
-                                    for (int iNota = 0; iNota < numeroNote; ++iNota) {
+                                    for (int iNota = numeroNote-1; iNota >=0; --iNota) {
                                         notaStringa = noteDaVisualizzare.getNote().get(iNota);
                                         if (notaStringa.substring(1, 9).equals(versettoStringa) || (notaStringa.startsWith("000", 6) && (notaStringa.substring(1, 6) + "001").equals(versettoStringa)) // nota per tutto il capitolo mostrato all'inizio del primo versetto
                                                 || (notaStringa.startsWith("000000", 3) && (notaStringa.substring(1, 3) + "001001").equals(versettoStringa))) // nota per tutto il libro mostrato all'inizio del primo versetto
@@ -1117,6 +1117,10 @@ public class Testo {
             }
         }
 
+        linguaDaUsare = linguaPrincipale;
+        if (linguaDaUsare.length() > 2) {
+            linguaDaUsare = linguaDaUsare.substring(0, 2);
+        }
         for (int i = carattereIniziale; i < testoDaModificare.length(); ++i) {
             c = testoDaModificare.charAt(i);
             if (Character.isLetterOrDigit(c)) {
@@ -1130,10 +1134,6 @@ public class Testo {
                 analizzaParola = true;
                 carattereDaInserire = i;
                 if (c == '\'') {
-                    linguaDaUsare = linguaPrincipale;
-                    if (linguaDaUsare.length() > 2) {
-                        linguaDaUsare = linguaDaUsare.substring(0, 2);
-                    }
                     switch (linguaDaUsare) {
                         case "en" -> {
                             if ((i == 1 || !Character.isLetterOrDigit(testoDaModificare.charAt(i - 1))) && ((i < testoDaModificare.length() - 1 && (testoDaModificare.charAt(i + 1) == 't' || testoDaModificare.charAt(i + 1) == 'T') && (i == testoDaModificare.length() - 2 || !Character.isLetterOrDigit(testoDaModificare.charAt(i + 2)))) || (i < testoDaModificare.length() - 3 && testoDaModificare.substring(i + 1, i + 4).equalsIgnoreCase("tis") && (i == testoDaModificare.length() - 4 || !Character.isLetterOrDigit(testoDaModificare.charAt(i + 4)))) || (i < testoDaModificare.length() - 4 && testoDaModificare.substring(i + 1, i + 5).equalsIgnoreCase("twas") && (i == testoDaModificare.length() - 5 || !Character.isLetterOrDigit(testoDaModificare.charAt(i + 5)))))) {

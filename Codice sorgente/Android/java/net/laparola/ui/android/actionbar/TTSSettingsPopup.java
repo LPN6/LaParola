@@ -2,7 +2,7 @@ package net.laparola.ui.android.actionbar;
 
 import net.laparola.R;
 import net.laparola.ui.android.LaParolaPreferences;
-import net.laparola.ui.android.ignspinner.IgnPopupWindow;
+import net.laparola.ui.android.lpnspinner.LpnPopupWindow;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -18,7 +18,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.android.material.slider.Slider;
 
-public class TTSSettingsPopup extends IgnPopupWindow implements OnCheckedChangeListener, OnClickListener {
+public class TTSSettingsPopup extends LpnPopupWindow implements OnCheckedChangeListener, OnClickListener {
     /**
 	 * 
 	 */

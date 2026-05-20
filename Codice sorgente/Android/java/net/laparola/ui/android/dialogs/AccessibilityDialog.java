@@ -153,7 +153,6 @@ public class AccessibilityDialog extends DialogFragment {
 
         SelectionAdapter adapter = new SelectionAdapter(verseAdapter, position -> {
             int verse = (int) verseAdapter.getItemId(position);
-            // Navigate using the method from your uploaded file
             parent.getActiveFragment().vaiALibroCapitoloVersetto(selectedBook, selectedChapter, verse);
             dismiss();
         });

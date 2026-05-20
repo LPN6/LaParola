@@ -267,8 +267,10 @@ public class LaParolaActivity extends AppCompatActivity implements LaParolaBrows
                     activeFragment.goToNextUrl();
                 return true;
             }
-        } else if (LaParolaPreferences.useVolumeKeys && (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) && !ttsActionItemManager.isExpanded()) {
-            return true;
+        } else {
+            if (LaParolaPreferences.useVolumeKeys && (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) && ttsActionItemManager!=null && !ttsActionItemManager.isExpanded()) {
+                return true;
+            }
         }
 
         return super.dispatchKeyEvent(event);

@@ -36,6 +36,8 @@ import net.laparola.ui.android.LaParolaJavascriptInterfaceAndroid;
 import net.laparola.ui.android.LaParolaPreferences;
 import net.laparola.ui.android.dialogs.MessageDialog;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Locale;
@@ -301,10 +303,39 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
         post(() -> {
             String urlText = url.getUrl();
             urlText = "http://localhost/?laparolaurl=" + URLEncoder.encode(urlText);
+            try {
             if (testo != null) {
-                loadDataWithBaseURL(urlText, testo.toString(), "text/html", "UTF-8", urlText);
+                //loadDataWithBaseURL(urlText, testo.toString(), "text/html", "UTF-8", urlText);
+                // 1. Create a temporary HTML file in the app's cache directory
+                File cacheFile = new File(getContext().getCacheDir(), "temp_page.html");
+                try (FileWriter writer = new FileWriter(cacheFile)) {
+                    // If 'testo' is a StringBuilder/StringBuffer, we stream it directly
+                    // to the file without calling .toString() into memory
+                    writer.write(testo.toString());
+                }
+
+                // 2. Load the file URL into the WebView
+                String fileUrl = "file://" + cacheFile.getAbsolutePath();
+                loadUrl(fileUrl);
+
+                // Note: If you absolutely need the base URL to mimic "http://localhost/",
+                // you can use loadDataWithBaseURL but read from the file instead, though
+                // loading the file directly via loadUrl(fileUrl) is the safest against OOM.
             } else {
                 loadDataWithBaseURL(urlText, "", "text/html", "UTF-8", urlText);
+            }
+        } catch (OutOfMemoryError oom) {
+            // 1. Clear up as much memory as possible
+            System.gc();
+
+                MessageDialog d = new MessageDialog(mContext, R.string.error, R.string.error_text_too_long);
+                //"Errore nella visualizzazione del testo - troppo lungo"
+                d.show();
+        }
+            catch (Exception e) {
+                MessageDialog d = new MessageDialog(mContext, R.string.error, R.string.error_text_file_error);
+                // "Errore nella visualizzazione del testo - errore di lettura o scrittura file"
+                d.show();
             }
             mGoToAnchor = url.ancoraggio;
 

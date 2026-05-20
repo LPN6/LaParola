@@ -6,8 +6,8 @@ import net.laparola.ui.android.LaParolaActivity;
 import net.laparola.ui.android.LaParolaFragment;
 import net.laparola.ui.android.actionbar.bibleversionspinner.BibleVersionSpinner;
 import net.laparola.ui.android.actionbar.bibleversionspinner.VersionAdapter;
-import net.laparola.ui.android.ignspinner.IgnAdapterView;
-import net.laparola.ui.android.ignspinner.IgnAdapterView.OnItemSelectedListener;
+import net.laparola.ui.android.lpnspinner.LpnAdapterView;
+import net.laparola.ui.android.lpnspinner.LpnAdapterView.OnItemSelectedListener;
 import net.laparola.ui.android.library.LibraryActivity;
 
 import android.content.Intent;
@@ -106,7 +106,7 @@ public class LibraryActionItemManager implements OnItemSelectedListener, OnClick
     }
 
     @Override
-    public void onItemSelected(IgnAdapterView<?> view, View itemview, int pos, long id) {
+    public void onItemSelected(LpnAdapterView<?> view, View itemview, int pos, long id) {
         if (ignoreSelection) {
             ignoreSelection = false;
         } else {
@@ -129,7 +129,7 @@ public class LibraryActionItemManager implements OnItemSelectedListener, OnClick
     }
 
     @Override
-    public void onNothingSelected(IgnAdapterView<?> view) {
+    public void onNothingSelected(LpnAdapterView<?> view) {
         //
     }
 

@@ -29,11 +29,9 @@ import net.laparola.ui.LaParolaUrl;
 import net.laparola.ui.android.LaParolaActivity;
 import net.laparola.ui.android.LaParolaFragment;
 import net.laparola.ui.android.LaParolaPreferences;
-import net.laparola.ui.android.ignspinner.GridSpinner;
-import net.laparola.ui.android.ignspinner.IgnAdapterView;
-import net.laparola.ui.android.ignspinner.ListSpinner;
-
-import java.util.Objects;
+import net.laparola.ui.android.lpnspinner.GridSpinner;
+import net.laparola.ui.android.lpnspinner.LpnAdapterView;
+import net.laparola.ui.android.lpnspinner.ListSpinner;
 
 import androidx.annotation.NonNull;
 
@@ -45,7 +43,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import static androidx.core.content.ContentProviderCompat.requireContext;
 */
 
-public class ReferenceActionItemManager implements OnItemSelectedListener, MenuItem.OnActionExpandListener, OnClickListener, OnEditorActionListener, net.laparola.ui.android.ignspinner.IgnAdapterView.OnItemSelectedListener {
+public class ReferenceActionItemManager implements OnItemSelectedListener, MenuItem.OnActionExpandListener, OnClickListener, OnEditorActionListener, LpnAdapterView.OnItemSelectedListener {
     private final LaParolaActivity parent;
     private final MenuItem referenceActionItem;
     private LinearLayout bcvLayout;
@@ -824,11 +822,11 @@ public class ReferenceActionItemManager implements OnItemSelectedListener, MenuI
 
 
     @Override
-    public void onItemSelected(IgnAdapterView<?> view, View itemview, int position, long id) {
+    public void onItemSelected(LpnAdapterView<?> view, View itemview, int position, long id) {
         onItemSelectedGeneric(view);
     }
 
     @Override
-    public void onNothingSelected(IgnAdapterView<?> parent) {
+    public void onNothingSelected(LpnAdapterView<?> parent) {
     }
 }

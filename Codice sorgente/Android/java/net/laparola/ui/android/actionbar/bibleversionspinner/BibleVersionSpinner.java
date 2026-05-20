@@ -4,12 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListAdapter;
 
-import net.laparola.ui.android.ignspinner.IgnDropDownAdapter;
-import net.laparola.ui.android.ignspinner.IgnDropdownPopup;
-import net.laparola.ui.android.ignspinner.IgnHijackFocusListView;
-import net.laparola.ui.android.ignspinner.IgnAbsSpinner;
+import net.laparola.ui.android.lpnspinner.LpnDropDownAdapter;
+import net.laparola.ui.android.lpnspinner.LpnDropdownPopup;
+import net.laparola.ui.android.lpnspinner.LpnHijackFocusListView;
+import net.laparola.ui.android.lpnspinner.LpnAbsSpinner;
 
-public class BibleVersionSpinner extends IgnAbsSpinner {
+public class BibleVersionSpinner extends LpnAbsSpinner {
     public boolean libraryVisible = true;
 
     public BibleVersionSpinner(Context context, AttributeSet attrs) {
@@ -21,11 +21,11 @@ public class BibleVersionSpinner extends IgnAbsSpinner {
     }
 
     @Override
-    public IgnDropdownPopup createPopup(Context context, AttributeSet attrs, int defStyle) {
+    public LpnDropdownPopup createPopup(Context context, AttributeSet attrs, int defStyle) {
         return new BibleVersionDropDownPopup(context, attrs, defStyle, this);
     }
 
-    static class BibleVersionDropDownPopup extends IgnDropdownPopup {
+    static class BibleVersionDropDownPopup extends LpnDropdownPopup {
         private VersionAdapter mVersionAdapter;
         private final BibleVersionSpinner parent;
 
@@ -35,7 +35,7 @@ public class BibleVersionSpinner extends IgnAbsSpinner {
         }
 
         @Override
-        protected IgnHijackFocusListView createListView(Context context, boolean hijackfocus) {
+        protected LpnHijackFocusListView createListView(Context context, boolean hijackfocus) {
             BibleVersionListView.sNextLibraryVisible = parent.libraryVisible;
             BibleVersionListView bibleVersionListView = new BibleVersionListView(context, hijackfocus);
             bibleVersionListView.setOnTypeChangedListener(tipo -> {
@@ -49,7 +49,7 @@ public class BibleVersionSpinner extends IgnAbsSpinner {
         @Override
         public void setAdapter(ListAdapter adapter) {
             super.setAdapter(adapter);
-            mVersionAdapter = (VersionAdapter) ((IgnDropDownAdapter) adapter).getInternalAdapter();
+            mVersionAdapter = (VersionAdapter) ((LpnDropDownAdapter) adapter).getInternalAdapter();
         }
 
         @Override
