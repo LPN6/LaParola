@@ -14,6 +14,16 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260521"></a>
+<h2>21 maggio 2026</h2>
+<p>Ho iniziato a scrivere una nuova versione dell'app per Windows, per usare le tecnologie pi&ugrave; recenti e creare un'interfaccia pi&ugrave; moderna.
+La prima versione di prova (8.0.0) &egrave; ora disponibile, che potete provare se volete.
+Tutte le informazioni sulla nuova app sono alla pagina sulla <a href="/programma/windowsbeta.php">versione beta</a>.
+</p>
+<p>Un vantaggio della nuova versione &egrave; che pu&ograve; visualizzare meglio il testo ebraico, per cui c&egrave; un nuovo testo ebraico (Westminister Leningrad Codex) con morfologia delle parole.
+Per l'app attuale di Windows (7.20), c'&egrave; adesso il testo Westminister Leningrad Codex senza la morfologia.
+</p>
+
 <a name="20260321"></a>
 <h2>21 marzo 2026</h2>
 <p>Per conservare tutto il materiale di LaParola, ho trasferito una copia di tutto a <a href="https://github.com/LPN6/LaParola">GitHub</a>. Ci sono tutte le risorse disponibili, il codice sorgente delle app, e le pagine e il database del sito.  
