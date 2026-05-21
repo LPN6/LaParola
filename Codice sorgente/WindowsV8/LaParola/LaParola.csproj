@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>LaParola</AssemblyName>
+		<RootNamespace>LaParola</RootNamespace>
+		<Version>8.0.0</Version>
+		<AssemblyVersion>8.0.0.0</AssemblyVersion>
+		<FileVersion>8.0.0.0</FileVersion>
+		<ApplicationIcon>appicon.ico</ApplicationIcon>
+
+		<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+		<PublishSingleFile>true</PublishSingleFile>
+		<SelfContained>false</SelfContained>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+
+		<SatelliteResourceLanguages>it;en</SatelliteResourceLanguages>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Resource Include="appicon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Dirkster.AvalonDock" Version="4.*" />
+		<PackageReference Include="Dirkster.AvalonDock.Themes.Arc" Version="4.*" />
+		<PackageReference Include="MahApps.Metro.IconPacks.Core" Version="6.2.1" />
+		<PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
+	</ItemGroup>
+</Project>

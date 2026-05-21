@@ -1,0 +1,109 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="AppTitle">LaParola</sys:String>
+    <sys:String x:Key="MainCaricamento">Caricamento in corso</sys:String>
+    
+    <sys:String x:Key="Errore">Errore</sys:String>
+    <sys:String x:Key="PulsanteOK">OK</sys:String>
+    <sys:String x:Key="PulsanteSi">Sì</sys:String>
+    <sys:String x:Key="PulsanteNo">No</sys:String>
+    <sys:String x:Key="PulsanteAnnulla">Annulla</sys:String>
+
+    <sys:String x:Key="MenuFile">_File</sys:String>
+    <sys:String x:Key="MenuModifica">_Modifica</sys:String>
+    <sys:String x:Key="MenuStrumenti">_Strumenti</sys:String>
+    <sys:String x:Key="MenuAiuto">_?</sys:String>
+    
+    <sys:String x:Key="MenuNewEditor">_Nuovo</sys:String>
+    <sys:String x:Key="MenuNewViewer">_Nuovo Documento Viewer</sys:String>
+    <sys:String x:Key="MenuApri">_Apri...</sys:String>
+    <sys:String x:Key="MenuChiudi">_Chiudi</sys:String>
+    <sys:String x:Key="MenuSalva">_Salva</sys:String>
+    <sys:String x:Key="MenuSalvaCome">Salva con _nome...</sys:String>
+    <sys:String x:Key="MenuEsci">_Esci</sys:String>
+
+    <sys:String x:Key="MenuAllineamento">_Allineamento</sys:String>
+    <sys:String x:Key="MenuAllineamentoSinistra">A _sinistra</sys:String>
+    <sys:String x:Key="MenuAllineamentoCentro">_Centro</sys:String>
+    <sys:String x:Key="MenuAllineamentoDestra">A _destra</sys:String>
+    <sys:String x:Key="MenuAllineamentoGiustificato">_Giustificato</sys:String>
+
+    <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
+    <sys:String x:Key="MenuConverter">_Convertitore misure</sys:String>
+    <sys:String x:Key="MenuOptions">_Opzioni</sys:String>
+    <sys:String x:Key="MenuAbout">_Informazioni su LaParola</sys:String>
+    <sys:String x:Key="MainNessunaVersione">Nessuno testo trovato. Vai a https://www.laparola.net/programma/windowsbeta.php per installare testi da leggere.</sys:String>
+
+    <sys:String x:Key="ViewerTitle">Documento</sys:String>
+
+    <sys:String x:Key="EditorTitle">Documento</sys:String>
+    <sys:String x:Key="EditorAiuto">In questa finestra puoi caricare testo da un file o generarlo da alcune delle finestre degli Strumenti. Ci sono alcuni comandi per formattare il testo nella barra degli strumenti della finestra e altri nel menu principale.</sys:String>
+    <sys:String x:Key="MenuGrassettoAbb">G</sys:String>
+    <sys:String x:Key="MenuCorsivoAbb">C</sys:String>
+    <sys:String x:Key="MenuSottolineatoAbb">S</sys:String>
+    <sys:String x:Key="MenuGrassetto">Grassetto</sys:String>
+    <sys:String x:Key="MenuCorsivo">Corsivo</sys:String>
+    <sys:String x:Key="MenuSottolineato">Sottolineato</sys:String>
+    <sys:String x:Key="MenuPuntiElenco">Punti elenco</sys:String>
+    <sys:String x:Key="MenuAumentaDimensioneCarattere">Aumenta dimensione carattere</sys:String>
+    <sys:String x:Key="MenuDiminuisciDimensioneCarattere">Diminuisci dimensione carattere</sys:String>
+    <sys:String x:Key="MenuOpen">Apri...</sys:String>
+    <sys:String x:Key="MenuSave">Salva</sys:String>
+    <sys:String x:Key="MenuSaveAs">Salva con nome...</sys:String>
+    <sys:String x:Key="FileDialogoFiltro">Testo formattato (*.rtf)|*.rtf|Testo semplice (*.txt)|*.txt</sys:String>
+    <sys:String x:Key="FileDialogoFiltroTutti">Testo formattato (*.rtf)|*.rtf|Testo semplice (*.txt)|*.txt|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="FileDialogoNome">documento</sys:String>
+    <sys:String x:Key="EditorSalvaModifiche">Vuoi salvare le modifiche a questo testo?</sys:String>
+    <sys:String x:Key="EditorSalvaModificheTitolo">Modifiche non salvate</sys:String>
+    <sys:String x:Key="EditorSalvaFallito">Salvataggio fallito</sys:String>
+    <sys:String x:Key="EditorApriFallito">Apertura fallita</sys:String>
+
+    <sys:String x:Key="FileLabel">File:</sys:String>
+    <sys:String x:Key="FileUnsaved">(non salvato)</sys:String>
+    <sys:String x:Key="FileNone">(nessuno)</sys:String>
+
+    <sys:String x:Key="OpzioniTitolo">Opzioni</sys:String>
+    <sys:String x:Key="OpzioniAiuto">Scegli le impostazioni dell'app, che vengono applicate immediate. Lasciate il mouse sopra un'impostazione per ulteriori informazioni.</sys:String>
+    <sys:String x:Key="OpzioniAspetto">Aspetto</sys:String>
+    <sys:String x:Key="OpzioniTemaTitolo">Tema</sys:String>
+    <sys:String x:Key="OpzioniTemaAiuto">Scegli il tema per l'applicazione: chiaro, scuro o quello del computer.</sys:String>
+    <sys:String x:Key="OpzioniTemaSistema">Impostazioni di sistema</sys:String>
+    <sys:String x:Key="OpzioniTemaChiaro">Chiaro</sys:String>
+    <sys:String x:Key="OpzioniTemaScuro">Scuro</sys:String>
+    <sys:String x:Key="OpzioniLinguaTitolo">Lingua</sys:String>
+    <sys:String x:Key="OpzioniLinguaAiuto">Scegli la lingua per l'applicazione, inglese o italiano. La maggior parte dell'interfaccia viene modificata immediatamente, il resto richiede il riavvio dell'app.</sys:String>
+    <sys:String x:Key="OpzioniLinguaNota">Per cambiare completamente la lingua utilizzata nell'app, è necessario riavviare l'applicazione. Cambiare la lingua dell'interfaccia cambia anche la lingua dei nomi e abbreviazioni dei libri usati e riconosciuti.</sys:String>
+    
+    <sys:String x:Key="MostraTitolo">Mostra brano</sys:String>
+    <sys:String x:Key="MostraAiuto">Digita il riferimento del brano che vuoi mostrare e scegliere la/le versione/i che vuoi leggere. "Alterna testi" mostra un versetto alla volta nelle diverse traduzioni. Il testo viene aperto in una finestra dell'editor, dove può essere modificato, copiato o salvato.</sys:String>
+    <sys:String x:Key="MostraRiferimento">Versetti da mostrare:</sys:String>
+    <sys:String x:Key="MostraRiferimentoAiuto">Digitare qui il riferimento del brano da visualizzare, per esempio Gen 1:1-2, 1P 3:16. L'app capisce molti formati diversi per i riferimenti.</sys:String>
+    <sys:String x:Key="MostraTesti">Testi da mostrare:</sys:String>
+    <sys:String x:Key="MostraTestiAiuto">Seleziona i testi che vuoi visualizzare. Puoi trascinare le voci per riordinarle; l'ordine personalizzato sarà utilizzato la prossima volta che usi il programma.</sys:String>
+    <sys:String x:Key="MostraSeleziona">Seleziona tutti</sys:String>
+    <sys:String x:Key="MostraDeseleziona">Deseleziona tutti</sys:String>
+    <sys:String x:Key="MostraAlterna">Alterna testi</sys:String>
+    <sys:String x:Key="MostraAlternaAiuto">Mostra il brano un versetto dopo l'altro, e per ogni versetto tutti i testi selezionati sono visualizzati. Può essere molto lento per brani lunghi.</sys:String>
+    <sys:String x:Key="MostraMostra">Mostra brano</sys:String>
+
+    <sys:String x:Key="MisureTitolo">Convertitore misure</sys:String>
+    <sys:String x:Key="MisureAiuto">Sul lato sinistro, scegli l'unità da cui vuoi convertire e digita il numero di quell'unità. Sul lato destro, scegli l'unità in cui vuoi convertire e verrà mostrato il valore in quell'unità.</sys:String>
+    <sys:String x:Key="MisurePesi">Pesi:</sys:String>
+    <sys:String x:Key="MisureLunghezze">Lunghezze:</sys:String>
+    <sys:String x:Key="MisureCapacita">Capacità:</sys:String>
+    <sys:String x:Key="MisureMonete">Monete:</sys:String>
+    <sys:String x:Key="MisureNumeroDaAiuto">Digita il numero di unità DA cui vuoi convertire.</sys:String>
+    <sys:String x:Key="MisureUnitaDaAiuto">Seleziona l'unità di misura DA cui vuoi convertire.</sys:String>
+    <sys:String x:Key="MisureUnitaAAiuto">Seleziona l'unità di misura IN cui vuoi convertire.</sys:String>
+    <sys:String x:Key="MisurePesiUnita">grammo,ghera,beca,pim,siclo,mina,talento,libbra</sys:String>
+    <sys:String x:Key="MisureLunghezzeUnita">metro,dito,palmo,spanna,cubito,canna,cammin di sabato,braccio,miglio,stadio</sys:String>
+    <sys:String x:Key="MisureCapacitaUnita">litro,log (liquidi),hin (liquidi),bat (liquidi),cor/comer (liquidi/solidi),cab (solidi),omer (solidi),misura (AT)(solidi),efa (solidi)</sys:String>
+    <sys:String x:Key="MisureMoneteUnita">euro,lepton/spicciolo,quadrante/quattrino,asse/soldo,denaro/paga giornaliera,dramma,didramma,statere/siclo,aurei,mina,talento</sys:String>
+
+    <sys:String x:Key="InformazioniTitolo">Informazioni su LaParola</sys:String>
+    <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nRisorse gratuite per leggere, studiare e insegnare la Bibbia in italiano</sys:String>
+
+    <sys:String x:Key="Aiuto">Aiuto per questo pannello</sys:String>
+    <sys:String x:Key="AiutoApri">Apri Centro assistenza</sys:String>
+</ResourceDictionary>

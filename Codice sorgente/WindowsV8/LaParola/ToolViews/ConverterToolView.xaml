@@ -1,0 +1,278 @@
+<UserControl x:Class="LaParola.ToolViews.ConverterToolView"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:sys="clr-namespace:System;assembly=mscorlib"
+xmlns:controls="clr-namespace:LaParola"
+xmlns:local="clr-namespace:LaParola.Utilities"
+Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
+<Grid Margin="12">
+<Grid.Resources>
+<!-- Common text styles for column 1 and 3 -->
+<Style x:Key="Col0TextStyle" TargetType="{x:Type TextBlock}">
+<Setter Property="HorizontalAlignment" Value="Left"/>
+<Setter Property="VerticalAlignment" Value="Center"/>
+<Setter Property="Margin" Value="0,0,10,0"/>
+</Style>
+
+<Style x:Key="Col2CenteredTextStyle" TargetType="{x:Type TextBlock}">
+<Setter Property="HorizontalAlignment" Value="Center"/>
+<Setter Property="VerticalAlignment" Value="Center"/>
+<Setter Property="FontWeight" Value="Bold"/>
+<Setter Property="FontSize" Value="16"/>
+<Setter Property="Margin" Value="0,0,0,0"/>
+</Style>
+
+</Grid.Resources>
+
+<!-- 4 rows -->
+<Grid.RowDefinitions>
+<RowDefinition Height="Auto"/>
+<RowDefinition Height="Auto"/>
+<RowDefinition Height="Auto"/>
+<RowDefinition Height="Auto"/>
+<RowDefinition Height="Auto"/>
+</Grid.RowDefinitions>
+
+<!-- 4 columns -->
+<Grid.ColumnDefinitions>
+<ColumnDefinition Width="Auto"/>
+<ColumnDefinition Width="*"/>
+<ColumnDefinition Width="Auto"/>
+<ColumnDefinition Width="*"/>
+</Grid.ColumnDefinitions>
+
+<controls:HelpFlyout
+x:Name="HelpFlyoutControl"
+HorizontalAlignment="Right"
+Grid.Column="3"
+Margin="0,8,0,0"
+HelpText="{DynamicResource MisureAiuto}"
+HelpClicked="HelpFlyout_OnHelpClicked"/>
+
+<!-- ===================== Row 0 ===================== -->
+<!-- Col 0: TextBlock left aligned, vertically centered -->
+<TextBlock Grid.Row="1" Grid.Column="0"
+Style="{DynamicResource Col0TextStyle}"
+Text="{DynamicResource MisurePesi}"/>
+
+<!-- Col 1: TextBox above ComboBox -->
+<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="0,4,10,4">
+<TextBox x:Name="Row0TextBox"
+local:NumericTextBox.IsEnabled="True"
+local:NumericTextBox.NormalizeOnLostFocus="True"
+TextChanged="TextBox_TextChanged"
+Margin="0,0,0,6"
+Text="1"
+ToolTipService.ShowDuration="10000">
+<TextBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureNumeroDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</TextBox.ToolTip>
+</TextBox>
+            <ComboBox x:Name="Row0ComboBox"
+SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+
+</StackPanel>
+
+<!-- Col 2: TextBlock centered horizontally and vertically -->
+<TextBlock Grid.Row="1" Grid.Column="2"
+Style="{DynamicResource Col2CenteredTextStyle}"
+Text="=" />
+
+<!-- Col 3: TextBlock above ComboBox both left aligned -->
+<StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical" Margin="10,4,0,4">
+<TextBlock x:Name="Row0RightTextBlock"
+Margin="0,0,0,6"
+Text="1"/>
+<ComboBox x:Name="Row0RightComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaAAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+</StackPanel>
+
+<!-- ===================== Row 1 ===================== -->
+<TextBlock Grid.Row="2" Grid.Column="0"
+Style="{DynamicResource Col0TextStyle}"
+Text="{DynamicResource MisureLunghezze}"/>
+
+<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" Margin="0,4,10,4">
+<TextBox x:Name="Row1TextBox"
+local:NumericTextBox.IsEnabled="True"
+local:NumericTextBox.NormalizeOnLostFocus="True"
+TextChanged="TextBox_TextChanged"
+Margin="0,0,0,6"
+Text="1"
+ToolTipService.ShowDuration="10000">
+<TextBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureNumeroDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</TextBox.ToolTip>
+</TextBox>
+<ComboBox x:Name="Row1ComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+
+</StackPanel>
+
+<TextBlock Grid.Row="2" Grid.Column="2"
+Style="{DynamicResource Col2CenteredTextStyle}"
+Text="="/>
+
+<StackPanel Grid.Row="2" Grid.Column="3" Orientation="Vertical" Margin="10,4,0,4">
+<TextBlock
+x:Name="Row1RightTextBlock"
+Margin="0,0,0,6"
+Text="1"/>
+<ComboBox x:Name="Row1RightComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaAAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+
+</StackPanel>
+
+<!-- ===================== Row 2 ===================== -->
+<TextBlock Grid.Row="3" Grid.Column="0"
+Style="{DynamicResource Col0TextStyle}"
+Text="{DynamicResource MisureCapacita}"/>
+
+<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical" Margin="0,4,10,4">
+<TextBox x:Name="Row2TextBox"
+local:NumericTextBox.IsEnabled="True"
+local:NumericTextBox.NormalizeOnLostFocus="True"
+TextChanged="TextBox_TextChanged"
+Margin="0,0,0,6"
+Text="1"
+ToolTipService.ShowDuration="10000">
+<TextBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureNumeroDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</TextBox.ToolTip>
+</TextBox>
+
+<ComboBox x:Name="Row2ComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+
+</StackPanel>
+
+<TextBlock Grid.Row="3" Grid.Column="2"
+Style="{DynamicResource Col2CenteredTextStyle}"
+Text="="/>
+
+<StackPanel Grid.Row="3" Grid.Column="3" Orientation="Vertical" Margin="10,4,0,4">
+<TextBlock x:Name="Row2RightTextBlock"
+Margin="0,0,0,6"
+Text="1"/>
+<ComboBox x:Name="Row2RightComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaAAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+
+</StackPanel>
+
+<!-- ===================== Row 3 ===================== -->
+<TextBlock Grid.Row="4" Grid.Column="0"
+Style="{DynamicResource Col0TextStyle}"
+Text="{DynamicResource MisureMonete}"/>
+
+<StackPanel Grid.Row="4" Grid.Column="1" Orientation="Vertical" Margin="0,4,10,4">
+<TextBox x:Name="Row3TextBox"
+local:NumericTextBox.IsEnabled="True"
+local:NumericTextBox.NormalizeOnLostFocus="True"
+TextChanged="TextBox_TextChanged"
+Margin="0,0,0,6"
+Text="1"
+ToolTipService.ShowDuration="10000">
+<TextBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureNumeroDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</TextBox.ToolTip>
+</TextBox>
+<ComboBox x:Name="Row3ComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaDaAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+</StackPanel>
+
+<TextBlock Grid.Row="4" Grid.Column="2"
+Style="{DynamicResource Col2CenteredTextStyle}"
+Text="="/>
+
+<StackPanel Grid.Row="4" Grid.Column="3" Orientation="Vertical" Margin="10,4,0,4">
+<TextBlock x:Name="Row3RightTextBlock"
+Margin="0,0,0,6"
+Text="1"/>
+<ComboBox x:Name="Row3RightComboBox" SelectionChanged="ComboBox_SelectionChanged"
+ToolTipService.ShowDuration="10000">
+<ComboBox.ToolTip>
+<ToolTip>
+<TextBlock Text="{DynamicResource MisureUnitaAAiuto}"
+TextWrapping="Wrap"
+MaxWidth="300"/>
+</ToolTip>
+</ComboBox.ToolTip>
+</ComboBox>
+
+</StackPanel>
+
+</Grid>
+</UserControl>

@@ -1,0 +1,109 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="AppTitle">LaParola</sys:String>
+    <sys:String x:Key="MainCaricamento">Loading</sys:String>
+    
+    <sys:String x:Key="Errore">Error</sys:String>
+    <sys:String x:Key="PulsanteOK">OK</sys:String>
+    <sys:String x:Key="PulsanteSi">Yes</sys:String>
+    <sys:String x:Key="PulsanteNo">No</sys:String>
+    <sys:String x:Key="PulsanteAnnulla">Cancel</sys:String>
+
+    <sys:String x:Key="MenuFile">_File</sys:String>
+    <sys:String x:Key="MenuModifica">_Edit</sys:String>
+    <sys:String x:Key="MenuStrumenti">_Tools</sys:String>
+    <sys:String x:Key="MenuAiuto">_Help</sys:String>
+
+    <sys:String x:Key="MenuNewEditor">_New</sys:String>
+    <sys:String x:Key="MenuNewViewer">New _Viewer Document</sys:String>
+    <sys:String x:Key="MenuApri">_Open...</sys:String>
+    <sys:String x:Key="MenuChiudi">_Close</sys:String>
+    <sys:String x:Key="MenuSalva">_Save</sys:String>
+    <sys:String x:Key="MenuSalvaCome">Save _As...</sys:String>
+    <sys:String x:Key="MenuEsci">E_xit</sys:String>
+
+    <sys:String x:Key="MenuAllineamento">_Alignment</sys:String>
+    <sys:String x:Key="MenuAllineamentoSinistra">_Left</sys:String>
+    <sys:String x:Key="MenuAllineamentoCentro">_Center</sys:String>
+    <sys:String x:Key="MenuAllineamentoDestra">_Right</sys:String>
+    <sys:String x:Key="MenuAllineamentoGiustificato">_Justified</sys:String>
+
+    <sys:String x:Key="MenuTextGenerator">Show _Passage</sys:String>
+    <sys:String x:Key="MenuConverter">Measures _Converter</sys:String>
+    <sys:String x:Key="MenuOptions">_Options</sys:String>
+    <sys:String x:Key="MenuAbout">_About LaParola</sys:String>
+    <sys:String x:Key="MainNessunaVersione">No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read.</sys:String>
+
+    <sys:String x:Key="ViewerTitle">Document</sys:String>
+
+    <sys:String x:Key="EditorTitle">Document</sys:String>
+    <sys:String x:Key="EditorAiuto">In this window you can load text from a file or generate text it from some of the Tools windows. There are some commands to format the text in the window toolbar, and others in the main menu.</sys:String>
+    <sys:String x:Key="MenuGrassettoAbb">B</sys:String>
+    <sys:String x:Key="MenuCorsivoAbb">I</sys:String>
+    <sys:String x:Key="MenuSottolineatoAbb">U</sys:String>
+    <sys:String x:Key="MenuGrassetto">Bold</sys:String>
+    <sys:String x:Key="MenuCorsivo">Italic</sys:String>
+    <sys:String x:Key="MenuSottolineato">Underline</sys:String>
+    <sys:String x:Key="MenuPuntiElenco">Bullets</sys:String>
+    <sys:String x:Key="MenuAumentaDimensioneCarattere">Increase Font Size</sys:String>
+    <sys:String x:Key="MenuDiminuisciDimensioneCarattere">Decrease Font Size</sys:String>
+    <sys:String x:Key="MenuOpen">Open...</sys:String>
+    <sys:String x:Key="MenuSave">Save</sys:String>
+    <sys:String x:Key="MenuSaveAs">Save As...</sys:String>
+    <sys:String x:Key="FileDialogoFiltro">Rich Text (*.rtf)|*.rtf|Plain text (*.txt)|*.txt</sys:String>
+    <sys:String x:Key="FileDialogoFiltroTutti">Rich Text (*.rtf)|*.rtf|Plain text (*.txt)|*.txt|All files (*.*)|*.*</sys:String>
+    <sys:String x:Key="FileDialogoNome">document</sys:String>
+    <sys:String x:Key="EditorSalvaModifiche">Do you want to save changes to this text?</sys:String>
+    <sys:String x:Key="EditorSalvaModificheTitolo">Unsaved changes</sys:String>
+    <sys:String x:Key="EditorSalvaFallito">Save failed</sys:String>
+    <sys:String x:Key="EditorApriFallito">Open failed</sys:String>
+
+    <sys:String x:Key="FileLabel">File:</sys:String>
+    <sys:String x:Key="FileUnsaved">(unsaved)</sys:String>
+    <sys:String x:Key="FileNone">(none)</sys:String>
+    
+    <sys:String x:Key="OpzioniTitolo">Options</sys:String>
+    <sys:String x:Key="OpzioniAiuto">Choose the app settings, which are applied immediately. Hover over a setting for more information.</sys:String>
+    <sys:String x:Key="OpzioniAspetto">Appearance</sys:String>
+    <sys:String x:Key="OpzioniTemaTitolo">Theme</sys:String>
+    <sys:String x:Key="OpzioniTemaAiuto">Choose the theme for the application: light, dark, or that of the computer.</sys:String>
+    <sys:String x:Key="OpzioniTemaSistema">Follow system setting</sys:String>
+    <sys:String x:Key="OpzioniTemaChiaro">Light</sys:String>
+    <sys:String x:Key="OpzioniTemaScuro">Dark</sys:String>
+    <sys:String x:Key="OpzioniLinguaTitolo">Language</sys:String>
+    <sys:String x:Key="OpzioniLinguaAiuto">Choose the language for the application, English or Italian. Most of the interface is changed immediately, the rest requires a restart of the app.</sys:String>
+    <sys:String x:Key="OpzioniLinguaNota">To completely change the language used in the app, you need to restart the application. Changing the interface language also changes the language of the names and abbreviations of the books used and recognised.</sys:String>
+
+    <sys:String x:Key="MostraTitolo">Show Passage</sys:String>
+    <sys:String x:Key="MostraAiuto">Type the reference of the passage you want to display and choose the Bible translation(s) you want to read. "Alternate Texts" shows one verse at a time in the different translations. The text is open in an editor window, where it can be modified, copied, or saved.</sys:String>
+    <sys:String x:Key="MostraRiferimento">Verses to Display:</sys:String>
+    <sys:String x:Key="MostraRiferimentoAiuto">Type here the reference of the passage you want to view, for example Gen 1:1-2, 1P 3:16. The app understands many different formats for the references.</sys:String>
+    <sys:String x:Key="MostraTesti">Texts to Show:</sys:String>
+    <sys:String x:Key="MostraTestiAiuto">Select the texts that you want to view. You can drag the items to reorder them; the custom order will be used the next time you run the program.</sys:String>
+    <sys:String x:Key="MostraSeleziona">Select All</sys:String>
+    <sys:String x:Key="MostraDeseleziona">Unselect All</sys:String>
+    <sys:String x:Key="MostraAlterna">Alternate Texts</sys:String>
+    <sys:String x:Key="MostraAlternaAiuto">Show the passage one verse at a time, and for every verse all of the selected texts are shown. Can be slow for long passages.</sys:String>
+    <sys:String x:Key="MostraMostra">Show Passage</sys:String>
+
+    <sys:String x:Key="MisureTitolo">Measures Converter</sys:String>
+    <sys:String x:Key="MisureAiuto">On the left side, choose the unit you want to convert from, and type the number of that unit. On the right side, choose the unit you want to convert to, and the value in that unit will be shown.</sys:String>
+    <sys:String x:Key="MisurePesi">Weights:</sys:String>
+    <sys:String x:Key="MisureLunghezze">Lengths:</sys:String>
+    <sys:String x:Key="MisureCapacita">Capacity:</sys:String>
+    <sys:String x:Key="MisureMonete">Money:</sys:String>
+    <sys:String x:Key="MisureNumeroDaAiuto">Type the number of units that you want to convert FROM.</sys:String>
+    <sys:String x:Key="MisureUnitaDaAiuto">Select the unit you want to convert FROM.</sys:String>
+    <sys:String x:Key="MisureUnitaAAiuto">Select the unit you want to convert TO.</sys:String>
+    <sys:String x:Key="MisurePesiUnita">gram,gerah,beka,pim,shekel,mina,talent,pound</sys:String>
+    <sys:String x:Key="MisureLunghezzeUnita">meter,digit,palm,span,cubit,reed,sabbath day's walk,fathom,mile,stadion</sys:String>
+    <sys:String x:Key="MisureCapacitaUnita">litre,log (liquids),hin (liquids),bath (liquids),cor/omer (liquids/solids),cab (solids),omer (solids),measure (OT)(solids),ephah (solids)</sys:String>
+    <sys:String x:Key="MisureMoneteUnita">euro,lepton/copper coin,kodrante/penny,assarion/penny,denarius/daily wage,drachma/silver coin,didrachma,shekel,aureus/gold coin,mina/pound,talent</sys:String>
+
+    <sys:String x:Key="InformazioniTitolo">About LaParola</sys:String>
+    <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nResources to freely read, study, and teach the Bible in Italian</sys:String>
+
+    <sys:String x:Key="Aiuto">Help about this panel</sys:String>
+    <sys:String x:Key="AiutoApri">Open Help Centre</sys:String>
+</ResourceDictionary>

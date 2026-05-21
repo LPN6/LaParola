@@ -1,0 +1,61 @@
+<UserControl x:Class="LaParola.ToolViews.OptionsToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:LaParola"
+             Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="16" FontWeight="SemiBold" Text="{DynamicResource OpzioniAspetto}"/>
+            <controls:HelpFlyout
+                x:Name="HelpFlyoutControl"
+        Grid.Column="1"
+        Margin="0,8,0,0"
+        HelpText="{DynamicResource OpzioniAiuto}"
+        HelpClicked="HelpFlyout_OnHelpClicked"/>
+        </Grid>
+        <GroupBox Grid.Row="1" Margin="0,12,0,0" Header="{DynamicResource OpzioniTemaTitolo}" ToolTipService.ShowDuration="10000">
+            <GroupBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource OpzioniTemaAiuto}"
+                       TextWrapping="Wrap"
+                       MaxWidth="300"/>
+                </ToolTip>
+            </GroupBox.ToolTip>
+
+            <StackPanel Margin="10">
+                <RadioButton x:Name="ThemeSystem" Content="{DynamicResource OpzioniTemaSistema}" Checked="SettingChanged"/>
+                <RadioButton x:Name="ThemeLight" Content="{DynamicResource OpzioniTemaChiaro}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                <RadioButton x:Name="ThemeDark" Content="{DynamicResource OpzioniTemaScuro}" Margin="0,6,0,0" Checked="SettingChanged"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Margin="0,12,0,0" Header="{DynamicResource OpzioniLinguaTitolo}" ToolTipService.ShowDuration="10000">
+            <GroupBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource OpzioniLinguaAiuto}"
+                       TextWrapping="Wrap"
+                       MaxWidth="300"/>
+                </ToolTip>
+            </GroupBox.ToolTip>
+            <StackPanel Margin="10">
+                <ComboBox x:Name="LanguageCombo" Width="220" SelectionChanged="SettingChanged">
+                    <ComboBoxItem Tag="en">English</ComboBoxItem>
+                    <ComboBoxItem Tag="it">Italiano</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Margin="0,10,0,0" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniLinguaNota}"/>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

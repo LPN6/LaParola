@@ -1,0 +1,15 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Color x:Key="AppBackground">#FFF6F7FB</Color>
+  <Color x:Key="ControlBackground">#FFFFFFFF</Color>
+  <Color x:Key="AppForeground">#FF111827</Color>
+  <Color x:Key="SubtleBorder">#FFDEE2E6</Color>
+  <Color x:Key="Accent">#FF2563EB</Color>
+  <Color x:Key="ControlForeground">#FF000000</Color>
+  <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackground}"/>
+  <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource ControlBackground}"/>
+  <SolidColorBrush x:Key="ControlForegroundBrush" Color="{StaticResource ControlForeground}"/>
+  <SolidColorBrush x:Key="AppForegroundBrush" Color="{StaticResource AppForeground}"/>
+  <SolidColorBrush x:Key="SubtleBorderBrush" Color="{StaticResource SubtleBorder}"/>
+  <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
+  <SolidColorBrush x:Key="Menu.Static.Background" Color="#FFF0F0F0"/>
+</ResourceDictionary>
