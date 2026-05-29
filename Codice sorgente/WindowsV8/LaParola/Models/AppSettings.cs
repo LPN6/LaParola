@@ -31,6 +31,10 @@ public class AppSettings
     public double? WindowHeight { get; set; }
     public WindowState? WindowState { get; set; }
 
+    public FormatoTesto Formato { get; set; } = new FormatoTesto();
+
+    public string RicercaTestoSelezionato { get; set; } = "";
+
     public List<string> MostraVersioniTutte { get; set; } = [];
     public List<string> MostraVersioniSelezionate { get; set; } = [];
     public bool MostraAlternare { get; set; } = false;

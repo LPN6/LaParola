@@ -1,4 +1,5 @@
 using AvalonDock.Layout;
+using LaParola.Utilities;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace LaParola.DocumentViews;
@@ -122,7 +124,8 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
 
     private void Open_Click(object sender, RoutedEventArgs e)
     {
-        OpenFileDialog dlg = new() {
+        OpenFileDialog dlg = new()
+        {
             Filter = (string)(Application.Current.TryFindResource("FileDialogoFiltroTutti") ?? "Rich Text (*.rtf)|*.rtf|Plain Text (*.txt)|*.txt|All files (*.*)|*.*")
         };
         if (dlg.ShowDialog(Window.GetWindow(this)) == true)
@@ -217,6 +220,8 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             else if (Path.GetExtension(path).Equals(".rtf", System.StringComparison.OrdinalIgnoreCase))
             {
                 range.Load(fs, DataFormats.Rtf);
+                Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+                RtfColorTransformer.ApplyThemeToDocument(Editor.Document, true, fg, true);
             }
             else
             {

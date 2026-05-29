@@ -4,54 +4,119 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ad="https://github.com/Dirkster99/AvalonDock"
+        xmlns:local="clr-namespace:LaParola"
         xmlns:views="clr-namespace:LaParola.ToolViews"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="{DynamicResource AppTitle}" Width="1200" Height="780"
         Background="{DynamicResource AppBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}"
         Icon="/appicon.ico" WindowState="Maximized">
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{x:Static local:MainWindow.NuovoCommand}" />
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{x:Static local:MainWindow.ApriCommand}" />
+        <KeyBinding Key="F4" Modifiers="Ctrl" Command="{x:Static local:MainWindow.ChiudiCommand}" />
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{x:Static local:MainWindow.SalvaCommand}" />
+        <KeyBinding Key="S" Modifiers="Ctrl+Shift" Command="{x:Static local:MainWindow.SalvaCommand}" />
+        <KeyBinding Key="F4" Modifiers="Alt" Command="{x:Static local:MainWindow.EsciCommand}" />
+        <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
+        <KeyBinding Key="F5" Command="{x:Static local:MainWindow.SearchCommand}" />
+        <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
+        <KeyBinding Key="F10" Command="{x:Static local:MainWindow.ConverterCommand}" />
+        <KeyBinding Key="O" Modifiers="Ctrl+Shift" Command="{x:Static local:MainWindow.OptionsCommand}" />
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <!-- This hooks up the Delete command to the built-in text editor logic -->
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteText_Executed" CanExecute="DeleteText_CanExecute"/>
+        <CommandBinding Command="{x:Static local:MainWindow.NuovoCommand}" Executed="NuovoEditor_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.ApriCommand}" Executed="ApriEditor_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.ChiudiCommand}" Executed="ChiudiEditor_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.SalvaCommand}" Executed="SalvaEditor_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.SalvaComeCommand}" Executed="SalvaCome_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.EsciCommand}" Executed="Esci_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.SearchCommand}" Executed="Search_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.MostraCommand}" Executed="Mostra_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.ConverterCommand}" Executed="Converter_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.OptionsCommand}" Executed="Options_Executed" />
+    </Window.CommandBindings>
     <Grid x:Name="LayoutRoot">
         <DockPanel>
             <Menu DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
                 <MenuItem Header="{DynamicResource MenuFile}">
-                    <MenuItem Header="{DynamicResource MenuNewEditor}" Click="NewEditor_Click">
+                    <MenuItem Header="{DynamicResource MenuNewEditor}" Command="{x:Static local:MainWindow.NuovoCommand}" InputGestureText="Ctrl+N">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FilePlus"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource MenuApri}" Click="ApriEditor_Click">
+                    <MenuItem x:Name="MenuApri" Header="{DynamicResource MenuApri}" Command="{x:Static local:MainWindow.ApriCommand}" InputGestureText="Ctrl+O">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FolderOpen"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource MenuNewViewer}" Click="NewViewer_Click" Visibility="Collapsed"/>
-                    <MenuItem x:Name="MenuChiudi" Header="{DynamicResource MenuChiudi}" IsEnabled="False" Click="Chiudi_Click">
+                    <MenuItem x:Name="MenuChiudi" Header="{DynamicResource MenuChiudi}" IsEnabled="False" Command="{x:Static local:MainWindow.ChiudiCommand}" InputGestureText="Ctrl+F4">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Close"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem x:Name="MenuSalva" Header="{DynamicResource MenuSalva}" IsEnabled="False" Click="Salva_Click">
+                    <MenuItem x:Name="MenuSalva" Header="{DynamicResource MenuSalva}" IsEnabled="False" Command="{x:Static local:MainWindow.SalvaCommand}" InputGestureText="Ctrl+S">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="MenuSalvaCome" Header="{DynamicResource MenuSalvaCome}" IsEnabled="False" Click="SalvaCome_Click">
+                    <MenuItem x:Name="MenuSalvaCome" Header="{DynamicResource MenuSalvaCome}" IsEnabled="False" Command="{x:Static local:MainWindow.SalvaComeCommand}" InputGestureText="Ctrl+Shift+S">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSaveEdit"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="{DynamicResource MenuEsci}" Click="Exit_Click"/>
+                    <MenuItem Header="{DynamicResource MenuEsci}" Command="{x:Static local:MainWindow.EsciCommand}" InputGestureText="Alt+F4"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MenuModifica}">
+                    <MenuItem Header="{DynamicResource MenuAnnulla}" Command="ApplicationCommands.Undo">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Undo"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuRipristina}" Command="ApplicationCommands.Redo">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Redo"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="{DynamicResource MenuTaglia}" Command="ApplicationCommands.Cut">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="ContentCut"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuCopia}" Command="ApplicationCommands.Copy">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="ContentCopy"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuIncolla}" Command="ApplicationCommands.Paste">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="ContentPaste"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuElimina}" Command="ApplicationCommands.Delete">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Delete"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuSelezionaTutto}" Command="ApplicationCommands.SelectAll">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="SelectAll"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
                     <MenuItem Header="{DynamicResource MenuAllineamento}" SubmenuOpened="Allineamento_SubmenuOpened">
-                        <MenuItem x:Name="MiAlignLeft" Header="{DynamicResource MenuAllineamentoSinistra}" Command="EditingCommands.AlignLeft" IsCheckable="True">
-                            <MenuItem.Icon>
-                                <iconPacks:PackIconMaterial Kind="AlignHorizontalLeft"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem x:Name="MiAlignCenter" Header="{DynamicResource MenuAllineamentoCentro}" Command="EditingCommands.AlignCenter" IsCheckable="True">
+                            <MenuItem x:Name="MiAlignLeft" Header="{DynamicResource MenuAllineamentoSinistra}" Command="EditingCommands.AlignLeft" IsCheckable="True">
+                                <MenuItem.Icon>
+                                    <iconPacks:PackIconMaterial Kind="AlignHorizontalLeft"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="MiAlignCenter" Header="{DynamicResource MenuAllineamentoCentro}" Command="EditingCommands.AlignCenter" IsCheckable="True">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="AlignHorizontalCenter"/>
                             </MenuItem.Icon>
@@ -69,17 +134,23 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MenuStrumenti}">
-                    <MenuItem Header="{DynamicResource MenuTextGenerator}" Click="ShowTextGenerator_Click">
+                    <MenuItem Header="{DynamicResource MenuRicerca}" Command="{x:Static local:MainWindow.SearchCommand}" InputGestureText="F5">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Magnify"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuTextGenerator}" Command="{x:Static local:MainWindow.MostraCommand}" InputGestureText="F6">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="BookOpenPageVariant"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource MenuConverter}" Click="ShowConverter_Click">
+                    <MenuItem Header="{DynamicResource MenuConverter}" Command="{x:Static local:MainWindow.ConverterCommand}" InputGestureText="F10">
+
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Ruler"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource MenuOptions}" Click="ShowOptions_Click">
+                    <MenuItem Header="{DynamicResource MenuOptions}" Command="{x:Static local:MainWindow.OptionsCommand}" InputGestureText="Ctrl+Shift+O">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Cog"/>
                         </MenuItem.Icon>

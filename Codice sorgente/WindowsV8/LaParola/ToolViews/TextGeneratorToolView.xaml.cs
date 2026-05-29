@@ -324,11 +324,11 @@ public partial class TextGeneratorToolView : UserControl
         Riferimento rif = MainWindow.Testi.ConvertiRiferimento(tbBrano.Text);
         bool alternare = cbAlternare.IsChecked == true;
         FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(rif, versioni, alternare);
-        if (Services.ThemeManager.IsDark(MainWindow.settings.ThemeMode))
-        {
+        //if (Services.ThemeManager.IsDark(MainWindow.settings.ThemeMode))
+        //{
             Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
-            RtfColorTransformer.ApplyThemeToDocument(doc, true, fg);
-        }
+            RtfColorTransformer.ApplyThemeToDocument(doc, true, fg,true);
+        //}
 
         App.DockingHost.SendFlowDocumentToActive(doc, true, title);
     }

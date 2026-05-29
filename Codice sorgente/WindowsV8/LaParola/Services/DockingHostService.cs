@@ -3,10 +3,8 @@ using AvalonDock.Layout;
 using LaParola.DocumentViews;
 using LaParola.ToolViews;
 using Microsoft.Win32;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Threading;
 
@@ -118,7 +116,12 @@ public class DockingHostService
 
             object? v = null;
             string titolo;
-            if (contentId == "tool.textgen")
+            if (contentId == "tool.search")
+            {
+                v = new SearchToolView();
+                titolo = (string)(System.Windows.Application.Current.TryFindResource("RicercaTitolo") ?? "Search");
+            }
+            else if (contentId == "tool.textgen")
             {
                 v = new TextGeneratorToolView();
                 titolo = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
@@ -153,7 +156,9 @@ public class DockingHostService
         }
         else
         {
-            if (contentId == "tool.textgen")
+            if (contentId == "tool.search")
+                anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("RicercaTitolo") ?? "Search");
+            else if (contentId == "tool.textgen")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
             else if (contentId == "tool.converter")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");

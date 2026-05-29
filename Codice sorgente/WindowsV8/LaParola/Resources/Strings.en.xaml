@@ -23,12 +23,20 @@
     <sys:String x:Key="MenuSalvaCome">Save _As...</sys:String>
     <sys:String x:Key="MenuEsci">E_xit</sys:String>
 
-    <sys:String x:Key="MenuAllineamento">_Alignment</sys:String>
+    <sys:String x:Key="MenuAnnulla">_Undo</sys:String>
+    <sys:String x:Key="MenuRipristina">_Redo</sys:String>
+    <sys:String x:Key="MenuTaglia">Cu_t</sys:String>
+    <sys:String x:Key="MenuCopia">_Copy</sys:String>
+    <sys:String x:Key="MenuIncolla">_Paste</sys:String>
+    <sys:String x:Key="MenuSelezionaTutto">Select _All</sys:String>
+    <sys:String x:Key="MenuElimina">_Delete</sys:String>
+    <sys:String x:Key="MenuAllineamento">A_lignment</sys:String>
     <sys:String x:Key="MenuAllineamentoSinistra">_Left</sys:String>
     <sys:String x:Key="MenuAllineamentoCentro">_Center</sys:String>
     <sys:String x:Key="MenuAllineamentoDestra">_Right</sys:String>
     <sys:String x:Key="MenuAllineamentoGiustificato">_Justified</sys:String>
 
+    <sys:String x:Key="MenuRicerca">_Search</sys:String>
     <sys:String x:Key="MenuTextGenerator">Show _Passage</sys:String>
     <sys:String x:Key="MenuConverter">Measures _Converter</sys:String>
     <sys:String x:Key="MenuOptions">_Options</sys:String>
@@ -74,6 +82,90 @@
     <sys:String x:Key="OpzioniLinguaTitolo">Language</sys:String>
     <sys:String x:Key="OpzioniLinguaAiuto">Choose the language for the application, English or Italian. Most of the interface is changed immediately, the rest requires a restart of the app.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">To completely change the language used in the app, you need to restart the application. Changing the interface language also changes the language of the names and abbreviations of the books used and recognised.</sys:String>
+    <sys:String x:Key="OpzioniFormato">Text Format</sys:String>
+    <sys:String x:Key="OpzioniFontTitolo">Fonts</sys:String>
+    <sys:String x:Key="OpzioniFontAiuto">Choose the font settings for the text. Note that the colour chosen is that which is shown in light mode - if black text is chosen, it is shown as white in dark mode. For the Bible references, you can also choose to use superscripts.</sys:String>
+    <sys:String x:Key="OpzioniFont">Default Font:</sys:String>
+    <sys:String x:Key="OpzioniFontGreco">Greek Font:</sys:String>
+    <sys:String x:Key="OpzioniFontEbraico">Hebrew Font:</sys:String>
+    <sys:String x:Key="OpzioniFontRicerca">Searched Words Font:</sys:String>
+    <sys:String x:Key="OpzioniFontRiferimenti">References Font:</sys:String>
+    <sys:String x:Key="OpzioniFontRiferimentiApice">Superscript</sys:String>
+    <sys:String x:Key="OpzioniFontModifica">Modify...</sys:String>
+
+    <sys:String x:Key="FontDialogAiuto">Choose the font settings for the text. Note that the colour chosen is that which is shown in light mode - if black text is chosen, it is shown as white in dark mode.</sys:String>
+    <sys:String x:Key="FontDialogFont">Font</sys:String>
+    <sys:String x:Key="FontDialogSize">Size</sys:String>
+    <sys:String x:Key="FontDialogBold">Bold</sys:String>
+    <sys:String x:Key="FontDialogItalic">Italic</sys:String>
+    <sys:String x:Key="FontDialogUnderline">Underline</sys:String>
+    <sys:String x:Key="FontDialogSuperscript">Superscript</sys:String>
+    <sys:String x:Key="FontDialogColour">Colour</sys:String>
+    <sys:String x:Key="FontDialogPreview">Preview</sys:String>
+    <sys:String x:Key="FontDialogPreviewText">For in this way God loved the world, so that he gave his one and only Son, in order that everyone who believes in him will not perish, but will have eternal life.</sys:String>
+
+    <sys:String x:Key="RicercaTitolo">Search</sys:String>
+    <sys:String x:Key="RicercaFrase">Search Expression:</sys:String>
+    <sys:String x:Key="RicercaAiuto">Type the search expression you want to use and choose the Bible translation and part of the Bible you want to search. The app will display all verses that match the search criteria. Click the button to the right of the search expression for an explanation of the symbols that can be used.</sys:String>
+    <sys:String x:Key="RicercaEspressioneAiuto">Type here the expression you want to search for. Click the button to the right for an explanation of the symbols that can be used.</sys:String>
+    <sys:String x:Key="RicercaEspressioneAiutoTitolo">Help for the Search Expression</sys:String>
+    <sys:String x:Key="RicercaEspressioneAiutoLungo">{\rtf\fs28 The search expression contains a list of words (composed of letters, hyphens and apostrophes) and some symbols between the words that specify the relationship between the words to search for. The words can also contain the symbols * and ?: * corresponds to any number of letters and ? corresponds to any letter.\par\par
+    Since numbers are used to indicate the relationship between the searched words, they cannot be searched as words. However, if the word containing a number is placed between the less-than and greater-than signs (for example,
+        \'3c12000\'3e), it is possible to search for it. This is useful especially for searching Strong's numbers (for example \'3cG446\'3e).\par\par
+        Spaces (except those between words) and uppercase letters are optional.\par\par
+{\b\fs32 Meaning of Symbols}\par\par
+
+        \b Between words:\b0\par
+\pard\tx3000 space, 0\tab AND\par
+\pard\tx3000 0, 1, ..., 9\tab AND WITHIN: the second word must appear within this number of verses\par
+\pard\tx3000  \tab SKIP (inside [...]): the maximum number of words that can be skipped in a sentence\par
+\pard\tx3000 |, !\tab OR\par
+\pard\tx3000 :\tab SKIP ANY NUMBER (inside [...]): any number of words can be between the two words\par        
+\b Before a word:\b0\par
+        \pard\tx3000 /\tab Any word that has this lemma\par
+        \pard\tx3000 \\\tab Any word that has the same lemma as this word\par
+        \pard\tx3000 ^, ~\tab NOT this word (or words if followed by \\ or /; must be followed by AND or AND WITHIN)\par
+        \b Around expressions:\b0\par
+        \pard\tx3000 (...)\tab Find the verses that contain the expression inside the parentheses. They are necessary when the order in which the words are analyzed (from left to right) is not the desired order\par
+        \pard\tx3000 [...], "..."\tab Find the verses that contain this phrase, that is, these words in this order\par
+        \par
+        {\b\fs32 Examples}\par\par
+        \pard\tx3000 forgive sinner\tab A verse that contains the words "forgive" and "sinner"\par
+        \pard\tx8000 forgive | sinner\tab A verse that contains either the word "forgive" or the word "sinner"\par
+        \pard\tx3000 /forgive /sin\tab A verse that contains a word with lemma "forgive" and a word with lemma "sin"\par
+        \pard\tx3000 \\forgive \\sinner\tab Same as the previous example\par
+        \pard\tx3000 /repent (/forgive|/sin)\tab A verse that contains a word from "repent", and either a word from "forgive" or a word from "sin"\par
+        \pard\tx3000 /repent /forgive | /sin\tab A verse that contains both a word from "repent" and a word from "forgive", or a word from "sin" (not the same as the previous example)\par
+        \pard\tx3000 /forgive 1 /sin\tab A verse that contains a word from "forgive", and in the same verse or the previous or next verse a word from "sin"\par
+        \pard\tx3000 /sin 1 /forgive\tab A verse that contains a word from "sin", and in the same verse or the previous or next verse a word from "forgive" (the verses will be different from those listed in the previous example, but they will refer to the same pairs of verses)\par
+        \pard\tx3000 /forgive ^ /sin\tab A verse that contains a word from "forgive" but not a word from "sin"\par
+        \pard\tx3000 [/forgive 2 /sin]\tab A verse that contains a word from "forgive" and not more than two words later a word from "sin"\par
+        \pard\tx3000 [(sin|peccati):/forgive]\tab A verse that contains the word "sin" or the word "peccati" and later in the same verse a word from "forgive"\par
+        \pard\tx3000 /sin7*pen*\tab A verse that contains a word from "sin" and within seven verses a word that contains the letters "pen"\par
+}
+    </sys:String>
+    <sys:String x:Key="RicercaVersione">Text to Search:</sys:String>
+    <sys:String x:Key="RicercaTestiAiuto">Select the text that you want to search in.</sys:String>
+    <sys:String x:Key="RicercaRicerca">Search</sys:String>
+    <sys:String x:Key="RicercaErroreParentesi">The parentheses in the search expression are not balanced.</sys:String>
+    <sys:String x:Key="RicercaErroreParentesiQuadrate">The square brackets in the search expression are not balanced.</sys:String>
+    <sys:String x:Key="RicercaErroreSintasi">The syntax of the search expression is incorrect at about character number {0}.</sys:String>
+    <sys:String x:Key="RicercaBranoTitolo">Range to Search in:</sys:String>
+    <sys:String x:Key="RicercaBranoAiuto">Choose the part of the Bible you want to search in: all of the Bible, one of the preset sections of the Bible, or any part of the Bible typing in the reference of the passage.</sys:String>
+    <sys:String x:Key="RicercaBranoSezione">Section:</sys:String>
+    <sys:String x:Key="RicercaBranoBrano">Passage:</sys:String>
+    <sys:String x:Key="RicercaBranoTutta">All</sys:String>
+    <sys:String x:Key="RicercaBranoAT">Old Testament</sys:String>
+    <sys:String x:Key="RicercaBranoNT">New Testament</sys:String>
+    <sys:String x:Key="RicercaBranoPenteuco">Pentateuch</sys:String>
+    <sys:String x:Key="RicercaBranoStorici">Historical Books</sys:String>
+    <sys:String x:Key="RicercaBranoScritti">Writings</sys:String>
+    <sys:String x:Key="RicercaBranoProfeti">Prophetic Books</sys:String>
+    <sys:String x:Key="RicercaBranoVangeli">Gospels</sys:String>
+    <sys:String x:Key="RicercaBranoVangeliAtti">Gospels and Acts</sys:String>
+    <sys:String x:Key="RicercaBranoLettere">Letters</sys:String>
+    <sys:String x:Key="RicercaBranoLetterePaolo">Letters of Paul</sys:String>
+    <sys:String x:Key="RicercaBranoLettereAltri">Letters of Others</sys:String>
 
     <sys:String x:Key="MostraTitolo">Show Passage</sys:String>
     <sys:String x:Key="MostraAiuto">Type the reference of the passage you want to display and choose the Bible translation(s) you want to read. "Alternate Texts" shows one verse at a time in the different translations. The text is open in an editor window, where it can be modified, copied, or saved.</sys:String>

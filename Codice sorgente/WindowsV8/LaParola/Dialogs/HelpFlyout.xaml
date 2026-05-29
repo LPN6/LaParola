@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="LaParola.HelpFlyout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="root">
+
+    <Grid>
+        <!-- INFO BUTTON -->
+        <Button x:Name="InfoButton" AutomationProperties.Name="Help"
+Width="22" Height="22" Margin="2"
+Background="{DynamicResource ControlBackgroundBrush}"
+        BorderBrush="{DynamicResource AppForegroundBrush}"
+        BorderThickness="1"
+                ToolTip="{DynamicResource Aiuto}"
+                ToolTipService.ShowDuration="5000"
+                Click="InfoButton_Click">
+
+            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE897;"
+                       FontSize="12"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Button>
+
+        <!-- POPUP -->
+        <Popup x:Name="Popup"
+               PlacementTarget="{Binding ElementName=InfoButton}"
+               Placement="Bottom"
+               StaysOpen="False"
+               AllowsTransparency="True">
+
+            <Border Background="{DynamicResource ControlBackgroundBrush}"
+                    Padding="12"
+                    CornerRadius="6"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="1"
+                    Width="260">
+
+                <StackPanel>
+                    <!-- Bindable help text -->
+                    <TextBlock Text="{Binding HelpText, ElementName=root}"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,10"/>
+
+                    <!-- Link button -->
+                    <Button Background="Transparent"
+                            BorderThickness="0"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            Visibility="Collapsed"
+                            Click="Help_Click">
+
+                        <TextBlock Text="{Binding HelpLinkText, ElementName=root}"
+                                   Foreground="{DynamicResource AccentBrush}"
+                                   TextDecorations="Underline"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+    </Grid>
+</UserControl>

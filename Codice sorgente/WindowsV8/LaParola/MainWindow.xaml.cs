@@ -8,6 +8,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -15,16 +16,92 @@ using System.Windows.Media;
 namespace LaParola;
 
 // TODO2 toolbar: new, open, save (all), print, undo, redo, find, cut, copy, paste, vis bibbia, commentario, apri note, segnalibri, navigare, ricerca, mostra, (chiave), (racc info), paralleli, LQ, Misure, Gesti testi, aggiorna, opzioni,aiuto
-// TODO2 menu and toolbar: Application.Commands.Copy/Cut/Paste/Undo/Redo/SelectAll, NavigationCommands.Find, ...
 // available icons are listed here: https://pictogrammers.com/library/mdi/
 // TODO2 help centre: Search, FAQs, tutorials, contact, release notes, keyboard shortcuts, about, documentation, how to use, getting started
 // TODO2 option to not ask confirm when closing documents
 
+// TODO2 ApplicationCommands:
+/*| `CancelPrint` | Cancels a print job. |
+| `Close` | Closes a file or document. |
+| `ContextMenu` | Opens the context menu. |
+| `CorrectionList` | Opens a correction list (typically for speech or handwriting). |
+| `Find` | Opens a search or "Find" dialog. |
+| `Help` | Opens the help documentation. |
+| `New` | Creates a new file or document. |
+| `Open` | Opens an existing file or document. |
+| `Print` | Prints the current document. |
+| `PrintPreview` | Opens a print preview window. |
+| `Properties` | Opens the properties for the current selection. |
+| `Replace` | Opens a "Replace" dialog. |
+| `Save` | Saves the current document. |
+| `SaveAs` | Saves the current document with a new name or location. |
+| `Stop` | Stops the current operation. |
+ */
+
+// TODO2 NavigationCommands:
+/*
+ * * `BrowseBack` (Navigates to the previous page in history)
+* `BrowseForward` (Navigates to the next page in history)
+* `BrowseHome` (Navigates to the home page)
+* `DecreaseZoom` (Decreases the zoom percentage)
+* `Favorites` | `FirstPage` | `GoToPage`
+* `IncreaseZoom` (Increases the zoom percentage)
+* `LastPage` | `NextPage` | `PreviousPage`
+* `Refresh` (Refreshes the current page/content)
+* `Search` (Navigates to a search interface)
+* `StopLoading` (Stops loading the current page)
+* `Zoom` (Sets a specific zoom level)
+ */
+
+// TODO2 EditingCommands:
+/*
+ * ### Caret Movement and Selection
+
+* `MoveDownByLine` | `MoveDownByPage` | `MoveDownByParagraph`
+* `MoveUpByLine` | `MoveUpByPage` | `MoveUpByParagraph`
+* `MoveLeftByCharacter` | `MoveLeftByWord`
+* `MoveRightByCharacter` | `MoveRightByWord`
+* `MoveToDocumentEnd` | `MoveToDocumentStart`
+* `MoveToLineEnd` | `MoveToLineStart`
+* `SelectDownByLine` | `SelectDownByPage` | `SelectDownByParagraph`
+* `SelectUpByLine` | `SelectUpByPage` | `SelectUpByParagraph`
+* `SelectLeftByCharacter` | `SelectLeftByWord`
+* `SelectRightByCharacter` | `SelectRightByWord`
+* `SelectToDocumentEnd` | `SelectToDocumentStart`
+* `SelectToLineEnd` | `SelectToLineStart`
+
+### Text Deletion and Modification
+
+* `Backspace` (Deletes character to the left)
+* `Delete` (Deletes character to the right)
+* `DeleteNextWord` | `DeletePreviousWord`
+* `EnterParagraphBreak` (Inserts a paragraph break / Enter key behavior)
+* `EnterLineBreak` (Inserts a line break / Shift+Enter behavior)
+* `TabForward` | `TabBackward`
+
+### Formatting (Rich Text)
+
+* `ToggleSubscript` | `ToggleSuperscript`
+* `ApplyFontSize` | `ApplyFontFamily`
+* `ApplyForeground` | `ApplyBackground`
+* `IncreaseIndentation` | `DecreaseIndentation`
+
+### Lists and Structures
+
+* `ToggleNumbering` (Toggles numbered list format)
+* `InsertTable` | `InsertRows` | `InsertColumns`
+* `DeleteRows` | `DeleteColumns` | `MergeCells` | `SplitCell`
+ */
+
 public partial class MainWindow : Window
 {
+    private SearchToolView? _searchView;
     private TextGeneratorToolView? _textGenView;
     private ConverterToolView? _converterView;
     private OptionsToolView? _optionsView;
+
+    private object SearchToolViewInstance()
+        => _searchView ??= new SearchToolView();
 
     private object TextGenToolViewInstance()
         => _textGenView ??= new TextGeneratorToolView();
@@ -40,9 +117,23 @@ public partial class MainWindow : Window
 
     private IInputElement? _previousFocus;
 
+    public static readonly RoutedUICommand NuovoCommand = new("NewEditor", "NuovoCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand ApriCommand = new("OpenEditor", "ApriCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand ChiudiCommand = new("Close", "ChiudiCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand SalvaCommand = new("Save", "SalvaCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand SalvaComeCommand = new("SaveAs", "SalvaComeCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand EsciCommand = new("Exit", "EsciCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand SearchCommand = new("Search", "SearchCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand MostraCommand = new("Mostra", "MostraCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand ConverterCommand = new("Converter", "ConverterCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand OptionsCommand = new("Options", "OptionsCommand", typeof(MainWindow));
+
     public MainWindow(AppSettings settingsLoaded)
     {
         settings = settingsLoaded;
+        // if settings.language is it (but not set the first time...)
+        //ApplicationCommands.SelectAll.InputGestures.Clear();
+        //ApplicationCommands.SelectAll.InputGestures.Add(new KeyGesture(Key.Q , ModifierKeys.Control));
 
         InitializeComponent();
 
@@ -50,7 +141,7 @@ public partial class MainWindow : Window
         App.DockingHost.Initialize(Dock, DocumentPane);
 
         Services.ThemeManager.ApplyDockTheme(Dock, settings.ThemeMode);
-        App.ThemeManager.HookSystemThemeChanges(settings.ThemeMode, Dock);
+        App.ThemeManager.HookSystemThemeChanges(Dock, settings.ThemeMode);
 
         Loaded += MainWindow_Loaded;
         Closing += MainWindow_Closing;
@@ -68,10 +159,6 @@ public partial class MainWindow : Window
         Loaded -= MainWindow_Loaded;
 
         ShowLoadingOverlay(true);
-        App.DockingHost.ActiveEditorChanged += (_, _) =>
-        {
-            UpdateEditorMenuState();
-        };
 
         try
         {
@@ -80,9 +167,15 @@ public partial class MainWindow : Window
                 Testi = new Texts(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar);
                 Testi.AggiungiDirectory(AppContext.BaseDirectory);
             });
-
+        }
+        finally
+        {
             // Ora ripristina layout
             RestoreDockLayout();
+
+            ShowLoadingOverlay(false);
+
+            Testi.Formato = settings.Formato;
 
             if (settings.Language == "it")
             {
@@ -97,11 +190,15 @@ public partial class MainWindow : Window
                     foreach (string abbreviazioneDiLibro in abbreviazioniDiLibro)
                         Testi.LibriAbbreviazioniRiconosciute[abbreviazioneDiLibro] = i;
                 }
+
+                UpdateShortcutBindings("it");
             }
-        }
-        finally
-        {
-            ShowLoadingOverlay(false);
+
+            App.DockingHost.ActiveEditorChanged += (_, _) =>
+            {
+                UpdateEditorMenuState();
+            };
+
         }
 
         if (Testi.NomiVersioni().Count == 0)
@@ -150,7 +247,7 @@ public partial class MainWindow : Window
 
             FlowDocument doc = new()
             {
-                FontFamily = new FontFamily("Giorgia"),
+                FontFamily = new FontFamily("Georgia"),
                 FontSize = 15
             };
             string testo = "Questa è la versione beta (di prova) di LaParola 8.\n\n" +
@@ -164,8 +261,7 @@ public partial class MainWindow : Window
 "If you encounter any issues or have suggestions, please email me at info@laparola.net.";
             doc.Blocks.Clear();
             doc.Blocks.Add(new Paragraph(new Run(testo)));
-
-            App.DockingHost.OpenEditorDocument(doc);
+            App.DockingHost.OpenEditorDocument(doc, ((string)(Application.Current.TryFindResource("MenuAbout") ?? "About LaParola")).Replace("_", ""));
             return;
         }
 
@@ -180,6 +276,7 @@ public partial class MainWindow : Window
 
             // 1) Tool panes: hanno ContentId fissi. Qui puoi restituire
             // le istanze già presenti (se le hai nominate con x:Name) oppure crearle.
+            if (id == "tool.search") { args.Content = SearchToolViewInstance(); return; }
             if (id == "tool.textgen") { args.Content = TextGenToolViewInstance(); return; }
             if (id == "tool.converter") { args.Content = ConverterToolViewInstance(); return; }
             if (id == "tool.options") { args.Content = OptionsToolViewInstance(); return; }
@@ -215,7 +312,6 @@ public partial class MainWindow : Window
         ConverterToolAnchorable?.Hide();
         OptionsToolAnchorable?.Hide();
     }
-
 
     private void ShowLoadingOverlay(bool show)
     {
@@ -254,27 +350,73 @@ public partial class MainWindow : Window
         MenuChiudi.IsEnabled = App.DockingHost.HasClosableContent;
     }
 
-    private void NewEditor_Click(object sender, RoutedEventArgs e) => App.DockingHost.OpenEditorDocument();
+    internal void UpdateShortcutBindings(string lingua)
+    {
+        bool italiano = lingua.StartsWith("it", StringComparison.CurrentCultureIgnoreCase);
+
+        // to change default shortcuts, do this. Need also to change in constructor before InitializeComponent, but can't be changed in the menu without restart
+        //ApplicationCommands.SelectAll.InputGestures.Clear();
+        //ApplicationCommands.SelectAll.InputGestures.Add(new KeyGesture(italiano ? Key.Q : Key.A, ModifierKeys.Control,"Ctrl+Q"));
+
+        // 1. Update the visual text displayed in the menu
+        MenuApri.InputGestureText = italiano ? "Ctrl+F12" : "Ctrl+O";
+
+        // 2. Remove the old key binding if it exists (to avoid duplicate triggers)
+        var existingBinding = this.InputBindings
+            .OfType<KeyBinding>()
+            .FirstOrDefault(b => b.Command == ApriCommand);
+
+        if (existingBinding != null)
+        {
+            this.InputBindings.Remove(existingBinding);
+        }
+
+        // 3. Add the brand new physical key listener to the window
+        KeyBinding newShortcut = new(ApriCommand, italiano ? Key.F12 : Key.O, ModifierKeys.Control);
+        this.InputBindings.Add(newShortcut);
+    }
+
+    private void NuovoEditor_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.OpenEditorDocument();
     private void NewViewer_Click(object sender, RoutedEventArgs e) => App.DockingHost.OpenViewerDocument();
 
-    private void ApriEditor_Click(object sender, RoutedEventArgs e)
+    private void ApriEditor_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         App.DockingHost.OpenEditorDocumentFromFile(this);
     }
 
-    private void Chiudi_Click(object sender, RoutedEventArgs e)
-    {   
+    private void ChiudiEditor_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
         App.DockingHost.CloseActiveContent();
     }
 
-    private void Salva_Click(object sender, RoutedEventArgs e)
+    private void SalvaEditor_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         App.DockingHost.SaveActiveEditor();
     }
 
-    private void SalvaCome_Click(object sender, RoutedEventArgs e)
+    private void SalvaCome_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         App.DockingHost.SaveActiveEditorAs();
+    }
+
+    private void DeleteText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        // Enable the menu item only if a text box is focused and has selected text
+        if (FocusManager.GetFocusedElement(this) is RichTextBox rtb)
+        {
+            e.CanExecute = !rtb.Selection.IsEmpty && !rtb.IsReadOnly;
+            e.Handled = true;
+        }
+    }
+
+    private void DeleteText_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        // Clear out the selected text
+        if (FocusManager.GetFocusedElement(this) is RichTextBox rtb)
+        {
+            rtb.Selection.Text = string.Empty;
+            e.Handled = true;
+        }
     }
 
     private void Allineamento_SubmenuOpened(object sender, RoutedEventArgs e)
@@ -308,7 +450,18 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ShowTextGenerator_Click(object sender, RoutedEventArgs e)
+    private void Search_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        //App.DockingHost.ShowTool("tool.textgen"); 
+
+        // Assicurati che Testi sia pronto prima di creare la view
+        if (Testi == null)
+            return; // oppure mostra un messaggio / lascia l’overlay attivo
+
+        App.DockingHost.ShowTool("tool.search");
+    }
+
+    private void Mostra_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         //App.DockingHost.ShowTool("tool.textgen"); 
 
@@ -318,8 +471,9 @@ public partial class MainWindow : Window
 
         App.DockingHost.ShowTool("tool.textgen");
     }
-    private void ShowConverter_Click(object sender, RoutedEventArgs e) => App.DockingHost.ShowTool("tool.converter");
-    private void ShowOptions_Click(object sender, RoutedEventArgs e) => App.DockingHost.ShowTool("tool.options");
+
+    private void Converter_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.converter");
+    private void Options_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.options");
 
     private void About_Click(object sender, RoutedEventArgs e)
     {
@@ -428,6 +582,6 @@ public partial class MainWindow : Window
         return sb.ToString();
     }
 
-    private void Exit_Click(object sender, RoutedEventArgs e) => Close();
+    private void Esci_Executed(object sender, ExecutedRoutedEventArgs e) => Close();
 
 }

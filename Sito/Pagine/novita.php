@@ -14,13 +14,21 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260529"></a>
+<h2>29 maggio 2026</h2>
+<p>La nuova versione di prova (8.0.1) &egrave; disponibile, in cui puoi ricercare il testo della Bibbia.
+Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.
+</p>
+<p>Il testo Westminister Leningrad Codex morfologico &egrave; stato migliorato, con una spiegazione dei codici morfologici.
+</p>
+
 <a name="20260521"></a>
 <h2>21 maggio 2026</h2>
 <p>Ho iniziato a scrivere una nuova versione dell'app per Windows, per usare le tecnologie pi&ugrave; recenti e creare un'interfaccia pi&ugrave; moderna.
 La prima versione di prova (8.0.0) &egrave; ora disponibile, che potete provare se volete.
-Tutte le informazioni sulla nuova app sono alla pagina sulla <a href="/programma/windowsbeta.php">versione beta</a>.
+Tutte le informazioni sulla nuova app sono alla pagina della <a href="/programma/windowsbeta.php">versione beta</a>.
 </p>
-<p>Un vantaggio della nuova versione &egrave; che pu&ograve; visualizzare meglio il testo ebraico, per cui c&egrave; un nuovo testo ebraico (Westminister Leningrad Codex) con morfologia delle parole.
+<p>Un vantaggio della nuova versione &egrave; che pu&ograve; visualizzare meglio il testo ebraico, per cui c'&egrave; un nuovo testo ebraico (Westminister Leningrad Codex) con la morfologia delle parole.
 Per l'app attuale di Windows (7.20), c'&egrave; adesso il testo Westminister Leningrad Codex senza la morfologia.
 </p>
 

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using LaParola.Utilities;
 using System.Windows.Documents;
 using LaParola.DocumentViews;
+using LaParola.ToolViews;
 
 namespace LaParola.Services;
 
@@ -33,7 +34,8 @@ public class ThemeManager
 
     public static void ApplyDockTheme(DockingManager dock, ThemeState themeMode)
     {
-        dock.Theme = IsDark(themeMode) ? new ArcDarkTheme() : new ArcLightTheme();
+        bool isDark = IsDark(themeMode);
+        dock.Theme = isDark ? new ArcDarkTheme() : new ArcLightTheme();
 
         LayoutRoot? root = dock.Layout;
         if (root == null)
@@ -52,21 +54,33 @@ public class ThemeManager
             {
                 bool oldDirty = fd.IsDirty;
                 string oldTitle = fd.ParentDocument?.Title ?? "LPNqwe3141#";
-                RtfColorTransformer.ApplyThemeToDocument(fd.FlowDocument, IsDark(themeMode), fg);
-                fd.IsDirty = oldDirty;
+                RtfColorTransformer.ApplyThemeToDocument(fd.FlowDocument, isDark, fg);
                 if (fd.ParentDocument != null && oldTitle != "LPNqwe3141#")
                 {
                     fd.ParentDocument.Title = oldTitle;
                 }
+                fd.IsDirty = oldDirty;
             }
         }
 
+        var anchorable = dock.Layout?
+            .Descendents()
+            .OfType<LayoutAnchorable>()
+            .FirstOrDefault(a => a.ContentId == "tool.options");
+
+        if (anchorable != null)
+        {
+            if (anchorable.Content is OptionsToolView toolView)
+            {
+                toolView.UpdateFontColor(isDark);
+            }
+        }
     }
 
-    public void HookSystemThemeChanges(ThemeState themeMode, DockingManager dock)
+    public void HookSystemThemeChanges(DockingManager dock, ThemeState themeMode)
     {
         UnhookSystemThemeChanges();
-        if (themeMode == ThemeState.System)
+        if (themeMode != ThemeState.System)
         {
             return;
         }

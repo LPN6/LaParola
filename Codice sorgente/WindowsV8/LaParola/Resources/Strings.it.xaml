@@ -23,12 +23,20 @@
     <sys:String x:Key="MenuSalvaCome">Salva con _nome...</sys:String>
     <sys:String x:Key="MenuEsci">_Esci</sys:String>
 
-    <sys:String x:Key="MenuAllineamento">_Allineamento</sys:String>
+    <sys:String x:Key="MenuAnnulla">_Annulla</sys:String>
+    <sys:String x:Key="MenuRipristina">_Ripristina</sys:String>
+    <sys:String x:Key="MenuTaglia">Tag_lia</sys:String>
+    <sys:String x:Key="MenuCopia">_Copia</sys:String>
+    <sys:String x:Key="MenuIncolla">_Incolla</sys:String>
+    <sys:String x:Key="MenuSelezionaTutto">_Seleziona tutto</sys:String>
+    <sys:String x:Key="MenuElimina">Ca_ncella</sys:String>
+    <sys:String x:Key="MenuAllineamento">Allinea_mento</sys:String>
     <sys:String x:Key="MenuAllineamentoSinistra">A _sinistra</sys:String>
     <sys:String x:Key="MenuAllineamentoCentro">_Centro</sys:String>
     <sys:String x:Key="MenuAllineamentoDestra">A _destra</sys:String>
     <sys:String x:Key="MenuAllineamentoGiustificato">_Giustificato</sys:String>
 
+    <sys:String x:Key="MenuRicerca">_Ricerca</sys:String>
     <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
     <sys:String x:Key="MenuConverter">_Convertitore misure</sys:String>
     <sys:String x:Key="MenuOptions">_Opzioni</sys:String>
@@ -74,7 +82,91 @@
     <sys:String x:Key="OpzioniLinguaTitolo">Lingua</sys:String>
     <sys:String x:Key="OpzioniLinguaAiuto">Scegli la lingua per l'applicazione, inglese o italiano. La maggior parte dell'interfaccia viene modificata immediatamente, il resto richiede il riavvio dell'app.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">Per cambiare completamente la lingua utilizzata nell'app, è necessario riavviare l'applicazione. Cambiare la lingua dell'interfaccia cambia anche la lingua dei nomi e abbreviazioni dei libri usati e riconosciuti.</sys:String>
-    
+    <sys:String x:Key="OpzioniFormato">Formato testo</sys:String>
+    <sys:String x:Key="OpzioniFontTitolo">Caratteri</sys:String>
+    <sys:String x:Key="OpzioniFontAiuto">Scegli le impostazioni del carattere per il testo. Nota che il colore scelto è quello che viene mostrato in modalità chiara - se viene scelto il testo nero, viene mostrato come bianco in modalità scura. Puoi anche scegliere di mettere i riferimenti biblici in apice.</sys:String>
+    <sys:String x:Key="OpzioniFont">Carattere predefinito:</sys:String>
+    <sys:String x:Key="OpzioniFontGreco">Carattere greco:</sys:String>
+    <sys:String x:Key="OpzioniFontEbraico">Carattere ebraico:</sys:String>
+    <sys:String x:Key="OpzioniFontRicerca">Carattere parole cercate:</sys:String>
+    <sys:String x:Key="OpzioniFontRiferimenti">Carattere riferimenti:</sys:String>
+    <sys:String x:Key="OpzioniFontRiferimentiApice">In apice</sys:String>
+    <sys:String x:Key="OpzioniFontModifica">Modifica...</sys:String>
+
+    <sys:String x:Key="FontDialogAiuto">Scegli le impostazioni del carattere per il testo. Nota che il colore scelto è quello che viene mostrato in modalità chiara - se viene scelto il testo nero, viene mostrato come bianco in modalità scura.</sys:String>
+    <sys:String x:Key="FontDialogFont">Carattere</sys:String>
+    <sys:String x:Key="FontDialogSize">Dimensione</sys:String>
+    <sys:String x:Key="FontDialogBold">Grassetto</sys:String>
+    <sys:String x:Key="FontDialogItalic">Corsivo</sys:String>
+    <sys:String x:Key="FontDialogUnderline">Sottolineato</sys:String>
+    <sys:String x:Key="FontDialogSuperscript">In apice</sys:String>
+    <sys:String x:Key="FontDialogColour">Colore</sys:String>
+    <sys:String x:Key="FontDialogPreview">Anteprima</sys:String>
+    <sys:String x:Key="FontDialogPreviewText">Perché Dio ha tanto amato il mondo, che ha dato il suo unigenito Figlio, affinché chiunque crede in lui non perisca, ma abbia vita eterna.</sys:String>
+
+    <sys:String x:Key="RicercaTitolo">Ricerca</sys:String>
+    <sys:String x:Key="RicercaFrase">Espressione da ricercare:</sys:String>
+    <sys:String x:Key="RicercaAiuto">Digita l'espressione da ricercare e scegli la versione e la sezione della Bibbia in cui vuoi cercare. L'app mostrerà tutti i versetti che corrispondono ai criteri di ricerca. Clicca il pulsante alla destra dell'espressione da ricercare per una spiegazione dei simboli che possono essere utilizzati.</sys:String>
+    <sys:String x:Key="RicercaEspressioneAiuto">Digita qui l'espressione che vuoi cercare. Clicca il pulsante alla destra per una spiegazione dei simboli che possono essere utilizzati.</sys:String>
+    <sys:String x:Key="RicercaEspressioneAiutoTitolo">Aiuto per l'espressione da ricercare</sys:String>
+    <sys:String x:Key="RicercaEspressioneAiutoLungo">{\rtf\fs28 L'espressione da ricercare contiene un elenco di parole (composte da lettere, trattini e apostrofi) e alcuni simboli fra le parole che specificano il rapporto fra le parole da ricercare. Le parole possono anche contenere i simboli * e ?: * corrisponde a qualsiasi numero di lettere e ? corrisponde ad una lettera qualsiasi.\par\par
+    Siccome le cifre sono usate per indicare il rapporto fra le parole ricercate, non possono essere ricercate come parole. Per\'f2, se la parola che contiene una cifra \'e8 messa fra i segni di minore e di maggiore (per esempio,
+        \'3c12000\'3e), \'e8 possibile cercarla. Questo \'e8 utile soprattutto per ricercare i numeri Strongs (per esempio \'3cG446\'3e).\par\par
+        Spazi (a parte di quelli fra le parole) e lettere maiuscole sono facoltativi.\par\par
+{\b\fs32 Significato dei simboli}\par\par
+
+        \b Fra le parole:\b0\par
+\pard\tx3000 spazio, 0\tab E\par
+\pard\tx3000 0, 1, ..., 9\tab E ENTRO: la seconda parola deve apparire entro questo numero di versetti\par
+\pard\tx3000  \tab SALTA (dentro [...]): il numero massimo di parole che possono essere saltate in una frase\par
+\pard\tx3000 |, !\tab OPPURE\par
+\pard\tx3000 :\tab SALTA QUALSIASI NUMERO (dentro [...]): qualsiasi numero di parole possono essere fra le due parole\par        
+\b Prima di una parola:\b0\par
+        \pard\tx3000 /\tab Qualsiasi parola che ha questo lemma\par
+        \pard\tx3000 \\\tab Qualsiasi parola che ha lo stesso lemma di questa parola\par
+        \pard\tx3000 ^, ~\tab NON questa parola (o parole se seguito da \ o /; deve seguire E o E ENTRO)\par
+        \b Intorno ad espressioni:\b0\par
+        \pard\tx3000 (...)\tab Trova prima i versetti che contengono l'espressione dentro le parentesi. Sono necessarie quando l'ordine in cui le parole sono analizzate (da sinistra a destra) non \'e8 l'ordine desiderato\par
+        \pard\tx3000 [...], "..."\tab Trova i versetti che contengono questa frase, cio\'e8, queste parole in questo ordine\par
+        \par
+        {\b\fs32 Esempi}\par\par
+        \pard\tx3000 perdona peccatore\tab Un versetto che contiene le parole "perdona" e "peccatore"\par
+        \pard\tx8000 perdona | peccatore\tab Un versetto che contiene o la parola "perdona" o la parola "peccatore"\par
+        \pard\tx3000 /perdonare /peccare\tab Un versetto che contiene una parola con radice "perdonare" e una parola con radice "peccare"\par
+        \pard\tx3000 \\perdona \\peccatore\tab uguale all'esempio precedente\par
+        \pard\tx3000 /pentire (/perdonare|/peccare)\tab Un versetto che contiene una parola da "pentire", e o una parola da "perdonare" o una da "peccare"\par
+        \pard\tx3000 /pentire /perdonare | /peccare\tab Un versetto che contiene sia una parola da "pentire" sia una da "perdonare", oppure una parola da "peccare" (non \'e8 uguale all'esempio precedente)\par
+        \pard\tx3000 /perdonare 1 /peccare\tab Un versetto che contiene una parola da "perdonare", e nello stesso versetto o in quello primo o in quello dopo una parola da "peccare"\par
+        \pard\tx3000 /peccare 1 /perdonare\tab Un versetto che contiene una parola da "peccare", e nello stesso versetto o in quello primo o in quello dopo una parola da "perdonare" (i versetti saranno diversi da quelli elencati dall'esempio precedente, ma si riferiranno alle stesse paia di versetti)\par
+        \pard\tx3000 /perdonare ^ /peccare\tab Un versetto che contiene una parola da "perdonare" ma non una da "peccare"\par
+        \pard\tx3000 [/perdonare 2 /peccare]\tab Un versetto che contiene una parola da "perdonare" e non pi\'f9 di due parole dopo una parola da "peccare"\par
+        \pard\tx3000 [(peccato|peccati):/perdonare]\tab Un versetto che contiene la parola "peccato" o la parola "peccati" e pi\'f9 tardi nello stesso versetto una parola da "perdonare"\par
+        \pard\tx3000 /peccare7*pen*\tab Un versetto che contiene una parola da "peccare" ed entro sette versetti una parola che contiene le lettere "pen"\par
+}
+    </sys:String>
+    <sys:String x:Key="RicercaVersione">Testo da ricercare:</sys:String>
+    <sys:String x:Key="RicercaTestiAiuto">Seleziona il testo in cui vuoi cercare.</sys:String>
+    <sys:String x:Key="RicercaRicerca">Ricerca</sys:String>
+    <sys:String x:Key="RicercaErroreParentesi">Le parentesi nell'espressione di ricerca non sono bilanciate.</sys:String>
+    <sys:String x:Key="RicercaErroreParentesiQuadrate">Le parentesi quadre nell'espressione di ricerca non sono bilanciate.</sys:String>
+    <sys:String x:Key="RicercaErroreSintasi">La sintassi dell'espressione di ricerca è errata all'incirca al carattere numero {0}.</sys:String>
+    <sys:String x:Key="RicercaBranoTitolo">Brano in cui ricercare:</sys:String>
+    <sys:String x:Key="RicercaBranoAiuto">Scegli la parte della Bibbia in cui vuoi cercare: tutta la Bibbia, una delle sezioni preimpostate della Bibbia, o qualsiasi parte della Bibbia digitando il riferimento del brano.</sys:String>
+    <sys:String x:Key="RicercaBranoSezione">Sezione:</sys:String>
+    <sys:String x:Key="RicercaBranoBrano">Brano:</sys:String>
+    <sys:String x:Key="RicercaBranoTutta">Tutta</sys:String>
+    <sys:String x:Key="RicercaBranoAT">Antico Testamento</sys:String>
+    <sys:String x:Key="RicercaBranoNT">Nuovo Testamento</sys:String>
+    <sys:String x:Key="RicercaBranoPenteuco">Pentateuco</sys:String>
+    <sys:String x:Key="RicercaBranoStorici">Libri storici</sys:String>
+    <sys:String x:Key="RicercaBranoScritti">Scritti</sys:String>
+    <sys:String x:Key="RicercaBranoProfeti">Libri profetici</sys:String>
+    <sys:String x:Key="RicercaBranoVangeli">Vangeli</sys:String>
+    <sys:String x:Key="RicercaBranoVangeliAtti">Vangeli e Atti</sys:String>
+    <sys:String x:Key="RicercaBranoLettere">Lettere</sys:String>
+    <sys:String x:Key="RicercaBranoLetterePaolo">Lettere di Paolo</sys:String>
+    <sys:String x:Key="RicercaBranoLettereAltri">Lettere di altri</sys:String>
+
     <sys:String x:Key="MostraTitolo">Mostra brano</sys:String>
     <sys:String x:Key="MostraAiuto">Digita il riferimento del brano che vuoi mostrare e scegliere la/le versione/i che vuoi leggere. "Alterna testi" mostra un versetto alla volta nelle diverse traduzioni. Il testo viene aperto in una finestra dell'editor, dove può essere modificato, copiato o salvato.</sys:String>
     <sys:String x:Key="MostraRiferimento">Versetti da mostrare:</sys:String>

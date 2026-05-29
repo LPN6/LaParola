@@ -105,59 +105,6 @@ namespace LaParola.Utilities
             return testoRtf.Replace(@"\v\", @"\").Replace(@"\'0e", "").Replace(@"\'02", "").Replace(@"\v0", "");
         }
 
-        // TODO cancel
-        /*
-        public static string ConvertiUnicodeInRtf(string rtf)
-        {
-            // StripRtf in testi.cs fa parzialmente il contrario
-            if (string.IsNullOrEmpty(rtf))
-            {
-                return "";
-            }
-
-            int numeroCaratteri = rtf.Length;
-            StringBuilder rtfSB = new(numeroCaratteri * 7);
-            for (int i = 0; i < numeroCaratteri; ++i)
-            {
-                if (rtf[i] >= 128)
-                {
-                    rtfSB.Append(@"\u").Append(((int)rtf[i]).ToString(CultureInfo.InvariantCulture)).Append('?');
-                }
-                else
-                {
-                    rtfSB.Append(rtf[i]);
-                }
-            }
-            return rtfSB.ToString();
-        }
-        */
-        /*
-        public static string ConvertiUnicodeInRtf(string rtf)
-        {
-            if (string.IsNullOrEmpty(rtf))
-                return string.Empty;
-
-            ReadOnlySpan<char> span = rtf.AsSpan();
-
-            StringBuilder sb = new(rtf.Length + (rtf.Length / 4));
-
-            foreach (char c in span)
-            {
-                if (c >= 128)
-                {
-                    sb.Append(@"\u");
-                    sb.Append((int)c);
-                    sb.Append('?');
-                }
-                else
-                {
-                    sb.Append(c);
-                }
-            }
-
-            return sb.ToString();
-        }
-        */
         public static string ConvertiUnicodeInRtf(string rtf)
         {
             if (string.IsNullOrEmpty(rtf))
@@ -165,6 +112,7 @@ namespace LaParola.Utilities
 
             StringBuilder sb = new(rtf.Length + 256);
 
+            Span<char> buffer = stackalloc char[6];
             foreach (char c in rtf)
             {
                 if (c < 128)
@@ -174,12 +122,10 @@ namespace LaParola.Utilities
                 else
                 {
                     sb.Append(@"\u");
-
-                    Span<char> buffer = stackalloc char[6];
-                    ((int)c).TryFormat(buffer, out int written);
-
-                    sb.Append(buffer[..written]);
-
+                    if (((int)c).TryFormat(buffer, out int written))
+                    {
+                        sb.Append(buffer[..written]);
+                    }
                     sb.Append('?');
                 }
             }

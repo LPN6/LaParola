@@ -8,7 +8,7 @@ require("../capo.php");
 <h2>App per Windows - versione 8 (beta)</h2>
 
 <p>Sto riscrivendo l'app per Window. L'app attuale ha quasi 20 anni, e si vede.
-La nuova versione ha un'interfaccia moderna e anche usa tecnologie nuove.
+La nuova versione ha un'interfaccia moderna e inoltre usa tecnologie nuove.
 Metter&ograve; diversi mesi per completare l'app, e ogni qualche settimana pubblicher&ograve;
 qui una nuova versione da provare. Se trovate dei problemi, fatemi sapere affinch&eacute;
 li possa correggere nella prossima versione beta.<p>
@@ -32,7 +32,17 @@ e mettere i file con estensione .laparola nella stessa cartella dell'app beta.</
 
 <h2>Caratteristiche</h2>
 
-<h3>Versione 8.0.0.0</h3>
+<h3>Versione 8.0.1</h3>
+<ul>
+<li><i>Ricerca:</i> digita una parola o un'espressione da ricercare e scegli la versione da ricercare
+(solo la Bibbia, non ancora i commentari).</li>
+<li><i>Opzioni:</i> i font utilizzati per visualizzare il testo possono essere personalizzati.</li>
+<li><i>Modifica:</i> annulla, ripristina, taglia, copia, incolla, cancella, seleziona tutto</li>
+<li><i>Testo ebraico:</i> il <a href="Westminster Leningrad Codex morfologico.laparola">Westminster Leningrad Codex morfologico</a>
+&egrave; stato migliorato, con i codici della morfologia espansi in italiano.</li>
+</ul>
+
+<h3>Versione 8.0.0</h3>
 <ul>
 <li><i>Mostra brano:</i> digita un riferimento e scegli le versioni da visualizzare
 (solo la Bibbia, non ancora i commentari).</li>
@@ -40,7 +50,7 @@ e mettere i file con estensione .laparola nella stessa cartella dell'app beta.</
 <li><i>Opzioni:</i> lingua dell'interfaccia, modalit&agrave; notte/giorno.</li>
 <li>Modalit&agrave; notte (non su Windows 10).</li>
 <li>Testo ebraico visualizzato bene. Una conseguenza dell'utilizzo delle nuove tecnologie &egrave; che &egrave; possibile visualizzare il testo ebraico un versetto dopo l'altro e che altro testo in caratteri latini pu&ograve; essere inserito.
-Per esempio, il nuovo testo <a href="Westminster Leningrad Codex morphological.laparola">Westminster Leningrad Codex morphological</a> mostra un codice per la morfologia dopo ogni parola, e quindi non pu&ograve; essere usato nella versione 7 dell'app.
+Per esempio, il nuovo testo <i>Westminster Leningrad Codex morphological</i> mostra un codice per la morfologia dopo ogni parola, e quindi non pu&ograve; essere usato nella versione 7 dell'app.
 Per provarlo, puoi scaricare quel file e copiarlo alla stessa cartella del programma (versione 8), poi usare il comando "Mostra brano" per visualizzarne il testo.
 I codici sono spiegati al sito di <a href="https://hb.openscriptures.org/parsing/HebrewMorphologyCodes.html">Open Scriptures</a>.</li>
 <li>App portabile: pu&ograve; essere avviata da una chiavetta

@@ -882,7 +882,7 @@ namespace LaParola
         /// <seealso cref="FormatoTesto"/>
         public FormatoTesto()
         {
-            fontNome = IsRunningOnMono() ? "Times New Roman" : "Giorgia";
+            fontNome = IsRunningOnMono() ? "Times New Roman" : "Georgia";
             fontDimensione = 12;
             // false è il valore predefinito, quindi non è necessario impostarlo
             //            fontGrassetto = false;
@@ -893,7 +893,7 @@ namespace LaParola
             fontGrecoNome = fontNome;
             fontGrecoDimensione = 12;
             fontGrecoColore = System.Windows.Media.Colors.Black;
-            fontEbraicoNome = "Giorgia";
+            fontEbraicoNome = "Times New Roman";
             fontEbraicoDimensione = 14;
             fontEbraicoColore = System.Windows.Media.Colors.Black;
 
@@ -3141,6 +3141,11 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, nomeVersione, [], null, null);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione)
+        {
+            return await FlowDocumentBranoAsync(riferimento, nomeVersione, [], null, null);
+        }
+
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3267,14 +3272,14 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, listaVersioni, [], worker, e);
         }
 
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, bool alternare)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, [], alternare, null, null);
-        }
-
         public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, bool alternare)
         {
             return await TestoBranoAsync(riferimento, listaVersioni, [], alternare, null, null);
+        }
+
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, bool alternare)
+        {
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, [], alternare, null, null);
         }
 
         /// <summary>
@@ -3322,6 +3327,14 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, versioni, collezioniDaVisualizzare, worker, e);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, BackgroundWorker? worker, DoWorkEventArgs? e)
+        {
+            Collection<string> versioni =
+            [
+                nomeVersione
+            ];
+            return await FlowDocumentBranoAsync(riferimento, versioni, collezioniDaVisualizzare, worker, e);
+        }
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3355,9 +3368,9 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), worker, e);
         }
 
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, BackgroundWorker? worker, DoWorkEventArgs? e)
         {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), alternare, worker, e);
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), worker, e);
         }
 
         /// <summary>
@@ -3375,6 +3388,11 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), alternare, worker, e);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
+        {
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), alternare, worker, e);
+        }
+
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3390,9 +3408,9 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, paroleRicercate, false, worker, e);
         }
 
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
         {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, alternare, worker, e);
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, false, worker, e);
         }
 
         /// <summary>
@@ -3409,6 +3427,10 @@ namespace LaParola
         public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
         {
             return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, alternare, worker, e);
+        }
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
+        {
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, alternare, worker, e);
         }
 
         public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool conNomiVersioni, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
@@ -3894,16 +3916,16 @@ namespace LaParola
                                 }
                                 catch { } // il nome della versione non era riconosciuto
                             }
-                            while (stringaRtf.Length > 0 && char.IsWhiteSpace(stringaRtf[stringaRtf.Length - 1]))
+                            while (stringaRtf.Length > 0 && char.IsWhiteSpace(stringaRtf[^1]))
                             {
                                 stringaRtf.Length--;
                             }
 
                             if (stringaRtf.Length >= 4 &&
-                                stringaRtf[stringaRtf.Length - 4] == '\\' &&
-                                stringaRtf[stringaRtf.Length - 3] == 'p' &&
-                                stringaRtf[stringaRtf.Length - 2] == 'a' &&
-                                stringaRtf[stringaRtf.Length - 1] == 'r')
+                                stringaRtf[^4] == '\\' &&
+                                stringaRtf[^3] == 'p' &&
+                                stringaRtf[^2] == 'a' &&
+                                stringaRtf[^1] == 'r')
                             {
                                 stringaRtf.Length -= 4;
                             }

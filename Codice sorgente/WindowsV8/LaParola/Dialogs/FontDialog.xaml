@@ -1,0 +1,110 @@
+﻿<Window x:Class="LaParola.FontDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:LaParola"
+        Title="{DynamicResource FontDialogFont}"
+        Height="450"
+        Width="520"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+    Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- LEFT SIDE -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,0">
+
+            <!-- Font -->
+            <TextBlock Text="{DynamicResource FontDialogFont}"/>
+            <ComboBox x:Name="cmbFonts"
+                      Height="25"
+                      Margin="0,4,0,10"/>
+
+            <!-- Size -->
+            <TextBlock Text="{DynamicResource FontDialogSize}"/>
+            <ComboBox x:Name="cmbSize"
+                      Height="25"
+                      Margin="0,4,0,10"
+                      IsEditable="True"/>
+
+            <!-- Styles -->
+            <CheckBox x:Name="chkBold"
+                      Content="{DynamicResource FontDialogBold}"
+                      Margin="0,0,0,5"/>
+
+            <CheckBox x:Name="chkItalic"
+                      Content="{DynamicResource FontDialogItalic}"
+                      Margin="0,0,0,5"/>
+
+            <CheckBox x:Name="chkUnderline"
+                      Content="{DynamicResource FontDialogUnderline}"
+                      Margin="0,0,0,5"/>
+
+            <CheckBox x:Name="chkSuperscript"
+                      Content="{DynamicResource FontDialogSuperscript}"
+                      Margin="0,0,0,10"
+                      Visibility="Collapsed"/>
+
+            <!-- Colour -->
+            <TextBlock Text="{DynamicResource FontDialogColour}"/>
+            <ComboBox x:Name="cmbColour">
+                <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="16"
+                        Height="16"
+                        Margin="0,0,6,0"
+                        Background="{Binding Brush}"
+                        BorderBrush="Gray"
+                        BorderThickness="1"/>
+
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- RIGHT SIDE -->
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <controls:HelpFlyout x:Name="HelpFlyoutControl"
+        Margin="0,8,0,0" HorizontalAlignment="Right"
+        HelpText="{DynamicResource FontDialogAiuto}"
+        HelpClicked="HelpFlyout_OnHelpClicked"/>
+
+            <GroupBox Header="{DynamicResource FontDialogPreview}">
+            <TextBlock x:Name="txtPreview"
+                           Text="{DynamicResource FontDialogPreviewText}"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"/>
+        </GroupBox>
+        </StackPanel>
+        <!-- BUTTONS -->
+        <StackPanel Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,12,0,0">
+
+            <Button Content="{DynamicResource PulsanteOK}"
+                    Width="80"
+                    Margin="0,0,8,0"
+                    Click="BtnOK_Click"/>
+
+            <Button Content="{DynamicResource PulsanteAnnulla}"
+                    Width="80"
+                    IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

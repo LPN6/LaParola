@@ -2248,7 +2248,7 @@ namespace LaParola
                         worker.ReportProgress(-quantoSpessoAggiornaBarra, e);
                     }
                 }
-                testoComeStringa = ""; //TODO: await genitore.MergeManyRtfAsync(stringheRtf); ;
+                testoComeStringa = ""; //TODO2 (commentario): era await genitore.MergeManyRtfAsync(stringheRtf); ;
                 if (string.IsNullOrEmpty(testoComeStringa))
                 {
                     testoComeStringa = "";

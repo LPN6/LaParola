@@ -3,11 +3,14 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace LaParola.Utilities
 {
     public static partial class RtfColorTransformer
     {
+        private static bool _apice;
+
         private static readonly DependencyProperty OriginalForegroundProperty =
     DependencyProperty.RegisterAttached(
         "OriginalForeground",
@@ -15,73 +18,21 @@ namespace LaParola.Utilities
         typeof(RtfColorTransformer),
         new PropertyMetadata(null));
 
-        /* tweakable in these ways
-          lum < 40      // what counts as "black"
-lum > 215     // what counts as "white"
-220           // light replacement
-60            // dark replacement
-0.85 / 0.15   // softness mix
-            */
-        /*
-        public static string TransformColorTableForDarkMode(string rtf)
+        public static Brush GetDarkThemedBrush(Brush originalBrush, Brush appForeground)
         {
-            return RegexRTFColorTable().Replace(rtf, match =>
-                {
-                    double r = int.Parse(match.Groups[1].Value);
-                    double g = int.Parse(match.Groups[2].Value);
-                    double b = int.Parse(match.Groups[3].Value);
-
-                    // Perceived luminance
-                    double lum = 0.299 * r + 0.587 * g + 0.114 * b;
-
-                    int rNew, gNew, bNew;
-
-                    if (lum < 40) // very dark → make light
-                    {
-                        rNew = gNew = bNew = 220;
-                    }
-                    else if (lum > 215) // very light → make dark gray
-                    {
-                        rNew = gNew = bNew = 60;
-                    }
-                    else
-                    {
-                        // Invert luminance but preserve color ratio
-                        double factor = (255 - lum) / lum;
-
-                        rNew = Clamp(r * factor);
-                        gNew = Clamp(g * factor);
-                        bNew = Clamp(b * factor);
-
-                        // Optional: soften extremes a bit
-                        rNew = Soften(rNew);
-                        gNew = Soften(gNew);
-                        bNew = Soften(bNew);
-                    }
-
-                    return $"\\red{rNew}\\green{gNew}\\blue{bNew}";
-                });
+            if (originalBrush is SolidColorBrush scb && IsTooDarkForDarkTheme(scb.Color))
+            {
+                return appForeground;
+            }
+            return originalBrush;
         }
 
-        private static int Clamp(double value)
-        {
-            return (int)Math.Max(0, Math.Min(255, value));
-        }
-
-        // Pull values slightly toward mid-range to avoid neon artifacts
-        private static int Soften(int value)
-        {
-            return (int)(value * 0.85 + 255 * 0.15);
-        }
-
-        [GeneratedRegex(@"\\red(\d+)\\green(\d+)\\blue(\d+)")]
-        private static partial Regex RegexRTFColorTable();
-        */
-
-        public static void ApplyThemeToDocument(FlowDocument doc, bool darkMode, Brush appForeground)
+        public static void ApplyThemeToDocument(FlowDocument doc, bool darkMode, Brush appForeground, bool trasformaApice = false)
         {
             if (doc == null)
                 return;
+
+            _apice = trasformaApice;
 
             foreach (Block block in doc.Blocks)
                 ApplyThemeToBlock(block, darkMode, appForeground);
@@ -89,7 +40,7 @@ lum > 215     // what counts as "white"
 
         private static void ApplyThemeToBlock(Block block, bool darkMode, Brush appForeground)
         {
-            ProcessElement(block, darkMode, appForeground);
+            ApplyThemeToElement(block, darkMode, appForeground);
 
             switch (block)
             {
@@ -121,7 +72,11 @@ lum > 215     // what counts as "white"
 
         private static void ApplyThemeToInline(Inline inline, bool darkMode, Brush appForeground)
         {
-            ProcessElement(inline, darkMode, appForeground);
+            ApplyThemeToElement(inline, darkMode, appForeground);
+            if (_apice)
+            {
+                AdjustInlineTypo(inline);
+            }
 
             if (inline is Span span)
             {
@@ -130,12 +85,11 @@ lum > 215     // what counts as "white"
             }
         }
 
-        private static void ProcessElement(TextElement element, bool darkMode, Brush appForeground)
+        private static void ApplyThemeToElement(TextElement element, bool darkMode, Brush appForeground)
         {
             object local = element.ReadLocalValue(TextElement.ForegroundProperty);
             if (darkMode)
             {
-
                 if (local is SolidColorBrush scb && IsTooDarkForDarkTheme(scb.Color))
                 {
                     // Save original brush once
@@ -157,16 +111,34 @@ lum > 215     // what counts as "white"
             }
         }
 
+        private static void AdjustInlineTypo(Inline inline)
+        {
+            // Typography.Variants is an attached property, so we read it via GetValue
+            var variant = (FontVariants)inline.GetValue(Typography.VariantsProperty);
+
+            if (variant == FontVariants.Superscript)
+            {
+                // Clear OpenType variant so standard alphabetic characters render
+                inline.ClearValue(Typography.VariantsProperty);
+
+                // Apply inline-specific baseline properties safely
+                inline.BaselineAlignment = BaselineAlignment.Superscript;
+                inline.FontSize *= 0.7;
+            }
+            else if (variant == FontVariants.Subscript)
+            {
+                inline.ClearValue(Typography.VariantsProperty);
+                inline.BaselineAlignment = BaselineAlignment.Subscript;
+                inline.FontSize *= 0.7;
+            }
+        }
+
         private static bool IsTooDarkForDarkTheme(Color c)
         {
             // Pure black or very dark colors
-            //return c.A > 0 && c.R < 40 && c.G < 40 && c.B < 40;
-            double luminance =
-    (0.2126 * c.R +
-     0.7152 * c.G +
-     0.0722 * c.B);
+            double luminance = (0.2126 * c.R + 0.7152 * c.G + 0.0722 * c.B);
 
-            return c.A > 0 && luminance < 80;
+            return c.A > 0 && luminance < 18;
         }
     }
 }
