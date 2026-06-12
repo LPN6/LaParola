@@ -458,28 +458,26 @@ namespace LaParola
         {
             string nomeVersione = info.Nome;
             string nomeFile = nomeVersione;
-            bool successoScrittura = true;
 
             if (noteModificate)
             {
-                FileStream fsNuovo = null;
-                BinaryWriter bwNuovo = null;
-
                 SortedDictionary<string, List<OccorrenzaParola>> chiave = new(confrontoParole);
+
+                int suffisso = 0;
+                while (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar + nomeFile + ".laparola"))
+                {
+                    suffisso += 1;
+                    nomeFile = nomeVersione + suffisso.ToString(CultureInfo.InvariantCulture);
+                }
+                nomeFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar + nomeFile + ".laparola";
 
                 try
                 {
-                    int suffisso = 0;
-                    while (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar + nomeFile + ".laparola"))
-                    {
-                        suffisso += 1;
-                        nomeFile = nomeVersione + suffisso.ToString(CultureInfo.InvariantCulture);
-                    }
-                    nomeFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar + nomeFile + ".laparola";
+                    using var fsNuovo = new FileStream(nomeFile, FileMode.Create, FileAccess.Write);
+                    using var bwNuovo = new BinaryWriter(fsNuovo);
 
-                    fsNuovo = new FileStream(nomeFile, FileMode.Create, FileAccess.Write);
-                    bwNuovo = new BinaryWriter(fsNuovo);
-                    bwNuovo.Write(['L', 'P', 'N', System.Convert.ToChar(Assembly.GetExecutingAssembly().GetName().Version.Major), System.Convert.ToChar(Assembly.GetExecutingAssembly().GetName().Version.Minor), System.Convert.ToChar(Assembly.GetExecutingAssembly().GetName().Version.Build), (char)1]);
+                    Version versioneApp = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(8, 0, 0);
+                    bwNuovo.Write(['L', 'P', 'N', System.Convert.ToChar(versioneApp.Major), System.Convert.ToChar(versioneApp.Minor), System.Convert.ToChar(versioneApp.Build), (char)1]);
                     bwNuovo.Write((UInt32)11);
                     bwNuovo.Write((UInt32)0);
 
@@ -665,44 +663,18 @@ namespace LaParola
                     bwNuovo.Write(inizioRiferimentiCitati);
                     bwNuovo.Write(inizioNoteInOrdine);
                     bwNuovo.Seek(0, SeekOrigin.End);
-                }
-                catch
-                {
-                    successoScrittura = false;
-                }
-                finally
-                {
-                    bwNuovo?.Close();
-                    fsNuovo?.Close();
-                }
 
-                if (successoScrittura)
-                {
-                    try
+                    try { br?.Dispose(); } catch { }
+                    try { fs?.Dispose(); } catch { }
+
+                    if (nomeFile != info.NomeDelFile)
                     {
-                        br.Close();
-                    }
-                    catch { }
-                    try
-                    {
-                        fs.Close();
-                    }
-                    catch { }
-                    try
-                    {
-                        if (nomeFile != info.NomeDelFile)
-                        {
-                            File.Delete(info.NomeDelFile);
-                            File.Move(nomeFile, info.NomeDelFile);
-                        }
-                    }
-                    catch
-                    {
-                        throw new ImpossibileScrivereModificheException();
+                        File.Move(nomeFile, info.NomeDelFile, overwrite: true);
                     }
                 }
-                else
+                catch (Exception)
                 {
+                    // Catches any write failures or file swapping access exceptions
                     throw new ImpossibileScrivereModificheException();
                 }
             }
@@ -865,7 +837,7 @@ namespace LaParola
                 {
                     List<int> inizioBrani = [];
                     List<int> fineBrani = [];
-                    UInt16[] numeroVersetto = new UInt16[2];
+                    UInt16[] numeroVersetto;
                     foreach (byte[] b in branoDaRicercare.Brani)
                     {
                         numeroVersetto = NumeroVersettoDaRiferimento(b);
@@ -1058,7 +1030,7 @@ namespace LaParola
             List<OccorrenzaParola> occorrenze = [];
             for (int i = 0; i < radiciDiverse.Count; ++i)
             {
-                if (radiciDiverse[i].NuovaRadice.ToLower(CultureInfo.InvariantCulture) == radice)
+                if (radiciDiverse[i].NuovaRadice.Equals(radice, StringComparison.CurrentCultureIgnoreCase))
                 {
                     occorrenze.Add(radiciDiverse[i].OccorrenzaRadice);
                 }
@@ -1816,11 +1788,11 @@ namespace LaParola
                     string riferimentoLibro = "";
                     string punteggiaturaFraLibroECapitolo = genitore.SeparatoriNeiRiferimenti()[0];
                     string punteggiaturaFraCapitoloEVersetto = genitore.SeparatoriNeiRiferimenti()[1];
-                    string libroStringa, capitoloStringa, versettoStringa, versettoStringaInTestoNascosto = "";
+                    string libroStringa, capitoloStringa, versettoStringa, versettoStringaInTestoNascosto;
                     string versettoStringa1;
                     int p, p1;
 
-                    byte[] riferimentoDaMostrare = new byte[6];
+                    byte[] riferimentoDaMostrare;
                     int nRiferimenti = riferimento.Count;
                     //                        Trace.WriteLine(DateTime.Now);
                     for (int i = 0; i < nRiferimenti; ++i)
@@ -2475,8 +2447,8 @@ namespace LaParola
                             case "en":
                                 if ((i == 1 || !IsLetteraONumero(testoDaModificare[i - 1]))
                                     && ((i < testoDaModificare.Length - 1 && (testoDaModificare[i + 1] == 't' || testoDaModificare[i + 1] == 'T') && (i == testoDaModificare.Length - 2 || !IsLetteraONumero(testoDaModificare[i + 2])))
-                                      || (i < testoDaModificare.Length - 3 && testoDaModificare.Substring(i + 1, 3).ToLower(CultureInfo.InvariantCulture) == "tis" && (i == testoDaModificare.Length - 4 || !IsLetteraONumero(testoDaModificare[i + 4])))
-                                      || (i < testoDaModificare.Length - 4 && testoDaModificare.Substring(i + 1, 4).ToLower(CultureInfo.InvariantCulture) == "twas" && (i == testoDaModificare.Length - 5 || !IsLetteraONumero(testoDaModificare[i + 5])))))
+                                      || (i < testoDaModificare.Length - 3 && testoDaModificare.Substring(i + 1, 3).Equals("tis", StringComparison.CurrentCultureIgnoreCase) && (i == testoDaModificare.Length - 4 || !IsLetteraONumero(testoDaModificare[i + 4])))
+                                      || (i < testoDaModificare.Length - 4 && testoDaModificare.Substring(i + 1, 4).Equals("twas", StringComparison.CurrentCultureIgnoreCase) && (i == testoDaModificare.Length - 5 || !IsLetteraONumero(testoDaModificare[i + 5])))))
                                 {
                                     parola.Append(c);
                                     analizzaParola = false;

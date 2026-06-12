@@ -1,8 +1,10 @@
+using AvalonDock;
 using AvalonDock.Layout;
 using AvalonDock.Layout.Serialization;
 using LaParola.DocumentViews;
 using LaParola.Models;
 using LaParola.ToolViews;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
@@ -17,8 +19,15 @@ namespace LaParola;
 
 // TODO2 toolbar: new, open, save (all), print, undo, redo, find, cut, copy, paste, vis bibbia, commentario, apri note, segnalibri, navigare, ricerca, mostra, (chiave), (racc info), paralleli, LQ, Misure, Gesti testi, aggiorna, opzioni,aiuto
 // available icons are listed here: https://pictogrammers.com/library/mdi/
+// TODO2 oppure invece di un toolbar, creare un tool "Quick Access", come in Logos
 // TODO2 help centre: Search, FAQs, tutorials, contact, release notes, keyboard shortcuts, about, documentation, how to use, getting started
 // TODO2 option to not ask confirm when closing documents
+// TODO2 right click menu for Editor and Visualizza
+/* TODO2 icons for other Visualizza menu items:
+ * Commentary: Kind="BookOpenPageVariant" or Kind="BookInformationVariant"
+Dictionary: Kind="BookAlphabet" or "Translate"
+Normal Book: Kind="Book" or Kind="BookOpen"
+ */
 
 // TODO2 ApplicationCommands:
 /*| `CancelPrint` | Cancels a print job. |
@@ -113,7 +122,7 @@ public partial class MainWindow : Window
         => _optionsView ??= new OptionsToolView();
 
     internal static Texts Testi;
-    internal static AppSettings settings;
+    internal static AppSettings settings = new();
 
     private IInputElement? _previousFocus;
 
@@ -123,7 +132,10 @@ public partial class MainWindow : Window
     public static readonly RoutedUICommand SalvaCommand = new("Save", "SalvaCommand", typeof(MainWindow));
     public static readonly RoutedUICommand SalvaComeCommand = new("SaveAs", "SalvaComeCommand", typeof(MainWindow));
     public static readonly RoutedUICommand EsciCommand = new("Exit", "EsciCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand FindNextCommand = new("FindNext", "FindNextCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand ReplaceNextCommand = new("ReplaceNext", "ReplaceNextCommand", typeof(MainWindow));
     public static readonly RoutedUICommand SearchCommand = new("Search", "SearchCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand FontCommand = new("Font", "FontCommand", typeof(MainWindow));
     public static readonly RoutedUICommand MostraCommand = new("Mostra", "MostraCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ConverterCommand = new("Converter", "ConverterCommand", typeof(MainWindow));
     public static readonly RoutedUICommand OptionsCommand = new("Options", "OptionsCommand", typeof(MainWindow));
@@ -131,9 +143,6 @@ public partial class MainWindow : Window
     public MainWindow(AppSettings settingsLoaded)
     {
         settings = settingsLoaded;
-        // if settings.language is it (but not set the first time...)
-        //ApplicationCommands.SelectAll.InputGestures.Clear();
-        //ApplicationCommands.SelectAll.InputGestures.Add(new KeyGesture(Key.Q , ModifierKeys.Control));
 
         InitializeComponent();
 
@@ -170,11 +179,6 @@ public partial class MainWindow : Window
         }
         finally
         {
-            // Ora ripristina layout
-            RestoreDockLayout();
-
-            ShowLoadingOverlay(false);
-
             Testi.Formato = settings.Formato;
 
             if (settings.Language == "it")
@@ -194,18 +198,44 @@ public partial class MainWindow : Window
                 UpdateShortcutBindings("it");
             }
 
+            // Ora ripristina layout
+            RestoreDockLayout();
+
+            ShowLoadingOverlay(false);
+
             App.DockingHost.ActiveEditorChanged += (_, _) =>
             {
                 UpdateEditorMenuState();
             };
 
-        }
+            // Otteniamo la lista delle versioni disponibili
+            Collection<string> versioni = Testi.NomiVersioni(TestoTipi.Bibbia);
 
-        if (Testi.NomiVersioni().Count == 0)
-        {
-            MessageBoxLPN.Show(this,
-                (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read."),
-                (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+            if (versioni.Count == 1)
+            {
+                // CASO 1: Una sola Bibbia. Trasformiamo il menu in un pulsante diretto.
+                string unicaVersione = versioni[0];
+
+                MenuVisualizzaBibbia.Header = versioni[0]; // Sostituisce il testo generico "Bibbia" con es. "Nuova Riveduta"
+                MenuVisualizzaBibbia.ItemsSource = null;     // Rimuove il sottomenu a tendina
+            }
+            else if (versioni.Count == 0)
+            {
+                // CASO 2: Nessuna Bibbia disponibile. Nascondiamo il menu.
+                MenuVisualizzaBibbia.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                // CASO 3: Più Bibbie disponibili. Manteniamo il comportamento standard con sottomenu.
+                MenuVisualizzaBibbia.ItemsSource = versioni;
+            }
+
+            if (Testi.NomiVersioni().Count == 0)
+            {
+                MessageBoxLPN.Show(this,
+                    (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read."),
+                    (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+            }
         }
     }
 
@@ -245,23 +275,40 @@ public partial class MainWindow : Window
         {
             HideDefaultToolWindows();
 
-            FlowDocument doc = new()
-            {
-                FontFamily = new FontFamily("Georgia"),
-                FontSize = 15
-            };
             string testo = "Questa è la versione beta (di prova) di LaParola 8.\n\n" +
-                "Attualmente il programma può mostrare un brano dalla Bibbia. Usa il menu 'Strumenti' per le possibili azioni da eseguire. Altre funzionalità saranno aggiunte prossimamente.\n\n" +
-                "La disposizione delle finestre è molto flessibile: trascinando il titolo di una finestra, potete spostare, ancorare, affiancare e sovrapporre le finestre come preferite. Potete anche aprire più finestre editor e organizzarle come volete.\n\n" +
-                "Se trovate dei problemi e avete suggerimenti, scrivetemi a info@laparola.net.\n\n" +
+                "Usa il menu 'Visualizza' per leggere la Bibbia. Usa il menu 'Strumenti' per altre possibili azioni da eseguire. Altre funzionalità saranno aggiunte prossimamente.\n\n" +
+                "La disposizione delle finestre è molto flessibile: trascinando il titolo di una finestra, potete spostare, ancorare, affiancare e sovrapporre le finestre come preferite. Potete aprire più finestre e organizzarle come volete.\n\n" +
+                "Se trovi dei problemi e hai dei suggerimenti, scrivimi a info@laparola.net.\n\n" +
                 "-----------------------------------------\n\n" +
-                "This is the beta version di LaParola 8.\n\n" +
-                "Currently, the program can only display a passage from the Bible. Use the 'Tools' menu for possible actions.Further features will be added soon.\n\n" +
-"The window layout is very flexible: by dragging a window's title bar, you can move, dock, tile or overlap windows as you wish. You can also open multiple editor windows and arrange them in any way.\n\n" +
+                "This is the beta version of LaParola 8.\n\n" +
+                "Use the 'View' menu to read the Bible. Use the 'Tools' menu for other possible actions. Further features will be added soon.\n\n" +
+"The window layout is very flexible: by dragging a window's title bar, you can move, dock, tile or overlap windows as you wish. You can open multiple windows and arrange them in any way.\n\n" +
 "If you encounter any issues or have suggestions, please email me at info@laparola.net.";
-            doc.Blocks.Clear();
-            doc.Blocks.Add(new Paragraph(new Run(testo)));
-            App.DockingHost.OpenEditorDocument(doc, ((string)(Application.Current.TryFindResource("MenuAbout") ?? "About LaParola")).Replace("_", ""));
+            CreaEditorDocument(testo, ((string)(Application.Current.TryFindResource("MenuAbout") ?? "About LaParola")).Replace("_", ""));
+
+            bool versioneVisualizzata = false;
+            if (Testi.VersioneEsiste("Nuova Riveduta"))
+            {
+                VisualizzaBibbia("Nuova Riveduta");
+                versioneVisualizzata = true;
+            }
+            if (Testi.VersioneEsiste("C.E.I."))
+            {
+                VisualizzaBibbia("C.E.I.");
+                versioneVisualizzata = true;
+            }
+            if (!versioneVisualizzata)
+            {
+                string nome = "";
+                if (Testi.NomiVersioni(TestoTipi.Bibbia).Count > 0)
+                    nome = Testi.NomiVersioni(TestoTipi.Bibbia)[0];
+                else if (Testi.NomiVersioni(TestoTipi.Commentario).Count > 0)
+                    nome = Testi.NomiVersioni(TestoTipi.Commentario)[0];
+                if (!string.IsNullOrEmpty(nome))
+                    VisualizzaBibbia(nome);
+                // else non visualizziamo nessuna versione, ci sarà un messaggio che nessuna versione è installata
+            }
+
             return;
         }
 
@@ -274,7 +321,7 @@ public partial class MainWindow : Window
         {
             string id = args.Model.ContentId ?? "";
 
-            // 1) Tool panes: hanno ContentId fissi. Qui puoi restituire
+            // Tool panes: hanno ContentId fissi. Qui puoi restituire
             // le istanze già presenti (se le hai nominate con x:Name) oppure crearle.
             if (id == "tool.search") { args.Content = SearchToolViewInstance(); return; }
             if (id == "tool.textgen") { args.Content = TextGenToolViewInstance(); return; }
@@ -284,13 +331,25 @@ public partial class MainWindow : Window
             // 2) Viewer docs: ricrea e applica placeholder state
             if (id.StartsWith("doc.viewer."))
             {
-                ViewerDocumentView view = new(); // il tuo UserControl viewer
-                if (viewerById.TryGetValue(id, out ViewerWindowState state))
+                if (viewerById.TryGetValue(id, out ViewerWindowState? state))
                 {
-                    // Placeholder: applica state fittizio per ora
-                    view.LoadPlaceholder(state.DisplayName, state.VerseRef);
+                    if (state != null && Testi.VersioneEsiste(state.Versione))
+                    {
+                        ViewerDocumentView view = new(state.Versione);
+                        _ = view.SpostaTesto(state.Libro, state.Capitolo, state.Versetto, true, false);
+                        view.IsTocVisible = state.IsSommarioVisibile;
+                        view.SincGruppo = state.SincGruppo;
+                        args.Content = view;
+                    }
+                    else
+                    {
+                        args.Cancel = true;
+                    }
                 }
-                args.Content = view;
+                else
+                {
+                    args.Cancel = true;
+                }
                 return;
             }
 
@@ -304,6 +363,18 @@ public partial class MainWindow : Window
 
         using StringReader reader = new(settings.DockLayoutXml);
         serializer.Deserialize(reader); // supportato https://www.microsoft365.com/34ef1840-738c-4d0c-b09d-2cdf559636bd)[1](https://blog.csdn.net/qq_41375318/article/details/149233645)
+    }
+
+    internal static void CreaEditorDocument(string testo, string titolo)
+    {
+        FlowDocument doc = new()
+        {
+            FontFamily = new FontFamily("Georgia"),
+            FontSize = 15
+        };
+        doc.Blocks.Clear();
+        doc.Blocks.Add(new Paragraph(new Run(testo)));
+        App.DockingHost.OpenEditorDocument(doc, titolo);
     }
 
     private void HideDefaultToolWindows()
@@ -347,22 +418,21 @@ public partial class MainWindow : Window
 
         MenuSalva.IsEnabled = enabled;
         MenuSalvaCome.IsEnabled = enabled;
-        MenuChiudi.IsEnabled = App.DockingHost.HasClosableContent;
+        //MenuChiudi.IsEnabled = App.DockingHost.HasClosableContent;
     }
 
     internal void UpdateShortcutBindings(string lingua)
     {
-        bool italiano = lingua.StartsWith("it", StringComparison.CurrentCultureIgnoreCase);
+        // per comandi che operano sul documento attivo (come Trova, Sostituisci),
+        // bisogna anche aggiungere code nel costruttore dell'Editor
 
-        // to change default shortcuts, do this. Need also to change in constructor before InitializeComponent, but can't be changed in the menu without restart
-        //ApplicationCommands.SelectAll.InputGestures.Clear();
-        //ApplicationCommands.SelectAll.InputGestures.Add(new KeyGesture(italiano ? Key.Q : Key.A, ModifierKeys.Control,"Ctrl+Q"));
+        bool italiano = lingua.StartsWith("it", StringComparison.CurrentCultureIgnoreCase);
 
         // 1. Update the visual text displayed in the menu
         MenuApri.InputGestureText = italiano ? "Ctrl+F12" : "Ctrl+O";
 
         // 2. Remove the old key binding if it exists (to avoid duplicate triggers)
-        var existingBinding = this.InputBindings
+        KeyBinding? existingBinding = this.InputBindings
             .OfType<KeyBinding>()
             .FirstOrDefault(b => b.Command == ApriCommand);
 
@@ -374,10 +444,33 @@ public partial class MainWindow : Window
         // 3. Add the brand new physical key listener to the window
         KeyBinding newShortcut = new(ApriCommand, italiano ? Key.F12 : Key.O, ModifierKeys.Control);
         this.InputBindings.Add(newShortcut);
+
+        // MenuTrova
+        MenuTrova.InputGestureText = italiano ? "Ctrl+T" : "Ctrl+F";
+        existingBinding = this.InputBindings
+    .OfType<KeyBinding>()
+    .FirstOrDefault(b => b.Command == ApplicationCommands.Find);
+        if (existingBinding != null)
+        {
+            this.InputBindings.Remove(existingBinding);
+        }
+        newShortcut = new(ApplicationCommands.Find, italiano ? Key.T : Key.F, ModifierKeys.Control);
+        this.InputBindings.Add(newShortcut);
+
+        // MenuSostituisci
+        MenuSostituisci.InputGestureText = italiano ? "Ctrl+U" : "Ctrl+H";
+        existingBinding = this.InputBindings
+    .OfType<KeyBinding>()
+    .FirstOrDefault(b => b.Command == ApplicationCommands.Replace);
+        if (existingBinding != null)
+        {
+            this.InputBindings.Remove(existingBinding);
+        }
+        newShortcut = new(ApplicationCommands.Replace, italiano ? Key.U : Key.H, ModifierKeys.Control);
+        this.InputBindings.Add(newShortcut);
     }
 
     private void NuovoEditor_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.OpenEditorDocument();
-    private void NewViewer_Click(object sender, RoutedEventArgs e) => App.DockingHost.OpenViewerDocument();
 
     private void ApriEditor_Executed(object sender, ExecutedRoutedEventArgs e)
     {
@@ -419,15 +512,85 @@ public partial class MainWindow : Window
         }
     }
 
+    private void Font_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        // TODO need to convert black text in dark mode
+        // TODO GCS in toolbar apply to whole text, not like this. Also not different aspect if selected text has characteristic
+        EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
+
+        if (edv == null)
+            return;
+
+        // Grab the active text selection (represents highlighted text OR the empty caret typing position)
+        TextSelection selection = edv.Editor.Selection;
+
+        // 1. Safely extract current formatting properties, using type-patterns to gracefully fall back if mixed selections return UnsetValue
+        var fontFamVal = selection.GetPropertyValue(TextElement.FontFamilyProperty);
+        FontFamily currentFontFamily = fontFamVal is FontFamily ff ? ff : edv.Editor.FontFamily;
+
+        var fontSizeVal = selection.GetPropertyValue(TextElement.FontSizeProperty);
+        double currentFontSize = (fontSizeVal is double fs) ? fs * 3.0 / 4.0 : edv.Editor.FontSize * 3.0 / 4.0;
+
+        var fontWeightVal = selection.GetPropertyValue(TextElement.FontWeightProperty);
+        bool isBold = fontWeightVal is FontWeight fw && fw == FontWeights.Bold;
+
+        var fontStyleVal = selection.GetPropertyValue(TextElement.FontStyleProperty);
+        bool isItalic = fontStyleVal is FontStyle fst && fst == FontStyles.Italic;
+
+        var textDecVal = selection.GetPropertyValue(Inline.TextDecorationsProperty);
+        bool isUnderline = textDecVal is TextDecorationCollection tdc && tdc.Count > 0;
+
+        var foregroundVal = selection.GetPropertyValue(TextElement.ForegroundProperty);
+        Brush currentBrush = foregroundVal is Brush b ? b : edv.Editor.Foreground;
+        string currentColorStr = currentBrush?.ToString() ?? "Black";
+
+        // 2. Initialize your dark-mode aware custom dialog with the extracted properties
+        FontDialog dlg = new(
+            allowSuperscript: false,
+            initialFont: currentFontFamily.ToString(),
+            initialSize: (float)currentFontSize,
+            bold: isBold,
+            italic: isItalic,
+            underline: isUnderline,
+            superscript: false,
+            initialColor: currentColorStr
+        );
+
+        if (dlg.ShowDialog() == true)
+        {
+            // 3. Apply changes via ApplyPropertyValue.
+            // WPF NATIVE ADVANTAGE: If text is highlighted, this modifies the selection. 
+            // If no text is highlighted, this automatically updates the typing formatting at the caret.
+            selection.ApplyPropertyValue(TextElement.FontFamilyProperty, dlg.SelectedFontFamily);
+            selection.ApplyPropertyValue(TextElement.FontSizeProperty, (double)dlg.SelectedFontSize * 4.0 / 3.0);
+            selection.ApplyPropertyValue(TextElement.FontWeightProperty, dlg.SelectedBold ? FontWeights.Bold : FontWeights.Normal);
+            selection.ApplyPropertyValue(TextElement.FontStyleProperty, dlg.SelectedItalic ? FontStyles.Italic : FontStyles.Normal);
+            selection.ApplyPropertyValue(Inline.TextDecorationsProperty, dlg.SelectedUnderline ? TextDecorations.Underline : null);
+
+            // 4. Safely parse and build a SolidColorBrush for the text foreground
+            try
+            {
+                if (ColorConverter.ConvertFromString(dlg.SelectedBrush) is Color chosenColor)
+                {
+                    selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(chosenColor));
+                }
+            }
+            catch
+            {
+                // Fallback: If parsing fails, leave the current foreground color completely intact
+            }
+        }
+    }
+
     private void Allineamento_SubmenuOpened(object sender, RoutedEventArgs e)
     {
         if (!ReferenceEquals(sender, e.Source))
             return;
 
-        MiAlignLeft.IsChecked = false;
-        MiAlignCenter.IsChecked = false;
-        MiAlignRight.IsChecked = false;
-        MiAlignJustify.IsChecked = false;
+        MenuAlignLeft.IsChecked = false;
+        MenuAlignCenter.IsChecked = false;
+        MenuAlignRight.IsChecked = false;
+        MenuAlignJustify.IsChecked = false;
 
         EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
 
@@ -443,11 +606,86 @@ public partial class MainWindow : Window
 
         if (value is TextAlignment alignment)
         {
-            MiAlignLeft.IsChecked = alignment == TextAlignment.Left;
-            MiAlignCenter.IsChecked = alignment == TextAlignment.Center;
-            MiAlignRight.IsChecked = alignment == TextAlignment.Right;
-            MiAlignJustify.IsChecked = alignment == TextAlignment.Justify;
+            MenuAlignLeft.IsChecked = alignment == TextAlignment.Left;
+            MenuAlignCenter.IsChecked = alignment == TextAlignment.Center;
+            MenuAlignRight.IsChecked = alignment == TextAlignment.Right;
+            MenuAlignJustify.IsChecked = alignment == TextAlignment.Justify;
         }
+    }
+
+    private void Find_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        // Verifica se esiste un editor aperto e attivo che contiene la RichTextBox
+        if (FocusManager.GetFocusedElement(this) is RichTextBox rtb)
+        {
+            e.CanExecute = true;
+            e.Handled = true;
+            // a bit if a hack to do it here
+            MenuSelezionaTutto.IsEnabled = !rtb.IsReadOnly;
+            MenuCarattere.IsEnabled = !rtb.IsReadOnly;
+            MenuAlign.IsEnabled = !rtb.IsReadOnly;
+            MenuTrova.IsEnabled = !rtb.IsReadOnly;
+            MenuTrovaProssima.IsEnabled = !rtb.IsReadOnly;
+            MenuSostituisci.IsEnabled = !rtb.IsReadOnly;
+            MenuSostituisciProssima.IsEnabled = !rtb.IsReadOnly;
+        }
+        else
+        {
+            MenuCarattere.IsEnabled = false;
+            MenuAlign.IsEnabled = false;
+            MenuTrovaProssima.IsEnabled = false;
+            MenuSostituisciProssima.IsEnabled = false;
+        }
+    }
+
+    private void Find_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
+
+        if (edv == null)
+            return;
+
+        edv.ShowFindDialog();
+    }
+
+    private void FindNext_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
+
+        if (edv == null)
+            return;
+
+        edv.FindNext();
+    }
+
+    private void Replace_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        // Verifica se esiste un editor aperto e attivo che contiene la RichTextBox
+        if (FocusManager.GetFocusedElement(this) is RichTextBox)
+        {
+            e.CanExecute = true;
+            e.Handled = true;
+        }
+    }
+
+    private void Replace_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
+
+        if (edv == null)
+            return;
+
+        edv.ShowReplaceDialog();
+    }
+
+    private void ReplaceNext_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
+
+        if (edv == null)
+            return;
+
+        edv.ReplaceNext();
     }
 
     private void Search_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -459,6 +697,41 @@ public partial class MainWindow : Window
             return; // oppure mostra un messaggio / lascia l’overlay attivo
 
         App.DockingHost.ShowTool("tool.search");
+    }
+
+    // Questo si attiva solo se l'utente clicca sul menu principale (quando non ha sottomenu)
+    private void MenuVisualizzaBibbia_Click(object sender, RoutedEventArgs e)
+    {
+        // Verifichiamo che il clic sia avvenuto proprio sul menu principale e che l'ItemsSource sia vuoto
+        if (e.Source == sender && MenuVisualizzaBibbia.ItemsSource == null && MenuVisualizzaBibbia.Header is string versionName)
+        {
+            VisualizzaBibbia(versionName);
+        }
+    }
+
+    private void SubMenuBibbia_Click(object sender, RoutedEventArgs e)
+    {
+        // Cast the sender to access the exact MenuItem that was clicked
+        if (sender is MenuItem clickedItem && clickedItem.Header is string versionName)
+        {
+            // Pass the version name text straight to your processing function
+            VisualizzaBibbia(versionName);
+        }
+    }
+
+    private static void VisualizzaBibbia(string testoNome)
+    {
+        byte libro = 1;
+        for (byte i = 1; i <= 73; ++i)
+        {
+            if (Testi.CapitoliInLibro(i, testoNome) > 0)
+            {
+                libro = i;
+                break;
+            }
+        }
+        /*ViewerDocumentView? view =*/
+        App.DockingHost.OpenViewerDocument(testoNome, libro, 1, 1);
     }
 
     private void Mostra_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -560,14 +833,27 @@ public partial class MainWindow : Window
                           .OfType<LayoutDocument>()
                           .Where(d => (d.ContentId ?? "").StartsWith("doc.viewer."))];
 
-        // TODO2 Placeholder: per ora non hai ancora l’identificatore vero.
-        // Quindi salva dati fittizi/minimi: ContentId + stringhe placeholder.
-        return [.. viewers.Select(d => new ViewerWindowState
+        List<ViewerWindowState> states = [];
+        foreach (LayoutDocument d in viewers)
         {
-            ContentId = d.ContentId ?? "",
-            DisplayName = "PLACEHOLDER_TITLE", // TODO2
-            VerseRef = "PLACEHOLDER_REF"
-        })];
+            // 1. Cast d.Content to your actual UserControl class name
+            if (d.Content is ViewerDocumentView viewer)
+            {
+                // 2. Safely read the values straight out of the control
+                states.Add(new ViewerWindowState
+                {
+                    ContentId = d.ContentId ?? "",
+                    Versione = viewer.Versione,
+                    Libro = viewer.Libro,
+                    Capitolo = viewer.Capitolo,
+                    Versetto = viewer.Versetto,
+                    IsSommarioVisibile = viewer.IsTocVisible,
+                    SincGruppo = viewer.SincGruppo
+                });
+            }
+        }
+
+        return states;
     }
 
     private string SerializeDockLayoutToString()

@@ -114,7 +114,7 @@ namespace LaParola.Utilities
         private static void AdjustInlineTypo(Inline inline)
         {
             // Typography.Variants is an attached property, so we read it via GetValue
-            var variant = (FontVariants)inline.GetValue(Typography.VariantsProperty);
+            FontVariants variant = (FontVariants)inline.GetValue(Typography.VariantsProperty);
 
             if (variant == FontVariants.Superscript)
             {

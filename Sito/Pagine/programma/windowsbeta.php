@@ -32,6 +32,15 @@ e mettere i file con estensione .laparola nella stessa cartella dell'app beta.</
 
 <h2>Caratteristiche</h2>
 
+<h3>Versione 8.0.2</h3>
+<ul>
+<li>Visualizzare l'intera Bibbia in un testo continuo. Nella barra degli strumenti ci sono vari modi per navigare ad altri versetti. Novit&agrave; in confronto con la versione 7: Un sommario che pu&ograve; essere aperto a sinistra.</li>
+<li>Trova e Sostituisci nell'editor, con un'interfaccia pi&ugrave; moderna.</li>
+<li>Opzioni per il formato del testo; le Opzioni hanno anche un sommario a sinistra.
+(Se la finestra delle Opzioni era aperta l'ultima volta che hai chiuso il programma, dovrai chiudere e riaprire la finestra delle Opzioni affinch&eacute; venga mostrata in uno spazio pi&ugrave; largo.</li>
+<li>Messaggi con le novit&agrave; sul programma possono essere mandati e saranno aperti dentro il programma. Cos&igrave; si potr&agrave; ricevere un messaggio quando la prossima versione sar&agrave; disponibile.</li>
+</ul>  
+
 <h3>Versione 8.0.1</h3>
 <ul>
 <li><i>Ricerca:</i> digita una parola o un'espressione da ricercare e scegli la versione da ricercare

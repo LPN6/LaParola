@@ -796,58 +796,6 @@ namespace LaParola
 
         #endregion
 
-        #region bloccare
-        /* TODO2 bloccare
-        private int nBlocchi = 0;
-        private IntPtr oldEventMask = (IntPtr)0;
-
-        /// <summary>
-        /// Impedisce che il controllo sia aggiornato.
-        /// Siccome diversi aggiornamenti, e quindi blocchi, possono essersi innestati, la funzione conta il numero di blocchi
-        ///    e sblocca il controllo solo quando l'ultimo sblocco è rimosso.
-        /// Per questo motivo, è importante sempre chiamare questa funzione due volte, per bloccare e poi sbloccare.
-        /// </summary>
-        /// <param name="blocca">True per bloccare, false per sbloccare.</param>
-        public void BloccaRtf(bool blocca)
-        {
-            // blocca (se bBlocca è vero) o sblocca (se bBlocca è falso) il controlla rtTesto
-            if (!isRunningOnMono)
-            {
-                BloccaNotMono(blocca);
-            }
-        }
-
-        private void BloccaNotMono(bool blocca)
-        {
-            if (blocca)
-            {
-                nBlocchi++;
-                if (nBlocchi == 1)
-                {
-                    // Prevent the control from raising any events.
-                    oldEventMask = SafeNativeMethods.SendMessage(Handle, EM_GETEVENTMASK, (IntPtr)0, (IntPtr)0);
-                    SafeNativeMethods.SendMessage(Handle, EM_SETEVENTMASK, (IntPtr)0, (IntPtr)0);
-                    // Prevent the control from redrawing itself.
-                    SafeNativeMethods.SendMessage(Handle, WM_SETREDRAW, (IntPtr)0, (IntPtr)0);
-                }
-            }
-            else
-            {
-                nBlocchi--;
-                if (nBlocchi <= 0)
-                {
-                    // Allow the control to redraw itself.
-                    SafeNativeMethods.SendMessage(Handle, WM_SETREDRAW, (IntPtr)1, (IntPtr)0);
-                    // Allow the control to raise event messages.
-                    SafeNativeMethods.SendMessage(Handle, EM_SETEVENTMASK, (IntPtr)0, oldEventMask);
-                    nBlocchi = 0;
-                    Invalidate();
-                }
-            }
-        }
-        */
-        #endregion
-
         #region link hover
         /* TODO2 ipertesto
         /// <summary>

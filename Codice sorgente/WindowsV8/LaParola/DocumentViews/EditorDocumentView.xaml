@@ -16,7 +16,7 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0"
         Background="{DynamicResource ControlBackgroundBrush}"
-        BorderBrush="{DynamicResource BorderBrush}"
+        BorderBrush="{DynamicResource SubtleBorderBrush}"
         BorderThickness="0,0,0,1"
         Padding="4">
 
@@ -95,19 +95,197 @@
                     </WrapPanel>
                 </Border>
                 <controls:HelpFlyout
-        x:Name="HelpFlyoutControl"
-Grid.Column="1"
-Margin="0,8,0,0"
-HelpText="{DynamicResource EditorAiuto}"
-HelpClicked="HelpFlyout_OnHelpClicked"/>
+        x:Name="HelpFlyoutControl" Grid.Column="1" Margin="0,8,0,0" HelpText="{DynamicResource EditorAiuto}" HelpClicked="HelpFlyout_OnHelpClicked"/>
             </Grid>
-            <RichTextBox x:Name="Editor" Grid.Row="1" Margin="0,6,0,0" AcceptsTab="True" VerticalScrollBarVisibility="Auto">
-                <RichTextBox.Resources>
-                    <Style TargetType="{x:Type Paragraph}">
-                        <Setter Property="Margin" Value="0"/>
-                    </Style>
-                </RichTextBox.Resources>
-            </RichTextBox>
+            <Grid Grid.Row="1">
+                <RichTextBox x:Name="Editor" Margin="0,6,0,0" AcceptsTab="True" VerticalScrollBarVisibility="Auto">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+                <Border x:Name="FindReplacePanel" 
+        Background="{DynamicResource ControlBackgroundBrush}" 
+        BorderBrush="{DynamicResource SubtleBorderBrush}" 
+        BorderThickness="1" 
+        CornerRadius="3"
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Top" 
+        Margin="0,10,25,0" 
+        Width="400"
+        Visibility="Collapsed">
+
+                    <Border.Resources>
+                        <Style TargetType="ToggleButton">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource ComboBox.Hover.Background}"/>
+                                            </Trigger>
+
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                                <Setter TargetName="ButtonBorder" Property="Background" Value="Transparent"/>
+                                            </Trigger>
+
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="IsMouseOver" Value="True"/>
+                                                    <Condition Property="IsChecked" Value="True"/>
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource ComboBox.Hover.Background}"/>
+                                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                            </MultiTrigger>
+
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.5"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                        <Style TargetType="Button" x:Key="FlatIconButton">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="ButtonBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="3"
+                        SnapsToDevicePixels="True">
+
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource ComboBox.Hover.Background}"/>
+                                            </Trigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource ComboBox.Open.Background}"/>
+                                            </Trigger>
+
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.4"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Border.Resources>
+
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Direction="315" Opacity="0.3" Color="Black"/>
+                    </Border.Effect>
+
+                    <Grid Margin="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton x:Name="BtnToggleReplace" Grid.Column="0" Width="24" Height="24" Click="BtnToggleReplace_Click">
+                            <iconPacks:PackIconMaterial Kind="ChevronDown" x:Name="ToggleIcon" Width="14" Height="14"
+                                            Foreground="{DynamicResource AppForegroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ToggleButton>
+
+                        <TextBox x:Name="TxtSearch" Grid.Column="1" Margin="4,0" Padding="4,0"
+                     VerticalContentAlignment="Center" Height="24"
+                     Background="{DynamicResource AppBackgroundBrush}" 
+                     Foreground="{DynamicResource AppForegroundBrush}" 
+                     BorderBrush="{DynamicResource SubtleBorderBrush}"
+                     TextChanged="TxtSearch_TextChanged"
+                                     KeyDown="TxtSearch_KeyDown"/>
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <ToggleButton x:Name="BtnMatchCase" Width="24" Height="24" Margin="1,0" ToolTip="{DynamicResource TrovaMaiuscoloAiuto}">
+                                <TextBlock Text="{DynamicResource TrovaMaiuscolo}" Foreground="{DynamicResource AppForegroundBrush}" FontWeight="Bold" FontSize="11" HorizontalAlignment="Center"/>
+                            </ToggleButton>
+                            <ToggleButton x:Name="BtnWholeWord" Width="24" Height="24" Margin="1,0" ToolTip="{DynamicResource TrovaParolaInteraAiuto}">
+                                <TextBlock Text="{DynamicResource TrovaParolaIntera}" Foreground="{DynamicResource AppForegroundBrush}" FontWeight="Bold" FontSize="11" HorizontalAlignment="Center"/>
+                            </ToggleButton>
+
+                            <Button x:Name="BtnPrev" Width="24" Height="24" Click="BtnPrev_Click" Style="{StaticResource FlatIconButton}" ToolTip="{DynamicResource TrovaPrecedenteAiuto}">
+                                <iconPacks:PackIconMaterial Kind="ChevronUp" Width="14" Height="14" Foreground="{DynamicResource AppForegroundBrush}" HorizontalAlignment="Center"/>
+                            </Button>
+                            <Button x:Name="BtnNext" Width="24" Height="24" Margin="2,0,0,0" Click="BtnNext_Click" Style="{StaticResource FlatIconButton}" ToolTip="{DynamicResource TrovaProssimaAiuto}">
+                                <iconPacks:PackIconMaterial Kind="ChevronDown" Width="14" Height="14" Foreground="{DynamicResource AppForegroundBrush}" HorizontalAlignment="Center"/>
+                            </Button>
+                            <Button x:Name="BtnClose" Width="24" Height="24" Click="BtnClose_Click" Style="{StaticResource FlatIconButton}" ToolTip="{DynamicResource TrovaChiudiAiuto}">
+                                <iconPacks:PackIconMaterial Kind="Close" Width="12" Height="12" Foreground="#D32F2F" HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+
+                        <TextBox x:Name="TxtReplace" 
+                 Grid.Row="1" 
+                 Grid.Column="1" 
+                 Margin="4,6,4,0" Padding="4,0"
+                 VerticalContentAlignment="Center" Height="24"
+                 Background="{DynamicResource AppBackgroundBrush}" 
+                 Foreground="{DynamicResource AppForegroundBrush}" 
+                 BorderBrush="{DynamicResource SubtleBorderBrush}"
+                 Visibility="Collapsed"/>
+
+                        <StackPanel x:Name="StackPanelReplace" 
+                    Grid.Row="1" 
+                    Grid.Column="2" 
+                    Orientation="Horizontal" 
+                    Margin="0,6,0,0"
+                    Visibility="Collapsed">
+
+                            <Button x:Name="BtnReplace" Content="{DynamicResource TrovaSostituisci}" Width="75" Height="24" Click="BtnReplace_Click" Margin="1,0"
+                    Background="{DynamicResource AppBackgroundBrush}" 
+                    Foreground="{DynamicResource AppForegroundBrush}" 
+                    BorderBrush="{DynamicResource SubtleBorderBrush}"/>
+
+                            <Button x:Name="BtnReplaceAll" Content="{DynamicResource TrovaTutti}" Width="45" Height="24" Click="BtnReplaceAll_Click" Margin="1,0"
+                    Background="{DynamicResource AppBackgroundBrush}" 
+                    Foreground="{DynamicResource AppForegroundBrush}" 
+                    BorderBrush="{DynamicResource SubtleBorderBrush}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </DockPanel>
 </UserControl>

@@ -5,8 +5,12 @@ namespace LaParola.Models;
 public class ViewerWindowState
 {
     public string ContentId { get; set; } = "";     // es: "viewer:abcd..."
-    public string DisplayName { get; set; } = "";   // placeholder (nome testo)
-    public string VerseRef { get; set; } = "";      // placeholder (riferimento)
+    public string Versione { get; set; } = "";   // nome testo
+    public byte Libro { get; set; } = 1;
+    public byte Capitolo { get; set; } = 1;
+    public byte Versetto { get; set; } = 1;
+    public bool IsSommarioVisibile { get; set; } = false;
+    public int SincGruppo { get; set; } = 0;
 }
 
 public enum ThemeState
@@ -32,6 +36,10 @@ public class AppSettings
     public WindowState? WindowState { get; set; }
 
     public FormatoTesto Formato { get; set; } = new FormatoTesto();
+
+    public int ControlloMessaggi { get; set; } = 1;
+    public DateTime UltimoControlloMessaggi { get; set; } = DateTime.MinValue;
+    public int UltimoMessaggioControllatoId { get; set; } = 0;
 
     public string RicercaTestoSelezionato { get; set; } = "";
 

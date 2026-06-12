@@ -557,11 +557,11 @@ if ($ris=mysqli_query($conn, "$sql")) {
   if ($brano=="")
     $brano = $RIF_NON_ESISTE;
   if ($xml==0) {
-    $testo .= "<h3>";
+    $testo .= "<h1>";
     $testo .= converti_rif3($l1,$c1,$v1,$l2,$c2,$v2, "it", $formato_rif);
     $brano = str_replace("<<", "&lt;&lt;", $brano);
     $brano = str_replace(">>", "&gt;&gt;", $brano);
-    $testo .= "</h3><p>".StripSlashes($brano)."</p>";
+    $testo .= "</h1><p>".StripSlashes($brano)."</p>";
   }
   else {
   	    for ($i=1; $i<=$numero_sezioni; ++$i)

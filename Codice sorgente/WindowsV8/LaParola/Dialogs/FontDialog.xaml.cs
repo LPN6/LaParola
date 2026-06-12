@@ -78,7 +78,6 @@ namespace LaParola
                 }
             }
 
-
             // Events
             cmbFonts.SelectionChanged += (_, __) => UpdatePreview();
             cmbSize.SelectionChanged += (_, __) => UpdatePreview();
@@ -133,55 +132,55 @@ namespace LaParola
         {
             cmbColour.ItemsSource = new[]
             {
-        new FontColourItem
-        {
-            Name = italian ? "Nero" : "Black",
-            NameEnglish = "Black",
-            Brush = Brushes.Black
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Bianco" : "White",
-            NameEnglish = "White",
-            Brush = Brushes.White
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Rosso" : "Red",
-            NameEnglish = "Red",
-            Brush = Brushes.Red
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Blu" : "Blue",
-            NameEnglish = "Blue",
-            Brush = Brushes.Blue
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Verde" : "Green",
-            NameEnglish = "Green",
-            Brush = Brushes.Green
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Giallo" : "Yellow",
-            NameEnglish = "Yellow",
-            Brush = Brushes.Goldenrod
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Arancione" : "Orange",
-            NameEnglish = "Orange",
-            Brush = Brushes.Orange
-        },
-        new FontColourItem
-        {
-            Name = italian ? "Viola" : "Purple",
-            NameEnglish = "Purple",
-            Brush = Brushes.Purple
-        }
-    };
+                new FontColourItem
+                {
+                    Name = italian ? "Nero" : "Black",
+                    NameEnglish = "Black",
+                    Brush = Brushes.Black
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Bianco" : "White",
+                    NameEnglish = "White",
+                    Brush = Brushes.White
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Rosso" : "Red",
+                    NameEnglish = "Red",
+                    Brush = Brushes.Red
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Blu" : "Blue",
+                    NameEnglish = "Blue",
+                    Brush = Brushes.Blue
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Verde" : "Green",
+                    NameEnglish = "Green",
+                    Brush = Brushes.Green
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Giallo" : "Yellow",
+                    NameEnglish = "Yellow",
+                    Brush = Brushes.Goldenrod
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Arancione" : "Orange",
+                    NameEnglish = "Orange",
+                    Brush = Brushes.Orange
+                },
+                new FontColourItem
+                {
+                    Name = italian ? "Viola" : "Purple",
+                    NameEnglish = "Purple",
+                    Brush = Brushes.Purple
+                }
+            };
 
             cmbColour.SelectedIndex = 0;
         }

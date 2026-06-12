@@ -17,8 +17,10 @@
         <KeyBinding Key="F4" Modifiers="Ctrl" Command="{x:Static local:MainWindow.ChiudiCommand}" />
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{x:Static local:MainWindow.SalvaCommand}" />
         <KeyBinding Key="S" Modifiers="Ctrl+Shift" Command="{x:Static local:MainWindow.SalvaCommand}" />
+        <KeyBinding Key="D" Modifiers="Ctrl" Command="{x:Static local:MainWindow.FontCommand}" />
+        <KeyBinding Key="F3" Command="{x:Static local:MainWindow.FindNextCommand}" />
+        <KeyBinding Key="F4" Command="{x:Static local:MainWindow.ReplaceNextCommand}" />
         <KeyBinding Key="F4" Modifiers="Alt" Command="{x:Static local:MainWindow.EsciCommand}" />
-        <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
         <KeyBinding Key="F5" Command="{x:Static local:MainWindow.SearchCommand}" />
         <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
         <KeyBinding Key="F10" Command="{x:Static local:MainWindow.ConverterCommand}" />
@@ -32,7 +34,12 @@
         <CommandBinding Command="{x:Static local:MainWindow.ChiudiCommand}" Executed="ChiudiEditor_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.SalvaCommand}" Executed="SalvaEditor_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.SalvaComeCommand}" Executed="SalvaCome_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.FontCommand}" Executed="Font_Executed" />
+        <CommandBinding Command="ApplicationCommands.Find" CanExecute="Find_CanExecute" Executed="Find_Executed" />
+        <CommandBinding Command="ApplicationCommands.Replace" CanExecute="Replace_CanExecute" Executed="Replace_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.EsciCommand}" Executed="Esci_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.FindNextCommand}" Executed="FindNext_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.ReplaceNextCommand}" Executed="ReplaceNext_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.SearchCommand}" Executed="Search_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.MostraCommand}" Executed="Mostra_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.ConverterCommand}" Executed="Converter_Executed" />
@@ -52,8 +59,7 @@
                             <iconPacks:PackIconMaterial Kind="FolderOpen"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource MenuNewViewer}" Click="NewViewer_Click" Visibility="Collapsed"/>
-                    <MenuItem x:Name="MenuChiudi" Header="{DynamicResource MenuChiudi}" IsEnabled="False" Command="{x:Static local:MainWindow.ChiudiCommand}" InputGestureText="Ctrl+F4">
+                    <MenuItem x:Name="MenuChiudi" Header="{DynamicResource MenuChiudi}" Command="{x:Static local:MainWindow.ChiudiCommand}" InputGestureText="Ctrl+F4">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Close"/>
                         </MenuItem.Icon>
@@ -104,33 +110,69 @@
                             <iconPacks:PackIconMaterial Kind="Delete"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource MenuSelezionaTutto}" Command="ApplicationCommands.SelectAll">
+                    <MenuItem x:Name="MenuSelezionaTutto" Header="{DynamicResource MenuSelezionaTutto}" Command="ApplicationCommands.SelectAll">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="SelectAll"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="{DynamicResource MenuAllineamento}" SubmenuOpened="Allineamento_SubmenuOpened">
-                            <MenuItem x:Name="MiAlignLeft" Header="{DynamicResource MenuAllineamentoSinistra}" Command="EditingCommands.AlignLeft" IsCheckable="True">
+                    <MenuItem x:Name="MenuCarattere" Header="{DynamicResource MenuCarattere}" Command="{x:Static local:MainWindow.FontCommand}" InputGestureText="Ctrl+D">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="FormatFont"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuAlign" Header="{DynamicResource MenuAllineamento}" SubmenuOpened="Allineamento_SubmenuOpened">
+                            <MenuItem x:Name="MenuAlignLeft" Header="{DynamicResource MenuAllineamentoSinistra}" Command="EditingCommands.AlignLeft" IsCheckable="True">
                                 <MenuItem.Icon>
                                     <iconPacks:PackIconMaterial Kind="AlignHorizontalLeft"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="MiAlignCenter" Header="{DynamicResource MenuAllineamentoCentro}" Command="EditingCommands.AlignCenter" IsCheckable="True">
+                            <MenuItem x:Name="MenuAlignCenter" Header="{DynamicResource MenuAllineamentoCentro}" Command="EditingCommands.AlignCenter" IsCheckable="True">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="AlignHorizontalCenter"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem x:Name="MiAlignRight" Header="{DynamicResource MenuAllineamentoDestra}" Command="EditingCommands.AlignRight" IsCheckable="True">
+                        <MenuItem x:Name="MenuAlignRight" Header="{DynamicResource MenuAllineamentoDestra}" Command="EditingCommands.AlignRight" IsCheckable="True">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="AlignHorizontalRight"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem x:Name="MiAlignJustify" Header="{DynamicResource MenuAllineamentoGiustificato}" Command="EditingCommands.AlignJustify" IsCheckable="True">
+                        <MenuItem x:Name="MenuAlignJustify" Header="{DynamicResource MenuAllineamentoGiustificato}" Command="EditingCommands.AlignJustify" IsCheckable="True">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="AlignHorizontalDistribute"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem x:Name="MenuTrova" Header="{DynamicResource MenuTrova}" Command="ApplicationCommands.Find">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Magnify"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuTrovaProssima" Header="{DynamicResource MenuTrovaProssima}" Command="{x:Static local:MainWindow.FindNextCommand}" InputGestureText="F3">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="MagnifyPlus"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuSostituisci" Header="{DynamicResource MenuSostituisci}" Command="ApplicationCommands.Replace">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="FindReplace"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuSostituisciProssima" Header="{DynamicResource MenuSostituisciProssima}" Command="{x:Static local:MainWindow.ReplaceNextCommand}" InputGestureText="F4">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource MenuVisualizza}">
+                    <MenuItem x:Name="MenuVisualizzaBibbia" Header="{DynamicResource MenuVisualizzaBibbia}" Click="MenuVisualizzaBibbia_Click">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="BookCross"/>
+                        </MenuItem.Icon>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Header" Value="{Binding}"/>
+                                <EventSetter Event="Click" Handler="SubMenuBibbia_Click"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MenuStrumenti}">

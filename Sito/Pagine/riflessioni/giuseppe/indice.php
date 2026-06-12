@@ -4,4 +4,5 @@
 <li><?if ($n<>1) echo "<a href=\"giuseppe01.php\">";?>Cadere in disgrazia (Genesi 37)<?if ($n<>1) echo "</a>";?></li>
 <li><?if ($n<>2) echo "<a href=\"giuseppe02.php\">";?>Successo e seduzione (Genesi 39)<?if ($n<>2) echo "</a>";?></li>
 <li><?if ($n<>3) echo "<a href=\"giuseppe03.php\">";?>Confinato ma coraggioso (Genesi 40)<?if ($n<>3) echo "</a>";?></li>
+<li><?if ($n<>4) echo "<a href=\"giuseppe04.php\">";?>Posto per un proposito (Genesi 41)<?if ($n<>3) echo "</a>";?></li>
 </ol>

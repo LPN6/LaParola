@@ -40,7 +40,7 @@ for ($i=0; $i<count($versioni); $i++) {
   $parametri .= "&versioni[]=".urlencode($versioni[$i]);
 }
 
-$descriz = "Il testo di ".$riferimento.", un versetto o brano della Bibbia, nella/e versione/i ".implode(", ",$versioni).". Puoi visualizzare il testo anche in altre versioni e leggere diversi commentari.";
+$descriz = "Il testo di ".$riferimento.", un versetto o brano della Bibbia, nella/e versione/i ".implode(", ",$versioni).".";
 $key = $riferimento.",versetto,brano";
 $titolo = $riferimento." (".implode(", ",$versioni).")";
 $sezione = "Testo della Bibbia";

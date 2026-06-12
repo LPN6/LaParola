@@ -1,10 +1,23 @@
-﻿using System.Globalization;
+﻿using AvalonDock.Layout;
+using System.Globalization;
 using System.Text;
+using System.Windows;
 
 namespace LaParola.Utilities
 {
     class Funzioni
     {
+        internal static string AggiungiZero(string stringa, int lunghezza)
+        {
+            string s1 = new String('0', lunghezza) + stringa;
+            return s1[^lunghezza..];
+        }
+
+        internal static string AggiungiZero(int numero, int lunghezza)
+        {
+            return AggiungiZero(numero.ToString(CultureInfo.InvariantCulture), lunghezza);
+        }
+
         public static string[] SplitString(string stringa, char divisore)
         {
             return SplitString(stringa, [divisore]);
@@ -133,5 +146,23 @@ namespace LaParola.Utilities
             return sb.ToString();
         }
 
+        public static List<LayoutDocument>? ListViewerDocuments()
+        {
+            if (Application.Current.MainWindow is MainWindow mw)
+            {
+                if (mw.FindName("Dock") is AvalonDock.DockingManager dock)
+                {
+                    LayoutRoot? root = dock.Layout;
+                    if (root != null)
+                    {
+                        List<LayoutDocument> viewers = [.. root.Descendents()
+                          .OfType<LayoutDocument>()
+                          .Where(d => (d.ContentId ?? "").StartsWith("doc.viewer."))];
+                        return viewers;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

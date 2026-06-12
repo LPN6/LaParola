@@ -14,6 +14,12 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260612"></a>
+<h2>12 giugno 2026</h2>
+<p>La nuova versione di prova (8.0.2) &egrave; disponibile, in cui puoi visualizzare il testo dell'intera Bibbia.
+Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.
+</p>
+
 <a name="20260529"></a>
 <h2>29 maggio 2026</h2>
 <p>La nuova versione di prova (8.0.1) &egrave; disponibile, in cui puoi ricercare il testo della Bibbia.

@@ -12,6 +12,8 @@
 
     <sys:String x:Key="MenuFile">_File</sys:String>
     <sys:String x:Key="MenuModifica">_Modifica</sys:String>
+    <sys:String x:Key="MenuVisualizza">_Visualizza</sys:String>
+    <sys:String x:Key="MenuVisualizzaBibbia">_Bibbia</sys:String>
     <sys:String x:Key="MenuStrumenti">_Strumenti</sys:String>
     <sys:String x:Key="MenuAiuto">_?</sys:String>
     
@@ -29,12 +31,17 @@
     <sys:String x:Key="MenuCopia">_Copia</sys:String>
     <sys:String x:Key="MenuIncolla">_Incolla</sys:String>
     <sys:String x:Key="MenuSelezionaTutto">_Seleziona tutto</sys:String>
+    <sys:String x:Key="MenuCarattere">Caratt_ere</sys:String>
     <sys:String x:Key="MenuElimina">Ca_ncella</sys:String>
     <sys:String x:Key="MenuAllineamento">Allinea_mento</sys:String>
     <sys:String x:Key="MenuAllineamentoSinistra">A _sinistra</sys:String>
     <sys:String x:Key="MenuAllineamentoCentro">_Centro</sys:String>
     <sys:String x:Key="MenuAllineamentoDestra">A _destra</sys:String>
     <sys:String x:Key="MenuAllineamentoGiustificato">_Giustificato</sys:String>
+    <sys:String x:Key="MenuTrova">_Trova...</sys:String>
+    <sys:String x:Key="MenuTrovaProssima">Tro_va successivo</sys:String>
+    <sys:String x:Key="MenuSostituisci">Sostit_uisci...</sys:String>
+    <sys:String x:Key="MenuSostituisciProssima">S_ostituisci successivo</sys:String>
 
     <sys:String x:Key="MenuRicerca">_Ricerca</sys:String>
     <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
@@ -44,6 +51,36 @@
     <sys:String x:Key="MainNessunaVersione">Nessuno testo trovato. Vai a https://www.laparola.net/programma/windowsbeta.php per installare testi da leggere.</sys:String>
 
     <sys:String x:Key="ViewerTitle">Documento</sys:String>
+    <sys:String x:Key="ViewerAiuto">Questa finestra mostra il testo della Bibbia e altri testi. Il primo pulsante nella barra degli strumenti attiva/disattiva la visibilità dell'indice. I pulsanti seguenti forniscono vari modi per passare a un'altra sezione del testo. L'ultimo pulsante connette questa finestra ad altre finestre, in modo che siano collegate e spostate insieme.</sys:String>
+    <sys:String x:Key="ViewerSommarioAiuto">Mostra/nascondi l'indice a sinistra</sys:String>
+    <sys:String x:Key="ViewerRiferimentoAiuto">Digita un riferimento (es. Gv 1:1)</sys:String>
+    <sys:String x:Key="ViewerVaiRiferimentoAiuto">Vai al riferimento inserito</sys:String>
+    <sys:String x:Key="ViewerLibroAbb">L</sys:String>
+    <sys:String x:Key="ViewerCapitoloAbb">C</sys:String>
+    <sys:String x:Key="ViewerVersettoAbb">V</sys:String>
+    <sys:String x:Key="ViewerLibroPrecedente">Libro precedente</sys:String>
+    <sys:String x:Key="ViewerLibroSuccessivo">Libro successivo</sys:String>
+    <sys:String x:Key="ViewerCapitoloPrecedente">Capitolo precedente</sys:String>
+    <sys:String x:Key="ViewerCapitoloSuccessivo">Capitolo successivo</sys:String>
+    <sys:String x:Key="ViewerVersettoPrecedente">Versetto precedente</sys:String>
+    <sys:String x:Key="ViewerVersettoSuccessivo">Versetto successivo</sys:String>
+    <sys:String x:Key="ViewerRicercaAiuto">Digita una parola o un'espressione da ricercare nel testo</sys:String>
+    <sys:String x:Key="ViewerVaiRicercaAiuto">Esegui la ricerca</sys:String>
+    <sys:String x:Key="ViewerRicercaVersettiAiuto">Versetti che contengono l'espressione da ricercare; scegline uno per visualizzarlo</sys:String>
+    <sys:String x:Key="ViewerIndietroAiuto">Indietro</sys:String>
+    <sys:String x:Key="ViewerAvantiAiuto">Avanti</sys:String>
+    <sys:String x:Key="ViewerSincNo">Non sincronizzato</sys:String>
+    <sys:String x:Key="ViewerSinc1">Sincronizza 1</sys:String>
+    <sys:String x:Key="ViewerSinc2">Sincronizza 2</sys:String>
+    <sys:String x:Key="ViewerSinc3">Sincronizza 3</sys:String>
+    <sys:String x:Key="ViewerSinc4">Sincronizza 4</sys:String>
+    <sys:String x:Key="ViewerSinc5">Sincronizza 5</sys:String>
+    <sys:String x:Key="ViewerSinc6">Sincronizza 6</sys:String>
+    <sys:String x:Key="ViewerSinc7">Sincronizza 7</sys:String>
+    <sys:String x:Key="ViewerSinc8">Sincronizza 8</sys:String>
+    <sys:String x:Key="ViewerSinc9">Sincronizza 9</sys:String>
+    <sys:String x:Key="ViewerSincAiuto0">Finestra non sincronizzata. Per sincronizzare il testo, fai clic sul pulsante e scegli lo stesso numero in questa e in un'altra finestra.</sys:String>
+    <sys:String x:Key="ViewerSincAiutoN">Finestra sincronizzata con le altre finestre del gruppo {0}.</sys:String>
 
     <sys:String x:Key="EditorTitle">Documento</sys:String>
     <sys:String x:Key="EditorAiuto">In questa finestra puoi caricare testo da un file o generarlo da alcune delle finestre degli Strumenti. Ci sono alcuni comandi per formattare il testo nella barra degli strumenti della finestra e altri nel menu principale.</sys:String>
@@ -66,13 +103,26 @@
     <sys:String x:Key="EditorSalvaModificheTitolo">Modifiche non salvate</sys:String>
     <sys:String x:Key="EditorSalvaFallito">Salvataggio fallito</sys:String>
     <sys:String x:Key="EditorApriFallito">Apertura fallita</sys:String>
+    <sys:String x:Key="TrovaMaiuscolo">Aa</sys:String>
+    <sys:String x:Key="TrovaMaiuscoloAiuto">Maiuscole/minuscole</sys:String>
+    <sys:String x:Key="TrovaParolaIntera">[p]</sys:String>
+    <sys:String x:Key="TrovaParolaInteraAiuto">Parola intera</sys:String>
+    <sys:String x:Key="TrovaProssimaAiuto">Trova successivo</sys:String>
+    <sys:String x:Key="TrovaPrecedenteAiuto">Trova precedente</sys:String>
+    <sys:String x:Key="TrovaChiudiAiuto">Chiudi (Esc)</sys:String>
+    <sys:String x:Key="TrovaSostituisci">Sostituisci</sys:String>
+    <sys:String x:Key="TrovaTutti">Tutto</sys:String>
+
+    <sys:String x:Key="TrovaSostituzioneCompletata">Sono state apportate {0} sostituzioni.</sys:String>
+    <sys:String x:Key="TrovaSostituzioneCompletata1">È stata apportata {0} sostituzione.</sys:String>
+    <sys:String x:Key="TrovaSostituzione">Sostituzione</sys:String>
 
     <sys:String x:Key="FileLabel">File:</sys:String>
     <sys:String x:Key="FileUnsaved">(non salvato)</sys:String>
     <sys:String x:Key="FileNone">(nessuno)</sys:String>
 
     <sys:String x:Key="OpzioniTitolo">Opzioni</sys:String>
-    <sys:String x:Key="OpzioniAiuto">Scegli le impostazioni dell'app, che vengono applicate immediate. Lasciate il mouse sopra un'impostazione per ulteriori informazioni.</sys:String>
+    <sys:String x:Key="OpzioniAiuto">Scegli le impostazioni dell'app, che vengono applicate immediate. Lasciate il mouse sopra un'impostazione per ulteriori informazioni. Clicca su un titolo sul lato sinistro per saltare immediatamente a quella sezione.</sys:String>
     <sys:String x:Key="OpzioniAspetto">Aspetto</sys:String>
     <sys:String x:Key="OpzioniTemaTitolo">Tema</sys:String>
     <sys:String x:Key="OpzioniTemaAiuto">Scegli il tema per l'applicazione: chiaro, scuro o quello del computer.</sys:String>
@@ -83,15 +133,39 @@
     <sys:String x:Key="OpzioniLinguaAiuto">Scegli la lingua per l'applicazione, inglese o italiano. La maggior parte dell'interfaccia viene modificata immediatamente, il resto richiede il riavvio dell'app.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">Per cambiare completamente la lingua utilizzata nell'app, è necessario riavviare l'applicazione. Cambiare la lingua dell'interfaccia cambia anche la lingua dei nomi e abbreviazioni dei libri usati e riconosciuti.</sys:String>
     <sys:String x:Key="OpzioniFormato">Formato testo</sys:String>
+    <sys:String x:Key="OpzioniTestoTitolo">Testo della Bibbia</sys:String>
+    <sys:String x:Key="OpzioniTestoAiuto">Scegli le impostazioni per la visualizzazione del testo della Bibbia: una nuova riga per ogni versetto, una nuova riga per ogni paragrafo, o nessun testo.</sys:String>
+    <sys:String x:Key="OpzioniTestoVersetti">Versetti</sys:String>
+    <sys:String x:Key="OpzioniTestoParagrafi">Paragrafi</sys:String>
+    <sys:String x:Key="OpzioniTestoNessuno">Nessuno</sys:String>
+    <sys:String x:Key="OpzioniTestoTitoli">Visualizza i titoli delle sezioni</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiTitolo">Riferimenti biblici</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiAiuto">Scegli le imporstazioni per la visualizzazione dei riferimenti biblici. Per il formato, puoi scegliere tra i nomi dei libri, le abbreviazioni per i nomi dei libri, e non mostrare i riferimenti.</sys:String>
     <sys:String x:Key="OpzioniFontTitolo">Caratteri</sys:String>
     <sys:String x:Key="OpzioniFontAiuto">Scegli le impostazioni del carattere per il testo. Nota che il colore scelto è quello che viene mostrato in modalità chiara - se viene scelto il testo nero, viene mostrato come bianco in modalità scura. Puoi anche scegliere di mettere i riferimenti biblici in apice.</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiTipo">Tipo</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiFormato">Formato</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiFormatoIntero">Intero</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiFormatoAbbreviazione">Abbreviazione</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiFormatoNessuno">Nessuno</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiPosizione">Posizione</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiPosizionePrimaStessa">Prima, stessa riga</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiPosizionePrimaDiversa">Prima, riga diversa</sys:String>
+    <sys:String x:Key="OpzioniRiferimentiPosizioneDopo">Dopo</sys:String>
     <sys:String x:Key="OpzioniFont">Carattere predefinito:</sys:String>
     <sys:String x:Key="OpzioniFontGreco">Carattere greco:</sys:String>
     <sys:String x:Key="OpzioniFontEbraico">Carattere ebraico:</sys:String>
-    <sys:String x:Key="OpzioniFontRicerca">Carattere parole cercate:</sys:String>
-    <sys:String x:Key="OpzioniFontRiferimenti">Carattere riferimenti:</sys:String>
+    <sys:String x:Key="OpzioniFontRicerca">Carattere delle parole ricercate:</sys:String>
+    <sys:String x:Key="OpzioniFontRiferimenti">Carattere dei riferimenti:</sys:String>
     <sys:String x:Key="OpzioniFontRiferimentiApice">In apice</sys:String>
     <sys:String x:Key="OpzioniFontModifica">Modifica...</sys:String>
+    <sys:String x:Key="OpzioniAggiornamenti">Aggiornamenti</sys:String>
+    <sys:String x:Key="OpzioniAggiornamentiMessaggi">Messaggi sugli aggiornamenti</sys:String>
+    <sys:String x:Key="OpzioniMessaggiMai">Non controllare mai per messaggi</sys:String>
+    <sys:String x:Key="OpzioniMessaggiGiorno">Controllare giornalmente</sys:String>
+    <sys:String x:Key="OpzioniMessaggiSettimana">Controllare settimanalmente</sys:String>
+    <sys:String x:Key="OpzioniMessaggiMese">Controllare mensilmente</sys:String>
+    <sys:String x:Key="OpzioniMessaggiAiuto">Scegli quanto frequentemente controllare per messaggi sugli aggiornamenti dell'app, delle risorse e del sito.</sys:String>
 
     <sys:String x:Key="FontDialogAiuto">Scegli le impostazioni del carattere per il testo. Nota che il colore scelto è quello che viene mostrato in modalità chiara - se viene scelto il testo nero, viene mostrato come bianco in modalità scura.</sys:String>
     <sys:String x:Key="FontDialogFont">Carattere</sys:String>

@@ -330,6 +330,6 @@ public partial class TextGeneratorToolView : UserControl
             RtfColorTransformer.ApplyThemeToDocument(doc, true, fg,true);
         //}
 
-        App.DockingHost.SendFlowDocumentToActive(doc, true, title);
+        App.DockingHost.SendFlowDocumentToActive(doc, title);
     }
 }

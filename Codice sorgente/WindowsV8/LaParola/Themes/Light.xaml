@@ -12,4 +12,7 @@
   <SolidColorBrush x:Key="SubtleBorderBrush" Color="{StaticResource SubtleBorder}"/>
   <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
   <SolidColorBrush x:Key="Menu.Static.Background" Color="#FFF0F0F0"/>
+
+    <SolidColorBrush x:Key="ComboBox.Hover.Background" Color="#FFE0E0E0"/>
+    <SolidColorBrush x:Key="ComboBox.Open.Background" Color="#FCDCDCDC"/>
 </ResourceDictionary>

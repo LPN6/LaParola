@@ -2,123 +2,193 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:LaParola"
-             Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
-    <Grid Margin="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+             Background="{DynamicResource ControlBackgroundBrush}" 
+             Foreground="{DynamicResource AppForegroundBrush}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock FontSize="16" FontWeight="SemiBold" Text="{DynamicResource OpzioniAspetto}"/>
-            <controls:HelpFlyout x:Name="HelpFlyoutControl"
-        Grid.Column="1" Margin="0,8,0,0"
-        HelpText="{DynamicResource OpzioniAiuto}"
-        HelpClicked="HelpFlyout_OnHelpClicked"/>
-        </Grid>
-        <GroupBox Grid.Row="1" Margin="0,12,0,0" Header="{DynamicResource OpzioniTemaTitolo}" ToolTipService.ShowDuration="10000">
-            <GroupBox.ToolTip>
-                <ToolTip>
-                    <TextBlock Text="{DynamicResource OpzioniTemaAiuto}"
-                       TextWrapping="Wrap"
-                       MaxWidth="300"/>
-                </ToolTip>
-            </GroupBox.ToolTip>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <TreeView x:Name="OptionsTree" 
+                      SelectedItemChanged="OptionsTree_SelectedItemChanged" 
+                      Background="Transparent" 
+                      BorderThickness="0" 
+                      Margin="6,12,6,12"
+                      Foreground="{DynamicResource AppForegroundBrush}">
 
-            <StackPanel Margin="10">
-                <RadioButton x:Name="ThemeSystem" Content="{DynamicResource OpzioniTemaSistema}" Checked="SettingChanged"/>
-                <RadioButton x:Name="ThemeLight" Content="{DynamicResource OpzioniTemaChiaro}" Margin="0,6,0,0" Checked="SettingChanged"/>
-                <RadioButton x:Name="ThemeDark" Content="{DynamicResource OpzioniTemaScuro}" Margin="0,6,0,0" Checked="SettingChanged"/>
-            </StackPanel>
-        </GroupBox>
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="True"/>
+                        <Setter Property="Padding" Value="4,4,4,4"/>
+                    </Style>
+                </TreeView.Resources>
 
-        <GroupBox Grid.Row="2" Margin="0,12,0,0" Header="{DynamicResource OpzioniLinguaTitolo}" ToolTipService.ShowDuration="10000">
-            <GroupBox.ToolTip>
-                <ToolTip>
-                    <TextBlock Text="{DynamicResource OpzioniLinguaAiuto}"
-                       TextWrapping="Wrap"
-                       MaxWidth="300"/>
-                </ToolTip>
-            </GroupBox.ToolTip>
-            <StackPanel Margin="10">
-                <ComboBox x:Name="LanguageCombo" Width="220" SelectionChanged="SettingChanged">
-                    <ComboBoxItem Tag="en">English</ComboBoxItem>
-                    <ComboBoxItem Tag="it">Italiano</ComboBoxItem>
-                </ComboBox>
-                <TextBlock Margin="0,10,0,0" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniLinguaNota}"/>
+                <TreeViewItem x:Name="TreeAspetto" Header="{DynamicResource OpzioniAspetto}">
+                    <TreeViewItem x:Name="NodeTheme" Header="{DynamicResource OpzioniTemaTitolo}"/>
+                    <TreeViewItem x:Name="NodeLanguage" Header="{DynamicResource OpzioniLinguaTitolo}"/>
+                </TreeViewItem>
+
+                <TreeViewItem x:Name="TreeFormato" Header="{DynamicResource OpzioniFormato}">
+                    <TreeViewItem x:Name="NodeText" Header="{DynamicResource OpzioniTestoTitolo}"/>
+                    <TreeViewItem x:Name="NodeReferences" Header="{DynamicResource OpzioniRiferimentiTitolo}"/>
+                    <TreeViewItem x:Name="NodeFonts" Header="{DynamicResource OpzioniFontTitolo}"/>
+                </TreeViewItem>
+
+                <TreeViewItem x:Name="TreeAggiornamenti" Header="{DynamicResource OpzioniAggiornamenti}">
+                    <TreeViewItem x:Name="NodeMessages" Header="{DynamicResource OpzioniAggiornamentiMessaggi}"/>
+                </TreeViewItem>
+            </TreeView>
+        </ScrollViewer>
+
+        <Border Grid.Column="1" Background="{DynamicResource Menu.Static.Separator}"/>
+
+        <ScrollViewer x:Name="RightScrollViewer" Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="RightContentStackPanel" Margin="24,12,24,24">
+
+                <Grid x:Name="SectionAspettoHeader" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock FontSize="16" Margin="4,0,0,8" FontWeight="SemiBold" Text="{DynamicResource OpzioniAspetto}"/>
+                    <controls:HelpFlyout x:Name="HelpFlyoutControl"
+                                         Grid.Column="1" Margin="0,4,0,0"
+                                         HelpText="{DynamicResource OpzioniAiuto}"
+                                         HelpClicked="HelpFlyout_OnHelpClicked"/>
+                </Grid>
+
+                <GroupBox x:Name="SectionTheme" Margin="0,4,0,16" Header="{DynamicResource OpzioniTemaTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniTemaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <RadioButton x:Name="ThemeSystem" Content="{DynamicResource OpzioniTemaSistema}" Checked="SettingChanged"/>
+                        <RadioButton x:Name="ThemeLight" Content="{DynamicResource OpzioniTemaChiaro}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <RadioButton x:Name="ThemeDark" Content="{DynamicResource OpzioniTemaScuro}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="SectionLanguage" Margin="0,0,0,28" Header="{DynamicResource OpzioniLinguaTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniLinguaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <ComboBox x:Name="LanguageCombo" Width="220" SelectionChanged="SettingChanged" HorizontalAlignment="Left">
+                            <ComboBoxItem Tag="en">English</ComboBoxItem>
+                            <ComboBoxItem Tag="it">Italiano</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Margin="0,10,0,0" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniLinguaNota}"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <TextBlock x:Name="SectionFormatoHeader" FontSize="16" FontWeight="SemiBold" Margin="4,12,0,8" Text="{DynamicResource OpzioniFormato}"/>
+
+                <GroupBox x:Name="SectionText" Margin="0,4,0,16" Header="{DynamicResource OpzioniTestoTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniTestoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <RadioButton x:Name="TestoVersetti" Content="{DynamicResource OpzioniTestoVersetti}" Checked="SettingChanged"/>
+                        <RadioButton x:Name="TestoParagrafi" Content="{DynamicResource OpzioniTestoParagrafi}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <RadioButton x:Name="TestoNessuno" Content="{DynamicResource OpzioniTestoNessuno}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <CheckBox x:Name="TestoTitoli" Content="{DynamicResource OpzioniTestoTitoli}" Margin="0,18,0,0" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="SectionReferences" Margin="0,4,0,16" Header="{DynamicResource OpzioniRiferimentiTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniRiferimentiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <GroupBox x:Name="SectionReferencesType" Margin="0,4,0,16" Header="{DynamicResource OpzioniRiferimentiTipo}">
+                            <StackPanel Margin="10">
+                                <RadioButton x:Name="RiferimentiTipoDuePunti" Content="1P 5:2,6-7" Checked="SettingChanged"/>
+                                <RadioButton x:Name="RiferimentiTipoVirgola" Content="1P 5,2.6-7" Margin="0,6,0,0" Checked="SettingChanged"/>
+                                <RadioButton x:Name="RiferimentiTipoCitazione" Content="1P., 5, 2,6-7:" Margin="0,6,0,0" Checked="SettingChanged"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox x:Name="SectionReferencesFormat" Margin="0,4,0,16" Header="{DynamicResource OpzioniRiferimentiFormato}">
+                            <StackPanel Margin="10">
+                                <RadioButton x:Name="RiferimentiFormatoIntero" Content="{DynamicResource OpzioniRiferimentiFormatoIntero}" Checked="SettingChanged"/>
+                                <RadioButton x:Name="RiferimentiFormatoAbbreviazione" Content="{DynamicResource OpzioniRiferimentiFormatoAbbreviazione}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                                <RadioButton x:Name="RiferimentiFormatoNessuno" Content="{DynamicResource OpzioniRiferimentiFormatoNessuno}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox x:Name="SectionReferencesPosition" Margin="0,4,0,16" Header="{DynamicResource OpzioniRiferimentiPosizione}">
+                            <StackPanel Margin="10">
+                                <RadioButton x:Name="RiferimentiPosizionePrimaStessa" Content="{DynamicResource OpzioniRiferimentiPosizionePrimaStessa}" Checked="SettingChanged"/>
+                                <RadioButton x:Name="RiferimentiPosizionePrimaDiversa" Content="{DynamicResource OpzioniRiferimentiPosizionePrimaDiversa}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                                <RadioButton x:Name="RiferimentiPosizioneDopo" Content="{DynamicResource OpzioniRiferimentiPosizioneDopo}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="SectionFonts" Margin="0,4,0,0" Header="{DynamicResource OpzioniFontTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniFontAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Margin="12,0,0,8" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}"/>
+                        <TextBlock Grid.Column="1" Margin="8,0,8,8" x:Name="FontPredefinitoEsempio" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}"/>
+                        <Button Grid.Column="2" x:Name="Modifica" Width="80" Margin="0,0,0,8" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="12,0,0,8" VerticalAlignment="Center" Text="{DynamicResource OpzioniFontGreco}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="8,0,8,8" x:Name="FontGrecoEsempio" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}"/>
+                        <Button Grid.Row="1" Grid.Column="2" x:Name="ModificaGreco" Width="80" Margin="0,0,0,8" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="12,0,0,8" VerticalAlignment="Center" Text="{DynamicResource OpzioniFontEbraico}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="8,0,8,8" x:Name="FontEbraicoEsempio" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}"/>
+                        <Button Grid.Row="2" Grid.Column="2" x:Name="ModificaEbraico" Width="80" Margin="0,0,0,8" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="12,0,0,8" VerticalAlignment="Center" Text="{DynamicResource OpzioniFontRicerca}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="8,0,8,8" x:Name="FontRicercaEsempio" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}"/>
+                        <Button Grid.Row="3" Grid.Column="2" x:Name="ModificaRicerca" Width="80" Margin="0,0,0,8" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="12,0,0,8" VerticalAlignment="Center" Text="{DynamicResource OpzioniFontRiferimenti}" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" Margin="8,0,8,8" x:Name="FontRiferimentoEsempio" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}" />
+                        <Button Grid.Row="4" Grid.Column="2" x:Name="ModificaRiferimenti" Width="80" Margin="0,0,0,8" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click" />
+                    </Grid>
+                </GroupBox>
+                
+                <TextBlock x:Name="SectionAggiornamentiHeader" FontSize="16" FontWeight="SemiBold" Margin="4,12,0,8" Text="{DynamicResource OpzioniAggiornamenti}"/>
+
+                <GroupBox x:Name="SectionMessages" Margin="0,4,0,16" Header="{DynamicResource OpzioniAggiornamentiMessaggi}">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniMessaggiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <RadioButton x:Name="AggiornamentiMessaggiMai" Content="{DynamicResource OpzioniMessaggiMai}" Checked="SettingChanged"/>
+                        <RadioButton x:Name="AggiornamentiMessaggiGiorno" Content="{DynamicResource OpzioniMessaggiGiorno}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <RadioButton x:Name="AggiornamentiMessaggiSettimana" Content="{DynamicResource OpzioniMessaggiSettimana}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <RadioButton x:Name="AggiornamentiMessaggiMese" Content="{DynamicResource OpzioniMessaggiMese}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
-        </GroupBox>
-        <TextBlock Grid.Row="3" FontSize="16" FontWeight="SemiBold" Margin="0,12,0,0" Text="{DynamicResource OpzioniFormato}"/>
-        <GroupBox Grid.Row="4" Margin="0,12,0,0" Header="{DynamicResource OpzioniFontTitolo}" ToolTipService.ShowDuration="10000">
-            <GroupBox.ToolTip>
-                <ToolTip>
-                    <TextBlock Text="{DynamicResource OpzioniFontAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
-                </ToolTip>
-            </GroupBox.ToolTip>
-            <StackPanel Margin="10">
-                <Grid Margin="0,0,0,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <TextBlock TextWrapping="Wrap" Text="{DynamicResource OpzioniFont}"/>
-                    <TextBlock x:Name="FontPredefinitoEsempio" TextWrapping="Wrap" Text="{DynamicResource OpzioniFont}"/>
-                    </StackPanel>
-                    <Button Grid.Column="1" x:Name="Modifica" Width="80" Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
-                </Grid>
-                <Grid Margin="0,0,0,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource OpzioniFontGreco}"/>
-                        <TextBlock x:Name="FontGrecoEsempio" TextWrapping="Wrap" Text="{DynamicResource OpzioniFont}"/>
-                    </StackPanel>
-                    <Button Grid.Column="1" x:Name="ModificaGreco" Width="80" Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
-                </Grid>
-                <Grid Margin="0,0,0,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource OpzioniFontEbraico}"/>
-                        <TextBlock x:Name="FontEbraicoEsempio" TextWrapping="Wrap" Text="{DynamicResource OpzioniFont}"/>
-                    </StackPanel>
-                    <Button Grid.Column="1" x:Name="ModificaEbraico" Width="80" Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
-                </Grid>
-                <Grid Margin="0,0,0,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource OpzioniFontRicerca}"/>
-                        <TextBlock x:Name="FontRicercaEsempio" TextWrapping="Wrap" Text="{DynamicResource OpzioniFont}"/>
-                    </StackPanel>
-                    <Button Grid.Column="1" x:Name="ModificaRicerca" Width="80" Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource OpzioniFontRiferimenti}" />
-                        <TextBlock x:Name="FontRiferimentoEsempio" TextWrapping="Wrap" Text="{DynamicResource OpzioniFont}" />
-                    </StackPanel>
-                    <Button Grid.Column="1" x:Name="ModificaRiferimenti" Width="80" Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click" />
-                </Grid>
-            </StackPanel>
-        </GroupBox>
+            
+        </ScrollViewer>
     </Grid>
 </UserControl>

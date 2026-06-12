@@ -79,9 +79,6 @@
                             <Setter Property="Foreground"
                                 Value="#FF777777"/>
                         </Trigger>
-
-
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

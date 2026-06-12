@@ -17,9 +17,9 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
 {
     private string? _currentFile;
     public LayoutDocument? ParentDocument { get; set; }
-    private bool _isDirty;
     private bool _suppressTextChanged;
 
+    private bool _isDirty;
     public bool IsDirty
     {
         get => _isDirty;
@@ -32,6 +32,66 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
 
             UpdateTitle();
         }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged([CallerMemberName] string? name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+    public EditorDocumentView()
+    {
+        InitializeComponent();
+
+        this.PreviewKeyDown += (s, e) =>
+        {
+            bool italiano = MainWindow.settings.Language.StartsWith("it", StringComparison.CurrentCultureIgnoreCase);
+            if (e.Key == System.Windows.Input.Key.T && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                if (italiano)
+                {
+                    ShowFindDialog();
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == System.Windows.Input.Key.U && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                if (italiano)
+                {
+                    ShowReplaceDialog();
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == System.Windows.Input.Key.F && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                if (italiano)
+                {
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == System.Windows.Input.Key.H && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                if (italiano)
+                {
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == System.Windows.Input.Key.Escape && FindReplacePanel.Visibility == Visibility.Visible)
+            {
+                CloseFindDialog();
+                e.Handled = true;
+            }
+        };
+
+        DataContext = this;
+        Editor.Document = new FlowDocument
+        {
+            FontFamily = new System.Windows.Media.FontFamily(MainWindow.Testi.Formato.FontNome),
+            FontSize = MainWindow.Testi.Formato.FontDimensione * 4.0 / 3.0, // perché WPF usa unità di misura in 1/96 di pollice, mentre i font sono in punti (1/72 di pollice)
+            PageWidth = double.NaN,
+            ColumnWidth = double.PositiveInfinity,
+            PagePadding = new Thickness(20)
+        };
+        Editor.TextChanged += Editor_TextChanged;
     }
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
@@ -68,21 +128,6 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
         : _currentFile!;
 
     public FlowDocument FlowDocument => Editor.Document;
-
-    public EditorDocumentView()
-    {
-        InitializeComponent();
-        DataContext = this;
-        Editor.Document = new FlowDocument
-        {
-            FontFamily = new System.Windows.Media.FontFamily(MainWindow.Testi.Formato.FontNome),
-            FontSize = MainWindow.Testi.Formato.FontDimensione * 4.0 / 3.0, // perché WPF usa unità di misura in 1/96 di pollice, mentre i font sono in punti (1/72 di pollice)
-            PageWidth = double.NaN,
-            ColumnWidth = double.PositiveInfinity,
-            PagePadding = new Thickness(20)
-        };
-        Editor.TextChanged += Editor_TextChanged;
-    }
 
     private void Editor_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -285,7 +330,243 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
         }
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged([CallerMemberName] string? name = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    public void ShowFindDialog()
+    {
+        ShowFindReplaceDialog(false);
+    }
+
+    public void FindNext()
+    {
+        if (FindReplacePanel.Visibility != Visibility.Visible)
+            ShowFindDialog();
+        DoSearch(false);
+    }
+
+    public void ReplaceNext()
+    {
+        if (FindReplacePanel.Visibility != Visibility.Visible)
+            ShowReplaceDialog();
+        DoReplace();
+    }
+
+    public void ShowReplaceDialog()
+    {
+        ShowFindReplaceDialog(true);
+    }
+
+    private void ShowFindReplaceDialog(bool showReplace)
+    {
+        FindReplacePanel.Visibility = Visibility.Visible;
+        BtnToggleReplace.IsChecked = showReplace;
+        if (showReplace)
+        {
+            TxtReplace.Visibility = Visibility.Visible;
+            StackPanelReplace.Visibility = Visibility.Visible;
+            ToggleIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronUp;
+        }
+        else
+        {
+            TxtReplace.Visibility = Visibility.Collapsed;
+            StackPanelReplace.Visibility = Visibility.Collapsed;
+            ToggleIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronDown;
+        }
+
+        if (showReplace && !string.IsNullOrEmpty(TxtSearch.Text))
+        {
+            // If they hit "Replace" and already typed a search term, focus the replace input
+            TxtReplace.Focus();
+            TxtReplace.SelectAll();
+        }
+        else
+        {
+            // Otherwise, focus the search bar first
+            TxtSearch.Focus();
+            TxtSearch.SelectAll();
+        }
+    }
+
+    private void CloseFindDialog()
+    {
+        FindReplacePanel.Visibility = Visibility.Collapsed;
+        TxtSearch.ClearValue(TextBox.BackgroundProperty);
+        Editor.Focus();
+    }
+
+    private void BtnClose_Click(object sender, RoutedEventArgs e) => CloseFindDialog();
+
+    // Gestione dell'espansione del pannello Replace (Animazione della freccetta inclusa)
+    private void BtnToggleReplace_Click(object sender, RoutedEventArgs e)
+    {
+        if (BtnToggleReplace.IsChecked == true)
+        {
+            TxtReplace.Visibility = Visibility.Visible;
+            StackPanelReplace.Visibility = Visibility.Visible;
+            ToggleIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronUp;
+            // Sposta il focus sulla sostituzione se l'utente ha già scritto cosa cercare
+            if (!string.IsNullOrEmpty(TxtSearch.Text))
+            {
+                TxtReplace.Focus();
+            }
+        }
+        else
+        {
+            TxtReplace.Visibility = Visibility.Collapsed;
+            StackPanelReplace.Visibility = Visibility.Collapsed;
+            ToggleIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronDown;
+            TxtSearch.Focus();
+        }
+    }
+
+    private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        // Resetta lo sfondo della TextBox se l'utente cambia testo dopo un errore
+        TxtSearch.ClearValue(TextBox.BackgroundProperty);
+        TxtSearch.ClearValue(TextBox.BorderBrushProperty);
+    }
+
+    private void TxtSearch_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        // Check if the user pressed the Enter/Return key
+        if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Return)
+        {
+            // Execute "Find Next"
+            DoSearch(false);
+
+            e.Handled = true;
+        }
+    }
+
+    private void BtnNext_Click(object sender, RoutedEventArgs e) => DoSearch(false);
+    private void BtnPrev_Click(object sender, RoutedEventArgs e) => DoSearch(true);
+
+    private bool DoSearch(bool backward)
+    {
+        string searchText = TxtSearch.Text;
+        if (string.IsNullOrEmpty(searchText)) return false;
+
+        bool matchCase = BtnMatchCase.IsChecked ?? false;
+        bool wholeWord = BtnWholeWord.IsChecked ?? false;
+
+        TextPointer startPointer = backward ? Editor.Selection.Start : Editor.Selection.End;
+        TextRange? foundRange = FindTextInDocument(startPointer, searchText, matchCase, wholeWord, backward);
+
+        if (foundRange == null)
+        {
+            // Cerca di nuovo dall'inizio/fine (Wrap-around)
+            TextPointer restartPointer = backward ? Editor.Document.ContentEnd : Editor.Document.ContentStart;
+            foundRange = FindTextInDocument(restartPointer, searchText, matchCase, wholeWord, backward);
+        }
+
+        if (foundRange != null)
+        {
+            // Ripristina lo stato grafico corretto del tema
+            TxtSearch.ClearValue(TextBox.BackgroundProperty);
+            TxtSearch.ClearValue(TextBox.BorderBrushProperty);
+
+            Editor.Selection.Select(foundRange.Start, foundRange.End);
+            Editor.Focus();
+            return true;
+        }
+
+        // testo non trovato. Usa un rosso scuro/trasparente adatto al Dark Mode
+        TxtSearch.Background = new SolidColorBrush(Color.FromArgb(50, 255, 0, 0)); // Rosso molto sfumato
+        TxtSearch.BorderBrush = Brushes.Red;
+        return false;
+    }
+
+    private static TextRange? FindTextInDocument(TextPointer startPosition, string textToFind, bool matchCase, bool wholeWord, bool backward)
+    {
+        LogicalDirection direction = backward ? LogicalDirection.Backward : LogicalDirection.Forward;
+        TextPointer position = startPosition;
+
+        while (position != null)
+        {
+            if (position.GetPointerContext(direction) == TextPointerContext.Text)
+            {
+                string textRun = position.GetTextInRun(direction);
+
+                // Determina il tipo di comparazione delle stringhe
+                StringComparison comparison = matchCase ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
+
+                int index = backward ? textRun.LastIndexOf(textToFind, comparison) : textRun.IndexOf(textToFind, comparison);
+
+                if (index >= 0)
+                {
+                    // Verifica l'opzione "Parola Intera" usando Regex sui confini del testo trovato
+                    if (wholeWord)
+                    {
+                        bool isWordStart = index == 0 || !char.IsLetterOrDigit(textRun[index - 1]);
+                        bool isWordEnd = (index + textToFind.Length) >= textRun.Length || !char.IsLetterOrDigit(textRun[index + textToFind.Length]);
+
+                        if (!isWordStart || !isWordEnd)
+                        {
+                            // Salta questa occorrenza perché non è una parola isolata
+                            position = position.GetPositionAtOffset(backward ? -1 : 1);
+                            continue;
+                        }
+                    }
+
+                    // Crea i puntatori precisi per selezionare l'istanza trovata nel run di testo
+                    TextPointer startMatch = position.GetPositionAtOffset(backward ? index - textRun.Length : index);
+                    TextPointer endMatch = startMatch.GetPositionAtOffset(textToFind.Length);
+
+                    return new TextRange(startMatch, endMatch);
+                }
+            }
+
+            position = position.GetNextContextPosition(direction);
+        }
+
+        return null;
+    }
+
+    // --- SEZIONE SOSTITUZIONE (REPLACE) ---
+
+    private void BtnReplace_Click(object sender, RoutedEventArgs e)
+    {
+        DoReplace();
+    }
+
+    private void DoReplace()
+    {
+        // Se la selezione corrente corrisponde già alla ricerca, la sostituisce al volo
+        if (!string.IsNullOrEmpty(TxtSearch.Text) && Editor.Selection.Text.Equals(TxtSearch.Text, StringComparison.CurrentCultureIgnoreCase))
+        {
+            Editor.Selection.Text = TxtReplace.Text;
+        }
+
+        // Successivamente si sposta sulla parola successiva
+        DoSearch(false);
+    }
+
+    private void BtnReplaceAll_Click(object sender, RoutedEventArgs e)
+    {
+        // Disabilita temporaneamente il rendering grafico per aumentare drasticamente le performance di sostituzione di massa
+        Editor.BeginChange();
+
+        // Ricomincia dall'inizio del documento
+        Editor.Selection.Select(Editor.Document.ContentStart, Editor.Document.ContentStart);
+
+        int counter = 0;
+        while (DoSearch(false))
+        {
+            Editor.Selection.Text = TxtReplace.Text;
+            counter++;
+            if (counter > 5000) break; // Protezione da loop infiniti accidentali
+        }
+
+        Editor.EndChange();
+
+        string messageTemplate;
+        if (counter != 1)
+        {
+            messageTemplate = (string)(Application.Current.TryFindResource("TrovaSostituzioneCompletata") ?? "{0} replacements were made.");
+        }
+        else
+        {
+            messageTemplate = (string)(Application.Current.TryFindResource("TrovaSostituzioneCompletata1") ?? "{0} replacement was made.");
+        }
+        string message = string.Format(messageTemplate, counter);
+        MessageBoxLPN.Show(Window.GetWindow(this), message, (string)(Application.Current.TryFindResource("TrovaSostituzione") ?? "Replace"));
+    }
 }

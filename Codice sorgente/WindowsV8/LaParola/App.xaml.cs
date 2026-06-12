@@ -15,7 +15,7 @@ public partial class App : Application
 
     private AppSettings ImpostazioniApp { get; set; } = default!;
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         ImpostazioniApp = Settings.Load();
 
@@ -49,5 +49,7 @@ public partial class App : Application
         MainWindow main = new(ImpostazioniApp);
         MainWindow = main;
         main.Show();
+
+        await MessageService.CheckForNewMessagesAsync();
     }
 }

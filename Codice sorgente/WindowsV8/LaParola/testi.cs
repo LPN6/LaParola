@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -1351,7 +1352,7 @@ namespace LaParola
     /// <remarks>
     /// Una classe che contiene tutte le informazioni sui testi biblici trovati, e restituisce le informazioni necessarie ad altri programmi.
     /// </remarks>
-    public class Texts
+    public partial class Texts
     {
         #region const
 
@@ -1397,6 +1398,11 @@ namespace LaParola
 
         private static readonly XmlLanguage HebrewLanguage = XmlLanguage.GetLanguage("he-IL");
         private static readonly XmlLanguage EnglishLanguage = XmlLanguage.GetLanguage("en-US");
+
+        private static readonly string LPN_ANCORA = "LPN_ANCORA_";
+        [GeneratedRegex(@"LPN_ANCORA_.*?(\d{8})")]
+        private static partial Regex AncoraRegEx();
+
 
         #endregion
 
@@ -1787,7 +1793,7 @@ namespace LaParola
             }
 
             fileTrovati = Directory.GetFiles(directory, "*.image_link");
-            XmlNode nodePrincipale, subNode;
+            XmlNode? nodePrincipale, subNode = null;
             string fileImmagine, nome;
             foreach (string fileTrovato in fileTrovati)
             {
@@ -1796,26 +1802,39 @@ namespace LaParola
                     XmlDocument xd = new();
                     xd.Load(fileTrovato);
                     nodePrincipale = xd.SelectSingleNode("image");
-                    subNode = nodePrincipale.SelectSingleNode("file");
+                    if (nodePrincipale != null)
+                    {
+                        subNode = nodePrincipale.SelectSingleNode("file");
+                    }
                     fileImmagine = (subNode == null ? "" : directory + subNode.InnerText);
-                    subNode = nodePrincipale.SelectSingleNode("links");
+                    if (nodePrincipale != null)
+                    {
+                        subNode = nodePrincipale.SelectSingleNode("links");
+                    }
+                    else
+                    {
+                        subNode = null;
+                    }
                     if (subNode != null && !string.IsNullOrEmpty(fileImmagine))
                     {
-                        XmlNodeList nodeLink = subNode.SelectNodes("name");
-                        foreach (XmlNode nodaLink in nodeLink)
+                        XmlNodeList? nodeLink = subNode.SelectNodes("name");
+                        if (nodeLink != null)
                         {
-                            nome = nodaLink.InnerText.ToLower(CultureInfo.InvariantCulture);
-                            if (indiceImmagini.TryGetValue(nome, out Collection<string>? value))
+                            foreach (XmlNode nodaLink in nodeLink)
                             {
-                                value.Add(fileImmagine);
-                            }
-                            else
-                            {
-                                Collection<string> immaginiDellaParola =
-                                [
-                                    fileImmagine
-                                ];
-                                indiceImmagini.Add(nome, immaginiDellaParola);
+                                nome = nodaLink.InnerText.ToLower(CultureInfo.InvariantCulture);
+                                if (indiceImmagini.TryGetValue(nome, out Collection<string>? value))
+                                {
+                                    value.Add(fileImmagine);
+                                }
+                                else
+                                {
+                                    Collection<string> immaginiDellaParola =
+                                    [
+                                        fileImmagine
+                                    ];
+                                    indiceImmagini.Add(nome, immaginiDellaParola);
+                                }
                             }
                         }
                     }
@@ -1943,15 +1962,12 @@ namespace LaParola
                 nomeNonEsistente = Path.GetDirectoryName(nuovoNomeFile) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(nuovoNomeFile) + " (" + count.ToString(CultureInfo.InvariantCulture) + ")" + Path.GetExtension(nuovoNomeFile);
             }
 
-            FileStream fsRead = null, fsWrite = null;
-            BinaryReader br = null;
-            BinaryWriter bw = null;
             try
             {
-                fsRead = new FileStream(versioni[nomeVersione].Info.NomeDelFile, FileMode.Open, FileAccess.Read, FileShare.Read);
-                br = new BinaryReader(fsRead);
-                fsWrite = new FileStream(nomeNonEsistente, FileMode.Create, FileAccess.Write, FileShare.None);
-                bw = new BinaryWriter(fsWrite);
+                using FileStream fsRead = new(versioni[nomeVersione].Info.NomeDelFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+                using BinaryReader br = new(fsRead);
+                using FileStream fsWrite = new(nomeNonEsistente, FileMode.Create, FileAccess.Write, FileShare.None);
+                using BinaryWriter bw = new(fsWrite);
 
                 bw.Write(br.ReadBytes(6));
                 byte numeroTesti = br.ReadByte();
@@ -1967,13 +1983,7 @@ namespace LaParola
                 bw.Write(nuovoNomeTesto);
                 bw.Write(br.ReadBytes((int)(fsRead.Length - fsRead.Position)));
             }
-            finally
-            {
-                br?.Close();
-                fsRead?.Close();
-                bw?.Close();
-                fsWrite?.Close();
-            }
+            catch { }
 
             AggiungiTesto(nomeNonEsistente, 0);
             return nuovoNomeTesto;
@@ -2338,7 +2348,7 @@ namespace LaParola
                 } // if ((IsNumero(cPrimoCarattere)) || cPrimoCarattere==':') else
 
                 int i;
-                Riferimento occorrenzeProssimaParola = new();
+                Riferimento occorrenzeProssimaParola;
                 primoCarattere = espressioneDaTrovare[0];
                 if (primoCarattere == '(')
                 {
@@ -3130,6 +3140,11 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, listaVersioni, []);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni)
+        {
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, []);
+        }
+
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3169,6 +3184,11 @@ namespace LaParola
             return await TestoBranoAsync(ConvertiRiferimento(riferimento), listaVersioni);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(string riferimento, Collection<string> listaVersioni)
+        {
+            return await FlowDocumentBranoAsync(ConvertiRiferimento(riferimento), listaVersioni);
+        }
+
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3178,6 +3198,11 @@ namespace LaParola
         public async Task<string> TestoBranoAsync(string riferimento, string nomeVersione)
         {
             return await TestoBranoAsync(riferimento, nomeVersione, []);
+        }
+
+        public async Task<FlowDocument> FlowDocumentBranoAsync(string riferimento, string nomeVersione)
+        {
+            return await FlowDocumentBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, []);
         }
 
         /// <summary>
@@ -3190,6 +3215,11 @@ namespace LaParola
         public async Task<string> TestoBranoAsync(string riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
         {
             return await TestoBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, collezioniDaVisualizzare);
+        }
+
+        public async Task<FlowDocument> FlowDocumentBranoAsync(string riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
+        {
+            return await FlowDocumentBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, collezioniDaVisualizzare);
         }
 
         /// <summary>
@@ -3234,6 +3264,11 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, nomeVersione, collezioniDaVisualizzare, new Riferimento(), null, null);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
+        {
+            return await FlowDocumentBranoAsync(riferimento, nomeVersione, collezioniDaVisualizzare, new Riferimento(), null, null);
+        }
+
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3244,6 +3279,11 @@ namespace LaParola
         public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare)
         {
             return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, null, null);
+        }
+
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare)
+        {
+            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), null, null);
         }
 
         /// <summary>
@@ -3354,6 +3394,15 @@ namespace LaParola
             return await TestoBranoAsync(riferimento, versioni, collezioniDaVisualizzare, paroleRicercate, worker, e);
         }
 
+        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
+        {
+            Collection<string> versioni =
+            [
+                nomeVersione
+            ];
+            return await FlowDocumentBranoAsync(riferimento, versioni, collezioniDaVisualizzare, paroleRicercate, worker, e);
+        }
+
         /// <summary>
         /// Il testo biblico di un brano.
         /// </summary>
@@ -3452,7 +3501,7 @@ namespace LaParola
                     List<string> stringheRtf = [];
                     StringBuilder stringaRtf = new(RtfIntestazione());
                     byte[] riferimentoArray = new byte[6];
-                    Riferimento rif = new Riferimento(riferimentoArray);
+                    Riferimento rif = new(riferimentoArray);
                     foreach (byte[] branoInRiferimento in riferimento.Brani)
                     {
                         for (byte lib = branoInRiferimento[0]; lib <= branoInRiferimento[3]; ++lib)
@@ -4743,9 +4792,9 @@ namespace LaParola
             int punteggiature, capitolo = 0;
             bool trattinoVecchio = true, trattino = false, versettoMancante = false;
             String riferimentoDaAnalizzare, libroNome = "";
-            byte[] riferimentoBrano = [0, 0, 0, 0, 0, 0, 0, 0];
+            byte[] riferimentoBrano;
             byte[] riferimentoBranoPrecedente = [0, 0, 0, 0, 0, 0, 0, 0];
-            byte[] riferimentoBrano4Byte = [0, 0, 0, 0, 0, 0, 0, 0];
+            byte[] riferimentoBrano4Byte;
             do
             {
                 // troviamo il riferimento del primo brano, cioè fino alla prima punteggiatura
@@ -5989,7 +6038,7 @@ namespace LaParola
         public bool ScriviRiferimentiCitati(BinaryWriter bw, string[] noteTesto)
         {
             int posizione1 = (int)(bw.Seek(0, SeekOrigin.Current));
-            List<Riferimento> riferimenti = [];
+            List<Riferimento> riferimenti;
             UInt32 numeroCitazioni = 0;
             bw.Write(numeroCitazioni); // il valore vero sarà scritto più avanti in questa routine
             for (UInt32 i = 0; i < noteTesto.Length; ++i)
@@ -6090,8 +6139,8 @@ namespace LaParola
                             case "en":
                                 if ((i == 0 || !IsLetteraONumero(testo[i - 1]))
                                     && ((i < nCaratteri - 1 && (testo[i + 1] == 't' || testo[i + 1] == 'T') && (i == nCaratteri - 2 || !IsLetteraONumero(testo[i + 2])))
-                                      || (i < nCaratteri - 3 && testo.Substring(i + 1, 3).ToLower(CultureInfo.InvariantCulture) == "tis" && (i == nCaratteri - 4 || !IsLetteraONumero(testo[i + 4])))
-                                      || (i < nCaratteri - 4 && testo.Substring(i + 1, 4).ToLower(CultureInfo.InvariantCulture) == "twas" && (i == nCaratteri - 5 || !IsLetteraONumero(testo[i + 5])))))
+                                      || (i < nCaratteri - 3 && testo.Substring(i + 1, 3).Equals("tis", StringComparison.CurrentCultureIgnoreCase) && (i == nCaratteri - 4 || !IsLetteraONumero(testo[i + 4])))
+                                      || (i < nCaratteri - 4 && testo.Substring(i + 1, 4).Equals("twas", StringComparison.CurrentCultureIgnoreCase) && (i == nCaratteri - 5 || !IsLetteraONumero(testo[i + 5])))))
                                 {
                                     parola += c;
                                     analizzaParola = false;
@@ -6111,7 +6160,7 @@ namespace LaParola
                                         parola += c;
                                         analizzaParola = false;
                                     }
-                                    else if (testo.Substring(i - 2, 2).ToLowerInvariant() == "ba" && i < nCaratteri - 1 && char.IsLetter(testo[i + 1]))
+                                    else if (testo.Substring(i - 2, 2).Equals("ba", StringComparison.InvariantCultureIgnoreCase) && i < nCaratteri - 1 && char.IsLetter(testo[i + 1]))
                                     { // per la Literal Standard Version
                                         parola += c;
                                         analizzaParola = false;
@@ -6255,7 +6304,7 @@ namespace LaParola
         private List<Riferimento> TrovaRiferimentiInVoce(string testo)
         {
             List<Riferimento> riferimenti = [];
-            Riferimento riferimentoLink = new();
+            Riferimento riferimentoLink;
 
             int posizione = testo.IndexOf(RichTextBoxEx.InizioLink.ToString(), StringComparison.Ordinal);
             int posizioneLink;
@@ -6587,11 +6636,100 @@ namespace LaParola
             TextRange range = new(doc.ContentStart, doc.ContentEnd);
 
             string converted = ConvertiUnicodeInRtf(rtf);
+            converted = converted.Replace("\\v ", LPN_ANCORA);
 
             using MemoryStream ms = new(Encoding.UTF8.GetBytes(converted));
             range.Load(ms, DataFormats.Rtf);
 
+            ProcessAndHideAnchors(doc);
+
             return doc;
+        }
+
+        private static void ProcessAndHideAnchors(FlowDocument doc)
+        {
+            bool foundAny;
+            do
+            {
+                foundAny = false;
+                TextPointer navigator = doc.ContentStart;
+
+                while (navigator != null && navigator.CompareTo(doc.ContentEnd) < 0)
+                {
+                    if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                    {
+                        string runText = navigator.GetTextInRun(LogicalDirection.Forward);
+                        int index = runText.IndexOf(LPN_ANCORA, StringComparison.Ordinal);
+
+                        if (index >= 0)
+                        {
+                            var match = AncoraRegEx().Match(runText[index..]);
+                            if (match.Success)
+                            {
+                                string verseId = match.Groups[1].Value;
+                                string fullMarkerText = match.Value;
+
+                                if (navigator.Parent is Run currentRun)
+                                {
+                                    // 1. Remove the anchor text from the current run (previous verse block)
+                                    currentRun.Text = currentRun.Text.Replace(fullMarkerText, "");
+
+                                    // 2. Scan forward to find the next upcoming Run element (the target verse text)
+                                    Run? nextRun = FindNextRun(navigator, currentRun, doc.ContentEnd);
+
+                                    if (nextRun != null)
+                                    {
+                                        // Attach the tag to the actual beginning of the chosen verse
+                                        nextRun.Tag = "VERSE_" + verseId;
+                                    }
+                                    else
+                                    {
+                                        // Fallback to current run only if it happens to be the last text element in the document
+                                        currentRun.Tag = "VERSE_" + verseId;
+                                    }
+
+                                    // Restart the scan safely to prevent tree corruption issues after updating text
+                                    foundAny = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
+                }
+            } while (foundAny);
+        }
+
+        // Helper method to look ahead for the next structural Text/Run element
+        private static Run? FindNextRun(TextPointer start, Run currentRun, TextPointer end)
+        {
+            TextPointer searcher = start;
+            while (searcher != null && searcher.CompareTo(end) < 0)
+            {
+                searcher = searcher.GetNextContextPosition(LogicalDirection.Forward);
+                if (searcher == null) break;
+
+                TextPointerContext context = searcher.GetPointerContext(LogicalDirection.Forward);
+
+                // Scenario A: We hit the boundary of a new layout element tag
+                if (context == TextPointerContext.ElementStart)
+                {
+                    DependencyObject adj = searcher.GetAdjacentElement(LogicalDirection.Forward);
+                    if (adj is Run r && r != currentRun)
+                    {
+                        return r;
+                    }
+                }
+                // Scenario B: We land directly into a subsequent text string container
+                else if (context == TextPointerContext.Text)
+                {
+                    if (searcher.Parent is Run r && r != currentRun)
+                    {
+                        return r;
+                    }
+                }
+            }
+            return null;
         }
 
         private static void NormalizeLoadedBlocks(FlowDocument doc, TextAlignment? fallbackAlignment)
@@ -6602,14 +6740,7 @@ namespace LaParola
             {
                 if (block is Paragraph p)
                 {
-                    TextAlignment effectiveAlignment =
-    p.TextAlignment != TextAlignment.Left ||
-    fallbackAlignment == null
-        ? p.TextAlignment
-        : fallbackAlignment.Value;
-
-                    TextAlignment alignment =
-    p.TextAlignment;
+                    TextAlignment alignment = p.TextAlignment;
 
                     // Optional fallback only if really needed
                     if (alignment == TextAlignment.Left &&
@@ -7134,5 +7265,6 @@ namespace LaParola
 
         private static readonly string[] ByteStringhe =
     [.. Enumerable.Range(0, 256).Select(i => i.ToString(CultureInfo.CurrentCulture))];
+
     }
 }

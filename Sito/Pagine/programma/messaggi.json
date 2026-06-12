@@ -1,0 +1,10 @@
+[
+  {
+    "Id": 1,
+    "Title": "Version 8.0.2",
+    "Content": "This is the third beta version. This new function of sending messages about the latest updates was added. In this way you will receive a message when the next version is available. Other new features:\n- View the whole Bible in a continuous text\n- Find and Replace in the editor\n- Options for the format of the text; the Options also have an table of contents on the left side. (If the Options window was open the last time you closed the program, you will need to close and reopen the Options window so that it is shown in a wider space.)",
+    "TitleIt": "Versione 8.0.2",
+    "ContentIt": "Questa è la terza versione di prova. È stata aggiunta questa funzionalità di mandare messaggi con le novità. Così riceverai un messaggio quando la prossima versione è disponibile. Altre novità:\n- Visualizzare l'intera Bibbia in un testo continuo\n- Trova e Sostituisci nell'editor\n- Opzioni per il formato del testo; le Opzioni hanno anche un sommario a sinistra. (Se la finestra delle Opzioni era aperta l'ultima volta che hai chiuso il programma, dovrai chiudere e riaprire la finestra delle Opzioni affinché venga mostrata in uno spazio più largo.)",
+    "Date": "2026-06-12T07:00:00"
+  }
+]

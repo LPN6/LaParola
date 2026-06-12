@@ -167,11 +167,11 @@ namespace LaParola.ToolViews
 
                 //if (Services.ThemeManager.IsDark(MainWindow.settings.ThemeMode))
                 //{
-                    Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
-                    RtfColorTransformer.ApplyThemeToDocument(doc, true, fg,true);
+                Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+                RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
                 //}
 
-                App.DockingHost.SendFlowDocumentToActive(doc, true, title);
+                App.DockingHost.SendFlowDocumentToActive(doc, title);
             }
         }
     }

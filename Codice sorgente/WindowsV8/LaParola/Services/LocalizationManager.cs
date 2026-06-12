@@ -1,3 +1,4 @@
+using AvalonDock.Layout;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -35,6 +36,39 @@ public class LocalizationManager
         else
         {
             merged.Add(newDict);
+        }
+    }
+
+    public static void RefreshToolTitles(LayoutRoot layout)
+    {
+        if (layout == null) return;
+
+        // 1. Refresh side-pane tools (Anchorables)
+        foreach (LayoutAnchorable anchorable in layout.Descendents().OfType<LayoutAnchorable>())
+        {
+            switch (anchorable.ContentId)
+            {
+                case "tool.search":
+                    anchorable.Title = (string)(Application.Current.TryFindResource("RicercaTitolo") ?? "Search");
+                    break;
+                case "tool.textgen":
+                    anchorable.Title = (string)(Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
+                    break;
+                case "tool.converter":
+                    anchorable.Title = (string)(Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");
+                    break;
+            }
+        }
+
+        // 2. Refresh main-workspace tools (Documents)
+        foreach (LayoutDocument doc in layout.Descendents().OfType<LayoutDocument>())
+        {
+            if (doc.ContentId == "tool.options")
+            {
+                doc.Title = (string)(Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+            }
+            // Viewers and Editor windows are completely ignored here because 
+            // their ContentIds won't match "tool.options"
         }
     }
 }

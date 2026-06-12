@@ -54,7 +54,7 @@
          Drop="ListBox_Drop"
          Background="{DynamicResource ControlBackgroundBrush}"
          BorderThickness="0"
-         Width="300">
+         >
 
             <ListBox.ToolTip>
                 <ToolTip>

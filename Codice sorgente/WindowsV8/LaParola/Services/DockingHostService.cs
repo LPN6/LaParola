@@ -2,10 +2,12 @@ using AvalonDock;
 using AvalonDock.Layout;
 using LaParola.DocumentViews;
 using LaParola.ToolViews;
+using LaParola.Utilities;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace LaParola.Services;
@@ -105,6 +107,13 @@ public class DockingHostService
             return;
         }
 
+        // INTERCEPT OPTIONS: Redirect to the wide LayoutDocumentPane (Visual Studio style)
+        if (contentId == "tool.options")
+        {
+            ShowOptionsAsDocument(contentId);
+            return;
+        }
+
         LayoutAnchorable? anchorable = _dock.Layout.Descendents().OfType<LayoutAnchorable>().FirstOrDefault(a => a.ContentId == contentId);
         if (anchorable == null)
         {
@@ -130,13 +139,14 @@ public class DockingHostService
             {
                 v = new ConverterToolView();
                 titolo = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter"); ;
-            }
+            } /* vecchio stile, nel panello a sinistra
             else if (contentId == "tool.options")
             {
                 v = new OptionsToolView();
                 titolo = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
-            }
+            } */
             else titolo = "";
+
             if (!string.IsNullOrEmpty(titolo))
             {
                 LayoutAnchorable layoutDoc = new()
@@ -162,14 +172,56 @@ public class DockingHostService
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
             else if (contentId == "tool.converter")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");
-            else if (contentId == "tool.options")
+            /*else if (contentId == "tool.options") vecchio stile
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+            */
             else
                 anchorable.Title = contentId; // non dovrebbe succedere
             anchorable.IsVisible = true;
             anchorable.IsSelected = true;
             anchorable.IsActive = true;
         }
+    }
+
+    private void ShowOptionsAsDocument(string contentId)
+    {
+        // Check if the wide Options document tab is already open
+        LayoutDocument? existingDoc = _dock!.Layout.Descendents()
+            .OfType<LayoutDocument>()
+            .FirstOrDefault(d => d.ContentId == contentId);
+
+        if (existingDoc != null)
+        {
+            // If it's already open, refresh the localized title and bring it to focus
+            existingDoc.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+            existingDoc.IsSelected = true;
+            existingDoc.IsActive = true;
+            return;
+        }
+
+        // Locate the wide document pane workspace
+        LayoutDocumentPane? docPane = _dock.Layout.Descendents()
+            .OfType<LayoutDocumentPane>()
+            .FirstOrDefault();
+
+        if (docPane == null) return;
+
+        // Instantiate the options view and title
+        OptionsToolView v = new();
+        string titolo = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+
+        // Wrap it inside a LayoutDocument instead of a LayoutAnchorable
+        LayoutDocument layoutDoc = new()
+        {
+            Title = titolo,
+            ContentId = contentId, // "tool.options"
+            Content = v
+        };
+
+        // Append to the wide document center and activate
+        docPane.Children.Add(layoutDoc);
+        layoutDoc.IsSelected = true;
+        layoutDoc.IsActive = true;
     }
 
     public EditorDocumentView? OpenEditorDocument(FlowDocument? doc = null, string titolo = "")
@@ -232,30 +284,32 @@ public class DockingHostService
         view?.LoadDocument(dlg.FileName);
     }
 
-    public void OpenViewerDocument(FlowDocument? doc = null)
+    public ViewerDocumentView? OpenViewerDocument(string title, byte libro = 1, byte capitolo = 1, byte versetto = 1)
     {
+        if (!MainWindow.Testi.VersioneEsiste(title))
+            return null;
+
         LayoutDocumentPane? docPane = _dock?.Layout?.Descendents()
-    .OfType<LayoutDocumentPane>()
-    .FirstOrDefault();
+            .OfType<LayoutDocumentPane>()
+            .FirstOrDefault();
 
-        if (docPane == null)
-            return;
+        if (docPane == null || string.IsNullOrWhiteSpace(title))
+            return null;
 
-        ViewerDocumentView view = new();
-        if (doc != null)
-        {
-            view.SetDocument(doc);
-        }
+        ViewerDocumentView view = new(title);
+        _ = view.SpostaTesto(libro, capitolo, versetto, true, false);
 
         LayoutDocument layoutDoc = new()
         {
-            Title = (string)(System.Windows.Application.Current.TryFindResource("ViewerTitle") ?? "Viewer Document"),
+            Title = title,
             ContentId = $"doc.viewer.{Guid.NewGuid():N}",
             Content = view
         };
         docPane.Children.Add(layoutDoc);
         layoutDoc.IsSelected = true;
         layoutDoc.IsActive = true;
+
+        return view;
     }
 
     public LayoutContent? GetActiveLayoutContent()
@@ -322,20 +376,13 @@ public class DockingHostService
         GetActiveEditor()?.SaveDocumentAs();
     }
 
-    public void SendFlowDocumentToActive(FlowDocument doc, bool preferEditor, string titolo)
+    public void SendFlowDocumentToActive(FlowDocument doc, string titolo)
     {
         if (_dock?.ActiveContent is IFlowDocumentHost host)
         {
             host.SetDocument(doc);
             return;
         }
-        if (preferEditor)
-        {
-            OpenEditorDocument(doc, titolo);
-        }
-        else
-        {
-            OpenViewerDocument(doc);
-        }
+        OpenEditorDocument(doc, titolo);
     }
 }
