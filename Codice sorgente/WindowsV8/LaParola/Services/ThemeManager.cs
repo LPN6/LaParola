@@ -63,7 +63,7 @@ public class ThemeManager
             }
         }
 
-        var anchorable = dock.Layout?
+        LayoutAnchorable? anchorable = dock.Layout?
             .Descendents()
             .OfType<LayoutAnchorable>()
             .FirstOrDefault(a => a.ContentId == "tool.options");

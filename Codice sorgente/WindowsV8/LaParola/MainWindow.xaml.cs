@@ -4,11 +4,13 @@ using AvalonDock.Layout.Serialization;
 using LaParola.DocumentViews;
 using LaParola.Models;
 using LaParola.ToolViews;
+using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -17,16 +19,23 @@ using System.Windows.Media;
 
 namespace LaParola;
 
+// per passare SmartScreen, usa https://www.microsoft.com/en-us/wdsi/filesubmission 
+
+// TODO2 vuoi salvare modifiche a questo testo? - non è chiaro a quel testo si riferisce quando ne sono diversi aperti
+// TODO2 in TextGen, multiple versioni, hover non cambia colore; anche solo 1 commentario ma con alternare
+// TODO2 rimuovere righe vuote addizionali, soprattutto in TextGen
+
 // TODO2 toolbar: new, open, save (all), print, undo, redo, find, cut, copy, paste, vis bibbia, commentario, apri note, segnalibri, navigare, ricerca, mostra, (chiave), (racc info), paralleli, LQ, Misure, Gesti testi, aggiorna, opzioni,aiuto
 // available icons are listed here: https://pictogrammers.com/library/mdi/
 // TODO2 oppure invece di un toolbar, creare un tool "Quick Access", come in Logos
 // TODO2 help centre: Search, FAQs, tutorials, contact, release notes, keyboard shortcuts, about, documentation, how to use, getting started
 // TODO2 option to not ask confirm when closing documents
 // TODO2 right click menu for Editor and Visualizza
-/* TODO2 icons for other Visualizza menu items:
+/* TODO2 icons for other Visualizza menu items: - if changed here need to change also in Biblioteca
  * Commentary: Kind="BookOpenPageVariant" or Kind="BookInformationVariant"
 Dictionary: Kind="BookAlphabet" or "Translate"
 Normal Book: Kind="Book" or Kind="BookOpen"
+https://pictogrammers.github.io/@mdi/font/5.4.55/ per tutti
  */
 
 // TODO2 ApplicationCommands:
@@ -108,6 +117,7 @@ public partial class MainWindow : Window
     private TextGeneratorToolView? _textGenView;
     private ConverterToolView? _converterView;
     private OptionsToolView? _optionsView;
+    private LibraryToolView? _libraryView;
 
     private object SearchToolViewInstance()
         => _searchView ??= new SearchToolView();
@@ -121,7 +131,10 @@ public partial class MainWindow : Window
     private object OptionsToolViewInstance()
         => _optionsView ??= new OptionsToolView();
 
-    internal static Texts Testi;
+    private object LibraryToolViewInstance()
+        => _libraryView ??= new LibraryToolView();
+
+    internal static Texts Testi = null!;
     internal static AppSettings settings = new();
 
     private IInputElement? _previousFocus;
@@ -134,11 +147,15 @@ public partial class MainWindow : Window
     public static readonly RoutedUICommand EsciCommand = new("Exit", "EsciCommand", typeof(MainWindow));
     public static readonly RoutedUICommand FindNextCommand = new("FindNext", "FindNextCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ReplaceNextCommand = new("ReplaceNext", "ReplaceNextCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand LibraryCommand = new("Library", "LibraryCommand", typeof(MainWindow));
     public static readonly RoutedUICommand SearchCommand = new("Search", "SearchCommand", typeof(MainWindow));
     public static readonly RoutedUICommand FontCommand = new("Font", "FontCommand", typeof(MainWindow));
     public static readonly RoutedUICommand MostraCommand = new("Mostra", "MostraCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ConverterCommand = new("Converter", "ConverterCommand", typeof(MainWindow));
     public static readonly RoutedUICommand OptionsCommand = new("Options", "OptionsCommand", typeof(MainWindow));
+
+    internal static readonly string LPN_ANCORA = "LPN_ANCORA_";
+    internal static Regex AncoraRegEx = new(LPN_ANCORA + @".*?(\d{8})");
 
     public MainWindow(AppSettings settingsLoaded)
     {
@@ -181,6 +198,11 @@ public partial class MainWindow : Window
         {
             Testi.Formato = settings.Formato;
 
+            if (settings.UltimaBibbia != "")
+                Testi.UltimaBibbia = settings.UltimaBibbia;
+            if (settings.UltimaBibbiaCompleta != "")
+                Testi.UltimaBibbiaCompleta = settings.UltimaBibbiaCompleta;
+
             if (settings.Language == "it")
             {
                 Testi.libriNomi = Texts.LibriNomiItaliano.Split('|');
@@ -208,35 +230,61 @@ public partial class MainWindow : Window
                 UpdateEditorMenuState();
             };
 
-            // Otteniamo la lista delle versioni disponibili
-            Collection<string> versioni = Testi.NomiVersioni(TestoTipi.Bibbia);
-
-            if (versioni.Count == 1)
-            {
-                // CASO 1: Una sola Bibbia. Trasformiamo il menu in un pulsante diretto.
-                string unicaVersione = versioni[0];
-
-                MenuVisualizzaBibbia.Header = versioni[0]; // Sostituisce il testo generico "Bibbia" con es. "Nuova Riveduta"
-                MenuVisualizzaBibbia.ItemsSource = null;     // Rimuove il sottomenu a tendina
-            }
-            else if (versioni.Count == 0)
-            {
-                // CASO 2: Nessuna Bibbia disponibile. Nascondiamo il menu.
-                MenuVisualizzaBibbia.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                // CASO 3: Più Bibbie disponibili. Manteniamo il comportamento standard con sottomenu.
-                MenuVisualizzaBibbia.ItemsSource = versioni;
-            }
+            AggiornaMenuVisualizza();
 
             if (Testi.NomiVersioni().Count == 0)
             {
-                MessageBoxLPN.Show(this,
+                MessageBoxLPN.Show(this, // TODO2 cambiare link per nuovi testi (in risorse x 2)
                     (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read."),
                     (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
             }
         }
+    }
+
+    public void AggiornaMenuVisualizza()
+    {
+        Collection<string> versioni = Testi.NomiVersioni(TestoTipi.Bibbia);
+
+        if (versioni.Count == 1)
+        {
+            // CASO 1: Una sola Bibbia. Trasformiamo il menu in un pulsante diretto.
+            MenuVisualizzaBibbia.Header = versioni[0]; // Sostituisce il testo generico "Bibbia" con es. "Nuova Riveduta"
+            MenuVisualizzaBibbia.ItemsSource = null;     // Rimuove il sottomenu a tendina
+            MenuVisualizzaBibbia.Visibility = Visibility.Visible; // Ensure it's visible if it was hidden before
+        }
+        else if (versioni.Count == 0)
+        {
+            // CASO 2: Nessuna Bibbia disponibile. Nascondiamo il menu.
+            MenuVisualizzaBibbia.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            // CASO 3: Più Bibbie disponibili. Manteniamo il comportamento standard con sottomenu.
+            MenuVisualizzaBibbia.Header = ((string)(Application.Current.TryFindResource("MenuVisualizzaBibbia") ?? "_Bible")); // Reset to default generic string resource
+            MenuVisualizzaBibbia.ItemsSource = versioni;
+            MenuVisualizzaBibbia.Visibility = Visibility.Visible;
+        }
+
+        Collection<string> commentari = Testi.NomiVersioni(TestoTipi.Commentario);
+
+        if (commentari.Count == 1)
+        {
+            MenuVisualizzaCommentario.Header = commentari[0]; // Sostituisce il testo generico "Bibbia" con es. "Nuova Riveduta"
+            MenuVisualizzaCommentario.ItemsSource = null;     // Rimuove il sottomenu a tendina
+            MenuVisualizzaCommentario.Visibility = Visibility.Visible; // Ensure it's visible if it was hidden before
+        }
+        else if (commentari.Count == 0)
+        {
+            MenuVisualizzaCommentario.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            MenuVisualizzaCommentario.Header = ((string)(Application.Current.TryFindResource("MenuVisualizzaCommentario") ?? "_Commentary")); // Reset to default generic string resource
+            MenuVisualizzaCommentario.ItemsSource = commentari;
+            MenuVisualizzaCommentario.Visibility = Visibility.Visible;
+        }
+
+        // TODO2 Repeat similar blocks here for TestoTipi.Dizionario, .Libro
     }
 
     private void RestoreWindowPlacement()
@@ -273,9 +321,9 @@ public partial class MainWindow : Window
         // Se non c'è layout salvato, non fare nulla (layout di default in XAML)
         if (string.IsNullOrWhiteSpace(settings.DockLayoutXml))
         {
-            HideDefaultToolWindows();
+            //HideDefaultToolWindows();
 
-            string testo = "Questa è la versione beta (di prova) di LaParola 8.\n\n" +
+            string testo = "Questa è la versione beta (di StringheBranoCommentario) di LaParola 8.\n\n" +
                 "Usa il menu 'Visualizza' per leggere la Bibbia. Usa il menu 'Strumenti' per altre possibili azioni da eseguire. Altre funzionalità saranno aggiunte prossimamente.\n\n" +
                 "La disposizione delle finestre è molto flessibile: trascinando il titolo di una finestra, potete spostare, ancorare, affiancare e sovrapporre le finestre come preferite. Potete aprire più finestre e organizzarle come volete.\n\n" +
                 "Se trovi dei problemi e hai dei suggerimenti, scrivimi a info@laparola.net.\n\n" +
@@ -327,6 +375,7 @@ public partial class MainWindow : Window
             if (id == "tool.textgen") { args.Content = TextGenToolViewInstance(); return; }
             if (id == "tool.converter") { args.Content = ConverterToolViewInstance(); return; }
             if (id == "tool.options") { args.Content = OptionsToolViewInstance(); return; }
+            if (id == "tool.library") { args.Content = LibraryToolViewInstance(); return; }
 
             // 2) Viewer docs: ricrea e applica placeholder state
             if (id.StartsWith("doc.viewer."))
@@ -370,19 +419,20 @@ public partial class MainWindow : Window
         FlowDocument doc = new()
         {
             FontFamily = new FontFamily("Georgia"),
-            FontSize = 15
+            FontSize = 15,
+            Tag = titolo
         };
         doc.Blocks.Clear();
         doc.Blocks.Add(new Paragraph(new Run(testo)));
         App.DockingHost.OpenEditorDocument(doc, titolo);
     }
 
-    private void HideDefaultToolWindows()
-    {
-        //TextGenToolAnchorable?.Hide();
-        ConverterToolAnchorable?.Hide();
-        OptionsToolAnchorable?.Hide();
-    }
+    //private void HideDefaultToolWindows()
+    //{
+    //TextGenToolAnchorable?.Hide();
+    //ConverterToolAnchorable?.Hide();
+    //OptionsToolAnchorable?.Hide();
+    //}
 
     private void ShowLoadingOverlay(bool show)
     {
@@ -468,6 +518,18 @@ public partial class MainWindow : Window
         }
         newShortcut = new(ApplicationCommands.Replace, italiano ? Key.U : Key.H, ModifierKeys.Control);
         this.InputBindings.Add(newShortcut);
+
+        // MenuBiblioteca
+        MenuBiblioteca.InputGestureText = italiano ? "Ctrl+B" : "Ctrl+L";
+        existingBinding = this.InputBindings
+    .OfType<KeyBinding>()
+    .FirstOrDefault(b => b.Command == LibraryCommand);
+        if (existingBinding != null)
+        {
+            this.InputBindings.Remove(existingBinding);
+        }
+        newShortcut = new(LibraryCommand, italiano ? Key.B : Key.L, ModifierKeys.Control);
+        this.InputBindings.Add(newShortcut);
     }
 
     private void NuovoEditor_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.OpenEditorDocument();
@@ -514,8 +576,6 @@ public partial class MainWindow : Window
 
     private void Font_Executed(object sender, ExecutedRoutedEventArgs e)
     {
-        // TODO need to convert black text in dark mode
-        // TODO GCS in toolbar apply to whole text, not like this. Also not different aspect if selected text has characteristic
         EditorDocumentView? edv = App.DockingHost.GetActiveEditor();
 
         if (edv == null)
@@ -688,17 +748,6 @@ public partial class MainWindow : Window
         edv.ReplaceNext();
     }
 
-    private void Search_Executed(object sender, ExecutedRoutedEventArgs e)
-    {
-        //App.DockingHost.ShowTool("tool.textgen"); 
-
-        // Assicurati che Testi sia pronto prima di creare la view
-        if (Testi == null)
-            return; // oppure mostra un messaggio / lascia l’overlay attivo
-
-        App.DockingHost.ShowTool("tool.search");
-    }
-
     // Questo si attiva solo se l'utente clicca sul menu principale (quando non ha sottomenu)
     private void MenuVisualizzaBibbia_Click(object sender, RoutedEventArgs e)
     {
@@ -706,6 +755,15 @@ public partial class MainWindow : Window
         if (e.Source == sender && MenuVisualizzaBibbia.ItemsSource == null && MenuVisualizzaBibbia.Header is string versionName)
         {
             VisualizzaBibbia(versionName);
+        }
+    }
+
+    private void MenuVisualizzaCommentario_Click(object sender, RoutedEventArgs e)
+    {
+        // Verifichiamo che il clic sia avvenuto proprio sul menu principale e che l'ItemsSource sia vuoto
+        if (e.Source == sender && MenuVisualizzaCommentario.ItemsSource == null && MenuVisualizzaCommentario.Header is string commentarioNome)
+        {
+            VisualizzaCommentario(commentarioNome);
         }
     }
 
@@ -719,7 +777,17 @@ public partial class MainWindow : Window
         }
     }
 
-    private static void VisualizzaBibbia(string testoNome)
+    private void SubMenuCommentario_Click(object sender, RoutedEventArgs e)
+    {
+        // Cast the sender to access the exact MenuItem that was clicked
+        if (sender is MenuItem clickedItem && clickedItem.Header is string commentarioName)
+        {
+            // Pass the version name text straight to your processing function
+            VisualizzaCommentario(commentarioName);
+        }
+    }
+
+    public static void VisualizzaBibbia(string testoNome)
     {
         byte libro = 1;
         for (byte i = 1; i <= 73; ++i)
@@ -730,8 +798,49 @@ public partial class MainWindow : Window
                 break;
             }
         }
+        VisualizzaBibbia(testoNome, libro, 1, 1);
+    }
+
+    public static void VisualizzaBibbia(string testoNome, byte libro, byte capitolo, byte versetto)
+    {
         /*ViewerDocumentView? view =*/
-        App.DockingHost.OpenViewerDocument(testoNome, libro, 1, 1);
+        App.DockingHost.OpenViewerDocument(testoNome, libro, capitolo, versetto);
+    }
+
+    public static void VisualizzaCommentario(string testoNome)
+    {
+        try
+        {
+            string primoCommento = Testi.Note(testoNome)[0]; //#LLCCCVVV
+            byte libro = byte.Parse(primoCommento.Substring(1, 2));
+            byte capitolo = byte.Parse(primoCommento.Substring(3, 3));
+            byte versetto = byte.Parse(primoCommento.Substring(6, 3));
+            App.DockingHost.OpenViewerDocument(testoNome, libro, capitolo, versetto);
+        }
+        catch
+        {
+            App.DockingHost.OpenViewerDocument(testoNome, 1, 1, 1);
+        }
+    }
+
+    private void Library_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        // Assicurati che Testi sia pronto prima di creare la view
+        if (Testi == null)
+            return;
+
+        App.DockingHost.ShowTool("tool.library");
+    }
+
+    private void Search_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        //App.DockingHost.ShowTool("tool.search"); 
+
+        // Assicurati che Testi sia pronto prima di creare la view
+        if (Testi == null)
+            return; // oppure mostra un messaggio / lascia l’overlay attivo
+
+        App.DockingHost.ShowTool("tool.search");
     }
 
     private void Mostra_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -746,7 +855,13 @@ public partial class MainWindow : Window
     }
 
     private void Converter_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.converter");
-    private void Options_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.options");
+
+    private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        if (Testi == null)
+            return; // oppure mostra un messaggio / lascia l’overlay attivo
+        App.DockingHost.ShowTool("tool.options");
+    }
 
     private void About_Click(object sender, RoutedEventArgs e)
     {
@@ -784,6 +899,11 @@ public partial class MainWindow : Window
 
         // 3) Salva layout XML
         settings.DockLayoutXml = SerializeDockLayoutToString();
+
+        // salvare UltimaBibbia, che non viene aggiornato automaticamente durante l'utilizzo,
+        // diversamente dalle altre impostazioni
+        settings.UltimaBibbia = Testi.UltimaBibbia;
+        settings.UltimaBibbiaCompleta = Testi.UltimaBibbiaCompleta;
 
         // 4) Salva sempre le impostazioni
         App.Settings.Save(settings);
@@ -863,11 +983,311 @@ public partial class MainWindow : Window
         StringBuilder sb = new();
         using (StringWriter writer = new(sb))
         {
-            serializer.Serialize(writer);  // supportato [2](blob:https://www.microsoft365.com/34ef1840-738c-4d0c-b09d-2cdf559636bd)[1](https://blog.csdn.net/qq_41375318/article/details/149233645)
+            serializer.Serialize(writer);  // supportato (https://www.microsoft365.com/34ef1840-738c-4d0c-b09d-2cdf559636bd) (https://blog.csdn.net/qq_41375318/article/details/149233645)
         }
         return sb.ToString();
     }
 
     private void Esci_Executed(object sender, ExecutedRoutedEventArgs e) => Close();
 
+    internal async static void LinkCliccato(int tipo, string nomeLink)
+    {
+        switch (tipo)
+        {
+            case 1:
+                string versioneDaUtilizzare;
+                Riferimento riferimento;
+                (versioneDaUtilizzare, riferimento) = VersionePerLinkBibbia(nomeLink);
+
+                if (versioneDaUtilizzare == "")
+                    break;
+
+                if (riferimento.Count == 0)
+                {
+                    // non fare niente
+                }
+                // un + invece di un - nel riferimento indica sempre nella finestra Visualizza (usato per mostrare i risultati di una ricerca in contesto)
+                else if ((riferimento.Count == 1 && riferimento.SoloUnoVersetto(0)) || nomeLink.Contains('+'))
+                {
+                    VisualizzaBibbia(versioneDaUtilizzare, riferimento.Brani[0][0], riferimento.Brani[0][1], riferimento.Brani[0][2]);
+                }
+                else
+                {
+                    FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(riferimento, versioneDaUtilizzare);
+                    doc.Tag = versioneDaUtilizzare;
+                    Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+                    RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
+
+                    string abbVersione = Testi.Info(versioneDaUtilizzare).Abbreviazione;
+                    App.DockingHost.SendFlowDocumentToActiveEditor(doc, Testi.NormalizzaRiferimento(riferimento) + " (" + abbVersione + ")");
+                }
+                break;
+            case 2:
+                string collezioneNuovaNota = "";
+                if (nomeLink.IndexOf('\\') > 0) // in questo modo, è possibile creare un link "Nuova Riveduta\#010010010000-01001002000"
+                { // in versione.cs, il nome del commentario è stato nel link affinché possa aprire nello stesso commentario
+                    collezioneNuovaNota = nomeLink[..nomeLink.IndexOf('\\')];
+                    nomeLink = nomeLink[(nomeLink.IndexOf('\\') + 1)..];
+
+                    // se la collezione richiesta non esiste, non fare niente
+                    if (!Testi.VersioneEsiste(collezioneNuovaNota))
+                        return;
+                }
+
+                if (string.IsNullOrEmpty(collezioneNuovaNota))
+                { // non si sa ancora quale collezione usare; proviamo con i dizionari
+                    // TODO2 dizionari
+                    /*
+                    if (!string.IsNullOrEmpty(nomeLink))
+                    {
+                        if (Funzioni.IsLetteraGreca(nomeLink[0]))
+                            collezioneNuovaNota = Settings.Default.DizionarioGreco;
+                        else
+                        {
+                            string lingua = Settings.Default.InterfacciaLingua;
+                            if (lingua.Length >= 2)
+                            {
+                                lingua = lingua.Substring(0, 2).ToLowerInvariant();
+                                if (lingua == "it")
+                                    collezioneNuovaNota = Settings.Default.DizionarioItaliano;
+                                else if (lingua == "en")
+                                    collezioneNuovaNota = Settings.Default.DizionarioInglese;
+                                else if (lingua == "es")
+                                    collezioneNuovaNota = Settings.Default.DizionarioSpagnolo;
+                            }
+                        }
+                    }
+                    */
+                }
+
+                if (!string.IsNullOrEmpty(collezioneNuovaNota))
+                {
+                    // TODO2 da cancellare old way, now always in Editor window? oppure continuare nota in Vis a Vis?
+                    /*
+                    if (finestra != null && finestra.Tag != null && finestra.Tag.ToString() == "Visualizza" && (((Visualizza)(finestra)).paneAttivo.TuttiTesti != TestoTipi.None || finestra.Text.StartsWith(collezioneNuovaNota, StringComparison.Ordinal)))
+                    {
+                        if (nomeLink.StartsWith("#", StringComparison.Ordinal))
+                            finestra.SpostaTesto(Testi.ConvertiRiferimento(nomeLink), true);
+                        else
+                            finestra.SpostaTesto(nomeLink, true);
+                    }
+                    else
+                        ApriNotaInEditor(nomeLink, collezioneNuovaNota);
+                    */
+                    if (!nomeLink.StartsWith('#') && Char.IsDigit(nomeLink[^1]) && Testi.GetNumeroNotaTitolo(collezioneNuovaNota, nomeLink) < 0)
+                    { // riferimenti ai brani nel con #, come Mt 1:21 -> Mt 1:1 in Note NR
+                        Riferimento noteInBrano = Testi.ElencaNoteInBrano(Testi.ConvertiRiferimento(nomeLink), collezioneNuovaNota);
+                        if (noteInBrano.Count > 0)
+                        {
+                            nomeLink = string.Join("", noteInBrano.Note);
+                        }
+                    }
+                    if (nomeLink.StartsWith('#'))
+                    {
+                        Riferimento riferimentoNota = Testi.ConvertiRiferimento(Testi.ConvertiTitoloNotaARiferimento(nomeLink));
+                        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(riferimentoNota, collezioneNuovaNota);
+                        doc.Tag = collezioneNuovaNota;
+                        Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+                        RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
+
+                        string abbVersione = Testi.Info(collezioneNuovaNota).Abbreviazione;
+                        App.DockingHost.SendFlowDocumentToActiveEditor(doc, Testi.NormalizzaRiferimento(riferimentoNota) + " (" + abbVersione + ")");
+                    }
+                    // TODO2 else open nota su tema
+                }
+                break;
+            case 3:
+                // TODO2 link to file
+                /* suggestion of Gemini was
+                 *                 try
+                {
+                    // Windows native shell launch to open external files safely via default applications
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = targetFile,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Unable to open file {targetFile}: {ex.Message}");
+                }
+
+                 */
+                /*
+                 *                     if (creaFinestra)
+                    {
+                        if (!File.Exists(nomeLink))
+                        {
+                            string nomeDelFileDellaCollezione = testi.Info(versioneDelTesto).NomeDelFile;
+                            try
+                            {
+                                if (!string.IsNullOrEmpty(nomeDelFileDellaCollezione))
+                                { // solo se la nota fa parte di una collezione
+                                    string[] fileTrovati = Directory.GetFiles(Path.GetDirectoryName(nomeDelFileDellaCollezione), nomeLink + ".*");
+                                    if (fileTrovati.Length > 0)
+                                        nomeLink = fileTrovati[0];
+                                    else
+                                    { // proviamo anche nella sottocartella con lo stesso nome della collezione
+                                        string[] fileTrovatiSotto = Directory.GetFiles(Path.GetDirectoryName(nomeDelFileDellaCollezione) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(nomeDelFileDellaCollezione), nomeLink + ".*");
+                                        if (fileTrovatiSotto.Length > 0)
+                                            nomeLink = fileTrovatiSotto[0];
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                            }
+                        }
+                        if (!File.Exists(nomeLink))
+                        {
+                            try
+                            {
+                                string[] fileTrovati = Directory.GetFiles(Application.StartupPath, nomeLink + ".*");
+                                if (fileTrovati.Length > 0)
+                                    nomeLink = fileTrovati[0];
+                            }
+                            catch
+                            {
+                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                            }
+                        }
+                        if (!File.Exists(nomeLink))
+                        {
+                            try
+                            {
+                                string[] fileTrovati = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola", nomeLink + ".*");
+                                if (fileTrovati.Length > 0)
+                                    nomeLink = fileTrovati[0];
+                            }
+                            catch
+                            {
+                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                            }
+                        }
+                        if (!File.Exists(nomeLink))
+                        {
+                            string[] cartelle = Settings.Default.CartelleDaCercare.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                            try
+                            {
+                                foreach (string cartella in cartelle)
+                                {
+                                    string[] fileTrovati = Directory.GetFiles(cartella, nomeLink + ".*");
+                                    if (fileTrovati.Length > 0)
+                                    {
+                                        nomeLink = fileTrovati[0];
+                                        break;
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                            }
+                        }
+
+                        nomeLink = nomeLink.Replace(RichTextBoxEx.ParolaRicercata.ToString(), "");
+                        string estensione = Path.GetExtension(nomeLink);
+                        if (File.Exists(nomeLink) && (string.Compare(estensione, ".gif", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".jpg", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".jpeg", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".bmp", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".png", StringComparison.OrdinalIgnoreCase) == 0))
+                            ApriNomeImmagini(new string[] { nomeLink });
+                        else
+                        {
+                            try
+                            {
+                                Funzioni.ApriBrowser(nomeLink, true);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, LocRM.GetString("EditorErrorCantStartFile"), nomeLink, exc.Message), LocRM.GetString("MiscError"), MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, messageBoxOptions);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        testoEVersione[0] = nomeLink;
+                    }
+
+                 */
+                break;
+            default:
+                break;
+        }
+        return;
+    }
+
+    internal static (string versioneDaUtilizzare, Riferimento riferimento) VersionePerLinkBibbia(string nomeLink)
+    {
+        string versioneDaUtilizzare = "";
+        if (nomeLink.IndexOf('\\') > 0) // in questo modo, è possibile creare un link "Nuova Riveduta\#010010010000-01001002000"
+        {
+            versioneDaUtilizzare = nomeLink[..nomeLink.IndexOf('\\')];
+            nomeLink = nomeLink[(nomeLink.IndexOf('\\') + 1)..];
+        }
+        string riftestuale = Testi.ConvertiTitoloNotaARiferimento(nomeLink);
+        Riferimento riferimento = Testi.ConvertiRiferimento(riftestuale);
+
+        if (riferimento.Count > 0)
+        {
+            string versioneDaProvare;
+            if (versioneDaUtilizzare == "")
+            {
+                versioneDaProvare = settings.BibbiaPreferita1;
+                // controlliamo che il capitolo esista, per casi come Dan 13
+                try
+                {
+                    if (Testi.CapitoliInLibro(riferimento.Brani[0][0], versioneDaProvare) >= riferimento.Brani[0][1])
+                        versioneDaUtilizzare = versioneDaProvare;
+                }
+                catch { } // se testo non esiste più, o è ""
+            }
+            if (versioneDaUtilizzare == "")
+            {
+                versioneDaProvare = settings.BibbiaPreferita2;
+                try
+                {
+                    if (Testi.CapitoliInLibro(riferimento.Brani[0][0], versioneDaProvare) >= riferimento.Brani[0][1])
+                        versioneDaUtilizzare = versioneDaProvare;
+                }
+                catch { } // se testo non esiste più, o è ""
+            }
+            if (versioneDaUtilizzare == "")
+            {
+                versioneDaProvare = settings.BibbiaPreferita3;
+                try
+                {
+                    if (Testi.CapitoliInLibro(riferimento.Brani[0][0], versioneDaProvare) >= riferimento.Brani[0][1])
+                        versioneDaUtilizzare = versioneDaProvare;
+                }
+                catch { } // se testo non esiste più, o è ""
+            }
+            if (versioneDaUtilizzare == "")
+            {
+                versioneDaProvare = Testi.UltimaBibbia;
+                try
+                {
+                    if (Testi.CapitoliInLibro(riferimento.Brani[0][0], versioneDaProvare) >= riferimento.Brani[0][1])
+                        versioneDaUtilizzare = versioneDaProvare;
+                }
+                catch { } // se testo non esiste più, o è ""
+            }
+            if (versioneDaUtilizzare == "")
+            {
+                versioneDaProvare = Testi.UltimaBibbiaCompleta;
+                try
+                {
+                    if (Testi.CapitoliInLibro(riferimento.Brani[0][0], versioneDaProvare) >= riferimento.Brani[0][1])
+                        versioneDaUtilizzare = versioneDaProvare;
+                }
+                catch { } // se testo non esiste più, o è ""
+            }
+        }
+        if (versioneDaUtilizzare == "" && Testi.NomiVersioni(TestoTipi.Bibbia).Count > 0)
+            versioneDaUtilizzare = Testi.NomiVersioni(TestoTipi.Bibbia)[0];
+
+        if (versioneDaUtilizzare != "")
+            riferimento = Testi.ConvertiDaStandard(riferimento, versioneDaUtilizzare);
+
+        return (versioneDaUtilizzare, riferimento);
+    }
 }

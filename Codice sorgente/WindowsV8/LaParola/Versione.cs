@@ -1,11 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.DirectoryServices.ActiveDirectory;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using static LaParola.Utilities.Funzioni;
 
 namespace LaParola
@@ -1363,7 +1366,7 @@ namespace LaParola
                 Riferimento noteInBrano = ElencaNoteInBrano(genitore.ConvertiRiferimento(titolo));
                 if (noteInBrano.Count > 1) // diverse note nel brano, restituiamo il testo di tutte insieme
                 {
-                    return await TestoBrano(noteInBrano, [], []);
+                    return await TestoBranoAsync(noteInBrano, [], []);
                 }
 
                 if (noteInBrano.Count > 0)
@@ -1474,6 +1477,9 @@ namespace LaParola
 
         public Riferimento ElencaNoteInBrano(Riferimento riferimento)
         {
+            if (riferimento.Note.Count > 0)
+                return riferimento; // già contiene l'elenco di note da restituire
+
             Riferimento noteInBrano = new(false);
             byte libroInizio, capitoloInizio, versettoInizio, libroFine, capitoloFine, versettoFine;
             char[] divisore = ['#'];
@@ -1642,33 +1648,30 @@ namespace LaParola
 
         #region TestoBrano
 
-        internal async Task<string> TestoBrano(Riferimento riferimento, Collection<string> collezioniDaVisualizzare, List<Riferimento> noteDaVisualizzare)
-        {
-            return await TestoBrano(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, new Riferimento());
-        }
+        internal Task<string> TestoBranoAsync(
+            Riferimento riferimento,
+            Collection<string> collezioniDaVisualizzare,
+            List<Riferimento> noteDaVisualizzare,
+            Riferimento? paroleRicercate = null) // Parametro opzionale
+            => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote: true, paroleRicercate ?? new Riferimento(), null, null);
 
+        internal Task<string> TestoBranoAsync(
+            Riferimento riferimento,
+            Collection<string> collezioniDaVisualizzare,
+            List<Riferimento> noteDaVisualizzare,
+            bool conNomiDelleNote,
+            BackgroundWorker? worker,
+            DoWorkEventArgs? e)
+            => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, new Riferimento(), worker, e);
 
-        internal async Task<string> TestoBrano(Riferimento riferimento, Collection<string> collezioniDaVisualizzare, List<Riferimento> noteDaVisualizzare, Riferimento paroleRicercate)
-        {
-            return await TestoBrano(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, true, paroleRicercate);
-        }
-
-        internal async Task<string> TestoBrano(Riferimento riferimento, Collection<string> collezioniDaVisualizzare, List<Riferimento> noteDaVisualizzare, bool conNomiDelleNote, Riferimento paroleRicercate)
-        {
-            return await TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, paroleRicercate, null, null);
-        }
-
-        internal async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> collezioniDaVisualizzare, List<Riferimento> noteDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, true, paroleRicercate, worker, e);
-        }
-
-        internal async Task<string> TestoBrano(Riferimento riferimento, Collection<string> collezioniDaVisualizzare, List<Riferimento> noteDaVisualizzare, bool conNomiDelleNote, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, new Riferimento(), worker, e);
-        }
-
-        internal async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> collezioniDaVisualizzare, List<Riferimento> noteDaVisualizzare, bool conNomiDelleNote, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
+        internal async Task<string> TestoBranoAsync(
+Riferimento riferimento,
+Collection<string> collezioniDaVisualizzare,
+List<Riferimento> noteDaVisualizzare,
+bool conNomiDelleNote,
+Riferimento paroleRicercate,
+BackgroundWorker? worker,
+DoWorkEventArgs? e)
         {
             string testoComeStringa;
             int numeroCommentari = collezioniDaVisualizzare.Count;
@@ -1709,43 +1712,9 @@ namespace LaParola
 
             formatoEbraico += " ";
 
-            string formatoRiferimento = @"\f1\fs" + Convert.ToString(Convert.ToInt32(genitore.Formato.FontRiferimentoDimensione * 2), CultureInfo.InvariantCulture) + @"\cf1";
-            if (genitore.Formato.FontRiferimentoGrassetto)
-            {
-                formatoRiferimento += @"\b";
-            }
-
-            if (genitore.Formato.FontRiferimentoCorsivo)
-            {
-                formatoRiferimento += @"\i";
-            }
-
-            if (genitore.Formato.FontRiferimentoSottolineato)
-            {
-                formatoRiferimento += @"\ul";
-            }
-            // per le note, quando il riferimento è il titolo, non è mai messo in apice
-
-            // FontRicerca (\f2) e FontRicercaDimensione non è usato, per non disturbare troppo il font del testo
-            //                string formatoRicerca = @"\f2\fs" + Convert.ToString(Convert.ToInt32(genitore.Formato.FontRicercaDimensione * 2), CultureInfo.InvariantCulture) + @"\cf2";
-            string formatoRicercaNote = (isRunningOnMono ? "" : @"\v " + RichTextBoxEx.ParolaRicercata + @"\v0"); // per non disturbare il formato delle note, cambiare solo lo stile delle parole ricercate, non il colore (il font e la dimensione non sono cambiati comunque, neanche per Bibbie)
-            string formatoRicerca = formatoRicercaNote + @"\cf2";
-            // comunque, modificare il font e il colore non funzionano, perché \f? e \cf? non necessariamente corrispondono al font e al colore giusti
-            if (genitore.Formato.FontRicercaGrassetto)
-            {
-                formatoRicerca += @"\b";
-                formatoRicercaNote += @"\b";
-            }
-            if (genitore.Formato.FontRicercaCorsivo)
-            {
-                formatoRicerca += @"\i";
-                formatoRicercaNote += @"\i";
-            }
-            if (genitore.Formato.FontRicercaSottolineato)
-            {
-                formatoRicerca += @"\ul";
-                formatoRicercaNote += @"\ul";
-            }
+            string formatoRiferimento = GetFormatoRiferimento();
+            string formatoRicerca, formatoRicercaNote;
+            (formatoRicerca, formatoRicercaNote) = GetFormatoRicerca();
 
             int ultimaParolaRicercata = -1;
 
@@ -1788,7 +1757,8 @@ namespace LaParola
                     string riferimentoLibro = "";
                     string punteggiaturaFraLibroECapitolo = genitore.SeparatoriNeiRiferimenti()[0];
                     string punteggiaturaFraCapitoloEVersetto = genitore.SeparatoriNeiRiferimenti()[1];
-                    string libroStringa, capitoloStringa, versettoStringa, versettoStringaInTestoNascosto;
+                    string libroStringa, capitoloStringa, versettoStringa;
+                    //string versettoStringaInTestoNascosto;
                     string versettoStringa1;
                     int p, p1;
 
@@ -1973,7 +1943,7 @@ namespace LaParola
                                         }
 
                                         versettoStringa = $"{capitoloStringa}{vers:000}";
-                                        versettoStringaInTestoNascosto = @"{\v " + RichTextBoxEx.InizioRiferimento + versettoStringa + "}";
+                                        string versettoStringaInTestoNascosto = MainWindow.LPN_ANCORA + versettoStringa;
                                         riferimentoVersetto.Insert(0, formatoRifPerVersetto).Insert(0, @"{");
                                         if (soloUnVersetto && genitore.Formato.RiferimentoContestoRicerche && genitore.Formato.RiferimentoFormato != RiferimentoFormato.Nessuno)
                                         {
@@ -2018,14 +1988,6 @@ namespace LaParola
                                             testoVersetto = ModificaFormatoParole(testoVersetto, riferimento.numeroParola[i], "{" + formatoRicerca + " ", "}", info.Lingua);
                                         }
 
-                                        // TODO2 ottimizzare: pre indice Dictionary<(int lib, int cap, int vers), List<int>>
-                                        // poi: if (paroleByVerse.TryGetValue((lib, cap, vers), out var parole))
-                                        //                            {
-                                        //                                  foreach (var parola in parole)
-                                        //                                    {
-                                        //                                          ...
-                                        //}
-                                        //}
                                         for (int numeroParolaRicercata = ultimaParolaRicercata + 1; numeroParolaRicercata < numeroParoleRicercate; ++numeroParolaRicercata)
                                         {
                                             if (lib > paroleRicercate.Brani[numeroParolaRicercata][0])
@@ -2074,14 +2036,7 @@ namespace LaParola
                                         // inserire le note nel posto giusto nel testo
                                         string notaStringa;
                                         for (int iCommentario = 0; iCommentario < numeroCommentari; ++iCommentario)
-                                        { // TODO2 optimizzare: creare un indice per ogni comentario prima dei loop dei brani, Dictionary<string, List<Nota>> notesByVerse;
-                                          // poi: if (notesByVerse.TryGetValue(versettoStringa, out var notes))
-                                          //                                 {
-                                          //                                       foreach (var nota in notes)
-                                          //                                         {
-                                          //                                             ...
-                                          //}
-                                          //}
+                                        {
                                             int numeroNote = noteDaVisualizzare[iCommentario].Count;
                                             for (int iNota = numeroNote - 1; iNota >= 0; --iNota)
                                             { // al contrario, per quando 2 note in un versetto meglio disturbare prima il testo posteriore
@@ -2164,63 +2119,15 @@ namespace LaParola
                 {
                     testoComeStringa = await TestoBranoAsync(ElencaNoteInBrano(riferimento), collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, paroleRicercate, null, null);
                 }
+                testoComeStringa = ConvertiLink(testoComeStringa);
                 #endregion
             }
             else
             {
                 #region nota
+                List<string> stringheRtf = StringheBranoCommentario(riferimento, conNomiDelleNote, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
                 // collezioniDaVisualizzare e noteDaVisualizzare non sono usati in questo caso
-                string titoloNota, titoloNotaDaLeggere;
-                List<string> stringheRtf = [];
-
-                string inizioFormatoRicercaNote = "{" + formatoRicercaNote + " ";
-                string inizioFormatoRiferimento = "{" + formatoRiferimento + " ";
-                string inizioInizioRiferimento = @"{\v " + RichTextBoxEx.InizioRiferimento;
-                bool notaSuBrano;
-                int numeroNote = riferimento.Note.Count;
-                int quantoSpessoAggiornaBarra = numeroNote / 100 + 1;
-                int quantoSpessoAggiornaBarraMenoUno = quantoSpessoAggiornaBarra - 1;
-                for (int i = 0; i < numeroNote; ++i)
-                {
-                    if (i > 0)
-                    { // riga vuota fra i brani
-                        stringheRtf.Add(genitore.RtfIntestazione() + @"\par}");
-                    }
-                    titoloNota = riferimento.Note[i];
-                    notaSuBrano = titoloNota.StartsWith('#');
-                    titoloNotaDaLeggere = (notaSuBrano ? genitore.ConvertiTitoloNotaARiferimento(titoloNota) : titoloNota);
-                    if (conNomiDelleNote)
-                    {
-                        stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(notaSuBrano ? string.Concat(inizioInizioRiferimento, titoloNota.AsSpan(1, 8), "}") : "").Append(inizioFormatoRiferimento).Append(ConvertiCaratteriInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
-                    }
-
-                    string testoModificato = ModificaFormatoParole(GetNotaTestoTitolo(titoloNota), riferimento.numeroParola[i], inizioFormatoRicercaNote, "}", info.Lingua);
-                    for (int numeroParolaRicercata = ultimaParolaRicercata + 1; numeroParolaRicercata < numeroParoleRicercate; ++numeroParolaRicercata)
-                    {
-                        switch (string.CompareOrdinal(riferimento.Note[i], paroleRicercate.Note[numeroParolaRicercata]))
-                        {
-                            case 1:
-                                ultimaParolaRicercata = numeroParolaRicercata;
-                                break;
-                            case -1:
-                                numeroParolaRicercata = numeroParoleRicercate; // finire il loop, non ci sono più note uguali
-                                break;
-                            case 0:
-                                testoModificato = ModificaFormatoParole(testoModificato, paroleRicercate.numeroParola[numeroParolaRicercata], "{" + formatoRicerca + " ", "}", info.Lingua);
-                                break;
-                        }
-                    }
-                    if (!testoModificato.StartsWith(@"{\rtf", StringComparison.Ordinal) && !testoModificato.EndsWith('}'))
-                    {
-                        testoModificato = genitore.RtfIntestazione() + ConvertiCaratteriInRtf(testoModificato) + "}";
-                    }
-                    stringheRtf.Add(testoModificato);
-                    if (worker != null && (i % quantoSpessoAggiornaBarra == quantoSpessoAggiornaBarraMenoUno))
-                    {
-                        worker.ReportProgress(-quantoSpessoAggiornaBarra, e);
-                    }
-                }
-                testoComeStringa = ""; //TODO2 (commentario): era await genitore.MergeManyRtfAsync(stringheRtf); ;
+                testoComeStringa = await genitore.MergeManyRtfAsStringAsync(ConvertiLink(stringheRtf));
                 if (string.IsNullOrEmpty(testoComeStringa))
                 {
                     testoComeStringa = "";
@@ -2248,6 +2155,190 @@ namespace LaParola
                 #endregion
             }
             return testoComeStringa;
+        }
+
+        private string GetFormatoRiferimento()
+        {
+            string formatoRiferimento = @"\f1\fs" + Convert.ToString(Convert.ToInt32(genitore.Formato.FontRiferimentoDimensione * 2), CultureInfo.InvariantCulture) + @"\cf1";
+            if (genitore.Formato.FontRiferimentoGrassetto)
+            {
+                formatoRiferimento += @"\b";
+            }
+
+            if (genitore.Formato.FontRiferimentoCorsivo)
+            {
+                formatoRiferimento += @"\i";
+            }
+
+            if (genitore.Formato.FontRiferimentoSottolineato)
+            {
+                formatoRiferimento += @"\ul";
+            }
+            // per le note, quando il riferimento è il titolo, non è mai messo in apice
+
+            return formatoRiferimento;
+        }
+
+        private (string, string) GetFormatoRicerca()
+        {
+            // FontRicerca (\f2) e FontRicercaDimensione non è usato, per non disturbare troppo il font del testo
+            //                string formatoRicerca = @"\f2\fs" + Convert.ToString(Convert.ToInt32(genitore.Formato.FontRicercaDimensione * 2), CultureInfo.InvariantCulture) + @"\cf2";
+            // TODO2 da cancellare?
+            //string formatoRicercaNote = (isRunningOnMono ? "" : @"\v " + RichTextBoxEx.ParolaRicercata + @"\v0"); // per non disturbare il formato delle note, cambiare solo lo stile delle parole ricercate, non il colore (il font e la dimensione non sono cambiati comunque, neanche per Bibbie)
+            string formatoRicercaNote = "";
+            string formatoRicerca = formatoRicercaNote + @"\cf2";
+            // comunque, modificare il font e il colore non funzionano, perché \f? e \cf? non necessariamente corrispondono al font e al colore giusti
+            if (genitore.Formato.FontRicercaGrassetto)
+            {
+                formatoRicerca += @"\b";
+                formatoRicercaNote += @"\b";
+            }
+            if (genitore.Formato.FontRicercaCorsivo)
+            {
+                formatoRicerca += @"\i";
+                formatoRicercaNote += @"\i";
+            }
+            if (genitore.Formato.FontRicercaSottolineato)
+            {
+                formatoRicerca += @"\ul";
+                formatoRicercaNote += @"\ul";
+            }
+            return (formatoRicerca, formatoRicercaNote);
+        }
+
+        public async Task<FlowDocument> FlowDocumentBranoCommentarioAsync(Riferimento riferimento, Riferimento paroleRicercate)
+        {
+            string formatoRiferimento = GetFormatoRiferimento();
+            string formatoRicerca, formatoRicercaNote;
+            (formatoRicerca, formatoRicercaNote) = GetFormatoRicerca();
+
+            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), true, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
+
+            // Direct compilation without string conversion overhead
+            return await Texts.MergeManyRtfAsDocumentAsync(ConvertiLink(stringheRtf));
+        }
+
+
+
+        private List<string> StringheBranoCommentario(Riferimento riferimento, bool conNomiDelleNote, Riferimento paroleRicercate, string formatoRicercaNote, string formatoRiferimento, string formatoRicerca)
+        {
+            int numeroParoleRicercate = paroleRicercate.Count;
+            int ultimaParolaRicercata = -1;
+            string titoloNota, titoloNotaDaLeggere;
+            List<string> stringheRtf = [];
+
+            string inizioFormatoRicercaNote = '{' + formatoRicercaNote + " ";
+            string inizioFormatoRiferimento = '{' + formatoRiferimento + " ";
+            string inizioInizioRiferimento = MainWindow.LPN_ANCORA;
+            bool notaSuBrano;
+            int numeroNote = riferimento.Note.Count;
+            // TODO2 int quantoSpessoAggiornaBarra = numeroNote / 100 + 1;
+            // TODO2 int quantoSpessoAggiornaBarraMenoUno = quantoSpessoAggiornaBarra - 1;
+            for (int i = 0; i < numeroNote; ++i)
+            {
+                if (i > 0)
+                { // riga vuota fra i brani
+                    stringheRtf.Add(genitore.RtfIntestazione() + @"\par}");
+                }
+                titoloNota = riferimento.Note[i];
+                notaSuBrano = titoloNota.StartsWith('#');
+                titoloNotaDaLeggere = (notaSuBrano ? genitore.ConvertiTitoloNotaARiferimento(titoloNota) : titoloNota);
+                if (conNomiDelleNote)
+                {
+                    stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(notaSuBrano ? string.Concat(inizioInizioRiferimento, titoloNota.AsSpan(1, 8)) : "").Append(inizioFormatoRiferimento).Append(ConvertiCaratteriInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
+                    //stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(inizioFormatoRiferimento).Append(ConvertiCaratteriInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
+                }
+
+                string testoModificato = ModificaFormatoParole(GetNotaTestoTitolo(titoloNota), riferimento.numeroParola[i], inizioFormatoRicercaNote, "}", info.Lingua);
+                for (int numeroParolaRicercata = ultimaParolaRicercata + 1; numeroParolaRicercata < numeroParoleRicercate; ++numeroParolaRicercata)
+                {
+                    switch (string.CompareOrdinal(riferimento.Note[i], paroleRicercate.Note[numeroParolaRicercata]))
+                    {
+                        case 1:
+                            ultimaParolaRicercata = numeroParolaRicercata;
+                            break;
+                        case -1:
+                            numeroParolaRicercata = numeroParoleRicercate; // finire il loop, non ci sono più note uguali
+                            break;
+                        case 0:
+                            testoModificato = ModificaFormatoParole(testoModificato, paroleRicercate.numeroParola[numeroParolaRicercata], "{" + formatoRicerca + " ", "}", info.Lingua);
+                            break;
+                    }
+                }
+                if (!testoModificato.StartsWith(@"{\rtf", StringComparison.Ordinal) && !testoModificato.EndsWith('}'))
+                {
+                    testoModificato = genitore.RtfIntestazione() + ConvertiCaratteriInRtf(testoModificato) + "}";
+                }
+                stringheRtf.Add(testoModificato);
+                // TODO2 sdf
+                //if (worker != null && (i % quantoSpessoAggiornaBarra == quantoSpessoAggiornaBarraMenoUno))
+                //{
+                //    worker.ReportProgress(-quantoSpessoAggiornaBarra, e);
+                //}
+
+            }
+            return stringheRtf;
+        }
+
+        private string ConvertiLink(string rtfString)
+        {
+            if (string.IsNullOrEmpty(rtfString)) return "";
+
+            // Pattern matches: \v \'02\v0 [Anchor] \v \'03 [\'05|\'06|\'07] [Data] \'04\v0 [optional trailing delimiter space]
+            // Note: In verbatim strings (@""), the .NET Regex engine natively interprets \uXXXX escape codes.
+            string linkPattern = @"\\v\s*(?:\u0002|\\'02)\\v0\s*(?<anchor>.*?)\\v\s*(?:\u0003|\\'03)(?<type>[\u0005\u0006\u0007]|\\'0[567])(?<data>.*?)(?:\u0004|\\'04)\\v0\s?";
+            Regex linkRegex = new(linkPattern, RegexOptions.Compiled);
+
+            // Translate the old custom markers into standard RTF fields on the fly
+            string processedRtf = linkRegex.Replace(rtfString, m =>
+            {
+                string anchor = m.Groups["anchor"].Value;
+
+                // Normalize RTF hex escapes (e.g., "\'05") back to standard string representation if needed
+                string type = m.Groups["type"].Value;
+                if (type == "\\'05") type = "\u0005";
+                else if (type == "\\'06") type = "\u0006";
+                else if (type == "\\'07") type = "\u0007";
+
+                string data = m.Groups["data"].Value;
+
+                // Map the internal type byte to the URI schemes
+                string scheme = type switch
+                {
+                    "\u0005" => "bibbia:",
+                    "\u0006" => "nota:",
+                    "\u0007" => "filenome:",
+                    _ => ""
+                };
+
+                if (!data.Contains('\\'))
+                {
+                    if (scheme == "bibbia:" && Info.VersioneDelleNote.Length > 0)
+                    {
+                        data = Info.VersioneDelleNote + @"\\" + data;
+                    }
+                    else if (scheme == "nota:")
+                    {
+                        data = Info.Nome + @"\\" + data;
+                    }
+                }
+
+                // Construct standard RTF hyperlink field code
+                return $"{{\\field{{\\*\\fldinst HYPERLINK \"{scheme}{data}\"}}{{\\fldrslt {anchor}}}}}";
+            });
+
+            return processedRtf;
+        }
+
+        private List<string> ConvertiLink(List<string> rtfStrings)
+        {
+            List<string> outStringhe = [];
+
+            foreach (string rtfString in rtfStrings)
+            {
+                outStringhe.Add(ConvertiLink(rtfString));
+            }
+            return outStringhe;
         }
 
         public string TestoVersettoRaw(byte libro, byte capitolo, byte versetto)

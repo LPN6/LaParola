@@ -35,12 +35,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="tbEspressione" Grid.Column="0" ToolTipService.ShowDuration="10000" KeyUp="Espressione_KeyUp" >
+            <TextBox x:Name="tbEspressione" Grid.Column="0" ToolTipService.ShowDuration="10000" KeyUp="Espressione_KeyUp" Grid.ColumnSpan="2" Margin="0,0,32,0" >
             <TextBox.ToolTip>
                 <ToolTip>
-                    <TextBlock Text="{DynamicResource RicercaEspressioneAiuto}"
-                       TextWrapping="Wrap"
-                       MaxWidth="300"/>
+                    <TextBlock Text="{DynamicResource RicercaEspressioneAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                 </ToolTip>
             </TextBox.ToolTip>
         </TextBox>

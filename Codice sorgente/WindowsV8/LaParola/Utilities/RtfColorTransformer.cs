@@ -12,11 +12,10 @@ namespace LaParola.Utilities
         private static bool _apice;
 
         private static readonly DependencyProperty OriginalForegroundProperty =
-    DependencyProperty.RegisterAttached(
-        "OriginalForeground",
-        typeof(Brush),
-        typeof(RtfColorTransformer),
-        new PropertyMetadata(null));
+            DependencyProperty.RegisterAttached("OriginalForeground",
+                                typeof(Brush),
+                                typeof(RtfColorTransformer),
+                                new PropertyMetadata(null));
 
         public static Brush GetDarkThemedBrush(Brush originalBrush, Brush appForeground)
         {

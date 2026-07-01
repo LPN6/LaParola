@@ -37,6 +37,10 @@
                     <TreeViewItem x:Name="NodeFonts" Header="{DynamicResource OpzioniFontTitolo}"/>
                 </TreeViewItem>
 
+                <TreeViewItem x:Name="TreeTesti" Header="{DynamicResource OpzioniTesti}">
+                    <TreeViewItem x:Name="NodeBibbiaPreferita" Header="{DynamicResource OpzioniTestiBibbiaPreferita}"/>
+                </TreeViewItem>
+
                 <TreeViewItem x:Name="TreeAggiornamenti" Header="{DynamicResource OpzioniAggiornamenti}">
                     <TreeViewItem x:Name="NodeMessages" Header="{DynamicResource OpzioniAggiornamentiMessaggi}"/>
                 </TreeViewItem>
@@ -169,6 +173,52 @@
                         <TextBlock Grid.Row="4" Grid.Column="0" Margin="12,0,0,8" VerticalAlignment="Center" Text="{DynamicResource OpzioniFontRiferimenti}" />
                         <TextBlock Grid.Row="4" Grid.Column="1" Margin="8,0,8,8" x:Name="FontRiferimentoEsempio" VerticalAlignment="Center" Text="{DynamicResource OpzioniFont}" />
                         <Button Grid.Row="4" Grid.Column="2" x:Name="ModificaRiferimenti" Width="80" Margin="0,0,0,8" VerticalAlignment="Center" Content="{DynamicResource OpzioniFontModifica}" Click="SelectFont_Click" />
+                    </Grid>
+                </GroupBox>
+
+                <TextBlock x:Name="SectionTestiHeader" FontSize="16" FontWeight="SemiBold" Margin="4,12,0,8" Text="{DynamicResource OpzioniTesti}"/>
+                <GroupBox x:Name="SectionBibbiaPreferita" Header="{DynamicResource OpzioniTestiBibbiaPreferita}" Margin="0,4,0,16" >
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniTestiBibbiaPreferitaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <Grid Grid.IsSharedSizeScope="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiBibbiaPreferita1}" VerticalAlignment="Center" Target="{Binding ElementName=ComboPref1}"/>
+                            <ComboBox x:Name="ComboPref1" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" 
+                      DisplayMemberPath="Titolo" SelectedValuePath="Nome" SelectionChanged="ComboPref_SelectionChanged" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiBibbiaPreferita2}" VerticalAlignment="Center" Target="{Binding ElementName=ComboPref2}"/>
+                            <ComboBox x:Name="ComboPref2" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left"
+                      DisplayMemberPath="Titolo" SelectedValuePath="Nome" SelectionChanged="ComboPref_SelectionChanged" />
+                        </Grid>
+
+                        <Grid Grid.Row="2" Margin="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiBibbiaPreferita3}" VerticalAlignment="Center" Target="{Binding ElementName=ComboPref3}"/>
+                            <ComboBox x:Name="ComboPref3" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left"
+                      DisplayMemberPath="Titolo" SelectedValuePath="Nome" SelectionChanged="ComboPref_SelectionChanged" />
+                        </Grid>
                     </Grid>
                 </GroupBox>
                 

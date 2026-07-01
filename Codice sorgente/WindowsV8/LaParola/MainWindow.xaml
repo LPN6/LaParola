@@ -21,6 +21,7 @@
         <KeyBinding Key="F3" Command="{x:Static local:MainWindow.FindNextCommand}" />
         <KeyBinding Key="F4" Command="{x:Static local:MainWindow.ReplaceNextCommand}" />
         <KeyBinding Key="F4" Modifiers="Alt" Command="{x:Static local:MainWindow.EsciCommand}" />
+        <KeyBinding Key="L" Modifiers="Ctrl" Command="{x:Static local:MainWindow.LibraryCommand}" />
         <KeyBinding Key="F5" Command="{x:Static local:MainWindow.SearchCommand}" />
         <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
         <KeyBinding Key="F10" Command="{x:Static local:MainWindow.ConverterCommand}" />
@@ -40,6 +41,7 @@
         <CommandBinding Command="{x:Static local:MainWindow.EsciCommand}" Executed="Esci_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.FindNextCommand}" Executed="FindNext_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.ReplaceNextCommand}" Executed="ReplaceNext_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.LibraryCommand}" Executed="Library_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.SearchCommand}" Executed="Search_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.MostraCommand}" Executed="Mostra_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.ConverterCommand}" Executed="Converter_Executed" />
@@ -174,8 +176,24 @@
                             </Style>
                         </MenuItem.ItemContainerStyle>
                     </MenuItem>
+                    <MenuItem x:Name="MenuVisualizzaCommentario" Header="{DynamicResource MenuVisualizzaCommentario}" Click="MenuVisualizzaCommentario_Click">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="BookOpenPageVariant"/>
+                        </MenuItem.Icon>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Header" Value="{Binding}"/>
+                                <EventSetter Event="Click" Handler="SubMenuCommentario_Click"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MenuStrumenti}">
+                    <MenuItem x:Name="MenuBiblioteca" Header="{DynamicResource MenuBiblioteca}" Command="{x:Static local:MainWindow.LibraryCommand}" InputGestureText="Ctrl+L">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Bookshelf"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource MenuRicerca}" Command="{x:Static local:MainWindow.SearchCommand}" InputGestureText="F5">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Magnify"/>
@@ -209,12 +227,6 @@
 
                         <ad:LayoutAnchorablePaneGroup DockWidth="320">
                             <ad:LayoutAnchorablePane>
-                                <ad:LayoutAnchorable x:Name="ConverterToolAnchorable" ContentId="tool.converter" Title="{DynamicResource MisureTitolo}" CanClose="False" CanHide="True">
-                                    <views:ConverterToolView />
-                                </ad:LayoutAnchorable>
-                                <ad:LayoutAnchorable x:Name="OptionsToolAnchorable" ContentId="tool.options" Title="{DynamicResource OpzioniTitolo}" CanClose="False" CanHide="True">
-                                    <views:OptionsToolView />
-                                </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
                         </ad:LayoutAnchorablePaneGroup>
 

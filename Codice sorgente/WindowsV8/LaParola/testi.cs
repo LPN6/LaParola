@@ -7,14 +7,19 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml;
 using static LaParola.Utilities.Funzioni;
+
+// TODO2 a volte sottolineatura di parole ricercate non corretta, per esempio quando ci sono link
 
 namespace LaParola
 {
@@ -94,6 +99,7 @@ namespace LaParola
     /// <remarks>
     /// Il tipo di un certo testo.
     /// </remarks>
+    [Flags]
     public enum TestoTipi
     {
         /// <summary>
@@ -1398,11 +1404,6 @@ namespace LaParola
 
         private static readonly XmlLanguage HebrewLanguage = XmlLanguage.GetLanguage("he-IL");
         private static readonly XmlLanguage EnglishLanguage = XmlLanguage.GetLanguage("en-US");
-
-        private static readonly string LPN_ANCORA = "LPN_ANCORA_";
-        [GeneratedRegex(@"LPN_ANCORA_.*?(\d{8})")]
-        private static partial Regex AncoraRegEx();
-
 
         #endregion
 
@@ -3129,371 +3130,155 @@ namespace LaParola
 
         #region TestoBrano
 
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni)
+        public async Task<string> TestoBranoAsync(
+    Riferimento riferimento,
+    string nomeVersione,
+    Collection<string>? collezioniDaVisualizzare = null,
+    bool conNomiVersioni = true,
+    Riferimento? paroleRicercate = null,
+    bool alternare = false,
+    BackgroundWorker? worker = null,
+    DoWorkEventArgs? e = null)
         {
-            return await TestoBranoAsync(riferimento, listaVersioni, []);
+            return await TestoBranoAsync(
+                riferimento,
+                [nomeVersione],
+                collezioniDaVisualizzare,
+                conNomiVersioni,
+                paroleRicercate,
+                alternare,
+                worker,
+                e);
         }
 
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni)
+        public async Task<string> TestoBranoAsync(
+            string riferimento,
+            IReadOnlyList<string> listaVersioni,
+            Collection<string>? collezioniDaVisualizzare = null,
+            bool conNomiVersioni = true,
+            Riferimento? paroleRicercate = null,
+            bool alternare = false,
+            BackgroundWorker? worker = null,
+            DoWorkEventArgs? e = null)
         {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, []);
+            return await TestoBranoAsync(
+                ConvertiRiferimento(riferimento),
+                listaVersioni,
+                collezioniDaVisualizzare,
+                conNomiVersioni,
+                paroleRicercate,
+                alternare,
+                worker,
+                e);
         }
 
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione)
+        public async Task<string> TestoBranoAsync(
+            string riferimento,
+            string nomeVersione,
+            Collection<string>? collezioniDaVisualizzare = null,
+            bool conNomiVersioni = true,
+            Riferimento? paroleRicercate = null,
+            bool alternare = false,
+            BackgroundWorker? worker = null,
+            DoWorkEventArgs? e = null)
         {
-            return await TestoBranoAsync(riferimento, nomeVersione, [], null, null);
+            return await TestoBranoAsync(
+                ConvertiRiferimento(riferimento),
+                [nomeVersione],
+                collezioniDaVisualizzare,
+                conNomiVersioni,
+                paroleRicercate,
+                alternare,
+                worker,
+                e);
         }
 
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione)
+        public async Task<FlowDocument> FlowDocumentBranoAsync(
+    Riferimento riferimento,
+    string nomeVersione,
+    Collection<string>? collezioniDaVisualizzare = null,
+    bool conNomiVersioni = true,
+    Riferimento? paroleRicercate = null,
+    bool alternare = false,
+    BackgroundWorker? worker = null,
+    DoWorkEventArgs? e = null)
         {
-            return await FlowDocumentBranoAsync(riferimento, nomeVersione, [], null, null);
+            return await FlowDocumentBranoAsync(
+                riferimento,
+                [nomeVersione], // Espressione di collezione C# 12
+                collezioniDaVisualizzare,
+                conNomiVersioni,
+                paroleRicercate,
+                alternare,
+                worker,
+                e);
         }
 
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione, Riferimento paroleRicercate)
+        public async Task<FlowDocument> FlowDocumentBranoAsync(
+            string riferimento,
+            IReadOnlyList<string> listaVersioni,
+            Collection<string>? collezioniDaVisualizzare = null,
+            bool conNomiVersioni = true,
+            Riferimento? paroleRicercate = null,
+            bool alternare = false,
+            BackgroundWorker? worker = null,
+            DoWorkEventArgs? e = null)
         {
-            return await TestoBranoAsync(riferimento, nomeVersione, [], paroleRicercate, null, null);
+            return await FlowDocumentBranoAsync(
+                ConvertiRiferimento(riferimento),
+                listaVersioni,
+                collezioniDaVisualizzare,
+                conNomiVersioni,
+                paroleRicercate,
+                alternare,
+                worker,
+                e);
         }
 
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(string riferimento, Collection<string> listaVersioni)
+        public async Task<FlowDocument> FlowDocumentBranoAsync(
+           string riferimento,
+           string nomeVersione,
+           Collection<string>? collezioniDaVisualizzare = null,
+           bool conNomiVersioni = true,
+           Riferimento? paroleRicercate = null,
+           bool alternare = false,
+           BackgroundWorker? worker = null,
+           DoWorkEventArgs? e = null)
         {
-            return await TestoBranoAsync(ConvertiRiferimento(riferimento), listaVersioni);
+            return await FlowDocumentBranoAsync(
+                ConvertiRiferimento(riferimento),
+                [nomeVersione],
+                collezioniDaVisualizzare,
+                conNomiVersioni,
+                paroleRicercate,
+                alternare,
+                worker,
+                e);
         }
 
-        public async Task<FlowDocument> FlowDocumentBranoAsync(string riferimento, Collection<string> listaVersioni)
+        public async Task<FlowDocument> FlowDocumentBranoAsync(
+    Riferimento riferimento,
+    IReadOnlyList<string> listaVersioni,
+    Collection<string>? collezioniDaVisualizzare = null,
+    bool conNomiVersioni = true,
+    Riferimento? paroleRicercate = null,
+    bool alternare = false,
+    BackgroundWorker? worker = null,
+    DoWorkEventArgs? e = null)
         {
-            return await FlowDocumentBranoAsync(ConvertiRiferimento(riferimento), listaVersioni);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(string riferimento, string nomeVersione)
-        {
-            return await TestoBranoAsync(riferimento, nomeVersione, []);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(string riferimento, string nomeVersione)
-        {
-            return await FlowDocumentBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, []);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(string riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
-        {
-            return await TestoBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, collezioniDaVisualizzare);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(string riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
-        {
-            return await FlowDocumentBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, collezioniDaVisualizzare);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(string riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate)
-        {
-            return await TestoBranoAsync(ConvertiRiferimento(riferimento), nomeVersione, collezioniDaVisualizzare, paroleRicercate, null, null);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate)
-        {
-            Collection<string> versioni =
-            [
-                nomeVersione
-            ];
-            return await TestoBranoAsync(riferimento, versioni, collezioniDaVisualizzare, paroleRicercate, null, null);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
-        {
-            return await TestoBranoAsync(riferimento, nomeVersione, collezioniDaVisualizzare, new Riferimento(), null, null);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare)
-        {
-            return await FlowDocumentBranoAsync(riferimento, nomeVersione, collezioniDaVisualizzare, new Riferimento(), null, null);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, null, null);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), null, null);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(string riferimento, Collection<string> listaVersioni, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            return await TestoBranoAsync(ConvertiRiferimento(riferimento), listaVersioni, worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una lista di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, [], worker, e);
-        }
-
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, bool alternare)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, [], alternare, null, null);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, bool alternare)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, [], alternare, null, null);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una lista di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, bool alternare, BackgroundWorker? worker, DoWorkEventArgs e)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, [], alternare, worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            return await TestoBranoAsync(riferimento, nomeVersione, [], worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            Collection<string> versioni =
-            [
-                nomeVersione
-            ];
-            return await TestoBranoAsync(riferimento, versioni, collezioniDaVisualizzare, worker, e);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            Collection<string> versioni =
-            [
-                nomeVersione
-            ];
-            return await FlowDocumentBranoAsync(riferimento, versioni, collezioniDaVisualizzare, worker, e);
-        }
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="nomeVersione">Il nome della versione di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            Collection<string> versioni =
-            [
-                nomeVersione
-            ];
-            return await TestoBranoAsync(riferimento, versioni, collezioniDaVisualizzare, paroleRicercate, worker, e);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, string nomeVersione, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            Collection<string> versioni =
-            [
-                nomeVersione
-            ];
-            return await FlowDocumentBranoAsync(riferimento, versioni, collezioniDaVisualizzare, paroleRicercate, worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), worker, e);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), alternare, worker, e);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, new Riferimento(), alternare, worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, paroleRicercate, false, worker, e);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, false, worker, e);
-        }
-
-        /// <summary>
-        /// Il testo biblico di un brano.
-        /// </summary>
-        /// <param name="riferimento">Il riferimento del brano desiderato.</param>
-        /// <param name="listaVersioni">Una collezione di stringhe con i nomi delle versioni di cui mostrare il testo.</param>
-        /// <param name="collezioniDaVisualizzare">Una collezione delle collezioni di note che devono essere visualizzate insieme con il testo.</param>
-        /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
-        /// <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
-        /// <returns>Il testo biblico.</returns>
-        public async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await TestoBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, alternare, worker, e);
-        }
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
-            return await FlowDocumentBranoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate, alternare, worker, e);
-        }
-
-        public async Task<FlowDocument> FlowDocumentBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool conNomiVersioni, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
-        {
+            collezioniDaVisualizzare ??= [];
+            paroleRicercate ??= new Riferimento();
             FlowDocument fd;
+
             if (alternare)
             {
                 byte cap0, cap1, vers0, vers1, maxCapitoloInTuttiTesti, maxVersettoInTuttiTesti;
 
                 StringBuilder titoloVersetto = new(RtfIntestazione().Length + 40);
                 int lunghezzaIntestazione = RtfIntestazione().Length;
-                String testoVersetto;
                 //string titoloVersettoInizio = RtfIntestazione() + @"{\v " + RichTextBoxEx.InizioRiferimento;
-                string titoloVersettoInizio = @"{\v " + RichTextBoxEx.InizioRiferimento;
+                string titoloVersettoInizio = RtfIntestazione() + MainWindow.LPN_ANCORA;
+
                 string libStringa, capStringa, versStringa;
                 RiferimentoFormato rfVecchio = Formato.RiferimentoFormato;
                 List<string> stringheRtf = await Task.Run(async () =>
@@ -3596,21 +3381,26 @@ namespace LaParola
                                     riferimentoArray[3] = lib;
                                     riferimentoArray[4] = cap;
                                     riferimentoArray[5] = vers;
+                                    stringaRtf.Clear();
                                     stringaRtf.Append(titoloVersettoInizio);
                                     stringaRtf.Append(libStringa).Append(capStringa).Append(versStringa);
-                                    stringaRtf.Append(@"}\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\b0\par\ql\par ");
+                                    stringaRtf.Append(@"\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\b0\par}");
+                                    stringheRtf.Add(stringaRtf.ToString());
                                     Formato.RiferimentoFormato = RiferimentoFormato.Nessuno;
                                     rif.Rimuovi(0);
                                     rif.AggiungiBrano(riferimentoArray);
-                                    testoVersetto = await TestoBranoAsync(rif, listaVersioni, collezioniDaVisualizzare, false, paroleRicercate, false, null, e); // null per worker, così non è aggiornato per ogni versetto
-                                    stringaRtf.Append(testoVersetto[lunghezzaIntestazione..^1]).Append(@"\par\ql\par}");
+                                    if (await ListBranoAsync(rif, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate) is { } ls)
+                                    {
+                                        stringheRtf.AddRange(ls);
+                                    }
+                                    stringheRtf.Add(RtfIntestazione() + @"\par}");
                                     Formato.RiferimentoFormato = rfVecchio;
                                 }
                             }
                         }
                         // TODO2 worker?.ReportProgress(-listaVersioni.Count - collezioniDaVisualizzare.Count, e);
                     }
-                    stringheRtf.Add(stringaRtf.ToString());
+                    //stringheRtf.Add(stringaRtf.ToString());
                     return stringheRtf;
                 }).ConfigureAwait(false);
                 fd = await MergeManyRtfAsync(stringheRtf);
@@ -3657,7 +3447,7 @@ namespace LaParola
                                             stringheRtf.Add(RtfIntestazione() + @"\fs28\b " + collezioniDaVisualizzare[i] + @"\par}");
                                         }
 
-                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBrano(noteInCollezione, [], [], conNomiVersioni, worker, e);
+                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBranoAsync(noteInCollezione, [], [], conNomiVersioni, worker, e);
                                         if (i != collezioniDaVisualizzare.Count - 1)
                                         {
                                             testoInCollezione = testoInCollezione[..^1] + @"\par\ql\par}";
@@ -3674,12 +3464,16 @@ namespace LaParola
                     else if (listaVersioni.Count == 1 && ((versioni[listaVersioni[0]].Info.Tipo & TestoTipi.Bibbia) != TestoTipi.Bibbia))
                     {
                         // quando una collezione di note, il testo è già RTF completo
-                        fd = new FlowDocument();
-                        using MemoryStream ms = new(Encoding.ASCII.GetBytes(await versioni[listaVersioni[0]].TestoBrano(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, paroleRicercate)));
+
+                        /*fd = new FlowDocument();
+                        using MemoryStream ms = new(Encoding.ASCII.GetBytes(await versioni[listaVersioni[0]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, paroleRicercate)));
                         ms.Position = 0;
 
                         TextRange range = new(fd.ContentStart, fd.ContentEnd);
-                        range.Load(ms, DataFormats.Rtf);
+                        range.Load(ms, DataFormats.Rtf);*/
+
+                        fd = await versioni[listaVersioni[0]].FlowDocumentBranoCommentarioAsync(riferimento, paroleRicercate);
+                        ProcessAndHideAnchors(fd); // altrimenti ancora lasciato all'inizio del testo, che in altri casi è chiamato da MergeManyRtfAsync
                     }
                     else
                     {
@@ -3688,6 +3482,7 @@ namespace LaParola
                              List<string> stringheRtf = [];
                              StringBuilder stringaRtf = new(RtfIntestazione());
                              string testoInVersione;
+                             bool ultimaVersioneBibbia = true;
                              int lunghezzaIntestazione = stringaRtf.Length;
                              for (int i = 0; i < listaVersioni.Count; ++i)
                              {
@@ -3698,20 +3493,36 @@ namespace LaParola
                                          stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
                                      }
                                      testoInVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate, worker, e);
-                                     stringaRtf.Append(testoInVersione[lunghezzaIntestazione..^1]);
+                                     if (versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
+                                     {
+                                         if (lunghezzaIntestazione < testoInVersione.Length - 1 && testoInVersione[lunghezzaIntestazione] != ' ')
+                                         {
+                                             stringaRtf.Append(' ');
+                                         }
+                                         stringaRtf.Append(testoInVersione[lunghezzaIntestazione..^1]);
+                                         if (!bibbiaTrovata)
+                                         {
+                                             UltimaBibbia = listaVersioni[i];
+                                             bibbiaTrovata = true;
+                                         }
+                                         ultimaVersioneBibbia = true;
+                                     }
+                                     else
+                                     { // commentario
+                                         stringheRtf.Add(stringaRtf + @"}");
+                                         stringheRtf.Add(testoInVersione);
+                                         stringaRtf = new(RtfIntestazione());
+                                         ultimaVersioneBibbia = false;
+                                     }
                                      if (i < listaVersioni.Count - 1)
                                      {
                                          stringaRtf.Append(@"\par\ql\par");
                                      }
-                                     if (!bibbiaTrovata && versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
-                                     {
-                                         UltimaBibbia = listaVersioni[i];
-                                         bibbiaTrovata = true;
-                                     }
                                  }
                                  catch { } // il nome della versione non era riconosciuto
                              }
-                             stringheRtf.Add(stringaRtf + @"}");
+                             if (ultimaVersioneBibbia)
+                                 stringheRtf.Add(stringaRtf + @"}");
                              return stringheRtf;
                          }).ConfigureAwait(false);
                         fd = await MergeManyRtfAsync(stringheRtf);
@@ -3721,8 +3532,8 @@ namespace LaParola
                 {
                     throw new TextNotExistException();
                 }
-
             }
+
             return fd;
         }
 
@@ -3738,14 +3549,25 @@ namespace LaParola
         /// <param name="worker">Il thread in cui il testo è creato.</param>
         /// <param name="e">Gli argomenti del thread.</param>
         /// <returns>Il testo biblico.</returns>
-        private async Task<string> TestoBranoAsync(Riferimento riferimento, Collection<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool conNomiVersioni, Riferimento paroleRicercate, bool alternare, BackgroundWorker? worker, DoWorkEventArgs? e)
+        private async Task<string> TestoBranoAsync(
+    Riferimento riferimento,
+    IReadOnlyList<string> listaVersioni,
+    Collection<string>? collezioniDaVisualizzare = null,
+    bool conNomiVersioni = true,
+    Riferimento? paroleRicercate = null,
+    bool alternare = false,
+    BackgroundWorker? worker = null,
+    DoWorkEventArgs? e = null)
         {
+            collezioniDaVisualizzare ??= [];
+            paroleRicercate ??= new Riferimento();
             string brano;
+
             if (alternare)
             {
                 byte cap0, cap1, vers0, vers1, maxCapitoloInTuttiTesti, maxVersettoInTuttiTesti;
                 StringBuilder titoloVersetto = new(RtfIntestazione().Length + 40);
-                string titoloVersettoInizio = RtfIntestazione() + @"{\v " + RichTextBoxEx.InizioRiferimento;
+                string titoloVersettoInizio = RtfIntestazione() + MainWindow.LPN_ANCORA;
                 string testoVersetto;
                 string libStringa, capStringa, versStringa;
                 byte[] riferimentoArray = new byte[6];
@@ -3855,7 +3677,7 @@ namespace LaParola
                                     titoloVersetto.Remove(0, titoloVersetto.Length);
                                     titoloVersetto.Append(titoloVersettoInizio);
                                     titoloVersetto.Append(libStringa).Append(capStringa).Append(versStringa);
-                                    titoloVersetto.Append(@"}\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\par}");
+                                    titoloVersetto.Append(@"\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\par}");
                                     stringheRtf.Add(titoloVersetto.ToString());
                                     Formato.RiferimentoFormato = RiferimentoFormato.Nessuno;
                                     testoVersetto = await TestoBranoAsync(new Riferimento(riferimentoArray), listaVersioni, collezioniDaVisualizzare, false, paroleRicercate, false, null, e); // null per worker, così non è aggiornato per ogni versetto
@@ -3914,7 +3736,7 @@ namespace LaParola
                                             stringheRtf.Add(RtfIntestazione() + @"\fs28\b " + collezioniDaVisualizzare[i] + @"\par}");
                                         }
 
-                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBrano(noteInCollezione, [], [], conNomiVersioni, worker, e);
+                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBranoAsync(noteInCollezione, [], [], conNomiVersioni, worker, e);
                                         if (i != collezioniDaVisualizzare.Count - 1)
                                         {
                                             testoInCollezione = testoInCollezione[..^1] + @"\par\ql\par}";
@@ -3932,7 +3754,7 @@ namespace LaParola
                     else if (listaVersioni.Count == 1 && ((versioni[listaVersioni[0]].Info.Tipo & TestoTipi.Bibbia) != TestoTipi.Bibbia))
                     {
                         // quando una collezione di note, il testo è già RTF completo
-                        brano = await versioni[listaVersioni[0]].TestoBrano(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, paroleRicercate);
+                        brano = await versioni[listaVersioni[0]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, paroleRicercate);
                     }
                     else
                     {
@@ -3950,8 +3772,11 @@ namespace LaParola
                                     {
                                         stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
                                     }
-                                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate, worker, e);
-                                    stringaRtf.Append(testoPerVersione[lunghezzaIntestazione..^1]);
+                                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, Formato.RiferimentoFormato != RiferimentoFormato.Nessuno, paroleRicercate, worker, e);
+                                    testoPerVersione = testoPerVersione.Contains("colortbl") && testoPerVersione.IndexOf(' ', testoPerVersione.IndexOf("colortbl")) != -1 ? testoPerVersione[(testoPerVersione.IndexOf(' ', testoPerVersione.IndexOf("colortbl")) + 1)..] : testoPerVersione;
+                                    if (!testoPerVersione.StartsWith(' '))
+                                        stringaRtf.Append(' ');
+                                    stringaRtf.Append(testoPerVersione[..^1]); // remove final }
                                     if (i < listaVersioni.Count - 1)
                                     {
                                         stringaRtf.Append(@"\par\ql\par");
@@ -4015,6 +3840,58 @@ namespace LaParola
             return brano;
         }
 
+        private async Task<List<string>> ListBranoAsync(
+Riferimento riferimento,
+IReadOnlyList<string> listaVersioni,
+Collection<string>? collezioniDaVisualizzare = null,
+bool conNomiVersioni = true,
+Riferimento? paroleRicercate = null)
+        {
+            collezioniDaVisualizzare ??= [];
+            paroleRicercate ??= new Riferimento();
+
+            List<Riferimento> noteDaVisualizzare = [];
+            if (listaVersioni.Count > 0)
+            {
+                foreach (string collezione in collezioniDaVisualizzare)
+                {
+                    noteDaVisualizzare.Add(versioni[collezione].ElencaNoteInBrano(riferimento));
+                }
+            }
+
+            // dovrebbe essere chiamato solo se listaVersioni.Count>=1
+            List<string> stringheRtf = [];
+            string testoPerVersione;
+            bool bibbiaTrovata = false;
+
+            for (int i = 0; i < listaVersioni.Count; ++i)
+            {
+                try
+                {
+                    if (conNomiVersioni && listaVersioni.Count > 1)
+                    {
+                        stringheRtf.Add(RtfIntestazione() + @"{\b1" + listaVersioni[i] + @"}\par}");
+                    }
+
+                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, Formato.RiferimentoFormato != RiferimentoFormato.Nessuno, paroleRicercate, null, null);
+                    stringheRtf.Add(testoPerVersione);
+
+                    if (i < listaVersioni.Count - 1)
+                    {
+                        stringheRtf.Add(RtfIntestazione() + @"\par}");
+                    }
+
+                    if (!bibbiaTrovata && versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
+                    {
+                        UltimaBibbia = listaVersioni[i];
+                        bibbiaTrovata = true;
+                    }
+                }
+                catch { } // il nome della versione non era riconosciuto
+            }
+            return stringheRtf;
+        }
+
         public void SetFontRtb(RichTextBoxEx rtb)
         {
             TextRange range = new(rtb.Document.ContentStart, rtb.Document.ContentEnd);
@@ -4048,7 +3925,7 @@ namespace LaParola
             range.ApplyPropertyValue(
                 Inline.TextDecorationsProperty,
                 Formato.FontSottolineato ? TextDecorations.Underline : null
-            ); // underline via TextDecorations è il meccanismo WPF [2](https://sne04.blogspot.com/2008/12/using-wpfc-richtextbox.html)[3](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/how-to-create-a-text-decoration)
+            ); // underline via TextDecorations è il meccanismo WPF (https://sne04.blogspot.com/2008/12/using-wpfc-richtextbox.html)[3](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/how-to-create-a-text-decoration)
 
         }
 
@@ -5324,7 +5201,7 @@ namespace LaParola
             {
                 if (libro1 == libro2)
                 { // Gv
-                    //rifSB += "";
+                  //rifSB += "";
                 }
                 else
                 { // Gv-At
@@ -5361,7 +5238,7 @@ namespace LaParola
                     {
                         if (capitolo1 == capitolo2)
                         { // Gv 4
-                            //rifSB += "";
+                          //rifSB += "";
                         }
                         else // Gv 4-5
                         {
@@ -5678,7 +5555,7 @@ namespace LaParola
             }
             catch (KeyNotFoundException)
             {
-                throw new TextNotExistException();
+                return -1;
             }
         }
 
@@ -6586,7 +6463,58 @@ namespace LaParola
                 DispatcherPriority.Normal);
         }
 
-        private FlowDocument BuildMergedFlowDocument(IReadOnlyList<string> rtfs, bool impostaFormato)
+        public async Task<string> MergeManyRtfAsStringAsync(List<string> rtfStrings)
+        {
+            // 1. Merge the RTF strings into a FlowDocument using your existing logic
+            FlowDocument doc = await MergeManyRtfAsync(rtfStrings);
+
+            // 2. Marshal the conversion back to the UI thread via the Dispatcher safely
+            return await doc.Dispatcher.InvokeAsync(
+                () => ToRtfString(doc),
+                DispatcherPriority.Normal
+            ).Task;
+        }
+
+        public static async Task<FlowDocument> MergeManyRtfAsDocumentAsync(List<string> rtfStrings)
+        {
+            // Ensure all FlowDocument allocations happen on the UI thread context
+            return await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                FlowDocument finalDoc = new();
+
+                foreach (string rtfString in rtfStrings)
+                {
+                    if (string.IsNullOrEmpty(rtfString)) continue;
+
+                    using MemoryStream ms = new(Encoding.ASCII.GetBytes(rtfString));
+                    // Parse into a temporary FlowDocument container so WPF can load fonttbl/colortbl
+                    FlowDocument tempDoc = new();
+                    TextRange range = new(tempDoc.ContentStart, tempDoc.ContentEnd);
+
+                    try
+                    {
+                        range.Load(ms, DataFormats.Rtf);
+
+                        // Extract parsed blocks directly and append them to the combined document
+                        while (tempDoc.Blocks.Count > 0)
+                        {
+                            var block = tempDoc.Blocks.FirstBlock;
+                            tempDoc.Blocks.Remove(block); // Sever ties with tempDoc
+                            finalDoc.Blocks.Add(block);    // Move to final composition
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Error parsing RTF snippet: {ex.Message}");
+                        // Optional: handle or rethrow depending on debugging needs
+                        //throw;
+                    }
+                }
+                return finalDoc;
+            });
+        }
+
+        public FlowDocument BuildMergedFlowDocument(IReadOnlyList<string> rtfs, bool impostaFormato = false)
         {
             FlowDocument finalDoc = new()
             {
@@ -6594,18 +6522,18 @@ namespace LaParola
                 TextAlignment = TextAlignment.Left
             };
 
-            bool first = true;
+            //bool first = true;
 
             foreach (string originalRtf in rtfs)
             {
-                TextAlignment sourceAlignment = GetAlignment(originalRtf);
+                //TextAlignment sourceAlignment = GetAlignment(originalRtf);
                 FlowDocument tempDoc = LoadRtfToFlowDocumentOnUiThread(originalRtf);
                 NormalizeLoadedBlocks(tempDoc, null);
 
-                if (!first)
-                {
-                    finalDoc.Blocks.Add(new Paragraph(new Run("")));
-                }
+                //if (!first)
+               // {
+                //    finalDoc.Blocks.Add(new Paragraph(new Run("")));
+                //}
 
                 // Move blocks into final doc
                 while (tempDoc.Blocks.FirstBlock != null)
@@ -6615,7 +6543,7 @@ namespace LaParola
                     finalDoc.Blocks.Add(block);
                 }
 
-                first = false;
+                //first = false;
             }
 
             // Final safety pass on the merged document so the displayed result is correct.
@@ -6636,7 +6564,7 @@ namespace LaParola
             TextRange range = new(doc.ContentStart, doc.ContentEnd);
 
             string converted = ConvertiUnicodeInRtf(rtf);
-            converted = converted.Replace("\\v ", LPN_ANCORA);
+            //converted = converted.Replace("\\v ", LPN_ANCORA);
 
             using MemoryStream ms = new(Encoding.UTF8.GetBytes(converted));
             range.Load(ms, DataFormats.Rtf);
@@ -6659,11 +6587,11 @@ namespace LaParola
                     if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
                     {
                         string runText = navigator.GetTextInRun(LogicalDirection.Forward);
-                        int index = runText.IndexOf(LPN_ANCORA, StringComparison.Ordinal);
+                        int index = runText.IndexOf(MainWindow.LPN_ANCORA, StringComparison.Ordinal);
 
                         if (index >= 0)
                         {
-                            var match = AncoraRegEx().Match(runText[index..]);
+                            var match = MainWindow.AncoraRegEx.Match(runText[index..]);
                             if (match.Success)
                             {
                                 string verseId = match.Groups[1].Value;
@@ -6974,7 +6902,6 @@ namespace LaParola
                 Formato.FontSottolineato ? TextDecorations.Underline : null);
         }
 
-
         private static TextAlignment GetAlignment(string rtf)
         {
             if (rtf.Contains(@"\qr"))
@@ -7258,13 +7185,13 @@ namespace LaParola
         }
 
         private static readonly string[] Numeri3Stringhe =
-    [.. Enumerable.Range(0, 256).Select(i => i.ToString("000", CultureInfo.InvariantCulture))];
+        [.. Enumerable.Range(0, 256).Select(i => i.ToString("000", CultureInfo.InvariantCulture))];
 
         private static readonly string[] Numeri2Stringhe =
-    [.. Enumerable.Range(0, 256).Select(i => i.ToString("00", CultureInfo.InvariantCulture))];
+        [.. Enumerable.Range(0, 256).Select(i => i.ToString("00", CultureInfo.InvariantCulture))];
 
         private static readonly string[] ByteStringhe =
-    [.. Enumerable.Range(0, 256).Select(i => i.ToString(CultureInfo.CurrentCulture))];
+        [.. Enumerable.Range(0, 256).Select(i => i.ToString(CultureInfo.CurrentCulture))];
 
     }
 }

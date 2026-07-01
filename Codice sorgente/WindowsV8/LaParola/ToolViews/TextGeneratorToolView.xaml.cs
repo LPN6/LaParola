@@ -20,7 +20,6 @@ public partial class TextGeneratorToolView : UserControl
     //    then genitore.MostraDefinizioniInEditor(branoDaMostrare, clbVersioni.CheckedItems[0].ToString());
     //    and in SelectedItem change:             cbDefinizioni.Enabled = (clbVersioni.CheckedItems.Count > 0 && !string.IsNullOrEmpty(Funzioni.DizionarioDiVersione(clbVersioni.CheckedItems[0].ToString())));
     // TODO2 progress bar; there are better ways to do the threading
-    // TODO2 aggiungere commentari
     // TODO2 testo può andare in una finestra editor attuale?
     // TODO2 alternare - riga addizionale da togliere
 
@@ -35,7 +34,17 @@ public partial class TextGeneratorToolView : UserControl
         DataContext = this;
         VersioneItem.SelectionChanged = SaveSelectedVersions;
 
-        List<string> available = [.. MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia)];
+        // Initial load on startup
+        AggiornaVersioniDisponibili();
+
+        cbAlternare.IsChecked = MainWindow.settings.MostraAlternare;
+        MostraPulsanteStato();
+    }
+
+    // Public method accessible by the removal coordinator
+    public void AggiornaVersioniDisponibili()
+    {
+        List<string> available = [.. MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia | TestoTipi.Commentario)];
         HashSet<string> availableSet = [.. available];
         List<string> savedAll = MainWindow.settings.MostraVersioniTutte ?? [];
         HashSet<string> savedSet = [.. savedAll];
@@ -50,7 +59,7 @@ public partial class TextGeneratorToolView : UserControl
         // Final ordered list
         List<string> finalList = [.. validSaved, .. newItems];
 
-        // Build UI items
+        // Build UI items cleanly
         VersioneItems.Clear();
 
         foreach (string v in finalList)
@@ -64,10 +73,6 @@ public partial class TextGeneratorToolView : UserControl
 
         SaveAllVersions();
         SaveSelectedVersions();
-
-        cbAlternare.IsChecked = MainWindow.settings.MostraAlternare;
-
-        MostraPulsanteStato();
     }
 
     public IReadOnlyList<string> GetSelectedVersionNames()
@@ -161,16 +166,6 @@ public partial class TextGeneratorToolView : UserControl
         _isMouseDown = false;
         _isDragging = false;
         _draggedItem = null;
-    }
-
-    private static bool IsClickOnCheckBox(DependencyObject? source)
-    {
-        while (source != null)
-        {
-            if (source is CheckBox) return true;
-            source = VisualTreeHelper.GetParent(source);
-        }
-        return false;
     }
 
     private void ListBox_DragOver(object sender, DragEventArgs e)
@@ -305,6 +300,10 @@ public partial class TextGeneratorToolView : UserControl
     private async void Generate_Click(object sender, RoutedEventArgs e)
     {
         Collection<string> versioni = new([.. GetSelectedVersionNames()]);
+        if (versioni.Count == 0)
+        {
+            return;
+        }
 
         string abbVersioni = "";
         foreach (string versione in versioni)
@@ -323,13 +322,11 @@ public partial class TextGeneratorToolView : UserControl
 
         Riferimento rif = MainWindow.Testi.ConvertiRiferimento(tbBrano.Text);
         bool alternare = cbAlternare.IsChecked == true;
-        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(rif, versioni, alternare);
-        //if (Services.ThemeManager.IsDark(MainWindow.settings.ThemeMode))
-        //{
-            Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
-            RtfColorTransformer.ApplyThemeToDocument(doc, true, fg,true);
-        //}
+        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(rif, versioni, alternare:alternare);
+        doc.Tag = versioni[0];
+        Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+        RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
 
-        App.DockingHost.SendFlowDocumentToActive(doc, title);
+        App.DockingHost.SendFlowDocumentToActiveEditor(doc, title);
     }
 }

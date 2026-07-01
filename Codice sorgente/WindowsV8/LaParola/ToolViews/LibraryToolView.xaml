@@ -1,0 +1,542 @@
+﻿<UserControl x:Class="LaParola.ToolViews.LibraryToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:LaParola.ToolViews"
+             xmlns:controls="clr-namespace:LaParola" mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <local:ValuesAreEqualConverter x:Key="ValuesAreEqualConverter"/>
+        <local:TestoTipoToVisibilityConverter x:Key="TestoTipoToVisibilityConverter"/>
+        <local:TestoTipiLocalizationConverter x:Key="TestoTipiLocalizationConverter"/>
+        <local:BloccatoTipiLocalizationConverter x:Key="BloccatoTipiLocalizationConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="SearchTextBox" 
+                     Grid.Row="0" Grid.Column="0" 
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Margin="0,0,8,0"
+                     TextChanged="SearchTextBox_TextChanged" >
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{DynamicResource BibliotecaRicercaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBlock Text="{DynamicResource BibliotecaRicercaHint}"
+               Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+               IsHitTestVisible="False" 
+               VerticalAlignment="Center"
+               Margin="6,0,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchTextBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <Button x:Name="AddBookButton"
+                    Grid.Row="0" Grid.Column="1"
+                    Content="{DynamicResource BibliotecaAggiungiLibri}"
+                    Height="28"
+                    Padding="12,0,12,0"
+                    Margin="0,0,8,0"
+                    Visibility="Collapsed"
+                    Click="AddBookButton_Click"/>
+
+            <controls:HelpFlyout
+                x:Name="HelpFlyoutControl"
+                Grid.Row="0" Grid.Column="2"
+                Margin="0,0,0,0"
+                HelpText="{DynamicResource BibliotecaAiuto}"
+                HelpClicked="HelpFlyout_OnHelpClicked"/>
+
+            <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10,0,0" VerticalAlignment="Center">
+
+                <TextBlock VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium">
+                    <Run Text="{DynamicResource BibliotecaTipo}"/>:
+                </TextBlock>
+                <ComboBox x:Name="TipoFilterComboBox" Width="120" Margin="0,0,15,0" SelectionChanged="FilterControl_SelectionChanged">
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoTutti}" Tag="All" IsSelected="True"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoBibbia}" Tag="Bibbia"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoCommentario}" Tag="Commentario"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoDizionario}" Tag="Dizionario"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoLibro}" Tag="Libro"/>
+                    <ComboBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource BibliotecaFiltroTipoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <TextBlock VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium">
+                        <Run Text="{DynamicResource BibliotecaLingua}"/>:
+                </TextBlock>
+                <ComboBox x:Name="LinguaFilterComboBox" Width="90" Margin="0,0,15,0" SelectionChanged="FilterControl_SelectionChanged">
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroLinguaQualsiasi}" Tag="All" IsSelected="True"/>
+                    <ComboBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource BibliotecaFiltroLinguaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <TextBlock Text="Data:" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium"/>
+                <ComboBox x:Name="DataConditionComboBox" Width="100" Margin="0,0,8,0" SelectionChanged="DataConditionComboBox_SelectionChanged">
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroDataQualsiasi}" Tag="Any" IsSelected="True"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroDataPrima}" Tag="Before"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroDataDopo}" Tag="After"/>
+                    <ComboBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource BibliotecaFiltroDataAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <TextBox x:Name="FilterYearTextBox" 
+         Width="50" 
+         MaxLength="4" 
+         Visibility="Collapsed" 
+         VerticalAlignment="Center"
+         Padding="2"
+         TextChanged="FilterYearTextBox_TextChanged"
+         PreviewTextInput="FilterYearTextBox_PreviewTextInput"
+         DataObject.Pasting="FilterYearTextBox_Pasting" >
+                    <TextBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource BibliotecaFiltroDataAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </WrapPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition x:Name="RightPaneColumn" Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="BooksDataGrid"
+                      Grid.Column="0"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      GridLinesVisibility="Horizontal"
+                      HeadersVisibility="Column"
+                      Background="Transparent"
+                      BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                      MouseDoubleClick="BooksDataGrid_MouseDoubleClick">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
+
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="10,8,10,8"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                                    <Grid>
+                                        <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="{TemplateBinding Padding}">
+
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                                        </Border>
+
+                                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Width="2" Background="Transparent" Cursor="SizeWE"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaNome}" Binding="{Binding Nome}" Width="2*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaAutore}" Binding="{Binding Autore}" Width="*"/>
+                    <DataGridTemplateColumn Header="{DynamicResource BibliotecaTipo}" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2,0" VerticalAlignment="Center">
+
+                                    <Border CornerRadius="1" Padding="2,0" Margin="0,0"
+        Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Bibbia}"
+        ToolTip="{DynamicResource BibliotecaTipoBibbiaAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="BookCross" Foreground="#0078D7" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                    <Border CornerRadius="1" Padding="2,0" Margin="0,0"
+                                    Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Commentario}"
+                                    ToolTip="{DynamicResource BibliotecaTipoCommentarioAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="BookOpenPageVariant" Foreground="#107C41" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                    <Border CornerRadius="1" Padding="2,0" Margin="0,0"
+                                    Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Dizionario}"
+                                    ToolTip="{DynamicResource BibliotecaTipoDizionarioAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="BookAlphabet" Foreground="#D83B01" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                    <Border CornerRadius="1" Padding="2,0" Margin="0,0"
+                                    Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Libro}"
+                                    ToolTip="{DynamicResource BibliotecaTipoLibroAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="Book" Foreground="#7A24B7" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaData}" Binding="{Binding Data}" Width="*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaCasaEditrice}" Binding="{Binding CasaEditrice}" Width="*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaCopyright}" Binding="{Binding Copyright}" Width="*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaLingua}" Binding="{Binding Lingua}" Width="Auto"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaAbbreviazione}" Binding="{Binding Abbreviazione}" Width="Auto"/>
+                </DataGrid.Columns>
+                <DataGrid.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{DynamicResource BibliotecaGrigiaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                    </ToolTip>
+                </DataGrid.ToolTip>
+
+            </DataGrid>
+
+            <GridSplitter x:Name="LibraryGridSplitter" Grid.Column="1" 
+                          Width="6" 
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Stretch"
+                          Background="Transparent"
+                          Cursor="SizeWE"/>
+
+            <ScrollViewer Grid.Column="2" 
+                          Margin="10,0,0,0"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel DataContext="{Binding ElementName=BooksDataGrid, Path=SelectedItem}">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{Binding Nome}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                    <TextBlock Text="{Binding Titolo}" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Titolo}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Value="True">
+                                                <Condition.Binding>
+                                                    <MultiBinding Converter="{StaticResource ValuesAreEqualConverter}">
+                                                        <Binding Path="Titolo" />
+                                                        <Binding Path="Nome" />
+                                                    </MultiBinding>
+                                                </Condition.Binding>
+                                            </Condition>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                    <TextBlock Text="{Binding Autore}" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,12">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Autore}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                    <Separator Margin="0,0,0,12"/>
+
+                    <!-- <TextBlock Text="Extended Specifications" FontWeight="SemiBold" Margin="0,0,0,6"/>-->
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Data}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaData}" />: <Run Text="{Binding Data}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CasaEditrice}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaCasaEditrice}" />: <Run Text="{Binding CasaEditrice}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Copyright}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaCopyright}" />: <Run Text="{Binding Copyright}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Isbn}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaISBN}" />: <Run Text="{Binding Isbn}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Lingua}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaLingua}" />: <Run Text="{Binding Lingua}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Abbreviazione}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaAbbreviazione}" />: <Run Text="{Binding Abbreviazione}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Tipo}" Value="None">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Tipo}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Tipo}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaTipo}" />: 
+                        <Run Text="{Binding Tipo, Converter={StaticResource TestoTipiLocalizationConverter}}" />
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding VersioneDelleNote}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaVersioneDelleNote}" />: <Run Text="{Binding VersioneDelleNote}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding NomeDelFile}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaNomeDelFile}" />: <Run Text="{Binding NomeDelFile}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Versione}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaVersione}" />: <Run Text="{Binding Versione}"/>
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Bloccato}" Value="Sbloccato">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Bloccato}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run FontWeight="Bold" Text="{DynamicResource BibliotecaBloccato}" /> 
+                        <Run Text="{Binding Bloccato, Converter={StaticResource BloccatoTipiLocalizationConverter}}" />
+                    </TextBlock>
+
+                    <StackPanel Margin="0,12,0,0">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Descrizione}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,4">
+                            <Run FontWeight="Bold" Text="{DynamicResource BibliotecaDescrizione}"/>:
+                        </TextBlock>
+
+                        <RichTextBox IsReadOnly="True"
+                 Focusable="True"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 Padding="0"
+                 IsDocumentEnabled="True"
+                 local:RichTextBoxHelper.BindableDescription="{Binding Descrizione}">
+                            <RichTextBox.Resources>
+                                <Style TargetType="Paragraph">
+                                    <Setter Property="Margin" Value="0,0,0,6"/>
+                                </Style>
+                            </RichTextBox.Resources>
+                        </RichTextBox>
+                    </StackPanel>
+
+                    <Separator Margin="0,12,0,12"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <Button x:Name="ButtonCancella"
+                    Content="{DynamicResource BibliotecaCancella}"
+                    Height="28"
+                    Padding="12,0,12,0"
+                    Margin="0,0,0,8"
+                    Click="ButtonCancella_Click">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource BibliotecaCancellaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+
+                            <Button x:Name="ButtonRinomina"
+                    Content="{DynamicResource BibliotecaRinomina}"
+                    Height="28"
+                    Padding="12,0,12,0"
+                    Margin="0,0,0,8"
+                    Click="ButtonRinomina_Click">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource BibliotecaRinominaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

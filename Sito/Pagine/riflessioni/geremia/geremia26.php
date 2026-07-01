@@ -52,9 +52,8 @@ Una terza considerazione &egrave; che le promesse e le minacce di Dio sono spess
 <p>Differenza fra Uria e Geremia? (20-23) [Uria morto, forse perch&eacute; scapp&ograve;, forse perch&eacute; non sempre funziona come &egrave; successo con Geremia (per esempio Stefano)]</p>
 <p>Cosa sappiamo di Aicam? (24)</p>
 
-
 <?
-$n=4;
+$n=5;
 require("indice.php");
 require("../../piede.php");
 ?>

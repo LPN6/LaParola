@@ -1,11 +1,14 @@
-﻿using System.Globalization;
+﻿using LaParola.Dialogs;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using static LaParola.Utilities.Funzioni;
 
 namespace LaParola
@@ -20,7 +23,7 @@ namespace LaParola
         /// <summary>
         /// Le otto cifre che seguono danno il riferimento del versetto che segue.
         /// </summary>
-        public const char InizioRiferimento = (char)1;
+//        public const char InizioRiferimento = (char)1;
         /// <summary>
         /// Il carattere inserito per indicare l'inizio di un link ipertestuale.
         /// </summary>
@@ -48,7 +51,7 @@ namespace LaParola
         /// <summary>
         /// Il carattere inserito per indicare l'inizio di una parola ricercata.
         /// </summary>
-        public const char ParolaRicercata = (char)14;
+        //public const char ParolaRicercata = (char)14;
 
         /// <summary>
         /// Il testo Rtf del controllo.
@@ -74,20 +77,9 @@ namespace LaParola
                 // Carica l’RTF in un TextRange che copre tutto il documento
                 TextRange range = new(Document.ContentStart, Document.ContentEnd);
                 using MemoryStream ms = new(Encoding.UTF8.GetBytes(ConvertiUnicodeInRtf(value))); // puoi usare un encoding diverso se serve
-                range.Load(ms, DataFormats.Rtf); // Load supporta Rtf [1](https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.textrange.load?view=windowsdesktop-10.0)[2](https://stackoverflow.com/questions/1367256/set-rtf-text-into-wpf-richtextbox-control)
+                range.Load(ms, DataFormats.Rtf); // Load supporta Rtf (https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.textrange.load?view=windowsdesktop-10.0) (https://stackoverflow.com/questions/1367256/set-rtf-text-into-wpf-richtextbox-control)
             }
         }
-
-        /* TODO2 ipertesto
-        /// <summary>
-        /// Il testo Rtf del testo selezionato.
-        /// </summary>
-        new public string SelectedRtf
-        {
-            get => base.SelectedRtf;
-            set => base.SelectedRtf = ConvertiUnicodeInRtf(value);
-        }
-        */
 
         public string Text
         {
@@ -104,10 +96,9 @@ namespace LaParola
             set
             {
                 // Sostituisce *tutto* il contenuto con plain text (nessuna formattazione)
-                new TextRange(Document.ContentStart, Document.ContentEnd).Text = value ?? string.Empty; //[1](https://github.com/MicrosoftDocs/winrt-api/blob/docs/windows.ui.xaml.documents/textelement_fontfamilyproperty.md/)
+                new TextRange(Document.ContentStart, Document.ContentEnd).Text = value ?? string.Empty; //(https://github.com/MicrosoftDocs/winrt-api/blob/docs/windows.ui.xaml.documents/textelement_fontfamilyproperty.md/)
             }
         }
-
 
         /// <summary>
         /// Seleziona tutto il testo.
@@ -139,7 +130,6 @@ namespace LaParola
             Selection.Select(start, end); // Select(TextPointer, TextPointer) [1](https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.textselection?view=windowsdesktop-10.0)
             Focus();
         }
-
 
         /// <summary>
         /// Restituisce un TextPointer corrispondente all'offset di caratteri "plain text"
@@ -188,33 +178,9 @@ namespace LaParola
             return Document.ContentEnd;
         }
 
-        private bool hoverNotificato = false;
-        //private Form fIpertesto; TODO2 ipertesto
-        private System.Windows.Point ultimoHover = new(-999, -999);
         internal static bool isRunningOnMono;
 
-        private enum StatoFinestraIpertesto
-        {
-            Antenato, NonUtilizzato, Utilizzato
-        }
-
-        private StatoFinestraIpertesto statoFinestra = StatoFinestraIpertesto.Antenato;
-        private StatoFinestraIpertesto StatoFinestra
-        {
-            get => statoFinestra; set => statoFinestra = value;
-        }
-
-        /* TODO2 ipertesto
-        /// <summary>
-        /// Se il controllo rivela e visualizza gli url automaticamente.
-        /// </summary>
-        [System.ComponentModel.DefaultValue(false)]
-        public new bool DetectUrls
-        { get => base.DetectUrls; set => base.DetectUrls = value;
-        }
-        */
-
-        private string versione="";
+        private string versione = "";
         /// <summary>
         /// La versione della Bibbia del testo nel controllo.
         /// </summary>
@@ -236,57 +202,8 @@ namespace LaParola
 
         #region const e struct
 
-        #region per i link
-        /* TODO2 ipertesto
-
-        private const int distanzaNonRipetereHover = 10;
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct POINT
-        {
-            public int x;
-            public int y;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct MSG
-        {
-            public IntPtr hwnd;
-            public int message;
-            public int wParam;
-            public IntPtr lParam;
-            public uint time;
-            public POINT pt;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct NMHDR
-        {
-            public IntPtr hwndFrom;
-            public int idFrom;
-            public int code;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct CHARRANGE
-        {
-            public int cpMin;
-            public int cpMax;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct ENLINK
-        {
-            public NMHDR nmhdr;
-            public int msg;
-            public int wParam;
-            public IntPtr lParam;
-            public CHARRANGE chrg;
-        }
-        */
-        #endregion
-
         #region per la stampa
+        // TODO2 da cancellare
         //        private const int WM_USER = 0x400;
         private const int EM_FORMATRANGE = 1081; // WM_USER + 57;
 
@@ -326,14 +243,57 @@ namespace LaParola
         public RichTextBoxEx()
         {
             // Otherwise, non-standard links get lost when user starts typing next to a non-standard link
-            // this.DetectUrls = false; TODO2 ipertesto
             isRunningOnMono = (Type.GetType("Mono.Runtime") != null);
-            this.IsDocumentEnabled = true;
 
-            /* TODO2 ipertesto
-            MouseLeave += new MouseEventHandler(RichTextBoxEx_MouseLeave);
-            MouseMove += new MouseEventHandler(RichTextBoxEx_MouseMove);
-            */
+            // 1. Create the base style for Hyperlink
+            Style linkStyle = new(typeof(Hyperlink));
+            linkStyle.Setters.Add(new Setter(TextElement.ForegroundProperty, Brushes.Blue));
+            linkStyle.Setters.Add(new Setter(Inline.TextDecorationsProperty, TextDecorations.Underline));
+
+            // 2. Create the hover trigger (turns red when mouse is over)
+            Trigger hoverTrigger = new() { Property = ContentElement.IsMouseOverProperty, Value = true };
+            hoverTrigger.Setters.Add(new Setter(TextElement.ForegroundProperty, Brushes.Red));
+            linkStyle.Triggers.Add(hoverTrigger);
+
+            // 3. Apply the style to the Editor's resources
+            Resources.Add(typeof(Hyperlink), linkStyle);
+
+            // 4. CRITICAL: Ensure the document is enabled to receive UI events
+            IsDocumentEnabled = true;
+
+            // 5. ATTACH GLOBAL HYPERLINK ROUTED EVENTS DIRECTLY TO THE EDITOR
+            // This catches the click/navigation for ALL links, regardless of document resources
+            AddHandler(Hyperlink.RequestNavigateEvent, new System.Windows.Navigation.RequestNavigateEventHandler(Editor_RequestNavigate));
+
+            linkStyle.Setters.Add(new EventSetter(ContentElement.MouseEnterEvent,
+                new MouseEventHandler(HoverPopup.OnHyperlinkHover)));
+        }
+
+        private void Editor_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            e.Handled = true;
+            string uri = e.Uri.OriginalString;
+
+            // CASE 1: Bible Reference
+            if (uri.StartsWith("bibbia:"))
+            {
+                string code = uri.Replace("bibbia:", "");
+                MainWindow.LinkCliccato(1, code);
+            }
+
+            // CASE 2: Cross-Reference to another note
+            else if (uri.StartsWith("nota:"))
+            {
+                string noteName = uri.Replace("nota:", "");
+                MainWindow.LinkCliccato(2, noteName);
+            }
+
+            // CASE 3: External File Target
+            else if (uri.StartsWith("filenome:"))
+            {
+                string targetFile = uri.Replace("filenome:", "");
+                MainWindow.LinkCliccato(3, targetFile);
+            }
         }
 
         #region AggiungiRtf
@@ -634,408 +594,6 @@ namespace LaParola
             Focus();
         }
 
-        /* TODO2 sottolineatura tipo
-        /// <summary>
-        /// Cambia il tipo di sottolineatura.
-        /// </summary>
-        /// <param name="underlineType">Il tipo di sottolineatura.</param>
-        public void SetSelectionUnderlineTypeNotMono(byte underlineType)
-        {
-            ApplyStyleUnderlineNotMono(CFM_UNDERLINETYPE, underlineType);
-        }
-        */
-
-        /* TODO2 ipertesto
-        /// <summary>
-        /// Set the current selection's link style
-        /// </summary>
-        /// <param name="link">true: set link style, false: clear link style</param>
-        public void SetSelectionLink(bool link)
-        {
-            ApplyStyle(CFM_LINK, link);
-        }
-
-        /// <summary>
-        /// Change the selected text to a link. The link text is followed by a @ symbol,
-        /// a letter indicating the type of link, and the given hyperlink text, all of them invisible.
-        /// When clicked on, the whole link text and hyperlink string are given in the LinkClickedEventArgs.
-        /// </summary>
-        /// <param name="link">Invisible hyperlink string to be inserted</param>
-        /// <param name="tipo">The type of link: FineLinkBrano->Bible passage, FineLinkNota->nota, FineLinkFile->file</param>
-        public void InserisciLink(string link, char tipo)
-        {
-            ArgumentNullException.ThrowIfNull(link);
-
-            int selezioneInizio = this.SelectionStart;
-            int selezioneLunghezza = this.Selection.Text.Length;
-            this.Select(selezioneInizio + selezioneLunghezza, 0);
-            link = link.Replace(@"\", @"\\");
-            this.SelectedRtf = @"{\rtf1\ansi{\v " + FineLink1 + tipo + link + FineLink2 + @"}}";
-            this.Select(selezioneInizio, 0);
-            this.SelectedRtf = @"{\rtf1\ansi{\v " + InizioLink + @"}}";
-            ImpostaFormatoDelLink(selezioneInizio, 1 + selezioneLunghezza + link.Length + 3);
-        }
-
-        /// <summary>
-        /// Cambia il formato del testo per visualizzare tutti i link.
-        /// </summary>
-        public void MostraLink()
-        {
-            int posizione = 0;
-            int selezioneInizio = new TextRange(rtb.Document.ContentStart, rtb.Selection.Start).Text.Length;
-            int selezioneLunghezza = Selection.Text.Length;
-            bool modificato = Modified;
-            int posizioneInizio = this.Text.IndexOf(InizioLink, posizione);
-            BloccaRtf(true);
-            try
-            {
-                //                while (this.Text().IndexOf((InizioLink.ToString(), posizione, StringComparison.Ordinal) >= posizione)
-                while (posizioneInizio >= posizione)
-                {
-                    //                    posizioneInizio = this.Text().IndexOf(InizioLink.ToString(), posizione, StringComparison.Ordinal);
-                    //posizioneInizio = this.Text().IndexOf(InizioLink, posizione);
-                    //                    linkFine = this.Text().IndexOf(FineLink2.ToString(), posizioneInizio, StringComparison.Ordinal);
-                    posizione = this.Text.IndexOf(FineLink2, posizioneInizio);
-
-                    if (posizione >= posizioneInizio)
-                    {
-                        ImpostaFormatoDelLink(posizioneInizio, posizione - posizioneInizio + 1);
-                    }
-
-                    posizioneInizio = this.Text.IndexOf(InizioLink, posizione);
-                }
-            }
-            finally
-            {
-                if (selezioneLunghezza >= 0)
-                {
-                    Select(selezioneInizio, selezioneLunghezza);
-                }
-
-                Modified = modificato;
-                BloccaRtf(false);
-            }
-        }
-
-        private void ImpostaFormatoDelLink(int selezioneInizio, int selezioneLunghezza)
-        {
-            if (selezioneInizio == 0)
-            { // necessario fare in questo modo, perché Select(0,...) non funziona se il testo inizia con testo nascosto
-                // nota che quando una nota è aperta e questa routine inserisce i link, il {BS} non funziona. Così uno spazio è sempre inserito all'inizio se c'è un link all'inizio.
-                this.SelectionStart = 0;
-                this.SelectedRtf = @"{\rtf1\ansi  }";
-                this.Select(1, selezioneLunghezza);
-                this.SetSelectionLink(true);
-                this.Select(1, 0);
-                SendKeys.Send("{BS}");
-            }
-            else
-            {
-                this.Select(selezioneInizio, selezioneLunghezza);
-                this.SetSelectionLink(true);
-            }
-        }
-        */
-        /*
-        private void ApplyStyle(UInt32 style, bool on)
-        {
-            ApplyStyle(style, on ? style : 0);
-        }
-
-        private void ApplyStyle(UInt32 style, UInt32 effect)
-        {
-            if (!isRunningOnMono)
-            {
-                //CHARFORMAT charFormato = new CHARFORMAT();
-                charFormato.cbSize = Marshal.SizeOf(charFormato);
-                charFormato.dwMask = style;
-                charFormato.dwEffects = effect;
-
-                SetCharFormatMessageNotMono(ref charFormato);
-            }
-        }
-
-        private void ApplyStyleUnderlineNotMono(UInt32 style, byte underlineType)
-        {
-            if (!isRunningOnMono)
-            {
-                //CHARFORMAT charFormato = new CHARFORMAT();
-                charFormato.cbSize = Marshal.SizeOf(charFormato);
-                charFormato.dwMask = style;
-                charFormato.bUnderlineType = underlineType;
-
-                SetCharFormatMessageNotMono(ref charFormato);
-            }
-        }
-        */
-        #endregion
-
-        #region allineamento
-
-        /// <summary>
-        /// Gets or sets the alignment to apply to the current
-        /// selection or insertion point.
-        /// </summary>
-        /// <remarks>
-        /// Replaces the SelectionAlignment from <see cref="RichTextBox"/>.
-        /// </remarks>
-        public TextAlignment? SelectionAlignment
-        {
-            get
-            {
-                object v = Selection.GetPropertyValue(Paragraph.TextAlignmentProperty);
-                if (v == DependencyProperty.UnsetValue)
-                    return null; // mixed alignment
-                return (TextAlignment)v;
-            }
-            set
-            {
-                Selection.ApplyPropertyValue(Paragraph.TextAlignmentProperty, value);
-            }
-        }
-
-        #endregion
-
-        #region link hover
-        /* TODO2 ipertesto
-        /// <summary>
-        /// Analizza un messaggio di Windows.
-        /// </summary>
-        /// <param name="m">Il messaggio</param>
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case 0x2000 + WM_NOTIFY:
-                    try
-                    {
-                        if (((NMHDR)Marshal.PtrToStructure(m.LParam, typeof(NMHDR))).code == EN_LINK)
-                        {
-                            ENLINK enLink = (ENLINK)Marshal.PtrToStructure(m.LParam, typeof(ENLINK));
-                            if (enLink.msg == WM_MOUSEMOVE || enLink.msg == WM_SETCURSOR && !hoverNotificato)
-                            { // hoverNotificato impedisce due messaggi consecutivi, per esempio SETCURSOR e MOUSEMOVE uno dopo l'altro
-                                string link = Text()[enLink.chrg.cpMin..enLink.chrg.cpMax];
-                                if (!string.IsNullOrEmpty(link) && link[0] == InizioLink && link[^1] == FineLink2)
-                                {
-                                    link = link[..^1][1..];
-                                    LinkHoverEventArgs e = new(this, link);
-                                    OnLinkHover(e);
-                                    hoverNotificato = true;
-                                }
-                            }
-                        }
-                    }
-                    catch { } // non fare hover se c'è stato qualche problema
-                    break;
-            }
-            hoverNotificato = false;
-            try
-            {
-                base.WndProc(ref m);
-            }
-            catch (AccessViolationException)
-            {
-                // su un computer (con Vista Ultimate 64 bit) c'era un errore, che forse possiamo ignorare
-            }
-        }
-
-        /// <summary>
-        /// Mostra il testo ipertestuale quando il mouse è sopra un link.
-        /// </summary>
-        /// <param name="testo">Il testo da visualizzare.</param>
-        /// <param name="versioneDelTesto">La nomeVersione della Bibbia del testo.</param>
-        /// <param name="posizione">La posizione del mouse sul controllo.</param>
-        /// <param name="mostraInTooltip">Se il testo dovrà essere visualizzato anche nelle finestre dell'ipertesto.</param>
-        public void MostraHover(string testo, string versioneDelTesto, System.Windows.Point posizione, bool mostraInTooltip)
-        {
-            // se mostraInTooltip è falso, non permettiamo l'ipertesto con hover da finestre dell'ipertesto (ma è comunque possibile fare il doppio clic)
-            if (string.IsNullOrEmpty(testo) || (StatoFinestra != StatoFinestraIpertesto.Antenato && !mostraInTooltip))
-            {
-                return;
-            }
-
-            // se l'ultimo hover è stato molto vicino, non ripetere la visualizzazione del testo
-            if (Math.Abs(ultimoHover.X - posizione.X) < distanzaNonRipetereHover && Math.Abs(ultimoHover.Y - posizione.Y) < distanzaNonRipetereHover)
-            {
-                this.FindForm().Activate();
-                return;
-            }
-
-            if (fIpertesto == null)
-            {
-                fIpertesto = new Form
-                {
-                    Owner = this.FindForm(),
-                    FormBorderStyle = FormBorderStyle.None,
-                    ShowInTaskbar = false
-                };
-            }
-            if (fIpertesto.Controls.Count == 0)
-            {
-                RichTextBoxEx rtControllo = new()
-                {
-                    Parent = fIpertesto,
-                    Dock = DockStyle.Fill,
-                    BackColor = Color.FromKnownColor(KnownColor.Info),
-                    ForeColor = Color.FromKnownColor(KnownColor.InfoText),
-                    StatoFinestra = StatoFinestraIpertesto.NonUtilizzato,
-                    ReadOnly = true
-                };
-                rtControllo.LinkClicked += new LinkClickedEventHandler(LinkCliccatoNonAntenato);
-            }
-            RichTextBoxEx rtIpertesto = (RichTextBoxEx)fIpertesto.Controls[0];
-
-            if (rtIpertesto.StatoFinestra == StatoFinestraIpertesto.NonUtilizzato)
-            {
-                rtIpertesto.StatoFinestra = StatoFinestraIpertesto.Utilizzato;
-                rtIpertesto.Versione = versioneDelTesto;
-                try
-                {
-                    rtIpertesto.Rtf = testo;
-                    rtIpertesto.MostraLink();
-                }
-                catch
-                {
-                    rtIpertesto.Text = testo;
-                }
-                rtIpertesto.Modified = false;
-                fIpertesto.Show();
-                fIpertesto.Width = 300;
-
-                fIpertesto.Height = Math.Min(Screen.PrimaryScreen.Bounds.Height, rtIpertesto.GetPositionFromCharIndex(rtIpertesto.Text().Length).Y + 30);
-                fIpertesto.Location = new System.Windows.Point(posizione.X - 4, posizione.Y - 4);
-                ultimoHover.X = posizione.X;
-                ultimoHover.Y = posizione.Y;
-                try
-                {
-                    if (fIpertesto.Right + fIpertesto.Owner.MdiParent.Left > Screen.PrimaryScreen.Bounds.Width)
-                    {
-                        fIpertesto.Width = Screen.PrimaryScreen.Bounds.Width - fIpertesto.Owner.MdiParent.Left - fIpertesto.Left - 30;
-                    }
-
-                    if (fIpertesto.Bottom + fIpertesto.Owner.MdiParent.Top > Screen.PrimaryScreen.Bounds.Height)
-                    {
-                        fIpertesto.Height = Screen.PrimaryScreen.Bounds.Height - fIpertesto.Owner.MdiParent.Top - fIpertesto.Top - 30;
-                    }
-                }
-                catch { }
-            }
-        }
-
-        private void RichTextBoxEx_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (Math.Abs(Cursor.Position.X - ultimoHover.X) >= distanzaNonRipetereHover || Math.Abs(Cursor.Position.Y - ultimoHover.Y) >= distanzaNonRipetereHover)
-            { // siamo andati lontano con il mouse, quindi tutti i hover sono ora validi
-                ultimoHover.X = -999;
-                ultimoHover.Y = -999;
-            }
-        }
-
-        private void RichTextBoxEx_MouseLeave(object sender, EventArgs e)
-        {
-            if (StatoFinestra == StatoFinestraIpertesto.Utilizzato)
-            {
-                Form formDaProvare = (Form)(this.Parent); // darebbe errore se RTB fosse il primo, ma non è possibile perché StatoFinestra sarebbe Antenato
-                bool formAttualeEDiscendente = false;
-                if (formDaProvare.OwnedForms.Length > 0)
-                {
-                    do
-                    {
-                        formDaProvare = formDaProvare.OwnedForms[0];
-                        if (formDaProvare == Form.ActiveForm)
-                        {
-                            formAttualeEDiscendente = true;
-                        }
-                    } while (formDaProvare.OwnedForms.Length > 0);
-                }
-                if (!formAttualeEDiscendente)
-                {
-                    AnnullaFinestraEFigli();
-                    formDaProvare.Owner.Activate();
-                }
-            }
-        }
-
-        private void AnnullaFinestraEFigli()
-        {
-            StatoFinestra = StatoFinestraIpertesto.NonUtilizzato;
-            Form formDelRT = (Form)(this.Parent);
-            formDelRT.Visible = false;
-            if (formDelRT.OwnedForms.Length > 0)
-            {
-                ((RichTextBoxEx)(formDelRT.OwnedForms[0].Controls[0])).AnnullaFinestraEFigli();
-            }
-        }
-
-        private void LinkCliccatoNonAntenato(object sender, LinkClickedEventArgs e)
-        {
-            RichTextBoxEx richTextAttuale = (RichTextBoxEx)(sender);
-            if (richTextAttuale != null)
-            {
-                if (richTextAttuale.StatoFinestra != StatoFinestraIpertesto.Antenato)
-                {
-                    RichTextBoxEx richTextGenitore = RichTextDelGenitore(richTextAttuale);
-                    richTextGenitore?.OnLinkClicked(e);
-                }
-            }
-        }
-
-        /// <summary>
-        /// L'evento quando il mouse si ferma sopra un link.
-        /// </summary>
-        public event EventHandler<LinkHoverEventArgs> LinkHoverEvento;
-
-        /// <summary>
-        /// L'evento quando il mouse si ferma sopra un link.
-        /// </summary>
-        /// <param name="e">Gli argomenti dell'evento.</param>
-        protected virtual void OnLinkHover(LinkHoverEventArgs e)
-        {
-            if (StatoFinestra == StatoFinestraIpertesto.Antenato)
-            {
-                // Invokes the delegates. 
-                LinkHoverEvento?.Invoke(e.RichText, e);
-            }
-            else // chiama l'evento nel genitore
-            {
-                RichTextBoxEx richTextGenitore = RichTextDelGenitore((RichTextBoxEx)(this));
-                richTextGenitore?.OnLinkHover(e);
-            }
-        }
-
-        private static RichTextBoxEx RichTextDelGenitore(RichTextBoxEx richTextAttuale)
-        {
-            RichTextBoxEx richTextGenitore = null;
-            try
-            {
-                Form formGenitore = ((Form)(richTextAttuale.Parent)).Owner;
-                for (int i = 0; i < formGenitore.Controls.Count; ++i)
-                {
-                    // per Sfogliare
-                    if (formGenitore.Controls[i].GetType().ToString() == "System.Windows.Forms.Panel")
-                    {
-                        for (int j = 0; j < formGenitore.Controls[i].Controls.Count; ++j)
-                        {
-                            if (formGenitore.Controls[i].Controls[j].GetType().ToString() == "LaParola.RichTextBoxEx")
-                            {
-                                richTextGenitore = (RichTextBoxEx)(formGenitore.Controls[i].Controls[j]);
-                            }
-                        }
-                    }
-                    // per Editor
-                    if (formGenitore.Controls[i].GetType().ToString() == "LaParola.RichTextBoxEx")
-                    {
-                        richTextGenitore = (RichTextBoxEx)(formGenitore.Controls[i]);
-                    }
-                }
-            }
-            catch
-            {
-            }
-            return richTextGenitore;
-        }
-        */
         #endregion
 
         #region metodi generali
@@ -1110,6 +668,7 @@ namespace LaParola
         /// </summary>
         /// <param name="posizione">La posizione del versetto.</param>
         /// <returns>Il riferimento del versetto attuale.</returns>
+        /* TODO2 cancellare?
         public string VersettoAttuale(int posizione)
         {
             if (posizione < 0)
@@ -1120,6 +679,7 @@ namespace LaParola
             int p = IndexUltimoOf(InizioRiferimento, posizione + 1);
             return (p > -1 ? Text.Substring(p + 1, 8) : "");
         }
+        
 
         /// <summary>
         /// Restituisce l'indice dell'ultima volta che una stringa occorre.
@@ -1154,127 +714,8 @@ namespace LaParola
             } while (p >= 0 && p < posizioneFinale);
             return pPrecedente;
         }
-
-        /* TODO2 ipertesto
-        /// <summary>
-        /// Copia il testo selezionato al clipboard; però il testo semplice (non RTF) non contiene il testo nascosto.
-        /// </summary>
-        public void CopiaSenzaTestoNascosto()
-        {
-            string testoRtf = SelectedRtf;
-            bool testoCambiato = false;
-            // qualcosa di simile in testi.cs::RimuoviTestoNascosto
-            while (testoRtf.IndexOf(@"\v\'01", StringComparison.Ordinal) > 0)
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'01", StringComparison.Ordinal), 14); // InizioRiferimento
-                testoCambiato = true;
-            }
-            while (testoRtf.IndexOf(@"\'01", StringComparison.Ordinal) > 0)
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\'01", StringComparison.Ordinal), 12); // InizioRiferimento
-                testoCambiato = true;
-            }
-            while (testoRtf.IndexOf(@"\v\'02\v0 ", StringComparison.Ordinal) > 0) // InizioLink
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'02\v0 ", StringComparison.Ordinal), 10);
-                testoCambiato = true;
-            }
-            while (testoRtf.IndexOf(@"\'02", StringComparison.Ordinal) > 0) // InizioLink
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\'02", StringComparison.Ordinal), 4);
-                testoCambiato = true;
-            }
-            while (testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal) > 0) // FineLink1
-            {
-                int p = testoRtf.IndexOf(@"\'04", testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), StringComparison.Ordinal); // FineLink2
-                if (p > 0 && p + 6 < testoRtf.Length && testoRtf.Substring(p, 7) == @"\'04\v0")
-                {
-                    testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), p - testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal) + 7);
-                }
-                else
-                {
-                    p = testoRtf.IndexOf(@"\'04", testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), StringComparison.Ordinal);
-                    if (p > 0)
-                    {
-                        testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), p - testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal) + 4);
-                    }
-                }
-                testoCambiato = true;
-            }
-            while (testoRtf.IndexOf(@"\v\'0e", StringComparison.Ordinal) > 0)
-            {
-                int p = testoRtf.IndexOf(@"\v0", testoRtf.IndexOf(@"\v\'0e", StringComparison.Ordinal), StringComparison.Ordinal); // ParolaRicercata
-                testoRtf = testoRtf.Remove(p, 3).Remove(testoRtf.IndexOf(@"\v\'0e", StringComparison.Ordinal), 6);
-                testoCambiato = true;
-            }
-            while (testoRtf.IndexOf(@"\'0e", StringComparison.Ordinal) > 0)
-            {
-                int p = testoRtf.IndexOf(@"\v0", testoRtf.IndexOf(@"\'0e", StringComparison.Ordinal), StringComparison.Ordinal); // ParolaRicercata
-                testoRtf = testoRtf.Remove(p, 3).Remove(testoRtf.IndexOf(@"\'0e", StringComparison.Ordinal), 4);
-                testoCambiato = true;
-            }
-            testoRtf = testoRtf.Replace(@"\v\", @"\");
-
-            if (testoCambiato)
-            {
-                RichTextBoxEx clipboardRtf = new()
-                {
-                    Rtf = testoRtf
-                };
-                clipboardRtf.SelectAll();
-                clipboardRtf.Copy();
-            }
-            else
-            {
-                Copy();
-            }
-        }
         */
+
         #endregion
-
     }
-
-    #region LinkHover classi
-    /* TODO2 ipertesto
-    /// <summary>
-    /// Gli argomenti dell'evento quando il mouse si ferma sopra un link.
-    /// </summary>
-    [ComVisible(false)]
-    public class LinkHoverEventArgs : EventArgs
-    {
-        private readonly string linkTesto;
-        /// <summary>
-        /// Il testo del link.
-        /// </summary>
-        public string LinkTesto
-        {
-            get { return linkTesto; }
-            //            set { linkTesto = value; }
-        }
-
-        private readonly RichTextBoxEx richText;
-        /// <summary>
-        /// Il controllo in cui il link esiste.
-        /// </summary>
-        public RichTextBoxEx RichText
-        {
-            get { return richText; }
-            //            set { richText = value; }
-        }
-
-        /// <summary>
-        /// Il costruttore della classe.
-        /// </summary>
-        /// <param name="controllo">Il controllo in cui il link esiste.</param>
-        /// <param name="testo">Il testo del link.</param>
-        public LinkHoverEventArgs(RichTextBoxEx controllo, string testo)
-        {
-            linkTesto = testo;
-            richText = controllo;
-        }
-    }
-
-    */
-
-    #endregion
 }

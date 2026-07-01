@@ -1,5 +1,6 @@
 using AvalonDock.Layout;
 using LaParola.Utilities;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 namespace LaParola.DocumentViews;
+
 // TODO2 toolbar: lista versetti, bookmark, zoom, highlights
 // TODO2 in 7, paralleli, aggiungi, note: servono?
 
@@ -26,6 +28,13 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
             _versione = value;
         }
+    }
+
+    private Riferimento paroleRicercate = new();
+    public Riferimento ParoleRicercate
+    {
+        get { return paroleRicercate; }
+        set { paroleRicercate = value; }
     }
 
     public double ScrollBarValore
@@ -47,6 +56,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
     private bool spostando = false;
     private bool isDraggingThumb = false;
     private bool ctrlPremuto;
+    private readonly bool tipoBibbia;
 
     public byte Libro = 0, Capitolo = 1, Versetto = 1;
 
@@ -74,8 +84,17 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         _versione = versione;
         DataContext = this;
 
-        // TODO2 solo se Bibbia in realtà, altrimenti ScrollBar normale
-        SBViewer.Maximum = MainWindow.Testi.CapitoliFinoALibro(73, versione) + MainWindow.Testi.CapitoliInLibro(73, versione);
+        tipoBibbia = ((MainWindow.Testi.Info(versione).Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia);
+
+        if (tipoBibbia)
+        {
+            SBViewer.Maximum = MainWindow.Testi.CapitoliFinoALibro(73, versione) + MainWindow.Testi.CapitoliInLibro(73, versione);
+        }
+        else
+        {
+            SBViewer.Visibility = Visibility.Collapsed;
+            Viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+        }
 
         Viewer.Document = new FlowDocument
         {
@@ -83,7 +102,8 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             FontSize = 16,// 12 *4 / 3
             PageWidth = double.NaN,
             ColumnWidth = double.PositiveInfinity,
-            PagePadding = new Thickness(20)
+            PagePadding = new Thickness(20),
+            Tag = versione
         };
 
         PopolaIndice();
@@ -100,45 +120,139 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         if (TocTreeView == null) return;
 
         TocTreeView.Items.Clear();
-
-        for (byte numeroLibro = 1; numeroLibro <= 73; numeroLibro++)
+        if (tipoBibbia)
         {
-            int totaleCapitoli = MainWindow.Testi.CapitoliInLibro(numeroLibro, _versione);
-            if (totaleCapitoli == 0) continue;
-
-            string nomeLibro = MainWindow.Testi.libriNomi[numeroLibro];
-
-            TreeViewItem libroNode = new()
+            for (byte numeroLibro = 1; numeroLibro <= 73; numeroLibro++)
             {
-                Header = nomeLibro,
-                Tag = numeroLibro
-            };
+                int totaleCapitoli = MainWindow.Testi.CapitoliInLibro(numeroLibro, _versione);
+                if (totaleCapitoli == 0) continue;
 
-            for (byte c = 1; c <= totaleCapitoli; c++)
-            {
-                TreeViewItem capitoloNode = new()
+                string nomeLibro = MainWindow.Testi.libriNomi[numeroLibro];
+
+                TreeViewItem libroNode = new()
                 {
-                    Header = c.ToString(),
-                    Tag = new Tuple<byte, byte>(numeroLibro, c)
+                    Header = nomeLibro,
+                    Tag = numeroLibro
                 };
-                libroNode.Items.Add(capitoloNode);
-            }
 
-            TocTreeView.Items.Add(libroNode);
+                for (byte c = 1; c <= totaleCapitoli; c++)
+                {
+                    TreeViewItem capitoloNode = new()
+                    {
+                        Header = c.ToString(),
+                        Tag = new Tuple<byte, byte>(numeroLibro, c)
+                    };
+                    libroNode.Items.Add(capitoloNode);
+                }
+
+                TocTreeView.Items.Add(libroNode);
+            }
+        }
+        else
+        {
+            Collection<string> note = MainWindow.Testi.Note(_versione);
+
+            int libroPrecedente = -1, capitoloPrecedente = -1, libro, capitolo;
+            string libroNome = "";
+
+            // Declare the node variables without pre-instantiating them
+            TreeViewItem ultimoLibroNodo = null!;
+            TreeViewItem ultimoCapitoloNodo = null!;
+
+            foreach (string titolo in note)
+            {
+                if (titolo.StartsWith('#'))
+                {
+                    libro = Convert.ToInt32(titolo.Substring(1, 2), CultureInfo.InvariantCulture);
+                    if (libro != libroPrecedente)
+                    {
+                        libroNome = MainWindow.Testi.GetLibroNome(libro);
+
+                        // Explicitly create the Book node
+                        ultimoLibroNodo = new TreeViewItem
+                        {
+                            Header = libroNome,
+                            Tag = libro // Storing the book number
+                        };
+                        TocTreeView.Items.Add(ultimoLibroNodo);
+
+                        libroPrecedente = libro;
+                        capitoloPrecedente = -1; // Reset chapter tracking for the new book
+                    }
+
+                    capitolo = Convert.ToInt32(titolo.Substring(3, 3), CultureInfo.InvariantCulture);
+                    if (capitolo != capitoloPrecedente)
+                    {
+                        // se capitolo==0, la nota è su tutto il libro
+                        string capitoloHeader = libroNome + (capitolo > 0 ? (" " + capitolo.ToString(CultureInfo.InvariantCulture)) : "");
+
+                        // Explicitly create the Chapter node
+                        ultimoCapitoloNodo = new TreeViewItem
+                        {
+                            Header = capitoloHeader,
+                            Tag = new Tuple<int, int>(libro, capitolo)
+                        };
+                        ultimoLibroNodo.Items.Add(ultimoCapitoloNodo);
+
+                        capitoloPrecedente = capitolo;
+                    }
+
+                    // Explicitly create the individual Note node
+                    TreeViewItem ultimoNotaNodo = new()
+                    {
+                        Header = MainWindow.Testi.ConvertiTitoloNotaARiferimento(titolo),
+                        Tag = titolo // il riferimento come titolo di una nota, usato con i pulsanti OK e Cancella
+                    };
+
+                    ultimoCapitoloNodo.Items.Add(ultimoNotaNodo);
+                }
+            }
+            // TODO2 dizionario, libro in ordine - vedi ApriNota.cs
         }
     }
 
     private void TocTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
     {
-        if (TocTreeView.SelectedItem is TreeViewItem selectedItem && selectedItem.Tag is Tuple<byte, byte> destinazione)
+        if (TocTreeView.SelectedItem is not TreeViewItem selectedItem) return;
+
+        // --- CASE 1: BIBLE (Chapter Node) ---
+        if (selectedItem.Tag is Tuple<byte, byte> destinazioneBibbia)
         {
-            byte libroTarget = destinazione.Item1;
-            byte capitoloTarget = destinazione.Item2;
+            byte libroTarget = destinazioneBibbia.Item1;
+            byte capitoloTarget = destinazioneBibbia.Item2;
 
             _ = SpostaTesto(libroTarget, capitoloTarget, 1, true, true);
         }
-    }
 
+        // --- CASE 2: COMMENTARY (Individual Note Leaf Node) ---
+        else if (selectedItem.Tag is string titolo && titolo.StartsWith('#'))
+        {
+            // Extract indices matching your string padding layout (# + 2-digit book + 3-digit chapter + 3-digit verse)
+            byte libro = Convert.ToByte(titolo.Substring(1, 2), CultureInfo.InvariantCulture);
+            byte capitolo = Convert.ToByte(titolo.Substring(3, 3), CultureInfo.InvariantCulture);
+            byte versetto = Convert.ToByte(titolo.Substring(6, 3), CultureInfo.InvariantCulture);
+
+            // Safety Guard: If a comment is written for a whole book (capitolo == 0) 
+            // or a whole chapter (versetto == 0), normalize to 1 so SpostaTesto doesn't crash.
+            byte targetCapitolo = (byte)(capitolo == 0 ? 1 : capitolo);
+            byte targetVersetto = (byte)(versetto == 0 ? 1 : versetto);
+
+            _ = SpostaTesto(libro, targetCapitolo, targetVersetto, true, true);
+        }
+
+        // --- CASE 3: COMMENTARY (Chapter Node, optional navigation) ---
+        /*
+        else if (selectedItem.Tag is Tuple<int, int> destinazioneCommentario)
+        {
+            int libro = destinazioneCommentario.Item1;
+            int capitolo = destinazioneCommentario.Item2;
+            int targetCapitolo = capitolo == 0 ? 1 : capitolo;
+
+            // Navigates to the start of that chapter when the folder item itself is selected
+            _ = SpostaTesto(libro, targetCapitolo, 1, true, true);
+        }*/
+        // TODO2 dizionario, libro
+    }
     private void BtnToggleToc_Click(object sender, RoutedEventArgs e)
     {
         IsTocVisible = !IsTocVisible;
@@ -167,11 +281,14 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         if (capitolo < 1) capitolo = 1;
         if (versetto < 1) versetto = 1;
         if (libro > 73) libro = 73;
-        if (capitolo > MainWindow.Testi.CapitoliInLibro(libro, _versione)) capitolo = (byte)MainWindow.Testi.CapitoliInLibro(libro, _versione);
-        if (versetto > MainWindow.Testi.VersettiInCapitolo(libro, capitolo, _versione)) versetto = (byte)MainWindow.Testi.VersettiInCapitolo(libro, capitolo, _versione);
+        if (tipoBibbia)
+        {
+            if (capitolo > MainWindow.Testi.CapitoliInLibro(libro, _versione)) capitolo = (byte)MainWindow.Testi.CapitoliInLibro(libro, _versione);
+            if (versetto > MainWindow.Testi.VersettiInCapitolo(libro, capitolo, _versione)) versetto = (byte)MainWindow.Testi.VersettiInCapitolo(libro, capitolo, _versione);
+        }
 
-        // OPTIMIZATION: If chapter matches, bypass database refresh entirely
-        if (Libro == libro && Capitolo == capitolo && Viewer.Document != null)
+        // If chapter matches, bypass database refresh entirely
+        if (tipoBibbia && Libro == libro && Capitolo == capitolo && Viewer.Document != null)
         {
             ScrollToVerse(libro, capitolo, versetto, verseTopOffset);
             ScrollBarValore = MainWindow.Testi.CapitoliFinoALibro((byte)(libro - 1), Versione) + capitolo;
@@ -190,19 +307,26 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             return;
         }
 
-        StringBuilder riferimento = new();
         try
         {
-            riferimento.Append(MainWindow.Testi.LibriAbbreviazioniRiconosciute.Abbreviazione(libro)).Append(capitolo).Append('-');
-            byte libroFine = (byte)(libro - 1);
-            UInt16 capitoloFine = (UInt16)(MainWindow.Testi.CapitoliFinoALibro(libroFine, _versione) + capitolo + 5);
-            do
+            if (tipoBibbia)
             {
-                ++libroFine;
-            } while (libroFine < 73 && MainWindow.Testi.CapitoliFinoALibro(libroFine, _versione) < capitoloFine);
-            riferimento.Append(MainWindow.Testi.LibriAbbreviazioniRiconosciute.Abbreviazione(libroFine)).Append(capitoloFine - MainWindow.Testi.CapitoliFinoALibro((byte)(libroFine - 1), _versione));
+                StringBuilder riferimento = new();
+                riferimento.Append(MainWindow.Testi.LibriAbbreviazioniRiconosciute.Abbreviazione(libro)).Append(capitolo).Append('-');
+                byte libroFine = (byte)(libro - 1);
+                UInt16 capitoloFine = (UInt16)(MainWindow.Testi.CapitoliFinoALibro(libroFine, _versione) + capitolo + 5);
+                do
+                {
+                    ++libroFine;
+                } while (libroFine < 73 && MainWindow.Testi.CapitoliFinoALibro(libroFine, _versione) < capitoloFine);
+                riferimento.Append(MainWindow.Testi.LibriAbbreviazioniRiconosciute.Abbreviazione(libroFine)).Append(capitoloFine - MainWindow.Testi.CapitoliFinoALibro((byte)(libroFine - 1), _versione));
+                Viewer.Document = await MainWindow.Testi.FlowDocumentBranoAsync(riferimento.ToString(), _versione, paroleRicercate: ParoleRicercate);
+            }
+            else
+            {
+                Viewer.Document = await MainWindow.Testi.FlowDocumentBranoAsync(new Riferimento(libro, capitolo, versetto), _versione, paroleRicercate: ParoleRicercate);
+            }
 
-            Viewer.Document = await MainWindow.Testi.FlowDocumentBranoAsync(riferimento.ToString(), _versione);
             Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
             RtfColorTransformer.ApplyThemeToDocument(Viewer.Document, true, fg, true);
         }
@@ -211,12 +335,15 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             return;
         }
 
-        await Dispatcher.InvokeAsync(() =>
+        if (tipoBibbia)
         {
-            ScrollToVerse(libro, capitolo, versetto, verseTopOffset);
-        }, System.Windows.Threading.DispatcherPriority.Background);
+            await Dispatcher.InvokeAsync(() =>
+                {
+                    ScrollToVerse(libro, capitolo, versetto, verseTopOffset);
+                }, System.Windows.Threading.DispatcherPriority.Background);
 
-        ScrollBarValore = MainWindow.Testi.CapitoliFinoALibro((byte)(libro - 1), Versione) + capitolo;
+            ScrollBarValore = MainWindow.Testi.CapitoliFinoALibro((byte)(libro - 1), Versione) + capitolo;
+        }
 
         Libro = libro;
         Capitolo = capitolo;
@@ -239,14 +366,21 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
     private void SpostaAltreViewer(bool cronologia = true)
     {
-        var state = GetCurrentTopVerseState();
-        if (!string.IsNullOrEmpty(state.Tag))
+        if (tipoBibbia)
         {
-            string verseTag = state.Tag;
-            byte currentBook = byte.Parse(verseTag.Substring(6, 2));
-            byte currentChapter = byte.Parse(verseTag.Substring(8, 3));
-            byte currentVerse = byte.Parse(verseTag.Substring(11, 3));
-            SpostaAltreViewer(currentBook, currentChapter, currentVerse, cronologia, state.VerseTopOffset);
+            var state = GetCurrentTopVerseState();
+            if (!string.IsNullOrEmpty(state.Tag))
+            {
+                string verseTag = state.Tag;
+                byte currentBook = byte.Parse(verseTag.Substring(6, 2));
+                byte currentChapter = byte.Parse(verseTag.Substring(8, 3));
+                byte currentVerse = byte.Parse(verseTag.Substring(11, 3));
+                SpostaAltreViewer(currentBook, currentChapter, currentVerse, cronologia, state.VerseTopOffset);
+            }
+        }
+        else
+        {
+            SpostaAltreViewer(Libro, Capitolo, Versetto, cronologia);
         }
     }
 
@@ -270,13 +404,17 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                         }
                     }
                 }
-                MainWindow.Testi.UltimaBibbia = Versione;
+                if (tipoBibbia)
+                    MainWindow.Testi.UltimaBibbia = Versione;
             }
         }
     }
 
     public void ScrollToVerse(int libro, int capitolo, int versetto, double verseTopOffset = double.NaN)
     {
+        if (!tipoBibbia)
+            return;
+
         // Enforce immediate rendering loop check before measuring coordinates
         Viewer.UpdateLayout();
 
@@ -296,7 +434,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
                     Rect characterRect = navigator.GetCharacterRect(LogicalDirection.Forward);
 
-                    // FIX: If hidden layout calculations yield empty space, fallback gracefully
+                    // If hidden layout calculations yield empty space, fallback gracefully
                     if (characterRect == Rect.Empty || double.IsInfinity(characterRect.Top))
                     {
                         fce.BringIntoView();
@@ -369,7 +507,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         string versione = _versione;
         if (!MainWindow.Testi.VersioneEsiste(versione))
             return;
-        if ((MainWindow.Testi.Info(versione).Tipo & TestoTipi.Bibbia) != TestoTipi.Bibbia)
+        if (!tipoBibbia)
             versione = MainWindow.Testi.UltimaBibbiaCompleta;
 
         try
@@ -506,11 +644,25 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
 
         if (versettiConFrase != null)
+            ParoleRicercate = versettiConFrase;
+
+        if (versettiConFrase != null && versettiConFrase.Count > 0)
         {
             List<string> risultati = [];
-            foreach (byte[] brano in versettiConFrase.Brani)
+            if (tipoBibbia)
             {
-                risultati.Add(MainWindow.Testi.NormalizzaRiferimento(brano[0], brano[1], brano[2]));
+                foreach (byte[] brano in versettiConFrase.Brani)
+                {
+                    risultati.Add(MainWindow.Testi.NormalizzaRiferimento(brano[0], brano[1], brano[2]));
+                }
+            }
+            else
+            {
+                foreach (string nota in versettiConFrase.Note)
+                {
+                    risultati.Add(MainWindow.Testi.ConvertiTitoloNotaARiferimento(nota));
+                }
+
             }
             CmbSearchResults.ItemsSource = risultati;
             CmbSearchResults.IsEnabled = true;
@@ -632,46 +784,98 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         ctrlPremuto = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         bool isShiftPressed = (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift;
 
-        // TODO2 if ((tipoTesto == TestoTipi.Bibbia) && !tuttiTesti)
-        if (!isShiftPressed)
+        if (tipoBibbia)
         {
-            switch (e.Key)
+            if (!isShiftPressed)
             {
-                case Key.Down:
-                    SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.SmallIncrement, 0));
-                    e.Handled = true;
-                    break;
-
-                case Key.End:
-                    if (ctrlPremuto)
-                    {
-                        SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.Last, 0));
+                switch (e.Key)
+                {
+                    case Key.Down:
+                        SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.SmallIncrement, 0));
                         e.Handled = true;
-                    }
-                    break;
+                        break;
 
-                case Key.Home:
-                    if (ctrlPremuto)
-                    {
-                        SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.First, 0));
+                    case Key.End:
+                        if (ctrlPremuto)
+                        {
+                            SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.Last, 0));
+                            e.Handled = true;
+                        }
+                        break;
+
+                    case Key.Home:
+                        if (ctrlPremuto)
+                        {
+                            SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.First, 0));
+                            e.Handled = true;
+                        }
+                        break;
+
+                    case Key.PageDown:
+                        SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.LargeIncrement, 0));
                         e.Handled = true;
-                    }
-                    break;
+                        break;
 
-                case Key.PageDown:
-                    SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.LargeIncrement, 0));
-                    e.Handled = true;
-                    break;
+                    case Key.PageUp:
+                        SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.LargeDecrement, 0));
+                        e.Handled = true;
+                        break;
 
-                case Key.PageUp:
-                    SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.LargeDecrement, 0));
-                    e.Handled = true;
-                    break;
+                    case Key.Up:
+                        SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.SmallDecrement, 0));
+                        e.Handled = true;
+                        break;
+                }
+            }
+        }
+        else
+        {
+            // Force direct viewport scrolling layout commands because 
+            // EditingCommands are disabled when IsReadOnly="True"
+            if (sender is RichTextBox rtb)
+            {
+                switch (e.Key)
+                {
+                    case Key.Down:
+                        rtb.LineDown();
+                        e.Handled = true;
+                        break;
 
-                case Key.Up:
-                    SBViewer_Scroll(sender, new ScrollEventArgs(ScrollEventType.SmallDecrement, 0));
-                    e.Handled = true;
-                    break;
+                    case Key.Up:
+                        rtb.LineUp();
+                        e.Handled = true;
+                        break;
+
+                    case Key.PageDown:
+                        rtb.PageDown();
+                        e.Handled = true;
+                        break;
+
+                    case Key.PageUp:
+                        rtb.PageUp();
+                        e.Handled = true;
+                        break;
+
+                    case Key.Home:
+                        if (ctrlPremuto)
+                        {
+                            rtb.ScrollToHome();
+                            e.Handled = true;
+                        }
+                        break;
+
+                    case Key.End:
+                        if (ctrlPremuto)
+                        {
+                            rtb.ScrollToEnd();
+                            e.Handled = true;
+                        }
+                        break;
+
+                    default:
+                        e.Handled = false;
+                        break;
+                }
             }
         }
     }
@@ -686,11 +890,14 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
     private void Viewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
+        if (!tipoBibbia)
+            return;
+
         if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
         {
             return;
         }
-        // TODO2 if ((tipoTesto == TestoTipi.Bibbia) && !tuttiTesti)
+
         e.Handled = true;
         int wheelScrollLines = SystemParameters.WheelScrollLines;
         int righe = Math.Abs(e.Delta * wheelScrollLines / 120);
@@ -713,7 +920,12 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
     private async void SBViewer_Scroll(object sender, ScrollEventArgs e)
     {
-        // FIX: Re-entry lock safeguard structured inside thread safety scopes
+        if (!tipoBibbia)
+        {
+            return; // SBViewer non esiste se non Bibbia, ma controlliamo comunque
+        }
+
+        // Re-entry lock safeguard structured inside thread safety scopes
         if (spostando) return;
 
         try
@@ -832,7 +1044,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             TextPointer scanner = topPointer;
             while (scanner != null)
             {
-                // FIX: Match against TextElement to expose ContentStart safely
+                // Match against TextElement to expose ContentStart safely
                 if (scanner.Parent is TextElement te && te.Tag != null)
                 {
                     string s = te.Tag.ToString() ?? "";

@@ -58,7 +58,6 @@ namespace LaParola.Services
 
                 int maxServerId = allMessages.Max(m => m.Id);
 
-                isFirstLaunch = false; // TODO2 da cancellare nella prossima versione
                 // 4. Handle First-Time Users
                 if (isFirstLaunch)
                 {

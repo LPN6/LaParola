@@ -10,7 +10,13 @@
     <Compile Update="Dialogs\HelpFlyout.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Dialogs\InputDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialogs\MessageBoxLPN.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ToolViews\LibraryToolView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ToolViews\SearchToolView.xaml.cs">

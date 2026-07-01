@@ -10,9 +10,9 @@ using System.Windows.Media;
 
 namespace LaParola.ToolViews
 {
-    // TODO2: scegliere parola
-    // salva in lista versetti, cercare in lista versetti
-    // anche commentari dizionari, libri
+    // TODO2 scegliere parola
+    // TODO2 salva in lista versetti, cercare in lista versetti
+    // TODO2 anche dizionari, libri (bisogna nascondere brano in cui ricercare, ma non se è commentario + dizionario/libro)
 
     public partial class SearchToolView : UserControl
     {
@@ -20,8 +20,16 @@ namespace LaParola.ToolViews
         {
             InitializeComponent();
 
+            AggiornaVersioniDisponibili();
+
+            RicercaPulsanteStato();
+        }
+
+        public void AggiornaVersioniDisponibili()
+        {
+            cbVersione.Items.Clear();
             string s = MainWindow.settings.RicercaTestoSelezionato;
-            foreach (string v in MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia))
+            foreach (string v in MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia | TestoTipi.Commentario))
             {
                 cbVersione.Items.Add(v);
                 if (v == s)
@@ -35,8 +43,6 @@ namespace LaParola.ToolViews
                 if (cbVersione.SelectedIndex == -1)
                     cbVersione.SelectedIndex = 0;
             }
-
-            RicercaPulsanteStato();
         }
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
@@ -164,6 +170,7 @@ namespace LaParola.ToolViews
             if (versettiConFrase != null)
             {
                 FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(versettiConFrase, versioneSelezionata);
+                doc.Tag = versioneSelezionata;
 
                 //if (Services.ThemeManager.IsDark(MainWindow.settings.ThemeMode))
                 //{
@@ -171,7 +178,7 @@ namespace LaParola.ToolViews
                 RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
                 //}
 
-                App.DockingHost.SendFlowDocumentToActive(doc, title);
+                App.DockingHost.SendFlowDocumentToActiveEditor(doc, title);
             }
         }
     }

@@ -1,8 +1,11 @@
 using AvalonDock.Layout;
+using LaParola.Dialogs;
 using LaParola.DocumentViews;
 using LaParola.Models;
 using LaParola.Utilities;
+using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Runtime;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -93,6 +96,8 @@ public partial class OptionsToolView : UserControl
             .Select(f => f.Source)
             .OrderBy(f => f)];
 
+        InitializeBiblePreferences(); //deve essere fatto dopo che Testi è pronto
+
         switch (MainWindow.settings?.ControlloMessaggi)
         {
             case 0:
@@ -113,6 +118,30 @@ public partial class OptionsToolView : UserControl
         }
 
         nonSalvare = false;
+    }
+
+    public void InitializeBiblePreferences()
+    {
+        // 1. Fetch available Bibles
+        Collection<string> bibles = MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia);
+
+        // 2. Map them to a list and insert an empty placeholder at index 0
+        var comboBoxItems = bibles.Select(b => new { Nome = b, Titolo = b }).ToList();
+        //var comboBoxItems = bibles.Select(b => new { Nome = b.Info.Nome, Titolo = b.Info.Titolo }).ToList();
+        comboBoxItems.Insert(0, new
+        {
+            Nome = "",
+            Titolo = (string)(Application.Current.TryFindResource("OpzioniTestiBibbiaPreferitaNessuna") ?? "(none)")
+        });
+
+        // 3. Assign the sources independently
+        ComboPref1.ItemsSource = comboBoxItems;
+        ComboPref2.ItemsSource = comboBoxItems;
+        ComboPref3.ItemsSource = comboBoxItems;
+
+        ComboPref1.SelectedValue = MainWindow.settings.BibbiaPreferita1 ?? string.Empty;
+        ComboPref2.SelectedValue = MainWindow.settings.BibbiaPreferita2 ?? string.Empty;
+        ComboPref3.SelectedValue = MainWindow.settings.BibbiaPreferita3 ?? string.Empty;
     }
 
     private static void ApplicaFontAdEsempio(TextBlock tbEsempio, string categoria)
@@ -204,6 +233,12 @@ public partial class OptionsToolView : UserControl
                     break;
                 case "NodeFonts":
                     targetElement = SectionFonts;
+                    break;
+                case "TreeTesti":
+                    targetElement = SectionTestiHeader;
+                    break;
+                case "NodeBibbiaPreferita":
+                    targetElement = SectionBibbiaPreferita;
                     break;
                 case "TreeAggiornamenti":
                     targetElement = SectionAggiornamentiHeader;
@@ -337,6 +372,16 @@ public partial class OptionsToolView : UserControl
             default:
                 break;
         }
+        App.Settings.Save(MainWindow.settings);
+    }
+
+    private void ComboPref_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (nonSalvare) return;
+
+        MainWindow.settings.BibbiaPreferita1 = ComboPref1.SelectedValue as string ?? string.Empty;
+        MainWindow.settings.BibbiaPreferita2 = ComboPref2.SelectedValue as string ?? string.Empty;
+        MainWindow.settings.BibbiaPreferita3 = ComboPref3.SelectedValue as string ?? string.Empty;
         App.Settings.Save(MainWindow.settings);
     }
 
@@ -478,6 +523,9 @@ public partial class OptionsToolView : UserControl
         {
             AggiornaDocumentiVisualizzazione();
         }
+
+        if (cambiaTema)
+            HoverPopup.CambiaTema();
 
         App.Settings.Save(_settings);
     }

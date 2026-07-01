@@ -23,22 +23,22 @@
                     <WrapPanel VerticalAlignment="Center" ItemHeight="32">
 
                         <!-- Bold -->
-                        <Button Command="EditingCommands.ToggleBold" CommandTarget="{Binding ElementName=Editor}" MinWidth="34" Height="32"
-                ToolTip="{DynamicResource MenuGrassetto}" Style="{StaticResource ToolbarIconButton}" FontSize="14">
+                        <ToggleButton Name="BoldBtn" Command="EditingCommands.ToggleBold" CommandTarget="{Binding ElementName=Editor}" MinWidth="34" Height="28"
+                ToolTip="{DynamicResource MenuGrassetto}" Style="{StaticResource ToolbarToggleIconButton}" FontSize="14">
                             <TextBlock Text="{DynamicResource MenuGrassettoAbb}" FontSize="14" FontWeight="Bold"/>
-                        </Button>
+                        </ToggleButton>
 
                         <!-- Italic -->
-                        <Button Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=Editor}" MinWidth="34" Height="32"
-                ToolTip="{DynamicResource MenuCorsivo}" Style="{StaticResource ToolbarIconButton}" FontSize="14">
+                        <ToggleButton Name="ItalicBtn" Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=Editor}" MinWidth="34" Height="28"
+                ToolTip="{DynamicResource MenuCorsivo}" Style="{StaticResource ToolbarToggleIconButton}" FontSize="14">
                             <TextBlock Text="{DynamicResource MenuCorsivoAbb}" FontSize="14" FontStyle="Italic"/>
-                        </Button>
+                        </ToggleButton>
 
                         <!-- Underline -->
-                        <Button Command="EditingCommands.ToggleUnderline" CommandTarget="{Binding ElementName=Editor}" MinWidth="34" Height="32"
-                ToolTip="{DynamicResource MenuSottolineato}" Style="{StaticResource ToolbarIconButton}" FontSize="14">
+                        <ToggleButton Name="UnderlineBtn" Command="EditingCommands.ToggleUnderline" CommandTarget="{Binding ElementName=Editor}" MinWidth="34" Height="28"
+                ToolTip="{DynamicResource MenuSottolineato}" Style="{StaticResource ToolbarToggleIconButton}" FontSize="14">
                             <TextBlock Text="{DynamicResource MenuSottolineatoAbb}" FontSize="14" TextDecorations="Underline"/>
-                        </Button>
+                        </ToggleButton>
 
                         <!-- Separator -->
                         <Rectangle Width="1" Height="18" Margin="6,0"
@@ -98,13 +98,13 @@
         x:Name="HelpFlyoutControl" Grid.Column="1" Margin="0,8,0,0" HelpText="{DynamicResource EditorAiuto}" HelpClicked="HelpFlyout_OnHelpClicked"/>
             </Grid>
             <Grid Grid.Row="1">
-                <RichTextBox x:Name="Editor" Margin="0,6,0,0" AcceptsTab="True" VerticalScrollBarVisibility="Auto">
-                    <RichTextBox.Resources>
+                <controls:RichTextBoxEx x:Name="Editor" SelectionChanged="Editor_SelectionChanged" Margin="0,6,0,0" AcceptsTab="True" VerticalScrollBarVisibility="Auto">
+                    <controls:RichTextBoxEx.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0"/>
                         </Style>
-                    </RichTextBox.Resources>
-                </RichTextBox>
+                    </controls:RichTextBoxEx.Resources>
+                </controls:RichTextBoxEx>
                 <Border x:Name="FindReplacePanel" 
         Background="{DynamicResource ControlBackgroundBrush}" 
         BorderBrush="{DynamicResource SubtleBorderBrush}" 

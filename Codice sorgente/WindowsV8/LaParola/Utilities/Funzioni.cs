@@ -1,6 +1,7 @@
 ﻿using AvalonDock.Layout;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace LaParola.Utilities
@@ -69,53 +70,6 @@ namespace LaParola.Utilities
         { // anche in funzioni.cs
             string linguaPrincipale = LinguaPrincipale(lingua);
             return (linguaPrincipale == "he" || linguaPrincipale == "ar");
-        }
-
-        /// <summary>
-        /// Cancella il testo nascosto da una stringa in formato RTF.
-        /// </summary>
-        /// <param name="testoRtf">La stringa da cui cancellare il testo nascosto.</param>
-        /// <returns>Una stringa senza il testo nascosto.</returns>
-        public static string RimuoviTestoNascosto(string testoRtf)
-        {
-            // qualcosa di simile in RichTextBoxEx.cs::CopiaSenzaTestoNascosto
-            while (testoRtf.IndexOf(@"\v\'01", StringComparison.Ordinal) > 0)
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'01", StringComparison.Ordinal), 14); // InizioRiferimento
-            }
-            while (testoRtf.IndexOf(@"\'01", StringComparison.Ordinal) > 0)
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\'01", StringComparison.Ordinal), 12); // InizioRiferimento
-            }
-            while (testoRtf.IndexOf(@"\v\'02\v0 ", StringComparison.Ordinal) > 0) // InizioLink
-            {
-                testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'02\v0 ", StringComparison.Ordinal), 10);
-            }
-            while (testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal) > 0) // FineLink1
-            {
-                int p = testoRtf.IndexOf(@"\'04", testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), StringComparison.Ordinal); // FineLink2
-                if (p > 0 && p + 6 < testoRtf.Length && testoRtf.Substring(p, 7) == @"\'04\v0")
-                {
-                    testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), p - testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal) + 7);
-                }
-                else
-                {
-                    p = testoRtf.IndexOf(@"\'04", testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), StringComparison.Ordinal);
-                    if (p > 0)
-                    {
-                        testoRtf = testoRtf.Remove(testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal), p - testoRtf.IndexOf(@"\v\'03", StringComparison.Ordinal) + 4);
-                    }
-                }
-            }
-            while (testoRtf.IndexOf(@"\v\'0e", StringComparison.Ordinal) > 0) // testo ricercato
-            {
-                int p = testoRtf.IndexOf(@"\v0", testoRtf.IndexOf(@"\v\'0e", StringComparison.Ordinal), StringComparison.Ordinal);
-                if (p > 0)
-                {
-                    testoRtf = testoRtf.Remove(p, 3).Remove(testoRtf.IndexOf(@"\v\'0e", StringComparison.Ordinal), 6);
-                }
-            }
-            return testoRtf.Replace(@"\v\", @"\").Replace(@"\'0e", "").Replace(@"\'02", "").Replace(@"\v0", "");
         }
 
         public static string ConvertiUnicodeInRtf(string rtf)

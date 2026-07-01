@@ -1,3 +1,4 @@
+using LaParola.ToolViews;
 using System.Windows;
 
 namespace LaParola.Models;
@@ -37,9 +38,17 @@ public class AppSettings
 
     public FormatoTesto Formato { get; set; } = new FormatoTesto();
 
+    public string UltimaBibbia { get; set; } = "";
+    public string UltimaBibbiaCompleta { get; set; } = "";
+
     public int ControlloMessaggi { get; set; } = 1;
     public DateTime UltimoControlloMessaggi { get; set; } = DateTime.MinValue;
     public int UltimoMessaggioControllatoId { get; set; } = 0;
+    public string BibbiaPreferita1 { get; set; } = "";
+    public string BibbiaPreferita2 { get; set; } = "";
+    public string BibbiaPreferita3 { get; set; } = "";
+
+    public LibraryToolState LibraryState { get; set; } = new LibraryToolState();
 
     public string RicercaTestoSelezionato { get; set; } = "";
 

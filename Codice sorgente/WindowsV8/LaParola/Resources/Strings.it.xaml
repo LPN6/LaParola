@@ -14,6 +14,7 @@
     <sys:String x:Key="MenuModifica">_Modifica</sys:String>
     <sys:String x:Key="MenuVisualizza">_Visualizza</sys:String>
     <sys:String x:Key="MenuVisualizzaBibbia">_Bibbia</sys:String>
+    <sys:String x:Key="MenuVisualizzaCommentario">_Commentario</sys:String>
     <sys:String x:Key="MenuStrumenti">_Strumenti</sys:String>
     <sys:String x:Key="MenuAiuto">_?</sys:String>
     
@@ -43,6 +44,7 @@
     <sys:String x:Key="MenuSostituisci">Sostit_uisci...</sys:String>
     <sys:String x:Key="MenuSostituisciProssima">S_ostituisci successivo</sys:String>
 
+    <sys:String x:Key="MenuBiblioteca">_Biblioteca</sys:String>
     <sys:String x:Key="MenuRicerca">_Ricerca</sys:String>
     <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
     <sys:String x:Key="MenuConverter">_Convertitore misure</sys:String>
@@ -121,6 +123,54 @@
     <sys:String x:Key="FileUnsaved">(non salvato)</sys:String>
     <sys:String x:Key="FileNone">(nessuno)</sys:String>
 
+    <sys:String x:Key="BibliotecaTitolo">Biblioteca</sys:String>
+    <sys:String x:Key="BibliotecaAiuto">La grigia elenca tutti i testi installati. Cliccare su una riga mostra ulteriori informazioni nel pannello a destra, un doppio clic apre il testo nel programma. Le due righe superiori danno vari modi per ricercare o filtare i testi. Lascia il mouse sopra gli elementi della finestra per ulteriori informationi.</sys:String>
+    <sys:String x:Key="BibliotecaRicercaHint">Ricerca...</sys:String>
+    <sys:String x:Key="BibliotecaRicercaAiuto">Digita alcune lettere, e i testi saranno filtrati per includere solo quelli che contengono quelle lettere nel nome, autore, o abbreviazione.</sys:String>
+    <sys:String x:Key="BibliotecaNome">Nome</sys:String>
+    <sys:String x:Key="BibliotecaAutore">Autore</sys:String>
+    <sys:String x:Key="BibliotecaTipo">Tipo</sys:String>
+    <sys:String x:Key="BibliotecaData">Data</sys:String>
+    <sys:String x:Key="BibliotecaCasaEditrice">Casa editrice</sys:String>
+    <sys:String x:Key="BibliotecaCopyright">Copyright</sys:String>
+    <sys:String x:Key="BibliotecaLingua">Lingua</sys:String>
+    <sys:String x:Key="BibliotecaAbbreviazione">Abbreviazione</sys:String>
+    <sys:String x:Key="BibliotecaISBN">ISBN</sys:String>
+    <sys:String x:Key="BibliotecaNomeDelFile">Nome del file</sys:String>
+    <sys:String x:Key="BibliotecaDescrizione">Descrizione</sys:String>
+    <sys:String x:Key="BibliotecaVersione">Versione del file</sys:String>
+    <sys:String x:Key="BibliotecaVersioneDelleNote">Bibbia delle note</sys:String>
+    <sys:String x:Key="BibliotecaBloccato">Sola lettura?</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoSbloccato">No</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoBloccato">Sì</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoBloccatoSempre">Sì permanente</sys:String>
+    <sys:String x:Key="BibliotecaTipoBibbiaAiuto">Contiene il testo di una versione della Bibbia</sys:String>
+    <sys:String x:Key="BibliotecaTipoCommentarioAiuto">Contiene commenti ai versetti della Bibbia (per es. commentario)</sys:String>
+    <sys:String x:Key="BibliotecaTipoDizionarioAiuto">Contiene spiegazioni di termini (per es. dizionario)</sys:String>
+    <sys:String x:Key="BibliotecaTipoLibroAiuto">Contiene testo con un ordine sequenziale (per es. libro con capitoli)</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoAiuto">Scegli quale tipo di testi visualizzare nella grigia</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoTutti">Tutti i tipi</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoBibbia">Bibbia</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoCommentario">Commentario</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoDizionario">Dizionario</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoLibro">Libro</sys:String>
+    <sys:String x:Key="BibliotecaFiltroLinguaAiuto">Scegli la lingua dei testi da visualizzare nella grigia</sys:String>
+    <sys:String x:Key="BibliotecaFiltroLinguaQualsiasi">Qualsiasi</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataAiuto">Scegli la data dei testi da visualizzare nella grigia: 'prima' o 'dopo', e poi una data (4 cifre)</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataQualsiasi">Qualsiasi</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataPrima">Prima del</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataDopo">Dopo il</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibri">Aggiungi testi</sys:String>
+    <sys:String x:Key="BibliotecaGrigiaAiuto">Un elenco di tutti i testi installati. Cliccare su una riga mostra ulteriori informazioni sul testo, un doppio clic apre il testo nel programma. Lasciare il mouse sopra le icone sotto 'Tipo' le spiega. I testi possono essere reordinati cliccando sull'instestazione di una colonna. Spostare le righe verticali fra le intestazioni cambia la larghezza delle colonne. La largehezza della grigia può essere modificata spostando la riga fra essa e il pannello a destra.</sys:String>
+    <sys:String x:Key="BibliotecaCancella">Elimina testo</sys:String>
+    <sys:String x:Key="BibliotecaCancellaAiuto">Cancella il testo dal disco (sarà richiesta una conferma)</sys:String>
+    <sys:String x:Key="BibliotecaCancellaDomanda">Sei sicuro di volere cancella '{0}' dal tuo disco?\n(Se è un file di LaParola, potrà essere riscaricato e reinstallato.)</sys:String>
+    <sys:String x:Key="BibliotecaCancellaTitolo">Conferma eliminazione</sys:String>
+    <sys:String x:Key="BibliotecaRinomina">Rinomina testo</sys:String>
+    <sys:String x:Key="BibliotecaRinominaAiuto">Dà un nuovo nome al testo</sys:String>
+    <sys:String x:Key="BibliotecaRinominaDomanda">Digita il nuovo nome di questo texto:</sys:String>
+    <sys:String x:Key="BibliotecRinominaTitolo">Rinomina testo</sys:String>
+
     <sys:String x:Key="OpzioniTitolo">Opzioni</sys:String>
     <sys:String x:Key="OpzioniAiuto">Scegli le impostazioni dell'app, che vengono applicate immediate. Lasciate il mouse sopra un'impostazione per ulteriori informazioni. Clicca su un titolo sul lato sinistro per saltare immediatamente a quella sezione.</sys:String>
     <sys:String x:Key="OpzioniAspetto">Aspetto</sys:String>
@@ -159,6 +209,13 @@
     <sys:String x:Key="OpzioniFontRiferimenti">Carattere dei riferimenti:</sys:String>
     <sys:String x:Key="OpzioniFontRiferimentiApice">In apice</sys:String>
     <sys:String x:Key="OpzioniFontModifica">Modifica...</sys:String>
+    <sys:String x:Key="OpzioniTesti">Testi</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita">Versioni della Bibbia preferite</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferitaAiuto">Scegli le versioni della Bibbia che saranno usate per mostrare il testo di collegamenti alla Bibbia. Se il riferimento non è trovato nella prima versione preferita, sarà cercato nella seconda, e poi nella terza.</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferitaNessuna">(nessuna)</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita1">Prima scelta:</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita2">Seconda scelta:</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita3">Terza scelta:</sys:String>
     <sys:String x:Key="OpzioniAggiornamenti">Aggiornamenti</sys:String>
     <sys:String x:Key="OpzioniAggiornamentiMessaggi">Messaggi sugli aggiornamenti</sys:String>
     <sys:String x:Key="OpzioniMessaggiMai">Non controllare mai per messaggi</sys:String>
@@ -180,7 +237,7 @@
 
     <sys:String x:Key="RicercaTitolo">Ricerca</sys:String>
     <sys:String x:Key="RicercaFrase">Espressione da ricercare:</sys:String>
-    <sys:String x:Key="RicercaAiuto">Digita l'espressione da ricercare e scegli la versione e la sezione della Bibbia in cui vuoi cercare. L'app mostrerà tutti i versetti che corrispondono ai criteri di ricerca. Clicca il pulsante alla destra dell'espressione da ricercare per una spiegazione dei simboli che possono essere utilizzati.</sys:String>
+    <sys:String x:Key="RicercaAiuto">Digita l'espressione da ricercare, poi scegli la versione della Bibbia o il commentario e poi la sezione della Bibbia in cui cercare. L'app mostrerà tutti i versetti che corrispondono ai criteri di ricerca. Clicca il pulsante alla destra dell'espressione da ricercare per una spiegazione dei simboli che possono essere utilizzati.</sys:String>
     <sys:String x:Key="RicercaEspressioneAiuto">Digita qui l'espressione che vuoi cercare. Clicca il pulsante alla destra per una spiegazione dei simboli che possono essere utilizzati.</sys:String>
     <sys:String x:Key="RicercaEspressioneAiutoTitolo">Aiuto per l'espressione da ricercare</sys:String>
     <sys:String x:Key="RicercaEspressioneAiutoLungo">{\rtf\fs28 L'espressione da ricercare contiene un elenco di parole (composte da lettere, trattini e apostrofi) e alcuni simboli fra le parole che specificano il rapporto fra le parole da ricercare. Le parole possono anche contenere i simboli * e ?: * corrisponde a qualsiasi numero di lettere e ? corrisponde ad una lettera qualsiasi.\par\par
@@ -242,7 +299,7 @@
     <sys:String x:Key="RicercaBranoLettereAltri">Lettere di altri</sys:String>
 
     <sys:String x:Key="MostraTitolo">Mostra brano</sys:String>
-    <sys:String x:Key="MostraAiuto">Digita il riferimento del brano che vuoi mostrare e scegliere la/le versione/i che vuoi leggere. "Alterna testi" mostra un versetto alla volta nelle diverse traduzioni. Il testo viene aperto in una finestra dell'editor, dove può essere modificato, copiato o salvato.</sys:String>
+    <sys:String x:Key="MostraAiuto">Digita il riferimento del brano che vuoi mostrare e scegliere la/le versione/i della Bibbia e/o i commentari che vuoi leggere. "Alterna testi" mostra un versetto alla volta nei diversi testi scelti. Il testo viene aperto in una finestra dell'editor, dove può essere modificato, copiato o salvato.</sys:String>
     <sys:String x:Key="MostraRiferimento">Versetti da mostrare:</sys:String>
     <sys:String x:Key="MostraRiferimentoAiuto">Digitare qui il riferimento del brano da visualizzare, per esempio Gen 1:1-2, 1P 3:16. L'app capisce molti formati diversi per i riferimenti.</sys:String>
     <sys:String x:Key="MostraTesti">Testi da mostrare:</sys:String>
@@ -268,7 +325,7 @@
     <sys:String x:Key="MisureMoneteUnita">euro,lepton/spicciolo,quadrante/quattrino,asse/soldo,denaro/paga giornaliera,dramma,didramma,statere/siclo,aurei,mina,talento</sys:String>
 
     <sys:String x:Key="InformazioniTitolo">Informazioni su LaParola</sys:String>
-    <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nRisorse gratuite per leggere, studiare e insegnare la Bibbia in italiano</sys:String>
+    <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nRisorse gratuite per leggere, studiare e insegnare la Bibbia in italiano.\n\nPer informazioni sui testi installati, vedi lo Strumento Biblioteca.</sys:String>
 
     <sys:String x:Key="Aiuto">Aiuto per questo pannello</sys:String>
     <sys:String x:Key="AiutoApri">Apri Centro assistenza</sys:String>

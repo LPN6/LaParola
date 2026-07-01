@@ -91,13 +91,43 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             ColumnWidth = double.PositiveInfinity,
             PagePadding = new Thickness(20)
         };
+
         Editor.TextChanged += Editor_TextChanged;
+
+        PreviewMouseLeftButtonDown += Editor_PreviewMouseLeftButtonDown;
     }
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
     {
         // TODO2: Open correct help section
         MessageBox.Show("Open Help Centre");
+    }
+
+    private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
+    {
+        if (Editor == null) return;
+
+        if (BoldBtn != null)
+        {
+            // Recuperiamo il peso del font del testo attualmente selezionato
+            object lFontWeight = Editor.Selection.GetPropertyValue(TextElement.FontWeightProperty);
+
+            // Se la selezione è mista (un po' in grassetto e un po' no), WPF restituisce DependencyProperty.UnsetValue
+            BoldBtn.IsChecked = (lFontWeight != DependencyProperty.UnsetValue && lFontWeight.Equals(FontWeights.Bold));
+        }
+
+        if (ItalicBtn != null)
+        {
+            object lFontStyle = Editor.Selection.GetPropertyValue(TextElement.FontStyleProperty);
+            ItalicBtn.IsChecked = (lFontStyle != DependencyProperty.UnsetValue && lFontStyle.Equals(FontStyles.Italic));
+        }
+
+        if (UnderlineBtn != null)
+        {
+            object lTextDecorations = Editor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            UnderlineBtn.IsChecked = (lTextDecorations != DependencyProperty.UnsetValue && lTextDecorations.Equals(TextDecorations.Underline));
+        }
+
     }
 
     private void UpdateTitle()
@@ -135,6 +165,38 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             return;
 
         IsDirty = true;
+    }
+
+    private void Editor_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        // Check if the user clicked exactly on a Hyperlink element
+        if (e.OriginalSource is DependencyObject source)
+        {
+            // Walk up the visual/logical tree to find the Hyperlink
+            DependencyObject current = source;
+            while (current != null)
+            {
+                if (current is Hyperlink link)
+                {
+                    // Trigger the click programmatically
+                    link.DoClick();
+
+                    // Mark event as handled so the RichTextBox doesn't move the caret
+                    e.Handled = true;
+                    return;
+                }
+
+                // Move up the tree (FrameworkContentElements like Run/Hyperlink use LogicalTreeHelper)
+                if (current is FrameworkContentElement fce)
+                {
+                    current = fce.Parent;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
     }
 
     public void SetDocument(FlowDocument doc)

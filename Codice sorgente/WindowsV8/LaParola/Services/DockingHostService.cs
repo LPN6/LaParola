@@ -2,7 +2,6 @@ using AvalonDock;
 using AvalonDock.Layout;
 using LaParola.DocumentViews;
 using LaParola.ToolViews;
-using LaParola.Utilities;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows;
@@ -107,10 +106,10 @@ public class DockingHostService
             return;
         }
 
-        // INTERCEPT OPTIONS: Redirect to the wide LayoutDocumentPane (Visual Studio style)
-        if (contentId == "tool.options")
+        // INTERCEPT OPTIONS, LIBRARY: Redirect to the wide LayoutDocumentPane (Visual Studio style)
+        if (contentId == "tool.options" || contentId == "tool.library")
         {
-            ShowOptionsAsDocument(contentId);
+            ShowToolAsDocument(contentId);
             return;
         }
 
@@ -139,7 +138,13 @@ public class DockingHostService
             {
                 v = new ConverterToolView();
                 titolo = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter"); ;
-            } /* vecchio stile, nel panello a sinistra
+            }
+            /* vecchio stile, nel panello a sinistra
+            else if (contentId == "tool.library")
+            {
+                v = new LibraryToolView();
+                titolo = (string)(System.Windows.Application.Current.TryFindResource("LibreriaTitolo") ?? "Library");
+            }
             else if (contentId == "tool.options")
             {
                 v = new OptionsToolView();
@@ -172,7 +177,9 @@ public class DockingHostService
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
             else if (contentId == "tool.converter")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");
-            /*else if (contentId == "tool.options") vecchio stile
+            /*else if (contentId == "tool.library")
+                anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("LibreriaTitolo") ?? "Library");
+            else if (contentId == "tool.options") vecchio stile
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
             */
             else
@@ -183,7 +190,7 @@ public class DockingHostService
         }
     }
 
-    private void ShowOptionsAsDocument(string contentId)
+    private void ShowToolAsDocument(string contentId)
     {
         // Check if the wide Options document tab is already open
         LayoutDocument? existingDoc = _dock!.Layout.Descendents()
@@ -193,7 +200,14 @@ public class DockingHostService
         if (existingDoc != null)
         {
             // If it's already open, refresh the localized title and bring it to focus
-            existingDoc.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+            if (contentId == "tool.options")
+            {
+                existingDoc.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+            }
+            else if (contentId == "tool.library")
+            {
+                existingDoc.Title = (string)(System.Windows.Application.Current.TryFindResource("BibliotecaTitolo") ?? "Library");
+            }
             existingDoc.IsSelected = true;
             existingDoc.IsActive = true;
             return;
@@ -206,17 +220,35 @@ public class DockingHostService
 
         if (docPane == null) return;
 
-        // Instantiate the options view and title
-        OptionsToolView v = new();
-        string titolo = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
-
-        // Wrap it inside a LayoutDocument instead of a LayoutAnchorable
-        LayoutDocument layoutDoc = new()
+        LayoutDocument layoutDoc;
+        if (contentId == "tool.options")
         {
-            Title = titolo,
-            ContentId = contentId, // "tool.options"
-            Content = v
-        };
+            // Instantiate the options view and title
+            OptionsToolView v = new();
+            string titolo = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
+
+            // Wrap it inside a LayoutDocument instead of a LayoutAnchorable
+            layoutDoc = new()
+            {
+                Title = titolo,
+                ContentId = contentId, // "tool.options"
+                Content = v
+            };
+        }
+        else if (contentId == "tool.library")
+        {
+            // Instantiate the library view and title
+            LibraryToolView v = new();
+            string titolo = (string)(System.Windows.Application.Current.TryFindResource("BibliotecaTitolo") ?? "Library");
+            // Wrap it inside a LayoutDocument instead of a LayoutAnchorable
+            layoutDoc = new()
+            {
+                Title = titolo,
+                ContentId = contentId, // "tool.library"
+                Content = v
+            };
+        }
+        else return; // non dovrebbe succedere
 
         // Append to the wide document center and activate
         docPane.Children.Add(layoutDoc);
@@ -252,6 +284,7 @@ public class DockingHostService
         {
             view.SetDocument(doc);
         }
+
         view.ParentDocument = layoutDoc;
         docPane.Children.Add(layoutDoc);
         view.Visibility = Visibility.Visible;
@@ -376,13 +409,8 @@ public class DockingHostService
         GetActiveEditor()?.SaveDocumentAs();
     }
 
-    public void SendFlowDocumentToActive(FlowDocument doc, string titolo)
+    public void SendFlowDocumentToActiveEditor(FlowDocument doc, string titolo)
     {
-        if (_dock?.ActiveContent is IFlowDocumentHost host)
-        {
-            host.SetDocument(doc);
-            return;
-        }
         OpenEditorDocument(doc, titolo);
     }
 }

@@ -14,6 +14,7 @@
     <sys:String x:Key="MenuModifica">_Edit</sys:String>
     <sys:String x:Key="MenuVisualizza">_View</sys:String>
     <sys:String x:Key="MenuVisualizzaBibbia">_Bible</sys:String>
+    <sys:String x:Key="MenuVisualizzaCommentario">_Commentary</sys:String>
     <sys:String x:Key="MenuStrumenti">_Tools</sys:String>
     <sys:String x:Key="MenuAiuto">_Help</sys:String>
 
@@ -43,6 +44,7 @@
     <sys:String x:Key="MenuSostituisci">R_eplace...</sys:String>
     <sys:String x:Key="MenuSostituisciProssima">Replace Ne_xt</sys:String>
 
+    <sys:String x:Key="MenuBiblioteca">_Library</sys:String>
     <sys:String x:Key="MenuRicerca">_Search</sys:String>
     <sys:String x:Key="MenuTextGenerator">Show _Passage</sys:String>
     <sys:String x:Key="MenuConverter">Measures _Converter</sys:String>
@@ -119,7 +121,55 @@
     <sys:String x:Key="FileLabel">File:</sys:String>
     <sys:String x:Key="FileUnsaved">(unsaved)</sys:String>
     <sys:String x:Key="FileNone">(none)</sys:String>
-    
+
+    <sys:String x:Key="BibliotecaTitolo">Library</sys:String>
+    <sys:String x:Key="BibliotecaAiuto">The table lists all the installed texts. Clicking on a row shows more information in the right side panel, double clicking opens the text in the program. The top two rows provide various ways to search for or filter the texts. Hover over the elements of the window for more information.</sys:String>
+    <sys:String x:Key="BibliotecaRicercaHint">Search...</sys:String>
+    <sys:String x:Key="BibliotecaRicercaAiuto">Type some letters, and the texts will be filtered to include only those that contain those letters in the name, author, or abbreviation.</sys:String>
+    <sys:String x:Key="BibliotecaNome">Name</sys:String>
+    <sys:String x:Key="BibliotecaAutore">Author</sys:String>
+    <sys:String x:Key="BibliotecaTipo">Type</sys:String>
+    <sys:String x:Key="BibliotecaData">Date</sys:String>
+    <sys:String x:Key="BibliotecaCasaEditrice">Publisher</sys:String>
+    <sys:String x:Key="BibliotecaCopyright">Copyright</sys:String>
+    <sys:String x:Key="BibliotecaLingua">Language</sys:String>
+    <sys:String x:Key="BibliotecaAbbreviazione">Abbreviation</sys:String>
+    <sys:String x:Key="BibliotecaISBN">ISBN</sys:String>
+    <sys:String x:Key="BibliotecaNomeDelFile">File Name</sys:String>
+    <sys:String x:Key="BibliotecaDescrizione">Description</sys:String>
+    <sys:String x:Key="BibliotecaVersione">File Versione</sys:String>
+    <sys:String x:Key="BibliotecaVersioneDelleNote">Bible of the Notes</sys:String>
+    <sys:String x:Key="BibliotecaBloccato">Read only?</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoSbloccato">No</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoBloccato">Yes</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoBloccatoSempre">Yes permanent</sys:String>
+    <sys:String x:Key="BibliotecaTipoBibbiaAiuto">Contains the text of a Bible translation</sys:String>
+    <sys:String x:Key="BibliotecaTipoCommentarioAiuto">Contains comments on the verses of the Bible (eg commentary)</sys:String>
+    <sys:String x:Key="BibliotecaTipoDizionarioAiuto">Contains explanations of terms (eg dictionary)</sys:String>
+    <sys:String x:Key="BibliotecaTipoLibroAiuto">Contains text with a sequential order (eg book with chapter)</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoAiuto">Choose what type of texts to view in the table</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoTutti">All Types</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoBibbia">Bible</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoCommentario">Commentary</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoDizionario">Dictionary</sys:String>
+    <sys:String x:Key="BibliotecaFiltroTipoLibro">Book</sys:String>
+    <sys:String x:Key="BibliotecaFiltroLinguaAiuto">Choose the language of the texts to view in the table</sys:String>
+    <sys:String x:Key="BibliotecaFiltroLinguaQualsiasi">All</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataAiuto">Choose the date of the texts to view in the table: first 'before' or 'after', and then a date (4 digits)</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataQualsiasi">Any Date</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataPrima">Before</sys:String>
+    <sys:String x:Key="BibliotecaFiltroDataDopo">After</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibri">Add Texts</sys:String>
+    <sys:String x:Key="BibliotecaGrigiaAiuto">A list of all the installed texts. Clicking on a row shows more information about it, double clicking opens the text in the program. Hovering the mouse over the icons under 'Type' explains them. The texts can be ordered by clicking a column heading. Moving the vertical lines between the column headings changes the column widths. The width of the table can be changed by moving the line between it and the right side panel.</sys:String>
+    <sys:String x:Key="BibliotecaCancella">Delete Text</sys:String>
+    <sys:String x:Key="BibliotecaCancellaAiuto">Deletes the text from the hard disk (you will be asked for confirmation)</sys:String>
+    <sys:String x:Key="BibliotecaCancellaDomanda">Are you sure you want to delete '{0}' from your disk?\n(If it is a file from LaParola, you can download and install it again later.)</sys:String>
+    <sys:String x:Key="BibliotecaCancellaTitolo">Confirm Deletion</sys:String>
+    <sys:String x:Key="BibliotecaRinomina">Rename Text</sys:String>
+    <sys:String x:Key="BibliotecaRinominaAiuto">Give a text a new name</sys:String>
+    <sys:String x:Key="BibliotecaRinominaDomanda">Enter the new name for this text:</sys:String>
+    <sys:String x:Key="BibliotecRinominaTitolo">Rename Text</sys:String>
+
     <sys:String x:Key="OpzioniTitolo">Options</sys:String>
     <sys:String x:Key="OpzioniAiuto">Choose the app settings, which are applied immediately. Hover over a setting for more information. Click a title on the left side to jump immediately to that section.</sys:String>
     <sys:String x:Key="OpzioniAspetto">Appearance</sys:String>
@@ -158,6 +208,13 @@
     <sys:String x:Key="OpzioniFontRiferimenti">References Font:</sys:String>
     <sys:String x:Key="OpzioniFontRiferimentiApice">Superscript</sys:String>
     <sys:String x:Key="OpzioniFontModifica">Modify...</sys:String>
+    <sys:String x:Key="OpzioniTesti">Texts</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita">Preferred Bible Version(s)</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferitaAiuto">Choose the Bible version(s) that will be used to display the text of links to the Bible. If the reference is not found in the first preferred Bible version, it will be looked for in the second, and then in the third.</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferitaNessuna">(none)</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita1">First Choice:</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita2">Second Choice:</sys:String>
+    <sys:String x:Key="OpzioniTestiBibbiaPreferita3">Third Choice:</sys:String>
     <sys:String x:Key="OpzioniAggiornamenti">Updates</sys:String>
     <sys:String x:Key="OpzioniAggiornamentiMessaggi">Messages about Updates</sys:String>
     <sys:String x:Key="OpzioniMessaggiMai">Never check for messages</sys:String>
@@ -179,7 +236,7 @@
 
     <sys:String x:Key="RicercaTitolo">Search</sys:String>
     <sys:String x:Key="RicercaFrase">Search Expression:</sys:String>
-    <sys:String x:Key="RicercaAiuto">Type the search expression you want to use and choose the Bible translation and part of the Bible you want to search. The app will display all verses that match the search criteria. Click the button to the right of the search expression for an explanation of the symbols that can be used.</sys:String>
+    <sys:String x:Key="RicercaAiuto">Type the search expression you want to use, then choose the Bible translation or commentary and then the part of the Bible you want to search. The app will display all verses that match the search criteria. Click the button to the right of the search expression for an explanation of the symbols that can be used.</sys:String>
     <sys:String x:Key="RicercaEspressioneAiuto">Type here the expression you want to search for. Click the button to the right for an explanation of the symbols that can be used.</sys:String>
     <sys:String x:Key="RicercaEspressioneAiutoTitolo">Help for the Search Expression</sys:String>
     <sys:String x:Key="RicercaEspressioneAiutoLungo">{\rtf\fs28 The search expression contains a list of words (composed of letters, hyphens and apostrophes) and some symbols between the words that specify the relationship between the words to search for. The words can also contain the symbols * and ?: * corresponds to any number of letters and ? corresponds to any letter.\par\par
@@ -241,7 +298,7 @@
     <sys:String x:Key="RicercaBranoLettereAltri">Letters of Others</sys:String>
 
     <sys:String x:Key="MostraTitolo">Show Passage</sys:String>
-    <sys:String x:Key="MostraAiuto">Type the reference of the passage you want to display and choose the Bible translation(s) you want to read. "Alternate Texts" shows one verse at a time in the different translations. The text is open in an editor window, where it can be modified, copied, or saved.</sys:String>
+    <sys:String x:Key="MostraAiuto">Type the reference of the passage you want to display and choose the Bible translation(s) and/or commentaries you want to read. "Alternate Texts" shows one verse at a time in the different texts that are chosen. The text is opened in an editor window, where it can be modified, copied, or saved.</sys:String>
     <sys:String x:Key="MostraRiferimento">Verses to Display:</sys:String>
     <sys:String x:Key="MostraRiferimentoAiuto">Type here the reference of the passage you want to view, for example Gen 1:1-2, 1P 3:16. The app understands many different formats for the references.</sys:String>
     <sys:String x:Key="MostraTesti">Texts to Show:</sys:String>
@@ -267,7 +324,7 @@
     <sys:String x:Key="MisureMoneteUnita">euro,lepton/copper coin,kodrante/penny,assarion/penny,denarius/daily wage,drachma/silver coin,didrachma,shekel,aureus/gold coin,mina/pound,talent</sys:String>
 
     <sys:String x:Key="InformazioniTitolo">About LaParola</sys:String>
-    <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nResources to freely read, study, and teach the Bible in Italian</sys:String>
+    <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nResources to freely read, study, and teach the Bible in Italian.\n\nFor information about the installed texts, see the Library Tool.</sys:String>
 
     <sys:String x:Key="Aiuto">Help about this panel</sys:String>
     <sys:String x:Key="AiutoApri">Open Help Centre</sys:String>
