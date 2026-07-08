@@ -1,0 +1,60 @@
+services:
+  db:
+    image: mysql:5
+    container_name: laparola-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
+    ports:
+      - "13306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max_allowed_packet=128M
+      - --bind-address=0.0.0.0
+      - --secure-file-priv=/var/lib/mysql-files
+      - --innodb-autoinc-lock-mode=0
+    volumes:
+      - dbdata:/var/lib/mysql
+      # Data files mounted (without :ro) so that the MySQL entrypoint can prepare them
+      # and LOAD DATA INFILE can read them. You run imports manually.
+      - ./Sito/Database:/var/lib/mysql-files/data
+      - ./Sito/Pagine/brani:/var/lib/mysql-files/brani
+
+  web:
+    image: php:8.1-apache
+    container_name: laparola-web
+    restart: unless-stopped
+    init: true
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+    volumes:
+      # The entire website (PHP pages, assets, etc.)
+      - ./Sito/Pagine:/var/www/html:ro
+    depends_on:
+      - db
+    # Configure PHP + Apache at runtime (no Dockerfile).
+    # Extensions and ini settings are applied on container start.
+    command: >
+      sh -c "
+        php -m | grep -q mysqli || docker-php-ext-install -j\$(nproc) mysqli &&
+        a2enmod rewrite headers &&
+        echo 'short_open_tag=On' > /usr/local/etc/php/conf.d/99-short-tags.ini &&
+        echo 'upload_max_filesize=32M' > /usr/local/etc/php/conf.d/99-uploads.ini &&
+        echo 'post_max_size=32M' >> /usr/local/etc/php/conf.d/99-uploads.ini &&
+        echo 'memory_limit=256M' >> /usr/local/etc/php/conf.d/99-uploads.ini &&
+        apache2-foreground
+      "
+
+volumes:
+  dbdata:
