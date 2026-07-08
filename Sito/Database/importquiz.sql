@@ -6,6 +6,6 @@ CREATE TABLE Quiz (id_d MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, 
 DROP TABLE IF EXISTS QuizTemi;
 CREATE TABLE QuizTemi (id_t MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, tema VARCHAR(255) NOT NULL);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\quiz.txt" INTO TABLE Quiz FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' (id_t,domanda,risposta1,risposta2,risposta3,risposta4,risposta,spiegazione);
+LOAD DATA LOCAL INFILE "quiz.txt" INTO TABLE Quiz FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' (id_t,domanda,risposta1,risposta2,risposta3,risposta4,risposta,spiegazione);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\quiztemi.txt" INTO TABLE QuizTemi LINES TERMINATED BY '\r\n' (tema);
+LOAD DATA LOCAL INFILE "quiztemi.txt" INTO TABLE QuizTemi LINES TERMINATED BY '\r\n' (tema);

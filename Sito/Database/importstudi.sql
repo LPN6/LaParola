@@ -13,8 +13,8 @@ DROP TABLE IF EXISTS Voti;
 CREATE TABLE Voti (id_s MEDIUMINT UNSIGNED NOT NULL, id_a MEDIUMINT UNSIGNED NOT NULL, voto TINYINT NOT NULL);
 ALTER TABLE Voti ADD PRIMARY KEY key_voto(id_s,id_a);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\studi.txt" INTO TABLE Studi FIELDS TERMINATED BY '|' (id_a,titolo,libro1,capitolo1,versetto1,libro2,capitolo2,versetto2,testo,data,indirizzo);
+LOAD DATA LOCAL INFILE "studi.txt" INTO TABLE Studi FIELDS TERMINATED BY '|' (id_a,titolo,libro1,capitolo1,versetto1,libro2,capitolo2,versetto2,testo,data,indirizzo);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\autori.txt" INTO TABLE Autori FIELDS TERMINATED BY '|' (nome,password,email,emailpubblico,sito,descrizione);
+LOAD DATA LOCAL INFILE "autori.txt" INTO TABLE Autori FIELDS TERMINATED BY '|' (nome,password,email,emailpubblico,sito,descrizione);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\voti.txt" INTO TABLE Voti FIELDS TERMINATED BY '|' (id_s,id_a,voto);
+LOAD DATA LOCAL INFILE "voti.txt" INTO TABLE Voti FIELDS TERMINATED BY '|' (id_s,id_a,voto);

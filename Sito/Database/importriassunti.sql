@@ -4,4 +4,4 @@ DROP TABLE IF EXISTS Riassunti;
 CREATE TABLE Riassunti (id_riass MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, Libro SMALLINT UNSIGNED NOT NULL, Capitolo SMALLINT UNSIGNED NOT NULL, Testo TEXT);
 ALTER TABLE Riassunti ADD UNIQUE KEY key_riass(Libro,Capitolo);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\riassunti.txt" INTO TABLE Riassunti FIELDS TERMINATED BY '|' (Libro,Capitolo,Testo);
+LOAD DATA LOCAL INFILE "riassunti.txt" INTO TABLE Riassunti FIELDS TERMINATED BY '|' (Libro,Capitolo,Testo);

@@ -4,4 +4,4 @@ DROP TABLE IF EXISTS Interlineare;
 CREATE TABLE Interlineare (id_inter MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, Libro SMALLINT UNSIGNED NOT NULL, Capitolo SMALLINT UNSIGNED NOT NULL, Versetto SMALLINT UNSIGNED NOT NULL, Parola SMALLINT UNSIGNED NOT NULL, Greco TINYTEXT, Radice TINYTEXT, NR06 TINYTEXT, NR94 TINYTEXT, R2 TINYTEXT);
 ALTER TABLE Interlineare ADD UNIQUE KEY key_inter(Libro,Capitolo,Versetto,Parola);
 
-LOAD DATA LOCAL INFILE "c:\\users\\richa\\OneDrive\\siti\\laparola\\mysql\\interlineare.txt" INTO TABLE Interlineare FIELDS TERMINATED BY '|' (Libro,Capitolo,Versetto,Parola,Greco, Radice,NR06, NR94,R2);
+LOAD DATA LOCAL INFILE "interlineare.txt" INTO TABLE Interlineare FIELDS TERMINATED BY '|' (Libro,Capitolo,Versetto,Parola,Greco, Radice,NR06, NR94,R2);
