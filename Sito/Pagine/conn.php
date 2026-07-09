@@ -12,7 +12,7 @@ $db_pass = getenv('DB_PASS') ?: '';
 $db_name = getenv('DB_NAME') ?: 'laparola_testo';
 $db_port = (int)(getenv('DB_PORT') ?: '3306');
 
-$conn=mysqli_connect("127.0.0.1","laparola_testo","","laparola_testo");
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
 
 if (mysqli_connect_errno())
   errore2('collegamento');
