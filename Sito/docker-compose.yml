@@ -20,10 +20,10 @@ services:
       - --innodb-autoinc-lock-mode=0
     volumes:
       - dbdata:/var/lib/mysql
-      # Data files mounted (without :ro) so that the MySQL entrypoint can prepare them
+      # Data files mounted so that the MySQL entrypoint can prepare them
       # and LOAD DATA INFILE can read them. You run imports manually.
-      - ./Sito/Database:/var/lib/mysql-files/data
-      - ./Sito/Pagine/brani:/var/lib/mysql-files/brani
+      - ./Database:/var/lib/mysql-files/data
+      - ./Pagine/brani:/var/lib/mysql-files/brani
 
   web:
     image: php:8.1-apache
@@ -40,7 +40,7 @@ services:
       DB_NAME: ${DB_NAME}
     volumes:
       # The entire website (PHP pages, assets, etc.)
-      - ./Sito/Pagine:/var/www/html:ro
+      - ./Pagine:/var/www/html:ro
     depends_on:
       - db
     # Configure PHP + Apache at runtime (no Dockerfile).
