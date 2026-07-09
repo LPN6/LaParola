@@ -53,6 +53,8 @@ if (!$ceiextra)
 echo "<p><a href=\"/testo.php?riferimento=".urlencode($libronome).$capitolo."&versioni[]=Martini\" title=\"Il capitolo nella versione Martini\">Martini</a></p>";
 if (!$apoc && !$ceiextra)
 echo "<p><a href=\"/testo.php?riferimento=".urlencode($libronome).$capitolo."&versioni[]=Diodati\" title=\"Il capitolo nella versione Diodati\">Diodati</a></p>";
+if (!$ceiextra)
+echo "<p><a href=\"/testo.php?riferimento=".urlencode($libronome).$capitolo."&versioni[]=Volgare\" title=\"Il capitolo nella versione Volgare\">Bibbia in Volgare</a></p>";
 if (!$apoc && !$ceiextra) {
 echo "<h2>Commentari italiani</h2>";
 echo "<p><a href=\"/testo.php?riferimento=".urlencode($libronome).$capitolo."&versioni[]=CommentarioHenry\" title=\"Un commentario del capitolo\">Commentario completo</a> di Matthew Henry</p>";

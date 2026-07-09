@@ -117,6 +117,7 @@ Per installare questi componenti, usa il comando di aggiornamento nel programma,
 <p><a href="/v7/Tintori.laparola.gz">Tintori</a></p>
 <p><a href="/v7/Martini.laparola.gz">Martini</a></p>
 <p><a href="/v7/Diodati.laparola.gz">Diodati</a></p>
+<p><a href="/v7/Bibbia in Volgare.laparola.gz">Bibbia in Volgare</a></p>
 <p><a href="/v7/Interlineare Riveduta 2020.laparola.gz">Interlineare Riveduta 2020</a></p>
 <p><a href="/v7/Interlineare Nuova Riveduta.laparola.gz">Interlineare Nuova Riveduta</a></p>
 <p><a href="/v7/Interlineare Nuova Riveduta (1994).laparola.gz">Interlineare Nuova Riveduta (1994)</a></p>

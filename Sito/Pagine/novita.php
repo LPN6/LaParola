@@ -14,6 +14,18 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260709"></a>
+<h2>9 luglio 2026</h2>
+<p>Aggiunta la versione italiana <i>Bibbia in Volgare</i>, la seconda traduzione della Bibbia in italiano, nel 1471 di Nicolas Jenson, ristampata per cura di Carlo Negroni dal 1882 al 1887.</p>
+<p>Ulteriori libri aggiunti al <i>Commentario di Giovanni Calvino</i>; ora ci sono Genesi-Numeri, Lamentazioni, Gioele, Abdia-Aggeo, Malachia e il Nuovo Testamento.</p>
+<p>Come sempre, i testi sono disponibili sul sito e in tutte le app di LaParola.</p>
+
+<a name="20260704"></a>
+<h2>4 luglio 2026</h2>
+<p>La nuova versione di prova (8.0.3) &egrave; disponibile, in cui puoi leggere anche i commentari e c'&egrave; una finestra per gestire tutti i libri installati.
+Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.
+</p>
+
 <a name="20260612"></a>
 <h2>12 giugno 2026</h2>
 <p>La nuova versione di prova (8.0.2) &egrave; disponibile, in cui puoi visualizzare il testo dell'intera Bibbia.

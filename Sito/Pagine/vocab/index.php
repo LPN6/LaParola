@@ -15,10 +15,10 @@ require("../capo.php");
 require("indvocab.php");
 ?>
 <h2>Scaricamento</h2>
-<p>Il vocabolario pu&ograve; essere scaricato in tre formati:</p>
+<p>Il vocabolario pu&ograve; essere scaricato in due formati:</p>
 <ul>
 <li>come collezione di note del <a href="/programma/windows.php">programma per Windows</a> disponibile su questo sito; usando il vocabolario in questo modo &egrave; possibile collegarlo con il testo greco;</li>
-<li>come <a href="/file/vocabgda.zip">file della Guida</a> di Windows (1.88Mb);</li>
+<!--<li>come <a href="/file/vocabgda.zip">file della Guida</a> di Windows (1.88Mb);</li>-->
 <li>come <a href="/file/vocabrtf.zip">file RTF</a> (668Kb), che pu&ograve; essere aperto in qualsiasi elaboratore di testo; non ci sono i collegamenti ipertestuali fra le parole, ma &egrave; il formato che pu&ograve; essere usato su quasi qualunque computer.</li>
 </ul>
 <p>Per leggere il file della Guida oppure il file RTF, bisogna prima scaricare il <a href="greek.ttf" title="Un file da copiare sul proprio computer per visualizzare i caratteri greci">font greco</a> che usa, e copiarlo alla directory dei font (in Windows, di solito c:\windows\fonts\).</p>

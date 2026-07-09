@@ -4,7 +4,7 @@
 
 <div class="menu" style="text-align:center;">
 <!--        <p><a href="/" title="Homepage del sito della Bibbia" style="display: inline-block;min-height: 24px;">Bibbia</a> | <a href="/programma/" title="Un programma gratuito da scaricare per studiare la Bibbia sul proprio computer" style="display: inline-block;min-height: 24px;">Programma</a> | <a href="/brani/" title="Risposte a domande comuni sui brani della Bibbia che sono difficili da capire" style="display: inline-block;min-height: 24px;">Brani difficili</a> | <a href="/studi/" title="Un indice di studi biblici su Internet" style="display: inline-block;min-height: 24px;">Studi biblici</a> | <a href="/nomi/" title="Tutti i nomi della Bibbia" style="display: inline-block;min-height: 24px;">Enciclopedia</a> | <a href="/vocab/" title="Vocabolario greco-italiano del Nuovo Testamento" style="display: inline-block;min-height: 24px;">Vocabolario</a> | <a href="/letoggi.php" title="4 brani biblici da leggere" style="display: inline-block;min-height: 24px;">La Bibbia in un anno</a> | <a href="/intro/" title="Studi sulle caratteristiche e sul contenuto della Bibbia" style="display: inline-block;min-height: 24px;">Che cosa &egrave; la Bibbia</a> | <a href="/novita.php" title="Cambiamenti recenti a questo sito" style="display: inline-block;min-height: 24px;">Novit&agrave;</a> | <a href="mailto:&#105;&#110;&#102;&#111;&#64;&#108;&#97;&#112;&#97;&#114;&#111;&#108;&#97;&#46;&#110;&#101;&#116;" title="Il mio indirizzo" style="display: inline-block;min-height: 24px;">Scrivimi</a></p>-->
-    <p class="piccolo">Copyright marzo 2026 (March 2026)</p>
+    <p class="piccolo">Copyright luglio 2026 (July 2026)</p>
 </div>
 </main>
 
@@ -65,10 +65,11 @@
             <ul class="navbar-submenu">
                 <li class="navbar-subitem"><a href="/novita.php" class="navbar-sublink" title="Cambiamenti recenti a questo sito">Novit&agrave;</a></li>
                 <li class="navbar-subitem"><a href="/faq/" class="navbar-sublink" title="Se hai una domanda, controlla prima qui!">Domande comuni</a></li>
-                <li class="navbar-subitem"><a href="/privacy.php" class="navbar-sublink" title="Privacy policy">Privacy</a></li>
-                <li class="navbar-subitem"><a href="/english.html" class="navbar-sublink" title="Questa pagina in inglese">English</a></li>
+                <li class="navbar-subitem"><a href="/english.html" class="navbar-sublink" title="La pagina principale in inglese">English</a></li>
+                <li class="navbar-subitem"><a href="/sorgente.php" class="navbar-sublink" title="Tutto per ricreare il sito e le app">Sorgente e risorse</a></li>
                 <li class="navbar-subitem"><a href="/inserire_bibbia.php" class="navbar-sublink" title="Come creare un link al testo biblico sul tuo sito">Visualizzare la Bibbia sul tuo sito</a></li>
                 <li class="navbar-subitem"><a href="/mailing_list.php" class="navbar-sublink" title="Ricevere messaggi regolari dal sito">Mailing list</a></li>
+                <li class="navbar-subitem"><a href="/privacy.php" class="navbar-sublink" title="Privacy policy">Privacy</a></li>
                 <li class="navbar-subitem"><a href="/chisono.php" class="navbar-sublink" title="Sul creatore di questo sito">Chi sono</a></li>
                 <li class="navbar-subitem"><a href="mailto:&#105;&#110;&#102;&#111;&#64;&#108;&#97;&#112;&#97;&#114;&#111;&#108;&#97;&#46;&#110;&#101;&#116;" class="navbar-sublink" title="Il mio indirizzo">Scrivimi</a></li>
             </ul>

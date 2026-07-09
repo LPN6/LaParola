@@ -1,5 +1,14 @@
 [
   {
+    "Id": 2,
+    "Title": "Version 8.0.3",
+    "Content": "The fourth beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are the Bible commentaries and the window to show your Library of books.",
+    "TitleIt": "Versione 8.0.3",
+    "ContentIt": "La quarta versione beta è ora disponibile a https://www.laparola.net/programma/windowsbeta.php . Le novità principali sono i commentari biblici e la finestra per mostrare la tua Biblioteca di libri.",
+    "Date": "2026-07-02T07:00:00"
+  }
+
+  {
     "Id": 1,
     "Title": "Version 8.0.2",
     "Content": "This is the third beta version. This new function of sending messages about the latest updates was added. In this way you will receive a message when the next version is available. Other new features:\n- View the whole Bible in a continuous text\n- Find and Replace in the editor\n- Options for the format of the text; the Options also have an table of contents on the left side. (If the Options window was open the last time you closed the program, you will need to close and reopen the Options window so that it is shown in a wider space.)",

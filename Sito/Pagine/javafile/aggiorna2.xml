@@ -123,6 +123,17 @@ La Società Biblica Britannica e Forestiera; 1877</descrizione>
 <tipo>Bibbia</tipo>
 </file>
 <file>
+<componente>Bibbia in Volgare</componente>
+<descrizione>L'edizione del 1471 di Nicolas Jenson, ristampata per cura di Carlo Negroni dal 1882 al 1887</descrizione>
+<versione>1.1.48</versione>
+<motivo>Prima versione</motivo>
+<url>https://www.laparola.net/javafile/bibbia_in_volgare.lpj.lzma</url>
+<url2>https://www.laparola.net/javafile/bibbia_in_volgare.zip</url2>
+<dimensione>3101134</dimensione>
+<dimensione2>4301996</dimensione2>
+<tipo>Bibbia</tipo>
+</file>
+<file>
 <componente>King James Version</componente>
 <descrizione>Del 1611. Questa è l'edizione di Oxford del testo standard del 1769.
 </descrizione>
@@ -545,12 +556,12 @@ La Società Biblica Britannica e Forestiera; 1877</descrizione>
 <file>
 <componente>Commentario di Giovanni Calvino</componente>
 <descrizione>Una traduzione del commentario da Giovanni Calvino (1550-1564), di Genesi e Matteo-1Giovanni.</descrizione>
-<versione>1.1.52</versione>
-<motivo>Prima versione</motivo>
+<versione>1.1.53</versione>
+<motivo>Molti libri della Bibbia aggiunti</motivo>
 <url>https://www.laparola.net/javafile/commentario_di_giovanni_calvino.lpj.lzma</url>
 <url2>https://www.laparola.net/javafile/commentario_di_giovanni_calvino.zip</url2>
-<dimensione>7112342</dimensione>
-<dimensione2>9788383</dimensione2>
+<dimensione>9708311</dimensione>
+<dimensione2>13381308</dimensione2>
 <tipo>Commentario</tipo>
 </file>
 <file>

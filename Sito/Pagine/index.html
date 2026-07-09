@@ -200,9 +200,9 @@ source: autoLibri
 <span id="tabellaVisualizza"></span>
 <script type="text/javascript">
 <!--
-var s = "<select multiple=\"multiple\" name=\"versioni[]\" id=\"versioni\" size=\"25\">";
+var s = "<select multiple=\"multiple\" name=\"versioni[]\" id=\"versioni\" size=\"26\">";
 var nvers = getCookie("nVisVers");
-var i, versNR=0, versCEI=0,versND=0,versR2=0,versNR94=0,versBG=0,versLuz=0,versRicc=0,versTint=0,versMar=0,versDio=0,versnome;
+var i, versNR=0, versCEI=0,versND=0,versR2=0,versNR94=0,versBG=0,versLuz=0,versRicc=0,versTint=0,versMar=0,versDio=0,versVolg=0,versnome;
 var versComm=0,versCommNT=0,versCommGill=0,versCommPulpito=0,versCommIllustratore=0,versRif=0,versCommHenry=0,versCommBarnes=0,versCommMeyer=0,versCommTesoro=0,versCommCalvino=0,versCommGinevra=0;
 
 for (i=0; i<nvers; i++) {
@@ -229,6 +229,8 @@ for (i=0; i<nvers; i++) {
     versMar=1;
   if (versnome=="Diodati")
     versDio=1;
+  if (versnome=="Volgare")
+    versVolg=1;
   if (versnome=="CommentarioHenry")
     versCommHenry=1;
   if (versnome=="CommentarioNT")
@@ -266,11 +268,12 @@ s=s+"<option "+(versRicc==1?"selected=\"selected\" ":"")+"value=\"Ricciotti\">Ri
 s=s+"<option "+(versTint==1?"selected=\"selected\" ":"")+"value=\"Tintori\">Tintori</option>";
 s=s+"<option "+(versMar==1?"selected=\"selected\" ":"")+"value=\"Martini\">Martini</option>";
 s=s+"<option "+(versDio==1?"selected=\"selected\" ":"")+"value=\"Diodati\">Diodati</option>";
+s=s+"<option "+(versVolg==1?"selected=\"selected\" ":"")+"value=\"Volgare\">Bibbia in Volgare</option>";
 s=s+"</optgroup>";
 s=s+"<optgroup label=\"Commentari\">";
 s=s+"<option "+(versCommHenry==1?"selected=\"selected\" ":"")+"value=\"CommentarioHenry\">Commentario completo di Matthew Henry</option>";
 s=s+"<option "+(versCommNT==1?"selected=\"selected\" ":"")+"value=\"CommentarioNT\">Commentario Nuovo Testamento</option>";
-s=s+"<option "+(versCommCalvino==1?"selected=\"selected\" ":"")+"value=\"CommentarioCalvino\">Commentario di Giovanni Calvino (Gen,Mt-1G)</option>";
+s=s+"<option "+(versCommCalvino==1?"selected=\"selected\" ":"")+"value=\"CommentarioCalvino\">Commentario di Giovanni Calvino</option>";
 s=s+"<option "+(versComm==1?"selected=\"selected\" ":"")+"value=\"Commentario\">Commentario abbreviato</option>";
 s=s+"<option "+(versCommBarnes==1?"selected=\"selected\" ":"")+"value=\"CommentarioBarnes\">Note di Albert Barnes</option>";
 s=s+"<option "+(versCommGinevra==1?"selected=\"selected\" ":"")+"value=\"CommentarioGinevra\">Note della Bibbia di Ginevra</option>";
@@ -284,13 +287,13 @@ s=s+"</optgroup>";
 s=s+"</select><br /><br />";
 s=s+"<div style=\"display:flex;justify-content:center;position:relative\">";
 s=s+"<input class=\"grandezzatesto\" type=\"button\" name=\"Seleziona tutti\" tabindex=\"3\" value=\"Seleziona tutti\" onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=true;}\" />";
-s=s+"<div style='position:relative'><input class='grandezzatesto' type='button' onclick=\"const menu = document.getElementById('dropdownMenu');menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';\" value='&dtri;' /><div id='dropdownMenu'><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i<11);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutte le Bibbie</a><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i>=11);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutti i commentari</a></div></div></div><br />";      
+s=s+"<div style='position:relative'><input class='grandezzatesto' type='button' onclick=\"const menu = document.getElementById('dropdownMenu');menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';\" value='&dtri;' /><div id='dropdownMenu'><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i<12);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutte le Bibbie</a><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i>=12);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutti i commentari</a></div></div></div><br />";      
 const myElement = document.getElementById("tabellaVisualizza");
 myElement.innerHTML = s;
 //-->
 </script>
 <noscript>
-        <select multiple="multiple" name="versioni[]" size="23" tabindex="2">
+        <select multiple="multiple" name="versioni[]" size="24" tabindex="2">
         <optgroup label="Versioni della Bibbia">
         <option selected="selected" value="Nuova Riveduta">Nuova Riveduta</option>
         <option value="C.E.I.">C.E.I. (1974)</option>
@@ -303,6 +306,7 @@ myElement.innerHTML = s;
         <option value="Tintori">Tintori</option>
         <option value="Martini">Martini</option>
         <option value="Diodati">Diodati</option>
+        <option value="Volgare">Bibbia in Volgare</option>
         </optgroup>
         <optgroup label="Commentari">
         <option value="CommentarioHenry">Commentario completo di Matthew Henry</option>
@@ -342,9 +346,9 @@ myElement.innerHTML = s;
 <span id="tabellaRicerca"></span>
 <script type="text/javascript">
 <!--
-var s="<select name=\"versione\" id=\"versione\" size=\"11\">";
+var s="<select name=\"versione\" id=\"versione\" size=\"12\">";
 var vers = getCookie("RicVers");
-if (!vers || (vers!="C.E.I." && vers!="NuovaDiodati" && vers!="Riveduta2020" && vers!="NuovaRiveduta1994" && vers!="BibbiadellaGioia" && vers!="Riveduta" && vers!="Ricciotti" && vers!="Tintori" && vers!="Martini" && vers!="Diodati"))
+if (!vers || (vers!="C.E.I." && vers!="NuovaDiodati" && vers!="Riveduta2020" && vers!="NuovaRiveduta1994" && vers!="BibbiadellaGioia" && vers!="Riveduta" && vers!="Ricciotti" && vers!="Tintori" && vers!="Martini" && vers!="Diodati" && vers!="Volgare"))
         s=s+"<option selected=\"selected\" value=\"Nuova Riveduta\">Nuova Riveduta</option>";
 else
         s=s+"<option value=\"Nuova Riveduta\">Nuova Riveduta</option>";
@@ -388,13 +392,17 @@ if (vers=="Diodati")
         s=s+"<option selected=\"selected\" value=\"Diodati\">Diodati</option>";
 else
         s=s+"<option value=\"Diodati\">Diodati</option>";
+if (vers=="Volgare")
+        s=s+"<option selected=\"selected\" value=\"Volgare\">Bibbia in Volgare</option>";
+else
+        s=s+"<option value=\"Volgare\">Bibbia in Volgare</option>";
 s=s+"</select>";
 const myElement2 = document.getElementById("tabellaRicerca");
 myElement2.innerHTML = s;
 //-->
 </script>
 <noscript>
-        <select name="versione" id="versione" size="11">
+        <select name="versione" id="versione" size="12">
         <option selected="selected" value="Nuova Riveduta">Nuova Riveduta</option>
         <option value="C.E.I.">C.E.I. (1974)</option>
         <option value="Nuova Diodati">Nuova Diodati</option>
@@ -406,6 +414,7 @@ myElement2.innerHTML = s;
         <option value="Tintori">Tintori</option>
         <option value="Martini">Martini</option>
         <option value="Diodati">Diodati</option>
+        <option value="Volgare">Bibbia in Volgare</option>
         </select>
 </noscript>
 </p>
@@ -444,7 +453,7 @@ myElement2.innerHTML = s;
 
 <div class="menu" style="text-align:center">
 <!--        <p><a href="/" title="Homepage del sito" style="display: inline-block;min-height: 24px;">Bibbia</a> | <a href="/programma/" title="Un programma gratuito da scaricare per studiare la Bibbia sul proprio computer" style="display: inline-block;min-height: 24px;">Programma</a> | <a href="/brani/" title="Risposte a domande comuni sui brani della Bibbia che sono difficili da capire" style="display: inline-block;min-height: 24px;">Brani difficili</a> | <a href="/studi/" title="Un indice di studi biblici su Internet" style="display: inline-block;min-height: 24px;">Studi biblici</a> | <a href="/nomi/" title="Tutti i nomi della Bibbia" style="display: inline-block;min-height: 24px;">Enciclopedia</a> | <a href="/vocab/" title="Vocabolario greco-italiano e interlineare del Nuovo Testamento" style="display: inline-block;min-height: 24px;">Vocabolario</a> | <a href="/letoggi.php" title="4 brani biblici da leggere" style="display: inline-block;min-height: 24px;">La Bibbia in un anno</a> | <a href="/intro/" title="Studi sulle caratteristiche e sul contenuto della Bibbia" style="display: inline-block;min-height: 24px;">Che cosa &egrave; la Bibbia</a> | <a href="/novita.php" title="Cambiamenti recenti a questo sito" style="display: inline-block;min-height: 24px;">Novit&agrave;</a> | <a href="mailto:&#105;&#110;&#102;&#111;&#64;&#108;&#97;&#112;&#97;&#114;&#111;&#108;&#97;&#46;&#110;&#101;&#116;" title="Il mio indirizzo" style="display: inline-block;min-height: 24px;">Scrivimi</a></p>-->
-        <p class="piccolo">Copyright marzo 2026 (March 2026)</p>
+        <p class="piccolo">Copyright luglio 2026 (July 2026)</p>
 </div>
 </main>
 
@@ -505,10 +514,11 @@ myElement2.innerHTML = s;
             <ul class="navbar-submenu">
                 <li class="navbar-subitem"><a href="/novita.php" class="navbar-sublink" title="Cambiamenti recenti a questo sito">Novit&agrave;</a></li>
                 <li class="navbar-subitem"><a href="/faq/" class="navbar-sublink" title="Se hai una domanda, controlla prima qui!">Domande comuni</a></li>
-                <li class="navbar-subitem"><a href="/privacy.php" class="navbar-sublink" title="Privacy policy">Privacy</a></li>
                 <li class="navbar-subitem"><a href="/english.html" class="navbar-sublink" title="Questa pagina in inglese">English</a></li>
+                <li class="navbar-subitem"><a href="/sorgente.php" class="navbar-sublink" title="Tutto per ricreare il sito e le app">Sorgente e risorse</a></li>
                 <li class="navbar-subitem"><a href="/inserire_bibbia.php" class="navbar-sublink" title="Come creare un link al testo biblico sul tuo sito">Visualizzare la Bibbia sul tuo sito</a></li>
                 <li class="navbar-subitem"><a href="/mailing_list.php" class="navbar-sublink" title="Ricevere messaggi regolari dal sito">Mailing list</a></li>
+                <li class="navbar-subitem"><a href="/privacy.php" class="navbar-sublink" title="Privacy policy">Privacy</a></li>
                 <li class="navbar-subitem"><a href="/chisono.php" class="navbar-sublink" title="Sul creatore di questo sito">Chi sono</a></li>
                 <li class="navbar-subitem"><a href="mailto:&#105;&#110;&#102;&#111;&#64;&#108;&#97;&#112;&#97;&#114;&#111;&#108;&#97;&#46;&#110;&#101;&#116;" class="navbar-sublink" title="Il mio indirizzo">Scrivimi</a></li>
             </ul>

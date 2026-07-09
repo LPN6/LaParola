@@ -268,7 +268,7 @@ var s="<select name=\"versione\" size=\"1\" id=\"selectVersione\" onchange=\"cam
 var vers = getCookie("SinossiVers");
 //alert(vers);
 if (!vers) vers = getCookie("RicVers");
-if (!vers || (vers!="C.E.I." && vers!="Nuova Diodati" && vers!="Riveduta 2020" && vers!="Nuova Riveduta 1994" && vers!="Bibbia della Gioia" && vers!="Riveduta" && vers!="Ricciotti" && vers!="Tintori" && vers!="Martini" && vers!="Diodati"))
+if (!vers || (vers!="C.E.I." && vers!="Nuova Diodati" && vers!="Riveduta 2020" && vers!="Nuova Riveduta 1994" && vers!="Bibbia della Gioia" && vers!="Riveduta" && vers!="Ricciotti" && vers!="Tintori" && vers!="Martini" && vers!="Diodati" && vers!="Volgare"))
         s=s+"<option selected=\"selected\" value=\"Nuova Riveduta\">Nuova Riveduta</option>";
 else
         s=s+"<option value=\"Nuova Riveduta\">Nuova Riveduta</option>";
@@ -312,6 +312,10 @@ if (vers=="Diodati")
         s=s+"<option selected=\"selected\" value=\"Diodati\">Diodati</option>";
 else
         s=s+"<option value=\"Diodati\">Diodati</option>";
+if (vers=="Volgare")
+        s=s+"<option selected=\"selected\" value=\"Volgare\">Bibbia in Volgare</option>";
+else
+        s=s+"<option value=\"Volgare\">Bibbia in Volgare</option>";
 s=s+"</select>";
 document.write(s);
 //-->

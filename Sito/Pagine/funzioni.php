@@ -94,6 +94,8 @@ function convversionetoapp($versione) {
 		$vapp = "martini";
 	else if ($versione=="Diodati")
 		$vapp = "dio";
+	else if ($versione=="Volgare")
+		$vapp = "volg";
     return $vapp;
 }
 
@@ -130,6 +132,8 @@ function converti_linkTestoContinuto($riferimento, $versioni) {
             $abb = "martini";
         } elseif ($versioni[$i-1] == "Diodati") {
             $abb = "dio";
+        } elseif ($versioni[$i-1] == "Volgare") {
+            $abb = "volgare";
         } elseif ($versioni[$i-1] == "Commentario") {
             $abb = "commabbrmh";
             $tipo ="commentary";

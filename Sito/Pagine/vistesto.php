@@ -724,6 +724,7 @@ global $formato_rif_trovato;
 
          $urlversione = $versioni[$i];
          if ($urlversione=="Bibbia della Gioia") $urlversione="La Parola &egrave; Vita"; // perché il nome della versione è stato cambiato
+         if ($urlversione=="Volgare") $urlversione="Bibbia in Volgare";
          if ($urlversione=="Nuova Riveduta 1994") $urlversione="Nuova Riveduta (1994)";
          if ($urlversione=="CommentarioNT") $urlversione="Commentario del Nuovo Testamento";
          if ($urlversione=="Commentario") $urlversione="Commentario abbreviato di Matthew Henry";

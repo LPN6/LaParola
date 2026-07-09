@@ -101,6 +101,10 @@ if (vers=="Diodati")
         s=s+"<option selected=\"selected\" value=\"Diodati\">Diodati</option>";
 else
         s=s+"<option value=\"Diodati\">Diodati</option>";
+if (vers=="Volgare")
+        s=s+"<option selected=\"selected\" value=\"Volgare\">Bibbia in Volgare</option>";
+else
+        s=s+"<option value=\"Volgare\">Bibbia in Volgare</option>";
 s=s+"</select></p>";
 document.write(s);
 //-->

@@ -19,5 +19,6 @@ CommentarioHenry|66|it|c|
 CommentarioBarnes|66|it|c|
 CommentarioMeyer|66|it|c|
 CommentarioTesoro|66|it|c|
-CommentarioCalvino|66|it|c
-CommentarioGinevra|66|it|c
+CommentarioCalvino|66|it|c|
+CommentarioGinevra|66|it|c|
+Volgare|73|it|v|

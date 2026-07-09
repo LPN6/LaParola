@@ -39,7 +39,7 @@ Questo non &egrave; perch&eacute; un virus o altro malware sono stati rilevati, 
 per dimostrare che &egrave; sicuro. Il programma pu&ograve; essere installato senza problemi, cliccando "Ulteriori informazioni" e poi il pulsante "Esegui comunque".</p>
 
 <p><b>Nota:</b> Un modo alternativo di ottenere il programma e tutti i testi disponibili (invece di usare l'aggiornamento automatico descritto qui sotto)
-&egrave; di scaricare il <a href="/file/laparola.exe">programma di installazione che contiene tutti i testi</a>, con cui puoi scegliere quali componenti installare. <b>Attenzione:</b> il file &egrave; di pi&ugrave; di 850Mb!.</p>
+&egrave; di scaricare il <a href="/file/laparola.exe">programma di installazione che contiene tutti i testi</a>, con cui puoi scegliere quali componenti installare. <b>Attenzione:</b> il file &egrave; di pi&ugrave; di 855Mb!.</p>
 
 <p><b>Nota:</b> A volte durante l'installazione c'&egrave; un messaggio di errore che il framework .NET non &egrave; installato. Il messaggio pu&ograve; essere ignorato; il programma funzioner&agrave; comunque.</p>
 
@@ -107,9 +107,9 @@ Per aggiungere questa possibilit&agrave; a Word, scarica e scompatta <a href="/f
 <a name="source"></a>
 <h2>Codice sorgente</h2>
 
-<p>Per i programmatori, non solo &egrave; il codice sorgente disponibile <a href="/file/laparolacode.zip">qui</a>, ma
+<p>Per i programmatori, non solo &egrave; il codice sorgente &egrave; disponibile su <a href="https://github.com/LPN6/LaParola/tree/main/Codice%20sorgente/Windows">Github</a>, ma
 anche l'ambiente di sviluppo, cio&egrave;
-<a href="https://visualstudio.microsoft.com/vs/">Visual C# Express</a>. Se viene chiesta una password per aprire il file, &egrave; <em>bibbia</em>.</p>
+<a href="https://visualstudio.microsoft.com/">Visual Studio</a>.</p>
 
 <h2>Versioni future</h2>
 

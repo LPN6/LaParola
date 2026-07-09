@@ -81,7 +81,7 @@ if ($country_code=="")
 	$country_code = "XX";
 geoip_close($gi);
 
-$nr=0;$cei=0;$nd=0;$r2=0;$nr94=0;$bdg=0;$riv=0;$mar=0;$ricc=0;$tint=0;$dio=0;
+$nr=0;$cei=0;$nd=0;$r2=0;$nr94=0;$bdg=0;$riv=0;$mar=0;$ricc=0;$tint=0;$dio=0;$volg=0;
 $comm=0;$commnt=0;$rif=0;$commpulpito=0;$commillustratore=0;$commgill=0;$commbarnes=0;$commmeyer=0;$commtesoro=0;$commhenry=0;$commcalvino=0;$commginevra=0;
 for ($i=0; $i<count($versioni); $i++) {
 	if ($versioni[$i]=="Nuova Riveduta")
@@ -106,6 +106,8 @@ for ($i=0; $i<count($versioni); $i++) {
 		$mar = 1;
 	else if ($versioni[$i]=="Diodati")
 		$dio = 1;
+	else if ($versioni[$i]=="Volgare")
+		$volg = 1;
 	else if ($versioni[$i]=="Commentario")
 		$comm = 1;
 	else if ($versioni[$i]=="CommentarioNT")

@@ -7,7 +7,7 @@
     <description>Novità a LaParola.Net - il centro per lo studio della Sacra Bibbia in italiano in Internet</description>
     <language>it</language>
     <copyright>Copyright 2026, laparola.net</copyright> 
-    <pubDate>Fri, 12 Jun 2026 02:00:00 +0100</pubDate>
+    <pubDate>Thu, 09 Jul 2026 02:00:00 +0100</pubDate>
     <atom:link href="https://www.laparola.net/feed.xml" rel="self" type="application/rss+xml" /> 
     <image>
       <title>La Parola - la Bibbia italiana</title> 
@@ -17,10 +17,25 @@
       <height>32</height> 
       <description>Il centro per lo studio della Sacra Bibbia in italiano in Internet</description> 
     </image>
-    <lastBuildDate>Fri, 12 Jun 2026 01:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 01:30:00 +0100</lastBuildDate>
+    <item>
+      <title>Bibbia in Volgare e Commentario di Calvino</title>
+      <link>https://www.laparola.net/</link>
+      <description>Aggiunta la versione italiana Bibbia in Volgare, la seconda traduzione della Bibbia in italiano, nel 1471 di Nicolas Jenson, ristampata per cura di Carlo Negroni dal 1882 al 1887. Ulteriori libri aggiunti al Commentario di Giovanni Calvino; ora ci sono Genesi-Numeri, Lamentazioni, Gioele, Abdia-Aggeo, Malachia e il Nuovo Testamento. Come sempre, i testi sono disponibili sul sito e in tutte le app di LaParola.
+      </description>
+      <pubDate>Thu, 09 Jun 2026 01:01:00 +0100</pubDate> 
+    </item>
+    <item>
+      <title>LaParola 8.0.3 per Windows (beta)</title>
+      <link>https://www.laparola.net/programma/windowsbeta.php</link>
+      <description>La prossima versione di prova (8.0.3) è disponibile, in cui puoi anche leggere i commentari  e c'è una finestra per gestire tutti i libri installati.
+Tutte le informazioni sulla nuova app sono alla pagina della versione beta (https://www.laparola.net/programma/windowsbeta.php).
+      </description>
+      <pubDate>Fri, 12 Jun 2026 01:01:00 +0100</pubDate> 
+    </item>
     <item>
       <title>LaParola 8.0.2 per Windows (beta)</title>
-      <link>https://www.laparola.net/windowsbeta.php</link>
+      <link>https://www.laparola.net/programma/windowsbeta.php</link>
       <description>La prossima versione di prova (8.0.2) è disponibile, in cui puoi leggere il testo dell'intera Bibbia.
 Tutte le informazioni sulla nuova app sono alla pagina della versione beta (https://www.laparola.net/programma/windowsbeta.php).
       </description>
@@ -28,7 +43,7 @@ Tutte le informazioni sulla nuova app sono alla pagina della versione beta (http
     </item>
     <item>
       <title>LaParola 8.0.1 per Windows (beta)</title>
-      <link>https://www.laparola.net/windowsbeta.php</link>
+      <link>https://www.laparola.net/programma/windowsbeta.php</link>
       <description>La prossima versione di prova (8.0.1) è disponibile, con la possibilità di eseguire ricerche.
 Tutte le informazioni sulla nuova app sono alla pagina della versione beta (https://www.laparola.net/programma/windowsbeta.php).
       </description>
@@ -36,7 +51,7 @@ Tutte le informazioni sulla nuova app sono alla pagina della versione beta (http
     </item>
     <item>
       <title>LaParola 8 per Windows (beta)</title>
-      <link>https://www.laparola.net/windowsbeta.php</link>
+      <link>https://www.laparola.net/programma/windowsbeta.php</link>
       <description>Ho iniziato a scrivere una nuova versione dell'app per Windows, per usare le tecnologie più recenti e creare un'interfaccia più moderna.
 La prima versione di prova (8.0.0) è ora disponibile, che potete provare se volete.
 Tutte le informazioni sulla nuova app sono alla pagina della versione beta (https://www.laparola.net/programma/windowsbeta.php).
@@ -127,22 +142,6 @@ Solo nelle app ci sono "Commentario sul testo greco delle epistole di Paolo" di 
       <description>Ho pubblicato alcuni dei miei studi biblici in una nuova sezione del sito chiamata "Riflessioni mie". Aggiungerò altri studi nel futuro.
       </description>
       <pubDate>Sun, 15 Sep 2024 01:01:00 +0100</pubDate> 
-    </item>
-    <item>
-      <title>LaParola per Macintosh e iOS</title>
-      <link>https://www.laparola.net/programma/</link>
-      <description>Le app per macOS e iOS sono state riscritte, per renderle più moderne e facili da usare.
-      </description>
-      <pubDate>Tue, 09 Jul 2024 01:01:00 +0100</pubDate> 
-    </item>
-    <item>
-      <title>Bibbia con testo continuo</title>
-      <link>https://www.laparola.net/app/</link>
-      <description>In una nuova sezione del sito (https://www.laparola.net/app/), puoi leggere tutta la Bibbia e vari commentari con un testo continuo, cioè scorrere su e giù per leggere più testo piuttosto di scegliere solo un brano particolare da leggere.
-Puoi anche ricercare parole, paragonare brani paralleli nella stessa versione, e paragonare lo stesso brano in versioni diverse.
-Tocca le tre linee orizzontali in alto a sinistra per aprire il menu con le funzioni della pagina.
-      </description>
-      <pubDate>Thu, 09 Nov 2023 01:01:00 +0100</pubDate> 
     </item>
   </channel>
 </rss>

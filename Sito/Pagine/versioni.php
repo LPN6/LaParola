@@ -19,6 +19,7 @@ require("capo.php");
 <li>la <a href="#Tintori">Tintori</a>,</li>
 <li>la <a href="#Martini">Martini</a>, e</li>
 <li>la <a href="#Diodati">Diodati</a>.</li>
+<li>la <a href="#Volgare">Bibbia in Volgare</a>.</li>
 </ul>
 <p>I commentari sono:</p>
 <ul> 
@@ -164,6 +165,9 @@ Stampato per<br />
 La Societ&agrave; Biblica Britannica e Forestiera<br />
 1877</p>
 
+<h2>Bibbia in Volgare</h2>
+<p id="Volgare">L'edizione del 1471 di Nicolas Jenson, ristampata per cura di Carlo Negroni dal 1882 al 1887.</p>
+
 <h2>Commentario completo di Matthew Henry</h2>
 <p id="CommentarioCompletoMH">
 Il commentario di Henry &egrave; famoso per la sua analisi approfondita, pratica e accurata della Bibbia.
@@ -212,7 +216,7 @@ I commentari sulle Epistole cattoliche sono anche inclusi nella ristampa anastat
 <p id="CommentarioCalvino">Giovanni Calvino (1509-1564) ricevette una solida formazione umanistica secondo i principi del Rinascimento. Calvino applic&ograve; questa formazione al testo biblico, sviluppando un metodo esegetico fondato sul ritorno alle lingue originali, sul rispetto del contesto storico e letterario e sul rifiuto delle interpretazioni allegoriche arbitrarie tipiche della scolastica medievale. Nei suoi commentari biblici privilegi&ograve; la chiarezza e la sobriet&agrave;, con l'obiettivo di spiegare il senso letterale del testo (sensus literalis), rendendolo comprensibile a pastori e lettori comuni.</p>
 <p>Il lavoro di Calvino sui commentari fu sistematico e continuo, spesso collegato alla sua attivit&agrave; di predicatore e docente a Ginevra: molte spiegazioni nascevano dalle prediche o dalle lezioni e venivano poi rielaborate per la pubblicazione. I suoi commentari coprono quasi tutta la Bibbia e sono caratterizzati da rigore filologico, coerenza teologica e attenzione all'applicazione pratica, diventando un modello duraturo per l'esegesi protestante.</p>
 <p>I commenti sono stati tradotti da <a href="https://itev.it/">Verbum: Istituto teologico evangelico</a> con l'aiuto dell'intelligenza artificiale.</p>
-<p>Attualmente ci sono i commenti sui libri di Genesi e da Matteo a 1Giovanni.</p>
+<p>Attualmente ci sono i commenti sui libri di Genesi-Numeri, Lamentazioni, Gioele, Abdia-Aggeo, Malachia, Matteo-1Giovanni, e Giuda.</p>
 
 <h2>Commentario abbreviato di Matthew Henry</h2>
 <p id="Commentario">Il commentario abbreviato &egrave; una traduzione di:<br />

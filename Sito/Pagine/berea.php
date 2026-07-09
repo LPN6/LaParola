@@ -24,7 +24,7 @@ per impostare il colore di sfondo della finestra. Giallo &egrave; il colore pred
 <code>&lt;script type="text/javascript"&gt;LPNcolore2 = "#ffcc33";&lt;/script&gt;</code>
 per impostare il colore di sfondo della parte inferiore della finestra. #ffcc33 (simile ad aranchione) &egrave; il colore predefinito, ma puoi mettere un altro valore, con il nome del colore in inglese oppure il codice di sei cifre usato in HTML per il colore.<br />
 <code>&lt;script type="text/javascript"&gt;LPNversione = "Nuova Riveduta";&lt;/script&gt;</code>
-per impostare la versione da visualizzare. La Nuova Riveduta &egrave; la versione predefinita, ma puoi mettere "C.E.I.", "Nuova Diodati", "Riveduta 2020", "Nuova Riveduta 1994", "Riveduta", "Ricciotti", "Tintori", "Martini", "Diodati", "Commentario", "CommentarioNT", o "Riferimenti incrociati".<br />
+per impostare la versione da visualizzare. La Nuova Riveduta &egrave; la versione predefinita, ma puoi mettere "C.E.I.", "Nuova Diodati", "Riveduta 2020", "Nuova Riveduta 1994", "Riveduta", "Ricciotti", "Tintori", "Martini", "Diodati", o "Volgare".<br />
 <code>&lt;script type="text/javascript"&gt;LPNritardo = 0;&lt;/script&gt;</code>
 per impostare il ritardo (in millisecondi) prima di aprire la finestra con il testo. 0 &egrave; il valore predefinito (nessun ritardo), ma puoi mettere un altro valore, per esempio 2000 per aspettare due secondi.<br />
 </p>

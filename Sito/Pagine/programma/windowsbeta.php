@@ -32,6 +32,15 @@ e mettere i file con estensione .laparola nella stessa cartella dell'app beta.</
 
 <h2>Caratteristiche</h2>
 
+<h3>Versione 8.0.3</h3>
+<ul>
+<li>I commentari sono disponibili, e possono essere letti dal menu Visualizza oppure Mostra brano.</li>
+<li>Link ipertestuali nei commentari ai brani della Bibbia e ad altre sezioni del commentario.</li>
+<li>Un'impostazione per scegliere le versioni della Bibbia preferite, che vengono usate per i link ipertestuali.</li>
+<li>La finestra Biblioteca, per vedere le caratteristiche di tutti i testi installati.</li>
+<li>Impostazione del carattere e stile nell'editor dell'app.</li>
+</ul>  
+
 <h3>Versione 8.0.2</h3>
 <ul>
 <li>Visualizzare l'intera Bibbia in un testo continuo. Nella barra degli strumenti ci sono vari modi per navigare ad altri versetti. Novit&agrave; in confronto con la versione 7: Un sommario che pu&ograve; essere aperto a sinistra.</li>

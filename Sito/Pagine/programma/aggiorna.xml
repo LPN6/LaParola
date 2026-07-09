@@ -314,6 +314,15 @@
 <tipo>Bibbia</tipo>
 </file>
 <file>
+<nome>Bibbia in Volgare (Italian Bible)</nome>
+<nome language="it">Bibbia in Volgare</nome>
+<componente>Bibbia in Volgare</componente>
+<versione>7.19.0</versione>
+<url>https://www.laparola.net/v7/Bibbia in Volgare.laparola.gz</url>
+<dimensione>4247 Kb</dimensione>
+<tipo>Bibbia</tipo>
+</file>
+<file>
 <nome>Sicilianu (Sicilian Bible)</nome>
 <nome language="it">Sicilianu</nome>
 <componente>Sicilianu</componente>
@@ -956,9 +965,9 @@
 <nome>Commentario di Giovanni Calvino (Italian commentary)</nome>
 <nome language="it">Commentario di Giovanni Calvino</nome>
 <componente>Commentario di Giovanni Calvino</componente>
-<versione>7.19.0</versione>
+<versione>7.19.1</versione>
 <url>https://www.laparola.net/v7/Commentario di Giovanni Calvino.laparola.gz</url>
-<dimensione>9604 Kb</dimensione>
+<dimensione>13125 Kb</dimensione>
 <tipo>commentario</tipo>
 </file>
 <file>
@@ -971,7 +980,7 @@
 <tipo>commentario</tipo>
 </file>
 <file>
-<nome>Note di Albert Barnes sulla Bibbria (Italian commentary)</nome>
+<nome>Note di Albert Barnes sulla Bibbia (Italian commentary)</nome>
 <nome language="it">Note di Albert Barnes sulla Bibbia</nome>
 <componente>Note di Albert Barnes sulla Bibbia</componente>
 <versione>7.19.0</versione>
@@ -2042,7 +2051,7 @@
 <nome>Italian Bibles</nome>
 <nome language="it">Versioni italiane</nome>
 <componente>Versioni italiane</componente>
-<versione>7.20.3</versione>
+<versione>7.20.4</versione>
 <url>https://www.laparola.net/v7/Versioni italiane</url>
 <dimensione>1 Kb</dimensione>
 <tipo>testiparalleli</tipo>

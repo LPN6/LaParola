@@ -35,7 +35,7 @@ ma non &egrave; necessario.</p>
 <p><code>&lt;a href=&quot;JavaScript:popup('gv3:16', 'C.E.I.');&quot;&gt;Giovanni 3,16&lt;/a&gt;</code></p>
 <p>visualizza il versetto nella C.E.I., mentre</p>
 <div style="word-wrap: break-word;word-break: break-all;"><p><code>&lt;a href=&quot;JavaScript:popup('gv3:16','Nuova Riveduta','Commentario');&quot;&gt;Giovanni 3,16&lt;/a&gt;</code></p></div>
-<p>lo visualizza nella Nuova Riveduta, con un commentario. I nomi che possono essere usati per le versioni sono: 'Nuova Riveduta', 'C.E.I.', 'Nuova Diodati', 'Riveduta 2020', 'Nuova Riveduta (1994)', Riveduta', 'Ricciotti', 'Tintori', 'Martini', 'Diodati', 'CommentarioHenry', 'CommentarioNT', 'Commentario Calvino', Commentario', 'CommentarioBarnes', 'CommentarioCalvino', CommentarioGill', CommentarioPulpito', 'CommentarioIllustratore', 'CommentarioMeyer', 'CommentarioTesoro', o 'Riferimenti incrociati'.</p>
+<p>lo visualizza nella Nuova Riveduta, con un commentario. I nomi che possono essere usati per le versioni sono: 'Nuova Riveduta', 'C.E.I.', 'Nuova Diodati', 'Riveduta 2020', 'Nuova Riveduta (1994)', Riveduta', 'Ricciotti', 'Tintori', 'Martini', 'Diodati', 'Volgare', 'CommentarioHenry', 'CommentarioNT', 'CommentarioCalvino', Commentario', 'CommentarioBarnes', 'CommentarioGinevra', CommentarioGill', CommentarioPulpito', 'CommentarioIllustratore', 'CommentarioMeyer', 'CommentarioTesoro', o 'Riferimenti+incrociati'.</p>
 <p>Similmente, per mostrare i risultati di una ricerca in una finestra pop-up, bisogna mettere lo stesso codice all'inizio della pagina, e poi per ogni ricerca</p>
 <p><code>&lt;a href=&quot;JavaScript:popupr('abba', 'C.E.I.', 'mt-gv');&quot;&gt;abba&lt;/a&gt;</code></p>
 <p>dove la versione e il brano in cui ricercare sono facoltativi.</p>
@@ -49,7 +49,7 @@ ma non &egrave; necessario.</p>
 <p><a href="/testo.php?riferimento=gv3:16&versioni[]=Nuova+Riveduta&versioni[]=C.E.I.">Giovanni 3:16</a> &egrave; il versetto pi&ugrave; conosciuto nella Bibbia.</p>
 <p>Tutti i caratteri nella stringa che segue 'href' devono essere in una sola riga, non divisi fra due o pi&ugrave; righe come qui sopra.</p>
 <p>Per il riferimento, &egrave; possibile usare quasi qualsiasi formato, come spiegato nell'<a href="aiutovis.php" title="Come digitare un riferimento e mostrare un brano">aiuto per visualizzare la Bibbia</a>. Nota per&ograve; che l'indirizzo di una pagina non pu&ograve; contenere uno spazio, quindi bisogna togliere tutti gli spazi dal riferimento, oppure sostituire ogni spazio con un segno di pi&ugrave; (+).</p>
-<p>Mettere la versione o le versioni desiderate &egrave; facoltativo; se non c'&egrave; nessuna versiona, la Nuova Riveduta &egrave; usata. Per usare una versione diversa o multiple versioni, bisogna aggiungerle all'indirizzo come nell'esempio qui sopra. Nota le parentesi quadrate dopo 'versioni'. I nomi che si possono usare per le versioni sono: 'Nuova+Riveduta', 'C.E.I.', 'Nuova+Diodati', 'Riveduta+2020', 'Nuova+Riveduta+(1994)', 'Riveduta', 'Ricciotti', 'Tintori', 'Martini', 'Diodati', 'CommentarioHenry', 'CommentarioNT', 'CommentarioCalvino', Commentario', 'CommentarioBarnes', 'CommentarioGill', 'CommentarioGinevra', CommentarioPulpito', 'CommentarioIllustratore', 'CommentarioMeyer', 'CommentarioTesoro', e 'Riferimenti+incrociati'. (Come sempre, il segno di pi&ugrave; sostituisce uno spazio nel nome.)</p>
+<p>Mettere la versione o le versioni desiderate &egrave; facoltativo; se non c'&egrave; nessuna versiona, la Nuova Riveduta &egrave; usata. Per usare una versione diversa o multiple versioni, bisogna aggiungerle all'indirizzo come nell'esempio qui sopra. Nota le parentesi quadrate dopo 'versioni'. I nomi che si possono usare per le versioni sono: 'Nuova+Riveduta', 'C.E.I.', 'Nuova+Diodati', 'Riveduta+2020', 'Nuova+Riveduta+(1994)', 'Riveduta', 'Ricciotti', 'Tintori', 'Martini', 'Diodati', 'Volgare', 'CommentarioHenry', 'CommentarioNT', 'CommentarioCalvino', Commentario', 'CommentarioBarnes', 'CommentarioGill', 'CommentarioGinevra', CommentarioPulpito', 'CommentarioIllustratore', 'CommentarioMeyer', 'CommentarioTesoro', e 'Riferimenti+incrociati'. (Come sempre, il segno di pi&ugrave; sostituisce uno spazio nel nome.)</p>
 <h3>Ad una ricerca di un'espressione</h3>
 <p>Il codice pi&ugrave; semplice &egrave;
 <div style="word-wrap: break-word;word-break: break-all;"><p><code>La parola '&lt;a href=&quot;https://www.laparola.net/ricerca.php?frase=abb&agrave;&quot;&gt;abb&agrave;&lt;/a&gt;' appare tre volte nella Bibbia.</code></p></div>
@@ -70,7 +70,7 @@ ma non &egrave; necessario.</p>
 &lt;form action=&quot;https://www.laparola.net/testo.php&quot; method=&quot;post&quot; onsubmit=&quot;if (riferimento.value.length==0) {alert('Digitare il riferimento di un brano')}; return riferimento.value.length!=0;&quot;&gt;<br />
 &lt;p&gt;Brano da visualizzare:&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;text&quot; name=&quot;riferimento&quot;&gt;&lt;/p&gt;<br />
 &lt;p&gt;Testo/i da visualizzare:&lt;br&gt;<br />
-&lt;select multiple name=&quot;versioni[]&quot; size=&quot;22&quot;&gt;<br />
+&lt;select multiple name=&quot;versioni[]&quot; size=&quot;23&quot;&gt;<br />
 &lt;option selected value=&quot;Nuova Riveduta&quot;&gt;Nuova Riveduta&lt;/option&gt;<br />
 &lt;option value=&quot;C.E.I.&quot;&gt;C.E.I. (1974)&lt;/option&gt;<br />
 &lt;option value=&quot;Nuova Diodati&quot;&gt;Nuova Diodati&lt;/option&gt;<br />
@@ -81,6 +81,7 @@ ma non &egrave; necessario.</p>
 &lt;option value=&quot;Tintori&quot;&gt;Tintori&lt;/option&gt;<br />
 &lt;option value=&quot;Martini&quot;&gt;Martini&lt;/option&gt;<br />
 &lt;option value=&quot;Diodati&quot;&gt;Diodati&lt;/option&gt;<br />
+&lt;option value=&quot;Volgare&quot;&gt;Bibbia in Volgare&lt;/option&gt;<br />
 &lt;option value=&quot;CommentarioHenry&quot;&gt;Commentario completo di Matthew Henry&lt;/option&gt;<br />
 &lt;option value=&quot;CommentarioNT&quot;&gt;Commentario Nuovo Testamento&lt;/option&gt;<br />
 &lt;option value=&quot;CommentarioCalvino&quot;&gt;Commentario di Giovanni Calvino&lt;/option&gt;<br />
@@ -102,7 +103,7 @@ ma non &egrave; necessario.</p>
 &lt;p&gt;&lt;b&gt;Ricercare un'espressione&lt;/b&gt;&lt;/p&gt;<br />
 &lt;p&gt;Parola o frase da ricercare:&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;text&quot; name=&quot;frase&quot;&gt;&lt;/p&gt;<br />
 &lt;p&gt;Versione da ricercare:&lt;br&gt;<br />
-&lt;select name=&quot;versione&quot; size=&quot;10&quot;&gt;<br />
+&lt;select name=&quot;versione&quot; size=&quot;11&quot;&gt;<br />
 &lt;option selected value=&quot;Nuova Riveduta&quot;&gt;Nuova Riveduta&lt;/option&gt;<br />
 &lt;option value=&quot;C.E.I.&quot;&gt;C.E.I. (1974)&lt;/option&gt;<br />
 &lt;option value=&quot;Nuova Diodati&quot;&gt;Nuova Diodati&lt;/option&gt;<br />
@@ -113,6 +114,7 @@ ma non &egrave; necessario.</p>
 &lt;option value=&quot;Tintori&quot;&gt;Tintori&lt;/option&gt;<br />
 &lt;option value=&quot;Martini&quot;&gt;Martini&lt;/option&gt;<br />
 &lt;option value=&quot;Diodati&quot;&gt;Diodati&lt;/option&gt;<br />
+&lt;option value=&quot;Volgare&quot;&gt;Bibbia in Volgare&lt;/option&gt;<br />
 &lt;/select&gt;&lt;/p&gt;<br />
 &lt;p&gt;Brano in cui ricercare:&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;text&quot; name=&quot;brano&quot;&gt;&lt;/p&gt;<br />
 &lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;Ricerca&quot;&gt;<br />

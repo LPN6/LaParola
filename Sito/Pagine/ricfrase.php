@@ -183,7 +183,7 @@ global $libri_abb;
 		if ($lib<>38 && $lib<>64 && $lib<>70 && $lib<>71 && $lib<>72)
 			$rifcap = $rifcap." ".$cap;
         if ($altrilink>0) {
-          echo "<p align=\"right\"><a href=\"/testo.php?riferimento=$rifcap:$vers&versioni[]=Nuova+Riveduta&versioni[]=C.E.I.&versioni[]=Nuova+Diodati&versioni[]=Riveduta+2020&versioni[]=Nuova+Riveduta+1994&versioni[]=Bibbia+della+Gioia&versioni[]=Riveduta&versioni[]=Ricciotti&versioni[]=Tintori&versioni[]=Martini&versioni[]=Diodati&versioni[]=CommentarioHenry&versioni[]=CommentarioNT&versioni[]=Commentario&versioni[]=CommentarioCalvino&versioni[]=CommentarioBarnes&versioni[]=CommentarioGinevra&versioni[]=CommentarioGill&versioni[]=CommentarioPulpito&versioni[]=CommentarioIllustratore&versioni[]=CommentarioMeyer&versioni[]=CommentarioTesoro&versioni[]=Riferimenti+incrociati\">$rifcap".($formato_rif=="vp"?",":":")."$vers in tutte le versioni</a> | ";
+          echo "<p align=\"right\"><a href=\"/testo.php?riferimento=$rifcap:$vers&versioni[]=Nuova+Riveduta&versioni[]=C.E.I.&versioni[]=Nuova+Diodati&versioni[]=Riveduta+2020&versioni[]=Nuova+Riveduta+1994&versioni[]=Bibbia+della+Gioia&versioni[]=Riveduta&versioni[]=Ricciotti&versioni[]=Tintori&versioni[]=Martini&versioni[]=Diodati&versioni[]=Volgare&versioni[]=CommentarioHenry&versioni[]=CommentarioNT&versioni[]=Commentario&versioni[]=CommentarioCalvino&versioni[]=CommentarioBarnes&versioni[]=CommentarioGinevra&versioni[]=CommentarioGill&versioni[]=CommentarioPulpito&versioni[]=CommentarioIllustratore&versioni[]=CommentarioMeyer&versioni[]=CommentarioTesoro&versioni[]=Riferimenti+incrociati\">$rifcap".($formato_rif=="vp"?",":":")."$vers in tutte le versioni</a> | ";
           echo "<a href=\"JavaScript:popup('$rifcap','$versione');\" onMouseOver=\"window.status='Visualizza contesto'; return true\" onMouseOut=\"window.status=''; return true\">Mostra capitolo</a> | ";
           echo "<a href=\"/app/?w1=bible&t1=local%3A".convversionetoapp($versione)."&v1=".convlibrotoapp($lib).$cap."_".$vers."\">Mostra contesto</a></p>"; // http://laparola/app/?w1=bible&t1=local%3Anr&v1=JL1_1
         }
@@ -271,6 +271,7 @@ if ($ris=mysqli_query ($conn, "$sql")) {
 else {
     errore2("interrogazione database per ricerca della parola $parola");
 }
+
 return $VersParola;
 }
 

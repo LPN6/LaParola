@@ -27,9 +27,9 @@ include("autolibri.php");
 <span id="tabellaVisualizza"></span>
 <script type="text/javascript">
 <!--
-var s = "<select multiple=\"multiple\" name=\"versioni[]\" id=\"versioni\" size=\"25\">";
+var s = "<select multiple=\"multiple\" name=\"versioni[]\" id=\"versioni\" size=\"26\">";
 var nvers = getCookie("nVisVers");
-var i, versNR=0, versCEI=0,versND=0,versR2=0,versNR94=0,versBG=0,versLuz=0,versRicc=0,versTint=0,versMar=0,versDio=0,versnome;
+var i, versNR=0, versCEI=0,versND=0,versR2=0,versNR94=0,versBG=0,versLuz=0,versRicc=0,versTint=0,versMar=0,versDio=0,versVolg=0,versnome;
 var versComm=0,versCommNT=0,versCommGill=0,versCommPulpito=0,versCommIllustratore=0,versRif=0,versCommHenry=0,versCommBarnes=0,versCommMeyer=0,versCommTesoro=0,versCommCalvino=0,versCommGinevra=0;
 
 for (i=0; i<nvers; i++) {
@@ -56,6 +56,8 @@ for (i=0; i<nvers; i++) {
     versMar=1;
   if (versnome=="Diodati")
     versDio=1;
+  if (versnome=="Volgare")
+    versVolg=1;
   if (versnome=="CommentarioHenry")
     versCommHenry=1;
   if (versnome=="CommentarioNT")
@@ -93,11 +95,12 @@ s=s+"<option "+(versRicc==1?"selected=\"selected\" ":"")+"value=\"Ricciotti\">Ri
 s=s+"<option "+(versTint==1?"selected=\"selected\" ":"")+"value=\"Tintori\">Tintori</option>";
 s=s+"<option "+(versMar==1?"selected=\"selected\" ":"")+"value=\"Martini\">Martini</option>";
 s=s+"<option "+(versDio==1?"selected=\"selected\" ":"")+"value=\"Diodati\">Diodati</option>";
+s=s+"<option "+(versVolg==1?"selected=\"selected\" ":"")+"value=\"Volgare\">Bibbia in Volgare</option>";
 s=s+"</optgroup>";
 s=s+"<optgroup label=\"Commentari\">";
 s=s+"<option "+(versCommHenry==1?"selected=\"selected\" ":"")+"value=\"CommentarioHenry\">Commentario completo di Matthew Henry</option>";
 s=s+"<option "+(versCommNT==1?"selected=\"selected\" ":"")+"value=\"CommentarioNT\">Commentario Nuovo Testamento</option>";
-s=s+"<option "+(versCommCalvino==1?"selected=\"selected\" ":"")+"value=\"CommentarioCalvino\">Commentario di Giovanni Calvino (Gen,Mt-1G)</option>";
+s=s+"<option "+(versCommCalvino==1?"selected=\"selected\" ":"")+"value=\"CommentarioCalvino\">Commentario di Giovanni Calvino</option>";
 s=s+"<option "+(versComm==1?"selected=\"selected\" ":"")+"value=\"Commentario\">Commentario abbreviato</option>";
 s=s+"<option "+(versCommBarnes==1?"selected=\"selected\" ":"")+"value=\"CommentarioBarnes\">Note di Albert Barnes</option>";
 s=s+"<option "+(versCommGinevra==1?"selected=\"selected\" ":"")+"value=\"CommentarioGinevra\">Note della Bibbia di Ginevra</option>";
@@ -111,14 +114,14 @@ s=s+"</optgroup>";
 s=s+"</select><br /><br />";
 s=s+"<div style=\"display:flex;justify-content:center;position:relative\">";
 s=s+"<input class=\"grandezzatesto\" type=\"button\" name=\"Seleziona tutti\" tabindex=\"3\" value=\"Seleziona tutti\" onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=true;}\" />";
-s=s+"<div style='position:relative'><input class='grandezzatesto' type='button' onclick=\"const menu = document.getElementById('dropdownMenu');menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';\" value='&dtri;' /><div id='dropdownMenu'><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i<11);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutte le Bibbie</a><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i>=11);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutti i commentari</a></div></div></div><br />";      
+s=s+"<div style='position:relative'><input class='grandezzatesto' type='button' onclick=\"const menu = document.getElementById('dropdownMenu');menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';\" value='&dtri;' /><div id='dropdownMenu'><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i<12);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutte le Bibbie</a><a href='javascript:void(0)' onclick=\"var selObj = document.getElementById('versioni');for (i=0; i<selObj.options.length; i++) {selObj.options[i].selected=(i>=12);};document.getElementById('dropdownMenu').style.display = 'none';\">Tutti i commentari</a></div></div></div><br />";      
 const myElement = document.getElementById("tabellaVisualizza");
 myElement.innerHTML = s;
 //-->
 </script>
     </label></p>
 <noscript>
-        <select multiple="multiple" name="versioni[]" size="23" tabindex="2">
+        <select multiple="multiple" name="versioni[]" size="24" tabindex="2">
         <optgroup label="Versioni della Bibbia">
         <option selected="selected" value="Nuova Riveduta">Nuova Riveduta</option>
         <option value="C.E.I.">C.E.I. (1974)</option>
@@ -131,11 +134,12 @@ myElement.innerHTML = s;
         <option value="Tintori">Tintori</option>
         <option value="Martini">Martini</option>
         <option value="Diodati">Diodati</option>
+        <option value="Volgare">Bibbia in Volgare</option>
         </optgroup>
         <optgroup label="Commentari">
         <option value="CommentarioHenry">Commentario completo di Matthew Henry</option>
         <option value="CommentarioNT">Commentario Nuovo Testamento</option>
-        <option value="CommentarioCalvino">Commentario di Giovanni Calvino (Gen,Mt-1G)</option>
+        <option value="CommentarioCalvino">Commentario di Giovanni Calvino</option>
         <option value="Commentario">Commentario abbreviato</option>
         <option value="CommentarioBarnes">Note di Albert Barnes</option>
         <option value="CommentarioGinevra">Note della Bibbia di Ginevra</option>
@@ -173,9 +177,9 @@ myElement.innerHTML = s;
 <span id="tabellaRicerca"></span>
 <script type="text/javascript">
 <!--
-var s="<select name=\"versione\" size=\"11\">";
+var s="<select name=\"versione\" size=\"12\">";
 var vers = getCookie("RicVers");
-if (!vers || (vers!="C.E.I." && vers!="Nuova+Diodati" && vers!="Riveduta+2020" && vers!="Bibbia+della+Gioia" && vers!="Riveduta" && vers!="Ricciotti" && vers!="Tintori" && vers!="Martini" && vers!="Diodati"))
+if (!vers || (vers!="C.E.I." && vers!="Nuova+Diodati" && vers!="Riveduta+2020" && vers!="Bibbia+della+Gioia" && vers!="Riveduta" && vers!="Ricciotti" && vers!="Tintori" && vers!="Martini" && vers!="Diodati" && vers!="Volgare"))
         s=s+"<option selected=\"selected\" value=\"Nuova Riveduta\">Nuova Riveduta</option>";
 else
         s=s+"<option value=\"Nuova Riveduta\">Nuova Riveduta</option>";
@@ -219,6 +223,10 @@ if (vers=="Diodati")
         s=s+"<option selected=\"selected\" value=\"Diodati\">Diodati</option>";
 else
         s=s+"<option value=\"Diodati\">Diodati</option>";
+if (vers=="Volgare")
+        s=s+"<option selected=\"selected\" value=\"Volgare\">Bibbia in Volgare</option>";
+else
+        s=s+"<option value=\"Volgare\">Bibbia in Volgare</option>";
 s=s+"</select>";
 const myElement2 = document.getElementById("tabellaRicerca");
 myElement2.innerHTML = s;
@@ -226,7 +234,7 @@ myElement2.innerHTML = s;
 </script>
         </label></p>
 <noscript><p>
-        <select name="versione" size="11">
+        <select name="versione" size="12">
         <option selected="selected" value="Nuova Riveduta">Nuova Riveduta</option>
         <option value="C.E.I.">C.E.I. (1974)</option>
         <option value="Nuova Diodati">Nuova Diodati</option>
@@ -238,6 +246,7 @@ myElement2.innerHTML = s;
         <option value="Tintori">Tintori</option>
         <option value="Martini">Martini</option>
         <option value="Diodati">Diodati</option>
+        <option value="Volgare">Bibbia in Volgare</option>
         </select></p>
 </noscript>
         <p style="text-align:left"><label>Brano in cui ricercare:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="text" type="text" name="brano" title="Digita qui un riferimento (facoltativo)" /></label></p>

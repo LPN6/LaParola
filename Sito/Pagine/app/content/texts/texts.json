@@ -58,6 +58,7 @@
 		"tintori",
 		"ukr_bju",
 		"vincentsws",
+		"volgare",
 		"vulg",
 		"web",
 		"wh"
@@ -761,6 +762,18 @@
 			"langNameItaliano": "Inglese",
 			"dir": "ltr",
 			"type": "commentary"
+		},
+		{
+			"id": "volgare",
+			"name": "Bibbia in Volgare",
+			"nameEnglish": "Bibbia in Volgare",
+			"abbr": "Volg",
+			"lang": "ita",
+			"langName": "Italiano",
+			"langNameEnglish": "Italian",
+			"langNameItaliano": "Italiano",
+			"dir": "ltr",
+			"type": "bible"
 		},
 		{
 			"id": "vulg",
