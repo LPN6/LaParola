@@ -14,6 +14,11 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260713"></a>
+<h2>13 luglio 2026</h2>
+<p>La nuova versione di prova (8.0.4) &egrave; disponibile, in cui puoi leggere anche i dizionari e altri libri.
+Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.</p>
+
 <a name="20260709"></a>
 <h2>9 luglio 2026</h2>
 <p>Aggiunta la versione italiana <i>Bibbia in Volgare</i>, la seconda traduzione della Bibbia in italiano, nel 1471 di Nicolas Jenson, ristampata per cura di Carlo Negroni dal 1882 al 1887.</p>

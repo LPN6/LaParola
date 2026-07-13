@@ -31,6 +31,11 @@
                     <TreeViewItem x:Name="NodeLanguage" Header="{DynamicResource OpzioniLinguaTitolo}"/>
                 </TreeViewItem>
 
+                <TreeViewItem x:Name="TreeAmbiente" Header="{DynamicResource OpzioniAmbiente}">
+                    <TreeViewItem x:Name="NodeEditor" Header="{DynamicResource OpzioniEditorTitolo}"/>
+                    <TreeViewItem x:Name="NodeHypertext" Header="{DynamicResource OpzioniIpertestoTitolo}"/>
+                </TreeViewItem>
+
                 <TreeViewItem x:Name="TreeFormato" Header="{DynamicResource OpzioniFormato}">
                     <TreeViewItem x:Name="NodeText" Header="{DynamicResource OpzioniTestoTitolo}"/>
                     <TreeViewItem x:Name="NodeReferences" Header="{DynamicResource OpzioniRiferimentiTitolo}"/>
@@ -39,6 +44,7 @@
 
                 <TreeViewItem x:Name="TreeTesti" Header="{DynamicResource OpzioniTesti}">
                     <TreeViewItem x:Name="NodeBibbiaPreferita" Header="{DynamicResource OpzioniTestiBibbiaPreferita}"/>
+                    <TreeViewItem x:Name="NodeDizionari" Header="{DynamicResource OpzioniTestiDizionari}"/>
                 </TreeViewItem>
 
                 <TreeViewItem x:Name="TreeAggiornamenti" Header="{DynamicResource OpzioniAggiornamenti}">
@@ -77,7 +83,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox x:Name="SectionLanguage" Margin="0,0,0,28" Header="{DynamicResource OpzioniLinguaTitolo}" ToolTipService.ShowDuration="10000">
+                <GroupBox x:Name="SectionLanguage" Margin="0,4,0,16" Header="{DynamicResource OpzioniLinguaTitolo}" ToolTipService.ShowDuration="10000">
                     <GroupBox.ToolTip>
                         <ToolTip>
                             <TextBlock Text="{DynamicResource OpzioniLinguaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
@@ -89,6 +95,29 @@
                             <ComboBoxItem Tag="it">Italiano</ComboBoxItem>
                         </ComboBox>
                         <TextBlock Margin="0,10,0,0" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniLinguaNota}"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <TextBlock x:Name="SectionAmbienteHeader" FontSize="16" FontWeight="SemiBold" Margin="4,12,0,8" Text="{DynamicResource OpzioniAmbiente}"/>
+
+                <GroupBox x:Name="SectionEditor" Margin="0,4,0,16" Header="{DynamicResource OpzioniEditorTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniEditorAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <CheckBox x:Name="EditorChiudere" Content="{DynamicResource OpzioniEditorChiusura}" Margin="10,12,0,12" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                </GroupBox>
+
+                <GroupBox x:Name="SectionHypertext" Margin="0,4,0,16" Header="{DynamicResource OpzioniIpertestoTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniIpertestoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <CheckBox x:Name="IpertestoTooltip" Content="{DynamicResource OpzioniIpertestoTooltip}" Margin="10,12,0,12" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                        <CheckBox x:Name="IpertestoDizionario" Content="{DynamicResource OpzioniIpertestoDizionario}" Margin="10,12,0,12" Checked="SettingChanged" Unchecked="SettingChanged"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -221,7 +250,65 @@
                         </Grid>
                     </Grid>
                 </GroupBox>
-                
+
+                <GroupBox x:Name="SectionDizionari" Header="{DynamicResource OpzioniTestiDizionari}" Margin="0,4,0,16" >
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniTestiDizionariAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <Grid Grid.IsSharedSizeScope="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiDizionarioInglese}" VerticalAlignment="Center" />
+                            <ComboBox x:Name="ComboDizionarioInglese" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiDizionarioItaliano}" VerticalAlignment="Center" />
+                            <ComboBox x:Name="ComboDizionarioItaliano" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiDizionarioGreco}" VerticalAlignment="Center" />
+                            <ComboBox x:Name="ComboDizionarioGreco" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                        </Grid>
+                        <Grid Grid.Row="3" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiDizionarioEbraico}" VerticalAlignment="Center" />
+                            <ComboBox x:Name="ComboDizionarioEbraico" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                        </Grid>
+                        <Grid Grid.Row="4" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelWidth"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{DynamicResource OpzioniTestiDizionarioLatino}" VerticalAlignment="Center" />
+                            <ComboBox x:Name="ComboDizionarioLatino" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+
                 <TextBlock x:Name="SectionAggiornamentiHeader" FontSize="16" FontWeight="SemiBold" Margin="4,12,0,8" Text="{DynamicResource OpzioniAggiornamenti}"/>
 
                 <GroupBox x:Name="SectionMessages" Margin="0,4,0,16" Header="{DynamicResource OpzioniAggiornamentiMessaggi}">
@@ -238,7 +325,7 @@
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
-            
+
         </ScrollViewer>
     </Grid>
 </UserControl>

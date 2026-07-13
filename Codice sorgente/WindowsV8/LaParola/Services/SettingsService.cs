@@ -51,7 +51,7 @@ public class SettingsService
         }
     }
 
-    private static string ResolveSettingsPath()
+    internal static string ResolveSettingsPath()
     {
         try
         {

@@ -7,9 +7,11 @@ public class ViewerWindowState
 {
     public string ContentId { get; set; } = "";     // es: "viewer:abcd..."
     public string Versione { get; set; } = "";   // nome testo
+    public bool VersettoMostrato { get; set; } = true;
     public byte Libro { get; set; } = 1;
     public byte Capitolo { get; set; } = 1;
     public byte Versetto { get; set; } = 1;
+    public string Titolo { get; set; } = "";
     public bool IsSommarioVisibile { get; set; } = false;
     public int SincGruppo { get; set; } = 0;
 }
@@ -22,7 +24,7 @@ public enum ThemeState
 public class AppSettings
 {
     public ThemeState ThemeMode { get; set; } = ThemeState.System;
-    public string Language { get; set; } = "";
+    public string Lingua { get; set; } = "";
 
     // Layout AvalonDock serializzato(XML come stringa)
     public string? DockLayoutXml { get; set; }
@@ -40,13 +42,23 @@ public class AppSettings
 
     public string UltimaBibbia { get; set; } = "";
     public string UltimaBibbiaCompleta { get; set; } = "";
+    public string UltimaCartellaImmagini { get; set; } = "";
 
+    public bool EditorChiudere { get; set; } = false;
+    public bool IpertestoTooltip { get; set; } = true;
+    public bool IpertestoDizionario { get; set; } = true;
     public int ControlloMessaggi { get; set; } = 1;
     public DateTime UltimoControlloMessaggi { get; set; } = DateTime.MinValue;
     public int UltimoMessaggioControllatoId { get; set; } = 0;
     public string BibbiaPreferita1 { get; set; } = "";
     public string BibbiaPreferita2 { get; set; } = "";
     public string BibbiaPreferita3 { get; set; } = "";
+
+    public string DizionarioInglese { get; set; } = "";
+    public string DizionarioItaliano { get; set; } = "";
+    public string DizionarioGreco { get; set; } = "";
+    public string DizionarioEbraico { get; set; } = "";
+    public string DizionarioLatino { get; set; } = "";
 
     public LibraryToolState LibraryState { get; set; } = new LibraryToolState();
 

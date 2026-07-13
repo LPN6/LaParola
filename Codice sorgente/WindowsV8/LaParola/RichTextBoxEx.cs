@@ -8,13 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using static LaParola.Utilities.Funzioni;
 
 namespace LaParola
 {
     /// <summary>
-    /// An extension for RichTextBox suitable for printing, formatting selections
+    /// An extension for RichTextBox
     /// </summary>
     public class RichTextBoxEx : RichTextBox
     {
@@ -53,6 +52,26 @@ namespace LaParola
         /// </summary>
         //public const char ParolaRicercata = (char)14;
 
+        internal static bool isRunningOnMono;
+
+        private string versione = "";
+        /// <summary>
+        /// La versione della Bibbia del testo nel controllo.
+        /// </summary>
+        public string Versione
+        {
+            get => versione; set => versione = value;
+        }
+
+        private string lingua = "";
+        /// <summary>
+        /// La lingua del testo nel controllo (o lingue, se separate con una riga verticale |).
+        /// </summary>
+        public string Lingua
+        {
+            get => lingua; set => lingua = value;
+        }
+
         /// <summary>
         /// Il testo Rtf del controllo.
         /// </summary>
@@ -62,8 +81,8 @@ namespace LaParola
             {
                 TextRange range = new(Document.ContentStart, Document.ContentEnd);
                 using MemoryStream ms = new();
-                range.Save(ms, DataFormats.Rtf);            // Save in RTF [3](https://stackoverflow.com/questions/79407278/can-i-save-a-textrange-inline-property-to-rtf-in-wpf)
-                return Encoding.UTF8.GetString(ms.ToArray()); // conversione a stringa (esempio comune) [3](https://stackoverflow.com/questions/79407278/can-i-save-a-textrange-inline-property-to-rtf-in-wpf)
+                range.Save(ms, DataFormats.Rtf);            // Save in RTF (https://stackoverflow.com/questions/79407278/can-i-save-a-textrange-inline-property-to-rtf-in-wpf)
+                return Encoding.UTF8.GetString(ms.ToArray()); // conversione a stringa (esempio comune) (https://stackoverflow.com/questions/79407278/can-i-save-a-textrange-inline-property-to-rtf-in-wpf)
             }
             set
             {
@@ -76,7 +95,7 @@ namespace LaParola
 
                 // Carica l’RTF in un TextRange che copre tutto il documento
                 TextRange range = new(Document.ContentStart, Document.ContentEnd);
-                using MemoryStream ms = new(Encoding.UTF8.GetBytes(ConvertiUnicodeInRtf(value))); // puoi usare un encoding diverso se serve
+                using MemoryStream ms = new(Encoding.UTF8.GetBytes(ConvertiUnicodeInRtf(value)));
                 range.Load(ms, DataFormats.Rtf); // Load supporta Rtf (https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.textrange.load?view=windowsdesktop-10.0) (https://stackoverflow.com/questions/1367256/set-rtf-text-into-wpf-richtextbox-control)
             }
         }
@@ -87,11 +106,11 @@ namespace LaParola
             {
                 // Testo plain dell’intero documento
                 TextRange range = new(Document.ContentStart, Document.ContentEnd);
-                string text = range.Text;// [1](https://github.com/MicrosoftDocs/winrt-api/blob/docs/windows.ui.xaml.documents/textelement_fontfamilyproperty.md/)
+                string text = range.Text;// (https://github.com/MicrosoftDocs/winrt-api/blob/docs/windows.ui.xaml.documents/textelement_fontfamilyproperty.md/)
 
                 // Opzionale: WPF spesso aggiunge CRLF finale perché ogni Paragraph termina con newline
                 // Se ti dà fastidio, rimuovilo:
-                return text;//.TrimEnd('\r', '\n'); [2](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/how-to-extract-the-text-content-from-a-richtextbox)[1](https://github.com/MicrosoftDocs/winrt-api/blob/docs/windows.ui.xaml.documents/textelement_fontfamilyproperty.md/)
+                return text;//.TrimEnd('\r', '\n'); (https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/how-to-extract-the-text-content-from-a-richtextbox)[1](https://github.com/MicrosoftDocs/winrt-api/blob/docs/windows.ui.xaml.documents/textelement_fontfamilyproperty.md/)
             }
             set
             {
@@ -127,7 +146,7 @@ namespace LaParola
             TextPointer start = GetTextPointerAtCharOffset(m);
             TextPointer end = GetTextPointerAtCharOffset(n);
 
-            Selection.Select(start, end); // Select(TextPointer, TextPointer) [1](https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.textselection?view=windowsdesktop-10.0)
+            Selection.Select(start, end); // Select(TextPointer, TextPointer) (https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.textselection?view=windowsdesktop-10.0)
             Focus();
         }
 
@@ -178,34 +197,11 @@ namespace LaParola
             return Document.ContentEnd;
         }
 
-        internal static bool isRunningOnMono;
-
-        private string versione = "";
-        /// <summary>
-        /// La versione della Bibbia del testo nel controllo.
-        /// </summary>
-        public string Versione
-        {
-            get => versione; set => versione = value;
-        }
-
-        private string lingua = "";
-        /// <summary>
-        /// La lingua del testo nel controllo (o lingue, se separate con una riga verticale |).
-        /// </summary>
-        public string Lingua
-        {
-            get => lingua; set => lingua = value;
-        }
-
         #endregion
 
         #region const e struct
 
         #region per la stampa
-        // TODO2 da cancellare
-        //        private const int WM_USER = 0x400;
-        private const int EM_FORMATRANGE = 1081; // WM_USER + 57;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct STRUCT_RECT
@@ -267,6 +263,141 @@ namespace LaParola
 
             linkStyle.Setters.Add(new EventSetter(ContentElement.MouseEnterEvent,
                 new MouseEventHandler(HoverPopup.OnHyperlinkHover)));
+        }
+
+        protected override void OnMouseDoubleClick(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Lasciamo che il RichTextBox base esegua prima la sua selezione nativa della parola ("all'uomo")
+            base.OnMouseDoubleClick(e);
+
+            if (MainWindow.settings.IpertestoDizionario == false)
+            {
+                return;
+            }
+
+            // INTERCEZIONE E CORREZIONE DELL'APOSTROFO
+            try
+            {
+                // Recuperiamo la posizione esatta del puntatore del mouse al momento del doppio clic
+                System.Windows.Point clickPoint = e.GetPosition(this);
+                TextPointer clickPos = this.GetPositionFromPoint(clickPoint, true);
+
+                if (clickPos != null)
+                {
+                    // Espandiamo verso SINISTRA per trovare l'inizio della parola
+                    TextPointer wordStart = clickPos;
+                    while (wordStart.CompareTo(this.Document.ContentStart) > 0)
+                    {
+                        TextPointer prev = wordStart.GetNextInsertionPosition(LogicalDirection.Backward);
+                        if (prev == null) break;
+
+                        string chText = new TextRange(prev, wordStart).Text;
+                        if (string.IsNullOrEmpty(chText)) break;
+
+                        char c = chText[0];
+                        // Se andiamo a sinistra e colpiamo un apostrofo o punteggiatura, ci fermiamo.
+                        // Questo fa sì che "uomo" NON includa l'apostrofo alla sua sinistra.
+                        if (IsCarattereDaScartare(c) || c == '\'' || c == '’')
+                        {
+                            break;
+                        }
+                        wordStart = prev;
+                    }
+
+                    // Espandiamo verso DESTRA per trovare la fine della parola
+                    TextPointer wordEnd = clickPos;
+                    while (wordEnd.CompareTo(this.Document.ContentEnd) < 0)
+                    {
+                        TextPointer next = wordEnd.GetNextInsertionPosition(LogicalDirection.Forward);
+                        if (next == null) break;
+
+                        string chText = new TextRange(wordEnd, next).Text;
+                        if (string.IsNullOrEmpty(chText)) break;
+
+                        char c = chText[0];
+                        // Se andiamo a destra e colpiamo un apostrofo, lo INCLUDIAMO nella parola di sinistra ("all'") e poi ci fermiamo.
+                        if (c == '\'' || c == '’')
+                        {
+                            wordEnd = next;
+                            break;
+                        }
+                        if (IsCarattereDaScartare(c))
+                        {
+                            break;
+                        }
+                        wordEnd = next;
+                    }
+
+                    // Sovrascriviamo la selezione nativa di WPF con i nostri confini personalizzati
+                    this.Selection.Select(wordStart, wordEnd);
+                }
+            }
+            catch /*(Exception ex)*/
+            {
+                // Silenzioso: se il parser di WPF fallisce il calcolo geometrico dei punti per motivi di rendering,
+                // l'app non crasha e mantiene la selezione nativa di base.
+                //System.Diagnostics.Debug.WriteLine($"Errore calcolo shortcut apostrofo: {ex.Message}");
+            }
+
+            // Recuperiamo il testo che ora è stato correttamente ricalcolato (all' OPPURE uomo)
+            string testoSelezionato = this.Selection.Text;
+
+            if (!string.IsNullOrWhiteSpace(testoSelezionato))
+            {
+                // 3. Puliamo la parola
+                string parolaPulita = PulisciParolaPerDizionario(testoSelezionato);
+
+                if (!string.IsNullOrEmpty(parolaPulita))
+                {
+                    // Inviamo la parola isolata al dizionario
+                    MainWindow.ApriDefinizioneDizionario(parolaPulita, versione);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determina se un carattere è da scartare ai bordi della parola, 
+        /// proteggendo le lettere, i numeri, i diacritici greci e gli apostrofi utili.
+        /// </summary>
+        private static bool IsCarattereDaScartare(char c)
+        {
+            // AGGIORNAMENTO: Proteggiamo l'apostrofo (sia dritto ' che tipografico ’) 
+            // per evitare che PulisciParola tranci via la coda di "all'" dopo che l'abbiamo isolata.
+            if (char.IsLetterOrDigit(c) || c == '\'' || c == '’') return false;
+
+            var categoria = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
+            if (categoria == System.Globalization.UnicodeCategory.NonSpacingMark) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Pulisce la parola isolando i caratteri alfanumerici e i diacritici combinati (Greco Form D).
+        /// </summary>
+        private static string PulisciParolaPerDizionario(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
+
+            text = text.Trim();
+
+            // Trova l'inizio reale della parola saltando la punteggiatura iniziale
+            int start = 0;
+            while (start < text.Length && IsCarattereDaScartare(text[start]))
+            {
+                start++;
+            }
+
+            // Trova la fine reale della parola saltando la punteggiatura finale
+            int end = text.Length - 1;
+            while (end >= start && IsCarattereDaScartare(text[end]))
+            {
+                end--;
+            }
+
+            if (start > end) return string.Empty;
+
+            return text.Substring(start, end - start + 1);
         }
 
         private void Editor_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

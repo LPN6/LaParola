@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 
 namespace LaParola.Dialogs
 {
-    public static class HoverPopup
+    public static partial class HoverPopup
     {
         private static readonly Popup _hoverPopup;
         private static readonly RichTextBox _popupViewer;
@@ -74,7 +75,11 @@ namespace LaParola.Dialogs
 
         public static async void OnHyperlinkHover(object sender, MouseEventArgs e)
         {
-            // TODO2 also note, file?
+            if (!MainWindow.settings.IpertestoTooltip)
+            {
+                return;
+            }
+
             if (sender is Hyperlink hyperlink)
             {
                 // GUARD 1: If we are already displaying/loading this exact link, do nothing.
@@ -105,6 +110,20 @@ namespace LaParola.Dialogs
                 _hoverPopup.IsOpen = true;
 
                 string uri = hyperlink.NavigateUri?.OriginalString ?? "";
+                // Decode the URI to recover the complete path with Greek characters intact
+                uri = Uri.UnescapeDataString(uri);
+                // Corregge le sequenze di escape ANSI/RTF residue (es: \'f9 -> ù)
+                uri = RegexRtf().Replace(uri, m =>
+                {
+                    // Estrae la stringa esadecimale (es. "f9") e la converte in byte
+                    string hexValue = m.Groups[1].Value;
+                    byte b = Convert.ToByte(hexValue, 16);
+
+                    // Converte il byte nel rispettivo carattere accentato occidentale.
+                    // Usiamo Encoding.Latin1 (ISO-8859-1) che mappa perfettamente caratteri come ò, à, ù, è, ì 
+                    // e funziona nativamente in .NET Core/.NET Framework senza configurazioni extra.
+                    return Encoding.Latin1.GetString([b]);
+                });
 
                 if (uri.StartsWith("bibbia:"))
                 {
@@ -132,7 +151,7 @@ namespace LaParola.Dialogs
                         string noteName = uri.Replace("nota:", "");
                         string collezioneNuovaNota = "";
                         if (noteName.IndexOf('\\') > 0) // in questo modo, è possibile creare un link "Nuova Riveduta\#010010010000-01001002000"
-                        { // in versione.cs, il nome del commentario è stato nel link affinché possa aprire nello stesso commentario
+                        { // in versione.cs, il nome del commentario è stato inserito nel link affinché possa aprire nello stesso commentario
                             collezioneNuovaNota = noteName[..noteName.IndexOf('\\')];
                             noteName = noteName[(noteName.IndexOf('\\') + 1)..];
 
@@ -158,23 +177,38 @@ namespace LaParola.Dialogs
 
                                 ImpostaTestoHover(rtf, hyperlink);
                             }
-                            // TODO2 else open nota su tema
+                            else
+                            {
+                                // apri nota su tema
+                                Riferimento riferimentoNota = new(false);
+                                riferimentoNota.AggiungiNotaEParole(noteName, []);
+                                string rtf = await MainWindow.Testi.TestoBranoAsync(riferimentoNota, collezioneNuovaNota);
+                                rtf = Funzioni.ConvertiUnicodeInRtf(MainWindow.AncoraRegEx.Replace(rtf, ""));
+                                ImpostaTestoHover(rtf, hyperlink);
+                            }
                         }
                     }
                     catch
                     {
                         _hoverPopup.IsOpen = false;
                     }
-
-                    // TODO2 file or non fare niente in questo caso
-                    /*
-                    // CASE 3: External Local Machine Files
-                    else if (uri.StartsWith("filenome:"))
+                }
+                else if (uri.StartsWith("filenome:"))
+                {
+                    _hoverPopup.IsOpen = false;
+                    try
                     {
-                        string fileName = uri.Replace("filename:", "");
-                        hyperlink.ToolTip = $"Apri file esterno: {Path.GetFileName(fileName)}";
+                        string filePath = uri.Replace("filenome:", "");
+                        hyperlink.ToolTip = (string)(Application.Current.TryFindResource("HoverFile") ?? "Open file") + " "+ filePath;
                     }
-                    */
+                    catch
+                    {
+                    }
+                }
+                else
+                {
+                    // For any other URI schemes, you can choose to display a default message or ignore.
+                    _hoverPopup.IsOpen = false;
                 }
             }
         }
@@ -246,5 +280,8 @@ namespace LaParola.Dialogs
                 }
             }), System.Windows.Threading.DispatcherPriority.Background);
         }
+
+        [GeneratedRegex(@"\\+'([0-9a-fA-F]{2})")]
+        private static partial Regex RegexRtf();
     }
 }

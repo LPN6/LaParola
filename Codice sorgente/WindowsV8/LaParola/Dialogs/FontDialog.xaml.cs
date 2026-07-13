@@ -52,7 +52,7 @@ namespace LaParola
 
             LoadFonts();
             LoadSizes();
-            LoadColours(MainWindow.settings.Language == "it");
+            LoadColours(MainWindow.settings.Lingua == "it");
 
             chkSuperscript.Visibility =
                 allowSuperscript

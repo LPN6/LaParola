@@ -62,7 +62,7 @@
             </ComboBox.ToolTip>
         </ComboBox>
 
-        <GroupBox Grid.Row="4" Header="{DynamicResource RicercaBranoTitolo}" Margin="0,12,0,0" Padding="12" ToolTipService.ShowDuration="10000">
+        <GroupBox x:Name="GbBrano" Grid.Row="4" Header="{DynamicResource RicercaBranoTitolo}" Margin="0,12,0,0" Padding="12" ToolTipService.ShowDuration="10000">
             <GroupBox.ToolTip>
                 <ToolTip>
                     <TextBlock Text="{DynamicResource RicercaBranoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>

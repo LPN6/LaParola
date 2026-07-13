@@ -327,6 +327,6 @@ public partial class TextGeneratorToolView : UserControl
         Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
         RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
 
-        App.DockingHost.SendFlowDocumentToActiveEditor(doc, title);
+        App.DockingHost.SendFlowDocumentToActiveEditor(doc, title, versioni[0]);
     }
 }

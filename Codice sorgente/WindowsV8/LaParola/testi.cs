@@ -1,25 +1,16 @@
-﻿using System.Collections;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Transactions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml;
 using static LaParola.Utilities.Funzioni;
-
-// TODO2 a volte sottolineatura di parole ricercate non corretta, per esempio quando ci sono link
 
 namespace LaParola
 {
@@ -29,7 +20,7 @@ namespace LaParola
     /// Una classe per confrontare due stringhe, che funziona anche con i caratteri greci.
     /// Case insensitive.
     /// </summary>
-    public class ConfrontoCI : IComparer<String>
+    public class ConfrontoCI : IComparer<string>, IEqualityComparer<string>
     {
         /// <summary>
         /// La funzione Compare.
@@ -39,11 +30,29 @@ namespace LaParola
         /// <returns>Il confronto delle stringhe: -1, 0 o 1.</returns>
         public int Compare(string? x, string? y)
         {
-            ArgumentNullException.ThrowIfNull(x);
-
-            ArgumentNullException.ThrowIfNull(y);
+            if (x == null && y == null) return 0;
+            if (x == null) return -1;
+            if (y == null) return 1;
 
             return String.Compare(x.Normalize(NormalizationForm.FormD), y.Normalize(NormalizationForm.FormD), StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool Equals(string? x, string? y)
+        {
+            // Se il confronto restituisce 0, significa che le stringhe sono uguali
+            return Compare(x, y) == 0;
+        }
+
+        public int GetHashCode(string obj)
+        {
+            ArgumentNullException.ThrowIfNull(obj);
+
+            // REGOLA D'ORO DI .NET: Se due stringhe sono considerate uguali da Equals(),
+            // devono ASSOLUTAMENTE restituire lo stesso identico HashCode.
+            // Pertanto, dobbiamo normalizzare in FormD anche qui prima di calcolare l'hash.
+            string normalized = obj.Normalize(NormalizationForm.FormD);
+
+            return StringComparer.InvariantCultureIgnoreCase.GetHashCode(normalized);
         }
     }
 
@@ -1399,8 +1408,8 @@ namespace LaParola
         /// </summary>
         public const string LibriAbbreviazioniRiconosciuteSpagnolo = "|gé,ge,gn|éx,ex|le,lv|nm,nu,nú|de,dt|jos,js|jue,jc|rt,ru|1 s,1s,isam|2 s,2s,iis|1 r,1r,ir|2 r,2r,iir|1 cr,1cr,icr|2 cr,2cr,iicr|esd,ed|ne,nh|tb,to|jdt,jt,judi|est,et|1 m,1m,im|2 m,2m,iim|jb,job|sal,slm|pr,pv|ec|cnt,can|sab,sb|eclo,si|is|je,jr|la,lm|bar,br|ez|da,dn|os|jl,joe|am|abd|jon,jn|mi|na,nh|hab,hb|sof,sf|hag,hg|zac,zc|mal,ml|mat,mt|mar,mr|lc,lu|jn,ju|hch,hech|rm,ro|1 co,1co,ico|2 co,2co,iico|ga,gá|ef|fil,flp|cl,col|1 ts,1ts,1tes,its|2 ts,2ts,2ts,iits,2tes|1 ti,1ti,1tm,iti|2 ti,2ti,2tm,iiti|ti,tt|flm,file,fm|he|stg,sant,snt,sg|1 p,1p,ip|2 p,2p,iip|1 j,1j,ij|2 j,2j,iij|3 j,3j,iiij|jud,jd|ap,rev,rv";
 
-        public static readonly string[] paroleItalianeConApostrofe = ["be", "co", "com", "da", "de", "di", "die", "dov", "e", "fa", "fe", "mo", "pe", "po", "quant", "que", "rifa", "sta", "va"];
-        public static readonly string[] paroleInglesiSenzaApostrofe = ["amiss", "apostates", "commandments", "fillets", "holiness", "intercessions", "jealous", "means", "peres", "prayer-fillets", "prayers", "prays", "righteous", "terms", "us", "was", "yahweh's", "yes"];
+        internal static readonly string[] paroleItalianeConApostrofe = ["be", "ch", "co", "com", "d", "da", "de", "di", "die", "dov", "e", "fa", "fe", "mo", "pe", "po", "quant", "que", "rifa", "sopr", "sta", "torra", "udi", "va"];
+        internal static readonly string[] paroleInglesiSenzaApostrofe = ["amiss", "apostates", "commandments", "fillets", "holiness", "intercessions", "jealous", "means", "peres", "prayer-fillets", "prayers", "prays", "righteous", "terms", "us", "was", "yahweh's", "yes"];
 
         private static readonly XmlLanguage HebrewLanguage = XmlLanguage.GetLanguage("he-IL");
         private static readonly XmlLanguage EnglishLanguage = XmlLanguage.GetLanguage("en-US");
@@ -1424,7 +1433,7 @@ namespace LaParola
         /// <summary>
         /// L'handler dell'evento quando la Bibbia utilizzata è cambiata.
         /// </summary>
-        public event EventHandler<UltimaBibbiaEventArgs> UltimaBibbiaEvento;
+        public event EventHandler<UltimaBibbiaEventArgs>? UltimaBibbiaEvento;
 
         /// <summary>
         /// Inizia l'evento quando la Bibbia utilizzata è cambiata.
@@ -2113,7 +2122,7 @@ namespace LaParola
             string abbreviazioneLC = abbreviazione.ToUpper(CultureInfo.InvariantCulture);
             foreach (KeyValuePair<string, Versione> kvp in versioni)
             {
-                if (kvp.Value.Info.Abbreviazione.ToUpper(CultureInfo.InvariantCulture) == abbreviazioneLC)
+                if (kvp.Value.Info.Abbreviazione.Equals(abbreviazioneLC, StringComparison.CurrentCultureIgnoreCase))
                 {
                     return kvp.Key;
                 }
@@ -5682,15 +5691,24 @@ Riferimento? paroleRicercate = null)
         /// <returns>Una collezione con i nomi di tutte le note.</returns>
         public Collection<string> Note(string nomeVersione)
         {
-            try
-            {
-                List<string> note = [.. versioni[nomeVersione].NoteTitoli];
-                return new Collection<string>(note);
-            }
-            catch (KeyNotFoundException)
+            if (!versioni.TryGetValue(nomeVersione, out var versione))
             {
                 throw new TextNotExistException();
             }
+
+            // Estraiamo i dati in modo pulito usando la sintassi C# 12,
+            // ma solo dopo esserci accertati che la chiave esista.
+            return new Collection<string>([.. versione.NoteTitoli]);
+        }
+
+        public int NumeroNote(string nomeVersione)
+        {
+            if (!versioni.TryGetValue(nomeVersione, out var versione))
+            {
+                throw new TextNotExistException();
+            }
+
+            return versione.NoteTitoli.Count;
         }
 
         /// <summary>
@@ -5700,24 +5718,54 @@ Riferimento? paroleRicercate = null)
         /// <returns>Una collezione di tutti i titoli.</returns>
         public Collection<string> NoteConTitolo(string nomeVersione)
         {
-            try
-            {
-                Collection<string> note = [];
-                int numeroNote = versioni[nomeVersione].NoteTitoli.Count;
-                for (int i = 0; i < numeroNote; ++i)
-                {
-                    if (!versioni[nomeVersione].NoteTitoli[i].StartsWith('#'))
-                    {
-                        note.Add(versioni[nomeVersione].NoteTitoli[i]);
-                    }
-                }
-
-                return note;
-            }
-            catch (KeyNotFoundException)
+            // 1. Avoid try-catch by using TryGetValue (Incredibly fast)
+            if (!versioni.TryGetValue(nomeVersione, out var versione))
             {
                 throw new TextNotExistException();
             }
+
+            // 2. Cache the list locally so we do ZERO dictionary lookups inside the loop
+            var noteTitoli = versione.NoteTitoli;
+            int numeroNote = noteTitoli.Count;
+
+            // 3. Pre-allocate capacity to prevent memory resizing overhead
+            var temporaryList = new List<string>(numeroNote);
+
+            for (int i = 0; i < numeroNote; ++i)
+            {
+                string titolo = noteTitoli[i]; // Read from array/list index only once
+
+                if (titolo != null && !titolo.StartsWith('#'))
+                {
+                    temporaryList.Add(titolo);
+                }
+            }
+
+            // 4. Wrap the list into a Collection without re-allocating memory
+            return new Collection<string>(temporaryList);
+        }
+
+        public int NumeroNoteConTitolo(string nomeVersione)
+        {
+            if (!versioni.TryGetValue(nomeVersione, out var versione))
+            {
+                throw new TextNotExistException();
+            }
+
+            var noteTitoli = versione.NoteTitoli;
+            int numeroNote = noteTitoli.Count;
+            int validNoteCount = 0;
+
+            for (int i = 0; i < numeroNote; ++i)
+            {
+                string titolo = noteTitoli[i];
+                if (titolo != null && !titolo.StartsWith('#'))
+                {
+                    validNoteCount++;
+                }
+            }
+
+            return validNoteCount;
         }
 
         /// <summary>
@@ -5729,43 +5777,50 @@ Riferimento? paroleRicercate = null)
         public Collection<string> NotePrimaOrdinate(string nomeVersione, bool conNoteSuBrani)
         {
             Collection<string> titoli = [];
-            if (!String.IsNullOrEmpty(nomeVersione))
+
+            if (string.IsNullOrEmpty(nomeVersione))
             {
-                Collection<string> noteInOrdine = GetNoteInOrdine(nomeVersione);
-                List<string> note = [.. Note(nomeVersione)];
-                ConfrontoCI confronto = new();
-                note.Sort(confronto);
+                return titoli;
+            }
 
-                // aggiungere prima le note in ordine, poi le altre note in ordine alfabetico
-                int indiceNota;
-                string notaSenzaTab;
-                char[] trimTab = ['\t'];
+            // 1. Recupero dei dati iniziali
+            Collection<string> noteInOrdine = GetNoteInOrdine(nomeVersione);
+            List<string> note = [.. Note(nomeVersione)];
 
-                foreach (string nota in noteInOrdine)
+            // Ordinamento iniziale alfabetico
+            ConfrontoCI confronto = new();
+            note.Sort(confronto);
+
+            // FUNZIONE LOCALE: Centralizza il filtro di validità delle note
+            bool IsNotaValida(string s) => !string.IsNullOrEmpty(s) && (conNoteSuBrani || !s.StartsWith('#'));
+
+            // Set per tracciare le note già inserite in tempo O(1) ed evitare duplicati.
+            HashSet<string> noteGiaIncluse = new(confronto);
+
+            // 2. Aggiunge prima le note nell'ordine specifico del file/struttura
+            foreach (string nota in noteInOrdine)
+            {
+                if (string.IsNullOrEmpty(nota)) continue;
+
+                // Rimuove i tab senza allocare array aggiuntivi
+                string notaSenzaTab = nota.TrimStart('\t');
+
+                if (IsNotaValida(notaSenzaTab))
                 {
-                    if (!string.IsNullOrEmpty(nota))
-                    {
-                        notaSenzaTab = nota.TrimStart(trimTab); // possono essere note dalle note in ordine, ma senza l'indentazione (indicata da una tabulazione) rimossa
-                        if (!string.IsNullOrEmpty(notaSenzaTab) && (conNoteSuBrani || !notaSenzaTab.StartsWith('#')))
-                        {
-                            titoli.Add(notaSenzaTab);
-                            indiceNota = note.BinarySearch(notaSenzaTab, confronto);
-                            if (indiceNota > -1)
-                            {
-                                note.RemoveAt(indiceNota);
-                            }
-                        }
-                    }
-                }
-
-                foreach (string nota in note)
-                {
-                    if (!string.IsNullOrEmpty(nota) && (conNoteSuBrani || !nota.StartsWith('#')))
-                    {
-                        titoli.Add(nota);
-                    }
+                    titoli.Add(notaSenzaTab);
+                    noteGiaIncluse.Add(notaSenzaTab); // Registriamo che questa nota è stata "consumata"
                 }
             }
+
+            // 3. Aggiunge le restanti note in ordine alfabetico (se non già incluse prima)
+            foreach (string nota in note)
+            {
+                if (IsNotaValida(nota) && !noteGiaIncluse.Contains(nota))
+                {
+                    titoli.Add(nota);
+                }
+            }
+
             return titoli;
         }
 
@@ -6073,7 +6128,7 @@ Riferimento? paroleRicercate = null)
                             case "it":
                                 if (i > 0 && i < nCaratteri - 1)
                                 {
-                                    if ((IsLetteraONumero(testo[i - 1]) && (IsLetteraONumero(testo[i + 1]) || testo[i + 1] == '\'' || testo[i + 1] == '«' || testo[i + 1] == '“' || testo[i + 1] == ']')) || (Array.BinarySearch(paroleItalianeConApostrofe, parola, confrontoParole) >= 0))
+                                    if ((IsLetteraONumero(testo[i - 1]) && (IsLetteraONumero(testo[i + 1]) || testo[i + 1] == '\'' || testo[i + 1] == '«' || testo[i + 1] == '“' || testo[i + 1] == ']' || (testo[i + 1] == ')') && testo.IndexOf("('") < i)) || (Array.BinarySearch(paroleItalianeConApostrofe, parola, confrontoParole) >= 0))
                                     {
                                         // per esempio l'uomo, l''Italica'
                                         parola += c;

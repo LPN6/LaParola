@@ -19,11 +19,11 @@ public partial class App : Application
     {
         ImpostazioniApp = Settings.Load();
 
-        CultureInfo culture = ImpostazioniApp.Language switch
+        CultureInfo culture = ImpostazioniApp.Lingua switch
         {
             "" => CultureInfo.CurrentUICulture,
-            "it" => new CultureInfo("it-IT"),
-            _ => new CultureInfo("en-US"),
+            "en" => new CultureInfo("en-US"),
+            _ => new CultureInfo("it-IT"),
         };
         CultureInfo.DefaultThreadCurrentUICulture = culture;
         CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -32,16 +32,16 @@ public partial class App : Application
                     typeof(FrameworkElement),
                     new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(culture.IetfLanguageTag)));
 
-        if (ImpostazioniApp.Language=="")
+        if (ImpostazioniApp.Lingua == "")
         {
-            ImpostazioniApp.Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-            if (ImpostazioniApp.Language!="it" && ImpostazioniApp.Language!="en")
+            ImpostazioniApp.Lingua = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            if (ImpostazioniApp.Lingua != "it" && ImpostazioniApp.Lingua != "en")
             {
-                ImpostazioniApp.Language = "en";
+                ImpostazioniApp.Lingua = "it";
             }
         }
 
-        LocalizationManager.ApplyLanguage(ImpostazioniApp.Language);
+        LocalizationManager.ApplyLanguage(ImpostazioniApp.Lingua);
         ThemeManager.ApplyTheme(ImpostazioniApp.ThemeMode);
 
         base.OnStartup(e);

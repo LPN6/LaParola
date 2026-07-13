@@ -1,5 +1,14 @@
 [
   {
+    "Id": 3,
+    "Title": "Version 8.0.4",
+    "Content": "The fifth beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are the dictionaries and other book (with hypertext link), images, and new options.",
+    "TitleIt": "Versione 8.0.4",
+    "ContentIt": "La quinta versione beta è ora disponibile a https://www.laparola.net/programma/windowsbeta.php . Le novità principali sono i dizionari e altri libri (con link ipertestuali), immagini, e nuove opzioni.",
+    "Date": "2026-07-13T07:00:00"
+  }
+
+  {
     "Id": 2,
     "Title": "Version 8.0.3",
     "Content": "The fourth beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are the Bible commentaries and the window to show your Library of books.",

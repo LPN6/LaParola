@@ -15,6 +15,9 @@
     <sys:String x:Key="MenuVisualizza">_View</sys:String>
     <sys:String x:Key="MenuVisualizzaBibbia">_Bible</sys:String>
     <sys:String x:Key="MenuVisualizzaCommentario">_Commentary</sys:String>
+    <sys:String x:Key="MenuVisualizzaDizionario">_Dictionary</sys:String>
+    <sys:String x:Key="MenuVisualizzaLibro">_Book</sys:String>
+    <sys:String x:Key="MenuVisualizzaImmagine">_Image...</sys:String>
     <sys:String x:Key="MenuStrumenti">_Tools</sys:String>
     <sys:String x:Key="MenuAiuto">_Help</sys:String>
 
@@ -66,6 +69,7 @@
     <sys:String x:Key="ViewerCapitoloSuccessivo">Next Chapter</sys:String>
     <sys:String x:Key="ViewerVersettoPrecedente">Previous Verse</sys:String>
     <sys:String x:Key="ViewerVersettoSuccessivo">Next Verse</sys:String>
+    <sys:String x:Key="ViewerTitoloNotaAiuto">Select a note to view</sys:String>
     <sys:String x:Key="ViewerRicercaAiuto">Enter a word or expression to search for in the text</sys:String>
     <sys:String x:Key="ViewerVaiRicercaAiuto">Execute the search</sys:String>
     <sys:String x:Key="ViewerRicercaVersettiAiuto">Verses that contain the search expression; choose one to view it</sys:String>
@@ -101,7 +105,7 @@
     <sys:String x:Key="FileDialogoFiltro">Rich Text (*.rtf)|*.rtf|Plain text (*.txt)|*.txt</sys:String>
     <sys:String x:Key="FileDialogoFiltroTutti">Rich Text (*.rtf)|*.rtf|Plain text (*.txt)|*.txt|All files (*.*)|*.*</sys:String>
     <sys:String x:Key="FileDialogoNome">document</sys:String>
-    <sys:String x:Key="EditorSalvaModifiche">Do you want to save changes to this text?</sys:String>
+    <sys:String x:Key="EditorSalvaModifiche">Do you want to save changes to</sys:String>
     <sys:String x:Key="EditorSalvaModificheTitolo">Unsaved changes</sys:String>
     <sys:String x:Key="EditorSalvaFallito">Save failed</sys:String>
     <sys:String x:Key="EditorApriFallito">Open failed</sys:String>
@@ -117,10 +121,17 @@
     <sys:String x:Key="TrovaSostituzioneCompletata">{0} replacements were made.</sys:String>
     <sys:String x:Key="TrovaSostituzioneCompletata1">{0} replacement was made.</sys:String>
     <sys:String x:Key="TrovaSostituzione">Replace</sys:String>
+    <sys:String x:Key="HoverFile">Open file</sys:String>
+    <sys:String x:Key="LinkFileErrore">I could not open the file</sys:String>
 
     <sys:String x:Key="FileLabel">File:</sys:String>
     <sys:String x:Key="FileUnsaved">(unsaved)</sys:String>
     <sys:String x:Key="FileNone">(none)</sys:String>
+
+    <sys:String x:Key="ImmagineAiuto">This window displays an image. If the image was created for the program, it may have hyperlinks: when the mouse is over a link, the cursor changes shape and the title of the note is displayed at the bottom of the window, and a click opens the note. A right click with the mouse on the image can change the zoom level of the image.</sys:String>
+    <sys:String x:Key="ImmaginiApriTitolo">Select One or More Images</sys:String>
+    <sys:String x:Key="ImmaginiFileFiltro">"Image files (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|All files (*.*)|*.*"</sys:String>
+    <sys:String x:Key="ImmaginiCollezioneNonTrovata">The collection of notes "{0}" was not found.</sys:String>
 
     <sys:String x:Key="BibliotecaTitolo">Library</sys:String>
     <sys:String x:Key="BibliotecaAiuto">The table lists all the installed texts. Clicking on a row shows more information in the right side panel, double clicking opens the text in the program. The top two rows provide various ways to search for or filter the texts. Hover over the elements of the window for more information.</sys:String>
@@ -169,6 +180,10 @@
     <sys:String x:Key="BibliotecaRinominaAiuto">Give a text a new name</sys:String>
     <sys:String x:Key="BibliotecaRinominaDomanda">Enter the new name for this text:</sys:String>
     <sys:String x:Key="BibliotecRinominaTitolo">Rename Text</sys:String>
+    <sys:String x:Key="BibliotecaCopia">Copy Text</sys:String>
+    <sys:String x:Key="BibliotecaCopiaAiuto">Create a copy of the text</sys:String>
+    <sys:String x:Key="BibliotecaCopiaCopiato">The text '{0}' was copied to '{1}'.</sys:String>
+    <sys:String x:Key="BibliotecaCopiaErrore">Error copying text: {0}</sys:String>
 
     <sys:String x:Key="OpzioniTitolo">Options</sys:String>
     <sys:String x:Key="OpzioniAiuto">Choose the app settings, which are applied immediately. Hover over a setting for more information. Click a title on the left side to jump immediately to that section.</sys:String>
@@ -181,6 +196,14 @@
     <sys:String x:Key="OpzioniLinguaTitolo">Language</sys:String>
     <sys:String x:Key="OpzioniLinguaAiuto">Choose the language for the application, English or Italian. Most of the interface is changed immediately, the rest requires a restart of the app.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">To completely change the language used in the app, you need to restart the application. Changing the interface language also changes the language of the names and abbreviations of the books used and recognised.</sys:String>
+    <sys:String x:Key="OpzioniAmbiente">Environment</sys:String>
+    <sys:String x:Key="OpzioniEditorTitolo">Editor</sys:String>
+    <sys:String x:Key="OpzioniEditorAiuto">Choose the settings for how the editor behaves.</sys:String>
+    <sys:String x:Key="OpzioniEditorChiusura">Close modified documents without asking to save</sys:String>
+    <sys:String x:Key="OpzioniIpertestoTitolo">Hypertext</sys:String>
+    <sys:String x:Key="OpzioniIpertestoAiuto">Choose the settings for how hypertext links are displayed.</sys:String>
+    <sys:String x:Key="OpzioniIpertestoTooltip">Show hypertext links in tooltip with mouse hover</sys:String>
+    <sys:String x:Key="OpzioniIpertestoDizionario">Show a definition from a dictionary with mouse double-click</sys:String>
     <sys:String x:Key="OpzioniFormato">Text Format</sys:String>
     <sys:String x:Key="OpzioniTestoTitolo">Bible Text</sys:String>
     <sys:String x:Key="OpzioniTestoAiuto">Choose the settings for how the Bible text is displayed: a new line for each verse, a new line for each paragraph, or no text.</sys:String>
@@ -215,6 +238,13 @@
     <sys:String x:Key="OpzioniTestiBibbiaPreferita1">First Choice:</sys:String>
     <sys:String x:Key="OpzioniTestiBibbiaPreferita2">Second Choice:</sys:String>
     <sys:String x:Key="OpzioniTestiBibbiaPreferita3">Third Choice:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionari">Dictionaries</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionariAiuto">Choose the dictionaries that will be used to display the definitions of words when you double-click on them.</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioInglese">English:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioItaliano">Italian:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioGreco">Greek:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioEbraico">Hebrew:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioLatino">Latin:</sys:String>
     <sys:String x:Key="OpzioniAggiornamenti">Updates</sys:String>
     <sys:String x:Key="OpzioniAggiornamentiMessaggi">Messages about Updates</sys:String>
     <sys:String x:Key="OpzioniMessaggiMai">Never check for messages</sys:String>

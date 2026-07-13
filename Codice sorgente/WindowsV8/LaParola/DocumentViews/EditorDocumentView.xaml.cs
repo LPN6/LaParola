@@ -17,6 +17,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
 {
     private string? _currentFile;
     public LayoutDocument? ParentDocument { get; set; }
+    private string ultimoTitolo = "";
     private bool _suppressTextChanged;
 
     private bool _isDirty;
@@ -44,7 +45,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
 
         this.PreviewKeyDown += (s, e) =>
         {
-            bool italiano = MainWindow.settings.Language.StartsWith("it", StringComparison.CurrentCultureIgnoreCase);
+            bool italiano = MainWindow.settings.Lingua.StartsWith("it", StringComparison.CurrentCultureIgnoreCase);
             if (e.Key == System.Windows.Input.Key.T && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
             {
                 if (italiano)
@@ -146,6 +147,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             title = Path.GetFileName(_currentFile);
         }
 
+        ultimoTitolo = title;
         if (IsDirty)
         {
             title += "*";
@@ -365,11 +367,11 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
 
     public bool ConfirmClose()
     {
-        if (!IsDirty)
+        if (!IsDirty || MainWindow.settings.EditorChiudere)
             return true;
 
         string message =
-            (string)(Application.Current.TryFindResource("EditorSalvaModifiche") ?? "Do you want to save changes?");
+            (string)(Application.Current.TryFindResource("EditorSalvaModifiche") ?? "Do you want to save changes to") + " " + ultimoTitolo + "?";
 
         string title =
             (string)(Application.Current.TryFindResource("EditorSalvaModificheTitolo") ?? "Unsaved changes");

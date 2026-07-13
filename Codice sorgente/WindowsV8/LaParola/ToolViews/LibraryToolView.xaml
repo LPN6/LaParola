@@ -154,7 +154,8 @@
                       HeadersVisibility="Column"
                       Background="Transparent"
                       BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                      MouseDoubleClick="BooksDataGrid_MouseDoubleClick">
+                      MouseDoubleClick="BooksDataGrid_MouseDoubleClick"
+                      MouseMove="BooksDataGrid_MouseMove">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
@@ -196,13 +197,13 @@
                                     <Border CornerRadius="1" Padding="2,0" Margin="0,0"
         Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Bibbia}"
         ToolTip="{DynamicResource BibliotecaTipoBibbiaAiuto}">
-                                        <iconPacks:PackIconMaterial Kind="BookCross" Foreground="#0078D7" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <iconPacks:PackIconMaterial Kind="BookCross" Foreground="#ffa000" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
 
                                     <Border CornerRadius="1" Padding="2,0" Margin="0,0"
                                     Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Commentario}"
                                     ToolTip="{DynamicResource BibliotecaTipoCommentarioAiuto}">
-                                        <iconPacks:PackIconMaterial Kind="BookOpenPageVariant" Foreground="#107C41" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <iconPacks:PackIconMaterial Kind="BookOpenPageVariant" Foreground="#107C10" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
 
                                     <Border CornerRadius="1" Padding="2,0" Margin="0,0"
@@ -214,7 +215,7 @@
                                     <Border CornerRadius="1" Padding="2,0" Margin="0,0"
                                     Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Libro}"
                                     ToolTip="{DynamicResource BibliotecaTipoLibroAiuto}">
-                                        <iconPacks:PackIconMaterial Kind="Book" Foreground="#7A24B7" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <iconPacks:PackIconMaterial Kind="Book" Foreground="#7A2487" Width="13" Height="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
 
                                 </StackPanel>
@@ -228,7 +229,7 @@
                     <DataGridTextColumn Header="{DynamicResource BibliotecaAbbreviazione}" Binding="{Binding Abbreviazione}" Width="Auto"/>
                 </DataGrid.Columns>
                 <DataGrid.ToolTip>
-                    <ToolTip>
+                    <ToolTip x:Name="DataGridToolTip" Opened="DataGridToolTip_Opened" Closed="DataGridToolTip_Closed">
                         <TextBlock Text="{DynamicResource BibliotecaGrigiaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                     </ToolTip>
                 </DataGrid.ToolTip>
@@ -521,13 +522,22 @@
 
                             <Button x:Name="ButtonRinomina"
                     Content="{DynamicResource BibliotecaRinomina}"
-                    Height="28"
-                    Padding="12,0,12,0"
-                    Margin="0,0,0,8"
+                    Height="28" Padding="12,0,12,0" Margin="0,0,0,8"
                     Click="ButtonRinomina_Click">
                                 <Button.ToolTip>
                                     <ToolTip>
                                         <TextBlock Text="{DynamicResource BibliotecaRinominaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+
+                            <Button x:Name="ButtonCopia"
+                    Content="{DynamicResource BibliotecaCopia}"
+                    Height="28" Padding="12,0,12,0" Margin="0,0,0,8"
+                    Click="ButtonCopia_Click">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource BibliotecaCopiaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                                     </ToolTip>
                                 </Button.ToolTip>
                             </Button>

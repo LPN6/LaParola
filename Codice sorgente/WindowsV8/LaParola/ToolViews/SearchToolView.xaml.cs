@@ -12,7 +12,6 @@ namespace LaParola.ToolViews
 {
     // TODO2 scegliere parola
     // TODO2 salva in lista versetti, cercare in lista versetti
-    // TODO2 anche dizionari, libri (bisogna nascondere brano in cui ricercare, ma non se è commentario + dizionario/libro)
 
     public partial class SearchToolView : UserControl
     {
@@ -29,7 +28,7 @@ namespace LaParola.ToolViews
         {
             cbVersione.Items.Clear();
             string s = MainWindow.settings.RicercaTestoSelezionato;
-            foreach (string v in MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia | TestoTipi.Commentario))
+            foreach (string v in MainWindow.Testi.NomiVersioni())
             {
                 cbVersione.Items.Add(v);
                 if (v == s)
@@ -64,12 +63,22 @@ namespace LaParola.ToolViews
             using MemoryStream ms = new(Encoding.UTF8.GetBytes(testo));
             range.Load(ms, DataFormats.Rtf);
 
-            App.DockingHost.OpenEditorDocument(doc, (string)(Application.Current.TryFindResource("RicercaEspressioneAiutoTitolo") ?? "Help for the Search Expression"));
+            App.DockingHost.OpenEditorDocument(doc, (string)(Application.Current.TryFindResource("RicercaEspressioneAiutoTitolo") ?? "Help for the Search Expression"), "");
         }
 
         private void Versione_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainWindow.settings.RicercaTestoSelezionato = cbVersione.SelectedItem as string ?? "";
+            string versioneSelezionata = cbVersione.SelectedItem as string ?? "";
+            MainWindow.settings.RicercaTestoSelezionato = versioneSelezionata;
+            TestoTipi tipoSelezionata = MainWindow.Testi.Info(versioneSelezionata).Tipo;
+            if ((tipoSelezionata & TestoTipi.Commentario) == TestoTipi.Commentario || (tipoSelezionata & TestoTipi.Bibbia) == TestoTipi.Bibbia)
+            {
+                GbBrano.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                GbBrano.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Espressione_KeyUp(object sender, KeyEventArgs e)
@@ -91,15 +100,15 @@ namespace LaParola.ToolViews
                 return;
             }
 
-            string abbVersioni = MainWindow.Testi.Info(versioneSelezionata)?.Abbreviazione ?? "";
+            string abbVersione = MainWindow.Testi.Info(versioneSelezionata)?.Abbreviazione ?? "";
 
-            if (!String.IsNullOrEmpty(abbVersioni))
-                abbVersioni = " (" + abbVersioni + ")";
+            if (!String.IsNullOrEmpty(abbVersione))
+                abbVersione = " (" + abbVersione + ")";
 
-            string title = espressione + abbVersioni;
+            string title = espressione + abbVersione;
 
             string branoDaRicercare = "";
-            if (rbBrano.IsChecked == true)
+            if (GbBrano.Visibility == Visibility.Collapsed || rbBrano.IsChecked == true)
             {
                 branoDaRicercare = tbBrano.Text;
             }
@@ -172,13 +181,10 @@ namespace LaParola.ToolViews
                 FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(versettiConFrase, versioneSelezionata);
                 doc.Tag = versioneSelezionata;
 
-                //if (Services.ThemeManager.IsDark(MainWindow.settings.ThemeMode))
-                //{
                 Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
                 RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
-                //}
 
-                App.DockingHost.SendFlowDocumentToActiveEditor(doc, title);
+                App.DockingHost.SendFlowDocumentToActiveEditor(doc, title, versioneSelezionata);
             }
         }
     }

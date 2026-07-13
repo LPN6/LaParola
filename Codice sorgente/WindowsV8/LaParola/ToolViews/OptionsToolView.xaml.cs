@@ -40,6 +40,10 @@ public partial class OptionsToolView : UserControl
 
         TestoTitoli.IsChecked = MainWindow.settings.Formato.TitoliVisualizzati;
 
+        IpertestoTooltip.IsChecked = MainWindow.settings.IpertestoTooltip;
+        IpertestoDizionario.IsChecked = MainWindow.settings.IpertestoDizionario;
+        EditorChiudere.IsChecked = MainWindow.settings.EditorChiudere;
+
         switch (MainWindow.settings.Formato.RiferimentoTipo)
         {
             case RiferimentoTipo.Virgola:
@@ -81,7 +85,7 @@ public partial class OptionsToolView : UserControl
 
         foreach (FrameworkElement item in LanguageCombo.Items.OfType<FrameworkElement>())
         {
-            if (item.Tag?.ToString() == MainWindow.settings?.Language)
+            if (item.Tag?.ToString() == MainWindow.settings?.Lingua)
             {
                 LanguageCombo.SelectedItem = item;
                 break;
@@ -96,7 +100,7 @@ public partial class OptionsToolView : UserControl
             .Select(f => f.Source)
             .OrderBy(f => f)];
 
-        InitializeBiblePreferences(); //deve essere fatto dopo che Testi è pronto
+        InitializeTextsPreferences(); //deve essere fatto dopo che Testi è pronto
 
         switch (MainWindow.settings?.ControlloMessaggi)
         {
@@ -120,7 +124,13 @@ public partial class OptionsToolView : UserControl
         nonSalvare = false;
     }
 
-    public void InitializeBiblePreferences()
+    internal void InitializeTextsPreferences()
+    {
+        InitializeBiblePreferences();
+        InitializeDictionaries();
+    }
+
+    private void InitializeBiblePreferences()
     {
         // 1. Fetch available Bibles
         Collection<string> bibles = MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia);
@@ -142,6 +152,45 @@ public partial class OptionsToolView : UserControl
         ComboPref1.SelectedValue = MainWindow.settings.BibbiaPreferita1 ?? string.Empty;
         ComboPref2.SelectedValue = MainWindow.settings.BibbiaPreferita2 ?? string.Empty;
         ComboPref3.SelectedValue = MainWindow.settings.BibbiaPreferita3 ?? string.Empty;
+    }
+
+    private void InitializeDictionaries()
+    {
+        ComboDizionarioInglese.Items.Clear();
+        ComboDizionarioItaliano.Items.Clear();
+        ComboDizionarioGreco.Items.Clear();
+        ComboDizionarioEbraico.Items.Clear();
+        ComboDizionarioLatino.Items.Clear();
+
+        Collection<string> dizionari = MainWindow.Testi.NomiVersioni(TestoTipi.Dizionario);
+        foreach (string dizionario in dizionari)
+        {
+            switch (Funzioni.LinguaPrincipale(MainWindow.Testi.Info(dizionario).Lingua).ToLowerInvariant())
+            {
+                case "en":
+                    ComboDizionarioInglese.Items.Add(dizionario);
+                    break;
+                case "it":
+                    ComboDizionarioItaliano.Items.Add(dizionario);
+                    break;
+                case "el":
+                    ComboDizionarioGreco.Items.Add(dizionario);
+                    break;
+                case "he":
+                    ComboDizionarioEbraico.Items.Add(dizionario);
+                    break;
+                case "la":
+                    ComboDizionarioLatino.Items.Add(dizionario);
+                    break;
+                default:
+                    break;
+            }
+        }
+        ComboDizionarioInglese.SelectedValue = MainWindow.settings?.DizionarioInglese ?? string.Empty;
+        ComboDizionarioItaliano.SelectedValue = MainWindow.settings?.DizionarioItaliano ?? string.Empty;
+        ComboDizionarioGreco.SelectedValue = MainWindow.settings?.DizionarioGreco ?? string.Empty;
+        ComboDizionarioEbraico.SelectedValue = MainWindow.settings?.DizionarioEbraico ?? string.Empty;
+        ComboDizionarioLatino.SelectedValue = MainWindow.settings?.DizionarioLatino ?? string.Empty;
     }
 
     private static void ApplicaFontAdEsempio(TextBlock tbEsempio, string categoria)
@@ -222,6 +271,15 @@ public partial class OptionsToolView : UserControl
                 case "NodeLanguage":
                     targetElement = SectionLanguage;
                     break;
+                case "TreeAmbiente":
+                    targetElement = SectionAmbienteHeader;
+                    break;
+                case "NodeEditor":
+                    targetElement = SectionEditor;
+                    break;
+                case "NodeHypertext":
+                    targetElement = SectionHypertext;
+                    break;
                 case "TreeFormato":
                     targetElement = SectionFormatoHeader;
                     break;
@@ -239,6 +297,9 @@ public partial class OptionsToolView : UserControl
                     break;
                 case "NodeBibbiaPreferita":
                     targetElement = SectionBibbiaPreferita;
+                    break;
+                case "NodeDizionari":
+                    targetElement = SectionDizionari;
                     break;
                 case "TreeAggiornamenti":
                     targetElement = SectionAggiornamentiHeader;
@@ -385,6 +446,18 @@ public partial class OptionsToolView : UserControl
         App.Settings.Save(MainWindow.settings);
     }
 
+    private void ComboDizionario_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (nonSalvare) return;
+
+        MainWindow.settings.DizionarioInglese = ComboDizionarioInglese.SelectedValue as string ?? string.Empty;
+        MainWindow.settings.DizionarioItaliano = ComboDizionarioItaliano.SelectedValue as string ?? string.Empty;
+        MainWindow.settings.DizionarioGreco = ComboDizionarioGreco.SelectedValue as string ?? string.Empty;
+        MainWindow.settings.DizionarioEbraico = ComboDizionarioEbraico.SelectedValue as string ?? string.Empty;
+        MainWindow.settings.DizionarioLatino = ComboDizionarioLatino.SelectedValue as string ?? string.Empty;
+        App.Settings.Save(MainWindow.settings);
+    }
+
     private void SettingChanged(object sender, RoutedEventArgs e)
     {
         if (nonSalvare) return;
@@ -393,6 +466,10 @@ public partial class OptionsToolView : UserControl
         bool cambiaTema = false;
         bool cambiaLingua = false;
         bool cambiaFormato = false;
+
+        _settings.EditorChiudere = EditorChiudere.IsChecked == true;
+        _settings.IpertestoTooltip = IpertestoTooltip.IsChecked == true;
+        _settings.IpertestoDizionario = IpertestoDizionario.IsChecked == true;
 
         TestoVisualizzato testoVisualizzatoPrecedente = _settings.Formato.TestoVisualizzato;
         TestoVisualizzato testoVisualizzatoAttuale = TestoVersetti.IsChecked == true ? TestoVisualizzato.Versetti :
@@ -456,14 +533,14 @@ public partial class OptionsToolView : UserControl
 
         if (LanguageCombo.SelectedItem is FrameworkElement fe && fe.Tag is string lang)
         {
-            if (lang != _settings.Language)
+            if (lang != _settings.Lingua)
             {
-                _settings.Language = lang;
-                Services.LocalizationManager.ApplyLanguage(_settings.Language);
+                _settings.Lingua = lang;
+                Services.LocalizationManager.ApplyLanguage(_settings.Lingua);
                 cambiaLingua = true;
 
                 string libriNomi, libriAbbUsate, libriAbbRic;
-                if (_settings.Language == "it")
+                if (_settings.Lingua == "it")
                 {
                     libriNomi = Texts.LibriNomiItaliano;
                     libriAbbUsate = Texts.LibriAbbreviazioniUsateItaliano;
@@ -515,7 +592,7 @@ public partial class OptionsToolView : UserControl
             }
             if (cambiaLingua)
             {
-                mw.UpdateShortcutBindings(_settings.Language);
+                mw.UpdateShortcutBindings(_settings.Lingua);
             }
         }
 

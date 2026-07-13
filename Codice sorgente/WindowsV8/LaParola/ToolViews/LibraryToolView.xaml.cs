@@ -1,6 +1,7 @@
 ﻿using AvalonDock.Layout;
 using LaParola.Dialogs;
 using LaParola.DocumentViews;
+using LaParola.Services;
 using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,8 +17,8 @@ using System.Windows.Input;
 
 namespace LaParola.ToolViews
 {
-    // TODO2 for each text, buttons to: copiare, unire 2, cambia sola lettura, esportare, creare file unico, aggiungere radici
-    // TODO2 in general, button to: create nuova collezione
+    // TODO2 for each text, buttons to: esportare, unire 2, cambia sola lettura, creare file unico, aggiungere radici
+    // TODO2 in general, button to: create nuova collezione / importare / scaricare
 
     /// <summary>
     /// Logica di interazione per LibraryToolView.xaml
@@ -25,6 +26,9 @@ namespace LaParola.ToolViews
     public partial class LibraryToolView : UserControl
     {
         private ICollectionView _booksView;
+
+        private Point _toolTipOpenPosition;
+        private bool _isToolTipOpen;
 
         public LibraryToolView()
         {
@@ -97,6 +101,38 @@ namespace LaParola.ToolViews
         {
             // TODO2: Open correct help section
             MessageBox.Show("Open Help Centre");
+        }
+
+        private void DataGridToolTip_Opened(object sender, RoutedEventArgs e)
+        {
+            // Capture the exact location where the tooltip spawned relative to the DataGrid
+            _toolTipOpenPosition = Mouse.GetPosition(BooksDataGrid);
+            _isToolTipOpen = true;
+        }
+
+        private void DataGridToolTip_Closed(object sender, RoutedEventArgs e)
+        {
+            // Reset flag if the tooltip closes naturally via timeout
+            _isToolTipOpen = false;
+        }
+
+        private void BooksDataGrid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isToolTipOpen)
+            {
+                Point currentPosition = e.GetPosition(BooksDataGrid);
+
+                // Calculate Euclidean distance moved since opening: sqrt((x2-x1)^2 + (y2-y1)^2)
+                double distanceMoved = Point.Subtract(currentPosition, _toolTipOpenPosition).Length;
+
+                // Threshold in pixels. If they slide the mouse more than 30px, kill the tooltip
+                if (distanceMoved > 30)
+                {
+                    _isToolTipOpen = false;
+
+                    DataGridToolTip.IsOpen = false;
+                }
+            }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -241,17 +277,26 @@ namespace LaParola.ToolViews
             // Ensure the user double-clicked an actual row, not empty space or column headers
             if (BooksDataGrid.SelectedItem is VersioneInformazioni selectedBook && selectedBook != null)
             {
-                dynamic book = selectedBook;
+                VersioneInformazioni book = selectedBook;
                 string testo = book.Nome;
-                TestoTipi tt = book.Tipo;
 
                 if (!string.IsNullOrEmpty(testo))
                 {
-                    if ((tt & TestoTipi.Bibbia) == TestoTipi.Bibbia)
+                    if ((book.Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia)
                         MainWindow.VisualizzaBibbia(testo);
-                    else if ((tt & TestoTipi.Commentario) == TestoTipi.Commentario)
-                        MainWindow.VisualizzaCommentario(testo);
-                    // TODO2 dizionari e libri - come decidere se aprire comm / diz / libri se tutti e tre?
+                    else
+                    {
+                        try
+                        {
+                            int nNote = MainWindow.Testi.NumeroNote(testo);
+                            int nNoteTitolo = MainWindow.Testi.NumeroNoteConTitolo(testo);
+                            if (nNoteTitolo < nNote / 2)
+                                MainWindow.VisualizzaCommentario(testo);
+                            else
+                                MainWindow.VisualizzaDizionario(testo);
+                        }
+                        catch { }
+                    }
                 }
             }
         }
@@ -265,10 +310,10 @@ namespace LaParola.ToolViews
                 string messageTemplate = (string)(Application.Current.TryFindResource("BibliotecaCancellaDomanda") ?? "Are you sure you want to permanently delete '{0}' from your disk?\\n(Se è un file di LaParola, potrà essere riscaricato e reinstallato.)");
                 string messaggio = string.Format(messageTemplate, selectedBook.Nome).Replace("\\n", "\n");
                 MessageBoxResult confirmResult =
-        MessageBoxLPN.Show(Window.GetWindow(this),
-        messaggio,
-        (string)(Application.Current.TryFindResource("BibliotecaCancellaTitolo") ?? "Confirm Deletion"),
-        MessageBoxButton.YesNo);
+                    MessageBoxLPN.Show(Window.GetWindow(this),
+                    messaggio,
+                    (string)(Application.Current.TryFindResource("BibliotecaCancellaTitolo") ?? "Confirm Deletion"),
+                    MessageBoxButton.YesNo);
 
                 if (confirmResult == MessageBoxResult.Yes)
                 {
@@ -294,8 +339,8 @@ namespace LaParola.ToolViews
             {
                 // Initialize generic dialog with structural text definitions
                 var dialog = new InputDialog(
-                    prompt: "Please enter the new name for this library text source:",
-                    windowTitle: "Rename Book",
+                    prompt: (string)(Application.Current.TryFindResource("BibliotecaRinominaDomanda") ?? "Enter the new name for this text:"),
+                    windowTitle: (string)(Application.Current.TryFindResource("BibliotecRinominaTitolo") ?? "Rename Text"),
                     suggestion: selectedBook.Nome
                 )
                 {
@@ -325,6 +370,48 @@ namespace LaParola.ToolViews
             }
         }
 
+        private void ButtonCopia_Click(object sender, RoutedEventArgs e)
+        {
+            if (BooksDataGrid.SelectedItem is VersioneInformazioni selectedBook)
+            {
+                try
+                {
+                    string vecchioNome = MainWindow.Testi.Info(selectedBook.Nome).NomeDelFile;
+                    int count = 1;
+                    string nuovoNomeTesto = selectedBook.Nome + count.ToString(CultureInfo.InvariantCulture);
+                    while (MainWindow.Testi.VersioneEsiste(nuovoNomeTesto))
+                    {
+                        ++count;
+                        nuovoNomeTesto = selectedBook.Nome + count.ToString(CultureInfo.InvariantCulture);
+                    }
+
+                    string cartella = Path.GetDirectoryName(SettingsService.ResolveSettingsPath()) + Path.DirectorySeparatorChar;
+                    count = 1;
+                    string nuovoNomeFile = cartella + Path.GetFileNameWithoutExtension(vecchioNome) + count.ToString(CultureInfo.InvariantCulture) + Path.GetExtension(vecchioNome);
+                    while (File.Exists(nuovoNomeFile))
+                    {
+                        ++count;
+                        nuovoNomeFile = cartella + Path.GetFileNameWithoutExtension(vecchioNome) + count.ToString(CultureInfo.InvariantCulture) + Path.GetExtension(vecchioNome);
+                    }
+
+                    string nuovoNome = MainWindow.Testi.CopiaTesto(selectedBook.Nome,
+                        nuovoNomeTesto,
+                        nuovoNomeFile);
+
+                    LoadLibraryData();
+                    AggiornaListeTesti();
+
+                    string messaggio = string.Format((string)(Application.Current.TryFindResource("BibliotecaCopiaCopiato") ?? "The text '{0}' was copied to '{1}'."), selectedBook.Nome, nuovoNome);
+                    MessageBoxLPN.Show(Window.GetWindow(this), messaggio, (string)(Application.Current.TryFindResource("BibliotecaCopia") ?? "Copy Text"));
+                }
+                catch (Exception exc)
+                {
+                    string messaggio = string.Format((string)(Application.Current.TryFindResource("BibliotecaCopiaErrore") ?? $"Error copying text: {{0}}."), exc);
+                    MessageBoxLPN.Show(Window.GetWindow(this), messaggio, (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+                }
+            }
+        }
+
         private static void RimuoviTestiDaApp(string nome)
         {
             List<LayoutDocument>? viewers = Funzioni.ListViewerDocuments();
@@ -345,7 +432,7 @@ namespace LaParola.ToolViews
 
         private static void AggiornaListeTesti()
         {
-            // Find the TextGenerator and Search tool window via its ContentId and refresh its layout
+            // Find the TextGenerator and Search and Options tools window via its ContentId and refresh its layout
             if (Application.Current.MainWindow is MainWindow mw)
             {
                 if (mw.FindName("Dock") is AvalonDock.DockingManager dock)
@@ -374,7 +461,7 @@ namespace LaParola.ToolViews
 
                     if (opzioniDocument?.Content is OptionsToolView opzioniView)
                     {
-                        opzioniView.InitializeBiblePreferences();
+                        opzioniView.InitializeTextsPreferences();
                     }
                 }
 

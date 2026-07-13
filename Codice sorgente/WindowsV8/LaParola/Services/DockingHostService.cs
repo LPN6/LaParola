@@ -3,7 +3,9 @@ using AvalonDock.Layout;
 using LaParola.DocumentViews;
 using LaParola.ToolViews;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -17,17 +19,20 @@ public class DockingHostService
     private LayoutDocumentPane? _docPane;
     private EditorDocumentView? _lastActiveEditor;
     private bool _isShuttingDown;
+    private Window? _ownerWindow;
+
     public bool HasActiveEditor =>
     GetActiveEditor() != null;
     public bool HasClosableContent =>
     GetActiveLayoutContent() != null;
 
-    public void Initialize(DockingManager dock, LayoutDocumentPane docPane)
+    public void Initialize(DockingManager dock, LayoutDocumentPane docPane, Window owner)
     {
         _dock = dock;
         _docPane = docPane;
         _dock.ActiveContentChanged += Dock_ActiveContentChanged;
         _dock.DocumentClosing += Dock_DocumentClosing;
+        _ownerWindow = owner;
     }
 
     public event EventHandler? ActiveEditorChanged;
@@ -256,7 +261,7 @@ public class DockingHostService
         layoutDoc.IsActive = true;
     }
 
-    public EditorDocumentView? OpenEditorDocument(FlowDocument? doc = null, string titolo = "")
+    public EditorDocumentView? OpenEditorDocument(FlowDocument? doc = null, string titolo = "", string versione = "")
     {
         LayoutDocumentPane? docPane = _dock?.Layout?.Descendents()
             .OfType<LayoutDocumentPane>()
@@ -289,6 +294,7 @@ public class DockingHostService
         docPane.Children.Add(layoutDoc);
         view.Visibility = Visibility.Visible;
 
+        view.Editor.Versione = versione;
         view.Editor.IsUndoEnabled = true;
         Application.Current.Dispatcher.BeginInvoke(
           DispatcherPriority.Loaded,
@@ -319,6 +325,24 @@ public class DockingHostService
 
     public ViewerDocumentView? OpenViewerDocument(string title, byte libro = 1, byte capitolo = 1, byte versetto = 1)
     {
+        ViewerDocumentView? view = OpenViewerDocumentCommon(title);
+
+        if (view != null)
+            _ = view.SpostaTesto(libro, capitolo, versetto, true, false);
+        return view;
+    }
+
+    public ViewerDocumentView? OpenViewerDocument(string title, string notaTitolo = "")
+    {
+        ViewerDocumentView? view = OpenViewerDocumentCommon(title);
+
+        if (view != null)
+            _ = view.SpostaTesto(notaTitolo, true, false);
+        return view;
+    }
+
+    private ViewerDocumentView? OpenViewerDocumentCommon(string title)
+    {
         if (!MainWindow.Testi.VersioneEsiste(title))
             return null;
 
@@ -330,12 +354,55 @@ public class DockingHostService
             return null;
 
         ViewerDocumentView view = new(title);
-        _ = view.SpostaTesto(libro, capitolo, versetto, true, false);
 
         LayoutDocument layoutDoc = new()
         {
             Title = title,
             ContentId = $"doc.viewer.{Guid.NewGuid():N}",
+            Content = view
+        };
+        docPane.Children.Add(layoutDoc);
+        layoutDoc.IsSelected = true;
+        layoutDoc.IsActive = true;
+
+        return view;
+    }
+
+    public Immagine? OpenImmagineDocument(string percorso)
+    {
+        if (!File.Exists(percorso) || string.IsNullOrWhiteSpace(percorso))
+            return null;
+
+        LayoutDocumentPane? docPane = _dock?.Layout?.Descendents()
+            .OfType<LayoutDocumentPane>()
+            .FirstOrDefault();
+
+        if (docPane == null)
+            return null;
+
+        Immagine view = new(percorso);
+
+        view.LinkClicked += async (linkNome, collezione) =>
+        {
+            // Tutta la logica di business e i messaggi a schermo rimangono qui nel container
+            if (MainWindow.Testi.VersioneEsiste(collezione))
+            {
+                await MainWindow.ApriNotaInEditor(linkNome, collezione);
+            }
+            else
+            {
+                string messaggio = (string)(Application.Current.TryFindResource("ImmaginiCollezioneNonTrovata") ?? "Collection not found");
+                messaggio = string.Format(CultureInfo.InvariantCulture, messaggio, collezione);
+                string titolo = (string)(Application.Current.TryFindResource("Errore") ?? "Error");
+                if (_ownerWindow != null)
+                    MessageBoxLPN.Show(_ownerWindow, messaggio, titolo);
+            }
+        };
+
+        LayoutDocument layoutDoc = new()
+        {
+            Title = Path.GetFileNameWithoutExtension(percorso),
+            ContentId = $"doc.immagine.{Guid.NewGuid():N}",
             Content = view
         };
         docPane.Children.Add(layoutDoc);
@@ -409,8 +476,8 @@ public class DockingHostService
         GetActiveEditor()?.SaveDocumentAs();
     }
 
-    public void SendFlowDocumentToActiveEditor(FlowDocument doc, string titolo)
+    public void SendFlowDocumentToActiveEditor(FlowDocument doc, string titolo, string versione="")
     {
-        OpenEditorDocument(doc, titolo);
+        OpenEditorDocument(doc, titolo, versione);
     }
 }

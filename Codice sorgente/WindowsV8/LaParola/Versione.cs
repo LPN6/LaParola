@@ -1,19 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.DirectoryServices.ActiveDirectory;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
 using System.Windows.Documents;
 using static LaParola.Utilities.Funzioni;
 
 namespace LaParola
 {
-    class Versione : IDisposable
+    partial class Versione : IDisposable
     {
         #region Proprietà
 
@@ -1665,13 +1662,13 @@ namespace LaParola
             => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, new Riferimento(), worker, e);
 
         internal async Task<string> TestoBranoAsync(
-Riferimento riferimento,
-Collection<string> collezioniDaVisualizzare,
-List<Riferimento> noteDaVisualizzare,
-bool conNomiDelleNote,
-Riferimento paroleRicercate,
-BackgroundWorker? worker,
-DoWorkEventArgs? e)
+            Riferimento riferimento,
+            Collection<string> collezioniDaVisualizzare,
+            List<Riferimento> noteDaVisualizzare,
+            bool conNomiDelleNote,
+            Riferimento paroleRicercate,
+            BackgroundWorker? worker,
+            DoWorkEventArgs? e)
         {
             string testoComeStringa;
             int numeroCommentari = collezioniDaVisualizzare.Count;
@@ -1956,10 +1953,10 @@ DoWorkEventArgs? e)
                                         riferimentoVersetto.Append(fineRiferimento);
 
                                         if (testoDaVisualizzare.Length > 0 &&
-    !EndsWith(testoDaVisualizzare, @"\par") &&
-    !EndsWith(testoDaVisualizzare, @"\par}") &&
-    !EndsWith(testoDaVisualizzare, @"\par }") &&
-    testoDaVisualizzare[^1] != ' ')
+                                            !EndsWith(testoDaVisualizzare, @"\par") &&
+                                            !EndsWith(testoDaVisualizzare, @"\par}") &&
+                                            !EndsWith(testoDaVisualizzare, @"\par }") &&
+                                            testoDaVisualizzare[^1] != ' ')
                                         {
                                             testoDaVisualizzare.Append(' ');
                                         }
@@ -2218,8 +2215,6 @@ DoWorkEventArgs? e)
             return await Texts.MergeManyRtfAsDocumentAsync(ConvertiLink(stringheRtf));
         }
 
-
-
         private List<string> StringheBranoCommentario(Riferimento riferimento, bool conNomiDelleNote, Riferimento paroleRicercate, string formatoRicercaNote, string formatoRiferimento, string formatoRicerca)
         {
             int numeroParoleRicercate = paroleRicercate.Count;
@@ -2245,8 +2240,8 @@ DoWorkEventArgs? e)
                 titoloNotaDaLeggere = (notaSuBrano ? genitore.ConvertiTitoloNotaARiferimento(titoloNota) : titoloNota);
                 if (conNomiDelleNote)
                 {
-                    stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(notaSuBrano ? string.Concat(inizioInizioRiferimento, titoloNota.AsSpan(1, 8)) : "").Append(inizioFormatoRiferimento).Append(ConvertiCaratteriInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
-                    //stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(inizioFormatoRiferimento).Append(ConvertiCaratteriInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
+                    stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(notaSuBrano ? string.Concat(inizioInizioRiferimento, titoloNota.AsSpan(1, 8)) : "").Append(inizioFormatoRiferimento).Append(ConvertiUnicodeInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
+                    //stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(inizioFormatoRiferimento).Append(ConvertiUnicodeInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
                 }
 
                 string testoModificato = ModificaFormatoParole(GetNotaTestoTitolo(titoloNota), riferimento.numeroParola[i], inizioFormatoRicercaNote, "}", info.Lingua);
@@ -2267,10 +2262,10 @@ DoWorkEventArgs? e)
                 }
                 if (!testoModificato.StartsWith(@"{\rtf", StringComparison.Ordinal) && !testoModificato.EndsWith('}'))
                 {
-                    testoModificato = genitore.RtfIntestazione() + ConvertiCaratteriInRtf(testoModificato) + "}";
+                    testoModificato = genitore.RtfIntestazione() + testoModificato.Replace("\r\n", @"\par ") + "}";
                 }
-                stringheRtf.Add(testoModificato);
-                // TODO2 sdf
+                stringheRtf.Add(ConvertiUnicodeInRtf(testoModificato));
+                // TODO2 progress bar
                 //if (worker != null && (i % quantoSpessoAggiornaBarra == quantoSpessoAggiornaBarraMenoUno))
                 //{
                 //    worker.ReportProgress(-quantoSpessoAggiornaBarra, e);
@@ -2284,10 +2279,13 @@ DoWorkEventArgs? e)
         {
             if (string.IsNullOrEmpty(rtfString)) return "";
 
+            bool aggiungicf0 = rtfString.Contains("colortbl ;");
+
             // Pattern matches: \v \'02\v0 [Anchor] \v \'03 [\'05|\'06|\'07] [Data] \'04\v0 [optional trailing delimiter space]
             // Note: In verbatim strings (@""), the .NET Regex engine natively interprets \uXXXX escape codes.
-            string linkPattern = @"\\v\s*(?:\u0002|\\'02)\\v0\s*(?<anchor>.*?)\\v\s*(?:\u0003|\\'03)(?<type>[\u0005\u0006\u0007]|\\'0[567])(?<data>.*?)(?:\u0004|\\'04)\\v0\s?";
-            Regex linkRegex = new(linkPattern, RegexOptions.Compiled);
+            //string linkPattern = @"\\v\s*(?:\u0002|\\'02)\\v0\s*(?<anchor>.*?)\\v\s*(?:\u0003|\\'03)(?<type>[\u0005\u0006\u0007]|\\'0[567])(?<data>.*?)(?:\u0004|\\'04)\\v0\s?";
+            // string linkpattern = @"\\v\s*(?:\\f\d+\s*)*(?:\u0002|\\'02)\\v0\s*(?<anchor>.*?)\\v\s*(?:\u0003|\\'03)(?<type>[\u0005\u0006\u0007]|\\'0[567])(?<data>.*?)(?:\u0004|\\'04)(?:\\cf\d+\s*)*\\v0\s?";
+            Regex linkRegex = RegExConvertiIperlink();
 
             // Translate the old custom markers into standard RTF fields on the fly
             string processedRtf = linkRegex.Replace(rtfString, m =>
@@ -2302,6 +2300,22 @@ DoWorkEventArgs? e)
 
                 string data = m.Groups["data"].Value;
 
+                // Convertiamo le doppie barre dell'RTF in una singola barra pulita C#
+                data = data.Replace(@"\\", @"\");
+                // Convertiamo gli escape esadecimali RTF (es. \'f9 -> ù) nei rispettivi caratteri.
+                data = RegexRtf().Replace(data, match =>
+                {
+                    byte b = Convert.ToByte(match.Groups[1].Value, 16);
+                    // Encoding.Latin1 gestisce perfettamente lettere accentate occidentali (à, è, é, ì, ò, ù)
+                    return Encoding.Latin1.GetString([b]);
+                });
+                // Convert literal RTF '\u1234?' sequences into actual C# Unicode characters
+                data = RegexConvertiUnicodeCaratteri().Replace(data, match =>
+                {
+                    int code = int.Parse(match.Groups[1].Value);
+                    return ((char)code).ToString();
+                });
+
                 // Map the internal type byte to the URI schemes
                 string scheme = type switch
                 {
@@ -2315,16 +2329,23 @@ DoWorkEventArgs? e)
                 {
                     if (scheme == "bibbia:" && Info.VersioneDelleNote.Length > 0)
                     {
-                        data = Info.VersioneDelleNote + @"\\" + data;
+                        data = Info.VersioneDelleNote + @"\" + data;
                     }
-                    else if (scheme == "nota:")
+                    else if (scheme == "nota:" || scheme == "filenome:")
                     {
-                        data = Info.Nome + @"\\" + data;
+                        data = Info.Nome + @"\" + data;
                     }
                 }
 
+                // URL-encode the data payload to make it 100% safe for the WPF RTF Parser
+                data = Uri.EscapeDataString(data);
+
                 // Construct standard RTF hyperlink field code
-                return $"{{\\field{{\\*\\fldinst HYPERLINK \"{scheme}{data}\"}}{{\\fldrslt {anchor}}}}}";
+                // aggiungere cf0 affinché il colore del link in RTF non cancelli il colore del setter in RichTextBoxEx
+                if (aggiungicf0)
+                    return $"{{\\field{{\\*\\fldinst HYPERLINK \"{scheme}{data}\"}}{{\\fldrslt {{\\cf0 {anchor}}}}}}}";
+                else
+                    return $"{{\\field{{\\*\\fldinst HYPERLINK \"{scheme}{data}\"}}{{\\fldrslt {anchor}}}}}";
             });
 
             return processedRtf;
@@ -2354,24 +2375,6 @@ DoWorkEventArgs? e)
                 }
             }
             return testoVersetto;
-        }
-
-        private static string ConvertiCaratteriInRtf(string stringa)
-        {
-            int lunghezza = stringa.Length;
-            string nuovaStringa = stringa;
-            for (int i = lunghezza - 1; i >= 0; --i)
-            {
-                if (stringa[i] > 256)
-                {
-                    nuovaStringa = nuovaStringa.Replace(stringa[i].ToString(CultureInfo.InvariantCulture), @"\u" + Convert.ToUInt32(stringa[i], CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture) + "?");
-                }
-                else if (stringa[i] > 127)
-                {
-                    nuovaStringa = nuovaStringa.Replace(stringa[i].ToString(CultureInfo.InvariantCulture), @"\'" + Uri.HexEscape(stringa[i])[1..]);
-                }
-            }
-            return nuovaStringa.Replace("\r\n", @"\par ");
         }
 
         internal static string ModificaFormatoParole(string testoDaModificare, UInt16 numeroParolaDaModificare, string formatoPrimaDellaParola, string formatoDopoLaParola, string lingua)
@@ -2504,9 +2507,12 @@ DoWorkEventArgs? e)
                             {
                                 i += 3;
                             }
-                            else // unicode \u1234? oppure \u123?
+                            else
                             {
-                                i = testoDaModificare.IndexOf('?', i);
+                                if (testoDaModificare[i + 2] == '0' && testoDaModificare[i + 3] == '0')
+                                    i += 5; // \u0005
+                                else // unicode \u1234? oppure \u123?
+                                    i = testoDaModificare.IndexOf('?', i);
                             }
                         }
                     }
@@ -2585,7 +2591,7 @@ DoWorkEventArgs? e)
                             case "it":
                                 if (i > 0 && i < testoDaModificare.Length - 1)
                                 {
-                                    if ((IsLetteraONumero(testoDaModificare[i - 1]) && (IsLetteraONumero(testoDaModificare[i + 1]) || testoDaModificare[i + 1] == '\'' || testoDaModificare[i + 1] == '«')) || (Array.BinarySearch(Texts.paroleItalianeConApostrofe, parola.ToString()) >= 0))
+                                    if ((IsLetteraONumero(testoDaModificare[i - 1]) && (IsLetteraONumero(testoDaModificare[i + 1]) || testoDaModificare[i + 1] == '\'' || testoDaModificare[i + 1] == '«' || testoDaModificare[i + 1] == ']' || (testoDaModificare[i + 1] == ')') && testoDaModificare.IndexOf("('") < i)) || (Array.BinarySearch(Texts.paroleItalianeConApostrofe, parola.ToString()) >= 0))
                                     {
                                         // per esempio l'uomo 
                                         parola.Append(c);
@@ -2657,6 +2663,19 @@ DoWorkEventArgs? e)
                             if (i == 6)
                             {
                                 i = testoDaModificare.Length - 1;
+                            }
+                        }
+                        // Controllo per inizio testo nascosto (\v o \v1, escludendo \v0)
+                        else if (c == '\\' && i + 1 < testoDaModificare.Length && testoDaModificare[i + 1] == 'v' &&
+                                 !(i + 2 < testoDaModificare.Length && testoDaModificare[i + 2] == '0'))
+                        {
+                            // Cerca la fine del blocco di testo nascosto (\v0)
+                            i = testoDaModificare.IndexOf(@"\v0", i, StringComparison.Ordinal) + 2;
+
+                            // Se IndexOf restituisce -1 (non trovato), -1 + 2 fa 1.
+                            if (i == 1)
+                            {
+                                i = testoDaModificare.Length - 1; // Salta fino alla fine del testo
                             }
                         }
                         else
@@ -2846,6 +2865,12 @@ DoWorkEventArgs? e)
 
             return true;
         }
+
+        [GeneratedRegex(@"\\u(-?\d+)\??")]
+        private static partial Regex RegexConvertiUnicodeCaratteri();
+        [GeneratedRegex(@"\\'([0-9a-fA-F]{2})")]
+        private static partial Regex RegexRtf();
+        [GeneratedRegex(@"\\v\s*(?:\\f\d+\s*)*(?:\u0002|\\'02)\\v0\s*(?<anchor>.*?)\\v\s*(?:\u0003|\\'03)(?<type>[\u0005\u0006\u0007]|\\'0[567])(?<data>.*?)(?:\u0004|\\'04)(?:\\cf\d+\s*)*\\v0\s?", RegexOptions.Compiled)]
+        private static partial Regex RegExConvertiIperlink();
     }
 }
-

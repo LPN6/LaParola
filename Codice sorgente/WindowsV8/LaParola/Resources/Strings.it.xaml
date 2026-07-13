@@ -15,7 +15,10 @@
     <sys:String x:Key="MenuVisualizza">_Visualizza</sys:String>
     <sys:String x:Key="MenuVisualizzaBibbia">_Bibbia</sys:String>
     <sys:String x:Key="MenuVisualizzaCommentario">_Commentario</sys:String>
+    <sys:String x:Key="MenuVisualizzaDizionario">_Dizionario</sys:String>
+    <sys:String x:Key="MenuVisualizzaLibro">_Libro</sys:String>
     <sys:String x:Key="MenuStrumenti">_Strumenti</sys:String>
+    <sys:String x:Key="MenuVisualizzaImmagine">_Immagine...</sys:String>
     <sys:String x:Key="MenuAiuto">_?</sys:String>
     
     <sys:String x:Key="MenuNewEditor">_Nuovo</sys:String>
@@ -44,6 +47,11 @@
     <sys:String x:Key="MenuSostituisci">Sostit_uisci...</sys:String>
     <sys:String x:Key="MenuSostituisciProssima">S_ostituisci successivo</sys:String>
 
+    <sys:String x:Key="ImmagineAiuto">Questa finestra mostra un'immagine. Se l'immagine è stata creata per il programma, può avere dei collegamenti ipertestuali: quando il mouse è sopra un collegamento, il cursore cambia forma e il titolo della nota è visualizzato in fondo alla finestra, e un clic apre la nota. Un clic con il tasto destro del mouse sull'immagine può cambiare lo zoom dell'immagine.</sys:String>
+    <sys:String x:Key="ImmaginiApriTitolo">Seleziona una o più immagini</sys:String>
+    <sys:String x:Key="ImmaginiFileFiltro">"Immagini (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|Tutti i file (*.*)|*.*"</sys:String>
+    <sys:String x:Key="ImmaginiCollezioneNonTrovata">La collezione di note "{0}" non è stata trovata.</sys:String>
+
     <sys:String x:Key="MenuBiblioteca">_Biblioteca</sys:String>
     <sys:String x:Key="MenuRicerca">_Ricerca</sys:String>
     <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
@@ -66,6 +74,7 @@
     <sys:String x:Key="ViewerCapitoloSuccessivo">Capitolo successivo</sys:String>
     <sys:String x:Key="ViewerVersettoPrecedente">Versetto precedente</sys:String>
     <sys:String x:Key="ViewerVersettoSuccessivo">Versetto successivo</sys:String>
+    <sys:String x:Key="ViewerTitoloNotaAiuto">Seleziona una nota per visualizzarla</sys:String>
     <sys:String x:Key="ViewerRicercaAiuto">Digita una parola o un'espressione da ricercare nel testo</sys:String>
     <sys:String x:Key="ViewerVaiRicercaAiuto">Esegui la ricerca</sys:String>
     <sys:String x:Key="ViewerRicercaVersettiAiuto">Versetti che contengono l'espressione da ricercare; scegline uno per visualizzarlo</sys:String>
@@ -101,7 +110,7 @@
     <sys:String x:Key="FileDialogoFiltro">Testo formattato (*.rtf)|*.rtf|Testo semplice (*.txt)|*.txt</sys:String>
     <sys:String x:Key="FileDialogoFiltroTutti">Testo formattato (*.rtf)|*.rtf|Testo semplice (*.txt)|*.txt|Tutti i file (*.*)|*.*</sys:String>
     <sys:String x:Key="FileDialogoNome">documento</sys:String>
-    <sys:String x:Key="EditorSalvaModifiche">Vuoi salvare le modifiche a questo testo?</sys:String>
+    <sys:String x:Key="EditorSalvaModifiche">Vuoi salvare le modifiche a</sys:String>
     <sys:String x:Key="EditorSalvaModificheTitolo">Modifiche non salvate</sys:String>
     <sys:String x:Key="EditorSalvaFallito">Salvataggio fallito</sys:String>
     <sys:String x:Key="EditorApriFallito">Apertura fallita</sys:String>
@@ -114,10 +123,11 @@
     <sys:String x:Key="TrovaChiudiAiuto">Chiudi (Esc)</sys:String>
     <sys:String x:Key="TrovaSostituisci">Sostituisci</sys:String>
     <sys:String x:Key="TrovaTutti">Tutto</sys:String>
-
     <sys:String x:Key="TrovaSostituzioneCompletata">Sono state apportate {0} sostituzioni.</sys:String>
     <sys:String x:Key="TrovaSostituzioneCompletata1">È stata apportata {0} sostituzione.</sys:String>
     <sys:String x:Key="TrovaSostituzione">Sostituzione</sys:String>
+    <sys:String x:Key="HoverFile">Apri file</sys:String>
+    <sys:String x:Key="LinkFileErrore">Non ho potuto aprire il file</sys:String>
 
     <sys:String x:Key="FileLabel">File:</sys:String>
     <sys:String x:Key="FileUnsaved">(non salvato)</sys:String>
@@ -170,6 +180,10 @@
     <sys:String x:Key="BibliotecaRinominaAiuto">Dà un nuovo nome al testo</sys:String>
     <sys:String x:Key="BibliotecaRinominaDomanda">Digita il nuovo nome di questo texto:</sys:String>
     <sys:String x:Key="BibliotecRinominaTitolo">Rinomina testo</sys:String>
+    <sys:String x:Key="BibliotecaCopia">Copia testo</sys:String>
+    <sys:String x:Key="BibliotecaCopiaAiuto">Crea una copia del testo</sys:String>
+    <sys:String x:Key="BibliotecaCopiaCopiato">Il testo '{0}' è stato copiato in '{1}'.</sys:String>
+    <sys:String x:Key="BibliotecaCopiaErrore">Errore copiando il testo: {0}</sys:String>
 
     <sys:String x:Key="OpzioniTitolo">Opzioni</sys:String>
     <sys:String x:Key="OpzioniAiuto">Scegli le impostazioni dell'app, che vengono applicate immediate. Lasciate il mouse sopra un'impostazione per ulteriori informazioni. Clicca su un titolo sul lato sinistro per saltare immediatamente a quella sezione.</sys:String>
@@ -182,6 +196,14 @@
     <sys:String x:Key="OpzioniLinguaTitolo">Lingua</sys:String>
     <sys:String x:Key="OpzioniLinguaAiuto">Scegli la lingua per l'applicazione, inglese o italiano. La maggior parte dell'interfaccia viene modificata immediatamente, il resto richiede il riavvio dell'app.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">Per cambiare completamente la lingua utilizzata nell'app, è necessario riavviare l'applicazione. Cambiare la lingua dell'interfaccia cambia anche la lingua dei nomi e abbreviazioni dei libri usati e riconosciuti.</sys:String>
+    <sys:String x:Key="OpzioniAmbiente">Environment</sys:String>
+    <sys:String x:Key="OpzioniEditorTitolo">Editor</sys:String>
+    <sys:String x:Key="OpzioniEditorAiuto">Scegli le impostazioni per la finestra dell'editor</sys:String>
+    <sys:String x:Key="OpzioniEditorChiusura">Chiudi documenti modificati senza chiedere di salvare</sys:String>
+    <sys:String x:Key="OpzioniIpertestoTitolo">Ipertesto</sys:String>
+    <sys:String x:Key="OpzioniIpertestoAiuto">Scegli le impostazioni per la visualizzazione dei link di ipertesto.</sys:String>
+    <sys:String x:Key="OpzioniIpertestoTooltip">Mostra i link di ipertesto in un tooltip quando il mouse è sopra di essi</sys:String>
+    <sys:String x:Key="OpzioniIpertestoDizionario">Mostra una definizione da un dizionario con un doppio clic del mouse</sys:String>
     <sys:String x:Key="OpzioniFormato">Formato testo</sys:String>
     <sys:String x:Key="OpzioniTestoTitolo">Testo della Bibbia</sys:String>
     <sys:String x:Key="OpzioniTestoAiuto">Scegli le impostazioni per la visualizzazione del testo della Bibbia: una nuova riga per ogni versetto, una nuova riga per ogni paragrafo, o nessun testo.</sys:String>
@@ -216,6 +238,13 @@
     <sys:String x:Key="OpzioniTestiBibbiaPreferita1">Prima scelta:</sys:String>
     <sys:String x:Key="OpzioniTestiBibbiaPreferita2">Seconda scelta:</sys:String>
     <sys:String x:Key="OpzioniTestiBibbiaPreferita3">Terza scelta:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionari">Dizionari</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionariAiuto">Scegli i dizionari che saranno usati per mostrare le definizioni delle parole quando si fa un doppio clic su una parola.</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioInglese">Inglese:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioItaliano">Italiano:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioGreco">Greco:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioEbraico">Ebraico:</sys:String>
+    <sys:String x:Key="OpzioniTestiDizionarioLatino">Latino:</sys:String>
     <sys:String x:Key="OpzioniAggiornamenti">Aggiornamenti</sys:String>
     <sys:String x:Key="OpzioniAggiornamentiMessaggi">Messaggi sugli aggiornamenti</sys:String>
     <sys:String x:Key="OpzioniMessaggiMai">Non controllare mai per messaggi</sys:String>

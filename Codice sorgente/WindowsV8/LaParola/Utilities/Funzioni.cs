@@ -1,8 +1,10 @@
 ﻿using AvalonDock.Layout;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace LaParola.Utilities
 {
@@ -118,5 +120,85 @@ namespace LaParola.Utilities
             }
             return null;
         }
+
+        #region ApriBrowser
+
+        /// <summary>
+        /// Apre un indirizzo Internet nel browser predefinito.
+        /// </summary>
+        /// <param name="url">L'indirizzo da aprire.</param>
+        /// <param name="throwException">Se un eventuale errore è passato a chi ha chiamato questa routine, oppure è ignorato.</param>
+        internal static void AprilFileOUrl(Uri url, bool throwException)
+        {
+            if (url == null)
+                throw new ArgumentNullException("url");
+            else
+                AprilFileOUrl(url.ToString(), "", throwException);
+        }
+
+        /// <summary>
+        /// Apre un indirizzo Internet nel browser predefinito.
+        /// </summary>
+        /// <param name="url">L'indirizzo da aprire.</param>
+        /// <param name="throwException">Se un eventuale errore è passato a chi ha chiamato questa routine, oppure è ignorato.</param>
+        internal static void AprilFileOUrl(string url, bool throwException)
+        {
+            AprilFileOUrl(url, "", throwException);
+        }
+
+        /// <summary>
+        /// Apre un indirizzo Internet nel browser predefinito.
+        /// </summary>
+        /// <param name="url">L'indirizzo da aprire.</param>
+        /// <param name="parametri">Gli eventuali parametri dell'indirizzo.</param>
+        /// <param name="throwException">Se un eventuale errore è passato a chi ha chiamato questa routine, oppure è ignorato.</param>
+        internal static void AprilFileOUrl(Uri url, string parametri, bool throwException)
+        {
+            if (url == null)
+                throw new ArgumentNullException("url");
+            else
+                AprilFileOUrl(url.ToString(), parametri, throwException);
+        }
+
+        /// <summary>
+        /// Apre un indirizzo Internet nel browser predefinito.
+        /// </summary>
+        /// <param name="url">L'indirizzo da aprire.</param>
+        /// <param name="parametri">Gli eventuali parametri dell'indirizzo.</param>
+        /// <param name="throwException">Se un eventuale errore è passato a chi ha chiamato questa routine, oppure è ignorato.</param>
+        internal static void AprilFileOUrl(string url, string parametri, bool throwException)
+        {
+            if (string.IsNullOrWhiteSpace(url)) return;
+
+            // 1. Salva l'eventuale cursore override attualmente attivo in WPF
+            Cursor cursoreAttuale = Mouse.OverrideCursor;
+
+            try
+            {
+                // 2. Imposta il cursore di attesa nativo di WPF a livello di applicazione
+                Mouse.OverrideCursor = Cursors.AppStarting;
+
+                // 3. Configura ProcessStartInfo (Obbligatorio per i link web in .NET moderno)
+                ProcessStartInfo psi = new()
+                {
+                    FileName = url,
+                    Arguments = parametri ?? string.Empty,
+                    UseShellExecute = true // Permette a Windows di capire che è un URL e aprire il browser
+                };
+
+                Process.Start(psi);
+            }
+            catch (Exception)
+            {
+                if (throwException)
+                    throw;
+            }
+            finally
+            {
+                // 4. Ripristina il cursore precedente (senza chiamare Dispose(), ci pensa WPF)
+                Mouse.OverrideCursor = cursoreAttuale;
+            }
+        }
+        #endregion
     }
 }

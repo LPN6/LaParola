@@ -10,7 +10,7 @@ namespace LaParola
         public string Message { get; set; }
         public MessageBoxResult Result { get; private set; }
 
-        public MessageBoxLPN(string message, Window owner, MessageBoxButton buttons)
+        public MessageBoxLPN(Window owner, string message, MessageBoxButton buttons)
         {
             InitializeComponent();
             Owner = owner;
@@ -87,7 +87,7 @@ namespace LaParola
 
         public static MessageBoxResult Show(Window owner, string message, string title, MessageBoxButton buttons = MessageBoxButton.OK)
         {
-            MessageBoxLPN dlg = new(message, owner, buttons)
+            MessageBoxLPN dlg = new(owner, message, buttons)
             {
                 Title = title
             };

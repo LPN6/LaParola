@@ -110,22 +110,12 @@ namespace LaParola.Services
                 // or load them into a notification area in your main window.
                 foreach (var msg in messages)
                 {
-                    if (MainWindow.settings.Language == "it")
+                    if (MainWindow.settings.Lingua == "it")
                     {
-                        /*System.Windows.MessageBox.Show(
-                            msg.ContentIt,
-                            msg.TitleIt,
-                            System.Windows.MessageBoxButton.OK,
-                            System.Windows.MessageBoxImage.Information);*/
                         MainWindow.CreaEditorDocument(msg.ContentIt, msg.TitleIt);
                     }
                     else
                     {
-                        /*System.Windows.MessageBox.Show(
-                        msg.Content,
-                        msg.Title,
-                        System.Windows.MessageBoxButton.OK,
-                        System.Windows.MessageBoxImage.Information);*/
                         MainWindow.CreaEditorDocument(msg.Content, msg.Title);
                     }
                 }

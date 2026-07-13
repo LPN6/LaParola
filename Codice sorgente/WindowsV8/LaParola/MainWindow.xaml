@@ -21,6 +21,7 @@
         <KeyBinding Key="F3" Command="{x:Static local:MainWindow.FindNextCommand}" />
         <KeyBinding Key="F4" Command="{x:Static local:MainWindow.ReplaceNextCommand}" />
         <KeyBinding Key="F4" Modifiers="Alt" Command="{x:Static local:MainWindow.EsciCommand}" />
+        <KeyBinding Key="I" Modifiers="Ctrl" Command="{x:Static local:MainWindow.ImageCommand}" />
         <KeyBinding Key="L" Modifiers="Ctrl" Command="{x:Static local:MainWindow.LibraryCommand}" />
         <KeyBinding Key="F5" Command="{x:Static local:MainWindow.SearchCommand}" />
         <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
@@ -41,6 +42,7 @@
         <CommandBinding Command="{x:Static local:MainWindow.EsciCommand}" Executed="Esci_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.FindNextCommand}" Executed="FindNext_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.ReplaceNextCommand}" Executed="ReplaceNext_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.ImageCommand}" Executed="Image_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.LibraryCommand}" Executed="Library_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.SearchCommand}" Executed="Search_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.MostraCommand}" Executed="Mostra_Executed" />
@@ -186,6 +188,36 @@
                                 <EventSetter Event="Click" Handler="SubMenuCommentario_Click"/>
                             </Style>
                         </MenuItem.ItemContainerStyle>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuVisualizzaDizionario" Header="{DynamicResource MenuVisualizzaDizionario}" Click="MenuVisualizzaDizionario_Click">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="BookAlphabet"/>
+                        </MenuItem.Icon>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Header" Value="{Binding}"/>
+                                <EventSetter Event="Click" Handler="SubMenuDizionario_Click"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuVisualizzaLibro" Header="{DynamicResource MenuVisualizzaLibro}" Click="MenuVisualizzaLibro_Click">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Book"/>
+                        </MenuItem.Icon>
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Header" Value="{Binding}"/>
+                                <EventSetter Event="Click" Handler="SubMenuLibro_Click"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
+                    
+                    <Separator/>
+
+                    <MenuItem x:Name="MenuVisualizzaImmagine" Header="{DynamicResource MenuVisualizzaImmagine}" Command="{x:Static local:MainWindow.ImageCommand}" InputGestureText="Ctrl+I">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="FileImageOutline"/>
+                        </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MenuStrumenti}">

@@ -32,6 +32,15 @@ e mettere i file con estensione .laparola nella stessa cartella dell'app beta.</
 
 <h2>Caratteristiche</h2>
 
+<h3>Versione 8.0.4</h3>
+<ul>
+<li>I dizionari e altri libri sono disponibili.</li>
+<li>Link ipertestuali in tutti i testi ad altri brani, commenti, voci, e immagini.</li>
+<li>Nella finestra per visualizzare un testo, il sommario a sinistra include le voci dei dizionari e l'indice dei libri.</li>
+<li>Una finestra per visualizzare le immagini.</li>
+<li><i>Opzioni:</i> come mostrare i link ipertestuali; impostare le versioni della Bibbia predefinite e i dizionari (che vengono usati per visualizzare il testo dei link)</li>
+</ul>  
+
 <h3>Versione 8.0.3</h3>
 <ul>
 <li>I commentari sono disponibili, e possono essere letti dal menu Visualizza oppure Mostra brano.</li>

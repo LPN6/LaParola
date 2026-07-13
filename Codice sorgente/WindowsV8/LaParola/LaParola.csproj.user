@@ -16,6 +16,9 @@
     <Compile Update="Dialogs\MessageBoxLPN.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="DocumentViews\Immagine.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ToolViews\LibraryToolView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

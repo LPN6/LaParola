@@ -2,6 +2,7 @@ using AvalonDock.Layout;
 using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Security.Principal;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,8 +13,10 @@ using System.Windows.Media;
 
 namespace LaParola.DocumentViews;
 
+// TODO2 indice in Sommario Dottrina cristiana ha 3 sezioni in un unico link invece di 3 link diversi
+
 // TODO2 toolbar: lista versetti, bookmark, zoom, highlights
-// TODO2 in 7, paralleli, aggiungi, note: servono?
+// TODO2 in 7, paralleli, aggiungi, noteNonAggiunte: servono?
 
 public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 {
@@ -51,14 +54,19 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
     }
 
-    private readonly List<byte[]> cronologia = [];
+    private bool isSpostando = false;
+    private readonly List<Riferimento> cronologia = [];
     private int nCronologia = -1;
     private bool spostando = false;
     private bool isDraggingThumb = false;
     private bool ctrlPremuto;
     private readonly bool tipoBibbia;
+    private readonly bool tipoVersetti;
+    private readonly bool tipoNote;
 
     public byte Libro = 0, Capitolo = 1, Versetto = 1;
+    internal bool VersettoMostrato = true;
+    internal string Titolo = "";
 
     public bool IsTocVisible
     {
@@ -82,9 +90,13 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
     {
         InitializeComponent();
         _versione = versione;
+        Viewer.Lingua = MainWindow.Testi.Info(versione).Lingua;
+        Viewer.Versione = versione;
         DataContext = this;
 
         tipoBibbia = ((MainWindow.Testi.Info(versione).Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia);
+        tipoVersetti = tipoBibbia | ((MainWindow.Testi.Info(versione).Tipo & TestoTipi.Commentario) == TestoTipi.Commentario);
+        tipoNote = ((MainWindow.Testi.Info(versione).Tipo & TestoTipi.Dizionario) == TestoTipi.Dizionario); // tutti il tipo Libri sono così
 
         if (tipoBibbia)
         {
@@ -94,6 +106,23 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         {
             SBViewer.Visibility = Visibility.Collapsed;
             Viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            int numeroNoteTitolo = MainWindow.Testi.NumeroNoteConTitolo(versione);
+            if (numeroNoteTitolo > 0)
+            {
+                CmbTitoloNota.Visibility = Visibility.Visible;
+                CmbTitoloNota.ItemsSource = MainWindow.Testi.NoteConTitolo(versione);
+                CmbTitoloNota.SelectedIndex = -1;
+            }
+            if (numeroNoteTitolo == MainWindow.Testi.NumeroNote(versione))
+            {
+                TxtReference.Visibility = Visibility.Collapsed;
+                BtnGoReference.Visibility = Visibility.Collapsed;
+                BorderReference.Visibility = Visibility.Collapsed;
+                SPLibro.Visibility = Visibility.Collapsed;
+                SPCapitolo.Visibility = Visibility.Collapsed;
+                SPVersetto.Visibility = Visibility.Collapsed;
+                BorderReference2.Visibility = Visibility.Collapsed;
+            }
         }
 
         Viewer.Document = new FlowDocument
@@ -115,11 +144,18 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         MessageBox.Show("Open Help Centre");
     }
 
+    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        // Limita la larghezza massima del pannello alla metà esatta della larghezza corrente della finestra
+        LeftColumn.MaxWidth = e.NewSize.Width / 2;
+    }
+
     private void PopolaIndice()
     {
         if (TocTreeView == null) return;
 
         TocTreeView.Items.Clear();
+
         if (tipoBibbia)
         {
             for (byte numeroLibro = 1; numeroLibro <= 73; numeroLibro++)
@@ -150,17 +186,77 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
         else
         {
-            Collection<string> note = MainWindow.Testi.Note(_versione);
+            // sezione note in ordine
+            Collection<string> noteNonAggiunte = MainWindow.Testi.NotePrimaOrdinate(_versione, true);
+            Collection<string> noteInOrdine = MainWindow.Testi.GetNoteInOrdine(_versione);
+
+            if (noteInOrdine.Count > 0)
+            {
+                List<TreeViewItem> ultimoALivello = [];
+
+                for (int i = 0; i < noteInOrdine.Count; ++i)
+                {
+                    string stringaOriginale = noteInOrdine[i];
+
+                    // Cleanly strip tabs and measure depth in one go
+                    string titolo = stringaOriginale.TrimStart('\t');
+                    int livello = stringaOriginale.Length - titolo.Length;
+
+                    // Create the WPF native tree node element
+                    TreeViewItem nuovoItem = new() { Header = titolo, Tag = titolo };
+                    noteNonAggiunte.Remove(titolo);
+
+                    // Ensure our tracking cache list has enough capacity for this level depth
+                    while (livello >= ultimoALivello.Count)
+                    {
+                        ultimoALivello.Add(null!);
+                    }
+
+                    if (livello == 0)
+                    {
+                        // Add directly to the root of the TreeView
+                        TocTreeView.Items.Add(nuovoItem);
+                    }
+                    else
+                    {
+                        // Grab the active parent from the preceding level depth
+                        TreeViewItem padre = ultimoALivello[livello - 1];
+                        padre?.Items.Add(nuovoItem);
+                    }
+
+                    // Cache this element as the latest node at this specific hierarchy level
+                    ultimoALivello[livello] = nuovoItem;
+                }
+            }
+
+            // sezione noteNonAggiunte su versetti
 
             int libroPrecedente = -1, capitoloPrecedente = -1, libro, capitolo;
             string libroNome = "";
+            char letteraPrecedente = '\0';
 
-            // Declare the node variables without pre-instantiating them
+            // Dichiarazione delle variabili dei nodi senza pre-istanziarle
             TreeViewItem ultimoLibroNodo = null!;
             TreeViewItem ultimoCapitoloNodo = null!;
+            TreeViewItem ultimoLetteraNodo = null!;
 
-            foreach (string titolo in note)
+            // 1. Pre-calcolo del numero di note che non iniziano con '#' per decidere la strategia di layout
+            int conteggioNonHash = 0;
+            foreach (string titolo in noteNonAggiunte)
             {
+                if (!string.IsNullOrEmpty(titolo) && !titolo.StartsWith('#'))
+                {
+                    conteggioNonHash++;
+                }
+            }
+            bool raggruppaPerLettera = conteggioNonHash >= 10;
+
+            // 2. Ciclo principale di popolamento del TreeView
+            foreach (string titolo in noteNonAggiunte)
+            {
+                // Clausola di salvaguardia per evitare stringhe vuote accidentali
+                if (string.IsNullOrEmpty(titolo)) continue;
+
                 if (titolo.StartsWith('#'))
                 {
                     libro = Convert.ToInt32(titolo.Substring(1, 2), CultureInfo.InvariantCulture);
@@ -168,25 +264,25 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                     {
                         libroNome = MainWindow.Testi.GetLibroNome(libro);
 
-                        // Explicitly create the Book node
+                        // Crea esplicitamente il nodo del Libro
                         ultimoLibroNodo = new TreeViewItem
                         {
                             Header = libroNome,
-                            Tag = libro // Storing the book number
+                            Tag = libro // Memorizza il numero del libro
                         };
                         TocTreeView.Items.Add(ultimoLibroNodo);
 
                         libroPrecedente = libro;
-                        capitoloPrecedente = -1; // Reset chapter tracking for the new book
+                        capitoloPrecedente = -1; // Reset del tracciamento capitoli per il nuovo libro
                     }
 
                     capitolo = Convert.ToInt32(titolo.Substring(3, 3), CultureInfo.InvariantCulture);
                     if (capitolo != capitoloPrecedente)
                     {
-                        // se capitolo==0, la nota è su tutto il libro
+                        // Se capitolo == 0, la nota è su tutto il libro
                         string capitoloHeader = libroNome + (capitolo > 0 ? (" " + capitolo.ToString(CultureInfo.InvariantCulture)) : "");
 
-                        // Explicitly create the Chapter node
+                        // Crea esplicitamente il nodo del Capitolo
                         ultimoCapitoloNodo = new TreeViewItem
                         {
                             Header = capitoloHeader,
@@ -197,18 +293,62 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                         capitoloPrecedente = capitolo;
                     }
 
-                    // Explicitly create the individual Note node
+                    // Crea esplicitamente il nodo della singola Nota standard (#)
                     TreeViewItem ultimoNotaNodo = new()
                     {
                         Header = MainWindow.Testi.ConvertiTitoloNotaARiferimento(titolo),
-                        Tag = titolo // il riferimento come titolo di una nota, usato con i pulsanti OK e Cancella
+                        Tag = titolo // Il riferimento come titolo di una nota, usato con i pulsanti OK e Cancella
                     };
 
                     ultimoCapitoloNodo.Items.Add(ultimoNotaNodo);
                 }
+                else
+                {
+                    // LOGICA PER LE NOTE SENZA '#'
+                    if (raggruppaPerLettera)
+                    {
+                        // Estrae la prima lettera e la rende maiuscola (unificando così 'a' e 'A')
+                        char letteraCorrente = char.ToUpper(titolo[0], CultureInfo.InvariantCulture);
+
+                        if (letteraCorrente != letteraPrecedente)
+                        {
+                            // Crea il nodo di primo livello per la Lettera (solo se esiste una nota corrispondente)
+                            ultimoLetteraNodo = new TreeViewItem
+                            {
+                                Header = letteraCorrente.ToString(),
+                                Tag = letteraCorrente
+                            };
+                            TocTreeView.Items.Add(ultimoLetteraNodo);
+
+                            letteraPrecedente = letteraCorrente;
+                        }
+
+                        // Crea il nodo della nota di secondo livello inserendolo sotto la lettera corrispondente
+                        TreeViewItem notaNodo = new()
+                        {
+                            Header = titolo,
+                            Tag = titolo // Il tag deve essere il titolo originale della nota
+                        };
+                        ultimoLetteraNodo.Items.Add(notaNodo);
+                    }
+                    else
+                    {
+                        // Meno di 10 note totali: le inseriamo direttamente nel livello radice dell'albero
+                        TreeViewItem notaNodo = new()
+                        {
+                            Header = titolo,
+                            Tag = titolo // Il tag deve essere il titolo originale della nota
+                        };
+                        TocTreeView.Items.Add(notaNodo);
+                    }
+                }
             }
-            // TODO2 dizionario, libro in ordine - vedi ApriNota.cs
         }
+    }
+
+    internal void MostraIndice(bool mostra)
+    {
+        IsTocVisible = mostra;
     }
 
     private void TocTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -225,12 +365,12 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
 
         // --- CASE 2: COMMENTARY (Individual Note Leaf Node) ---
-        else if (selectedItem.Tag is string titolo && titolo.StartsWith('#'))
+        else if (selectedItem.Tag is string rifNota && rifNota.StartsWith('#'))
         {
             // Extract indices matching your string padding layout (# + 2-digit book + 3-digit chapter + 3-digit verse)
-            byte libro = Convert.ToByte(titolo.Substring(1, 2), CultureInfo.InvariantCulture);
-            byte capitolo = Convert.ToByte(titolo.Substring(3, 3), CultureInfo.InvariantCulture);
-            byte versetto = Convert.ToByte(titolo.Substring(6, 3), CultureInfo.InvariantCulture);
+            byte libro = Convert.ToByte(rifNota.Substring(1, 2), CultureInfo.InvariantCulture);
+            byte capitolo = Convert.ToByte(rifNota.Substring(3, 3), CultureInfo.InvariantCulture);
+            byte versetto = Convert.ToByte(rifNota.Substring(6, 3), CultureInfo.InvariantCulture);
 
             // Safety Guard: If a comment is written for a whole book (capitolo == 0) 
             // or a whole chapter (versetto == 0), normalize to 1 so SpostaTesto doesn't crash.
@@ -240,7 +380,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             _ = SpostaTesto(libro, targetCapitolo, targetVersetto, true, true);
         }
 
-        // --- CASE 3: COMMENTARY (Chapter Node, optional navigation) ---
+        // --- CASE az: COMMENTARY (Chapter Node, optional navigation) ---
         /*
         else if (selectedItem.Tag is Tuple<int, int> destinazioneCommentario)
         {
@@ -251,8 +391,14 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             // Navigates to the start of that chapter when the folder item itself is selected
             _ = SpostaTesto(libro, targetCapitolo, 1, true, true);
         }*/
-        // TODO2 dizionario, libro
+        // --- CASE 3: DICTIONARY AND BOOK (Chapter Node, optional navigation) ---
+
+        else if (selectedItem.Tag is string titolo && !titolo.StartsWith('#'))
+        {
+            _ = SpostaTesto(titolo, true, true);
+        }
     }
+
     private void BtnToggleToc_Click(object sender, RoutedEventArgs e)
     {
         IsTocVisible = !IsTocVisible;
@@ -266,12 +412,21 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
     public void CambiaFormato()
     {
         _ = SpostaTesto(Libro, Capitolo, Versetto, false, false);
+        VersettoMostrato = true;
     }
 
     public async void SpostaTesto(Riferimento riferimento, bool aggiungiACronologia = true, bool sincronizza = true)
     {
-        if (riferimento.Count < 1 || !riferimento.Versetti) return;
-        _ = SpostaTesto(riferimento.Brani[0][0], riferimento.Brani[0][1], riferimento.Brani[0][2], aggiungiACronologia, sincronizza);
+        if (riferimento.Count < 1)
+            return;
+        if (!riferimento.Versetti)
+        {
+            _ = SpostaTesto(riferimento.Note[0], aggiungiACronologia, sincronizza);
+        }
+        else
+        {
+            _ = SpostaTesto(riferimento.Brani[0][0], riferimento.Brani[0][1], riferimento.Brani[0][2], aggiungiACronologia, sincronizza);
+        }
     }
 
     // Overload supporting precise vertical line offsets during scrolling sync
@@ -295,12 +450,12 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             Versetto = versetto;
 
             if (sincronizza)
-                SpostaAltreViewer(libro, capitolo, versetto, aggiungiACronologia, verseTopOffset);
+                SpostaAltreViewer(new Riferimento(libro, capitolo, versetto), aggiungiACronologia, verseTopOffset);
 
             if (aggiungiACronologia)
             {
                 for (int i = cronologia.Count - 1; i > nCronologia; i--) cronologia.RemoveAt(i);
-                cronologia.Add([libro, capitolo, versetto]);
+                cronologia.Add(new Riferimento(libro, capitolo, versetto));
                 nCronologia = cronologia.Count - 1;
                 AggiornaCronologia();
             }
@@ -350,7 +505,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         Versetto = versetto;
 
         if (sincronizza)
-            SpostaAltreViewer(libro, capitolo, versetto, aggiungiACronologia, verseTopOffset);
+            SpostaAltreViewer(new Riferimento(libro, capitolo, versetto), aggiungiACronologia, verseTopOffset);
 
         if (aggiungiACronologia)
         {
@@ -358,10 +513,43 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             {
                 cronologia.RemoveAt(i);
             }
-            cronologia.Add([libro, capitolo, versetto]);
+            cronologia.Add(new Riferimento(libro, capitolo, versetto));
             nCronologia = cronologia.Count - 1;
             AggiornaCronologia();
         }
+
+        VersettoMostrato = true;
+    }
+
+    public async Task SpostaTesto(string notaTitolo, bool aggiungiACronologia = true, bool sincronizza = true)
+    {
+        Riferimento rif = new(false);
+        rif.AggiungiNotaEParole(notaTitolo, []);
+        Viewer.Document = await MainWindow.Testi.FlowDocumentBranoAsync(rif, _versione, paroleRicercate: ParoleRicercate);
+
+        Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+        RtfColorTransformer.ApplyThemeToDocument(Viewer.Document, true, fg, true);
+
+        isSpostando = true;
+        CmbTitoloNota.SelectedItem = notaTitolo;
+        isSpostando = false;
+
+        if (sincronizza)
+            SpostaAltreViewer(rif, aggiungiACronologia);
+
+        if (aggiungiACronologia)
+        {
+            for (int i = cronologia.Count - 1; i > nCronologia; i--)
+            {
+                cronologia.RemoveAt(i);
+            }
+            cronologia.Add(rif);
+            nCronologia = cronologia.Count - 1;
+            AggiornaCronologia();
+        }
+
+        Titolo = notaTitolo;
+        VersettoMostrato = false;
     }
 
     private void SpostaAltreViewer(bool cronologia = true)
@@ -375,17 +563,20 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                 byte currentBook = byte.Parse(verseTag.Substring(6, 2));
                 byte currentChapter = byte.Parse(verseTag.Substring(8, 3));
                 byte currentVerse = byte.Parse(verseTag.Substring(11, 3));
-                SpostaAltreViewer(currentBook, currentChapter, currentVerse, cronologia, state.VerseTopOffset);
+                SpostaAltreViewer(new Riferimento(currentBook, currentChapter, currentVerse), cronologia, state.VerseTopOffset);
             }
         }
         else
         {
-            SpostaAltreViewer(Libro, Capitolo, Versetto, cronologia);
+            SpostaAltreViewer(new Riferimento(Libro, Capitolo, Versetto), cronologia);
         }
     }
 
-    private void SpostaAltreViewer(byte libro, byte capitolo, byte versetto, bool cronologia = true, double verseTopOffset = double.NaN)
+    private void SpostaAltreViewer(Riferimento riferimento, bool cronologia = true, double verseTopOffset = double.NaN)
     {
+        if (riferimento.Count < 1)
+            return;
+
         if (SincGruppo != 0)
         {
             List<LayoutDocument>? viewers = Funzioni.ListViewerDocuments();
@@ -395,18 +586,26 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                 {
                     ViewerDocumentView? vd = (d.Content as ViewerDocumentView);
                     if (vd != null && vd != this && vd.SincGruppo == SincGruppo)
-                    {
-                        Riferimento rif = MainWindow.Testi.ConvertiDaStandard(MainWindow.Testi.ConvertiAStandard(new Riferimento(libro, capitolo, versetto), _versione), vd.Versione);
-                        if (rif.Count >= 1 && rif.Versetti)
+                        if (riferimento.Versetti)
                         {
-                            // Explicitly call the byte overload to maintain micro scroll precision offsets
-                            _ = vd.SpostaTesto(rif.Brani[0][0], rif.Brani[0][1], rif.Brani[0][2], cronologia, false, verseTopOffset);
+                            if (vd.tipoVersetti)
+                            {
+                                Riferimento rif = MainWindow.Testi.ConvertiDaStandard(MainWindow.Testi.ConvertiAStandard(riferimento, _versione), vd.Versione);
+                                // Explicitly call the byte overload to maintain micro scroll precision offsets
+                                _ = vd.SpostaTesto(rif.Brani[0][0], rif.Brani[0][1], rif.Brani[0][2], cronologia, false, verseTopOffset);
+                            }
                         }
-                    }
+                        else
+                        {
+                            if (vd.tipoNote)
+                            {
+                                _ = vd.SpostaTesto(riferimento.Note[0], cronologia, false);
+                            }
+                        }
                 }
-                if (tipoBibbia)
-                    MainWindow.Testi.UltimaBibbia = Versione;
             }
+            if (tipoBibbia)
+                MainWindow.Testi.UltimaBibbia = Versione;
         }
     }
 
@@ -486,6 +685,19 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             {
                 SpostaTesto(r);
             }
+        }
+    }
+
+    private void EseguiSpostamentoNota(string titoloNota)
+    {
+        if (!string.IsNullOrWhiteSpace(titoloNota))
+        {
+            Riferimento rif = new()
+            {
+                Versetti = false
+            };
+            rif.AggiungiNotaEParole(titoloNota, []);
+            SpostaTesto(rif);
         }
     }
 
@@ -648,22 +860,42 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
         if (versettiConFrase != null && versettiConFrase.Count > 0)
         {
-            List<string> risultati = [];
+            List<NotaSearchResult> risultati = [];
             if (tipoBibbia)
             {
                 foreach (byte[] brano in versettiConFrase.Brani)
                 {
-                    risultati.Add(MainWindow.Testi.NormalizzaRiferimento(brano[0], brano[1], brano[2]));
+                    risultati.Add(new NotaSearchResult
+                    {
+                        DisplayText = MainWindow.Testi.NormalizzaRiferimento(brano[0], brano[1], brano[2]),
+                        RawNota = "", // non è utilizzato
+                        IsReference = true
+                    });
                 }
             }
             else
             {
                 foreach (string nota in versettiConFrase.Note)
                 {
-                    risultati.Add(MainWindow.Testi.ConvertiTitoloNotaARiferimento(nota));
+                    if (nota.StartsWith('#'))
+                    {
+                        risultati.Add(new NotaSearchResult
+                        {
+                            DisplayText = MainWindow.Testi.ConvertiTitoloNotaARiferimento(nota),
+                            RawNota = nota,
+                            IsReference = true
+                        });
+                    }
+                    else
+                        risultati.Add(new NotaSearchResult
+                        {
+                            DisplayText = nota,
+                            RawNota = nota,
+                            IsReference = false
+                        });
                 }
-
             }
+            CmbSearchResults.DisplayMemberPath = nameof(NotaSearchResult.DisplayText);
             CmbSearchResults.ItemsSource = risultati;
             CmbSearchResults.IsEnabled = true;
             CmbSearchResults.SelectedIndex = 0;
@@ -675,11 +907,29 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
     }
 
+    private void CmbTitoloNota_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (isSpostando)
+            return;
+        if (CmbTitoloNota.SelectedItem is string selectedTitle)
+        {
+            _ = SpostaTesto(selectedTitle);
+        }
+    }
+
     private void CmbSearchResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (CmbSearchResults.IsEnabled && CmbSearchResults.SelectedItem is string selectedVerse)
+        if (CmbSearchResults.IsEnabled && CmbSearchResults.SelectedItem is NotaSearchResult selectedItem)
         {
-            EseguiSpostamentoRiferimento(selectedVerse);
+            if (selectedItem.IsReference)
+            {
+                EseguiSpostamentoRiferimento(selectedItem.DisplayText);
+            }
+            else
+            {
+                // Call your alternative function here for non-# text string titles
+                EseguiSpostamentoNota(selectedItem.RawNota);
+            }
         }
     }
 
@@ -688,7 +938,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         if (nCronologia > 0)
         {
             nCronologia--;
-            _ = SpostaTesto(cronologia[nCronologia][0], cronologia[nCronologia][1], cronologia[nCronologia][2], false, true);
+            SpostaTesto(cronologia[nCronologia], false, true);
             AggiornaCronologia();
         }
     }
@@ -698,7 +948,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         if (nCronologia < cronologia.Count - 1)
         {
             nCronologia++;
-            _ = SpostaTesto(cronologia[nCronologia][0], cronologia[nCronologia][1], cronologia[nCronologia][2], false, true);
+            SpostaTesto(cronologia[nCronologia], false, true);
             AggiornaCronologia();
         }
     }
@@ -1122,5 +1372,12 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
         postScrollAction?.Invoke();
         Viewer.Opacity = 1;
+    }
+
+    public class NotaSearchResult
+    {
+        public string DisplayText { get; set; } = string.Empty;
+        public string RawNota { get; set; } = string.Empty;
+        public bool IsReference { get; set; }
     }
 }

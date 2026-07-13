@@ -5,6 +5,7 @@ using LaParola.DocumentViews;
 using LaParola.Models;
 using LaParola.ToolViews;
 using LaParola.Utilities;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -20,23 +21,18 @@ using System.Windows.Media;
 namespace LaParola;
 
 // per passare SmartScreen, usa https://www.microsoft.com/en-us/wdsi/filesubmission 
+// per controllare il contenuto di un FlowDocument, System.Windows.Markup.XamlWriter.Save(finalDoc) in Immediate Window
 
-// TODO2 vuoi salvare modifiche a questo testo? - non è chiaro a quel testo si riferisce quando ne sono diversi aperti
-// TODO2 in TextGen, multiple versioni, hover non cambia colore; anche solo 1 commentario ma con alternare
+// TODO2 versione 8.0.5
+
+// TODO2 in TextGen, multiple versioni, hover non cambia colore; anche solo uno commentario ma con alternare
 // TODO2 rimuovere righe vuote addizionali, soprattutto in TextGen
 
 // TODO2 toolbar: new, open, save (all), print, undo, redo, find, cut, copy, paste, vis bibbia, commentario, apri note, segnalibri, navigare, ricerca, mostra, (chiave), (racc info), paralleli, LQ, Misure, Gesti testi, aggiorna, opzioni,aiuto
-// available icons are listed here: https://pictogrammers.com/library/mdi/
+// available icons are listed here: https://pictogrammers.com/library/mdi/ and https://pictogrammers.github.io/@mdi/font/5.4.55/ 
 // TODO2 oppure invece di un toolbar, creare un tool "Quick Access", come in Logos
 // TODO2 help centre: Search, FAQs, tutorials, contact, release notes, keyboard shortcuts, about, documentation, how to use, getting started
-// TODO2 option to not ask confirm when closing documents
 // TODO2 right click menu for Editor and Visualizza
-/* TODO2 icons for other Visualizza menu items: - if changed here need to change also in Biblioteca
- * Commentary: Kind="BookOpenPageVariant" or Kind="BookInformationVariant"
-Dictionary: Kind="BookAlphabet" or "Translate"
-Normal Book: Kind="Book" or Kind="BookOpen"
-https://pictogrammers.github.io/@mdi/font/5.4.55/ per tutti
- */
 
 // TODO2 ApplicationCommands:
 /*| `CancelPrint` | Cancels a print job. |
@@ -147,6 +143,7 @@ public partial class MainWindow : Window
     public static readonly RoutedUICommand EsciCommand = new("Exit", "EsciCommand", typeof(MainWindow));
     public static readonly RoutedUICommand FindNextCommand = new("FindNext", "FindNextCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ReplaceNextCommand = new("ReplaceNext", "ReplaceNextCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand ImageCommand = new("Image", "ImageCommand", typeof(MainWindow));
     public static readonly RoutedUICommand LibraryCommand = new("Library", "LibraryCommand", typeof(MainWindow));
     public static readonly RoutedUICommand SearchCommand = new("Search", "SearchCommand", typeof(MainWindow));
     public static readonly RoutedUICommand FontCommand = new("Font", "FontCommand", typeof(MainWindow));
@@ -164,7 +161,7 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         RestoreWindowPlacement();
-        App.DockingHost.Initialize(Dock, DocumentPane);
+        App.DockingHost.Initialize(Dock, DocumentPane, this);
 
         Services.ThemeManager.ApplyDockTheme(Dock, settings.ThemeMode);
         App.ThemeManager.HookSystemThemeChanges(Dock, settings.ThemeMode);
@@ -203,8 +200,9 @@ public partial class MainWindow : Window
             if (settings.UltimaBibbiaCompleta != "")
                 Testi.UltimaBibbiaCompleta = settings.UltimaBibbiaCompleta;
 
-            if (settings.Language == "it")
+            if (settings.Lingua == "it")
             {
+                // TODO2 salvati in settings, da cambiare in Opzioni
                 Testi.libriNomi = Texts.LibriNomiItaliano.Split('|');
                 Testi.libriAbbreviazioniUsate = Texts.LibriAbbreviazioniUsateItaliano.Split('|');
                 string[] libriAbbRic = Texts.LibriAbbreviazioniRiconosciuteItaliano.Split('|', StringSplitOptions.RemoveEmptyEntries);
@@ -238,6 +236,76 @@ public partial class MainWindow : Window
                     (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read."),
                     (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
             }
+
+            // imposta dizionari
+            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioInglese).Lingua) != "en")
+                settings.DizionarioInglese = "";
+            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioItaliano).Lingua) != "it")
+                settings.DizionarioItaliano = "";
+            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioGreco).Lingua) != "el")
+                settings.DizionarioGreco = "";
+            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioEbraico).Lingua) != "he")
+                settings.DizionarioEbraico = "";
+            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioLatino).Lingua) != "la")
+                settings.DizionarioLatino = "";
+
+            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("International Standard Bible Encyclopedia").Lingua == "en")
+                settings.DizionarioInglese = "International Standard Bible Encyclopedia";
+            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Easton's Bible Dictionary").Lingua == "en")
+                settings.DizionarioInglese = "Easton's Bible Dictionary";
+            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Torrey's New Topical Textbook").Lingua == "en")
+                settings.DizionarioInglese = "Torrey's New Topical Textbook";
+            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Smith's Bible Dictionary").Lingua == "en")
+                settings.DizionarioInglese = "Smith's Bible Dictionary";
+            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Nave's Topical Bible").Lingua == "en")
+                settings.DizionarioInglese = "Nave's Topical Bible";
+            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Hitchcock's Bible Names Dictionary").Lingua == "en")
+                settings.DizionarioInglese = "Hitchcock's Bible Names Dictionary";
+
+            if (string.IsNullOrEmpty(settings.DizionarioItaliano) && Testi.Info("Enciclopedia biblica").Lingua == "it")
+                settings.DizionarioItaliano = "Enciclopedia biblica";
+            if (string.IsNullOrEmpty(settings.DizionarioItaliano) && Testi.Info("Note della Nuova Riveduta").Lingua == "it")
+                settings.DizionarioItaliano = "Note della Nuova Riveduta";
+
+            if (settings.Lingua.Length >= 2 && settings.Lingua[..2].Equals("IT", StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info("Vocabolario del Nuovo Testamento").Lingua) == "el")
+                    settings.DizionarioGreco = "Vocabolario del Nuovo Testamento";
+            }
+            if (string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info("Strong's Greek Dictionary").Lingua) == "el")
+                settings.DizionarioGreco = "Strong's Greek Dictionary";
+            if (string.IsNullOrEmpty(settings.DizionarioEbraico) && Funzioni.LinguaPrincipale(Testi.Info("Strong's Hebrew Dictionary").Lingua) == "he")
+                settings.DizionarioEbraico = "Strong's Hebrew Dictionary";
+            if (string.IsNullOrEmpty(settings.DizionarioLatino) && Funzioni.LinguaPrincipale(Testi.Info("Words Latin Dictionary").Lingua) == "la")
+                settings.DizionarioLatino = "Words Latin Dictionary";
+
+            Collection<string> dizionariTutti = Testi.NomiVersioni(TestoTipi.Dizionario);
+            foreach (string dizionario in dizionariTutti)
+            {
+                switch (Funzioni.LinguaPrincipale(Testi.Info(dizionario).Lingua))
+                {
+                    case "en":
+                        if (string.IsNullOrEmpty(settings.DizionarioInglese))
+                            settings.DizionarioInglese = dizionario;
+                        break;
+                    case "it":
+                        if (string.IsNullOrEmpty(settings.DizionarioItaliano))
+                            settings.DizionarioItaliano = dizionario;
+                        break;
+                    case "el":
+                        if (string.IsNullOrEmpty(settings.DizionarioGreco))
+                            settings.DizionarioGreco = dizionario;
+                        break;
+                    case "he":
+                        if (string.IsNullOrEmpty(settings.DizionarioEbraico))
+                            settings.DizionarioEbraico = dizionario;
+                        break;
+                    case "la":
+                        if (string.IsNullOrEmpty(settings.DizionarioLatino))
+                            settings.DizionarioLatino = dizionario;
+                        break;
+                }
+            }
         }
     }
 
@@ -266,7 +334,6 @@ public partial class MainWindow : Window
         }
 
         Collection<string> commentari = Testi.NomiVersioni(TestoTipi.Commentario);
-
         if (commentari.Count == 1)
         {
             MenuVisualizzaCommentario.Header = commentari[0]; // Sostituisce il testo generico "Bibbia" con es. "Nuova Riveduta"
@@ -284,7 +351,41 @@ public partial class MainWindow : Window
             MenuVisualizzaCommentario.Visibility = Visibility.Visible;
         }
 
-        // TODO2 Repeat similar blocks here for TestoTipi.Dizionario, .Libro
+        Collection<string> dizionari = Testi.NomiVersioni(TestoTipi.Dizionario);
+        if (dizionari.Count == 1)
+        {
+            MenuVisualizzaDizionario.Header = dizionari[0];
+            MenuVisualizzaDizionario.ItemsSource = null;
+            MenuVisualizzaDizionario.Visibility = Visibility.Visible;
+        }
+        else if (dizionari.Count == 0)
+        {
+            MenuVisualizzaDizionario.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            MenuVisualizzaDizionario.Header = ((string)(Application.Current.TryFindResource("MenuVisualizzaDizionario") ?? "_Dictionary")); // Reset to default generic string resource
+            MenuVisualizzaDizionario.ItemsSource = dizionari;
+            MenuVisualizzaDizionario.Visibility = Visibility.Visible;
+        }
+
+        Collection<string> libri = Testi.NomiVersioni(TestoTipi.Libro);
+        if (libri.Count == 1)
+        {
+            MenuVisualizzaLibro.Header = libri[0];
+            MenuVisualizzaLibro.ItemsSource = null;
+            MenuVisualizzaLibro.Visibility = Visibility.Visible;
+        }
+        else if (libri.Count == 0)
+        {
+            MenuVisualizzaLibro.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            MenuVisualizzaLibro.Header = ((string)(Application.Current.TryFindResource("MenuVisualizzaLibro") ?? "_Book")); // Reset to default generic string resource
+            MenuVisualizzaLibro.ItemsSource = libri;
+            MenuVisualizzaLibro.Visibility = Visibility.Visible;
+        }
     }
 
     private void RestoreWindowPlacement()
@@ -385,7 +486,10 @@ public partial class MainWindow : Window
                     if (state != null && Testi.VersioneEsiste(state.Versione))
                     {
                         ViewerDocumentView view = new(state.Versione);
-                        _ = view.SpostaTesto(state.Libro, state.Capitolo, state.Versetto, true, false);
+                        if (state.VersettoMostrato)
+                            _ = view.SpostaTesto(state.Libro, state.Capitolo, state.Versetto, true, false);
+                        else
+                            _ = view.SpostaTesto(state.Titolo, true, false);
                         view.IsTocVisible = state.IsSommarioVisibile;
                         view.SincGruppo = state.SincGruppo;
                         args.Content = view;
@@ -403,7 +507,7 @@ public partial class MainWindow : Window
             }
 
             // 3) Editor docs: NON ricreare contenuti -> così non vengono ripristinati
-            if (id.StartsWith("doc.editor."))
+            if (id.StartsWith("doc.editor.") || id.StartsWith("doc.immagine."))
             {
                 args.Cancel = true;
                 return;
@@ -767,6 +871,24 @@ public partial class MainWindow : Window
         }
     }
 
+    private void MenuVisualizzaDizionario_Click(object sender, RoutedEventArgs e)
+    {
+        // Verifichiamo che il clic sia avvenuto proprio sul menu principale e che l'ItemsSource sia vuoto
+        if (e.Source == sender && MenuVisualizzaDizionario.ItemsSource == null && MenuVisualizzaDizionario.Header is string dizionarioNome)
+        {
+            VisualizzaDizionario(dizionarioNome);
+        }
+    }
+
+    private void MenuVisualizzaLibro_Click(object sender, RoutedEventArgs e)
+    {
+        // Verifichiamo che il clic sia avvenuto proprio sul menu principale e che l'ItemsSource sia vuoto
+        if (e.Source == sender && MenuVisualizzaLibro.ItemsSource == null && MenuVisualizzaLibro.Header is string libroNome)
+        {
+            VisualizzaLibro(libroNome);
+        }
+    }
+
     private void SubMenuBibbia_Click(object sender, RoutedEventArgs e)
     {
         // Cast the sender to access the exact MenuItem that was clicked
@@ -784,6 +906,26 @@ public partial class MainWindow : Window
         {
             // Pass the version name text straight to your processing function
             VisualizzaCommentario(commentarioName);
+        }
+    }
+
+    private void SubMenuDizionario_Click(object sender, RoutedEventArgs e)
+    {
+        // Cast the sender to access the exact MenuItem that was clicked
+        if (sender is MenuItem clickedItem && clickedItem.Header is string dizionarioName)
+        {
+            // Pass the version name text straight to your processing function
+            VisualizzaDizionario(dizionarioName);
+        }
+    }
+
+    private void SubMenuLibro_Click(object sender, RoutedEventArgs e)
+    {
+        // Cast the sender to access the exact MenuItem that was clicked
+        if (sender is MenuItem clickedItem && clickedItem.Header is string libroName)
+        {
+            // Pass the version name text straight to your processing function
+            VisualizzaLibro(libroName);
         }
     }
 
@@ -820,6 +962,128 @@ public partial class MainWindow : Window
         catch
         {
             App.DockingHost.OpenViewerDocument(testoNome, 1, 1, 1);
+        }
+    }
+
+    public static void VisualizzaDizionario(string testoNome)
+    {
+        try
+        {
+            string notaDaAprire = Testi.NoteConTitolo(testoNome)[0]; // può dare exception
+            App.DockingHost.OpenViewerDocument(testoNome, notaDaAprire);
+        }
+        catch
+        { // per esempio nessuna nota su un tema, o testoNome inesistente
+            App.DockingHost.OpenViewerDocument(testoNome, "");
+        }
+    }
+
+    public static void VisualizzaLibro(string testoNome)
+    {
+        ViewerDocumentView? view;
+        try
+        {
+            string notaDaAprire = "";
+            Collection<string> noteOrdinate = Testi.GetNoteInOrdine(testoNome);
+            if (noteOrdinate.Count > 0)
+                notaDaAprire = noteOrdinate[0]; // l'indice (se esiste)
+            if (string.IsNullOrEmpty(notaDaAprire) && noteOrdinate.Count > 1)
+                notaDaAprire = noteOrdinate[1]; // la prima nota in ordine
+            if (string.IsNullOrEmpty(notaDaAprire))
+                notaDaAprire = Testi.NoteConTitolo(testoNome)[0]; // può dare exception
+            view = App.DockingHost.OpenViewerDocument(testoNome, notaDaAprire);
+        }
+        catch
+        { // per esempio nessuna nota su un tema, o testoNome inesistente
+            view = App.DockingHost.OpenViewerDocument(testoNome, "");
+        }
+        view?.MostraIndice(true);
+    }
+
+    private void Image_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        {
+            string[] selectedImagePaths = SelectImageFile();
+
+            if (selectedImagePaths != null && selectedImagePaths.Length > 0)
+            {
+                ApriNomeImmagini(selectedImagePaths);
+            }
+        }
+    }
+
+    private static string[] SelectImageFile()
+    {
+        string ultimaCartellaImmagini = settings.UltimaCartellaImmagini;
+        if (String.IsNullOrEmpty(ultimaCartellaImmagini))
+        {
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LaParola");
+            string baseDir = AppContext.BaseDirectory;
+
+            // 2. Count the images in both folders
+            int appDataImageCount = CountImagesInFolder(appDataPath);
+            int baseDirImageCount = CountImagesInFolder(baseDir);
+
+            // 3. Compare and return the winner. 
+            // If they are equal (e.g., both have 0 images), default to AppContext.BaseDirectory
+            ultimaCartellaImmagini = appDataImageCount > baseDirImageCount ? appDataPath : baseDir;
+        }
+
+        // Create an instance of the OpenFileDialog
+        OpenFileDialog openFileDialog = new()
+        {
+            Title = (string)(Application.Current.TryFindResource("ImmaginiApriTitolo") ?? "Select One or More Images"),
+            Filter = (string)(Application.Current.TryFindResource("ImmaginiFileFiltro") ?? "Image files (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|All files (*.*)|*.*"),
+
+            InitialDirectory = ultimaCartellaImmagini,
+            Multiselect = true
+        };
+
+        // 4. Show the dialog box. ShowDialog() returns a nullable boolean (bool?).
+        bool? result = openFileDialog.ShowDialog();
+
+        // 5. If the user clicked OK, return the selected file path
+        if (result == true)
+        {
+            return openFileDialog.FileNames;
+        }
+
+        // Return null or empty string if the user cancelled
+        return [];
+    }
+
+    private static int CountImagesInFolder(string folderPath)
+    {
+        // Guard clause: If the folder doesn't exist, it has 0 images
+        if (!Directory.Exists(folderPath)) return 0;
+
+        // Define the image extensions we care about (with dots)
+        string[] imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp"];
+
+        try
+        {
+            // Enumerate top-level files and count how many match our extension list
+            return Directory.EnumerateFiles(folderPath, "*.*", SearchOption.TopDirectoryOnly)
+                .Count(file => imageExtensions.Contains(Path.GetExtension(file), StringComparer.OrdinalIgnoreCase));
+        }
+        catch (Exception)
+        {
+            // Fail safely if the folder is locked, corrupted, or inaccessible
+            return 0;
+        }
+    }
+
+    private static void ApriNomeImmagini(string[] fileDaAprire)
+    {
+        if (fileDaAprire == null || fileDaAprire.Length == 0)
+            return;
+
+        string? percorso = Path.GetDirectoryName(fileDaAprire[0]);
+        if (percorso != null && percorso.Length > 0)
+            settings.UltimaCartellaImmagini = percorso;
+        foreach (string nomeFile in fileDaAprire)
+        {
+            App.DockingHost.OpenImmagineDocument(nomeFile);
         }
     }
 
@@ -893,6 +1157,7 @@ public partial class MainWindow : Window
 
         // 1) Chiudi editor docs (non devono essere salvati/restaurati)
         CloseDocumentsByPrefix("doc.editor.");
+        CloseDocumentsByPrefix("doc.immagine.");
 
         // 2) Snapshot viewer docs -> placeholder state
         settings.ViewerWindows = CaptureViewerStates();
@@ -964,9 +1229,11 @@ public partial class MainWindow : Window
                 {
                     ContentId = d.ContentId ?? "",
                     Versione = viewer.Versione,
+                    VersettoMostrato = viewer.VersettoMostrato,
                     Libro = viewer.Libro,
                     Capitolo = viewer.Capitolo,
                     Versetto = viewer.Versetto,
+                    Titolo = viewer.Titolo,
                     IsSommarioVisibile = viewer.IsTocVisible,
                     SincGruppo = viewer.SincGruppo
                 });
@@ -992,6 +1259,7 @@ public partial class MainWindow : Window
 
     internal async static void LinkCliccato(int tipo, string nomeLink)
     {
+        nomeLink = Uri.UnescapeDataString(nomeLink);
         switch (tipo)
         {
             case 1:
@@ -1019,7 +1287,7 @@ public partial class MainWindow : Window
                     RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
 
                     string abbVersione = Testi.Info(versioneDaUtilizzare).Abbreviazione;
-                    App.DockingHost.SendFlowDocumentToActiveEditor(doc, Testi.NormalizzaRiferimento(riferimento) + " (" + abbVersione + ")");
+                    App.DockingHost.SendFlowDocumentToActiveEditor(doc, Testi.NormalizzaRiferimento(riferimento) + " (" + abbVersione + ")", versioneDaUtilizzare);
                 }
                 break;
             case 2:
@@ -1034,186 +1302,261 @@ public partial class MainWindow : Window
                         return;
                 }
 
-                if (string.IsNullOrEmpty(collezioneNuovaNota))
-                { // non si sa ancora quale collezione usare; proviamo con i dizionari
-                    // TODO2 dizionari
-                    /*
-                    if (!string.IsNullOrEmpty(nomeLink))
-                    {
-                        if (Funzioni.IsLetteraGreca(nomeLink[0]))
-                            collezioneNuovaNota = Settings.Default.DizionarioGreco;
-                        else
-                        {
-                            string lingua = Settings.Default.InterfacciaLingua;
-                            if (lingua.Length >= 2)
-                            {
-                                lingua = lingua.Substring(0, 2).ToLowerInvariant();
-                                if (lingua == "it")
-                                    collezioneNuovaNota = Settings.Default.DizionarioItaliano;
-                                else if (lingua == "en")
-                                    collezioneNuovaNota = Settings.Default.DizionarioInglese;
-                                else if (lingua == "es")
-                                    collezioneNuovaNota = Settings.Default.DizionarioSpagnolo;
-                            }
-                        }
-                    }
-                    */
-                }
 
                 if (!string.IsNullOrEmpty(collezioneNuovaNota))
                 {
-                    // TODO2 da cancellare old way, now always in Editor window? oppure continuare nota in Vis a Vis?
+                    // old way was from View window to the same View window, now always in Editor window. Also because getting the View window is not easy
                     /*
                     if (finestra != null && finestra.Tag != null && finestra.Tag.ToString() == "Visualizza" && (((Visualizza)(finestra)).paneAttivo.TuttiTesti != TestoTipi.None || finestra.Text.StartsWith(collezioneNuovaNota, StringComparison.Ordinal)))
                     {
-                        if (nomeLink.StartsWith("#", StringComparison.Ordinal))
-                            finestra.SpostaTesto(Testi.ConvertiRiferimento(nomeLink), true);
+                        if (titoloNota.StartsWith("#", StringComparison.Ordinal))
+                            finestra.SpostaTesto(Testi.ConvertiRiferimento(titoloNota), true);
                         else
-                            finestra.SpostaTesto(nomeLink, true);
+                            finestra.SpostaTesto(titoloNota, true);
                     }
                     else
-                        ApriNotaInEditor(nomeLink, collezioneNuovaNota);
+                        ApriNotaInEditor(titoloNota, collezioneNuovaNota);
                     */
                     if (!nomeLink.StartsWith('#') && Char.IsDigit(nomeLink[^1]) && Testi.GetNumeroNotaTitolo(collezioneNuovaNota, nomeLink) < 0)
-                    { // riferimenti ai brani nel con #, come Mt 1:21 -> Mt 1:1 in Note NR
+                    { // riferimenti ai brani non con #, come Mt 1:21 -> Mt 1:1 in Note NR
                         Riferimento noteInBrano = Testi.ElencaNoteInBrano(Testi.ConvertiRiferimento(nomeLink), collezioneNuovaNota);
                         if (noteInBrano.Count > 0)
                         {
                             nomeLink = string.Join("", noteInBrano.Note);
                         }
                     }
-                    if (nomeLink.StartsWith('#'))
-                    {
-                        Riferimento riferimentoNota = Testi.ConvertiRiferimento(Testi.ConvertiTitoloNotaARiferimento(nomeLink));
-                        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(riferimentoNota, collezioneNuovaNota);
-                        doc.Tag = collezioneNuovaNota;
-                        Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
-                        RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
 
-                        string abbVersione = Testi.Info(collezioneNuovaNota).Abbreviazione;
-                        App.DockingHost.SendFlowDocumentToActiveEditor(doc, Testi.NormalizzaRiferimento(riferimentoNota) + " (" + abbVersione + ")");
-                    }
-                    // TODO2 else open nota su tema
+                    await ApriNotaInEditor(nomeLink, collezioneNuovaNota);
                 }
                 break;
             case 3:
-                // TODO2 link to file
-                /* suggestion of Gemini was
-                 *                 try
-                {
-                    // Windows native shell launch to open external files safely via default applications
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = targetFile,
-                        UseShellExecute = true
-                    });
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Unable to open file {targetFile}: {ex.Message}");
+                string collezioneNota = "";
+                if (nomeLink.IndexOf('\\') > 0) // in questo modo, è possibile creare un link "Nuova Riveduta\#010010010000-01001002000"
+                { // in versione.cs, il nome del commentario è stato nel link affinché possa aprire nello stesso commentario
+                    collezioneNota = nomeLink[..nomeLink.IndexOf('\\')];
+                    nomeLink = nomeLink[(nomeLink.IndexOf('\\') + 1)..];
+
+                    // se la collezione richiesta non esiste, non fare niente
+                    if (!Testi.VersioneEsiste(collezioneNota))
+                        return;
                 }
 
-                 */
+                if (!File.Exists(nomeLink))
+                {
+                    string nomeDelFileDellaCollezione = Testi.Info(collezioneNota).NomeDelFile;
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(nomeDelFileDellaCollezione))
+                        { // solo se la nota fa parte di una collezione
+                            string? percorso = Path.GetDirectoryName(nomeDelFileDellaCollezione);
+                            if (percorso != null)
+                            {
+                                string[] fileTrovati = Directory.GetFiles(percorso, nomeLink + ".*");
+                                if (fileTrovati.Length > 0)
+                                    nomeLink = fileTrovati[0];
+                                else
+                                { // proviamo anche nella sottocartella con lo stesso nome della collezione
+                                    string[] fileTrovatiSotto = Directory.GetFiles(percorso + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(nomeDelFileDellaCollezione), nomeLink + ".*");
+                                    if (fileTrovatiSotto.Length > 0)
+                                        nomeLink = fileTrovatiSotto[0];
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                    }
+                }
+                if (!File.Exists(nomeLink))
+                {
+                    try
+                    {
+                        string[] fileTrovati = Directory.GetFiles(AppContext.BaseDirectory, nomeLink + ".*");
+                        if (fileTrovati.Length > 0)
+                            nomeLink = fileTrovati[0];
+                    }
+                    catch
+                    {
+                        // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                    }
+                }
+                if (!File.Exists(nomeLink))
+                {
+                    try
+                    {
+                        string[] fileTrovati = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola", nomeLink + ".*");
+                        if (fileTrovati.Length > 0)
+                            nomeLink = fileTrovati[0];
+                    }
+                    catch
+                    {
+                        // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
+                    }
+                }
+                // TODO2 cartelle extra per file
                 /*
-                 *                     if (creaFinestra)
+                    if (!File.Exists(titoloNota))
                     {
-                        if (!File.Exists(nomeLink))
+                        string[] cartelle = Settings.Default.CartelleDaCercare.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                        try
                         {
-                            string nomeDelFileDellaCollezione = testi.Info(versioneDelTesto).NomeDelFile;
-                            try
+                            foreach (string cartella in cartelle)
                             {
-                                if (!string.IsNullOrEmpty(nomeDelFileDellaCollezione))
-                                { // solo se la nota fa parte di una collezione
-                                    string[] fileTrovati = Directory.GetFiles(Path.GetDirectoryName(nomeDelFileDellaCollezione), nomeLink + ".*");
-                                    if (fileTrovati.Length > 0)
-                                        nomeLink = fileTrovati[0];
-                                    else
-                                    { // proviamo anche nella sottocartella con lo stesso nome della collezione
-                                        string[] fileTrovatiSotto = Directory.GetFiles(Path.GetDirectoryName(nomeDelFileDellaCollezione) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(nomeDelFileDellaCollezione), nomeLink + ".*");
-                                        if (fileTrovatiSotto.Length > 0)
-                                            nomeLink = fileTrovatiSotto[0];
-                                    }
-                                }
-                            }
-                            catch
-                            {
-                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
-                            }
-                        }
-                        if (!File.Exists(nomeLink))
-                        {
-                            try
-                            {
-                                string[] fileTrovati = Directory.GetFiles(Application.StartupPath, nomeLink + ".*");
+                                string[] fileTrovati = Directory.GetFiles(cartella, titoloNota + ".*");
                                 if (fileTrovati.Length > 0)
-                                    nomeLink = fileTrovati[0];
-                            }
-                            catch
-                            {
-                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
-                            }
-                        }
-                        if (!File.Exists(nomeLink))
-                        {
-                            try
-                            {
-                                string[] fileTrovati = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola", nomeLink + ".*");
-                                if (fileTrovati.Length > 0)
-                                    nomeLink = fileTrovati[0];
-                            }
-                            catch
-                            {
-                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
-                            }
-                        }
-                        if (!File.Exists(nomeLink))
-                        {
-                            string[] cartelle = Settings.Default.CartelleDaCercare.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                            try
-                            {
-                                foreach (string cartella in cartelle)
                                 {
-                                    string[] fileTrovati = Directory.GetFiles(cartella, nomeLink + ".*");
-                                    if (fileTrovati.Length > 0)
-                                    {
-                                        nomeLink = fileTrovati[0];
-                                        break;
-                                    }
+                                    titoloNota = fileTrovati[0];
+                                    break;
                                 }
                             }
-                            catch
-                            {
-                                // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
-                            }
                         }
-
-                        nomeLink = nomeLink.Replace(RichTextBoxEx.ParolaRicercata.ToString(), "");
-                        string estensione = Path.GetExtension(nomeLink);
-                        if (File.Exists(nomeLink) && (string.Compare(estensione, ".gif", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".jpg", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".jpeg", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".bmp", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".png", StringComparison.OrdinalIgnoreCase) == 0))
-                            ApriNomeImmagini(new string[] { nomeLink });
-                        else
+                        catch
                         {
-                            try
-                            {
-                                Funzioni.ApriBrowser(nomeLink, true);
-                            }
-                            catch (Exception exc)
-                            {
-                                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, LocRM.GetString("EditorErrorCantStartFile"), nomeLink, exc.Message), LocRM.GetString("MiscError"), MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, messageBoxOptions);
-                            }
+                            // un Internet link, o altro testo che non è lecito per un percorso, dà un errore qui; basta saltare
                         }
                     }
-                    else
-                    {
-                        testoEVersione[0] = nomeLink;
-                    }
+                */
 
-                 */
+                string estensione = Path.GetExtension(nomeLink);
+                if (File.Exists(nomeLink) && (string.Compare(estensione, ".gif", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".jpg", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".jpeg", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".bmp", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(estensione, ".png", StringComparison.OrdinalIgnoreCase) == 0))
+                    ApriNomeImmagini([nomeLink]);
+                else
+                {
+                    try
+                    {
+                        Funzioni.AprilFileOUrl(nomeLink, true);
+                    }
+                    catch (Exception exc)
+                    {
+                        Application.Current?.Dispatcher.Invoke(() =>
+                        {
+                            Window owner = Application.Current.MainWindow;
+                            MessageBoxLPN.Show(owner,
+                                (string)(Application.Current.TryFindResource("LinkFileErrore") ?? "I could not open the file" + " " + nomeLink + ": " + exc.Message),
+                                (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+                        });
+                    }
+                }
                 break;
             default:
                 break;
         }
         return;
+    }
+
+    internal static void ApriDefinizioneDizionario(string voce, string versione)
+    {
+        if (string.IsNullOrEmpty(voce))
+            return;
+
+        string dizionario = "";
+
+        bool cercaRadiceInDizionario = true;
+        // se la parola è greca/ebraica in un testo in un'altra lingua, usa il dizionario appropriato
+        // anche la radice della parola deve essere cercata nel dizionario greco/ebraico, non nella nomeVersione del testo
+        char primaLettera = voce[0];
+        if (Funzioni.IsLetteraGreca(primaLettera))
+            dizionario = settings.DizionarioGreco;
+        else if ((primaLettera >= '\u0591' && primaLettera <= '\u05ff') || (primaLettera >= '\ufb1e' && primaLettera <= '\u5b4f'))
+            dizionario = settings.DizionarioEbraico;
+        else
+        {
+            cercaRadiceInDizionario = string.IsNullOrEmpty(versione); // se non c'è nomeVersione (per es un file non in una Bibbia o collezione) controlliamo invece del dizionario
+            foreach (string linguaDelTesto in Testi.Info(versione).Lingua.Split(['|'], StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (string.IsNullOrEmpty(dizionario))
+                {
+                    switch (linguaDelTesto)
+                    {
+                        case "it":
+                            dizionario = settings.DizionarioItaliano;
+                            break;
+                        case "en":
+                            dizionario = settings.DizionarioInglese;
+                            break;
+                        case "el":
+                            dizionario = settings.DizionarioGreco;
+                            break;
+                        case "he":
+                            dizionario = settings.DizionarioEbraico;
+                            break;
+                        case "la":
+                            dizionario = settings.DizionarioLatino;
+                            break;
+                    }
+                }
+            }
+            if (string.IsNullOrEmpty(dizionario))
+            {
+                dizionario = settings.Lingua.ToUpperInvariant() switch
+                {
+                    "IT" => settings.DizionarioItaliano,
+                    "EN" => settings.DizionarioInglese,
+                    _ => settings.DizionarioInglese,
+                };
+            }
+        }
+
+        if (!string.IsNullOrEmpty(dizionario))
+        {
+            string testo = Testi.GetNotaTesto(voce, dizionario);
+            if (string.IsNullOrEmpty(testo))
+            {
+                try
+                {
+                    string parolaAttualeTrovata = Testi.RadiceDiParola(voce, cercaRadiceInDizionario ? dizionario : versione);
+                    voce = ((string.IsNullOrEmpty(parolaAttualeTrovata) && cercaRadiceInDizionario) ? Testi.RadiceDiParola(voce, versione) : parolaAttualeTrovata);
+                }
+                catch (TextNotExistException)
+                { // succede quando la versione è stata cancellata
+                    voce = "";
+                }
+
+                primaLettera = (!string.IsNullOrEmpty(voce) ? voce[0] : (char)0);
+                if (Funzioni.IsLetteraGreca(primaLettera))
+                    dizionario = settings.DizionarioGreco;
+                else if ((primaLettera >= '\u0591' && primaLettera <= '\u05ff') || (primaLettera >= '\ufb1e' && primaLettera <= '\u5b4f'))
+                    dizionario = settings.DizionarioEbraico;
+                else if (primaLettera == 'H' && voce.Length >= 2 && voce[1] == '8')
+                    dizionario = settings.DizionarioEbraico; // nel dizionario Strongs Hebrew, le voci di tempo voce modo hanno radice H8xxx
+
+                // dizionario può essere "" se non c'è un dizionario ebraico installato
+                testo = (string.IsNullOrEmpty(dizionario) ? "" : Testi.GetNotaTesto(voce, dizionario));
+                if (string.IsNullOrEmpty(testo))
+                    voce = "";
+            }
+        }
+
+        if (string.IsNullOrEmpty(dizionario) || string.IsNullOrEmpty(voce))
+            return;
+
+        _ = ApriNotaInEditor(voce, dizionario);
+    }
+
+    internal static async Task ApriNotaInEditor(string titoloNota, string collezioneNuovaNota)
+    {
+        Riferimento riferimentoNota;
+        string titoloToolbar;
+        if (titoloNota.StartsWith('#'))
+        {
+            riferimentoNota = Testi.ConvertiRiferimento(Testi.ConvertiTitoloNotaARiferimento(titoloNota));
+            titoloToolbar = Testi.NormalizzaRiferimento(riferimentoNota);
+        }
+        else
+        {
+            // apri nota su tema
+            riferimentoNota = new(false);
+            riferimentoNota.AggiungiNotaEParole(titoloNota, []);
+            titoloToolbar = titoloNota;
+        }
+        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(riferimentoNota, collezioneNuovaNota);
+        doc.Tag = collezioneNuovaNota;
+        Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
+        RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
+
+        string abbVersione = Testi.Info(collezioneNuovaNota).Abbreviazione;
+        App.DockingHost.SendFlowDocumentToActiveEditor(doc, titoloToolbar + " (" + abbVersione + ")", collezioneNuovaNota);
     }
 
     internal static (string versioneDaUtilizzare, Riferimento riferimento) VersionePerLinkBibbia(string nomeLink)

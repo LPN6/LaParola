@@ -370,6 +370,18 @@
                 <Setter Property="Padding" Value="7,4,8,4"/>
             </Style>
 
+            <Style TargetType="{x:Type StatusBar}">
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                <Setter Property="Padding" Value="4,2"/>
+            </Style>
+
+            <Style TargetType="{x:Type StatusBarItem}">
+                <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
