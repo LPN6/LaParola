@@ -1,8 +1,9 @@
 ﻿using AvalonDock.Layout;
+using LaParola.ToolViews;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -131,7 +132,7 @@ namespace LaParola.Utilities
         internal static void AprilFileOUrl(Uri url, bool throwException)
         {
             if (url == null)
-                throw new ArgumentNullException("url");
+                throw new ArgumentNullException(nameof(url));
             else
                 AprilFileOUrl(url.ToString(), "", throwException);
         }
@@ -155,7 +156,7 @@ namespace LaParola.Utilities
         internal static void AprilFileOUrl(Uri url, string parametri, bool throwException)
         {
             if (url == null)
-                throw new ArgumentNullException("url");
+                throw new ArgumentNullException(nameof(url));
             else
                 AprilFileOUrl(url.ToString(), parametri, throwException);
         }
@@ -200,5 +201,173 @@ namespace LaParola.Utilities
             }
         }
         #endregion
+
+        /// <summary>
+        /// Aggiungi le radici delle parole ad un testo.
+        /// </summary>
+        /// <param name="cartellaDeiFile">La cartella in cui si trova i file *.parole_radici con contengono le radici.</param>
+        /// <param name="linguePreferite">La lingua normale del testo (radici in questa lingua hanno preferenza sulle altre).</param>
+        /// <param name="elencoParoleInVersione">Tutte le parole nel testo.</param>
+        /// <param name="listaRadici">Una lista di tutte le radici usate.</param>
+        /// <returns>La radice di ogni parola nel testo.</returns>
+        public static string[] AggiungiRadiciDaFile(string? cartellaDeiFile, string linguePreferite, string[] elencoParoleInVersione, List<string> listaRadici)
+        {
+            if (string.IsNullOrEmpty(cartellaDeiFile))
+                return [];
+
+            ConfrontoCI confrontoParole = new();
+            string[] fileParoleRadici = Directory.GetFiles(cartellaDeiFile, "*.parole_radici");
+            // i file devono essere UTF-8
+            foreach (string linguaPreferita in linguePreferite.ToUpperInvariant().Split(['|'], StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (linguaPreferita.Length >= 2)
+                {
+                    // far sì che la lingua del testo abbia precedenza sulle altre lingue presenti nel testo
+                    bool trovato = false;
+                    for (int i = 0; i < fileParoleRadici.Length; ++i)
+                    {
+                        if (fileParoleRadici[i].EndsWith(Path.DirectorySeparatorChar + linguaPreferita + ".parole_radici", StringComparison.OrdinalIgnoreCase))
+                        {
+                            (fileParoleRadici[0], fileParoleRadici[i]) = (fileParoleRadici[i], fileParoleRadici[0]);
+                            trovato = true;
+                            break;
+                        }
+                    }
+                    if (trovato)
+                    {
+                        trovato = false;
+                        for (int i = 1; i < fileParoleRadici.Length; ++i)
+                        {
+                            if (fileParoleRadici[i].EndsWith(Path.DirectorySeparatorChar + linguaPreferita + "1.parole_radici", StringComparison.OrdinalIgnoreCase))
+                            {
+                                (fileParoleRadici[1], fileParoleRadici[i]) = (fileParoleRadici[i], fileParoleRadici[1]);
+                                trovato = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (trovato)
+                    {
+                        for (int i = 2; i < fileParoleRadici.Length; ++i)
+                        {
+                            if (fileParoleRadici[i].EndsWith(Path.DirectorySeparatorChar + linguaPreferita + "2.parole_radici", StringComparison.OrdinalIgnoreCase))
+                            {
+                                (fileParoleRadici[2], fileParoleRadici[i]) = (fileParoleRadici[i], fileParoleRadici[2]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            string[] paroleRadici = [];
+            foreach (string fileConParoleRadici in fileParoleRadici)
+            {
+                string[] paroleRadiciInFile = File.ReadAllLines(fileConParoleRadici);
+                Array.Resize(ref paroleRadici, paroleRadici.Length + paroleRadiciInFile.Length);
+                Array.Copy(paroleRadiciInFile, 0, paroleRadici, paroleRadici.Length - paroleRadiciInFile.Length, paroleRadiciInFile.Length);
+            }
+
+            string[] radiceDiParola = new string[elencoParoleInVersione.Length];
+
+            int indiceRadice, numeroParola;
+            string[] parolaRadice;
+            foreach (string s in paroleRadici)
+            {
+                try
+                {
+                    parolaRadice = s.Split('=');
+                    numeroParola = Array.BinarySearch(elencoParoleInVersione, parolaRadice[0], confrontoParole);
+                    // se parola è usata nel testo, e non già data una radice (perché multipli file possono dare radici diverse alla stessa parola)
+                    //      dà la radice alla parola
+                    if (numeroParola >= 0 && string.IsNullOrEmpty(radiceDiParola[numeroParola]))
+                        radiceDiParola[numeroParola] = parolaRadice[1];
+                }
+                catch
+                {
+                    // problema con una riga in formato sbagliato (cioè senza =) - basta saltare la riga
+                }
+            }
+
+            // creare la lista di tutte le radici utilizzate
+            listaRadici.Add("*"); // quando una parola non ha radice
+            bool esisteUnaParolaSenzaRadice = false;
+            int numeroParole = radiceDiParola.Length;
+            for (int i = 0; i < numeroParole; ++i)
+            {
+                if (String.IsNullOrEmpty(radiceDiParola[i]))
+                    radiceDiParola[i] = "*";
+                if (radiceDiParola[i] == "*")
+                    esisteUnaParolaSenzaRadice = true;
+
+                indiceRadice = listaRadici.BinarySearch(radiceDiParola[i], confrontoParole);
+                if (indiceRadice < 0)
+                    listaRadici.Insert(~indiceRadice, radiceDiParola[i]);
+            }
+            if (!esisteUnaParolaSenzaRadice)
+                listaRadici.RemoveAt(0);
+
+            return radiceDiParola;
+        }
+
+        internal static void AggiornaTestiNellInterfaccia()
+        {
+            // Find the TextGenerator and Search and Options tools window via its ContentId and refresh its layout
+            if (Application.Current.MainWindow is MainWindow mw)
+            {
+                if (mw.FindName("Dock") is AvalonDock.DockingManager dock)
+                {
+                    LayoutAnchorable? textGenAnchorable = dock.Layout.Descendents()
+                        .OfType<LayoutAnchorable>()
+                        .FirstOrDefault(a => a.ContentId == "tool.textgen");
+
+                    if (textGenAnchorable?.Content is TextGeneratorToolView textGenView)
+                    {
+                        textGenView.AggiornaVersioniDisponibili();
+                    }
+
+                    LayoutAnchorable? searchAnchorable = dock.Layout.Descendents()
+                        .OfType<LayoutAnchorable>()
+                        .FirstOrDefault(a => a.ContentId == "tool.search");
+
+                    if (searchAnchorable?.Content is SearchToolView searchView)
+                    {
+                        searchView.AggiornaVersioniDisponibili();
+                    }
+
+                    LayoutDocument? opzioniDocument = dock.Layout.Descendents()
+                        .OfType<LayoutDocument>()
+                        .FirstOrDefault(a => a.ContentId == "tool.options");
+
+                    if (opzioniDocument?.Content is OptionsToolView opzioniView)
+                    {
+                        opzioniView.InitializeTextsPreferences();
+                    }
+
+                    LayoutDocument? bibliotecaDocument = dock.Layout.Descendents()
+                        .OfType<LayoutDocument>()
+                        .FirstOrDefault(a => a.ContentId == "tool.library");
+
+                    if (bibliotecaDocument?.Content is LibraryToolView bibliotecaView)
+                    {
+                        bibliotecaView.LoadLibraryData();
+                    }
+
+
+                    LayoutDocument? aggiungiTestiDocument = dock.Layout.Descendents()
+                        .OfType<LayoutDocument>()
+                        .FirstOrDefault(a => a.ContentId == "tool.aggiungitesti");
+
+                    if (aggiungiTestiDocument?.Content is AggiungiTesti aggiungiTestiView)
+                    {
+                        aggiungiTestiView.PopolaGrigia();
+                        aggiungiTestiView.AggiornaConteggioStato();
+                    }
+
+                }
+
+                mw.AggiornaMenuVisualizza();
+            }
+
+        }
     }
 }

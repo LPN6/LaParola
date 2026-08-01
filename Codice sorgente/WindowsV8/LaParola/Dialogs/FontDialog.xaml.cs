@@ -69,7 +69,7 @@ namespace LaParola
             chkUnderline.IsChecked = underline;
             chkSuperscript.IsChecked = superscript;
 
-            foreach (var fci in cmbColour.Items)
+            foreach (object fci in cmbColour.Items)
             {
                 if (((FontColourItem)fci).NameEnglish == initialColor)
                 {
@@ -110,7 +110,7 @@ namespace LaParola
 
         private void LoadFonts()
         {
-            var fonts = Fonts.SystemFontFamilies
+            IOrderedEnumerable<string> fonts = Fonts.SystemFontFamilies
                 .Select(f => f.Source)
                 .OrderBy(f => f);
 

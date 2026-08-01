@@ -1,5 +1,14 @@
 [
   {
+    "Id": 4,
+    "Title": "Version 8.0.5",
+    "Content": "The sixth beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are voice synthesis and adding next texts from inside the program.",
+    "TitleIt": "Versione 8.0.5",
+    "ContentIt": "La sesta versione beta è ora disponibile a https://www.laparola.net/programma/windowsbeta.php . Le novità principali sono la sintesi vocale e la possibilità di aggiungere nuovi testi da dentro il programma.",
+    "Date": "2026-07-13T07:00:00"
+  }
+
+  {
     "Id": 3,
     "Title": "Version 8.0.4",
     "Content": "The fifth beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are the dictionaries and other book (with hypertext link), images, and new options.",

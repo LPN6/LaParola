@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="LaParola.ToolViews.ReferenceSearchToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:LaParola.ToolViews"
+             Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
+    <UserControl.Resources>
+        <local:TestoTipoToVisibilityConverter x:Key="TestoTipoToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" x:Name="TocColumn"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Width="200" x:Name="TocBorder" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                BorderThickness="0,0,1,0" Margin="0,0,4,0" Background="{DynamicResource ControlBackgroundBrush}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{DynamicResource ViewerIndicazioni}" FontWeight="SemiBold" Padding="4,2"
+                           Foreground="{DynamicResource AppForegroundBrush}"/>
+                <TreeView x:Name="TocTreeView" Grid.Row="1"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          SelectedItemChanged="TocTreeView_SelectedItemChanged"/>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <WrapPanel Grid.Row="0" VerticalAlignment="Center" ItemHeight="32">
+                <Button x:Name="BtnToggleToc" Click="BtnToggleToc_Click" ToolTip="{DynamicResource ViewerSommarioAiuto}" Width="34" Height="30" Background="Transparent" BorderThickness="0">
+                    <iconPacks:PackIconMaterial Kind="ViewList" Width="16" Height="16"/>
+                </Button>
+                <Border Width="1" Height="18" Background="{DynamicResource SubtleBorderBrush}" Margin="6,0"/>
+                <TextBox x:Name="TxtRiferimento" Width="120" Height="24" Margin="4,0"
+                         VerticalContentAlignment="Center"
+                         Background="{DynamicResource AppBackgroundBrush}"
+                         Foreground="{DynamicResource AppForegroundBrush}"
+                         BorderBrush="{DynamicResource SubtleBorderBrush}"
+                         TextChanged="TxtRiferimento_TextChanged"
+                         KeyDown="TxtRiferimento_KeyDown"
+                         ToolTip="{DynamicResource RiferimentiAiuto}"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="1" Margin="0,8,0,0" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium" Text="{DynamicResource BibliotecaTipo}"/>
+                <ComboBox x:Name="TipoFilterComboBox" Width="120" Margin="0,0,15,0" SelectionChanged="TipoFilter_SelectionChanged">
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoTutti}" Tag="All" IsSelected="True"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoCommentario}" Tag="Commentario"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoDizionario}" Tag="Dizionario"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroTipoLibro}" Tag="Libro"/>
+                </ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium" Text="{DynamicResource BibliotecaLingua}"/>
+                <ComboBox x:Name="LinguaFilterComboBox" Width="90" Margin="0,0,15,0" SelectionChanged="LinguaFilter_SelectionChanged"/>
+                <TextBlock Text="Data:" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium"/>
+                <ComboBox x:Name="DataConditionComboBox" Width="100" Margin="0,0,8,0" SelectionChanged="DataConditionComboBox_SelectionChanged">
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroDataQualsiasi}" Tag="Any" IsSelected="True"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroDataPrima}" Tag="Before"/>
+                    <ComboBoxItem Content="{DynamicResource BibliotecaFiltroDataDopo}" Tag="After"/>
+                </ComboBox>
+                <TextBox x:Name="FilterYearTextBox" Width="50" MaxLength="4" Visibility="Collapsed" VerticalAlignment="Center" Padding="2" TextChanged="FilterYearTextBox_TextChanged"/>
+            </WrapPanel>
+            <DataGrid x:Name="ResultsDataGrid" Grid.Row="2" Margin="0,8,0,0"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      SelectionMode="Single" SelectionUnit="FullRow"
+                      GridLinesVisibility="Horizontal" HeadersVisibility="Column"
+                      Background="Transparent"
+                      BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                      MouseDoubleClick="ResultsDataGrid_MouseDoubleClick">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="10,8,10,8"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                                    <Grid>
+                                        <Border Background="{TemplateBinding Background}"
+                                                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                                                BorderThickness="0,0,0,1"
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                                        </Border>
+                                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Width="2" Background="Transparent" Cursor="SizeWE"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaNome}" Binding="{Binding Nome}" Width="2*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaAutore}" Binding="{Binding Autore}" Width="*"/>
+                    <DataGridTemplateColumn Header="{DynamicResource BibliotecaTipo}" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2,0" VerticalAlignment="Center">
+                                    <Border CornerRadius="1" Padding="2,0" Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Commentario}" ToolTip="{DynamicResource BibliotecaTipoCommentarioAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="BookOpenPageVariant" Foreground="#107C10" Width="13" Height="13"/>
+                                    </Border>
+                                    <Border CornerRadius="1" Padding="2,0" Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Dizionario}" ToolTip="{DynamicResource BibliotecaTipoDizionarioAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="BookAlphabet" Foreground="#D83B01" Width="13" Height="13"/>
+                                    </Border>
+                                    <Border CornerRadius="1" Padding="2,0" Visibility="{Binding Tipo, Converter={StaticResource TestoTipoToVisibilityConverter}, ConverterParameter=Libro}" ToolTip="{DynamicResource BibliotecaTipoLibroAiuto}">
+                                        <iconPacks:PackIconMaterial Kind="Book" Foreground="#7A2487" Width="13" Height="13"/>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaData}" Binding="{Binding Data}" Width="*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaCasaEditrice}" Binding="{Binding CasaEditrice}" Width="*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaCopyright}" Binding="{Binding Copyright}" Width="*"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaLingua}" Binding="{Binding Lingua}" Width="Auto"/>
+                    <DataGridTextColumn Header="{DynamicResource BibliotecaAbbreviazione}" Binding="{Binding Abbreviazione}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
 using AvalonDock.Layout;
+using LaParola.Services;
 using LaParola.Utilities;
 using Microsoft.Win32;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
     private string? _currentFile;
     public LayoutDocument? ParentDocument { get; set; }
     private string ultimoTitolo = "";
+    internal bool IsRiferimentoBiblico;
     private bool _suppressTextChanged;
 
     private bool _isDirty;
@@ -103,6 +105,23 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
         // TODO2: Open correct help section
         MessageBox.Show("Open Help Centre");
     }
+
+    /// <summary>
+    /// Interrompe immediatamente la sintesi vocale in corso.
+    /// Invocato dal DockingManager quando il pannello viene chiuso definitivamente.
+    /// </summary>
+    public void StoppaSintesiVocale()
+    {
+        try
+        {
+            LettoreVoce.FermaSeAttivo(BtnVoce);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Errore stop TTS: {ex.Message}");
+        }
+    }
+
 
     private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
     {
@@ -198,6 +217,20 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
                     break;
                 }
             }
+        }
+    }
+
+    public void EseguiSenzaSporcareDocumento(Action azione)
+    {
+        bool eraSospeso = _suppressTextChanged;
+        _suppressTextChanged = true;
+        try
+        {
+            azione();
+        }
+        finally
+        {
+            _suppressTextChanged = eraSospeso;
         }
     }
 
@@ -392,6 +425,16 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             default:
                 return false;
         }
+    }
+
+    private void Voce_Click(object sender, RoutedEventArgs e)
+    {
+        ToggleLettura();
+    }
+
+    public void ToggleLettura()
+    {
+        LettoreVoce.ToggleLettura(BtnVoce, this, () => Editor.Document, "", IsRiferimentoBiblico);
     }
 
     public void ShowFindDialog()

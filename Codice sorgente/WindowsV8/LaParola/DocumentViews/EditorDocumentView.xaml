@@ -60,8 +60,7 @@
                         </Button>
 
                         <!-- Separator -->
-                        <Rectangle Width="1" Height="18" Margin="6,0"
-                Fill="{DynamicResource AppForegroundBrush}" Opacity="0.5"/>
+                        <Rectangle Width="1" Height="18" Margin="6,0" Fill="{DynamicResource AppForegroundBrush}" Opacity="0.5"/>
 
                         <!-- Open -->
                         <Button Style="{StaticResource ToolbarIconButton}"
@@ -90,6 +89,13 @@
                 Height="30">
 
                             <iconPacks:PackIconMaterial Kind="ContentSaveEdit"/>
+                        </Button>
+
+                        <!-- Separator -->
+                        <Rectangle Width="1" Height="18" Margin="6,0" Fill="{DynamicResource AppForegroundBrush}" Opacity="0.5"/>
+
+                        <Button x:Name="BtnVoce" Style="{StaticResource ToolbarIconButton}" Click="Voce_Click" ToolTip="{DynamicResource ViewerVoceAiuto}" Width="34" Height="30">
+                            <iconPacks:PackIconMaterial Kind="AccountVoice"/>
                         </Button>
 
                     </WrapPanel>

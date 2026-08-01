@@ -34,6 +34,7 @@
                 <TreeViewItem x:Name="TreeAmbiente" Header="{DynamicResource OpzioniAmbiente}">
                     <TreeViewItem x:Name="NodeEditor" Header="{DynamicResource OpzioniEditorTitolo}"/>
                     <TreeViewItem x:Name="NodeHypertext" Header="{DynamicResource OpzioniIpertestoTitolo}"/>
+                    <TreeViewItem x:Name="NodeVoce" Header="{DynamicResource OpzioniVoceTitolo}"/>
                 </TreeViewItem>
 
                 <TreeViewItem x:Name="TreeFormato" Header="{DynamicResource OpzioniFormato}">
@@ -90,11 +91,12 @@
                         </ToolTip>
                     </GroupBox.ToolTip>
                     <StackPanel Margin="10">
+                        <TextBlock Margin="0,0,0,10" TextWrapping="Wrap" Text="{DynamicResource OpzioniInterfaccia}"/>
                         <ComboBox x:Name="LanguageCombo" Width="220" SelectionChanged="SettingChanged" HorizontalAlignment="Left">
                             <ComboBoxItem Tag="en">English</ComboBoxItem>
                             <ComboBoxItem Tag="it">Italiano</ComboBoxItem>
                         </ComboBox>
-                        <TextBlock Margin="0,10,0,0" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniLinguaNota}"/>
+                        <TextBlock Margin="0,10,0,10" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniLinguaNota}"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -115,9 +117,43 @@
                             <TextBlock Text="{DynamicResource OpzioniIpertestoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                         </ToolTip>
                     </GroupBox.ToolTip>
-                    <StackPanel Margin="10">
+                    <StackPanel>
                         <CheckBox x:Name="IpertestoTooltip" Content="{DynamicResource OpzioniIpertestoTooltip}" Margin="10,12,0,12" Checked="SettingChanged" Unchecked="SettingChanged"/>
                         <CheckBox x:Name="IpertestoDizionario" Content="{DynamicResource OpzioniIpertestoDizionario}" Margin="10,12,0,12" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="SectionVoce" Margin="0,4,0,16" Header="{DynamicResource OpzioniVoceTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniVoceAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                            <TextBlock Margin="0,0,0,10" TextWrapping="Wrap" Text="{DynamicResource OpzioniVoce}"/>
+                            <ComboBox x:Name="VoceCombo" Width="220" SelectionChanged="SettingChanged" HorizontalAlignment="Left">
+                            </ComboBox>
+                            <CheckBox x:Name="VoceDelTesto" Content="{DynamicResource OpzioniVoceDelTesto}" Margin="10,10,0,0" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                            <TextBlock Margin="0,10,0,0" Opacity="0.8" TextWrapping="Wrap" Text="{DynamicResource OpzioniVoceNota}"/>
+
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="{DynamicResource OpzioniVoceVelocita}" VerticalAlignment="Center"/>
+                            <Slider x:Name="VoceVelocita" Grid.Column="1" Minimum="0" Maximum="20" SmallChange="1" LargeChange="2" TickFrequency="1" ValueChanged="SettingChanged" Margin="10,5"/>
+                            <TextBlock x:Name="VoceVelocitaValore" Grid.Column="2" VerticalAlignment="Center" MinWidth="40" TextAlignment="Right"/>
+                            <Label Grid.Row="1" Content="{DynamicResource OpzioniVoceVolume}" VerticalAlignment="Center"/>
+                            <Slider Grid.Row="1" x:Name="VoceVolume" Grid.Column="1" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="SettingChanged" Margin="10,5"/>
+                            <TextBlock Grid.Row="1" x:Name="VoceVolumeValore" Grid.Column="2" VerticalAlignment="Center" MinWidth="40" TextAlignment="Right"/>
+                        </Grid>
+                        <CheckBox x:Name="VoceEvidenzia" Content="{DynamicResource OpzioniVoceEvidenzia}" Margin="10,10,0,0" Checked="SettingChanged" Unchecked="SettingChanged"/>
                     </StackPanel>
                 </GroupBox>
 

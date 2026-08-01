@@ -40,9 +40,18 @@ public class AppSettings
 
     public FormatoTesto Formato { get; set; } = new FormatoTesto();
 
+    public string VoceSintesiVocale { get; set; } = "";
+    public bool VoceDelTesto { get; set; } = true;
+    public double VelocitaVoce { get; set; } = 1.0;
+    public int VolumeVoce { get; set; } = 100;
+    public bool VoceEvidenzia { get; set; } = false;
+
     public string UltimaBibbia { get; set; } = "";
     public string UltimaBibbiaCompleta { get; set; } = "";
     public string UltimaCartellaImmagini { get; set; } = "";
+    public string UltimaCartellaImportare { get; set; } = "";
+    public string UltimaCartellaImportarePDF { get; set; } = "";
+    public string UltimaCartellaImportareRtf { get; set; } = "";
 
     public bool EditorChiudere { get; set; } = false;
     public bool IpertestoTooltip { get; set; } = true;
@@ -67,4 +76,9 @@ public class AppSettings
     public List<string> MostraVersioniTutte { get; set; } = [];
     public List<string> MostraVersioniSelezionate { get; set; } = [];
     public bool MostraAlternare { get; set; } = false;
+
+    // Reference search
+    public bool ReferenceSearchTocVisible { get; set; } = true;
+
+    public HashSet<string> TestiNascosti { get; set; } = new HashSet<string>();
 }

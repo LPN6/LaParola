@@ -5,7 +5,7 @@ using LaParola.Models;
 using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.Reflection;
-using System.Runtime;
+using System.Speech.Synthesis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,9 +16,35 @@ public partial class OptionsToolView : UserControl
 {
     readonly bool nonSalvare = true;
 
-    // TODO2 - reimposta default settings, help on export/import settings, setting to turn off tool tips
+    // TODO2 color picker per highlight sintesi - di Extended.Wpf.Toolkit?
+    /*
+      <Window x:Class="MyApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+    <Grid Padding="20">
+        <!-- ColorPicker Dropdown -->
+        <xctk:ColorPicker x:Name="MyColorPicker" 
+                          SelectedColorChanged="MyColorPicker_SelectedColorChanged"
+                          DisplayColorAndName="True"
+                          Width="200" 
+                          Height="30"/>
+    </Grid>
+</Window>
+
+    private void MyColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+{
+    if (e.NewValue.HasValue)
+    {
+        Color selectedColor = e.NewValue.Value;
+        // Use WPF Color directly
+    }
+}
+     */
+    // TODO2 - reimposta default settings, help on export/import settings
     // TODO2 - results in same editor window or new
     // TODO2 - References: context in searches
+    // TODO2 book names
 
     public OptionsToolView()
     {
@@ -43,6 +69,8 @@ public partial class OptionsToolView : UserControl
         IpertestoTooltip.IsChecked = MainWindow.settings.IpertestoTooltip;
         IpertestoDizionario.IsChecked = MainWindow.settings.IpertestoDizionario;
         EditorChiudere.IsChecked = MainWindow.settings.EditorChiudere;
+
+        InitializeVoiceSettings();
 
         switch (MainWindow.settings.Formato.RiferimentoTipo)
         {
@@ -137,7 +165,6 @@ public partial class OptionsToolView : UserControl
 
         // 2. Map them to a list and insert an empty placeholder at index 0
         var comboBoxItems = bibles.Select(b => new { Nome = b, Titolo = b }).ToList();
-        //var comboBoxItems = bibles.Select(b => new { Nome = b.Info.Nome, Titolo = b.Info.Titolo }).ToList();
         comboBoxItems.Insert(0, new
         {
             Nome = "",
@@ -191,6 +218,109 @@ public partial class OptionsToolView : UserControl
         ComboDizionarioGreco.SelectedValue = MainWindow.settings?.DizionarioGreco ?? string.Empty;
         ComboDizionarioEbraico.SelectedValue = MainWindow.settings?.DizionarioEbraico ?? string.Empty;
         ComboDizionarioLatino.SelectedValue = MainWindow.settings?.DizionarioLatino ?? string.Empty;
+    }
+
+    /// <summary>Nome mostrato nella ComboBox voci e nome reale (quello salvato in
+    /// AppSettings.VoceNome e usato da LettoreVoce per selezionare la voce) - separati perché
+    /// l'utente ha chiesto di togliere "Microsoft" dal nome mostrato, ma il nome REALE deve
+    /// restare quello esatto riportato da Windows, altrimenti la selezione salvata non
+    /// corrisponderebbe più a nessuna voce installata.</summary>
+    private sealed record VoceVisualizzata(string NomeVisualizzato, string NomeReale, string Lingua);
+
+    private void InitializeVoiceSettings()
+    {
+        VoceCombo.Items.Clear();
+        try
+        {
+            // Elenco letto da System.Speech.Synthesis (SAPI5), coerente con LettoreVoce.cs -
+            // prima usava Windows.Media.SpeechSynthesis (WinRT), i cui nomi/Id non
+            // corrisponderebbero piu' a quelli usati dal motore di lettura reale (vedi changelog
+            // 2026-07-18: le voci OneCore installate non riportano marcatori per-parola tramite
+            // l'API WinRT, ma li riportano tramite questo livello SAPI5 classico).
+            using SpeechSynthesizer synthEnumerazione = new();
+            List<VoceVisualizzata> voci = [.. synthEnumerazione.GetInstalledVoices()
+                .Select(v => v.VoiceInfo)
+                .Select(vi => new VoceVisualizzata(TogliMicrosoft(vi.Name) + FormattaLingua(vi), vi.Name, vi.Culture?.TwoLetterISOLanguageName ?? ""))
+                ];
+            VoceCombo.ItemsSource = voci;
+            VoceCombo.DisplayMemberPath = "NomeVisualizzato";
+            VoceCombo.SelectedValuePath = "NomeReale";
+            if (!string.IsNullOrEmpty(MainWindow.settings.VoceSintesiVocale))
+                VoceCombo.SelectedValue = MainWindow.settings.VoceSintesiVocale;
+            else if (voci.Count > 0)
+                VoceCombo.SelectedIndex = 0;
+        }
+        catch { }
+
+        if (VoceCombo.Items.Count == 0)
+        {
+            VoceCombo.IsEnabled = false;
+        }
+        else
+        { // cerchiamo una voce predefinita: quello da Settings, una della lingua dell'interfaccia, o prima trovata
+            string linguaImpostata = MainWindow.settings.Lingua?.Length >= 2
+                ? MainWindow.settings.Lingua[..2].ToLower()
+                : "";
+            string voceImpostata = MainWindow.settings.VoceSintesiVocale ?? "";
+            VoceVisualizzata? vocePossibile = null;
+
+            foreach (VoceVisualizzata voice in VoceCombo.Items)
+            {
+                string nomeOriginale = voice.NomeReale ?? "";
+                string linguaVoce = voice.Lingua ?? "";
+
+                if (nomeOriginale.Equals(voceImpostata, StringComparison.OrdinalIgnoreCase))
+                {
+                    VoceCombo.SelectedItem = voice;
+                    break;
+                }
+                else if (vocePossibile == null && linguaVoce == linguaImpostata)
+                {
+                    vocePossibile = voice;
+                }
+            }
+            if (VoceCombo.SelectedIndex < 0)
+            {
+                if (vocePossibile != null)
+                    VoceCombo.SelectedItem = vocePossibile;
+                else if (VoceCombo.Items.Count > 0)
+                    VoceCombo.SelectedIndex = 0;
+                if (VoceCombo.SelectedItem is VoceVisualizzata voceSelezionata)
+                {
+                    MainWindow.settings.VoceSintesiVocale = voceSelezionata.NomeReale;
+                }
+            }
+        }
+
+        VoceDelTesto.IsChecked = MainWindow.settings.VoceDelTesto;
+
+        VoceVelocita.Value = MainWindow.settings.VelocitaVoce * 10;
+        VoceVelocitaValore.Text = (int)VoceVelocita.Value + "/20";
+
+        VoceVolume.Value = MainWindow.settings.VolumeVoce;
+        VoceVolumeValore.Text = MainWindow.settings.VolumeVoce + "%";
+
+        VoceEvidenzia.IsChecked = MainWindow.settings.VoceEvidenzia;
+    }
+
+    /// <summary>Richiesto dall'utente: "Microsoft Cosimo" -> "Cosimo" nell'elenco voci - solo
+    /// visualizzazione, il nome reale (usato per salvare/riconoscere la voce) resta invariato.</summary>
+    private static string TogliMicrosoft(string nome)
+    {
+        return nome.Replace("Microsoft ", "", StringComparison.OrdinalIgnoreCase).Trim();
+    }
+
+    /// <summary>Richiesto dall'utente: aggiunge tra parentesi il codice lingua della voce (es.
+    /// "(it)", "(en)") quando riconoscibile dalla Culture riportata da Windows, per distinguere a
+    /// colpo d'occhio voci con lo stesso nome/lingua diversa.</summary>
+    private static string FormattaLingua(VoiceInfo voce)
+    {
+        try
+        {
+            string codice = voce.Culture?.TwoLetterISOLanguageName ?? "";
+            return string.IsNullOrEmpty(codice) ? "" : $" ({codice})";
+        }
+        catch { return ""; }
     }
 
     private static void ApplicaFontAdEsempio(TextBlock tbEsempio, string categoria)
@@ -279,6 +409,9 @@ public partial class OptionsToolView : UserControl
                     break;
                 case "NodeHypertext":
                     targetElement = SectionHypertext;
+                    break;
+                case "NodeVoce":
+                    targetElement = SectionVoce;
                     break;
                 case "TreeFormato":
                     targetElement = SectionFormatoHeader;
@@ -470,6 +603,18 @@ public partial class OptionsToolView : UserControl
         _settings.EditorChiudere = EditorChiudere.IsChecked == true;
         _settings.IpertestoTooltip = IpertestoTooltip.IsChecked == true;
         _settings.IpertestoDizionario = IpertestoDizionario.IsChecked == true;
+
+        // Impostazioni voce
+        if (VoceCombo.SelectedItem is VoceVisualizzata voceSelezionata)
+        {
+            _settings.VoceSintesiVocale = voceSelezionata.NomeReale;
+        }
+        _settings.VoceDelTesto = VoceDelTesto.IsChecked == true;
+        _settings.VelocitaVoce = VoceVelocita.Value / 10.0;
+        _settings.VolumeVoce = (int)VoceVolume.Value;
+        VoceVelocitaValore.Text = (int)VoceVelocita.Value + "/20";
+        VoceVolumeValore.Text = (int)VoceVolume.Value + "%";
+        _settings.VoceEvidenzia = VoceEvidenzia.IsChecked == true;
 
         TestoVisualizzato testoVisualizzatoPrecedente = _settings.Formato.TestoVisualizzato;
         TestoVisualizzato testoVisualizzatoAttuale = TestoVersetti.IsChecked == true ? TestoVisualizzato.Versetti :

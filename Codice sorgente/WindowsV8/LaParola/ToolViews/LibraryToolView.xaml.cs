@@ -3,11 +3,13 @@ using LaParola.Dialogs;
 using LaParola.DocumentViews;
 using LaParola.Services;
 using LaParola.Utilities;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -18,7 +20,6 @@ using System.Windows.Input;
 namespace LaParola.ToolViews
 {
     // TODO2 for each text, buttons to: esportare, unire 2, cambia sola lettura, creare file unico, aggiungere radici
-    // TODO2 in general, button to: create nuova collezione / importare / scaricare
 
     /// <summary>
     /// Logica di interazione per LibraryToolView.xaml
@@ -45,7 +46,7 @@ namespace LaParola.ToolViews
             AttachStateTrackers();
         }
 
-        private void LoadLibraryData()
+        internal void LoadLibraryData()
         {
             try
             {
@@ -77,13 +78,13 @@ namespace LaParola.ToolViews
         private void PopulateLanguageOptions(List<VersioneInformazioni> libri)
         {
             // Extract unique root language tags across all books
-            var rootLanguages = libri
+            IOrderedEnumerable<string> rootLanguages = libri
                 .Where(b => !string.IsNullOrWhiteSpace(b.Lingua))
                 .SelectMany(b => GetBaseLanguageCodes(b.Lingua))
                 .Distinct()
                 .OrderBy(lang => lang);
 
-            foreach (var lang in rootLanguages)
+            foreach (string lang in rootLanguages)
             {
                 LinguaFilterComboBox.Items.Add(new ComboBoxItem { Content = lang.ToUpperInvariant(), Tag = lang });
             }
@@ -129,7 +130,6 @@ namespace LaParola.ToolViews
                 if (distanceMoved > 30)
                 {
                     _isToolTipOpen = false;
-
                     DataGridToolTip.IsOpen = false;
                 }
             }
@@ -153,16 +153,18 @@ namespace LaParola.ToolViews
                 bool matchText = (info.Nome?.Contains(txt, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
                                  (info.Autore?.Contains(txt, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
                                  (info.Abbreviazione?.Contains(txt, StringComparison.CurrentCultureIgnoreCase) ?? false);
-                if (!matchText) return false;
+                if (!matchText)
+                    return false;
             }
 
             // 2. TIPO FILTER
             if (TipoFilterComboBox?.SelectedItem is ComboBoxItem selectedTipoItem)
             {
                 string? tipoTag = selectedTipoItem.Tag.ToString();
-                if (tipoTag != null && tipoTag != "All" && Enum.TryParse(typeof(TestoTipi), tipoTag, out var match) && match is TestoTipi selectedEnumFlag)
+                if (tipoTag != null && tipoTag != "All" && Enum.TryParse(typeof(TestoTipi), tipoTag, out object? match) && match is TestoTipi selectedEnumFlag)
                 {
-                    if (!info.Tipo.HasFlag(selectedEnumFlag)) return false;
+                    if (!info.Tipo.HasFlag(selectedEnumFlag))
+                        return false;
                 }
             }
 
@@ -170,7 +172,8 @@ namespace LaParola.ToolViews
             if (LinguaFilterComboBox?.SelectedItem is ComboBoxItem selectedLangItem)
             {
                 string? langTag = selectedLangItem.Tag.ToString();
-                if (langTag != null && langTag != "All" && !GetBaseLanguageCodes(info.Lingua).Contains(langTag)) return false;
+                if (langTag != null && langTag != "All" && !GetBaseLanguageCodes(info.Lingua).Contains(langTag))
+                    return false;
             }
 
             // 4. FIXED DATA (YEAR) FILTER
@@ -237,7 +240,7 @@ namespace LaParola.ToolViews
 
             // Matches standalone 3 OR 4 digit numbers.
             // Catches "350" in "A.D. 350", "384" in "384-405", and skips "15" and "03" to grab "2006" in full dates.
-            var match = RegExAnno().Match(dataStr);
+            Match match = RegExAnno().Match(dataStr);
             if (match.Success && int.TryParse(match.Value, out int year))
             {
                 return year;
@@ -245,9 +248,325 @@ namespace LaParola.ToolViews
             return null;
         }
 
-        private void AddBookButton_Click(object sender, RoutedEventArgs e)
+        private async void AddBookButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO2 Launch your file picker or installer dialog here - bisogna visibility=visible on the button also
+            // CASO 1: L'utente ha fatto clic sul pulsante principale
+            if (sender is Button bottone)
+            {
+                if (bottone.ContextMenu != null)
+                {
+                    // Allinea il menu esattamente sotto il pulsante
+                    bottone.ContextMenu.PlacementTarget = bottone;
+                    // Forza l'apertura del menu a comparsa
+                    bottone.ContextMenu.IsOpen = true;
+                }
+            }
+
+            // CASO 2: L'utente ha cliccato su una delle opzioni del menu
+            else if (sender is MenuItem voceMenu)
+            {
+                // Recuperiamo il Tag identificativo
+                string tagSelezionato = voceMenu.Tag?.ToString() ?? "";
+                TipoImportazione tipo = TipoImportazione.Nessuno;
+
+                switch (tagSelezionato)
+                {
+                    case "Scarica":
+                        App.DockingHost.ShowTool("tool.aggiungitesti");
+                        break;
+
+                    case "ImportaOSIS":
+                    case "ImportaZefania":
+                    case "ImportaThML":
+                    case "ImportaBibleWorks":
+                        string titoloSelezionaXMLDialogo = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriApriFileXML") ?? "Select an XML File");
+                        string filtro = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriApriFileXMLFiltro") ?? "XML files (*.xml)|*.xml|All files (*.*)|*.*");
+                        if (tagSelezionato == "ImportaOSIS")
+                            tipo = TipoImportazione.ImportaOSIS;
+                        else if (tagSelezionato == "ImportaZefania")
+                            tipo = TipoImportazione.ImportaZefania;
+                        else if (tagSelezionato == "ImportaThML")
+                            tipo = TipoImportazione.ImportaThML;
+                        else if (tagSelezionato == "ImportaBibleWorks")
+                        {
+                            tipo = TipoImportazione.ImportaBibleWorks;
+                            titoloSelezionaXMLDialogo = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriApriFileTXT") ?? "Select a Text File (BibleWorks format)");
+                            filtro = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriApriFileTXTFiltro") ?? "Text files (*.txt)|*.txt|All files (*.*)|*.*");
+                        }
+
+                        string ultimaCartellaImportare = MainWindow.settings.UltimaCartellaImportare;
+                        if (string.IsNullOrEmpty(ultimaCartellaImportare))
+                            ultimaCartellaImportare = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                        OpenFileDialog openFileDialog = new()
+                        {
+                            Title = titoloSelezionaXMLDialogo,
+                            Filter = filtro,
+                            InitialDirectory = ultimaCartellaImportare,
+                            Multiselect = false
+                        };
+
+                        // Show the dialog box. ShowDialog() returns a nullable boolean (bool?).
+                        bool? result = openFileDialog.ShowDialog();
+
+                        // If the user clicked OK, import the selected file path
+                        if (result == true)
+                        {
+                            string? percorso = Path.GetDirectoryName(openFileDialog.FileName);
+                            if (!string.IsNullOrEmpty(percorso))
+                            {
+                                MainWindow.settings.UltimaCartellaImportare = openFileDialog.FileName;
+                            }
+
+                            using StatusTask status = StatusService.AvviaTask((string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriInCorso") ?? "Importing the file"));
+
+                            MetaData? data = await ImportaService.ImportaDaFileAsync(openFileDialog.FileName, tipo);
+                            if (data != null)
+                            {
+                                string messaggio = string.Format(CultureInfo.InvariantCulture, (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCompletato") ?? "{0} added to the program"), Path.GetFileName(data.NomeVersioneUtilizzato));
+                                status.Update(messaggio, 100);
+                                MainWindow.Testi.AggiungiTesto(data.NomeVersioneUtilizzato + ".laparola", 0);
+
+                                Funzioni.AggiornaTestiNellInterfaccia();
+                            }
+                            else
+                            {
+                                status.Update((string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriErrore") ?? "Error while importing the file"), 100);
+                            }
+
+                            // Remove status bar text after 5 seconds
+                            await Task.Delay(5000);
+                        }
+                        break;
+
+                    case "ImportaRtf":
+                        //tipo = TipoImportazione.ImportaRtf;
+                        string ultimaCartellaImportareRtf = MainWindow.settings.UltimaCartellaImportareRtf;
+                        if (string.IsNullOrEmpty(ultimaCartellaImportareRtf))
+                            ultimaCartellaImportareRtf = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                        OpenFolderDialog dialogCartella = new()
+                        {
+                            Title = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCartellaDialogoTitolo") ?? "Importing the file"),
+                            InitialDirectory = ultimaCartellaImportareRtf,
+                        };
+
+                        if (dialogCartella.ShowDialog() == true)
+                        {
+                            string selectedDirectory = dialogCartella.FolderName;
+                            MainWindow.settings.UltimaCartellaImportareRtf = selectedDirectory;
+                            MetaData dati = new();
+                            if (Directory.Exists(selectedDirectory))
+                            {
+                                // Search for any file ending with .laparolainfo
+                                string? infoFilePath = Directory.GetFiles(selectedDirectory, "*.laparolainfo").FirstOrDefault();
+
+                                if (infoFilePath != null)
+                                {
+                                    // Execute your function passing the path as an argument
+                                    dati = ImportaService.CaricaMetadatiDaFile(infoFilePath);
+                                }
+                            }
+
+                            ImportDialog dialogRtf = new(tipo)
+                            {
+                                Owner = Window.GetWindow(this), // Sets parent window for proper styling/centering
+                                File = selectedDirectory,
+                                Titolo = dati.Titolo,
+                                Abbreviazione = dati.Abbreviazione,
+                                Autore = dati.Autore,
+                                CasaEditrice = dati.CasaEditrice,
+                                Copyright = dati.Copyright,
+                                Descrizione = dati.Descrizione,
+                                Data = dati.Data,
+                                Isbn = dati.ISBN,
+                                Lingua = dati.Lingua,
+                                VersioneDiNote = dati.VersioneDelleNote,
+                            };
+
+                            if (dialogRtf.ShowDialog() == true)
+                            {
+                                MetaData datiNuova = new()
+                                {
+                                    Titolo = dialogRtf.Titolo,
+                                    Abbreviazione = dialogRtf.Abbreviazione,
+                                    Autore = dialogRtf.Autore,
+                                    CasaEditrice = dialogRtf.CasaEditrice,
+                                    Copyright = dialogRtf.Copyright,
+                                    Descrizione = dialogRtf.Descrizione,
+                                    Data = dialogRtf.Data,
+                                    ISBN = dialogRtf.Isbn,
+                                    Lingua = dialogRtf.Lingua,
+                                    VersioneDelleNote = dialogRtf.VersioneDiNote,
+                                    FileDaAnalizzare = selectedDirectory,
+                                    NomeVersioneUtilizzato = ImportaService.ImpostaNomeFileLaParolaDaFileOrigine(dialogRtf.Titolo),
+                                    Tipo = TipoImportazione.ImportaRtf
+                                };
+
+                                using StatusTask status = StatusService.AvviaTask((string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriInCorso") ?? "Importing the file"));
+                                bool successo = await ImportaService.CreaFileAsync(datiNuova);
+                                if (!successo)
+                                {
+                                    string messaggio = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriErrore") ?? "Error while importing the file");
+                                    status.Update(messaggio, 100);
+                                }
+                                else
+                                {
+                                    string messaggio = string.Format(CultureInfo.InvariantCulture, (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCreaCompletato") ?? "{0} added to the program"), Path.GetFileName(datiNuova.Titolo));
+                                    status.Update(messaggio, 100);
+                                    MainWindow.Testi.AggiungiTesto(datiNuova.NomeVersioneUtilizzato + ".laparola", 0);
+                                    Funzioni.AggiornaTestiNellInterfaccia();
+                                }
+
+                                // Remove status bar text after 5 seconds
+                                await Task.Delay(5000);
+                            }
+                        }
+                        break;
+                    case "ImportaPDFRTF":
+                        tipo = TipoImportazione.ImportaPDF;
+                        titoloSelezionaXMLDialogo = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriApriFilePDF") ?? "Select a PDF or RTF File");
+                        filtro = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriApriFilePDFFiltro") ?? "PDF files (*.pdf)|*.pdf|RTF files (*.rtf)|*.rtf|All files (*.*)|*.*");
+
+                        ultimaCartellaImportare = MainWindow.settings.UltimaCartellaImportarePDF;
+                        if (string.IsNullOrEmpty(ultimaCartellaImportare))
+                            ultimaCartellaImportare = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                        OpenFileDialog openFileDialogPDF = new()
+                        {
+                            Title = titoloSelezionaXMLDialogo,
+                            Filter = filtro,
+                            InitialDirectory = ultimaCartellaImportare,
+                            Multiselect = false
+                        };
+
+                        // Show the dialog box. ShowDialog() returns a nullable boolean (bool?).
+                        bool? resultPDF = openFileDialogPDF.ShowDialog();
+
+                        // If the user clicked OK, import the selected file path
+                        if (resultPDF == true)
+                        {
+                            string? percorso = Path.GetDirectoryName(openFileDialogPDF.FileName);
+                            if (!string.IsNullOrEmpty(percorso))
+                            {
+                                MainWindow.settings.UltimaCartellaImportarePDF = openFileDialogPDF.FileName;
+                            }
+
+                            MetaData datiPDF = new();
+                            string infoFilePathPDF = Path.ChangeExtension(openFileDialogPDF.FileName, ".laparolainfo");
+                            if (File.Exists(infoFilePathPDF))
+                            {
+                                datiPDF = ImportaService.CaricaMetadatiDaFile(infoFilePathPDF);
+                            }
+
+                            ImportDialog dialogPDF = new(tipo)
+                            {
+                                Owner = Window.GetWindow(this), // Sets parent window for proper styling/centering
+                                File = openFileDialogPDF.FileName,
+                                Titolo = datiPDF.Titolo,
+                                Abbreviazione = datiPDF.Abbreviazione,
+                                Autore = datiPDF.Autore,
+                                CasaEditrice = datiPDF.CasaEditrice,
+                                Copyright = datiPDF.Copyright,
+                                Descrizione = datiPDF.Descrizione,
+                                Data = datiPDF.Data,
+                                Isbn = datiPDF.ISBN,
+                                Lingua = datiPDF.Lingua,
+                                VersioneDiNote = datiPDF.VersioneDelleNote,
+                            };
+
+                            if (dialogPDF.ShowDialog() == true)
+                            {
+                                MetaData datiNuova = new()
+                                {
+                                    Titolo = dialogPDF.Titolo,
+                                    Abbreviazione = dialogPDF.Abbreviazione,
+                                    Autore = dialogPDF.Autore,
+                                    CasaEditrice = dialogPDF.CasaEditrice,
+                                    Copyright = dialogPDF.Copyright,
+                                    Descrizione = dialogPDF.Descrizione,
+                                    Data = dialogPDF.Data,
+                                    ISBN = dialogPDF.Isbn,
+                                    Lingua = dialogPDF.Lingua,
+                                    VersioneDelleNote = dialogPDF.VersioneDiNote,
+                                    PDFComeLibro = dialogPDF.ComeLibro.IsChecked==true,
+                                    FileDaAnalizzare = openFileDialogPDF.FileName,
+                                    NomeVersioneUtilizzato = ImportaService.ImpostaNomeFileLaParolaDaFileOrigine(dialogPDF.Titolo),
+                                    Tipo = TipoImportazione.ImportaPDF
+                                };
+
+                                using StatusTask statusPDF = StatusService.AvviaTask((string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriInCorso") ?? "Importing the file"));
+                                bool successo = await ImportaService.CreaFileAsync(datiNuova);
+                                if (!successo)
+                                {
+                                    string messaggio = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriErrore") ?? "Error while importing the file");
+                                    statusPDF.Update(messaggio, 100);
+                                }
+                                else
+                                {
+                                    string messaggio = string.Format(CultureInfo.InvariantCulture, (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCreaCompletato") ?? "{0} added to the program"), Path.GetFileName(datiNuova.Titolo));
+                                    statusPDF.Update(messaggio, 100);
+                                    MainWindow.Testi.AggiungiTesto(datiNuova.NomeVersioneUtilizzato + ".laparola", 0);
+                                    Funzioni.AggiornaTestiNellInterfaccia();
+                                }
+
+                                // Remove status bar text after 5 seconds
+                                await Task.Delay(5000);
+                            }
+                        }
+                        break;
+
+                    case "Crea":
+                        tipo = TipoImportazione.Crea;
+                        ImportDialog dialog = new(tipo)
+                        {
+                            Owner = Window.GetWindow(this), // Sets parent window for proper styling/centering
+                            //Lingua = "it", // Pre-populate default value
+                        };
+
+                        if (dialog.ShowDialog() == true)
+                        {
+                            MetaData datiNuova = new()
+                            {
+                                Abbreviazione = dialog.Abbreviazione,
+                                Titolo = dialog.Titolo,
+                                ISBN = dialog.Isbn,
+                                Autore = dialog.Autore,
+                                CasaEditrice = dialog.CasaEditrice,
+                                Data = dialog.Data,
+                                Copyright = dialog.Copyright,
+                                Lingua = dialog.Lingua,
+                                VersioneDelleNote = dialog.VersioneDiNote,
+                                Descrizione = dialog.Descrizione,
+                                NomeVersioneUtilizzato = ImportaService.ImpostaNomeFileLaParolaDaFileOrigine(dialog.Titolo),
+                                Tipo = TipoImportazione.Crea
+                            };
+
+                            using StatusTask status = StatusService.AvviaTask((string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCreaInCorso") ?? "Creating the file"));
+                            bool successo = await ImportaService.CreaFileAsync(datiNuova);
+                            if (!successo)
+                            {
+                                string messaggio = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCreaErrore") ?? "Error while creating and saving the file");
+                                status.Update(messaggio, 100);
+                            }
+                            else
+                            {
+                                string messaggio = string.Format(CultureInfo.InvariantCulture, (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCreaCompletato") ?? "{0} added to the program"), Path.GetFileName(datiNuova.Titolo));
+                                status.Update(messaggio, 100);
+                                MainWindow.Testi.AggiungiTesto(datiNuova.NomeVersioneUtilizzato + ".laparola", 0);
+                                Funzioni.AggiornaTestiNellInterfaccia();
+                            }
+
+                            // Remove status bar text after 5 seconds
+                            await Task.Delay(5000);
+                        }
+                        break;
+
+                    default:
+                        // Gestione di sicurezza se un Tag dovesse mancare o essere errato
+                        break;
+                }
+            }
         }
 
         // Triggers filter recalculation on generic combo changes
@@ -258,7 +577,7 @@ namespace LaParola.ToolViews
         {
             if (FilterYearTextBox == null) return;
 
-            var selectedTag = (DataConditionComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString();
+            string? selectedTag = (DataConditionComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString();
 
             // Show the year input only if Before or After is selected
             FilterYearTextBox.Visibility = (selectedTag == "Before" || selectedTag == "After") ? Visibility.Visible : Visibility.Collapsed;
@@ -320,10 +639,8 @@ namespace LaParola.ToolViews
                     // Pass the identifier field to your backend method
                     MainWindow.Testi.CancellaTesto(selectedBook.Nome);
 
-                    // 2. Refresh the UI by reloading the data structure
-                    LoadLibraryData();
-
-                    RimuoviTestiDaApp(selectedBook.Nome);
+                    ChiudiViewerConTesto(selectedBook.Nome);
+                    Funzioni.AggiornaTestiNellInterfaccia();
                 }
             }
             else
@@ -338,7 +655,7 @@ namespace LaParola.ToolViews
             if (BooksDataGrid.SelectedItem is VersioneInformazioni selectedBook)
             {
                 // Initialize generic dialog with structural text definitions
-                var dialog = new InputDialog(
+                InputDialog dialog = new(
                     prompt: (string)(Application.Current.TryFindResource("BibliotecaRinominaDomanda") ?? "Enter the new name for this text:"),
                     windowTitle: (string)(Application.Current.TryFindResource("BibliotecRinominaTitolo") ?? "Rename Text"),
                     suggestion: selectedBook.Nome
@@ -362,10 +679,8 @@ namespace LaParola.ToolViews
                     // 4. Execution if validation criteria succeeded
                     MainWindow.Testi.RinominaTesto(selectedBook.Nome, cleanNewName);
 
-                    LoadLibraryData();
-
-                    RimuoviTestiDaApp(selectedBook.Nome);
-                    // chiama AggiornaListeTesti per anche aggiungere con il nuovo nome
+                    ChiudiViewerConTesto(selectedBook.Nome);
+                    Funzioni.AggiornaTestiNellInterfaccia();
                 }
             }
         }
@@ -394,12 +709,9 @@ namespace LaParola.ToolViews
                         nuovoNomeFile = cartella + Path.GetFileNameWithoutExtension(vecchioNome) + count.ToString(CultureInfo.InvariantCulture) + Path.GetExtension(vecchioNome);
                     }
 
-                    string nuovoNome = MainWindow.Testi.CopiaTesto(selectedBook.Nome,
-                        nuovoNomeTesto,
-                        nuovoNomeFile);
+                    string nuovoNome = MainWindow.Testi.CopiaTesto(selectedBook.Nome, nuovoNomeTesto, nuovoNomeFile);
 
-                    LoadLibraryData();
-                    AggiornaListeTesti();
+                    Funzioni.AggiornaTestiNellInterfaccia();
 
                     string messaggio = string.Format((string)(Application.Current.TryFindResource("BibliotecaCopiaCopiato") ?? "The text '{0}' was copied to '{1}'."), selectedBook.Nome, nuovoNome);
                     MessageBoxLPN.Show(Window.GetWindow(this), messaggio, (string)(Application.Current.TryFindResource("BibliotecaCopia") ?? "Copy Text"));
@@ -412,7 +724,7 @@ namespace LaParola.ToolViews
             }
         }
 
-        private static void RimuoviTestiDaApp(string nome)
+        private static void ChiudiViewerConTesto(string nome)
         {
             List<LayoutDocument>? viewers = Funzioni.ListViewerDocuments();
 
@@ -426,54 +738,12 @@ namespace LaParola.ToolViews
                     }
                 }
             }
-
-            AggiornaListeTesti();
-        }
-
-        private static void AggiornaListeTesti()
-        {
-            // Find the TextGenerator and Search and Options tools window via its ContentId and refresh its layout
-            if (Application.Current.MainWindow is MainWindow mw)
-            {
-                if (mw.FindName("Dock") is AvalonDock.DockingManager dock)
-                {
-                    LayoutAnchorable? textGenAnchorable = dock.Layout.Descendents()
-                        .OfType<LayoutAnchorable>()
-                        .FirstOrDefault(a => a.ContentId == "tool.textgen");
-
-                    if (textGenAnchorable?.Content is TextGeneratorToolView textGenView)
-                    {
-                        textGenView.AggiornaVersioniDisponibili();
-                    }
-
-                    LayoutAnchorable? searchAnchorable = dock.Layout.Descendents()
-                        .OfType<LayoutAnchorable>()
-                        .FirstOrDefault(a => a.ContentId == "tool.search");
-
-                    if (searchAnchorable?.Content is SearchToolView searchView)
-                    {
-                        searchView.AggiornaVersioniDisponibili();
-                    }
-
-                    LayoutDocument? opzioniDocument = dock.Layout.Descendents()
-                        .OfType<LayoutDocument>()
-                        .FirstOrDefault(a => a.ContentId == "tool.options");
-
-                    if (opzioniDocument?.Content is OptionsToolView opzioniView)
-                    {
-                        opzioniView.InitializeTextsPreferences();
-                    }
-                }
-
-                mw.AggiornaMenuVisualizza();
-            }
-
         }
 
         private void SaveLibraryState()
         {
             if (MainWindow.settings?.LibraryState == null) return;
-            var state = MainWindow.settings.LibraryState;
+            LibraryToolState state = MainWindow.settings.LibraryState;
 
             // 1. Text & Filters
             state.SearchText = SearchTextBox.Text;
@@ -511,8 +781,9 @@ namespace LaParola.ToolViews
 
         private void RestoreLibraryState()
         {
-            var state = MainWindow.settings?.LibraryState;
-            if (state == null) return;
+            LibraryToolState? state = MainWindow.settings?.LibraryState;
+            if (state == null)
+                return;
 
             // 1. Text & Year Text
             SearchTextBox.Text = state.SearchText;
@@ -532,23 +803,20 @@ namespace LaParola.ToolViews
             // 4. DataGrid Column Widths
             if (state.ColumnStates != null && state.ColumnStates.Count > 0)
             {
-                foreach (var colState in state.ColumnStates)
+                foreach (ColumnState colState in state.ColumnStates)
                 {
-                    var column = BooksDataGrid.Columns.FirstOrDefault(c => c.Header?.ToString() == colState.Header);
-                    if (column != null)
-                    {
-                        column.Width = new DataGridLength(colState.Width);
-                    }
+                    DataGridColumn? column = BooksDataGrid.Columns.FirstOrDefault(c => c.Header?.ToString() == colState.Header);
+                    column?.Width = new DataGridLength(colState.Width);
                 }
             }
 
             // 5. DataGrid Sorting Rules
             if (!string.IsNullOrEmpty(state.SortColumnMemberPath) && _booksView != null)
             {
-                var column = BooksDataGrid.Columns.FirstOrDefault(c => c.SortMemberPath == state.SortColumnMemberPath);
+                DataGridColumn? column = BooksDataGrid.Columns.FirstOrDefault(c => c.SortMemberPath == state.SortColumnMemberPath);
                 if (column != null)
                 {
-                    var dir = state.SortDirection == "Ascending" ? ListSortDirection.Ascending : ListSortDirection.Descending;
+                    ListSortDirection dir = state.SortDirection == "Ascending" ? ListSortDirection.Ascending : ListSortDirection.Descending;
                     column.SortDirection = dir;
 
                     _booksView.SortDescriptions.Clear();
@@ -645,8 +913,8 @@ namespace LaParola.ToolViews
 
                 try
                 {
-                    var range = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                    using var ms = new MemoryStream(Encoding.UTF8.GetBytes(text));
+                    TextRange range = new(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+                    using MemoryStream ms = new(Encoding.UTF8.GetBytes(text));
                     // Check if the text header declares it's an RTF document
                     if (text.TrimStart().StartsWith("{\\rtf", StringComparison.OrdinalIgnoreCase))
                     {
@@ -673,7 +941,7 @@ namespace LaParola.ToolViews
             if (value is TestoTipi tipo && parameter is string targetFlagStr)
             {
                 // Converte il parametro stringa del XAML nell'enum corrispondente
-                if (Enum.TryParse(typeof(TestoTipi), targetFlagStr, out var result) && result is TestoTipi flag)
+                if (Enum.TryParse(typeof(TestoTipi), targetFlagStr, out object? result) && result is TestoTipi flag)
                 {
                     // Verifica se il bit dell'enum è attivo (es: tipo contiene Bibbia?)
                     return tipo.HasFlag(flag) ? Visibility.Visible : Visibility.Collapsed;
@@ -698,10 +966,10 @@ namespace LaParola.ToolViews
                 if (tipi == TestoTipi.None)
                     return string.Empty;
 
-                var localizedNames = new List<string>();
+                List<string> localizedNames = [];
 
                 // Dynamically loop through all flags inside the enum set
-                foreach (TestoTipi flag in Enum.GetValues(typeof(TestoTipi)))
+                foreach (TestoTipi flag in Enum.GetValues<TestoTipi>())
                 {
                     if (flag == TestoTipi.None) continue;
 
@@ -711,7 +979,7 @@ namespace LaParola.ToolViews
                         string resourceKey = $"BibliotecaFiltroTipo{flag}";
 
                         // Look up the string in the active localized ResourceDictionary
-                        var localizedString = Application.Current.TryFindResource(resourceKey)?.ToString();
+                        string? localizedString = Application.Current.TryFindResource(resourceKey)?.ToString();
 
                         // Fallback to the raw enum name if the resource isn't found
                         localizedNames.Add(localizedString ?? flag.ToString());
@@ -742,7 +1010,7 @@ namespace LaParola.ToolViews
                 string resourceKey = $"BibliotecaBloccato{bloccato}";
 
                 // Fetch from active language ResourceDictionary
-                var localizedString = Application.Current.TryFindResource(resourceKey)?.ToString();
+                string? localizedString = Application.Current.TryFindResource(resourceKey)?.ToString();
 
                 return localizedString ?? bloccato.ToString();
             }

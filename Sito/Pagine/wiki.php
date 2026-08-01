@@ -40,7 +40,7 @@ for ($i=0; $i<count($versioni); $i++)
 echo "</p><p><input type=\"submit\" name=\"Submit\" value=\"Visualizza testo\" /></p>";
 echo "</form>";
 ?>
-<p><a href="/"><img src="/immagini/bibbia.gif" alt="Bibbia" />(Da https://www.laparola.net/)</a></p>
+<p><a href="/"><img src="/immagini/bibbia.png" height="32" width="32" alt="Bibbia" />(Da https://www.laparola.net/)</a></p>
 
 </body>
 </html>

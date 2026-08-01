@@ -28,6 +28,7 @@ Background="{DynamicResource ControlBackgroundBrush}"
                AllowsTransparency="True">
 
             <Border Background="{DynamicResource ControlBackgroundBrush}"
+                    TextElement.Foreground="{DynamicResource AppForegroundBrush}"
                     Padding="12"
                     CornerRadius="6"
                     BorderBrush="{DynamicResource AccentBrush}"

@@ -51,9 +51,16 @@
     <sys:String x:Key="MenuRicerca">_Search</sys:String>
     <sys:String x:Key="MenuTextGenerator">Show _Passage</sys:String>
     <sys:String x:Key="MenuConverter">Measures _Converter</sys:String>
+    <sys:String x:Key="MenuRiferimenti">_Reference Search</sys:String>
+    <sys:String x:Key="RiferimentiTitolo">Reference Search</sys:String>
+    <sys:String x:Key="RiferimentiCerca">Search</sys:String>
+    <sys:String x:Key="RiferimentiTrovati">Found {0} results in {1} texts</sys:String>
+    <sys:String x:Key="RiferimentiAiuto">Type a Bible reference (e.g. John 3:16), then click Search to find all texts that contain it.</sys:String>
+    <sys:String x:Key="MenuVoce">Sp_eech Synthesis</sys:String>
+    <sys:String x:Key="MenuAggiungiTesti">_Add Texts</sys:String>
     <sys:String x:Key="MenuOptions">_Options</sys:String>
     <sys:String x:Key="MenuAbout">_About LaParola</sys:String>
-    <sys:String x:Key="MainNessunaVersione">No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read.</sys:String>
+    <sys:String x:Key="MainNessunaVersione">No text was found. Use the 'Add Texts' command of the Tools menu to add some texts.</sys:String>
 
     <sys:String x:Key="ViewerTitle">Document</sys:String>
     <sys:String x:Key="ViewerAiuto">This window shows the text of the Bible and other texts. The first button on the toolbar toggles the visibility of the Table of Contents. The following buttons provide various ways to move to another section of the text. The last button connects this window to other windows, so that they are linked and moved together.</sys:String>
@@ -85,8 +92,10 @@
     <sys:String x:Key="ViewerSinc7">Synchronize 7</sys:String>
     <sys:String x:Key="ViewerSinc8">Synchronize 8</sys:String>
     <sys:String x:Key="ViewerSinc9">Synchronize 9</sys:String>
-    <sys:String x:Key="ViewerSincAiuto0">Window not synchronized. To synchronize the text, click the button and choose the same number in this and in another window.</sys:String>
-    <sys:String x:Key="ViewerSincAiutoN">Window synchronized with the other windows in group {0}.</sys:String>
+    <sys:String x:Key="ViewerSincAiuto0">Window not synchronized. To synchronize the text, click the button and choose the same number in this and in another window</sys:String>
+    <sys:String x:Key="ViewerSincAiutoN">Window synchronized with the other windows in group {0}</sys:String>
+    <sys:String x:Key="ViewerVoceAiuto">Start the speech synthesis to read this text</sys:String>
+    <sys:String x:Key="ViewerVoceAiutoFerma">Stop the speech synthesis</sys:String>
 
     <sys:String x:Key="EditorTitle">Document</sys:String>
     <sys:String x:Key="EditorAiuto">In this window you can load text from a file or generate text from some of the Tools windows. There are some commands to format the text in the window toolbar, and others in the main menu.</sys:String>
@@ -134,7 +143,7 @@
     <sys:String x:Key="ImmaginiCollezioneNonTrovata">The collection of notes "{0}" was not found.</sys:String>
 
     <sys:String x:Key="BibliotecaTitolo">Library</sys:String>
-    <sys:String x:Key="BibliotecaAiuto">The table lists all the installed texts. Clicking on a row shows more information in the right side panel, double clicking opens the text in the program. The top two rows provide various ways to search for or filter the texts. Hover over the elements of the window for more information.</sys:String>
+    <sys:String x:Key="BibliotecaAiuto">The table lists all the installed texts. Clicking on a row shows more information in the right side panel, double clicking opens the text in the program. The top two rows provide various ways to search for or filter the texts. The button on the left gives various ways to add texts to the library. Hover over the elements of the window for more information.</sys:String>
     <sys:String x:Key="BibliotecaRicercaHint">Search...</sys:String>
     <sys:String x:Key="BibliotecaRicercaAiuto">Type some letters, and the texts will be filtered to include only those that contain those letters in the name, author, or abbreviation.</sys:String>
     <sys:String x:Key="BibliotecaNome">Name</sys:String>
@@ -170,11 +179,34 @@
     <sys:String x:Key="BibliotecaFiltroDataQualsiasi">Any Date</sys:String>
     <sys:String x:Key="BibliotecaFiltroDataPrima">Before</sys:String>
     <sys:String x:Key="BibliotecaFiltroDataDopo">After</sys:String>
-    <sys:String x:Key="BibliotecaAggiungiLibri">Add Texts</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibri">Add a Text</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriAiuto">Download texts from LaParola.net, import texts from existing files, or create a new text</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriScarica">Download and Install</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImporta">Import from a File...</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImportaOSIS">Bible in OSIS (XML) Formato</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImportaZefania">Bible in Zefania (XML) Formato</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImportaBibleWorks">Bible in BibleWorks (text) Formato</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImportaRtf">Collection of Notes in RTF Formato</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImportaThML">Collection of Notes in ThML (XML) Formato</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriImportaPDFRTF">Import PDF/RTF</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriCrea">Create a New Text</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriApriFileXML">Select an XML File</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriApriFileXMLFiltro">XML files (*.xml)|*.xml|All files (*.*)|*.*</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriApriFileTXT">Select a Text File (BibleWorks format)</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriApriFileTXTFiltro">Text files (*.txt)|*.txt|All files (*.*)|*.*</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriApriFilePDF">Select a PDF or RTF File</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriApriFilePDFFiltro">PDF files (*.pdf)|*.pdf|RTF files (*.rtf)|*.rtf|All files (*.*)|*.*</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriCartellaDialogoTitolo">Select the directory that contains the files to import</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriInCorso">Importing the file</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriCompletato">{0} added to the program</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriErrore">Error while importing the file</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriCreaInCorso">Creating the file</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriCreaCompletato">{0} added to the program</sys:String>
+    <sys:String x:Key="BibliotecaAggiungiLibriCreaErrore">Error while creating and saving the file</sys:String>
     <sys:String x:Key="BibliotecaGrigiaAiuto">A list of all the installed texts. Clicking on a row shows more information about it, double clicking opens the text in the program. Hovering the mouse over the icons under 'Type' explains them. The texts can be ordered by clicking a column heading. Moving the vertical lines between the column headings changes the column widths. The width of the table can be changed by moving the line between it and the right side panel.</sys:String>
     <sys:String x:Key="BibliotecaCancella">Delete Text</sys:String>
     <sys:String x:Key="BibliotecaCancellaAiuto">Deletes the text from the hard disk (you will be asked for confirmation)</sys:String>
-    <sys:String x:Key="BibliotecaCancellaDomanda">Are you sure you want to delete '{0}' from your disk?\n(If it is a file from LaParola, you can download and install it again later.)</sys:String>
+    <sys:String x:Key="BibliotecaCancellaDomanda">Are you sure you want to delete '{0}' from your disk? (If it is a file from LaParola, you can download and install it again later.)</sys:String>
     <sys:String x:Key="BibliotecaCancellaTitolo">Confirm Deletion</sys:String>
     <sys:String x:Key="BibliotecaRinomina">Rename Text</sys:String>
     <sys:String x:Key="BibliotecaRinominaAiuto">Give a text a new name</sys:String>
@@ -185,6 +217,70 @@
     <sys:String x:Key="BibliotecaCopiaCopiato">The text '{0}' was copied to '{1}'.</sys:String>
     <sys:String x:Key="BibliotecaCopiaErrore">Error copying text: {0}</sys:String>
 
+    <sys:String x:Key="ImportaErroreXML">Error importing the file: {0}</sys:String>
+    <sys:String x:Key="ImportaErroreNullo">Failed to find valid metadata.</sys:String>
+    <sys:String x:Key="ImportaCodiceSconosciuto">Unrecognised code: {0}</sys:String>
+    <sys:String x:Key="ImportaErroreRadiciDiverse">Error in the line {1} in the file radici_diverse: {0}</sys:String>
+
+    <sys:String x:Key="ImportaDialogoTitolo">Create a New Text</sys:String>
+    <sys:String x:Key="ImportaDialogoAiuto">Type the information on the text. The Title is required, the Abbreviation will be created automatically if you do not give it, the other value are optional. If you hover the mouse over the boxes, more information is given.</sys:String>
+    <sys:String x:Key="ImportaDialogoFile">File:</sys:String>
+    <sys:String x:Key="ImportaDialogoFileAiuto">The file with the text to be imported. To change the file, close this dialog and start again.</sys:String>
+    <sys:String x:Key="ImportaDialogoCartella">Directory:</sys:String>
+    <sys:String x:Key="ImportaDialogoCartellaAiuto">The directory that contains the files with the text to be imported. To change the directory, close this dialog and start again.</sys:String>
+    <sys:String x:Key="ImportaDialogoCome">Import as:</sys:String>
+    <sys:String x:Key="ImportaDialogoComeCommentario">Commentary</sys:String>
+    <sys:String x:Key="ImportaDialogoComeLibro">Book</sys:String>
+    <sys:String x:Key="ImportaDialogoTitoloTesto">Title:</sys:String>
+    <sys:String x:Key="ImportaDialogoTitoloTestoAiuto">Type the name to give to this text.</sys:String>
+    <sys:String x:Key="ImportaDialogoAbbreviazione">Abbreviation:</sys:String>
+    <sys:String x:Key="ImportaDialogoAbbreviazioneAiuto">An abbreviation that the program will use in some places to refer to the text.</sys:String>
+    <sys:String x:Key="ImportaDialogoAutore">Author:</sys:String>
+    <sys:String x:Key="ImportaDialogoAutoreAiuto">The author (or authors) of the text.</sys:String>
+    <sys:String x:Key="ImportaDialogoLingua">Language:</sys:String>
+    <sys:String x:Key="ImportaDialogoLinguaAiuto">The language of the text, using the two letter ISO 639-1 code.</sys:String>
+    <sys:String x:Key="ImportaDialogoData">Date:</sys:String>
+    <sys:String x:Key="ImportaDialogoDataAiuto">The date in which the text was written or published.</sys:String>
+    <sys:String x:Key="ImportaDialogoCasaEditrice">Publisher:</sys:String>
+    <sys:String x:Key="ImportaDialogoCasaEditriceAiuto">The publisher of the text, if there is one.</sys:String>
+    <sys:String x:Key="ImportaDialogoCopyright">Copyright:</sys:String>
+    <sys:String x:Key="ImportaDialogoCopyrightAiuto">The copyright status of the text, for example "Public Domain".</sys:String>
+    <sys:String x:Key="ImportaDialogoIsbn">ISBN:</sys:String>
+    <sys:String x:Key="ImportaDialogoIsbnAiuto">The International Standard Book Number of the text, if it has one.</sys:String>
+    <sys:String x:Key="ImportaDialogoBibbiaDiNote">Bible of notes:</sys:String>
+    <sys:String x:Key="ImportaDialogoBibbiaDiNoteAiuto">If the text has comments on a certain translation of the Bible (for example, its foonotes), the Bible of the notes is put here. Usually it is left blank.</sys:String>
+    <sys:String x:Key="ImportaDialogoDescrizione">Description:</sys:String>
+    <sys:String x:Key="ImportaDialogoDescrizioneAiuto">A description of the text, which is usually longer than the other fields.</sys:String>
+    <sys:String x:Key="ImportaDialogoNoTitolo">You must type a title for the text.</sys:String>
+
+    <sys:String x:Key="AggiungiTestiTitolo">Add Texts</sys:String>
+    <sys:String x:Key="AggiungiTestiErroreCaricamento">Error during the loading of the list of texts: {0}</sys:String>
+    <sys:String x:Key="AggiungiTestiNienteDaInstallare">No texts were found that can be added to the program.</sys:String>
+    <sys:String x:Key="AggiungiTestiNienteDaInstallareTestiNascosti">However, there are texts that you have hidden that can be installed: click the 'Unhide the hidden texts' to reveal them.</sys:String>
+    <sys:String x:Key="AggiungiTestiAiuto">In the table at left, choose the texts you want to add to the program. If there are texts you are not interested in, you can remove them for the list by choosing to hide them. Then click 'Apply changes' to install and/or hide the texts.</sys:String>
+    <sys:String x:Key="AggiungiTestiPreparazione">Downloading the list of available texts...</sys:String>
+    <sys:String x:Key="AggiungiTestiFiltro">Filter Texts:</sys:String>
+    <sys:String x:Key="AggiungiTestiFiltroAiuto">Type some letters, and only the texts that contain them will be shown</sys:String>
+    <sys:String x:Key="AggiungiTestiGrigiaAiuto">Click in the last two columns if you want to download and install a text or hide a text from this list</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaNome">Name of the text</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaTipo">Type</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaDimensione">Size</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaScarica">Add?</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaNascondi">Hide?</sys:String>
+    <sys:String x:Key="AggiungiTestiApplica">Apply Changes</sys:String>
+    <sys:String x:Key="AggiungiTestiApplicaAiuto">Download and hide the selected texts</sys:String>
+    <sys:String x:Key="AggiungiTestiScaricaTutti">Download and Install All</sys:String>
+    <sys:String x:Key="AggiungiTestiScaricaTuttiAiuto">Select all of the texts listed, so they are downloaded and added to the program. You need to then click the 'Apply Changes' button to start the actual downloading.</sys:String>
+    <sys:String x:Key="AggiungiTestiDeselezionaTutti">Unselect All</sys:String>
+    <sys:String x:Key="AggiungiTestiDeselezionaTuttiAiuto">Unselect all the selected texts</sys:String>
+    <sys:String x:Key="AggiungiTestiMostraNascosti">Unhide the hidden texts</sys:String>
+    <sys:String x:Key="AggiungiTestiMostraNascostiAiuto">Show the texts that were previously hidden</sys:String>
+    <sys:String x:Key="AggiungiTestiInstallazioneScaricamentoInCorso">Downloading the file {0}</sys:String>
+    <sys:String x:Key="AggiungiTestiInstallazioneInstallazioneInCorso">Installing the file {0}</sys:String>
+    <sys:String x:Key="AggiungiTestiInstallazioneInstallazioneCompletata">Installation of {0} completed</sys:String>
+    <sys:String x:Key="AggiungiTestiInstallazioneErrore">Error downloading {0}, text not installed</sys:String>
+    <sys:String x:Key="AggiungiTestiInstallazioneCompletato">Downloading and installing completed</sys:String>
+    
     <sys:String x:Key="OpzioniTitolo">Options</sys:String>
     <sys:String x:Key="OpzioniAiuto">Choose the app settings, which are applied immediately. Hover over a setting for more information. Click a title on the left side to jump immediately to that section.</sys:String>
     <sys:String x:Key="OpzioniAspetto">Appearance</sys:String>
@@ -194,8 +290,17 @@
     <sys:String x:Key="OpzioniTemaChiaro">Light</sys:String>
     <sys:String x:Key="OpzioniTemaScuro">Dark</sys:String>
     <sys:String x:Key="OpzioniLinguaTitolo">Language</sys:String>
+    <sys:String x:Key="OpzioniInterfaccia">Interface:</sys:String>
     <sys:String x:Key="OpzioniLinguaAiuto">Choose the language for the application, English or Italian. Most of the interface is changed immediately, the rest requires a restart of the app.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">To completely change the language used in the app, you need to restart the application. Changing the interface language also changes the language of the names and abbreviations of the books used and recognised.</sys:String>
+    <sys:String x:Key="OpzioniVoceTitolo">Speech Synthesis</sys:String>
+    <sys:String x:Key="OpzioniVoceAiuto">Choose the settings for speech synthesis: voice, speed and volume.</sys:String>
+    <sys:String x:Key="OpzioniVoce">Voice:</sys:String>
+    <sys:String x:Key="OpzioniVoceDelTesto">Use a voice of the language of the text, if such a voice is installed</sys:String>
+    <sys:String x:Key="OpzioniVoceNota">Other voices can be installato in Windows, in the section "Language and Region" of the Settings.</sys:String>
+    <sys:String x:Key="OpzioniVoceVelocita">Speed:</sys:String>
+    <sys:String x:Key="OpzioniVoceVolume">Volume:</sys:String>
+    <sys:String x:Key="OpzioniVoceEvidenzia">Highlight the words as they are being read</sys:String>
     <sys:String x:Key="OpzioniAmbiente">Environment</sys:String>
     <sys:String x:Key="OpzioniEditorTitolo">Editor</sys:String>
     <sys:String x:Key="OpzioniEditorAiuto">Choose the settings for how the editor behaves.</sys:String>
@@ -353,6 +458,8 @@
     <sys:String x:Key="MisureCapacitaUnita">litre,log (liquids),hin (liquids),bath (liquids),cor/omer (liquids/solids),cab (solids),omer (solids),measure (OT)(solids),ephah (solids)</sys:String>
     <sys:String x:Key="MisureMoneteUnita">euro,lepton/copper coin,kodrante/penny,assarion/penny,denarius/daily wage,drachma/silver coin,didrachma,shekel,aureus/gold coin,mina/pound,talent</sys:String>
 
+    <sys:String x:Key="SintesiAvvioErrore">The speech synthesis could not be started: {0}.</sys:String>
+    
     <sys:String x:Key="InformazioniTitolo">About LaParola</sys:String>
     <sys:String x:Key="InformazioniMessaggio">LaParola VLPN (beta)\n\nhttps://www.laparola.net/\n\nResources to freely read, study, and teach the Bible in Italian.\n\nFor information about the installed texts, see the Library Tool.</sys:String>
 

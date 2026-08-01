@@ -14,11 +14,13 @@
     <SolidColorBrush x:Key="AppForegroundBrush" Color="{StaticResource AppForeground}"/>
     <SolidColorBrush x:Key="SubtleBorderBrush" Color="{StaticResource SubtleBorder}"/>
     <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="#FF2D2D30"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#FF2D2D30"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="White"/>
 
     <SolidColorBrush x:Key="ComboBox.Hover.Background" Color="#FF3A3A3A"/>
     <SolidColorBrush x:Key="ComboBox.Open.Background" Color="#FF404040"/>
 
-    <!-- Define your theme brushes -->
     <SolidColorBrush x:Key="MenuBgBrush" Color="#FF1E1E1E"/>
     <SolidColorBrush x:Key="MenuFgBrush" Color="#FFF0F0F0"/>
     <SolidColorBrush x:Key="MenuHoverBgBrush" Color="#FF2D2D2D"/>
@@ -29,9 +31,6 @@
     <SolidColorBrush x:Key="Menu.Popup.Border"     Color="#FF3A3A3A"/>
     <SolidColorBrush x:Key="Menu.Popup.Hover"      Color="#FF2A2A2A"/>
     <SolidColorBrush x:Key="Menu.Static.Background" Color="#FF1E1E1E"/>
-
-    <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="#2D2D30"/>
-    <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="White"/>
 
     <Style TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>

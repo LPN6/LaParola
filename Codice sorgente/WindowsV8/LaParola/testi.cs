@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -5691,7 +5692,7 @@ Riferimento? paroleRicercate = null)
         /// <returns>Una collezione con i nomi di tutte le note.</returns>
         public Collection<string> Note(string nomeVersione)
         {
-            if (!versioni.TryGetValue(nomeVersione, out var versione))
+            if (!versioni.TryGetValue(nomeVersione, out Versione? versione))
             {
                 throw new TextNotExistException();
             }
@@ -5703,7 +5704,7 @@ Riferimento? paroleRicercate = null)
 
         public int NumeroNote(string nomeVersione)
         {
-            if (!versioni.TryGetValue(nomeVersione, out var versione))
+            if (!versioni.TryGetValue(nomeVersione, out Versione? versione))
             {
                 throw new TextNotExistException();
             }
@@ -5719,17 +5720,17 @@ Riferimento? paroleRicercate = null)
         public Collection<string> NoteConTitolo(string nomeVersione)
         {
             // 1. Avoid try-catch by using TryGetValue (Incredibly fast)
-            if (!versioni.TryGetValue(nomeVersione, out var versione))
+            if (!versioni.TryGetValue(nomeVersione, out Versione? versione))
             {
                 throw new TextNotExistException();
             }
 
             // 2. Cache the list locally so we do ZERO dictionary lookups inside the loop
-            var noteTitoli = versione.NoteTitoli;
+            List<string> noteTitoli = versione.NoteTitoli;
             int numeroNote = noteTitoli.Count;
 
             // 3. Pre-allocate capacity to prevent memory resizing overhead
-            var temporaryList = new List<string>(numeroNote);
+            List<string> temporaryList = new(numeroNote);
 
             for (int i = 0; i < numeroNote; ++i)
             {
@@ -5747,12 +5748,12 @@ Riferimento? paroleRicercate = null)
 
         public int NumeroNoteConTitolo(string nomeVersione)
         {
-            if (!versioni.TryGetValue(nomeVersione, out var versione))
+            if (!versioni.TryGetValue(nomeVersione, out Versione? versione))
             {
                 throw new TextNotExistException();
             }
 
-            var noteTitoli = versione.NoteTitoli;
+            List<string> noteTitoli = versione.NoteTitoli;
             int numeroNote = noteTitoli.Count;
             int validNoteCount = 0;
 
@@ -6553,7 +6554,7 @@ Riferimento? paroleRicercate = null)
                         // Extract parsed blocks directly and append them to the combined document
                         while (tempDoc.Blocks.Count > 0)
                         {
-                            var block = tempDoc.Blocks.FirstBlock;
+                            Block block = tempDoc.Blocks.FirstBlock;
                             tempDoc.Blocks.Remove(block); // Sever ties with tempDoc
                             finalDoc.Blocks.Add(block);    // Move to final composition
                         }
@@ -6646,7 +6647,7 @@ Riferimento? paroleRicercate = null)
 
                         if (index >= 0)
                         {
-                            var match = MainWindow.AncoraRegEx.Match(runText[index..]);
+                            Match match = MainWindow.AncoraRegEx.Match(runText[index..]);
                             if (match.Success)
                             {
                                 string verseId = match.Groups[1].Value;

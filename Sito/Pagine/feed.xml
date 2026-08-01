@@ -7,7 +7,7 @@
     <description>Novità a LaParola.Net - il centro per lo studio della Sacra Bibbia in italiano in Internet</description>
     <language>it</language>
     <copyright>Copyright 2026, laparola.net</copyright> 
-    <pubDate>Mon, 13 Jul 2026 02:00:00 +0100</pubDate>
+    <pubDate>Sat, 01 Aug 2026 02:00:00 +0100</pubDate>
     <atom:link href="https://www.laparola.net/feed.xml" rel="self" type="application/rss+xml" /> 
     <image>
       <title>La Parola - la Bibbia italiana</title> 
@@ -17,7 +17,15 @@
       <height>32</height> 
       <description>Il centro per lo studio della Sacra Bibbia in italiano in Internet</description> 
     </image>
-    <lastBuildDate>Mon, 13 Jul 2026 01:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 01:30:00 +0100</lastBuildDate>
+    <item>
+      <title>LaParola 8.0.5 per Windows (beta)</title>
+      <link>https://www.laparola.net/programma/windowsbeta.php</link>
+      <description>La prossima versione di prova (8.0.5) è disponibile, con la sintesi vocale e la possibilità di aggiungere testi al programma.
+Tutte le informazioni sulla nuova app sono alla pagina della versione beta (https://www.laparola.net/programma/windowsbeta.php).
+      </description>
+      <pubDate>Sat, 01 Aug 2026 01:01:00 +0100</pubDate> 
+    </item>
     <item>
       <title>LaParola 8.0.4 per Windows (beta)</title>
       <link>https://www.laparola.net/programma/windowsbeta.php</link>

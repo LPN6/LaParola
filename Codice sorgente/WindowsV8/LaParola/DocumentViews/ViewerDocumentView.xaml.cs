@@ -1,9 +1,10 @@
 using AvalonDock.Layout;
+using LaParola.Services;
 using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 namespace LaParola.DocumentViews;
 
 // TODO2 indice in Sommario Dottrina cristiana ha 3 sezioni in un unico link invece di 3 link diversi
+// TODO2 c'è sempre uno spazio addizionale all'inizio del testo biblico in Viewer
 
 // TODO2 toolbar: lista versetti, bookmark, zoom, highlights
 // TODO2 in 7, paralleli, aggiungi, noteNonAggiunte: servono?
@@ -148,6 +150,22 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
     {
         // Limita la larghezza massima del pannello alla metà esatta della larghezza corrente della finestra
         LeftColumn.MaxWidth = e.NewSize.Width / 2;
+    }
+
+    /// <summary>
+    /// Interrompe immediatamente la sintesi vocale in corso.
+    /// Invocato dal DockingManager quando il pannello viene chiuso definitivamente.
+    /// </summary>
+    public void StoppaSintesiVocale()
+    {
+        try
+        {
+            LettoreVoce.FermaSeAttivo(BtnVoce);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Errore stop TTS: {ex.Message}");
+        }
     }
 
     private void PopolaIndice()
@@ -409,9 +427,17 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         Viewer.Document = doc;
     }
 
+    public void EseguiSenzaSporcareDocumento(Action azione)
+    {
+        azione();
+    }
+
     public void CambiaFormato()
     {
-        _ = SpostaTesto(Libro, Capitolo, Versetto, false, false);
+        if (!string.IsNullOrEmpty(Titolo))
+            _ = SpostaTesto(Titolo, false, false);
+        else
+            _ = SpostaTesto(Libro, Capitolo, Versetto, false, false);
         VersettoMostrato = true;
     }
 
@@ -530,6 +556,8 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
         RtfColorTransformer.ApplyThemeToDocument(Viewer.Document, true, fg, true);
 
+        ConvertiRiferimentiInLink(Viewer.Document); // TODO2 controlla
+
         isSpostando = true;
         CmbTitoloNota.SelectedItem = notaTitolo;
         isSpostando = false;
@@ -556,7 +584,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
     {
         if (tipoBibbia)
         {
-            var state = GetCurrentTopVerseState();
+            (string? Tag, double VerseTopOffset) state = GetCurrentTopVerseState();
             if (!string.IsNullOrEmpty(state.Tag))
             {
                 string verseTag = state.Tag;
@@ -953,6 +981,16 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
     }
 
+    private void Voce_Click(object sender, RoutedEventArgs e)
+    {
+        ToggleLettura();
+    }
+
+    public void ToggleLettura()
+    {
+        LettoreVoce.ToggleLettura(BtnVoce, this, () => Viewer.Document, Viewer.Lingua, tipoBibbia);
+    }
+
     private void AggiornaCronologia()
     {
         BtnAvanti.IsEnabled = (nCronologia < cronologia.Count - 1);
@@ -1019,7 +1057,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
         if (BtnSync.ContextMenu != null)
         {
-            foreach (var item in BtnSync.ContextMenu.Items)
+            foreach (object item in BtnSync.ContextMenu.Items)
             {
                 if (item is MenuItem menuItem && menuItem.Tag is string t)
                 {
@@ -1334,7 +1372,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
     private async Task LoadNewSlidingWindow(Action postScrollAction)
     {
-        var state = GetCurrentTopVerseState();
+        (string? Tag, double VerseTopOffset) state = GetCurrentTopVerseState();
 
         if (!string.IsNullOrEmpty(state.Tag))
         {
@@ -1379,5 +1417,117 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         public string DisplayText { get; set; } = string.Empty;
         public string RawNota { get; set; } = string.Empty;
         public bool IsReference { get; set; }
+    }
+
+    // TODO2 Berea
+    private static readonly Regex RiferimentoRegex = new(@"\b([1-3]?\s?[A-ZÀ-Ù][a-zàèéìòù]+)[\.]?\s*(\d{1,3})(?::(\d{1,3})(?:[-,](\d{1,3}))?)?", RegexOptions.Compiled);
+
+    private static void ConvertiRiferimentiInLink(FlowDocument doc)
+    {
+        if (doc == null) return;
+        List<Run> runsToFix = [];
+        TextPointer nav = doc.ContentStart;
+        while (nav != null && nav.CompareTo(doc.ContentEnd) < 0)
+        {
+            if (nav.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text && nav.Parent is Run r && RiferimentoRegex.IsMatch(r.Text))
+                runsToFix.Add(r);
+            nav = nav.GetNextContextPosition(LogicalDirection.Forward);
+        }
+        foreach (Run run in runsToFix)
+        {
+            try
+            {
+                string text = run.Text;
+                char[] chars = [.. text.Where(c => c >= 32 || c == '\t' || c == '\n' || c == '\r')];
+                string clean = new(chars);
+                List<Inline> parts = [];
+                int pos = 0;
+                foreach (Match m in RiferimentoRegex.Matches(clean))
+                {
+                    if (m.Index > pos)
+                        parts.Add(new Run(clean[pos..m.Index]));
+                    string visText = m.Value;
+                    string token = m.Groups[1].Value.Trim().ToLowerInvariant().Replace(" ", "").Replace(".", "");
+                    if (!Services.EstrazionePdf.AbbrevALibro.ContainsKey(token))
+                    {
+                        parts.Add(new Run(visText));
+                    }
+                    else
+                    {
+                        Hyperlink hl = new() { Tag = "RIF:" + visText, Foreground = System.Windows.Media.Brushes.RoyalBlue };
+                        hl.Inlines.Add(new Run(visText));
+                        hl.Click += (s, e) =>
+                        {
+                            if (s is Hyperlink h && h.Tag is string tag && tag.StartsWith("RIF:"))
+                                MostraPopupVersetto(tag[4..], h);
+                        };
+                        parts.Add(hl);
+                    }
+                    pos = m.Index + m.Length;
+                }
+                if (pos < clean.Length)
+                    parts.Add(new Run(clean[pos..]));
+                if (parts.Count == 0) continue;
+                if (run.Parent is Span sp)
+                {
+                    foreach (Inline p in parts) sp.Inlines.InsertBefore(run, p);
+                    sp.Inlines.Remove(run);
+                }
+                else if (run.Parent is Paragraph par)
+                {
+                    foreach (Inline p in parts) par.Inlines.InsertBefore(run, p);
+                    par.Inlines.Remove(run);
+                }
+            }
+            catch { }
+        }
+    }
+
+    private static async void MostraPopupVersetto(string refText, Hyperlink sender)
+    { // TODO2 controlla
+        try
+        {
+            Match m = RiferimentoRegex.Match(refText);
+            if (!m.Success) { MessageBox.Show("Regex fallito: " + refText); return; }
+            string token = m.Groups[1].Value.Trim().ToLowerInvariant().Replace(" ", "").Replace(".", "");
+            byte libroNum = MainWindow.Testi.GetLibroNumeroDaAbbreviazione(token);
+            if (libroNum < 1 || libroNum > 73)
+            {
+                MessageBox.Show("Libro non trovato: " + m.Groups[1].Value);
+                return;
+            } // TODO2 risorse e anche altrove in funziona
+            byte cap = byte.Parse(m.Groups[2].Value);
+            byte vers = m.Groups[3].Success ? byte.Parse(m.Groups[3].Value) : (byte)1;
+            byte endVers = m.Groups[4].Success ? byte.Parse(m.Groups[4].Value) : vers;
+            string versione = MainWindow.Testi.UltimaBibbia;
+            if (string.IsNullOrEmpty(versione))
+            { 
+                Collection<string> b = MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia); if (b.Count > 0) versione = b[0];
+            }
+            if (string.IsNullOrEmpty(versione)) { MessageBox.Show("Nessuna Bibbia disponibile"); return; }
+            string abbrev = MainWindow.Testi.LibriAbbreviazioniRiconosciute.Abbreviazione((byte)libroNum);
+            if (string.IsNullOrEmpty(abbrev)) { MessageBox.Show("Abbreviazione non trovata per libro " + libroNum); return; }
+            string rifString;
+            if (m.Groups[3].Success)
+            {
+                rifString = $"{abbrev}{cap}:{vers}";
+                if (endVers > vers) rifString += $"-{endVers}";
+            }
+            else
+            {
+                byte maxVers = MainWindow.Testi.VersettiInCapitolo((byte)libroNum, cap, versione);
+                rifString = $"{abbrev}{cap}:1-{maxVers}";
+            }
+            FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(rifString, versione);
+            if (doc == null) {
+                MessageBox.Show("FlowDocument = null"); return;
+            }
+            if (doc.Blocks.Count == 0) return;
+            Brush fgBr = (Brush)Application.Current.FindResource("AppForegroundBrush");
+            RtfColorTransformer.ApplyThemeToDocument(doc, ThemeManager.IsDark(MainWindow.settings.ThemeMode), fgBr, true);
+            EditorDocumentView? editorView = App.DockingHost.OpenEditorDocument(doc, refText);
+            editorView?.IsRiferimentoBiblico = true;
+        }
+        catch (Exception ex) { MessageBox.Show("Errore: " + ex.Message); }
     }
 }

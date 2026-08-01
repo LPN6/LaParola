@@ -1,8 +1,10 @@
 using AvalonDock;
 using AvalonDock.Layout;
 using AvalonDock.Layout.Serialization;
+using LaParola.Dialogs;
 using LaParola.DocumentViews;
 using LaParola.Models;
+using LaParola.Services;
 using LaParola.ToolViews;
 using LaParola.Utilities;
 using Microsoft.Win32;
@@ -23,7 +25,12 @@ namespace LaParola;
 // per passare SmartScreen, usa https://www.microsoft.com/en-us/wdsi/filesubmission 
 // per controllare il contenuto di un FlowDocument, System.Windows.Markup.XamlWriter.Save(finalDoc) in Immediate Window
 
-// TODO2 versione 8.0.5
+// TODO2 Regex per identificare riferimenti da Berea
+// TODO2 versione 8.0.6
+// TODO2 togliere tutti "var "
+// TODO2 all'uscita con note modificate, ci vuole tanto tempo per scrivere le modifiche e chiudere il programma
+// TODO2 importare Henry come Libro dà Out of Memory errore
+// TODO2 perché parlare in lingue importato ha ipertesto (ma senza hover), ma Brani no? forse CollegaCitazioniEEscape?
 
 // TODO2 in TextGen, multiple versioni, hover non cambia colore; anche solo uno commentario ma con alternare
 // TODO2 rimuovere righe vuote addizionali, soprattutto in TextGen
@@ -114,6 +121,8 @@ public partial class MainWindow : Window
     private ConverterToolView? _converterView;
     private OptionsToolView? _optionsView;
     private LibraryToolView? _libraryView;
+    private ReferenceSearchToolView? _riferimentiView;
+    private AggiungiTesti? _aggiungiTesti;
 
     private object SearchToolViewInstance()
         => _searchView ??= new SearchToolView();
@@ -129,6 +138,12 @@ public partial class MainWindow : Window
 
     private object LibraryToolViewInstance()
         => _libraryView ??= new LibraryToolView();
+
+    private object ReferenceSearchToolViewInstance()
+        => _riferimentiView ??= new ReferenceSearchToolView();
+
+    private object AggiungiTestiInstance()
+        => _aggiungiTesti ??= new AggiungiTesti();
 
     internal static Texts Testi = null!;
     internal static AppSettings settings = new();
@@ -149,7 +164,10 @@ public partial class MainWindow : Window
     public static readonly RoutedUICommand FontCommand = new("Font", "FontCommand", typeof(MainWindow));
     public static readonly RoutedUICommand MostraCommand = new("Mostra", "MostraCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ConverterCommand = new("Converter", "ConverterCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand VoiceCommand = new("Voice", "VoiceCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand AddTextsCommand = new("AddTexts", "AddTextsCommand", typeof(MainWindow));
     public static readonly RoutedUICommand OptionsCommand = new("Options", "OptionsCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand RiferimentiCommand = new("Riferimenti", "RiferimentiCommand", typeof(MainWindow));
 
     internal static readonly string LPN_ANCORA = "LPN_ANCORA_";
     internal static Regex AncoraRegEx = new(LPN_ANCORA + @".*?(\d{8})");
@@ -166,8 +184,12 @@ public partial class MainWindow : Window
         Services.ThemeManager.ApplyDockTheme(Dock, settings.ThemeMode);
         App.ThemeManager.HookSystemThemeChanges(Dock, settings.ThemeMode);
 
+        MenuRiferimenti.Visibility = Visibility.Collapsed; // TODO2 rimettere
+
         Loaded += MainWindow_Loaded;
         Closing += MainWindow_Closing;
+
+        StatusItemsControl.ItemsSource = Services.StatusService.Tasks;
     }
 
     protected override void OnSourceInitialized(EventArgs e)
@@ -228,12 +250,17 @@ public partial class MainWindow : Window
                 UpdateEditorMenuState();
             };
 
+            App.DockingHost.ActiveWindowChanged += (_, _) =>
+            {
+                UpdateMenuState();
+            };
+
             AggiornaMenuVisualizza();
 
             if (Testi.NomiVersioni().Count == 0)
             {
-                MessageBoxLPN.Show(this, // TODO2 cambiare link per nuovi testi (in risorse x 2)
-                    (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Go to https://www.laparola.net/programma/windowsbeta.php to install texts to read."),
+                MessageBoxLPN.Show(this,
+                    (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Use the 'Add Texts' command of the Tools menu to add some texts."),
                     (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
             }
 
@@ -306,6 +333,27 @@ public partial class MainWindow : Window
                         break;
                 }
             }
+        }
+    }
+
+    private void DockingManager_DocumentClosed(object sender, DocumentClosedEventArgs e)
+    {
+        // Verifichiamo se il contenuto del documento appena chiuso è il tuo UserControl
+        if (e.Document.Content is ViewerDocumentView viewDocument)
+        {
+            // Il pannello è stato chiuso permanentemente dalla "X": spegniamo la voce!
+            viewDocument.StoppaSintesiVocale();
+
+            // Se hai implementato IDisposable, questo è anche il momento perfetto per chiamarlo:
+            // viewDocument.Dispose();
+        }
+        else if (e.Document.Content is EditorDocumentView editorDocument)
+        {
+            // Il pannello è stato chiuso permanentemente dalla "X": spegniamo la voce!
+            editorDocument.StoppaSintesiVocale();
+
+            // Se hai implementato IDisposable, questo è anche il momento perfetto per chiamarlo:
+            // viewDocument.Dispose();
         }
     }
 
@@ -424,15 +472,15 @@ public partial class MainWindow : Window
         {
             //HideDefaultToolWindows();
 
-            string testo = "Questa è la versione beta (di StringheBranoCommentario) di LaParola 8.\n\n" +
+            string testo = "Questa è la versione beta (cioè di prova) di LaParola 8.\n\n" +
                 "Usa il menu 'Visualizza' per leggere la Bibbia. Usa il menu 'Strumenti' per altre possibili azioni da eseguire. Altre funzionalità saranno aggiunte prossimamente.\n\n" +
                 "La disposizione delle finestre è molto flessibile: trascinando il titolo di una finestra, potete spostare, ancorare, affiancare e sovrapporre le finestre come preferite. Potete aprire più finestre e organizzarle come volete.\n\n" +
                 "Se trovi dei problemi e hai dei suggerimenti, scrivimi a info@laparola.net.\n\n" +
                 "-----------------------------------------\n\n" +
                 "This is the beta version of LaParola 8.\n\n" +
                 "Use the 'View' menu to read the Bible. Use the 'Tools' menu for other possible actions. Further features will be added soon.\n\n" +
-"The window layout is very flexible: by dragging a window's title bar, you can move, dock, tile or overlap windows as you wish. You can open multiple windows and arrange them in any way.\n\n" +
-"If you encounter any issues or have suggestions, please email me at info@laparola.net.";
+                "The window layout is very flexible: by dragging a window's title bar, you can move, dock, tile or overlap windows as you wish. You can open multiple windows and arrange them in any way.\n\n" +
+                "If you encounter any issues or have suggestions, please email me at info@laparola.net.";
             CreaEditorDocument(testo, ((string)(Application.Current.TryFindResource("MenuAbout") ?? "About LaParola")).Replace("_", ""));
 
             bool versioneVisualizzata = false;
@@ -477,6 +525,8 @@ public partial class MainWindow : Window
             if (id == "tool.converter") { args.Content = ConverterToolViewInstance(); return; }
             if (id == "tool.options") { args.Content = OptionsToolViewInstance(); return; }
             if (id == "tool.library") { args.Content = LibraryToolViewInstance(); return; }
+            if (id == "tool.riferimenti") { args.Content = ReferenceSearchToolViewInstance(); return; }
+            if (id == "tool.aggiungitesti") { args.Content = AggiungiTestiInstance(); return; }
 
             // 2) Viewer docs: ricrea e applica placeholder state
             if (id.StartsWith("doc.viewer."))
@@ -531,13 +581,6 @@ public partial class MainWindow : Window
         App.DockingHost.OpenEditorDocument(doc, titolo);
     }
 
-    //private void HideDefaultToolWindows()
-    //{
-    //TextGenToolAnchorable?.Hide();
-    //ConverterToolAnchorable?.Hide();
-    //OptionsToolAnchorable?.Hide();
-    //}
-
     private void ShowLoadingOverlay(bool show)
     {
         if (show)
@@ -573,6 +616,22 @@ public partial class MainWindow : Window
         MenuSalva.IsEnabled = enabled;
         MenuSalvaCome.IsEnabled = enabled;
         //MenuChiudi.IsEnabled = App.DockingHost.HasClosableContent;
+    }
+
+    private void UpdateMenuState()
+    {
+        LayoutContent? content = App.DockingHost.GetActiveLayoutContent();
+        if (content is LayoutDocument document)
+        {
+            if (document.Content is EditorDocumentView || document.Content is ViewerDocumentView)
+                MenuVoce.IsEnabled = true;
+            else
+                MenuVoce.IsEnabled = false;
+        }
+        else
+        {
+            MenuVoce.IsEnabled = false;
+        }
     }
 
     internal void UpdateShortcutBindings(string lingua)
@@ -689,22 +748,22 @@ public partial class MainWindow : Window
         TextSelection selection = edv.Editor.Selection;
 
         // 1. Safely extract current formatting properties, using type-patterns to gracefully fall back if mixed selections return UnsetValue
-        var fontFamVal = selection.GetPropertyValue(TextElement.FontFamilyProperty);
+        object fontFamVal = selection.GetPropertyValue(TextElement.FontFamilyProperty);
         FontFamily currentFontFamily = fontFamVal is FontFamily ff ? ff : edv.Editor.FontFamily;
 
-        var fontSizeVal = selection.GetPropertyValue(TextElement.FontSizeProperty);
+        object fontSizeVal = selection.GetPropertyValue(TextElement.FontSizeProperty);
         double currentFontSize = (fontSizeVal is double fs) ? fs * 3.0 / 4.0 : edv.Editor.FontSize * 3.0 / 4.0;
 
-        var fontWeightVal = selection.GetPropertyValue(TextElement.FontWeightProperty);
+        object fontWeightVal = selection.GetPropertyValue(TextElement.FontWeightProperty);
         bool isBold = fontWeightVal is FontWeight fw && fw == FontWeights.Bold;
 
-        var fontStyleVal = selection.GetPropertyValue(TextElement.FontStyleProperty);
+        object fontStyleVal = selection.GetPropertyValue(TextElement.FontStyleProperty);
         bool isItalic = fontStyleVal is FontStyle fst && fst == FontStyles.Italic;
 
-        var textDecVal = selection.GetPropertyValue(Inline.TextDecorationsProperty);
+        object textDecVal = selection.GetPropertyValue(Inline.TextDecorationsProperty);
         bool isUnderline = textDecVal is TextDecorationCollection tdc && tdc.Count > 0;
 
-        var foregroundVal = selection.GetPropertyValue(TextElement.ForegroundProperty);
+        object foregroundVal = selection.GetPropertyValue(TextElement.ForegroundProperty);
         Brush currentBrush = foregroundVal is Brush b ? b : edv.Editor.Foreground;
         string currentColorStr = currentBrush?.ToString() ?? "Black";
 
@@ -1098,8 +1157,6 @@ public partial class MainWindow : Window
 
     private void Search_Executed(object sender, ExecutedRoutedEventArgs e)
     {
-        //App.DockingHost.ShowTool("tool.search"); 
-
         // Assicurati che Testi sia pronto prima di creare la view
         if (Testi == null)
             return; // oppure mostra un messaggio / lascia l’overlay attivo
@@ -1119,6 +1176,25 @@ public partial class MainWindow : Window
     }
 
     private void Converter_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.converter");
+
+    private void Riferimenti_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.riferimenti");
+
+    private void Voice_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        LayoutContent? content = App.DockingHost.GetActiveLayoutContent();
+        if (content is LayoutDocument document)
+        {
+            if (document.Content is EditorDocumentView editor)
+                editor.ToggleLettura();
+            else if (document.Content is ViewerDocumentView viewer)
+                viewer.ToggleLettura();
+        }
+    }
+
+    private void AddTexts_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        App.DockingHost.ShowTool("tool.aggiungitesti");
+    }
 
     private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
     {

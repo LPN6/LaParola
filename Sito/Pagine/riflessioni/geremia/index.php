@@ -8,7 +8,7 @@ $titolo = "Geremia";
 $sezione = "Strumenti";
 require("../../capo.php");
 ?>
-<h1>Geremia</h1>
+<h1>Geremia e Lamentazioni</h1>
 <h2>Struttura</h2>
 <p>La chiamata di Geremia (1)</p>
 <p>Il giudizio di Dio su Giuda e Gerusalemme (2-25)<br />

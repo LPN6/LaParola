@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime;
+﻿using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace LaParola.Services
 {
@@ -68,7 +63,7 @@ namespace LaParola.Services
                     // OPTIONAL: If you want them to see just the ONE latest message on their first run, 
                     // uncomment the lines below:
                     /*
-                    var latestMessage = allMessages.OrderByDescending(m => m.Id).First();
+                    AppMessage latestMessage = allMessages.OrderByDescending(m => m.Id).First();
                     if ((DateTime.Now - latestMessage.Date).TotalDays <= 90) // Only if it's recent
                     {
                         DisplayMessages(new List<AppMessage> { latestMessage });
@@ -108,7 +103,7 @@ namespace LaParola.Services
             {
                 // Example: Open a custom announcement window, 
                 // or load them into a notification area in your main window.
-                foreach (var msg in messages)
+                foreach (AppMessage msg in messages)
                 {
                     if (MainWindow.settings.Lingua == "it")
                     {

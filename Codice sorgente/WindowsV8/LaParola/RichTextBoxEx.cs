@@ -362,12 +362,14 @@ namespace LaParola
         /// </summary>
         private static bool IsCarattereDaScartare(char c)
         {
-            // AGGIORNAMENTO: Proteggiamo l'apostrofo (sia dritto ' che tipografico ’) 
+            // Proteggiamo l'apostrofo (sia dritto ' che tipografico ’) 
             // per evitare che PulisciParola tranci via la coda di "all'" dopo che l'abbiamo isolata.
-            if (char.IsLetterOrDigit(c) || c == '\'' || c == '’') return false;
+            if (char.IsLetterOrDigit(c) || c == '\'' || c == '’')
+                return false;
 
-            var categoria = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
-            if (categoria == System.Globalization.UnicodeCategory.NonSpacingMark) return false;
+            UnicodeCategory categoria = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
+            if (categoria == System.Globalization.UnicodeCategory.NonSpacingMark)
+                return false;
 
             return true;
         }

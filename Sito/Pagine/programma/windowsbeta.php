@@ -18,19 +18,26 @@ li possa correggere nella prossima versione beta.<p>
 <p>Bisogna scaricare l'app beta in una qualsiasi cartella.
 Non serve l'installazione; basta avviare il file scaricato.<br />
 Ci sono due versioni dell'app da cui scegliere:<br />
-1. Versione autonoma da <a href="LaParola0.exe">scaricare qui</a>; circa 150Mb. Non ha bisogno di certi componenti facoltativi di Windows<br />
-2. Versione dipendente da <a href="LaParola.exe">scaricare qui</a>; circa 5Mb. Possibilmente (dipende dalle app che hai gi&agrave; installato) la prima volta che avvi l'app ti dir&agrave; che devi prima installare
-.NET Desktop Runtime versione 8; in quel caso segui le istruzioni per scaricare e avviare il programma per installare il componente.</p>
+1. Versione autonoma da <a href="LaParola0.exe">scaricare qui</a>; circa 168Mb. Non ha bisogno di certi componenti facoltativi di Windows<br />
+2. Versione dipendente da <a href="LaParola.exe">scaricare qui</a>; circa 37Mb. Possibilmente (dipende dalle app che hai gi&agrave; installato) la prima volta che avvi l'app ti dir&agrave; che devi prima installare
+.NET Desktop Runtime versione 10; in quel caso segui le istruzioni per scaricare e avviare il programma per installare il componente.</p>
 
 <p>L'app beta trova tutte le versioni installate dalla versione 7 dell'app nella cartella
 c:\users\&lt;nome utente&gt;\AppData\Roaming\LaParola .
 Se non hai la versione 7 installata o le versioni della Bibbia non sono installate in quella cartella,
-bisogna scaricare e scompattare i file desiderati da <a href="/program/addins.php">https://www.laparola.net/program/addins.php</a>
-e mettere i file con estensione .laparola nella stessa cartella dell'app beta.</p>
+usa il comando <i>Aggiungi testi</i> del menu Strumenti per installare i testi desiderati.</p>
 
 <p> L'installazione sar&agrave; migliorata in una versione futura della versione beta.</p>
 
 <h2>Caratteristiche</h2>
+
+<h3>Versione 8.0.5</h3>
+<ul>
+<li>Sintesi vocale di testi visualizzati.</li>
+<li>Aggiungi testi: Scarica e installa i testi creati da LaParola</li>
+<li>Biblioteca: pulsante per aggiungere testi - da LaParola (come qui sopra), importando altri formati, creando una nuova collezione di note</li>
+<li><i>Opzioni:</i> diverse nuove impostazioni</li>
+</ul>  
 
 <h3>Versione 8.0.4</h3>
 <ul>

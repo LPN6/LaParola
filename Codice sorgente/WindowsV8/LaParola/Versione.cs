@@ -454,6 +454,7 @@ namespace LaParola
             Rimuovi();
             File.Delete(info.NomeDelFile);
         }
+
         public void Chiudi()
         {
             string nomeVersione = info.Nome;
@@ -473,8 +474,8 @@ namespace LaParola
 
                 try
                 {
-                    using var fsNuovo = new FileStream(nomeFile, FileMode.Create, FileAccess.Write);
-                    using var bwNuovo = new BinaryWriter(fsNuovo);
+                    using FileStream fsNuovo = new(nomeFile, FileMode.Create, FileAccess.Write);
+                    using BinaryWriter bwNuovo = new(fsNuovo);
 
                     Version versioneApp = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(8, 0, 0);
                     bwNuovo.Write(['L', 'P', 'N', System.Convert.ToChar(versioneApp.Major), System.Convert.ToChar(versioneApp.Minor), System.Convert.ToChar(versioneApp.Build), (char)1]);
@@ -2209,7 +2210,7 @@ namespace LaParola
             string formatoRicerca, formatoRicercaNote;
             (formatoRicerca, formatoRicercaNote) = GetFormatoRicerca();
 
-            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), true, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
+            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), false, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
 
             // Direct compilation without string conversion overhead
             return await Texts.MergeManyRtfAsDocumentAsync(ConvertiLink(stringheRtf));

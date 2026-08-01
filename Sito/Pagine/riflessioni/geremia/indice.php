@@ -9,5 +9,6 @@
 <li><?if ($n<>6) echo "<a href=\"geremia31.php\">";?>Geremia 31:1-34<?if ($n<>6) echo "</a>";?></li>
 <li><?if ($n<>7) echo "<a href=\"geremia38.php\">";?>Geremia 38<?if ($n<>7) echo "</a>";?></li>
 <li><?if ($n<>8) echo "<a href=\"geremia42.php\">";?>Geremia 42:1-43:7<?if ($n<>8) echo "</a>";?></li>
-
+<li><?if ($n<>9) echo "<a href=\"lamentazioni.php\">";?>Lamentazioni<?if ($n<>9) echo "</a>";?></li>
+<li><?if ($n<>10) echo "<a href=\"geremia44.php\">";?>Geremia 44-45<?if ($n<>10) echo "</a>";?></li>
 </ol>

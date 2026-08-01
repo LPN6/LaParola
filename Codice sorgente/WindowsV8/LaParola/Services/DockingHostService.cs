@@ -1,5 +1,6 @@
 using AvalonDock;
 using AvalonDock.Layout;
+using LaParola.Dialogs;
 using LaParola.DocumentViews;
 using LaParola.ToolViews;
 using Microsoft.Win32;
@@ -36,6 +37,7 @@ public class DockingHostService
     }
 
     public event EventHandler? ActiveEditorChanged;
+    public event EventHandler? ActiveWindowChanged;
 
     public EditorDocumentView? GetActiveEditor()
     {
@@ -46,8 +48,7 @@ public class DockingHostService
     {
         EditorDocumentView? previous = _lastActiveEditor;
 
-        if (_dock?.Layout?.ActiveContent?.Content
-            is EditorDocumentView editor)
+        if (_dock?.Layout?.ActiveContent?.Content is EditorDocumentView editor)
         {
             _lastActiveEditor = editor;
         }
@@ -57,6 +58,8 @@ public class DockingHostService
         {
             ActiveEditorChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        ActiveWindowChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void Dock_DocumentClosing(object? sender, DocumentClosingEventArgs e)
@@ -111,8 +114,8 @@ public class DockingHostService
             return;
         }
 
-        // INTERCEPT OPTIONS, LIBRARY: Redirect to the wide LayoutDocumentPane (Visual Studio style)
-        if (contentId == "tool.options" || contentId == "tool.library")
+        // INTERCEPT OPTIONS, LIBRARY, RIFERIMENTI, AGGIUNGI_TESTI: Redirect to the wide LayoutDocumentPane (Visual Studio style)
+        if (contentId == "tool.options" || contentId == "tool.library" || contentId == "tool.aggiungitesti" || contentId == "tool.riferimenti")
         {
             ShowToolAsDocument(contentId);
             return;
@@ -125,7 +128,25 @@ public class DockingHostService
                             .OfType<LayoutAnchorablePane>()
                             .FirstOrDefault();
 
-            if (pane == null) return;
+            if (pane == null)
+            {
+                LayoutPanel rootPanel = _dock.Layout.RootPanel;
+                if (rootPanel == null) return;
+
+                // 1. Look for an existing group. If pruned, recreate it.
+                LayoutAnchorablePaneGroup? group = _dock.Layout.Descendents().OfType<LayoutAnchorablePaneGroup>().FirstOrDefault();
+                if (group == null)
+                {
+                    group = new LayoutAnchorablePaneGroup { DockWidth = new System.Windows.GridLength(320) };
+
+                    // Insert at index 0 to force it to dock on the far left of the main layout
+                    rootPanel.Children.Insert(0, group);
+                }
+
+                // 2. Create the pane and add it to the group
+                pane = new LayoutAnchorablePane();
+                group.Children.Add(pane);
+            }
 
             object? v = null;
             string titolo;
@@ -182,11 +203,6 @@ public class DockingHostService
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
             else if (contentId == "tool.converter")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");
-            /*else if (contentId == "tool.library")
-                anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("LibreriaTitolo") ?? "Library");
-            else if (contentId == "tool.options") vecchio stile
-                anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
-            */
             else
                 anchorable.Title = contentId; // non dovrebbe succedere
             anchorable.IsVisible = true;
@@ -204,15 +220,22 @@ public class DockingHostService
 
         if (existingDoc != null)
         {
-            // If it's already open, refresh the localized title and bring it to focus
-            if (contentId == "tool.options")
+            existingDoc.Content ??= contentId switch
+                {
+                    "tool.options" => new OptionsToolView(),
+                    "tool.library" => new LibraryToolView(),
+                    "tool.riferimenti" => new ReferenceSearchToolView(),
+                    _ => null
+                };
+            // Refresh title and focus
+            existingDoc.Title = contentId switch
             {
-                existingDoc.Title = (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options");
-            }
-            else if (contentId == "tool.library")
-            {
-                existingDoc.Title = (string)(System.Windows.Application.Current.TryFindResource("BibliotecaTitolo") ?? "Library");
-            }
+                "tool.options" => (string)(System.Windows.Application.Current.TryFindResource("OpzioniTitolo") ?? "Options"),
+                "tool.library" => (string)(System.Windows.Application.Current.TryFindResource("BibliotecaTitolo") ?? "Library"),
+                "tool.aggiungitesti" => (string)(System.Windows.Application.Current.TryFindResource("AggiungiTestiTitolo") ?? "Add Texts"),
+                "tool.riferimenti" => (string)(System.Windows.Application.Current.TryFindResource("RiferimentiTitolo") ?? "Reference Search"),
+                _ => existingDoc.Title
+            };
             existingDoc.IsSelected = true;
             existingDoc.IsActive = true;
             return;
@@ -242,14 +265,36 @@ public class DockingHostService
         }
         else if (contentId == "tool.library")
         {
-            // Instantiate the library view and title
             LibraryToolView v = new();
             string titolo = (string)(System.Windows.Application.Current.TryFindResource("BibliotecaTitolo") ?? "Library");
+            layoutDoc = new()
+            {
+                Title = titolo,
+                ContentId = contentId,
+                Content = v
+            };
+        }
+        else if (contentId == "tool.riferimenti")
+        {
+            ReferenceSearchToolView v = new();
+            string titolo = (string)(System.Windows.Application.Current.TryFindResource("RiferimentiTitolo") ?? "Reference Search");
+            layoutDoc = new()
+            {
+                Title = titolo,
+                ContentId = contentId,
+                Content = v
+            };
+        }
+        else if (contentId == "tool.aggiungitesti")
+        {
+            // Instantiate the view and title
+            AggiungiTesti v = new();
+            string titolo = (string)(System.Windows.Application.Current.TryFindResource("AggiungiTestiTitolo") ?? "Add Texts");
             // Wrap it inside a LayoutDocument instead of a LayoutAnchorable
             layoutDoc = new()
             {
                 Title = titolo,
-                ContentId = contentId, // "tool.library"
+                ContentId = contentId, // "tool.aggiungitesti"
                 Content = v
             };
         }
@@ -368,6 +413,31 @@ public class DockingHostService
         return view;
     }
 
+    public AggiungiTesti? OpenAggiungiTesti(string percorso)
+    {
+        LayoutDocumentPane? docPane = _dock?.Layout?.Descendents()
+    .OfType<LayoutDocumentPane>()
+    .FirstOrDefault();
+
+        if (docPane == null)
+            return null;
+
+        AggiungiTesti view = new();
+
+        LayoutDocument layoutDoc = new()
+        {
+            Title = Path.GetFileNameWithoutExtension(percorso),
+            ContentId = $"doc.immagine.{Guid.NewGuid():N}",
+            Content = view
+        };
+        docPane.Children.Add(layoutDoc);
+        layoutDoc.IsSelected = true;
+        layoutDoc.IsActive = true;
+
+        return view;
+
+    }
+
     public Immagine? OpenImmagineDocument(string percorso)
     {
         if (!File.Exists(percorso) || string.IsNullOrWhiteSpace(percorso))
@@ -476,7 +546,7 @@ public class DockingHostService
         GetActiveEditor()?.SaveDocumentAs();
     }
 
-    public void SendFlowDocumentToActiveEditor(FlowDocument doc, string titolo, string versione="")
+    public void SendFlowDocumentToActiveEditor(FlowDocument doc, string titolo, string versione = "")
     {
         OpenEditorDocument(doc, titolo, versione);
     }
