@@ -99,7 +99,11 @@ namespace LaParola
         /// <summary>
         /// La collezione è bloccata, ma non può essere sbloccata dall'utente.
         /// </summary>
-        BloccatoSempre
+        BloccatoSempre,
+        /// <summary>
+        /// La collezione è bloccata, ma non può essere sbloccata né eliminata dall'utente.
+        /// </summary>
+        Permanente
     }
 
     #endregion
@@ -6614,7 +6618,7 @@ Riferimento? paroleRicercate = null)
             return finalDoc;
         }
 
-        private static FlowDocument LoadRtfToFlowDocumentOnUiThread(string rtf)
+        public static FlowDocument LoadRtfToFlowDocumentOnUiThread(string rtf)
         {
             FlowDocument doc = new();
             TextRange range = new(doc.ContentStart, doc.ContentEnd);

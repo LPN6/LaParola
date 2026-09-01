@@ -80,6 +80,11 @@
                 <!-- Import Type Selection -->
                 <Label Grid.Row="1" Grid.Column="0" x:Name="LabelCome" Content="{DynamicResource ImportaDialogoCome}" VerticalAlignment="Center" />
                 <StackPanel Grid.Row="1" Grid.Column="1" x:Name="StackCome" Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource ImportaDialogoComeAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </StackPanel.ToolTip>
                     <RadioButton x:Name="ComeCommentario" 
                                  Content="{DynamicResource ImportaDialogoComeCommentario}" 
                                  GroupName="ImportType" 
@@ -208,13 +213,11 @@
                     Margin="0,15,0,0">
             <Button Content="{DynamicResource PulsanteOK}" 
                     Width="85" 
-                    Height="28" 
                     IsDefault="True" 
                     Click="BtnOk_Click" 
                     Margin="0,0,10,0" />
             <Button Content="{DynamicResource PulsanteAnnulla}"
                     Width="85" 
-                    Height="28" 
                     IsCancel="True" 
                     Click="BtnCancel_Click" />
         </StackPanel>

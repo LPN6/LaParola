@@ -15,8 +15,6 @@ using System.Windows.Shapes;
 
 namespace LaParola
 {
-    // TODO2 rimuovere Visibility="Collapsed" da XAML quando Help Centre è pronto
-
     /// <summary>
     /// Interaction logic for HelpFlyout.xaml
     /// </summary>
@@ -26,6 +24,9 @@ namespace LaParola
         {
             InitializeComponent();
         }
+
+        // Command-like event (simpler than ICommand for now)
+        public event RoutedEventHandler? HelpClicked;
 
         // Help text
         public static readonly DependencyProperty HelpTextProperty =
@@ -46,9 +47,6 @@ namespace LaParola
             get => (string)GetValue(HelpLinkTextProperty);
             set => SetValue(HelpLinkTextProperty, value);
         }
-
-        // Command-like event (simpler than ICommand for now)
-        public event RoutedEventHandler HelpClicked;
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {

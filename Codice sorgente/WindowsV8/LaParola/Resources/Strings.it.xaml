@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    <sys:String x:Key="AppTitle">LaParola</sys:String>
+    <sys:String x:Key="AppTitolo">LaParola</sys:String>
     <sys:String x:Key="MainCaricamento">Caricamento in corso</sys:String>
     
     <sys:String x:Key="Errore">Errore</sys:String>
@@ -17,6 +17,7 @@
     <sys:String x:Key="MenuVisualizzaCommentario">_Commentario</sys:String>
     <sys:String x:Key="MenuVisualizzaDizionario">_Dizionario</sys:String>
     <sys:String x:Key="MenuVisualizzaLibro">_Libro</sys:String>
+    <sys:String x:Key="MenuVisualizzaZoom">_Zoom</sys:String>
     <sys:String x:Key="MenuStrumenti">_Strumenti</sys:String>
     <sys:String x:Key="MenuVisualizzaImmagine">_Immagine...</sys:String>
     <sys:String x:Key="MenuAiuto">_?</sys:String>
@@ -47,6 +48,7 @@
     <sys:String x:Key="MenuSostituisci">Sostit_uisci...</sys:String>
     <sys:String x:Key="MenuSostituisciProssima">S_ostituisci successivo</sys:String>
 
+    <sys:String x:Key="ImmagineTitolo">Immagine</sys:String>
     <sys:String x:Key="ImmagineAiuto">Questa finestra mostra un'immagine. Se l'immagine è stata creata per il programma, può avere dei collegamenti ipertestuali: quando il mouse è sopra un collegamento, il cursore cambia forma e il titolo della nota è visualizzato in fondo alla finestra, e un clic apre la nota. Un clic con il tasto destro del mouse sull'immagine può cambiare lo zoom dell'immagine.</sys:String>
     <sys:String x:Key="ImmaginiApriTitolo">Seleziona una o più immagini</sys:String>
     <sys:String x:Key="ImmaginiFileFiltro">Immagini (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|Tutti i file (*.*)|*.*</sys:String>
@@ -55,7 +57,8 @@
     <sys:String x:Key="MenuBiblioteca">_Biblioteca</sys:String>
     <sys:String x:Key="MenuRicerca">_Ricerca</sys:String>
     <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
-    <sys:String x:Key="MenuConverter">_Convertitore misure</sys:String>
+    <sys:String x:Key="MenuCreaChiave">Crea _chiave</sys:String>
+    <sys:String x:Key="MenuConverter">Conver_titore misure</sys:String>
     <sys:String x:Key="MenuRiferimenti">_Cerca riferimenti</sys:String>
     <sys:String x:Key="RiferimentiTitolo">Cerca riferimenti</sys:String>
     <sys:String x:Key="RiferimentiCerca">Cerca</sys:String>
@@ -64,10 +67,12 @@
     <sys:String x:Key="MenuVoce">Sintesi _vocale</sys:String>
     <sys:String x:Key="MenuAggiungiTesti">_Aggiungi testi</sys:String>
     <sys:String x:Key="MenuOptions">_Opzioni</sys:String>
+    <sys:String x:Key="MenuAssistenza">_Centro assistenza</sys:String>
     <sys:String x:Key="MenuAbout">_Informazioni su LaParola</sys:String>
     <sys:String x:Key="MainNessunaVersione">Nessuno testo trovato. Usa il commando 'Aggiungi testi' del menu Strumenti per aggiungere qualche testo.</sys:String>
+    <sys:String x:Key="MainNessunaGuida">Il file della guida non è stato trovato. Potrebbe essere un problema interno del programma.</sys:String>
 
-    <sys:String x:Key="ViewerTitle">Documento</sys:String>
+    <sys:String x:Key="ViewerTitolo">Visualizzatore</sys:String>
     <sys:String x:Key="ViewerAiuto">Questa finestra mostra il testo della Bibbia e altri testi. Il primo pulsante nella barra degli strumenti attiva/disattiva la visibilità dell'indice. I pulsanti seguenti forniscono vari modi per passare a un'altra sezione del testo. L'ultimo pulsante connette questa finestra ad altre finestre, in modo che siano collegate e spostate insieme.</sys:String>
     <sys:String x:Key="ViewerSommarioAiuto">Mostra/nascondi l'indice a sinistra</sys:String>
     <sys:String x:Key="ViewerRiferimentoAiuto">Digita un riferimento (es. Gv 1:1)</sys:String>
@@ -99,10 +104,11 @@
     <sys:String x:Key="ViewerSinc9">Sincronizza 9</sys:String>
     <sys:String x:Key="ViewerSincAiuto0">Finestra non sincronizzata. Per sincronizzare il testo, fai clic sul pulsante e scegli lo stesso numero in questa e in un'altra finestra</sys:String>
     <sys:String x:Key="ViewerSincAiutoN">Finestra sincronizzata con le altre finestre del gruppo {0}</sys:String>
+    <sys:String x:Key="ViewerZoomAiuto">Scegli quanto ingrandire o ridurre il testo</sys:String>
     <sys:String x:Key="ViewerVoceAiuto">Inizia la sintesi vocale per leggere questo testo</sys:String>
     <sys:String x:Key="ViewerVoceAiutoFerma">Ferma la sintesi vocale</sys:String>
 
-    <sys:String x:Key="EditorTitle">Documento</sys:String>
+    <sys:String x:Key="EditorTitolo">Documento</sys:String>
     <sys:String x:Key="EditorAiuto">In questa finestra puoi caricare testo da un file o generarlo da alcune delle finestre degli Strumenti. Ci sono alcuni comandi per formattare il testo nella barra degli strumenti della finestra e altri nel menu principale.</sys:String>
     <sys:String x:Key="MenuGrassettoAbb">G</sys:String>
     <sys:String x:Key="MenuCorsivoAbb">C</sys:String>
@@ -163,6 +169,7 @@
     <sys:String x:Key="BibliotecaBloccatoSbloccato">No</sys:String>
     <sys:String x:Key="BibliotecaBloccatoBloccato">Sì</sys:String>
     <sys:String x:Key="BibliotecaBloccatoBloccatoSempre">Sì permanente</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoPermenente">Non può essere cancellato</sys:String>
     <sys:String x:Key="BibliotecaTipoBibbiaAiuto">Contiene il testo di una versione della Bibbia</sys:String>
     <sys:String x:Key="BibliotecaTipoCommentarioAiuto">Contiene commenti ai versetti della Bibbia (per es. commentario)</sys:String>
     <sys:String x:Key="BibliotecaTipoDizionarioAiuto">Contiene spiegazioni di termini (per es. dizionario)</sys:String>
@@ -224,11 +231,13 @@
 
     <sys:String x:Key="ImportaDialogoTitolo">Creare un nuovo testo</sys:String>
     <sys:String x:Key="ImportaDialogoAiuto">Digitare le informazioni sul testo. Il Titolo è obbligatorio, l'Abbreviazione sarà creata automaticamente se non lo metti, gli altri valori sono facoltativi. Se lasci il mouse sopra i campi, ulteriori informazioni sono mostrate.</sys:String>
+    <sys:String x:Key="ImportaDialogoAiutoPagine">Informazioni bibliografiche</sys:String>
     <sys:String x:Key="ImportaDialogoFile">File:</sys:String>
     <sys:String x:Key="ImportaDialogoFileAiuto">Il file con il testo da importare. Per cambiare il file, chiudi questo dialogo e ricominciare.</sys:String>
     <sys:String x:Key="ImportaDialogoCartella">Cartella:</sys:String>
     <sys:String x:Key="ImportaDialogoCartellaAiuto">La cartella che contiene i file con il testo da importare. Per cambiare la cartella, chiudi questo dialogo e ricominciare.</sys:String>
     <sys:String x:Key="ImportaDialogoCome">Importa come:</sys:String>
+    <sys:String x:Key="ImportaDialogoComeAiuto">Importare come commentario crea una nota per ogni versetto trovato nel testo; importare come libro crea un testo continuo, separato in pagine se il file è un PDF</sys:String>
     <sys:String x:Key="ImportaDialogoComeCommentario">Commentario</sys:String>
     <sys:String x:Key="ImportaDialogoComeLibro">Libro</sys:String>
     <sys:String x:Key="ImportaDialogoTitoloTesto">Titolo:</sys:String>
@@ -300,7 +309,7 @@
     <sys:String x:Key="OpzioniVoceNota">Altre voci possono essere installate in Windows, nella sezione "Lingua e area geografica" delle Impostazioni.</sys:String>
     <sys:String x:Key="OpzioniVoceVelocita">Velocità:</sys:String>
     <sys:String x:Key="OpzioniVoceVolume">Volume:</sys:String>
-    <sys:String x:Key="OpzioniVoceEvidenzia">Evidenzia le parole mentre vengono lette</sys:String>
+    <sys:String x:Key="OpzioniVoceEvidenzia">Evidenzia le parole mentre vengono lette con il colore</sys:String>
     <sys:String x:Key="OpzioniVoceSeleziona">Voce:</sys:String>
     <sys:String x:Key="OpzioniAmbiente">Ambiente</sys:String>
     <sys:String x:Key="OpzioniEditorTitolo">Editor</sys:String>
@@ -386,11 +395,11 @@
 \pard\tx3000 0, 1, ..., 9\tab E ENTRO: la seconda parola deve apparire entro questo numero di versetti\par
 \pard\tx3000  \tab SALTA (dentro [...]): il numero massimo di parole che possono essere saltate in una frase\par
 \pard\tx3000 |, !\tab OPPURE\par
-\pard\tx3000 :\tab SALTA QUALSIASI NUMERO (dentro [...]): qualsiasi numero di parole possono essere fra le due parole\par        
+\pard\tx3000 :\tab SALTA QUALSIASI NUMERO (dentro [...]): qualsiasi numero di parole possono essere fra le due parole\par\par
 \b Prima di una parola:\b0\par
-        \pard\tx3000 /\tab Qualsiasi parola che ha questo lemma\par
-        \pard\tx3000 \\\tab Qualsiasi parola che ha lo stesso lemma di questa parola\par
-        \pard\tx3000 ^, ~\tab NON questa parola (o parole se seguito da \ o /; deve seguire E o E ENTRO)\par
+        \pard\tx3000 /\tab Qualsiasi parola che ha questa radice\par
+        \pard\tx3000 \\\tab Qualsiasi parola che ha la stessa radice di questa parola\par
+        \pard\tx3000 ^, ~\tab NON questa parola (o parole se seguito da \\ o /; deve seguire E o E ENTRO)\par\par
         \b Intorno ad espressioni:\b0\par
         \pard\tx3000 (...)\tab Trova prima i versetti che contengono l'espressione dentro le parentesi. Sono necessarie quando l'ordine in cui le parole sono analizzate (da sinistra a destra) non \'e8 l'ordine desiderato\par
         \pard\tx3000 [...], "..."\tab Trova i versetti che contengono questa frase, cio\'e8, queste parole in questo ordine\par
@@ -445,6 +454,31 @@
     <sys:String x:Key="MostraAlternaAiuto">Mostra il brano un versetto dopo l'altro, e per ogni versetto tutti i testi selezionati sono visualizzati. Può essere molto lento per brani lunghi.</sys:String>
     <sys:String x:Key="MostraMostra">Mostra brano</sys:String>
 
+    <sys:String x:Key="CreaChiaveTitolo">Crea chiave</sys:String>
+    <sys:String x:Key="CreaChiaveAiuto">Una chiave è un elenco delle parole in un testo. Seleziona il testo di cui vuoi creare la chiave, e poi le altre impostazioni. Lascia il mouse sopra una parte della finestra per ulteriori informazioni sulle impostazioni.</sys:String>
+    <sys:String x:Key="CreaChiaveText">Testo:</sys:String>
+    <sys:String x:Key="CreaChiaveTextAiuto">Seleziona il testo di cui vuoi creare la concordanza.</sys:String>
+    <sys:String x:Key="CreaChiaveRiferimento">Riferimento:</sys:String>
+    <sys:String x:Key="CreaChiaveRiferimentoAiuto">Digitare qui il riferimento del brano di cui vuoi creare una chiave, per esempio Gen 1:1-2, 1P 3:16. L'app capisce molti formati diversi per i riferimenti. Lascia vuota per tutta la Bibbia.</sys:String>
+    <sys:String x:Key="CreaChiaveTipoTitolo">Chiave di:</sys:String>
+    <sys:String x:Key="CreaChiaveTipoAiuto">Seleziona il tipo di concordanza che vuoi creare.</sys:String>
+    <sys:String x:Key="CreaChiaveTipoParole">Parole</sys:String>
+    <sys:String x:Key="CreaChiaveTipoRadici">Radici</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineTitolo">Ordine delle voci:</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineAiuto">Seleziona l'ordine in cui vuoi che le voci della concordanza siano visualizzate.</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineAlfabetico">Alfabetico</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineNumerico">Numero di apparenze</sys:String>
+    <sys:String x:Key="CreaChiaveOrdinePrima">Prima apparenza</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroMinimo">Numero minimo di apparenze:</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroMinimoAiuto">Seleziona il numero minimo di apparenze per una voce affinché appaia nella concordanza.</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroConRiferimenti">Con riferimenti</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroConRiferimentiAiuto">Includi il riferimento biblico di ogni brano in cui appare la voce.</sys:String>
+    <sys:String x:Key="CreaChiaveEscludiRadici">Escludi le seguenti radici (una per riga):</sys:String>
+    <sys:String x:Key="CreaChiaveEscludiRadiciAiuto">Se la casella è spuntata, nessuna parola di queste radici verrà elencata. (* indica le parole più comuni.)</sys:String>
+    <sys:String x:Key="CreaChiaveCreaChiave">Crea Chiave</sys:String>
+    <sys:String x:Key="CreaChiaveCreazione">Creazione della chiave in corso...</sys:String>
+    <sys:String x:Key="CreaChiaveChiaveTitolo">Chiave di</sys:String>
+
     <sys:String x:Key="MisureTitolo">Convertitore misure</sys:String>
     <sys:String x:Key="MisureAiuto">Sul lato sinistro, scegli l'unità da cui vuoi convertire e digita il numero di quell'unità. Sul lato destro, scegli l'unità in cui vuoi convertire e verrà mostrato il valore in quell'unità.</sys:String>
     <sys:String x:Key="MisurePesi">Pesi:</sys:String>
@@ -466,4 +500,14 @@
 
     <sys:String x:Key="Aiuto">Aiuto per questo pannello</sys:String>
     <sys:String x:Key="AiutoApri">Apri Centro assistenza</sys:String>
+
+    <sys:String x:Key="ColorYellow">Giallo</sys:String>
+    <sys:String x:Key="ColorGold">Oro</sys:String>
+    <sys:String x:Key="ColorOrange">Arancione</sys:String>
+    <sys:String x:Key="ColorRed">Rosso</sys:String>
+    <sys:String x:Key="ColorPink">Rosa</sys:String>
+    <sys:String x:Key="ColorPurple">Viola</sys:String>
+    <sys:String x:Key="ColorLightBlue">Celeste</sys:String>
+    <sys:String x:Key="ColorCyan">Azzurro</sys:String>
+    <sys:String x:Key="ColorGreen">Verde</sys:String>
 </ResourceDictionary>

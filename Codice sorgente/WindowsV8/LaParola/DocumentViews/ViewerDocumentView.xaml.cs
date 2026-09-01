@@ -17,7 +17,7 @@ namespace LaParola.DocumentViews;
 // TODO2 indice in Sommario Dottrina cristiana ha 3 sezioni in un unico link invece di 3 link diversi
 // TODO2 c'è sempre uno spazio addizionale all'inizio del testo biblico in Viewer
 
-// TODO2 toolbar: lista versetti, bookmark, zoom, highlights
+// TODO2 toolbar: lista versetti, bookmark, highlights
 // TODO2 in 7, paralleli, aggiungi, noteNonAggiunte: servono?
 
 public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
@@ -88,6 +88,19 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
     }
 
+    private int _zoom = 100;
+    public int Zoom
+    {
+        get => _zoom;
+        set
+        {
+            if (value < 20) value = 20;
+            if (value > 500) value = 500;
+            _zoom = value;
+            Viewer.LayoutTransform = new ScaleTransform(_zoom / 100.0, _zoom / 100.0);
+        }
+    }
+
     public ViewerDocumentView(string versione)
     {
         InitializeComponent();
@@ -142,8 +155,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
     {
-        // TODO2: Open correct help section
-        MessageBox.Show("Open Help Centre");
+        MainWindow.MostraGuida((string)(Application.Current.TryFindResource("ViewerTitolo") ?? "Viewer"));
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -326,7 +338,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                     if (raggruppaPerLettera)
                     {
                         // Estrae la prima lettera e la rende maiuscola (unificando così 'a' e 'A')
-                        char letteraCorrente = char.ToUpper(titolo[0], CultureInfo.InvariantCulture);
+                        char letteraCorrente = OttieniLetteraBase(titolo);
 
                         if (letteraCorrente != letteraPrecedente)
                         {
@@ -362,6 +374,25 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                 }
             }
         }
+    }
+
+    private static char OttieniLetteraBase(string testo)
+    {
+        if (string.IsNullOrWhiteSpace(testo)) return '?';
+
+        // FormD splits 'ά' into 'α' + combining accent mark
+        string normalized = testo[0].ToString().Normalize(NormalizationForm.FormD);
+
+        // Extract the base character by ignoring non-spacing diacritical marks
+        foreach (char c in normalized)
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            {
+                return char.ToUpper(c, CultureInfo.InvariantCulture);
+            }
+        }
+
+        return char.ToUpper(testo[0], CultureInfo.InvariantCulture);
     }
 
     internal void MostraIndice(bool mostra)
@@ -1067,6 +1098,54 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
     }
 
+    private void BtnZoom_Click(object sender, RoutedEventArgs e)
+    {
+        if (BtnZoom.ContextMenu != null)
+        {
+            if (Application.Current.TryFindResource("ControlBackgroundBrush") is Brush currentThemeBrush)
+            {
+                BtnZoom.ContextMenu.Resources[SystemColors.MenuBrushKey] = currentThemeBrush;
+                BtnZoom.ContextMenu.Resources[SystemColors.MenuBarBrushKey] = currentThemeBrush;
+            }
+
+            BtnZoom.ContextMenu.PlacementTarget = BtnZoom;
+            BtnZoom.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            BtnZoom.ContextMenu.IsOpen = true;
+
+            if (!ReferenceEquals(sender, e.Source))
+                return;
+
+            MenuZoom100.IsChecked = false;
+            MenuZoom200.IsChecked = false;
+            MenuZoom050.IsChecked = false;
+            MenuZoom080.IsChecked = false;
+            MenuZoom150.IsChecked = false;
+            MenuZoom120.IsChecked = false;
+            MenuZoom400.IsChecked = false;
+
+            switch (Zoom)
+            {
+                case 50: MenuZoom050.IsChecked = true; break;
+                case 80: MenuZoom080.IsChecked = true; break;
+                case 100: MenuZoom100.IsChecked = true; break;
+                case 120: MenuZoom120.IsChecked = true; break;
+                case 150: MenuZoom150.IsChecked = true; break;
+                case 200: MenuZoom200.IsChecked = true; break;
+                case 400: MenuZoom400.IsChecked = true; break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void MenuZoomItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuItem item && item.Tag is string tagStr && int.TryParse(tagStr, out int zoom))
+        {
+            Zoom = zoom;
+        }
+    }
+
     private void RtfTesto_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         ctrlPremuto = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
@@ -1166,6 +1245,29 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                 }
             }
         }
+
+        // TODO2 zoom in toolbar Visualizzatore e Editor?
+        // zoom in/out with Ctrl + '+' or Ctrl + '-'
+        if (ctrlPremuto && sender is RichTextBox rtbz)
+        {
+            if (e.Key == Key.OemPlus || e.Key == Key.Add)
+            {
+                ZoomStep(rtbz, true);
+                e.Handled = true;
+
+            }
+            else if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+            {
+                ZoomStep(rtbz, false);
+                e.Handled = true;
+            }
+        }
+    }
+
+    private void ZoomStep(RichTextBox rtb, bool zoomIn)
+    {
+        int zoom = (int)Math.Round(rtb.LayoutTransform.Value.M11 * 100) + (zoomIn ? 10 : -10);
+        Zoom = zoom;
     }
 
     private void RtfTesto_KeyUp(object sender, KeyEventArgs e)
@@ -1176,6 +1278,9 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
         }
     }
 
+    private DateTime _lastZoomTime = DateTime.MinValue;
+    private const int ZoomCooldownMs = 100; // Minimum milliseconds between zoom steps
+
     private void Viewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
         if (!tipoBibbia)
@@ -1183,6 +1288,16 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
         if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
         {
+            // Mark handled IMMEDIATELY so child/parent controls don't re-process the event
+            e.Handled = true;
+            if (sender is RichTextBox rtb)
+            {
+                // Ignore micro-events arriving within the cooldown window (stops momentum chatter)
+                if ((DateTime.Now - _lastZoomTime).TotalMilliseconds < ZoomCooldownMs)
+                    return;
+                _lastZoomTime = DateTime.Now;
+                ZoomStep(rtb, e.Delta > 0);
+            }
             return;
         }
 
@@ -1485,6 +1600,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
 
     private static async void MostraPopupVersetto(string refText, Hyperlink sender)
     { // TODO2 controlla
+        // TODO2 era per riferimenti automatici. Ma riconosce solo libri italiani, ma se libri in inglese dà il "Libro non trovato" errore
         try
         {
             Match m = RiferimentoRegex.Match(refText);
@@ -1492,7 +1608,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             string token = m.Groups[1].Value.Trim().ToLowerInvariant().Replace(" ", "").Replace(".", "");
             byte libroNum = MainWindow.Testi.GetLibroNumeroDaAbbreviazione(token);
             if (libroNum < 1 || libroNum > 73)
-            {
+            {// TODO2 check all MessasgeBox, delete or make LPN version of MessasgeBox
                 MessageBox.Show("Libro non trovato: " + m.Groups[1].Value);
                 return;
             } // TODO2 risorse e anche altrove in funziona
@@ -1501,7 +1617,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             byte endVers = m.Groups[4].Success ? byte.Parse(m.Groups[4].Value) : vers;
             string versione = MainWindow.Testi.UltimaBibbia;
             if (string.IsNullOrEmpty(versione))
-            { 
+            {
                 Collection<string> b = MainWindow.Testi.NomiVersioni(TestoTipi.Bibbia); if (b.Count > 0) versione = b[0];
             }
             if (string.IsNullOrEmpty(versione)) { MessageBox.Show("Nessuna Bibbia disponibile"); return; }
@@ -1519,7 +1635,8 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                 rifString = $"{abbrev}{cap}:1-{maxVers}";
             }
             FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(rifString, versione);
-            if (doc == null) {
+            if (doc == null)
+            {
                 MessageBox.Show("FlowDocument = null"); return;
             }
             if (doc.Blocks.Count == 0) return;

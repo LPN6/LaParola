@@ -1,10 +1,8 @@
 using AvalonDock;
 using AvalonDock.Layout;
-using AvalonDock.Layout.Serialization;
-using LaParola.Dialogs;
+using AvalonDock.Serializer.Xml;
 using LaParola.DocumentViews;
 using LaParola.Models;
-using LaParola.Services;
 using LaParola.ToolViews;
 using LaParola.Utilities;
 using Microsoft.Win32;
@@ -25,9 +23,10 @@ namespace LaParola;
 // per passare SmartScreen, usa https://www.microsoft.com/en-us/wdsi/filesubmission 
 // per controllare il contenuto di un FlowDocument, System.Windows.Markup.XamlWriter.Save(finalDoc) in Immediate Window
 
+// TODO2 esporta Biblioteca in vari formati - come versione 7
 // TODO2 Regex per identificare riferimenti da Berea
-// TODO2 versione 8.0.6
-// TODO2 togliere tutti "var "
+// TODO versione 8.0.6; update help files (including Recent Changes) and make them readonly type 3
+// TODO togliere tutti "var "
 // TODO2 all'uscita con note modificate, ci vuole tanto tempo per scrivere le modifiche e chiudere il programma
 // TODO2 importare Henry come Libro dà Out of Memory errore
 // TODO2 perché parlare in lingue importato ha ipertesto (ma senza hover), ma Brani no? forse CollegaCitazioniEEscape?
@@ -38,7 +37,6 @@ namespace LaParola;
 // TODO2 toolbar: new, open, save (all), print, undo, redo, find, cut, copy, paste, vis bibbia, commentario, apri note, segnalibri, navigare, ricerca, mostra, (chiave), (racc info), paralleli, LQ, Misure, Gesti testi, aggiorna, opzioni,aiuto
 // available icons are listed here: https://pictogrammers.com/library/mdi/ and https://pictogrammers.github.io/@mdi/font/5.4.55/ 
 // TODO2 oppure invece di un toolbar, creare un tool "Quick Access", come in Logos
-// TODO2 help centre: Search, FAQs, tutorials, contact, release notes, keyboard shortcuts, about, documentation, how to use, getting started
 // TODO2 right click menu for Editor and Visualizza
 
 // TODO2 ApplicationCommands:
@@ -118,6 +116,7 @@ public partial class MainWindow : Window
 {
     private SearchToolView? _searchView;
     private TextGeneratorToolView? _textGenView;
+    private CreaChiaveToolView? _creaChiaveView;
     private ConverterToolView? _converterView;
     private OptionsToolView? _optionsView;
     private LibraryToolView? _libraryView;
@@ -129,6 +128,9 @@ public partial class MainWindow : Window
 
     private object TextGenToolViewInstance()
         => _textGenView ??= new TextGeneratorToolView();
+
+    private object CreaChiaveToolViewInstance()
+        => _creaChiaveView ??= new CreaChiaveToolView();
 
     private object ConverterToolViewInstance()
         => _converterView ??= new ConverterToolView();
@@ -163,6 +165,7 @@ public partial class MainWindow : Window
     public static readonly RoutedUICommand SearchCommand = new("Search", "SearchCommand", typeof(MainWindow));
     public static readonly RoutedUICommand FontCommand = new("Font", "FontCommand", typeof(MainWindow));
     public static readonly RoutedUICommand MostraCommand = new("Mostra", "MostraCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand CreaChiaveCommand = new("CreaChiave", "CreaChiaveCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ConverterCommand = new("Converter", "ConverterCommand", typeof(MainWindow));
     public static readonly RoutedUICommand VoiceCommand = new("Voice", "VoiceCommand", typeof(MainWindow));
     public static readonly RoutedUICommand AddTextsCommand = new("AddTexts", "AddTextsCommand", typeof(MainWindow));
@@ -211,6 +214,7 @@ public partial class MainWindow : Window
             {
                 Testi = new Texts(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar);
                 Testi.AggiungiDirectory(AppContext.BaseDirectory);
+                Testi.AggiungiDirectory(Path.Combine(AppContext.BaseDirectory, "Resources"));
             });
         }
         finally
@@ -472,17 +476,6 @@ public partial class MainWindow : Window
         {
             //HideDefaultToolWindows();
 
-            string testo = "Questa è la versione beta (cioè di prova) di LaParola 8.\n\n" +
-                "Usa il menu 'Visualizza' per leggere la Bibbia. Usa il menu 'Strumenti' per altre possibili azioni da eseguire. Altre funzionalità saranno aggiunte prossimamente.\n\n" +
-                "La disposizione delle finestre è molto flessibile: trascinando il titolo di una finestra, potete spostare, ancorare, affiancare e sovrapporre le finestre come preferite. Potete aprire più finestre e organizzarle come volete.\n\n" +
-                "Se trovi dei problemi e hai dei suggerimenti, scrivimi a info@laparola.net.\n\n" +
-                "-----------------------------------------\n\n" +
-                "This is the beta version of LaParola 8.\n\n" +
-                "Use the 'View' menu to read the Bible. Use the 'Tools' menu for other possible actions. Further features will be added soon.\n\n" +
-                "The window layout is very flexible: by dragging a window's title bar, you can move, dock, tile or overlap windows as you wish. You can open multiple windows and arrange them in any way.\n\n" +
-                "If you encounter any issues or have suggestions, please email me at info@laparola.net.";
-            CreaEditorDocument(testo, ((string)(Application.Current.TryFindResource("MenuAbout") ?? "About LaParola")).Replace("_", ""));
-
             bool versioneVisualizzata = false;
             if (Testi.VersioneEsiste("Nuova Riveduta"))
             {
@@ -506,6 +499,8 @@ public partial class MainWindow : Window
                 // else non visualizziamo nessuna versione, ci sarà un messaggio che nessuna versione è installata
             }
 
+            MostraGuida(settings.Lingua.ToLower()[..2] == "it" ? "Introduzione" : "Introduction");
+
             return;
         }
 
@@ -522,6 +517,7 @@ public partial class MainWindow : Window
             // le istanze già presenti (se le hai nominate con x:Name) oppure crearle.
             if (id == "tool.search") { args.Content = SearchToolViewInstance(); return; }
             if (id == "tool.textgen") { args.Content = TextGenToolViewInstance(); return; }
+            if (id == "tool.creachiave") { args.Content = CreaChiaveToolViewInstance(); return; }
             if (id == "tool.converter") { args.Content = ConverterToolViewInstance(); return; }
             if (id == "tool.options") { args.Content = OptionsToolViewInstance(); return; }
             if (id == "tool.library") { args.Content = LibraryToolViewInstance(); return; }
@@ -542,6 +538,7 @@ public partial class MainWindow : Window
                             _ = view.SpostaTesto(state.Titolo, true, false);
                         view.IsTocVisible = state.IsSommarioVisibile;
                         view.SincGruppo = state.SincGruppo;
+                        view.Zoom = state.Zoom;
                         args.Content = view;
                     }
                     else
@@ -693,6 +690,22 @@ public partial class MainWindow : Window
         }
         newShortcut = new(LibraryCommand, italiano ? Key.B : Key.L, ModifierKeys.Control);
         this.InputBindings.Add(newShortcut);
+    }
+
+    internal static void MostraGuida(string sezione)
+    {
+
+        string nome = settings.Lingua.ToLower()[..2] == "it" ? "Guida a LaParola" : "Help for LaParola";
+        if (Testi.VersioneEsiste(nome))
+        {
+            /*ViewerDocumentView? view = */App.DockingHost.OpenViewerDocument(nome, sezione, true);
+        }
+        else
+        {
+            MessageBoxLPN.Show(Application.Current.MainWindow,
+                (string)(Application.Current.TryFindResource("MainNessunaGuida") ?? "The help file was not found. It is maybe an internal problem in the program."),
+                (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+        }
     }
 
     private void NuovoEditor_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.OpenEditorDocument();
@@ -911,6 +924,18 @@ public partial class MainWindow : Window
         edv.ReplaceNext();
     }
 
+    private void MenuVisualizza_SubmenuOpened(object sender, RoutedEventArgs e)
+    {
+        if (App.DockingHost.GetActiveLayoutContent()?.Content is EditorDocumentView || App.DockingHost.GetActiveLayoutContent()?.Content is ViewerDocumentView)
+        {
+            MenuVisualizzaZoom.IsEnabled = true;
+        }
+        else
+        {
+            MenuVisualizzaZoom.IsEnabled = false;
+        }
+    }
+
     // Questo si attiva solo se l'utente clicca sul menu principale (quando non ha sottomenu)
     private void MenuVisualizzaBibbia_Click(object sender, RoutedEventArgs e)
     {
@@ -1059,6 +1084,63 @@ public partial class MainWindow : Window
         view?.MostraIndice(true);
     }
 
+    private void MenuVisualizzaZoom_Click(object sender, RoutedEventArgs e)
+    {
+        // FocusManager.GetFocusedElement(this) is RichTextBox rtb
+        if (sender is MenuItem mi)
+        {
+            int zoom = int.Parse(mi.Tag.ToString() ?? "0");
+            if (zoom > 0)
+            {
+                if (App.DockingHost.GetActiveLayoutContent()?.Content is EditorDocumentView edv)
+                {
+                    edv.Editor.LayoutTransform = new ScaleTransform(zoom / 100.0, zoom / 100.0);
+                }
+                else if (App.DockingHost.GetActiveLayoutContent()?.Content is ViewerDocumentView vdv)
+                {
+                    vdv.Zoom = zoom;
+                }
+            }
+        }
+    }
+
+    private void Zoom_SubmenuOpened(object sender, RoutedEventArgs e)
+    {
+        if (!ReferenceEquals(sender, e.Source))
+            return;
+
+        MenuZoom100.IsChecked = false;
+        MenuZoom200.IsChecked = false;
+        MenuZoom050.IsChecked = false;
+        MenuZoom080.IsChecked = false;
+        MenuZoom150.IsChecked = false;
+        MenuZoom120.IsChecked = false;
+        MenuZoom400.IsChecked = false;
+
+        RichTextBox? rtb = null;
+        if (App.DockingHost.GetActiveLayoutContent()?.Content is EditorDocumentView edv)
+            rtb = edv.Editor;
+        else if (App.DockingHost.GetActiveLayoutContent()?.Content is ViewerDocumentView vdv)
+            rtb = vdv.Viewer;
+
+        if (rtb != null)
+        {
+            int zoom = (int)Math.Round(rtb.LayoutTransform.Value.M11 * 100);
+            switch (zoom)
+            {
+                case 50: MenuZoom050.IsChecked = true; break;
+                case 80: MenuZoom080.IsChecked = true; break;
+                case 100: MenuZoom100.IsChecked = true; break;
+                case 120: MenuZoom120.IsChecked = true; break;
+                case 150: MenuZoom150.IsChecked = true; break;
+                case 200: MenuZoom200.IsChecked = true; break;
+                case 400: MenuZoom400.IsChecked = true; break;
+                default:
+                    break;
+            }
+        }
+    }
+
     private void Image_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         {
@@ -1175,6 +1257,16 @@ public partial class MainWindow : Window
         App.DockingHost.ShowTool("tool.textgen");
     }
 
+    private void CreaChiave_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        // Assicurati che Testi sia pronto prima di creare la view
+        if (Testi == null)
+            return; // oppure mostra un messaggio / lascia l’overlay attivo
+
+        App.DockingHost.ShowTool("tool.creachiave");
+    }
+
+
     private void Converter_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.converter");
 
     private void Riferimenti_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.riferimenti");
@@ -1201,6 +1293,21 @@ public partial class MainWindow : Window
         if (Testi == null)
             return; // oppure mostra un messaggio / lascia l’overlay attivo
         App.DockingHost.ShowTool("tool.options");
+    }
+
+    private void Assistenza_Click(object sender, RoutedEventArgs e)
+    {
+        if (e.Source == sender)
+        {
+            MostraGuida();
+        }
+    }
+
+    private static void MostraGuida()
+    {
+        string linguaInterfaccia = MainWindow.settings.Lingua.ToLower()[..2];
+        string nome = linguaInterfaccia == "en" ? "Help for LaParola" : "Guida a LaParola";
+        VisualizzaLibro(nome);
     }
 
     private void About_Click(object sender, RoutedEventArgs e)
@@ -1311,7 +1418,8 @@ public partial class MainWindow : Window
                     Versetto = viewer.Versetto,
                     Titolo = viewer.Titolo,
                     IsSommarioVisibile = viewer.IsTocVisible,
-                    SincGruppo = viewer.SincGruppo
+                    SincGruppo = viewer.SincGruppo,
+                    Zoom = viewer.Zoom,
                 });
             }
         }

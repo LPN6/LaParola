@@ -31,11 +31,18 @@ usa il comando <i>Aggiungi testi</i> del menu Strumenti per installare i testi d
 
 <h2>Caratteristiche</h2>
 
+<h3>Versione 8.0.6</h3>
+<ul>
+<li><i>Crea chiave:</i> per creare una chiave biblica.</li>
+<li><i>Zoom:</i> nell'editor e nel visualizzatore.</li>
+<li><i>Guida:</i> dal menu principale e un aiuto contestuale per ogni finestra. La Guida &egrave; funzionante anche se non ancora completo.</li>
+</ul>  
+
 <h3>Versione 8.0.5</h3>
 <ul>
 <li>Sintesi vocale di testi visualizzati.</li>
-<li>Aggiungi testi: Scarica e installa i testi creati da LaParola</li>
-<li>Biblioteca: pulsante per aggiungere testi - da LaParola (come qui sopra), importando altri formati, creando una nuova collezione di note</li>
+<li>Aggiungi testi: Scarica e installa i testi creati da LaParola.</li>
+<li>Biblioteca: pulsante per aggiungere testi - da LaParola (come qui sopra), importando altri formati, creando una nuova collezione di note.</li>
 <li><i>Opzioni:</i> diverse nuove impostazioni</li>
 </ul>  
 

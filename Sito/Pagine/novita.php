@@ -14,9 +14,14 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20260901"></a>
+<h2>1 settembre 2026</h2>
+<p>La nuova versione di prova (8.0.6) &egrave; disponibile, con la creazione di chiavi, lo zoom del testo, e il file della Guida (funzionante, ma non ancora completo).
+Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.</p>
+
 <a name="20260801"></a>
 <h2>1 agosto 2026</h2>
-<p>La nuova versione di prova (8.0.5) &egrave; disponibile, con la sintesi vocale e la possibilità di aggiungere testi al programma.
+<p>La nuova versione di prova (8.0.5) &egrave; disponibile, con la sintesi vocale e la possibilit&agrave; di aggiungere testi al programma.
 Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.</p>
 
 <a name="20260713"></a>

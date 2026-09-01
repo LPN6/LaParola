@@ -1,5 +1,6 @@
 using LaParola.ToolViews;
 using System.Windows;
+using System.Windows.Media;
 
 namespace LaParola.Models;
 
@@ -14,6 +15,7 @@ public class ViewerWindowState
     public string Titolo { get; set; } = "";
     public bool IsSommarioVisibile { get; set; } = false;
     public int SincGruppo { get; set; } = 0;
+    public int Zoom { get; set; } = 100;
 }
 
 public enum ThemeState
@@ -45,6 +47,7 @@ public class AppSettings
     public double VelocitaVoce { get; set; } = 1.0;
     public int VolumeVoce { get; set; } = 100;
     public bool VoceEvidenzia { get; set; } = false;
+    public Color VoceEvidenziaColore { get; set; } = Colors.Red;
 
     public string UltimaBibbia { get; set; } = "";
     public string UltimaBibbiaCompleta { get; set; } = "";
@@ -77,8 +80,16 @@ public class AppSettings
     public List<string> MostraVersioniSelezionate { get; set; } = [];
     public bool MostraAlternare { get; set; } = false;
 
+    public string CreaChiaveVersioneSelezionata { get; set; } = "";
+    public int CreaChiaveNumeroMinimo { get; set; } = 1;
+    public bool CreaChiaveConRiferimenti { get; set; } = true;
+    public TipoChiave CreaChiaveTipo { get; set; } = TipoChiave.Parole;
+    public OrdineChiave CreaChiaveOrdine { get; set; } = OrdineChiave.Alfabetico;
+    public bool CreaChiaveEscludiParole { get; set; } = true;
+    public string CreaChiaveParoleDaEscludere { get; set; } = "*";
+
     // Reference search
     public bool ReferenceSearchTocVisible { get; set; } = true;
 
-    public HashSet<string> TestiNascosti { get; set; } = new HashSet<string>();
+    public HashSet<string> TestiNascosti { get; set; } = [];
 }

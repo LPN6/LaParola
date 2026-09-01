@@ -101,7 +101,7 @@ public partial class TextGeneratorToolView : UserControl
             }
         }
 
-        public static Action? SelectionChanged;
+        internal static Action? SelectionChanged;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string? name = null)
@@ -259,8 +259,7 @@ public partial class TextGeneratorToolView : UserControl
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
     {
-        // TODO2: Open correct help section
-        MessageBox.Show("Open Help Centre");
+        MainWindow.MostraGuida((string)(Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage"));
     }
 
     private void Seleziona_Click(object sender, RoutedEventArgs e)
@@ -318,7 +317,7 @@ public partial class TextGeneratorToolView : UserControl
         if (!String.IsNullOrEmpty(abbVersioni))
             abbVersioni = " (" + abbVersioni[..^2] + ")";
 
-        string title = string.IsNullOrWhiteSpace(tbBrano.Text) ? (string)(System.Windows.Application.Current.TryFindResource("EditorTitle") ?? "Editor Document") : MainWindow.Testi.NormalizzaRiferimento(tbBrano.Text) + abbVersioni;
+        string title = string.IsNullOrWhiteSpace(tbBrano.Text) ? (string)(System.Windows.Application.Current.TryFindResource("EditorTitolo") ?? "Document") : MainWindow.Testi.NormalizzaRiferimento(tbBrano.Text) + abbVersioni;
 
         Riferimento rif = MainWindow.Testi.ConvertiRiferimento(tbBrano.Text);
         bool alternare = cbAlternare.IsChecked == true;

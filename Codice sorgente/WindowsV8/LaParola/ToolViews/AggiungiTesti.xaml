@@ -132,7 +132,7 @@
             <controls:HelpFlyout x:Name="HelpFlyoutControl" HorizontalAlignment="Right" Margin="0,8,0,0" HelpText="{DynamicResource AggiungiTestiAiuto}" HelpClicked="HelpFlyout_OnHelpClicked"/>
 
             <Button x:Name="BtnApplica" Content="{DynamicResource AggiungiTestiApplica}" 
-                    Height="35" FontWeight="Bold" Margin="0,10,0,10" 
+                    FontWeight="Bold" Margin="0,10,0,10" 
                     Click="BtnApplica_Click">
                 <Button.ToolTip>
                     <ToolTip>
@@ -142,7 +142,7 @@
             </Button>
 
             <Button x:Name="BtnSelezionaTutti" Content="{DynamicResource AggiungiTestiScaricaTutti}" 
-                    Height="28" Margin="0,0,0,6" 
+                    Margin="0,0,0,6" 
                     Click="BtnSelezionaTutti_Click">
                 <Button.ToolTip>
                     <ToolTip>
@@ -152,7 +152,7 @@
             </Button>
 
             <Button x:Name="BtnDeselezionaTutti" Content="{DynamicResource AggiungiTestiDeselezionaTutti}" 
-                    Height="28" Margin="0,0,0,15" 
+                    Margin="0,0,0,15" 
                     Click="BtnDeselezionaTutti_Click">
                 <Button.ToolTip>
                     <ToolTip>
@@ -162,7 +162,7 @@
             </Button>
 
             <Button x:Name="BtnMostraNascosti" Content="{DynamicResource AggiungiTestiMostraNascosti}" 
-                          Height="28" Margin="0,0,0,15" 
+                          Margin="0,0,0,15" 
                           Click="BtnMostraNascosti_Click">
             <Button.ToolTip>
                 <ToolTip>

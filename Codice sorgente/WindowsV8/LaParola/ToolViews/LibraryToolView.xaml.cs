@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace LaParola.ToolViews
 {
-    // TODO2 for each text, buttons to: esportare, unire 2, cambia sola lettura, creare file unico, aggiungere radici
+    // TODO2 for each text, buttons to: esportare, unire 2, cambia sola lettura (se Bloccato=0 or 1), creare file unico, aggiungere radici
 
     /// <summary>
     /// Logica di interazione per LibraryToolView.xaml
@@ -100,8 +100,7 @@ namespace LaParola.ToolViews
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
         {
-            // TODO2: Open correct help section
-            MessageBox.Show("Open Help Centre");
+            MainWindow.MostraGuida((string)(Application.Current.TryFindResource("BibliotecaTitolo") ?? "Library"));
         }
 
         private void DataGridToolTip_Opened(object sender, RoutedEventArgs e)
@@ -340,7 +339,7 @@ namespace LaParola.ToolViews
                         break;
 
                     case "ImportaRtf":
-                        //tipo = TipoImportazione.ImportaRtf;
+                        tipo = TipoImportazione.ImportaRtf;
                         string ultimaCartellaImportareRtf = MainWindow.settings.UltimaCartellaImportareRtf;
                         if (string.IsNullOrEmpty(ultimaCartellaImportareRtf))
                             ultimaCartellaImportareRtf = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -489,7 +488,7 @@ namespace LaParola.ToolViews
                                     ISBN = dialogPDF.Isbn,
                                     Lingua = dialogPDF.Lingua,
                                     VersioneDelleNote = dialogPDF.VersioneDiNote,
-                                    PDFComeLibro = dialogPDF.ComeLibro.IsChecked==true,
+                                    PDFComeLibro = dialogPDF.ComeLibro.IsChecked == true,
                                     FileDaAnalizzare = openFileDialogPDF.FileName,
                                     NomeVersioneUtilizzato = ImportaService.ImpostaNomeFileLaParolaDaFileOrigine(dialogPDF.Titolo),
                                     Tipo = TipoImportazione.ImportaPDF
@@ -591,6 +590,24 @@ namespace LaParola.ToolViews
             _booksView?.Refresh();
         }
 
+        private void BooksDataGrid_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (BooksDataGrid.SelectedItem is VersioneInformazioni selectedBook && selectedBook != null)
+            {
+                VersioneInformazioni book = selectedBook;
+                if (book.Bloccato == BloccatoTipi.Permanente)
+                {
+                    ButtonCancella.Visibility = Visibility.Collapsed;
+                    ButtonRinomina.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ButtonCancella.Visibility = Visibility.Visible;
+                    ButtonRinomina.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         private void BooksDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             // Ensure the user double-clicked an actual row, not empty space or column headers
@@ -609,10 +626,16 @@ namespace LaParola.ToolViews
                         {
                             int nNote = MainWindow.Testi.NumeroNote(testo);
                             int nNoteTitolo = MainWindow.Testi.NumeroNoteConTitolo(testo);
-                            if (nNoteTitolo < nNote / 2)
+                            if (nNoteTitolo < nNote / 2) {
                                 MainWindow.VisualizzaCommentario(testo);
+                            }
                             else
-                                MainWindow.VisualizzaDizionario(testo);
+                            {
+                                if (MainWindow.Testi.GetNoteInOrdine(testo).Count > 0 && !string.IsNullOrEmpty(MainWindow.Testi.GetNoteInOrdine(testo)[0]))
+                                    MainWindow.VisualizzaLibro(testo);
+                                else
+                                    MainWindow.VisualizzaDizionario(testo);
+                            }
                         }
                         catch { }
                     }

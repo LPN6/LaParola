@@ -153,7 +153,27 @@
                             <Slider Grid.Row="1" x:Name="VoceVolume" Grid.Column="1" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="SettingChanged" Margin="10,5"/>
                             <TextBlock Grid.Row="1" x:Name="VoceVolumeValore" Grid.Column="2" VerticalAlignment="Center" MinWidth="40" TextAlignment="Right"/>
                         </Grid>
-                        <CheckBox x:Name="VoceEvidenzia" Content="{DynamicResource OpzioniVoceEvidenzia}" Margin="10,10,0,0" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox x:Name="VoceEvidenzia" Content="{DynamicResource OpzioniVoceEvidenzia}" Margin="10,10,0,0" Checked="SettingChanged" Unchecked="SettingChanged"/>
+                            <ComboBox x:Name="ColorPickerEvidenzia" Grid.Column="1" Margin="5,6,0,0" Width="160"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding ElementName=VoceEvidenzia, Path=IsChecked}"
+          SelectionChanged="ColorPickerEvidenzia_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="16" Height="16" Margin="0,0,8,0" CornerRadius="2"
+                        Background="{Binding Brush}" BorderBrush="Gray" BorderThickness="1"/>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        </Grid>
                     </StackPanel>
                 </GroupBox>
 
@@ -261,7 +281,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiBibbiaPreferita1}" VerticalAlignment="Center" Target="{Binding ElementName=ComboPref1}"/>
-                            <ComboBox x:Name="ComboPref1" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" 
+                            <ComboBox x:Name="ComboPref1" Grid.Column="1" Width="300" HorizontalAlignment="Left" 
                       DisplayMemberPath="Titolo" SelectedValuePath="Nome" SelectionChanged="ComboPref_SelectionChanged" />
                         </Grid>
 
@@ -271,7 +291,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiBibbiaPreferita2}" VerticalAlignment="Center" Target="{Binding ElementName=ComboPref2}"/>
-                            <ComboBox x:Name="ComboPref2" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left"
+                            <ComboBox x:Name="ComboPref2" Grid.Column="1" Width="300" HorizontalAlignment="Left"
                       DisplayMemberPath="Titolo" SelectedValuePath="Nome" SelectionChanged="ComboPref_SelectionChanged" />
                         </Grid>
 
@@ -281,7 +301,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiBibbiaPreferita3}" VerticalAlignment="Center" Target="{Binding ElementName=ComboPref3}"/>
-                            <ComboBox x:Name="ComboPref3" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left"
+                            <ComboBox x:Name="ComboPref3" Grid.Column="1" Width="300" HorizontalAlignment="Left"
                       DisplayMemberPath="Titolo" SelectedValuePath="Nome" SelectionChanged="ComboPref_SelectionChanged" />
                         </Grid>
                     </Grid>
@@ -308,7 +328,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiDizionarioInglese}" VerticalAlignment="Center" />
-                            <ComboBox x:Name="ComboDizionarioInglese" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                            <ComboBox x:Name="ComboDizionarioInglese" Grid.Column="1" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
                         </Grid>
                         <Grid Grid.Row="1" Margin="0,0,0,10">
                             <Grid.ColumnDefinitions>
@@ -316,7 +336,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiDizionarioItaliano}" VerticalAlignment="Center" />
-                            <ComboBox x:Name="ComboDizionarioItaliano" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                            <ComboBox x:Name="ComboDizionarioItaliano" Grid.Column="1" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
                         </Grid>
                         <Grid Grid.Row="2" Margin="0,0,0,10">
                             <Grid.ColumnDefinitions>
@@ -324,7 +344,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiDizionarioGreco}" VerticalAlignment="Center" />
-                            <ComboBox x:Name="ComboDizionarioGreco" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                            <ComboBox x:Name="ComboDizionarioGreco" Grid.Column="1" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
                         </Grid>
                         <Grid Grid.Row="3" Margin="0,0,0,10">
                             <Grid.ColumnDefinitions>
@@ -332,7 +352,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiDizionarioEbraico}" VerticalAlignment="Center" />
-                            <ComboBox x:Name="ComboDizionarioEbraico" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                            <ComboBox x:Name="ComboDizionarioEbraico" Grid.Column="1" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
                         </Grid>
                         <Grid Grid.Row="4" Margin="0,0,0,10">
                             <Grid.ColumnDefinitions>
@@ -340,7 +360,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{DynamicResource OpzioniTestiDizionarioLatino}" VerticalAlignment="Center" />
-                            <ComboBox x:Name="ComboDizionarioLatino" Grid.Column="1" Height="26" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
+                            <ComboBox x:Name="ComboDizionarioLatino" Grid.Column="1" Width="300" HorizontalAlignment="Left" SelectionChanged="ComboDizionario_SelectionChanged" />
                         </Grid>
                     </Grid>
                 </GroupBox>

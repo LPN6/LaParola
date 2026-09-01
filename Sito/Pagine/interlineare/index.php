@@ -45,6 +45,35 @@ require("../capo.php");
       display: inline-block;
       font-weight: bold;
     }
+    .analysis-code {
+    position: relative;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline dotted;
+}
+
+.tooltip {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+
+    background: #ffffe0;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 8px;
+    min-width: 50px;
+
+    box-shadow: 2px 2px 8px rgba(0,0,0,.2);
+    font-size: 0.9em;
+    color: black;
+    
+    pointer-events: none;
+}
+
+.analysis-code.active .tooltip {
+    display: block;
+}
+
 </style>
 
 <h1>Interlineare greco-italiano del Nuovo Testamento</h1>
@@ -53,7 +82,6 @@ require("../capo.php");
 reverse interlineare; - cosi' controllo contro il testo italiano e anche i numeri superscript
 
 SBL: check Jn 7-8 included (see Morph pull requests)
-Morph: check errors in the discussion in the site
 check errors in email messages
 
 link to Vocabolario da rifare con nuovo vocabolario; controlla che tutte le parole esistono
@@ -65,14 +93,15 @@ different versions of the book with different lines (no lemma, translit x 2, gra
     <p><a href="#" id="toggle-link">Nascondi spiegazioni</a></p>
     <div id="instructions">
     <p><i>Testo greco</i></p>
-   <p>Sotto ogni parola greca nel testo del Nuovo Testamento, ci sono una traslitterazione della parola, il lemma della parola in greco e la sua traslitterazione.
-   Queste tre righe possono essere nascoste o mostrate:</p>
+   <p>Sotto ogni parola greca nel testo del Nuovo Testamento, ci sono una traslitterazione della parola, l'analisi grammaticale, il lemma della parola in greco e la sua traslitterazione.
+   Queste quattro righe possono essere nascoste o mostrate:</p>
     <p><label><input type="checkbox" id="cbTraslit" onchange="onCheckboxChange(this)" />Traslitterazione</label><br />
+    <label><input type="checkbox" id="cbGramm" onchange="onCheckboxChange(this)" />Analisi grammaticale</label><br />
     <label><input type="checkbox" id="cbRad" onchange="onCheckboxChange(this)" />Lemma</label><br />
     <label><input type="checkbox" id="cbRadTraslit" onchange="onCheckboxChange(this)" />Lemma traslitterato</label>
     </p>
     <p>Il testo greco &egrave; l'edizione <a href="https://www.sblgnt.com/">SBL Greek New Testament</a> che &egrave; distribuita con licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it">Creative Commons Attribuzione 4.0 Internazionale</a>. Le parentesi quadrate [...] indicano che il testo &egrave; dubbio.<br />
-    I lemmi delle parole greche sono presi da <a href="https://github.com/morphgnt/sblgnt">MorphGNT SBLGNT</a> con licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.it">Creative Commons Attribuzione - Condividi allo stesso modo 3.0 Unported</a>.<br />
+    I lemmi e l'analisi grammaticale delle parole greche nel testo SBL sono presi da <a href="https://github.com/morphgnt/sblgnt">MorphGNT SBLGNT</a> con licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.it">Creative Commons Attribuzione - Condividi allo stesso modo 3.0 Unported</a>.<br />
         <p><i>Testi italiani</i></p>
         <p>Sotto le parole greche, ci sono le parole corrispondenti in tre versioni italiane.
         Le righe possono essere nascoste o mostrate, e le differenze fra i testi italiani possono essere evidenziati o non evidenziati:</p>
@@ -115,6 +144,7 @@ different versions of the book with different lines (no lemma, translit x 2, gra
 <p><button class="button" onclick="changeChapter(-1)">Capitolo precedente</button>
     <button class="button" onclick="changeChapter(1)">Prossimo capitolo</button></p>
 <p><a href="capitoli.php">Tutti i capitoli del Nuovo Testamento con link all'interlineare</a><p>
+<div id="tooltip" class="tooltip"></div>
 <script>
 const books = [
     "Matteo", "Marco", "Luca", "Giovanni", "Atti", "Romani", "1Corinzi", "2Corinzi",
@@ -128,6 +158,73 @@ const chapters = [
     28, 16, 24, 21, 28, 16, 16, 13, 6, 6,
     4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22
 ];
+
+const tooltip = document.getElementById('tooltip');
+let activeCodeEl = null;
+
+function showTooltip(code) {
+    const analysisText = code.dataset.analysis;
+    if (!analysisText) return;
+
+    code.classList.add('active');
+    tooltip.textContent = analysisText;
+    tooltip.style.display = 'block';
+
+    const rect = code.getBoundingClientRect();
+    let left = rect.left;
+    let top = rect.bottom + 5;
+
+    const ttRect = tooltip.getBoundingClientRect();
+
+    if (left + ttRect.width > window.innerWidth - 10) {
+        left = window.innerWidth - ttRect.width - 10;
+    }
+    if (left < 10) {
+        left = 10;
+    }
+
+    if (top + ttRect.height > window.innerHeight - 10) {
+        top = rect.top - ttRect.height - 5;
+    }
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+}
+
+function hideTooltip() {
+    tooltip.style.display = 'none';
+    document.querySelectorAll('.analysis-code.active').forEach(el => el.classList.remove('active'));
+    activeCodeEl = null;
+}
+// 1. Show tooltip on hover (handles dynamic AJAX content automatically)
+document.addEventListener('mouseover', function(e) {
+    const code = e.target.closest('.analysis-code');
+    if (code) {
+        showTooltip(code);
+    }
+});
+
+// Hide tooltip when mouse leaves
+document.addEventListener('mouseout', function(e) {
+    const code = e.target.closest('.analysis-code');
+    if (code && !code.contains(e.relatedTarget) && activeCodeEl !== code) {
+        hideTooltip();
+    }
+});
+
+document.addEventListener('click', function(e) {
+    const code = e.target.closest('.analysis-code');
+    if (code) {
+        if (activeCodeEl === code && tooltip.style.display === 'block') {
+            hideTooltip();
+        } else {
+            activeCodeEl = code;
+            showTooltip(code);
+        }
+    } else {
+        hideTooltip();
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function () {
  var instructions = document.getElementById("instructions");
@@ -150,6 +247,15 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 checkboxTraslit.checked = false; // Default state OFF
             }
+
+            const savedStateGramm = getCookie('interlinearecbGramm');
+            const checkboxGramm = document.getElementById('cbGramm');
+            if (savedStateGramm != "") {
+                checkboxGramm.checked = (savedStateGramm === 'true');
+            } else {
+                checkboxGramm.checked = false; // Default state OFF
+            }
+
             const savedStateRad = getCookie('interlinearecbRad');
             const checkboxRad = document.getElementById('cbRad');
             if (savedStateRad != "") {
@@ -157,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 checkboxRad.checked = true; // Default state ON
             }
+
             const savedStateRadTraslit = getCookie('interlinearecbRadTraslit');
             const checkboxRadTraslit = document.getElementById('cbRadTraslit');
             if (savedStateRadTraslit != "") {
@@ -305,7 +412,7 @@ function loadSelections() {
             const secondList = document.getElementById('secondList');
 
             firstList.value = selectedBook;
-            updateSecondList();
+            updateSecondList(false);
             secondList.value = selectedChapter;
 
     generaContenuto(selectedBook, selectedChapter);
@@ -370,7 +477,7 @@ function handleSecondListChange() {
 }
 
 function generaContenuto(nLibro, nCapitolo) {
-    var righe = (document.getElementById('cbNR06').checked?1:0) + (document.getElementById('cbNR94').checked?2:0) + (document.getElementById('cbR2').checked?4:0) + (document.getElementById('cbRad').checked?8:0) + (document.getElementById('cbTraslit').checked?16:0) + (document.getElementById('cbRadTraslit').checked?32:0);
+    var righe = (document.getElementById('cbNR06').checked?1:0) + (document.getElementById('cbNR94').checked?2:0) + (document.getElementById('cbR2').checked?4:0) + (document.getElementById('cbRad').checked?8:0) + (document.getElementById('cbTraslit').checked?16:0) + (document.getElementById('cbRadTraslit').checked?32:0)+ (document.getElementById('cbGramm').checked?64:0);
     var opzioni = (document.getElementById('cbDiff').checked?1:0) + (document.getElementById('cbTC').checked?2:0) + (document.getElementById('cbDiffPicc').checked?4:0);    
 //    alert(righe);
     var xhr = new XMLHttpRequest();
@@ -386,9 +493,9 @@ function generaContenuto(nLibro, nCapitolo) {
 
 }
 
-firstList.addEventListener('change', updateSecondList);
-const secondList = document.getElementById('secondList');
-secondList.addEventListener('change', handleSecondListChange);
+//firstList.addEventListener('change', updateSecondList);
+//const secondList = document.getElementById('secondList');
+//secondList.addEventListener('change', handleSecondListChange);
 </script>
 
 <div class="container" id="container"></div>

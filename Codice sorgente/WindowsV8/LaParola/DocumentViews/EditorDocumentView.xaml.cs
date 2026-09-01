@@ -83,6 +83,20 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
                 CloseFindDialog();
                 e.Handled = true;
             }
+            else if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                if (e.Key == Key.OemPlus || e.Key == Key.Add)
+                {
+                    ZoomIn(Editor, true);
+                    e.Handled = true;
+
+                }
+                else if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+                {
+                    ZoomIn(Editor, false);
+                    e.Handled = true;
+                }
+            }
         };
 
         DataContext = this;
@@ -98,12 +112,40 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
         Editor.TextChanged += Editor_TextChanged;
 
         PreviewMouseLeftButtonDown += Editor_PreviewMouseLeftButtonDown;
+        PreviewMouseWheel += (s, e) =>
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                e.Handled = true;
+                // Ignore micro-events arriving within the cooldown window (stops momentum chatter)
+                if ((DateTime.Now - _lastZoomTime).TotalMilliseconds < ZoomCooldownMs)
+                    return;
+
+                _lastZoomTime = DateTime.Now;
+                ZoomIn(Editor, e.Delta > 0);
+            }
+        };
+    }
+
+    private DateTime _lastZoomTime = DateTime.MinValue;
+    private const int ZoomCooldownMs = 100; // Minimum milliseconds between zoom steps
+
+    private static void ZoomIn(RichTextBox rtb, bool zoomIn)
+    {
+        int zoom = (int)Math.Round(rtb.LayoutTransform.Value.M11 * 100) + (zoomIn ? 10 : -10);
+        setZoom(rtb, zoom);
+    }
+
+    private static void setZoom(RichTextBox rtb, int zoom)
+    {
+        if (zoom < 20) zoom = 20;
+        if (zoom > 500) zoom = 500;
+        rtb.LayoutTransform = new ScaleTransform(zoom / 100.0, zoom / 100.0);
     }
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
     {
-        // TODO2: Open correct help section
-        MessageBox.Show("Open Help Centre");
+        MainWindow.MostraGuida((string)(Application.Current.TryFindResource("OpzioniEditorTitolo") ?? "Editor"));
     }
 
     /// <summary>
@@ -309,10 +351,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             _currentFile = dlg.FileName;
             SaveToFile(_currentFile);
             OnPropertyChanged(nameof(CurrentFileDisplay));
-            if (ParentDocument != null)
-            {
-                ParentDocument.Title = Path.GetFileName(_currentFile);
-            }
+            ParentDocument?.Title = Path.GetFileName(_currentFile);
         }
     }
 
@@ -378,10 +417,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             }
 
             _currentFile = path;
-            if (ParentDocument != null)
-            {
-                ParentDocument.Title = Path.GetFileName(path);
-            }
+            ParentDocument?.Title = Path.GetFileName(_currentFile);
             OnPropertyChanged(nameof(CurrentFileDisplay));
 
             FocusEditor();
@@ -426,6 +462,56 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
                 return false;
         }
     }
+
+    private void BtnZoom_Click(object sender, RoutedEventArgs e)
+    {
+        if (BtnZoom.ContextMenu != null)
+        {
+            if (Application.Current.TryFindResource("ControlBackgroundBrush") is Brush currentThemeBrush)
+            {
+                BtnZoom.ContextMenu.Resources[SystemColors.MenuBrushKey] = currentThemeBrush;
+                BtnZoom.ContextMenu.Resources[SystemColors.MenuBarBrushKey] = currentThemeBrush;
+            }
+
+            BtnZoom.ContextMenu.PlacementTarget = BtnZoom;
+            BtnZoom.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            BtnZoom.ContextMenu.IsOpen = true;
+
+            if (!ReferenceEquals(sender, e.Source))
+                return;
+
+            MenuZoom100.IsChecked = false;
+            MenuZoom200.IsChecked = false;
+            MenuZoom050.IsChecked = false;
+            MenuZoom080.IsChecked = false;
+            MenuZoom150.IsChecked = false;
+            MenuZoom120.IsChecked = false;
+            MenuZoom400.IsChecked = false;
+
+            int zoom = (int)Math.Round(Editor.LayoutTransform.Value.M11 * 100);
+            switch (zoom)
+            {
+                case 50: MenuZoom050.IsChecked = true; break;
+                case 80: MenuZoom080.IsChecked = true; break;
+                case 100: MenuZoom100.IsChecked = true; break;
+                case 120: MenuZoom120.IsChecked = true; break;
+                case 150: MenuZoom150.IsChecked = true; break;
+                case 200: MenuZoom200.IsChecked = true; break;
+                case 400: MenuZoom400.IsChecked = true; break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void MenuZoomItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuItem item && item.Tag is string tagStr && int.TryParse(tagStr, out int zoom))
+        {
+            setZoom(Editor, zoom);
+        }
+    }
+
 
     private void Voce_Click(object sender, RoutedEventArgs e)
     {

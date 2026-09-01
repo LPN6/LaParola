@@ -41,7 +41,7 @@
                     <iconPacks:PackIconMaterial Kind="ViewList" Width="16" Height="16"/>
                 </Button>
                 <Border Width="1" Height="18" Background="{DynamicResource SubtleBorderBrush}" Margin="6,0"/>
-                <TextBox x:Name="TxtRiferimento" Width="120" Height="24" Margin="4,0"
+                <TextBox x:Name="TxtRiferimento" Width="120" MinHeight="24" Margin="4,0"
                          VerticalContentAlignment="Center"
                          Background="{DynamicResource AppBackgroundBrush}"
                          Foreground="{DynamicResource AppForegroundBrush}"

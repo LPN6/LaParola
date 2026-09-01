@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    <sys:String x:Key="AppTitle">LaParola</sys:String>
+    <sys:String x:Key="AppTitolo">LaParola</sys:String>
     <sys:String x:Key="MainCaricamento">Loading</sys:String>
     
     <sys:String x:Key="Errore">Error</sys:String>
@@ -17,6 +17,7 @@
     <sys:String x:Key="MenuVisualizzaCommentario">_Commentary</sys:String>
     <sys:String x:Key="MenuVisualizzaDizionario">_Dictionary</sys:String>
     <sys:String x:Key="MenuVisualizzaLibro">_Book</sys:String>
+    <sys:String x:Key="MenuVisualizzaZoom">_Zoom</sys:String>
     <sys:String x:Key="MenuVisualizzaImmagine">_Image...</sys:String>
     <sys:String x:Key="MenuStrumenti">_Tools</sys:String>
     <sys:String x:Key="MenuAiuto">_Help</sys:String>
@@ -39,7 +40,7 @@
     <sys:String x:Key="MenuElimina">_Delete</sys:String>
     <sys:String x:Key="MenuAllineamento">A_lignment</sys:String>
     <sys:String x:Key="MenuAllineamentoSinistra">_Left</sys:String>
-    <sys:String x:Key="MenuAllineamentoCentro">_Center</sys:String>
+    <sys:String x:Key="MenuAllineamentoCentro">_Centre</sys:String>
     <sys:String x:Key="MenuAllineamentoDestra">_Right</sys:String>
     <sys:String x:Key="MenuAllineamentoGiustificato">_Justified</sys:String>
     <sys:String x:Key="MenuTrova">_Find...</sys:String>
@@ -50,7 +51,8 @@
     <sys:String x:Key="MenuBiblioteca">_Library</sys:String>
     <sys:String x:Key="MenuRicerca">_Search</sys:String>
     <sys:String x:Key="MenuTextGenerator">Show _Passage</sys:String>
-    <sys:String x:Key="MenuConverter">Measures _Converter</sys:String>
+    <sys:String x:Key="MenuCreaChiave">Create _Concordance</sys:String>
+    <sys:String x:Key="MenuConverter">_Measures Converter</sys:String>
     <sys:String x:Key="MenuRiferimenti">_Reference Search</sys:String>
     <sys:String x:Key="RiferimentiTitolo">Reference Search</sys:String>
     <sys:String x:Key="RiferimentiCerca">Search</sys:String>
@@ -59,10 +61,12 @@
     <sys:String x:Key="MenuVoce">Sp_eech Synthesis</sys:String>
     <sys:String x:Key="MenuAggiungiTesti">_Add Texts</sys:String>
     <sys:String x:Key="MenuOptions">_Options</sys:String>
+    <sys:String x:Key="MenuAssistenza">_Help Centre</sys:String>
     <sys:String x:Key="MenuAbout">_About LaParola</sys:String>
     <sys:String x:Key="MainNessunaVersione">No text was found. Use the 'Add Texts' command of the Tools menu to add some texts.</sys:String>
+    <sys:String x:Key="MainNessunaGuida">The help file was not found. It is maybe an internal problem in the program.</sys:String>
 
-    <sys:String x:Key="ViewerTitle">Document</sys:String>
+    <sys:String x:Key="ViewerTitolo">Viewer</sys:String>
     <sys:String x:Key="ViewerAiuto">This window shows the text of the Bible and other texts. The first button on the toolbar toggles the visibility of the Table of Contents. The following buttons provide various ways to move to another section of the text. The last button connects this window to other windows, so that they are linked and moved together.</sys:String>
     <sys:String x:Key="ViewerSommarioAiuto">Show/hide the Table of Contents on the left</sys:String>
     <sys:String x:Key="ViewerRiferimentoAiuto">Enter a reference (e.g., Jn 3:16)</sys:String>
@@ -94,10 +98,11 @@
     <sys:String x:Key="ViewerSinc9">Synchronize 9</sys:String>
     <sys:String x:Key="ViewerSincAiuto0">Window not synchronized. To synchronize the text, click the button and choose the same number in this and in another window</sys:String>
     <sys:String x:Key="ViewerSincAiutoN">Window synchronized with the other windows in group {0}</sys:String>
+    <sys:String x:Key="ViewerZoomAiuto">Choose how much to zoom the text in or out</sys:String>
     <sys:String x:Key="ViewerVoceAiuto">Start the speech synthesis to read this text</sys:String>
     <sys:String x:Key="ViewerVoceAiutoFerma">Stop the speech synthesis</sys:String>
 
-    <sys:String x:Key="EditorTitle">Document</sys:String>
+    <sys:String x:Key="EditorTitolo">Document</sys:String>
     <sys:String x:Key="EditorAiuto">In this window you can load text from a file or generate text from some of the Tools windows. There are some commands to format the text in the window toolbar, and others in the main menu.</sys:String>
     <sys:String x:Key="MenuGrassettoAbb">B</sys:String>
     <sys:String x:Key="MenuCorsivoAbb">I</sys:String>
@@ -137,6 +142,7 @@
     <sys:String x:Key="FileUnsaved">(unsaved)</sys:String>
     <sys:String x:Key="FileNone">(none)</sys:String>
 
+    <sys:String x:Key="ImmagineTitolo">Image</sys:String>
     <sys:String x:Key="ImmagineAiuto">This window displays an image. If the image was created for the program, it may have hyperlinks: when the mouse is over a link, the cursor changes shape and the title of the note is displayed at the bottom of the window, and a click opens the note. A right click with the mouse on the image can change the zoom level of the image.</sys:String>
     <sys:String x:Key="ImmaginiApriTitolo">Select One or More Images</sys:String>
     <sys:String x:Key="ImmaginiFileFiltro">"Image files (*.png;*.jpeg;*.jpg;*.gif;*.bmp)|*.png;*.jpeg;*.jpg;*.gif;*.bmp|All files (*.*)|*.*"</sys:String>
@@ -163,6 +169,7 @@
     <sys:String x:Key="BibliotecaBloccatoSbloccato">No</sys:String>
     <sys:String x:Key="BibliotecaBloccatoBloccato">Yes</sys:String>
     <sys:String x:Key="BibliotecaBloccatoBloccatoSempre">Yes permanent</sys:String>
+    <sys:String x:Key="BibliotecaBloccatoPermanente">Can not be deleted</sys:String>
     <sys:String x:Key="BibliotecaTipoBibbiaAiuto">Contains the text of a Bible translation</sys:String>
     <sys:String x:Key="BibliotecaTipoCommentarioAiuto">Contains comments on the verses of the Bible (eg commentary)</sys:String>
     <sys:String x:Key="BibliotecaTipoDizionarioAiuto">Contains explanations of terms (eg dictionary)</sys:String>
@@ -224,11 +231,13 @@
 
     <sys:String x:Key="ImportaDialogoTitolo">Create a New Text</sys:String>
     <sys:String x:Key="ImportaDialogoAiuto">Type the information on the text. The Title is required, the Abbreviation will be created automatically if you do not give it, the other value are optional. If you hover the mouse over the boxes, more information is given.</sys:String>
+    <sys:String x:Key="ImportaDialogoAiutoPagine">Bibliographical Information</sys:String>
     <sys:String x:Key="ImportaDialogoFile">File:</sys:String>
     <sys:String x:Key="ImportaDialogoFileAiuto">The file with the text to be imported. To change the file, close this dialog and start again.</sys:String>
     <sys:String x:Key="ImportaDialogoCartella">Directory:</sys:String>
     <sys:String x:Key="ImportaDialogoCartellaAiuto">The directory that contains the files with the text to be imported. To change the directory, close this dialog and start again.</sys:String>
     <sys:String x:Key="ImportaDialogoCome">Import as:</sys:String>
+    <sys:String x:Key="ImportaDialogoComeAiuto">Importing as a commentary creates a note for every verse found in the text; importing as a book creates a continuous text, separated into pages if the file is a PDF</sys:String>
     <sys:String x:Key="ImportaDialogoComeCommentario">Commentary</sys:String>
     <sys:String x:Key="ImportaDialogoComeLibro">Book</sys:String>
     <sys:String x:Key="ImportaDialogoTitoloTesto">Title:</sys:String>
@@ -300,7 +309,7 @@
     <sys:String x:Key="OpzioniVoceNota">Other voices can be installato in Windows, in the section "Language and Region" of the Settings.</sys:String>
     <sys:String x:Key="OpzioniVoceVelocita">Speed:</sys:String>
     <sys:String x:Key="OpzioniVoceVolume">Volume:</sys:String>
-    <sys:String x:Key="OpzioniVoceEvidenzia">Highlight the words as they are being read</sys:String>
+    <sys:String x:Key="OpzioniVoceEvidenzia">Highlight the words as they are being read with the colour</sys:String>
     <sys:String x:Key="OpzioniAmbiente">Environment</sys:String>
     <sys:String x:Key="OpzioniEditorTitolo">Editor</sys:String>
     <sys:String x:Key="OpzioniEditorAiuto">Choose the settings for how the editor behaves.</sys:String>
@@ -385,11 +394,11 @@
 \pard\tx3000 0, 1, ..., 9\tab AND WITHIN: the second word must appear within this number of verses\par
 \pard\tx3000  \tab SKIP (inside [...]): the maximum number of words that can be skipped in a sentence\par
 \pard\tx3000 |, !\tab OR\par
-\pard\tx3000 :\tab SKIP ANY NUMBER (inside [...]): any number of words can be between the two words\par        
+\pard\tx3000 :\tab SKIP ANY NUMBER (inside [...]): any number of words can be between the two words\par\par
 \b Before a word:\b0\par
-        \pard\tx3000 /\tab Any word that has this lemma\par
-        \pard\tx3000 \\\tab Any word that has the same lemma as this word\par
-        \pard\tx3000 ^, ~\tab NOT this word (or words if followed by \\ or /; must be followed by AND or AND WITHIN)\par
+        \pard\tx3000 /\tab Any word that has this root\par
+        \pard\tx3000 \\\tab Any word that has the same root as this word\par
+        \pard\tx3000 ^, ~\tab NOT this word (or words if followed by \\ or /; must be followed by AND or AND WITHIN)\par\par
         \b Around expressions:\b0\par
         \pard\tx3000 (...)\tab Find the verses that contain the expression inside the parentheses. They are necessary when the order in which the words are analyzed (from left to right) is not the desired order\par
         \pard\tx3000 [...], "..."\tab Find the verses that contain this phrase, that is, these words in this order\par
@@ -397,7 +406,7 @@
         {\b\fs32 Examples}\par\par
         \pard\tx3000 forgive sinner\tab A verse that contains the words "forgive" and "sinner"\par
         \pard\tx8000 forgive | sinner\tab A verse that contains either the word "forgive" or the word "sinner"\par
-        \pard\tx3000 /forgive /sin\tab A verse that contains a word with lemma "forgive" and a word with lemma "sin"\par
+        \pard\tx3000 /forgive /sin\tab A verse that contains a word with root "forgive" and a word with root "sin"\par
         \pard\tx3000 \\forgive \\sinner\tab Same as the previous example\par
         \pard\tx3000 /repent (/forgive|/sin)\tab A verse that contains a word from "repent", and either a word from "forgive" or a word from "sin"\par
         \pard\tx3000 /repent /forgive | /sin\tab A verse that contains both a word from "repent" and a word from "forgive", or a word from "sin" (not the same as the previous example)\par
@@ -444,6 +453,31 @@
     <sys:String x:Key="MostraAlternaAiuto">Show the passage one verse at a time, and for every verse all of the selected texts are shown. Can be slow for long passages.</sys:String>
     <sys:String x:Key="MostraMostra">Show Passage</sys:String>
 
+    <sys:String x:Key="CreaChiaveTitolo">Create Concordance</sys:String>
+    <sys:String x:Key="CreaChiaveAiuto">A concordance is a list of the words in a text. Select the text you want of which you want to create the concordance, and then the other options. Hover the mouse over a part of the window for more information on the options.</sys:String>
+    <sys:String x:Key="CreaChiaveText">Text:</sys:String>
+    <sys:String x:Key="CreaChiaveTextAiuto">Select the text of which you want to create the concordance.</sys:String>
+    <sys:String x:Key="CreaChiaveRiferimento">Reference:</sys:String>
+    <sys:String x:Key="CreaChiaveRiferimentoAiuto">Type here the reference of the passage for which you want to create a concordance, for example Gen 1:1-2, 1P 3:16. The app understands many different formats for the references. Leave it blank for the whole Bibble.</sys:String>
+    <sys:String x:Key="CreaChiaveTipoTitolo">Concordance of:</sys:String>
+    <sys:String x:Key="CreaChiaveTipoAiuto">Select the type of concordance you want to create.</sys:String>
+    <sys:String x:Key="CreaChiaveTipoParole">Words</sys:String>
+    <sys:String x:Key="CreaChiaveTipoRadici">Roots</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineTitolo">Order of the Entries:</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineAiuto">Select the order in which you want the concordance entries to be displayed.</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineAlfabetico">Alphabetical</sys:String>
+    <sys:String x:Key="CreaChiaveOrdineNumerico">Number of Appearances</sys:String>
+    <sys:String x:Key="CreaChiaveOrdinePrima">First Appearance</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroMinimo">Minimum Number of Appearances:</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroMinimoAiuto">Select the minimum number of appearances for an entry to appear in the concordance.</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroConRiferimenti">With References</sys:String>
+    <sys:String x:Key="CreaChiaveNumeroConRiferimentiAiuto">Include the Bible reference of each passages where the entry appears.</sys:String>
+    <sys:String x:Key="CreaChiaveEscludiRadici">Exclude the Following Roots (one per line):</sys:String>
+    <sys:String x:Key="CreaChiaveEscludiRadiciAiuto">If the box is ticked, no word with these roots will be listed. (* indicates the most common words.)</sys:String>
+    <sys:String x:Key="CreaChiaveCreaChiave">Create Concordance</sys:String>
+    <sys:String x:Key="CreaChiaveCreazione">Creating the concordance...</sys:String>
+    <sys:String x:Key="CreaChiaveChiaveTitolo">Concordance of</sys:String>
+
     <sys:String x:Key="MisureTitolo">Measures Converter</sys:String>
     <sys:String x:Key="MisureAiuto">On the left side, choose the unit you want to convert from, and type the number of that unit. On the right side, choose the unit you want to convert to, and the value in that unit will be shown.</sys:String>
     <sys:String x:Key="MisurePesi">Weights:</sys:String>
@@ -465,4 +499,14 @@
 
     <sys:String x:Key="Aiuto">Help about this panel</sys:String>
     <sys:String x:Key="AiutoApri">Open Help Centre</sys:String>
+
+    <sys:String x:Key="ColorYellow">Yellow</sys:String>
+    <sys:String x:Key="ColorGold">Gold</sys:String>
+    <sys:String x:Key="ColorOrange">Orange</sys:String>
+    <sys:String x:Key="ColorRed">Red</sys:String>
+    <sys:String x:Key="ColorPink">Pink</sys:String>
+    <sys:String x:Key="ColorPurple">Purple</sys:String>
+    <sys:String x:Key="ColorLightBlue">Light Blue</sys:String>
+    <sys:String x:Key="ColorCyan">Cyan</sys:String>
+    <sys:String x:Key="ColorGreen">Green</sys:String>
 </ResourceDictionary>

@@ -311,11 +311,20 @@ namespace LaParola.Utilities
 
         internal static void AggiornaTestiNellInterfaccia()
         {
-            // Find the TextGenerator and Search and Options tools window via its ContentId and refresh its layout
+            // Find the TextGenerator and Search and Options and Concordance tools window via its ContentId and refresh its layout
             if (Application.Current.MainWindow is MainWindow mw)
             {
                 if (mw.FindName("Dock") is AvalonDock.DockingManager dock)
                 {
+                    LayoutAnchorable? searchAnchorable = dock.Layout.Descendents()
+                        .OfType<LayoutAnchorable>()
+                        .FirstOrDefault(a => a.ContentId == "tool.search");
+
+                    if (searchAnchorable?.Content is SearchToolView searchView)
+                    {
+                        searchView.AggiornaVersioniDisponibili();
+                    }
+
                     LayoutAnchorable? textGenAnchorable = dock.Layout.Descendents()
                         .OfType<LayoutAnchorable>()
                         .FirstOrDefault(a => a.ContentId == "tool.textgen");
@@ -325,13 +334,13 @@ namespace LaParola.Utilities
                         textGenView.AggiornaVersioniDisponibili();
                     }
 
-                    LayoutAnchorable? searchAnchorable = dock.Layout.Descendents()
+                    LayoutAnchorable? creaChiaveAnchorable = dock.Layout.Descendents()
                         .OfType<LayoutAnchorable>()
-                        .FirstOrDefault(a => a.ContentId == "tool.search");
+                        .FirstOrDefault(a => a.ContentId == "tool.creachiave");
 
-                    if (searchAnchorable?.Content is SearchToolView searchView)
+                    if (creaChiaveAnchorable?.Content is CreaChiaveToolView creaChiaveView)
                     {
-                        searchView.AggiornaVersioniDisponibili();
+                        creaChiaveView.AggiornaVersioniDisponibili();
                     }
 
                     LayoutDocument? opzioniDocument = dock.Layout.Descendents()

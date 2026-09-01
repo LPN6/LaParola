@@ -27,13 +27,11 @@
             <!-- Font -->
             <TextBlock Text="{DynamicResource FontDialogFont}"/>
             <ComboBox x:Name="cmbFonts"
-                      Height="25"
                       Margin="0,4,0,10"/>
 
             <!-- Size -->
             <TextBlock Text="{DynamicResource FontDialogSize}"/>
             <ComboBox x:Name="cmbSize"
-                      Height="25"
                       Margin="0,4,0,10"
                       IsEditable="True"/>
 

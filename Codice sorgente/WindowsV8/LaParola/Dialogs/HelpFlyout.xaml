@@ -46,7 +46,6 @@ Background="{DynamicResource ControlBackgroundBrush}"
                             BorderThickness="0"
                             Padding="0"
                             HorizontalAlignment="Left"
-                            Visibility="Collapsed"
                             Click="Help_Click">
 
                         <TextBlock Text="{Binding HelpLinkText, ElementName=root}"

@@ -121,8 +121,7 @@ namespace LaParola.DocumentViews
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
         {
-            // TODO2: Open correct help section
-            MessageBox.Show("Open Help Centre");
+            MainWindow.MostraGuida((string)(Application.Current.TryFindResource("ImmagineTitolo") ?? "Image"));
         }
 
         private void PbImmagine_MouseUp(object sender, MouseButtonEventArgs e)

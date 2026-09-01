@@ -47,8 +47,8 @@ namespace LaParola.Services
         private static double msPerCarattereStimati = 90.0;
         private static SolidColorBrush pennelloLetto = new(Color.FromRgb(44, 62, 80));
         private static string _linguaEspansione = "it";
-        // Segnalato dall'utente: l'oro (#FFD700) si vedeva a malapena - sostituito col rosso.
-        private static readonly SolidColorBrush pennelloParolaCorrente = new(Color.FromRgb(0xFF, 0x00, 0x00));
+        // Segnalato dall'utente: l'oro (#FFD700) si vedeva a malapena - sostituito col rosso (predefinito) o colore scelto nelle Opzioni
+        private static readonly SolidColorBrush pennelloParolaCorrente = new(MainWindow.settings.VoceEvidenziaColore);
 
         // Punti di taglio (uno per ogni offset di carattere) della parola attualmente in
         // riempimento progressivo, precalcolati TUTTI INSIEME la prima volta che questa parola
@@ -231,7 +231,7 @@ namespace LaParola.Services
             // AllineaParole fa combaciare le due sequenze con un allineamento per sottosequenza
             // comune più lunga (LCS), così l'evidenziazione resta ancorata alla parola giusta.
             string[] paroleLette = testo.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-            ParolaConPosizione[] mappatura = AllineaParole(paroleOriginali, paroleLette);
+            ParolaConPosizione[]? mappatura = AllineaParole(paroleOriginali, paroleLette);
 
             hostAttuale = host;
             paroleOriginaliAttuali = paroleOriginali;
@@ -439,6 +439,7 @@ namespace LaParola.Services
                     }
                 }
                 // Aggiunge abbreviazioni italiane mancanti (non presenti nell'elenco inglese caricato da Testi)
+                // TODO2 da Testi
                 string[] itExtra = ["ge","gn","eo","es","le","lv","nm","nu","de","dt","gios","gs","gdc","giudic","rt","ru",
                     "1s","2s","1r","2r","1cr","2cr","ed","esd","ne","tb","to","giudit","est","et","1m","2m","gb","giob",
                     "sal","sl","pr","pv","ec","q","ca","cc","ct","sap","si","is","ger","gr","la","b","ez","da","dn","o",
@@ -583,7 +584,10 @@ namespace LaParola.Services
             }
             catch
             {
-                pennelloLetto = Brushes.Black;
+                if (ThemeManager.IsDark(MainWindow.settings.ThemeMode))
+                    pennelloLetto = Brushes.White;
+                else
+                    pennelloLetto = Brushes.Black;
             }
 
             void GestisciSuUI()
@@ -636,7 +640,7 @@ namespace LaParola.Services
                     puntiTaglioParolaCorrente = PrecalcolaPuntiTaglio(corrente);
                     indiceParolaConPuntiPrecalcolati = nuovoIndice;
 
-                    corrente.Inizio.Paragraph?.BringIntoView();
+                    corrente.Inizio?.Paragraph?.BringIntoView();
                 }
                 catch { }
             }
@@ -797,7 +801,7 @@ namespace LaParola.Services
 
         private static List<ParolaConPosizione> EstraiParoleConPosizione(FlowDocument documento)
         {
-            List<ParolaConPosizione> parole = new List<ParolaConPosizione>();
+            List<ParolaConPosizione> parole = [];
             TextPointer? posizione = documento.ContentStart;
             Paragraph? paragrafoPrecedente = null;
             while (posizione != null)
@@ -838,14 +842,14 @@ namespace LaParola.Services
         // Limite di sicurezza sulla tabella di allineamento (O(n*m) in tempo e spazio) - oltre
         // questa dimensione l'evidenziazione si disattiva da sola (la lettura audio prosegue
         // comunque) invece di rischiare di rallentare l'avvio della lettura su testi enormi.
-        private const int LimiteParolePerAllineamento = 4000;
+        private const int LimiteParolePerAllineamento = 6000; // Ex 4 in Visualizzatore in CEI è un po' più di 4000 parole
 
-        private static ParolaConPosizione[] AllineaParole(List<ParolaConPosizione> originali, string[] lette)
+        private static ParolaConPosizione[]? AllineaParole(List<ParolaConPosizione> originali, string[] lette)
         {
             int n = originali.Count, m = lette.Length;
             ParolaConPosizione[] risultato = new ParolaConPosizione[m];
             if (n == 0 || m == 0 || (long)n * m > (long)LimiteParolePerAllineamento * LimiteParolePerAllineamento)
-                return risultato;
+                return null;
 
             string[] normOriginali = [.. originali.Select(p => NormalizzaParolaPerConfronto(p.Testo))];
             string[] normLette = [.. lette.Select(NormalizzaParolaPerConfronto)];
@@ -953,6 +957,8 @@ namespace LaParola.Services
         /// tick del timer (vedi il commento sul campo puntiTaglioParolaCorrente).</summary>
         private static TextPointer[] PrecalcolaPuntiTaglio(ParolaConPosizione parola)
         {
+            if (parola.Testo == null || parola.Inizio == null || parola.Fine == null)
+                return [];
             int lunghezza = parola.Testo.Length;
             TextPointer[] punti = new TextPointer[lunghezza + 1];
             punti[0] = parola.Inizio;

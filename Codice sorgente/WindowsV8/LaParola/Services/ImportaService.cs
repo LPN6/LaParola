@@ -353,7 +353,7 @@ namespace LaParola.Services
                 bw.Write(data.Lingua);
                 bw.Write(data.VersioneDelleNote);
                 bw.Write(data.Tipo == TipoImportazione.Crea ? (byte)BloccatoTipi.Sbloccato : (byte)BloccatoTipi.Bloccato);
-                byte tipoTestoDaScrivere = (data.Tipo == TipoImportazione.ImportaRtf || data.Tipo == TipoImportazione.Crea || data.Tipo == TipoImportazione.ImportaPDF || (data.Tipo == TipoImportazione.ImportaThML && data.ThMLTipo != TipoThML.Bibbia) ? (byte)1 : (byte)0);
+                byte tipoTestoDaScrivere = (data.Tipo == TipoImportazione.ImportaRtf || data.Tipo == TipoImportazione.Crea || data.Tipo == TipoImportazione.ImportaPDF || data.Tipo == TipoImportazione.ImportaBibleWorks || (data.Tipo == TipoImportazione.ImportaThML && data.ThMLTipo == TipoThML.Collezione) ? (byte)1 : (byte)0);
                 bw.Write(tipoTestoDaScrivere);
                 UInt32 pInizioDati = (UInt32)(bw.Seek(0, SeekOrigin.Current));
                 bw.Seek(11, SeekOrigin.Begin);

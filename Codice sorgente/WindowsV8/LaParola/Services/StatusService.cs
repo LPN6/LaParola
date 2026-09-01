@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -42,7 +41,7 @@ namespace LaParola.Services
     /// Rappresenta una singola coppia (Testo + ProgressBar) visibile nella StatusBar.
     /// Implementa IDisposable per consentire la distruzione automatica a fine operazione.
     /// </summary>
-    public class StatusTask(string message, Visibility isVisible=Visibility.Visible, bool isIndeterminate = true) : INotifyPropertyChanged, IDisposable
+    public class StatusTask(string message, Visibility isVisible = Visibility.Visible, bool isIndeterminate = true) : INotifyPropertyChanged, IDisposable
     {
         private string _message = message;
         private bool _isIndeterminate = isIndeterminate;
@@ -110,9 +109,9 @@ namespace LaParola.Services
         /// <summary>
         /// Crea e registra una nuova coppia Testo/ProgressBar nella StatusBar.
         /// </summary>
-        public static StatusTask AvviaTask(string messaggioIniziale, Visibility isVisible=Visibility.Visible, bool isIndeterminate = true)
+        public static StatusTask AvviaTask(string messaggioIniziale, Visibility isVisible = Visibility.Visible, bool isIndeterminate = true)
         {
-            StatusTask task = new(messaggioIniziale,isVisible, isIndeterminate);
+            StatusTask task = new(messaggioIniziale, isVisible, isIndeterminate);
 
             Application.Current?.Dispatcher.InvokeAsync(() =>
             {

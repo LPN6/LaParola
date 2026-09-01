@@ -5,6 +5,7 @@ using LaParola.Models;
 using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Security.Principal;
 using System.Speech.Synthesis;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,37 +15,19 @@ namespace LaParola.ToolViews;
 
 public partial class OptionsToolView : UserControl
 {
-    readonly bool nonSalvare = true;
-
-    // TODO2 color picker per highlight sintesi - di Extended.Wpf.Toolkit?
-    /*
-      <Window x:Class="MyApp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
-    <Grid Padding="20">
-        <!-- ColorPicker Dropdown -->
-        <xctk:ColorPicker x:Name="MyColorPicker" 
-                          SelectedColorChanged="MyColorPicker_SelectedColorChanged"
-                          DisplayColorAndName="True"
-                          Width="200" 
-                          Height="30"/>
-    </Grid>
-</Window>
-
-    private void MyColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
-{
-    if (e.NewValue.HasValue)
-    {
-        Color selectedColor = e.NewValue.Value;
-        // Use WPF Color directly
-    }
-}
-     */
     // TODO2 - reimposta default settings, help on export/import settings
     // TODO2 - results in same editor window or new
     // TODO2 - References: context in searches
     // TODO2 book names
+
+    readonly bool nonSalvare = true;
+
+    public class HighlightColorItem
+    {
+        public string Name { get; set; } = "";
+        public Color Color { get; set; }
+        public SolidColorBrush Brush => new(Color);
+    }
 
     public OptionsToolView()
     {
@@ -301,6 +284,21 @@ public partial class OptionsToolView : UserControl
         VoceVolumeValore.Text = MainWindow.settings.VolumeVoce + "%";
 
         VoceEvidenzia.IsChecked = MainWindow.settings.VoceEvidenzia;
+
+        List<HighlightColorItem> items = [
+            new() { Name = (string)Application.Current.TryFindResource("ColorRed") ?? "Red", Color = Colors.Red },
+            new() { Name = (string)Application.Current.TryFindResource("ColorOrange") ?? "Orange", Color = Colors.Orange },
+            new() { Name = (string)Application.Current.TryFindResource("ColorGold") ?? "Gold", Color = Colors.Gold },
+            new() { Name = (string)Application.Current.TryFindResource("ColorYellow") ?? "Yellow", Color = Colors.Yellow },
+            new() { Name = (string)Application.Current.TryFindResource("ColorGreen") ?? "Green", Color = Colors.LightGreen },
+            new() { Name = (string)Application.Current.TryFindResource("ColorCyan") ?? "Cyan", Color = Colors.Cyan },
+            new() { Name = (string)Application.Current.TryFindResource("ColorLightBlue") ?? "Light Blue", Color = Colors.LightSkyBlue },
+            new() { Name = (string)Application.Current.TryFindResource("ColorPurple") ?? "Purple", Color = Colors.Plum },
+            new() { Name = (string)Application.Current.TryFindResource("ColorPink") ?? "Pink", Color = Colors.Pink }
+        ];
+
+        ColorPickerEvidenzia.ItemsSource = items;
+        ColorPickerEvidenzia.SelectedValue = items.FirstOrDefault(i => i.Color == MainWindow.settings.VoceEvidenziaColore);
     }
 
     /// <summary>Richiesto dall'utente: "Microsoft Cosimo" -> "Cosimo" nell'elenco voci - solo
@@ -321,6 +319,14 @@ public partial class OptionsToolView : UserControl
             return string.IsNullOrEmpty(codice) ? "" : $" ({codice})";
         }
         catch { return ""; }
+    }
+
+    private void ColorPickerEvidenzia_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (nonSalvare) return;
+
+        MainWindow.settings.VoceEvidenziaColore = ColorPickerEvidenzia.SelectedValue is HighlightColorItem item ? item.Color : Colors.Red;
+        App.Settings.Save(MainWindow.settings);
     }
 
     private static void ApplicaFontAdEsempio(TextBlock tbEsempio, string categoria)
@@ -379,8 +385,7 @@ public partial class OptionsToolView : UserControl
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
     {
-        // TODO2: Open correct help section
-        MessageBox.Show("Open Help Centre");
+        MainWindow.MostraGuida((string)(Application.Current.TryFindResource("OpzioniTitolo") ?? "Options"));
     }
 
     private void OptionsTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -615,6 +620,7 @@ public partial class OptionsToolView : UserControl
         VoceVelocitaValore.Text = (int)VoceVelocita.Value + "/20";
         VoceVolumeValore.Text = (int)VoceVolume.Value + "%";
         _settings.VoceEvidenzia = VoceEvidenzia.IsChecked == true;
+        _settings.VoceEvidenziaColore = ColorPickerEvidenzia.SelectedValue is HighlightColorItem item ? item.Color : Colors.Red;
 
         TestoVisualizzato testoVisualizzatoPrecedente = _settings.Formato.TestoVisualizzato;
         TestoVisualizzato testoVisualizzatoAttuale = TestoVersetti.IsChecked == true ? TestoVisualizzato.Versetti :

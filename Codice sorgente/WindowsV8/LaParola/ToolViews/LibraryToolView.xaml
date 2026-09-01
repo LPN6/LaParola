@@ -34,7 +34,7 @@
 
             <TextBox x:Name="SearchTextBox" 
                      Grid.Row="0" Grid.Column="0" 
-                     Height="28"
+                     MinHeight="28"
                      VerticalContentAlignment="Center"
                      Margin="0,0,8,0"
                      TextChanged="SearchTextBox_TextChanged" >
@@ -64,7 +64,7 @@
             <Button x:Name="AddBookButton"
                     Grid.Row="0" Grid.Column="1"
                     Content="{DynamicResource BibliotecaAggiungiLibri}"
-                    Height="28"
+                    MinHeight="28"
                     Padding="12,0,12,0"
                     Margin="0,0,8,0"
                     Click="AddBookButton_Click">
@@ -257,6 +257,7 @@
                       HeadersVisibility="Column"
                       Background="Transparent"
                       BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                      MouseUp="BooksDataGrid_MouseUp"
                       MouseDoubleClick="BooksDataGrid_MouseDoubleClick"
                       MouseMove="BooksDataGrid_MouseMove">
                 <DataGrid.Resources>
@@ -612,7 +613,7 @@
                         <StackPanel Grid.Column="1" Orientation="Vertical">
                             <Button x:Name="ButtonCancella"
                     Content="{DynamicResource BibliotecaCancella}"
-                    Height="28"
+                    MinHeight="28"
                     Padding="12,0,12,0"
                     Margin="0,0,0,8"
                     Click="ButtonCancella_Click">
@@ -625,7 +626,7 @@
 
                             <Button x:Name="ButtonRinomina"
                     Content="{DynamicResource BibliotecaRinomina}"
-                    Height="28" Padding="12,0,12,0" Margin="0,0,0,8"
+                    MinHeight="28" Padding="12,0,12,0" Margin="0,0,0,8"
                     Click="ButtonRinomina_Click">
                                 <Button.ToolTip>
                                     <ToolTip>
@@ -636,7 +637,7 @@
 
                             <Button x:Name="ButtonCopia"
                     Content="{DynamicResource BibliotecaCopia}"
-                    Height="28" Padding="12,0,12,0" Margin="0,0,0,8"
+                    MinHeight="28" Padding="12,0,12,0" Margin="0,0,0,8"
                     Click="ButtonCopia_Click">
                                 <Button.ToolTip>
                                     <ToolTip>

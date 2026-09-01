@@ -98,7 +98,6 @@ namespace LaParola
             cmbColour.SelectionChanged += (_, __) => UpdatePreview();
 
             UpdatePreview();
-
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -187,8 +186,7 @@ namespace LaParola
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
         {
-            // TODO2: Open correct help section
-            MessageBox.Show("Open Help Centre");
+            MainWindow.MostraGuida((string)(Application.Current.TryFindResource("FontDialogFont") ?? "Font"));
         }
 
         private void UpdatePreview()

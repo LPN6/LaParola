@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace LaParola.ToolViews
 {
-    // TODO2 scegliere parola
+    // TODO2 scegliere parola - note Help file, voice Glossario > Radice, ne parla già, bisogna controllare che il testo sia giusto
     // TODO2 salva in lista versetti, cercare in lista versetti
 
     public partial class SearchToolView : UserControl
@@ -46,8 +46,7 @@ namespace LaParola.ToolViews
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
         {
-            // TODO2: Open correct help section
-            MessageBox.Show("Open Help Centre");
+            MainWindow.MostraGuida((string)(Application.Current.TryFindResource("RicercaTitolo") ?? "Search"));
         }
 
         private void AiutoEspressione_Click(object sender, RoutedEventArgs e)

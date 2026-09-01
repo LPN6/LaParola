@@ -160,6 +160,11 @@ public class DockingHostService
                 v = new TextGeneratorToolView();
                 titolo = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
             }
+            else if (contentId == "tool.creachiave")
+            {
+                v = new CreaChiaveToolView();
+                titolo = (string)(System.Windows.Application.Current.TryFindResource("CreaChiaveTitolo") ?? "Create Concordance");
+            }
             else if (contentId == "tool.converter")
             {
                 v = new ConverterToolView();
@@ -201,6 +206,8 @@ public class DockingHostService
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("RicercaTitolo") ?? "Search");
             else if (contentId == "tool.textgen")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
+            else if (contentId == "tool.creachiave")
+                anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("CreaChiaveTitolo") ?? "Create Concordance");
             else if (contentId == "tool.converter")
                 anchorable.Title = (string)(System.Windows.Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");
             else
@@ -323,7 +330,7 @@ public class DockingHostService
         LayoutDocument layoutDoc = new()
         {
             Title = string.IsNullOrEmpty(titolo) ?
-                (string)(System.Windows.Application.Current.TryFindResource("EditorTitle") ?? "Editor Document")
+                (string)(System.Windows.Application.Current.TryFindResource("EditorTitolo") ?? "Document")
                 : titolo,
             ContentId = $"doc.editor.{Guid.NewGuid():N}",
             Content = view
@@ -377,19 +384,34 @@ public class DockingHostService
         return view;
     }
 
-    public ViewerDocumentView? OpenViewerDocument(string title, string notaTitolo = "")
+    public ViewerDocumentView? OpenViewerDocument(string title, string notaTitolo = "", bool unico=false)
     {
-        ViewerDocumentView? view = OpenViewerDocumentCommon(title);
+        ViewerDocumentView? view = OpenViewerDocumentCommon(title, unico);
 
         if (view != null)
             _ = view.SpostaTesto(notaTitolo, true, false);
         return view;
     }
 
-    private ViewerDocumentView? OpenViewerDocumentCommon(string title)
+    private ViewerDocumentView? OpenViewerDocumentCommon(string title, bool unico=false)
     {
         if (!MainWindow.Testi.VersioneEsiste(title))
             return null;
+
+        if (unico && _dock?.Layout != null)
+        {
+            // se già aperto, vai a quella finestra - usato per il file della Guida
+            LayoutDocument? existingDoc = _dock.Layout.Descendents()
+                .OfType<LayoutDocument>()
+                .FirstOrDefault(d => string.Equals(d.Title, title, StringComparison.Ordinal));
+
+            if (existingDoc != null)
+            {
+                existingDoc.IsSelected = true;
+                existingDoc.IsActive = true;
+                return existingDoc.Content as ViewerDocumentView;
+            }
+        }
 
         LayoutDocumentPane? docPane = _dock?.Layout?.Descendents()
             .OfType<LayoutDocumentPane>()

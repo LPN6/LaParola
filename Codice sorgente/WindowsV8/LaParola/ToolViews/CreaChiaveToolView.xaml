@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="LaParola.ToolViews.CreaChiaveToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LaParola.ToolViews"
+             xmlns:controls="clr-namespace:LaParola"
+             
+             Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="0,8,0,0" Text="{DynamicResource CreaChiaveText}" />
+
+            <controls:HelpFlyout
+                x:Name="HelpFlyoutControl"
+        Grid.Column="1"
+        Margin="0,8,0,0"
+        HelpText="{DynamicResource CreaChiaveAiuto}"
+        HelpClicked="HelpFlyout_OnHelpClicked"/>
+        </Grid>
+
+        <ComboBox x:Name="cbVersione" Grid.Row="1" Margin="0,8,0,0" ToolTipService.ShowDuration="10000" Background="{DynamicResource ControlBackgroundBrush}" ItemsSource="{Binding VersioneItems}" SelectedItem="{Binding SelectedVersione, Mode=TwoWay}">
+            <ComboBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveTextAiuto}"
+                       TextWrapping="Wrap"
+                       MaxWidth="300"/>
+                </ToolTip>
+            </ComboBox.ToolTip>
+        </ComboBox>
+
+        <TextBlock x:Name="labBrano" Grid.Row="2" Margin="0,8,0,0" Text="{DynamicResource CreaChiaveRiferimento}" />
+
+        <TextBox x:Name="tbBrano" Grid.Row="3" Margin="0,12,0,0" ToolTipService.ShowDuration="10000">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveRiferimentoAiuto}"
+                       TextWrapping="Wrap"
+                       MaxWidth="300"/>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <GroupBox x:Name="GbTipo" Grid.Row="4" Header="{DynamicResource CreaChiaveTipoTitolo}" Margin="0,12,0,0" Padding="12">
+            <GroupBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveTipoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </GroupBox.ToolTip>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <RadioButton x:Name="rbTipoParole" Grid.Row="0"
+                         Content="{DynamicResource CreaChiaveTipoParole}"
+                         GroupName="Tipo"
+                         IsChecked="{Binding IsTipoParole, Mode=TwoWay}"
+                         VerticalAlignment="Center"/>
+                <RadioButton x:Name="rbTipoRadici" Grid.Row="2"
+                         Content="{DynamicResource CreaChiaveTipoRadici}"
+                         GroupName="Tipo"
+                         IsChecked="{Binding IsTipoRadici, Mode=TwoWay}"
+                         VerticalAlignment="Center"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="GbOrdine" Grid.Row="5" Header="{DynamicResource CreaChiaveOrdineTitolo}" Margin="0,12,0,0" Padding="12">
+            <GroupBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveOrdineAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </GroupBox.ToolTip>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <RadioButton x:Name="rbOrdineAlfabetico" Grid.Row="0"
+                         Content="{DynamicResource CreaChiaveOrdineAlfabetico}"
+                         GroupName="Ordine"
+                         IsChecked="{Binding IsOrdineAlfabetico, Mode=TwoWay}"
+                         VerticalAlignment="Center"/>
+                <RadioButton x:Name="rbOrdineNumerico" Grid.Row="2"
+                         Content="{DynamicResource CreaChiaveOrdineNumerico}"
+                         GroupName="Ordine"
+                         IsChecked="{Binding IsOrdineNumerico, Mode=TwoWay}"
+                         VerticalAlignment="Center"/>
+
+                <RadioButton x:Name="rbOrdinePrima" Grid.Row="4"
+                         Content="{DynamicResource CreaChiaveOrdinePrima}"
+                         GroupName="Ordine"
+                         IsChecked="{Binding IsOrdinePrima, Mode=TwoWay}"
+                         VerticalAlignment="Center"/>
+
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="6" Margin="0,12,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveNumeroMinimoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </Grid.ToolTip>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource CreaChiaveNumeroMinimo}" VerticalAlignment="Center" />
+
+            <Slider x:Name="SliderNumeroMinimo" Grid.Row="1" Grid.Column="0" 
+            Minimum="1" 
+            Maximum="100" 
+            Value="{Binding NumeroMinimo, Mode=TwoWay}" 
+            TickFrequency="1" 
+            IsSnapToTickEnabled="True" 
+            VerticalAlignment="Center" />
+
+            <TextBox Grid.Row="1" Grid.Column="1" 
+                     Width="50"
+             Margin="8,0,0,0" 
+             TextAlignment="Center" 
+             VerticalAlignment="Center"
+             Text="{Binding ElementName=SliderNumeroMinimo, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+        <CheckBox x:Name="ChkOption" Grid.Row="7" Margin="0,12,0,0" 
+          Content="{DynamicResource CreaChiaveNumeroConRiferimenti}" 
+          IsChecked="{Binding ConRiferimenti, Mode=TwoWay}" 
+          VerticalAlignment="Center">
+            <CheckBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveNumeroConRiferimentiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </CheckBox.ToolTip>
+        </CheckBox>
+
+        <!-- CheckBox to enable/disable exclusion -->
+        <CheckBox x:Name="CbEscludiParole" Grid.Row="8" Margin="0,12,0,6"
+          Content="{DynamicResource CreaChiaveEscludiRadici}"
+          IsChecked="{Binding EscludiParoleAbilitato, Mode=TwoWay}"
+          VerticalAlignment="Center" />
+
+        <!-- Multi-line TextBox for word input -->
+        <TextBox x:Name="TbEscludiParole" Grid.Row="9"
+         Height="100"
+         AcceptsReturn="True"
+         VerticalScrollBarVisibility="Auto"
+         TextWrapping="NoWrap"
+         IsEnabled="{Binding ElementName=CbEscludiParole, Path=IsChecked}"
+         Text="{Binding ParoleDaEscludereText, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource CreaChiaveEscludiRadiciAiuto}"
+                       TextWrapping="Wrap"
+                       MaxWidth="300"/>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Button x:Name="PulCreaChiave" Grid.Row="10" Margin="0,14,0,0" IsDefault="True" Padding="10,8" Content="{DynamicResource CreaChiaveCreaChiave}" Click="CreaChiave_Click" HorizontalAlignment="Right" />
+    </Grid>
+</UserControl>

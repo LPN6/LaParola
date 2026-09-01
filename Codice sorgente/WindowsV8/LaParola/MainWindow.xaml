@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:LaParola.ToolViews"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="{DynamicResource AppTitle}" Width="1200" Height="780"
+        Title="{DynamicResource AppTitolo}" Width="1200" Height="780"
         Background="{DynamicResource AppBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}"
         Icon="/appicon.ico" WindowState="Maximized">
     <Window.InputBindings>
@@ -25,6 +25,7 @@
         <KeyBinding Key="L" Modifiers="Ctrl" Command="{x:Static local:MainWindow.LibraryCommand}" />
         <KeyBinding Key="F5" Command="{x:Static local:MainWindow.SearchCommand}" />
         <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
+        <KeyBinding Key="F7" Command="{x:Static local:MainWindow.CreaChiaveCommand}" />
         <KeyBinding Key="M" Modifiers="Ctrl+Shift" Command="{x:Static local:MainWindow.ConverterCommand}" />
         <KeyBinding Key="F10" Command="{x:Static local:MainWindow.VoiceCommand}" />
         <KeyBinding Key="R" Modifiers="Ctrl" Command="{x:Static local:MainWindow.RiferimentiCommand}" />
@@ -48,6 +49,7 @@
         <CommandBinding Command="{x:Static local:MainWindow.LibraryCommand}" Executed="Library_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.SearchCommand}" Executed="Search_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.MostraCommand}" Executed="Mostra_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.CreaChiaveCommand}" Executed="CreaChiave_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.ConverterCommand}" Executed="Converter_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.VoiceCommand}" Executed="Voice_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.AddTextsCommand}" Executed="AddTexts_Executed" />
@@ -178,7 +180,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource MenuVisualizza}">
+                <MenuItem Header="{DynamicResource MenuVisualizza}" SubmenuOpened="MenuVisualizza_SubmenuOpened">
                     <MenuItem x:Name="MenuVisualizzaBibbia" Header="{DynamicResource MenuVisualizzaBibbia}" Click="MenuVisualizzaBibbia_Click">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="BookCross"/>
@@ -226,6 +228,21 @@
 
                     <Separator/>
 
+                    <MenuItem x:Name="MenuVisualizzaZoom" Header="{DynamicResource MenuVisualizzaZoom}" SubmenuOpened="Zoom_SubmenuOpened">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="MagnifyExpand"/>
+                        </MenuItem.Icon>
+                        <MenuItem x:Name="MenuZoom400" Header="400%" Tag="400" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                        <MenuItem x:Name="MenuZoom200" Header="200%" Tag="200" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                        <MenuItem x:Name="MenuZoom150" Header="150%" Tag="150" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                        <MenuItem x:Name="MenuZoom120" Header="120%" Tag="120" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                        <MenuItem x:Name="MenuZoom100" Header="100%" Tag="100" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                        <MenuItem x:Name="MenuZoom080" Header="80%" Tag="80" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                        <MenuItem x:Name="MenuZoom050" Header="50%" Tag="50" IsCheckable="True" Click="MenuVisualizzaZoom_Click" />
+                    </MenuItem>
+
+                    <Separator/>
+
                     <MenuItem x:Name="MenuVisualizzaImmagine" Header="{DynamicResource MenuVisualizzaImmagine}" Command="{x:Static local:MainWindow.ImageCommand}" InputGestureText="Ctrl+I">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FileImageOutline"/>
@@ -248,6 +265,11 @@
                             <iconPacks:PackIconMaterial Kind="BookOpenPageVariant"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuCreaChiave}" Command="{x:Static local:MainWindow.CreaChiaveCommand}" InputGestureText="F7">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="BookAlphabet"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource MenuConverter}" Command="{x:Static local:MainWindow.ConverterCommand}" InputGestureText="Ctrl+Shift+M">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Ruler"/>
@@ -259,15 +281,15 @@
                             <iconPacks:PackIconMaterial Kind="CrosshairsQuestion"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                   <!-- <Separator/>-->
+                    <!-- <Separator/>-->
                     <MenuItem x:Name="MenuVoce" Header="{DynamicResource MenuVoce}" Command="{x:Static local:MainWindow.VoiceCommand}" InputGestureText="F10">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="AccountVoice"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <Separator/>
-                    
+
                     <MenuItem Header="{DynamicResource MenuAggiungiTesti}" Command="{x:Static local:MainWindow.AddTextsCommand}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="BookPlus"/>
@@ -280,6 +302,11 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MenuAiuto}">
+                    <MenuItem Header="{DynamicResource MenuAssistenza}" Click="Assistenza_Click">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Help"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource MenuAbout}" Click="About_Click">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Information"/>
@@ -311,7 +338,7 @@
                     </ad:LayoutRoot>
                 </ad:DockingManager>
 
-                <StatusBar Grid.Row="1" Height="28" 
+                <StatusBar Grid.Row="1" MinHeight="28" 
            Background="{DynamicResource AppBackgroundBrush}" 
            BorderBrush="{DynamicResource SubtleBorderBrush}" 
            BorderThickness="0,1,0,0">
@@ -338,13 +365,12 @@
                                         <!-- ProgressBar dedicata -->
                                         <ProgressBar Width="90" Height="12" 
                                      IsIndeterminate="{Binding IsIndeterminate}" 
-                                     Value="{Binding Progress}" 
-                                                     Visibility="{Binding IsVisible}"
+                                     Value="{Binding Progress}" Visibility="{Binding IsVisible}"
                                      Minimum="0" Maximum="100" 
                                      VerticalAlignment="Center" />
 
                                         <!-- Separatore verticale opzionale tra i processi -->
-                                        <Separator Margin="15,2,0,2" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                        <!-- <Separator Margin="15,2,0,2" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />-->
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

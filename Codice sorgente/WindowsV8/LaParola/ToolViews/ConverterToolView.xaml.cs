@@ -40,8 +40,7 @@ public partial class ConverterToolView : UserControl
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
     {
-        // TODO2: Open correct help section
-        MessageBox.Show("Open Help Centre");
+        MainWindow.MostraGuida((string)(Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter"));
     }
 
     private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

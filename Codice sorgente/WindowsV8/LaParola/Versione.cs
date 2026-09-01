@@ -2848,6 +2848,7 @@ namespace LaParola
                     noteModificate = true;
                     break;
                 case BloccatoTipi.BloccatoSempre: // non fare niente
+                case BloccatoTipi.Permanente:
                     break;
             }
         }

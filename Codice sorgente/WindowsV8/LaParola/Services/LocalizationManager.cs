@@ -54,6 +54,9 @@ public class LocalizationManager
                 case "tool.textgen":
                     anchorable.Title = (string)(Application.Current.TryFindResource("MostraTitolo") ?? "Show Passage");
                     break;
+                case "tool.creachiave":
+                    anchorable.Title = (string)(Application.Current.TryFindResource("CreaChiaveTitolo") ?? "Create Concordance");
+                    break;
                 case "tool.converter":
                     anchorable.Title = (string)(Application.Current.TryFindResource("MisureTitolo") ?? "Measures Converter");
                     break;

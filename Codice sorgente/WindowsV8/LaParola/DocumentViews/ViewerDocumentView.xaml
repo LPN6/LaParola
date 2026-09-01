@@ -48,7 +48,7 @@
                             <Border Width="1" Height="18" Background="{DynamicResource SubtleBorderBrush}" Margin="6,0"/>
 
                             <TextBox x:Name="TxtReference" 
-                                     Width="90" Height="24" Margin="4,0" 
+                                     Width="90" MinHeight="24" Margin="4,0" 
                                      VerticalContentAlignment="Center"
                                      Background="{DynamicResource AppBackgroundBrush}" 
                                      Foreground="{DynamicResource AppForegroundBrush}"
@@ -102,7 +102,7 @@
                             <Border x:Name="BorderReference2" Width="1" Height="18" Background="{DynamicResource SubtleBorderBrush}" Margin="8,0"/>
 
                             <ComboBox x:Name="CmbTitoloNota" 
-                                      Width="160" Height="24" Margin="6,0,4,0" 
+                                      Width="160" MinHeight="24" Margin="6,0,4,0" 
                                       VerticalContentAlignment="Center"
                                       Visibility="Collapsed"
                                       SelectionChanged="CmbTitoloNota_SelectionChanged"
@@ -112,7 +112,7 @@
                             <Border Width="1" Height="18" Background="{DynamicResource SubtleBorderBrush}" Margin="8,0"/>
 
                             <TextBox x:Name="TxtSearchWord" 
-                                     Width="120" Height="24" Margin="4,0" 
+                                     Width="120" MinHeight="24" Margin="4,0" 
                                      VerticalContentAlignment="Center"
                                      Background="{DynamicResource AppBackgroundBrush}" 
                                      Foreground="{DynamicResource AppForegroundBrush}"
@@ -129,7 +129,7 @@
                             </Button>
 
                             <ComboBox x:Name="CmbSearchResults" 
-                                      Width="160" Height="24" Margin="6,0,4,0" 
+                                      Width="160" MinHeight="24" Margin="6,0,4,0" 
                                       VerticalContentAlignment="Center"
                                       IsEnabled="False" 
                                       SelectionChanged="CmbSearchResults_SelectionChanged"
@@ -221,11 +221,74 @@
                             </Button>
 
                             <Border Width="1" Height="18" Background="{DynamicResource SubtleBorderBrush}" Margin="6,0"/>
-                            
+
+                            <Button x:Name="BtnZoom" Style="{StaticResource ToolbarIconButton}" Click="BtnZoom_Click" ToolTip="{DynamicResource ViewerZoomAiuto}" Width="38" Height="30">
+                                <Button.Resources>
+                                    <Style TargetType="ContextMenu">
+                                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorderBrush}"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="Padding" Value="1,2"/>
+                                    </Style>
+
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}"/>
+                                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0,3"/>
+
+                                        <Style.Resources>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlLightBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF163A55"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="#FF163A55"/>
+                                        </Style.Resources>
+                                    </Style>
+
+                                    <Style TargetType="Separator">
+                                        <!-- Margin shifts the line past the icon column (32px from left) cleanly -->
+                                        <Setter Property="Margin" Value="32,3,4,3"/>
+                                        <Setter Property="Height" Value="1"/>
+                                        <Setter Property="Background" Value="{DynamicResource SubtleBorderBrush}"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Separator">
+                                                    <Border Background="{TemplateBinding Background}" Height="1"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Resources>
+
+                                <Grid>
+                                    <iconPacks:PackIconMaterial x:Name="IconZoom" Kind="MagnifyExpand" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Border x:Name="BadgeZoom" Background="{DynamicResource AppForegroundBrush}" 
+                                        CornerRadius="2" Padding="2,0" Height="11" MinWidth="11" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                        Margin="0,0,-4,-2" Visibility="Collapsed">
+                                    </Border>
+                                </Grid>
+
+                                <Button.ContextMenu>
+                                    <ContextMenu x:Name="MenuZoom">
+                                        <MenuItem x:Name="MenuZoom400" Header="400%" Tag="400" Click="MenuZoomItem_Click"/>
+                                        <MenuItem x:Name="MenuZoom200" Header="200%" Tag="200" Click="MenuZoomItem_Click"/>
+                                        <MenuItem x:Name="MenuZoom150" Header="150%" Tag="150" Click="MenuZoomItem_Click"/>
+                                        <MenuItem x:Name="MenuZoom120" Header="120%" Tag="120" Click="MenuZoomItem_Click"/>
+                                        <MenuItem x:Name="MenuZoom100" Header="100%" Tag="100" Click="MenuZoomItem_Click"/>
+                                        <MenuItem x:Name="MenuZoom080" Header="80%" Tag="80" Click="MenuZoomItem_Click"/>
+                                        <MenuItem x:Name="MenuZoom050" Header="50%" Tag="50" Click="MenuZoomItem_Click"/>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+
                             <Button x:Name="BtnVoce" Style="{StaticResource ToolbarIconButton}" Click="Voce_Click" ToolTip="{DynamicResource ViewerVoceAiuto}" Width="34" Height="30">
                                 <iconPacks:PackIconMaterial Kind="AccountVoice"/>
                             </Button>
-
 
                         </WrapPanel>
                     </Border>

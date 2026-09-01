@@ -27,7 +27,7 @@ namespace LaParola.Dialogs
             {
                 LabelFile.Visibility = Visibility.Collapsed;
                 TxtFile.Visibility = Visibility.Collapsed;
-                LabelCome.Visibility=Visibility.Collapsed;
+                LabelCome.Visibility = Visibility.Collapsed;
                 StackCome.Visibility = Visibility.Collapsed;
             }
             else if (tipo == TipoImportazione.ImportaRtf) // mostrare Cartella:
@@ -49,8 +49,7 @@ namespace LaParola.Dialogs
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
         {
-            // TODO2: Open correct help section
-            MessageBox.Show("Open Help Centre");
+            MainWindow.MostraGuida((string)(Application.Current.TryFindResource("ImportaDialogoAiutoPagine") ?? "Bibliographical Information"));
         }
 
         public string File
