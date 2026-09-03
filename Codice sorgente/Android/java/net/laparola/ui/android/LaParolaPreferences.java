@@ -40,6 +40,7 @@ public class LaParolaPreferences {
     public static String[] lastUrl;
     public static int[] textZoom;
     public static boolean accessibilityMode;
+    public static boolean fontPredefinito;
     public static boolean autoOpenRef;
     public static boolean oneHandZoom;
     public static boolean menuZoom;
@@ -68,6 +69,7 @@ public class LaParolaPreferences {
         keepScreenOn = sharedPreferences.getBoolean("keepScreenOn", false);
         nightMode = sharedPreferences.getBoolean("nightMode", false);
         accessibilityMode = sharedPreferences.getBoolean("accessibilityMode", false);
+        fontPredefinito = sharedPreferences.getBoolean("fontPredefinito", false);
         autoOpenRef = sharedPreferences.getBoolean("autoOpenRef", false);
         oneHandZoom = sharedPreferences.getBoolean("oneHandZoom", true);
         menuZoom = sharedPreferences.getBoolean("menuZoom", false);
@@ -128,11 +130,13 @@ public class LaParolaPreferences {
 
         editor.putBoolean("nightMode", nightMode);
         editor.putBoolean("accessibilityMode", accessibilityMode);
+        editor.putBoolean("fontPredefinito", fontPredefinito);
         editor.putBoolean("autoOpenRef", autoOpenRef);
         editor.putBoolean("oneHandZoom", oneHandZoom);
         editor.putBoolean("menuZoom", menuZoom);
         editor.putString("storagePath", writeStoragePath);
         editor.putString("highlighColor", highlighColor);
+        editor.putBoolean("swipeChapters", swipeChapters);
 
         editor.putInt("ttsPitch", ttsPitch);
         editor.putInt("ttsSpeed", ttsSpeed);
@@ -142,6 +146,8 @@ public class LaParolaPreferences {
         editor.apply();
 
         LaParolaBackupAgent.dataChanged(laParolaActivity.getPackageName());
+
+
     }
 
     public static boolean getHomeOption(String key, boolean def) {
@@ -173,7 +179,7 @@ public class LaParolaPreferences {
         for (String path : paths) {
             if (LaParolaActivityInitUtility.checkStoragePath(path)) {
                 writeStoragePath = path;
-
+/*
                 if (false) {   // test
                     writeStoragePath = writeStoragePath + "/test";
                     (new File(writeStoragePath)).mkdirs();
@@ -184,6 +190,7 @@ public class LaParolaPreferences {
 
                     return;
                 }
+ */
 
                 return;
             }

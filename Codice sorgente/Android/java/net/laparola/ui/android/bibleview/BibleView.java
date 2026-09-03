@@ -18,6 +18,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -42,11 +44,32 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Locale;
 
+import androidx.webkit.WebViewAssetLoader;
 import timber.log.Timber;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class BibleView extends WebView implements LaParolaBrowserClient {
     class BibleWebViewClient extends WebViewClient {
+        private final WebViewAssetLoader mAssetLoader;
+
+        public BibleWebViewClient(Context context, File webCacheDir) {
+            // Build WebViewAssetLoader inside the custom client
+            mAssetLoader = new WebViewAssetLoader.Builder()
+                    .addPathHandler("/cache/", new WebViewAssetLoader.InternalStoragePathHandler(context, webCacheDir))
+                    .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(context))
+                    .build();
+        }
+
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            // Intercept asset requests for https://appassets.androidplatform.net/
+            WebResourceResponse response = mAssetLoader.shouldInterceptRequest(request.getUrl());
+            if (response != null) {
+                return response;
+            }
+            return super.shouldInterceptRequest(view, request);
+        }
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             try {
@@ -142,7 +165,7 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
             ((Activity) mContext).registerForContextMenu(this);
 
         setWebChromeClient(new BibleWebChromeClient());
-        setWebViewClient(new BibleWebViewClient());
+        //setWebViewClient(new BibleWebViewClient());
         WebSettings mSettings = getSettings();
         mSettings.setJavaScriptEnabled(true);
         mSettings.setBuiltInZoomControls(false);
@@ -159,8 +182,16 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
         addJavascriptInterface(new LaParolaJavascriptInterfaceAndroid(this), "LaParola");
 
         mZoomToast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
-    }
 
+        // Create a dedicated subfolder inside cacheDir
+        File webCacheDir = new File(getContext().getCacheDir(), "web_cache");
+        if (!webCacheDir.exists()) {
+            webCacheDir.mkdirs();
+        }
+
+        // Set the single, unified WebViewClient that handles BOTH custom URLs and Asset Interception
+        setWebViewClient(new BibleWebViewClient(context, webCacheDir));
+    }
 
     public void aggiornaPreferenze() {
         mTouchHandler.updatePreferences();
@@ -305,18 +336,29 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
             urlText = "http://localhost/?laparolaurl=" + URLEncoder.encode(urlText);
             try {
             if (testo != null) {
+                // 1. Save file in the dedicated subfolder
+                File webCacheDir = new File(getContext().getCacheDir(), "web_cache");
+                if (!webCacheDir.exists()) {
+                    webCacheDir.mkdirs();
+                }
+
                 //loadDataWithBaseURL(urlText, testo.toString(), "text/html", "UTF-8", urlText);
                 // 1. Create a temporary HTML file in the app's cache directory
-                File cacheFile = new File(getContext().getCacheDir(), "temp_page.html");
+                //File cacheFile = new File(getContext().getCacheDir(), "temp_page.html");
+                File cacheFile = new File(webCacheDir, "temp_page.html");
+                // Convert CharSequence to String and swap file:///android_asset/ with virtual domain
+                String htmlContent = testo.toString()
+                        .replace("file:///android_asset/", "https://appassets.androidplatform.net/assets/");
                 try (FileWriter writer = new FileWriter(cacheFile)) {
-                    // If 'testo' is a StringBuilder/StringBuffer, we stream it directly
-                    // to the file without calling .toString() into memory
-                    writer.write(testo.toString());
+                    writer.write(htmlContent);
                 }
 
                 // 2. Load the file URL into the WebView
-                String fileUrl = "file://" + cacheFile.getAbsolutePath();
-                loadUrl(fileUrl);
+                //String fileUrl = "file://" + cacheFile.getAbsolutePath();
+                //loadUrl(fileUrl);
+                // quel code dava errori di permessi su Android 12, provo in un modo moderno con la seguente riga
+                // 2. Load the file using the virtual HTTPS URL managed by WebViewAssetLoader
+                loadUrl("https://appassets.androidplatform.net/cache/temp_page.html");
 
                 // Note: If you absolutely need the base URL to mimic "http://localhost/",
                 // you can use loadDataWithBaseURL but read from the file instead, though
@@ -565,10 +607,11 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
                 VersioneInformazioni informazioniTesto = LaParolaBrowser.getInformazioniTesto(urlCorrente.versione);
                 boolean greek = (informazioniTesto != null) && (
                         (informazioniTesto.getLingua().contains("el") && !informazioniTesto.getLingua().contains("transliterated")) ||
-                                (informazioniTesto.getLingua().isEmpty() && informazioniTesto.getTitolo().contains("nterlin") && informazioniTesto.getTitolo().contains("reco"))
+                                (informazioniTesto.getLingua().isEmpty() && informazioniTesto.getTitolo().contains("nterlinea"))
                 );
 
-                if (!mLaParolaBrowser.inHome() && greek) {
+                if (!mLaParolaBrowser.inHome() /*&& greek*/) {
+                    /*
                     if (!InstallGentiumHelper.isInstalled()) {
                         Toast.makeText(mContext, R.string.greek_not_installed, Toast.LENGTH_LONG).show();
                         executeJavascript(
@@ -576,9 +619,9 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
                                         "if (bs != null) {" +
                                         "bs.innerHTML = '<p align=\\'center\\'><a href=\\'lpcomando:installa_font_greco\\'>" + mContext.getString(R.string.greek_install) + "</a></p>';" +
                                         "}");
-                    }
-
-                    applyCSS(
+                    }*/
+                    if (LaParolaPreferences.fontPredefinito) {
+                        applyCSS(/*
                             "@font-face {" +
                                     "	font-family: \"FontGreco\";" +
                                     "	src: url(\"file://" + InstallGentiumHelper.getFontPath() + "\");" +
@@ -588,9 +631,16 @@ public class BibleView extends WebView implements LaParolaBrowserClient {
                                     "	font-family: \"FontGreco\";" +
                                     "	src: url(\"file://" + InstallGentiumHelper.getFontPathItalics() + "\");" +
                                     "   font-style: italic;" +
-                                    "}" +
-                                    "body {font-family: \"FontGreco\", sans-serif;}"
-                    );
+                                    "}" +*/
+                                //"body {font-family: \"FontGreco\", serif;}"
+                                "body {font-family: serif;}"
+                        );
+                    }
+                    else {
+                        applyCSS(
+                                "body {font-family: sans-serif;}"
+                        );
+                    }
                 }
             }
 

@@ -30,6 +30,11 @@
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
             android:autofillHints="description"
+            android:gravity="top|start"
+            android:minLines="2"
+            android:maxLines="8"
+            android:scrollbars="vertical"
+            android:overScrollMode="ifContentScrolls"
             android:textColor="?attr/colorOnSurface"
             android:textColorHint="?attr/colorOnSurfaceVariant"
             android:imeOptions="actionDone">

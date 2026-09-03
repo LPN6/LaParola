@@ -126,7 +126,10 @@ public class LaParolaSegnalibri {
             } else if (inRiferimento) {
                 if (inSegnalibro) {
                     if (valore.contains("&#")) {
-                        valore = valore.replace("&", "£");   // workaround per bug introdotto con commentari
+                        // workaround per bug introdotto con commentari
+                        // era repalce(&,£), ma ho cambiato £ in _ nella classe url (perché £ non è utf-8)
+                        // non sono sicuro se andava cambiato anche qui
+                        valore = valore.replace("&", "_");
                     }
                     if (!ultimiRiferimenti.contains(valore)) {
                         ultimiRiferimenti.add(valore);
@@ -195,7 +198,7 @@ public class LaParolaSegnalibri {
         res.append("<p>");
         if (n == 1 && segnalibro.riferimenti.get(0).contains(":")) {
             res.append("<a href='");
-            res.append(segnalibro.riferimenti.get(0));
+            res.append(segnalibro.riferimenti.get(0).replace('£', '_')); // per gestire cambio formato da £ a _
             res.append("'>");
             res.append(segnalibro.nome);
             res.append("</a>");
@@ -433,6 +436,10 @@ public class LaParolaSegnalibri {
             return null;
 
         String stringurl = url.getUrlSenzaAncoraggio();
+        if (stringurl.endsWith("Â£_#")) // un problema creato quando £ è stato cambiato a _
+            stringurl = stringurl.substring(0, stringurl.length() - 4);
+        if (stringurl.endsWith("£_#"))
+            stringurl = stringurl.substring(0, stringurl.length() - 3);
 
         for (int i = 0; i < gruppi.size(); i++) {
             GruppoSegnalibri g = gruppi.get(i);
@@ -441,7 +448,7 @@ public class LaParolaSegnalibri {
                 Segnalibro s = g.segnalibri.get(j);
 
                 for (int k = 0; k < s.riferimenti.size(); k++) {
-                    String r = s.riferimenti.get(k);
+                    String r = s.riferimenti.get(k).replace('£', '_');
 
                     if (r.startsWith(stringurl)) {   // non confronta l'ancoraggio
                         return s;

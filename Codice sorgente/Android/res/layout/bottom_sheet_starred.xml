@@ -24,7 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/description"
-            android:inputType="textCapSentences" />
+            android:inputType="textCapSentences|textMultiLine"
+            android:gravity="top|start"
+            android:minLines="2"
+            android:maxLines="8"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout

@@ -199,8 +199,15 @@ public class LaParolaJavascriptInterfaceAndroid implements LaParolaJavascriptInt
     public String leggiFile(String nome) {
         LaParolaActivity context = (LaParolaActivity)mBibleView.getContext();
         InputStream is = context.apriFile(nome);
-        Scanner s = new Scanner(is, "UTF-8").useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
+		if (is == null) {
+			return "";
+		}
+
+		Scanner s = new Scanner(is, "UTF-8").useDelimiter("\\A");
+		String content = s.hasNext() ? s.next() : "";
+
+		// Replace any legacy file:///android_asset/ references with the WebViewAssetLoader HTTPS domain
+		return content.replaceAll("(?i)file:///android_asset/?", "https://appassets.androidplatform.net/assets/");
     }
 
     @Override

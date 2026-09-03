@@ -64,4 +64,6 @@
     <string name="menuZoom">Zoom nel menu</string>
     <string name="menuZoom_descr">Mostra i comandi per lo zoom nel menu</string>
 
+    <string name="fontPredefinito">Usa un carattere alternativo</string>
+    <string name="fontPredefinito_descr">Usa un carattere serif per il testo</string>
 </resources>

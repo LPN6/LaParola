@@ -1,6 +1,7 @@
 package net.laparola.ui.android;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +11,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -268,7 +271,7 @@ public class LaParolaActivity extends AppCompatActivity implements LaParolaBrows
                 return true;
             }
         } else {
-            if (LaParolaPreferences.useVolumeKeys && (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) && ttsActionItemManager!=null && !ttsActionItemManager.isExpanded()) {
+            if (LaParolaPreferences.useVolumeKeys && (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) && ttsActionItemManager != null && !ttsActionItemManager.isExpanded()) {
                 return true;
             }
         }
@@ -676,7 +679,7 @@ public class LaParolaActivity extends AppCompatActivity implements LaParolaBrows
                 libraryActionItemManager.expandActionView();
                 return true;
             } else if (itemId == R.id.menu_item_reference) {
-                if (getActiveFragment() != null) {
+                if (getActiveFragment() != null && getActiveFragment().getInformazioniVersione() != null) {
                     EnumSet<Testi.TestoTipi> tipoTesto = getActiveFragment().getInformazioniVersione().getTipo();
                     // rmw1024 referenceActionItemManager.setDizionario(tipoTesto.contains(Testi.TestoTipi.DIZIONARIO));
                 }
@@ -724,6 +727,7 @@ public class LaParolaActivity extends AppCompatActivity implements LaParolaBrows
         return false;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void showStarredBottomSheet() {
         LaParolaFragment fragment = getActiveFragment();
         if (fragment == null) return;
@@ -735,6 +739,24 @@ public class LaParolaActivity extends AppCompatActivity implements LaParolaBrows
         EditText descriptionInput = sheetView.findViewById(R.id.starred_description);
         Button saveBtn = sheetView.findViewById(R.id.starred_save_btn);
         Button removeBtn = sheetView.findViewById(R.id.starred_remove_btn);
+
+
+// Enable internal scrolling method
+        descriptionInput.setMovementMethod(new ScrollingMovementMethod());
+// Disallow BottomSheet touch interception while touching the EditText
+        descriptionInput.setOnTouchListener((v, event) -> {
+            // Request parent layouts (BottomSheet) to yield touch events to EditText
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+
+            // Re-enable parent touch interception when finger is lifted or cancelled
+            if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP
+                    || (event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_CANCEL) {
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+            }
+
+            // Return false so EditText still handles normal typing/cursor selection
+            return false;
+        });
 
         final net.laparola.ui.LaParolaSegnalibri.Segnalibro s = net.laparola.ui.LaParolaBrowser.cercaUrlTraPreferiti(url);
 
@@ -749,7 +771,7 @@ public class LaParolaActivity extends AppCompatActivity implements LaParolaBrows
         }
 
         saveBtn.setOnClickListener(v -> {
-            if (url!=null) {
+            if (url != null) {
                 String desc = descriptionInput.getText().toString();
                 if (s == null) {
                     LaParolaBrowser.aggiungiPreferito("Preferiti", desc, url);

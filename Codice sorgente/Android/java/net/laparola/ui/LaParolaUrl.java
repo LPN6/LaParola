@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import timber.log.Timber;
 
 /*
-laparola:[brani][_ricerca][@testo][£commentario aggiuntivo][#segnalibro]
+laparola:[brani][_ricerca][@testo][_commentario aggiuntivo][#segnalibro]
 "brani" descrive i brani da ricercare. Può essere espresso come:
 - laparola:Gen 1,1
 - laparola:1 1 1 1 1 30
@@ -39,7 +39,7 @@ public class LaParolaUrl {
                     "(.*?)" +   // brani
                     "(?:_(.*?))?" +   // ricerca
                     "(?:@(.*?))?" +   // versione
-                    "(?:[&£](.*?))?" +   // versioneCommentarioAggiuntivo
+                    "(?:[&_](.*?))?" +   // versioneCommentarioAggiuntivo
                     "(?:#(.*?))?" +   // ancoraggio
                     ")$");
 
@@ -255,7 +255,7 @@ public class LaParolaUrl {
     }
 
     public String getChiaveCache() {
-        return String.format("%s:%s_%s@%s£%s",
+        return String.format("%s:%s_%s@%s_%s",
                 schema,
                 brani != null ? brani : "",
                 ricerca != null ? ricerca : "",
@@ -305,7 +305,7 @@ public class LaParolaUrl {
             }
         }
 
-        return String.format("%s:%s_%s@%s£%s#%s",
+        return String.format("%s:%s_%s@%s_%s#%s",
                 schema,
                 nuoviBrani != null ? nuoviBrani : "",
                 ricerca != null ? ricerca : "",
@@ -511,7 +511,7 @@ public class LaParolaUrl {
         } catch (Exception e) {
         }
 
-        return String.format(Locale.ENGLISH, "laparola:%d %d %d %d %d %d@%s£%s#%s",
+        return String.format(Locale.ENGLISH, "laparola:%d %d %d %d %d %d@%s_%s#%s",
                 b[0], b[1], b[2], b[3], b[4], b[5],
                 ver,
                 verComm,

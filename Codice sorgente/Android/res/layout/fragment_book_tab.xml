@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:background="?attr/colorSurface">
 
-    <net.laparola.ui.android.ignspinner.ListSpinner
+    <net.laparola.ui.android.lpnspinner.ListSpinner
         android:id="@+id/book_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_marginTop="8dp"
         android:weightSum="2">
 
-        <net.laparola.ui.android.ignspinner.GridSpinner
+        <net.laparola.ui.android.lpnspinner.GridSpinner
             android:id="@+id/chapter_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:background="?attr/colorSurface"
             android:spinnerMode="dropdown" />
 
-        <net.laparola.ui.android.ignspinner.GridSpinner
+        <net.laparola.ui.android.lpnspinner.GridSpinner
             android:id="@+id/verse_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

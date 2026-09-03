@@ -57,6 +57,12 @@
         android:persistent="true"
         android:summary="@string/accessibility_descr"
         android:title="@string/accessibility" />
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="fontPredefinito"
+        android:persistent="true"
+        android:summary="@string/fontPredefinito_descr"
+        android:title="@string/fontPredefinito" />
 
     <PreferenceCategory android:title="@string/layout" >
         <SwitchPreferenceCompat
