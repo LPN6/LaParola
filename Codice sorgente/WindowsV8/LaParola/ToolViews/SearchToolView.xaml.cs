@@ -1,6 +1,7 @@
 ﻿using LaParola.Utilities;
 using System.Globalization;
 using System.IO;
+using System.Security.Principal;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +11,6 @@ using System.Windows.Media;
 
 namespace LaParola.ToolViews
 {
-    // TODO2 scegliere parola - note Help file, voice Glossario > Radice, ne parla già, bisogna controllare che il testo sia giusto
     // TODO2 salva in lista versetti, cercare in lista versetti
 
     public partial class SearchToolView : UserControl
@@ -22,6 +22,8 @@ namespace LaParola.ToolViews
             AggiornaVersioniDisponibili();
 
             RicercaPulsanteStato();
+
+            expWordPicker.IsExpanded = MainWindow.settings.RicercaScegliParolaAperta;
         }
 
         public void AggiornaVersioniDisponibili()
@@ -78,6 +80,7 @@ namespace LaParola.ToolViews
             {
                 GbBrano.Visibility = Visibility.Collapsed;
             }
+            PopulateWordAndRootLists();
         }
 
         private void Espressione_KeyUp(object sender, KeyEventArgs e)
@@ -186,5 +189,200 @@ namespace LaParola.ToolViews
                 App.DockingHost.SendFlowDocumentToActiveEditor(doc, title, versioneSelezionata);
             }
         }
+
+        private void ExpWordPicker_StateChanged(object sender, RoutedEventArgs e)
+        {
+            // Read current state
+            bool isOpen = expWordPicker.IsExpanded;
+
+            // Save to app settings
+            MainWindow.settings.RicercaScegliParolaAperta = isOpen;
+        }
+
+        #region Scegli Parola / Radice
+        #region Word & Root Helper Data Loading
+
+        private void PopulateWordAndRootLists()
+        {
+            if (cbVersione.SelectedValue is string selectedVersion)
+            {
+                // Load words into Tab 1
+                lbParole.ItemsSource = MainWindow.Testi.Parole(selectedVersion);
+
+                // Load roots into Tab 2 (Column 1)
+                lbRadici.ItemsSource = MainWindow.Testi.Radici(selectedVersion);
+
+                // Clear word-by-root list
+                lbParoleRadice.ItemsSource = null;
+
+                bool radici = (MainWindow.Testi.Radici(selectedVersion).Length > 0);
+                tabRadici.Visibility = radici ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        #endregion
+
+        #region Prefix Search Logic
+
+        private static void FilterListBoxByPrefix(TextBox filterBox, ListBox listBox)
+        {
+            string filterText = filterBox.Text.Trim();
+            if (listBox.ItemsSource == null) return;
+            if (string.IsNullOrEmpty(filterText))
+            {
+                listBox.SelectedIndex = -1;
+                return;
+            }
+
+            foreach (object? item in listBox.ItemsSource)
+            {
+                string itemText = item?.ToString() ?? "";
+                if (itemText.StartsWith(filterText, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    listBox.SelectedItem = item;
+                    listBox.ScrollIntoView(item);
+                    break;
+                }
+            }
+        }
+
+        private void TbFiltroParole_TextChanged(object sender, TextChangedEventArgs e)
+            => FilterListBoxByPrefix(tbFiltroParole, lbParole);
+
+        private void TbFiltroRadici_TextChanged(object sender, TextChangedEventArgs e)
+            => FilterListBoxByPrefix(tbFiltroRadici, lbRadici);
+
+        private void TbFiltroParoleRadice_TextChanged(object sender, TextChangedEventArgs e)
+            => FilterListBoxByPrefix(tbFiltroParoleRadice, lbParoleRadice);
+
+        #endregion
+
+        #region Selection Changed Handlers
+
+        private void LbParole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbVersione.SelectedValue is string selectedVersion)
+            {
+                bool hasSelection = lbParole.SelectedItem != null;
+                btnAggiungiParola.IsEnabled = hasSelection;
+
+                if (hasSelection)
+                {
+                    string selectedWord = lbParole.SelectedItem?.ToString() ?? "";
+                    lblOccorrenzeParola.Text = $"{Application.Current.TryFindResource("RicercaOccorrenze") ?? "Appearances:"} {MainWindow.Testi.NumeroVolteParola(selectedWord, selectedVersion)}";
+                    lblRadiceParola.Text = $"{Application.Current.TryFindResource("RicercaRadice") ?? "Root:"} {MainWindow.Testi.RadiceDiParola(selectedWord, selectedVersion)}";
+                }
+                else
+                {
+                    lblOccorrenzeParola.Text = (string)(Application.Current.TryFindResource("RicercaOccorrenze") ?? "Appearances") + " -";
+                    lblRadiceParola.Text = (string)(Application.Current.TryFindResource("RicercaRadice") ?? "Root") + " -";
+                }
+            }
+        }
+
+        private void LbRadici_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbVersione.SelectedValue is string selectedVersion)
+            {
+                lbParoleRadice.ItemsSource = null;
+
+                bool hasSelection = lbRadici.SelectedItem != null;
+                btnAggiungiRadice.IsEnabled = hasSelection;
+
+                if (hasSelection)
+                {
+                    string selectedRoot = lbRadici.SelectedItem?.ToString() ?? "";
+                    lblOccorrenzeRadice.Text = $"{Application.Current.TryFindResource("RicercaOccorrenze") ?? "Appearances:"} {MainWindow.Testi.NumeroVolteRadice(selectedRoot, selectedVersion)}";
+                    lblParoleConRadiceHeader.Text = $"{Application.Current.TryFindResource("RicercaParoleConRadice") ?? "Words with Root:"} {MainWindow.Testi.ParoleDiRadice(selectedRoot, selectedVersion).Count}";
+
+                    lbParoleRadice.ItemsSource = MainWindow.Testi.ParoleDiRadice(selectedRoot, selectedVersion);
+                    if (lbParoleRadice.Items.Count > 0)
+                        lbParoleRadice.SelectedIndex = 0;
+                }
+                else
+                {
+                    lblOccorrenzeRadice.Text = (string)(Application.Current.TryFindResource("RicercaOccorrenze") ?? "Appearances") + " -";
+                    lbParoleRadice.ItemsSource = null;
+                }
+            }
+        }
+
+        private void LbParoleRadice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbVersione.SelectedValue is string selectedVersion)
+            {
+                bool hasSelection = lbParoleRadice.SelectedItem != null;
+                btnAggiungiParolaRadice.IsEnabled = hasSelection;
+
+                if (hasSelection)
+                {
+                    string selectedWord = lbParoleRadice.SelectedItem?.ToString() ?? "";
+                    lblOccorrenzeParolaRadice.Text = $"{Application.Current.TryFindResource("RicercaOccorrenze") ?? "Appearances:"} {MainWindow.Testi.NumeroVolteParola(selectedWord, selectedVersion)}";
+                }
+                else
+                {
+                    lblOccorrenzeParolaRadice.Text = (string)(Application.Current.TryFindResource("RicercaOccorrenze") ?? "Appearances") + " -"; ;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Add to Expression Logic
+
+        private void AppendToExpression(string? parola)
+        {
+            if (string.IsNullOrWhiteSpace(parola)) return;
+
+            if (parola.IndexOfAny(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']) >= 0 && parola.IndexOfAny(['<', '>']) == -1)
+                parola = "<" + parola + ">";
+
+            if (string.IsNullOrWhiteSpace(tbEspressione.Text))
+            {
+                tbEspressione.Text = parola;
+            }
+            else
+            {
+                char c = tbEspressione.Text[^1];
+                if (c != ' ' && c != '(' && c != '[' && c != '/' && c != '\\' && c != '~' && c != '^')
+                    tbEspressione.Text += " ";
+                tbEspressione.Text += parola;
+            }
+
+            RicercaPulsanteStato();
+            tbEspressione.Focus();
+            tbEspressione.CaretIndex = tbEspressione.Text.Length;
+        }
+
+        private void BtnAggiungiParola_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbParole.SelectedItem != null)
+                AppendToExpression(lbParole.SelectedItem.ToString());
+        }
+
+        private void BtnAggiungiRadice_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbRadici.SelectedItem != null)
+                AppendToExpression(lbRadici.SelectedItem.ToString());
+        }
+
+        private void BtnAggiungiParolaRadice_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbParoleRadice.SelectedItem != null)
+                AppendToExpression(lbParoleRadice.SelectedItem.ToString());
+        }
+
+        private void LbParole_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+            => BtnAggiungiParola_Click(sender, e);
+
+        private void LbRadici_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+            => BtnAggiungiRadice_Click(sender, e);
+
+        private void LbParoleRadice_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+            => BtnAggiungiParolaRadice_Click(sender, e);
+
+        #endregion
+
+        #endregion
     }
 }

@@ -6,8 +6,80 @@
              xmlns:controls="clr-namespace:LaParola"
              xmlns:local="clr-namespace:LaParola.ToolViews"
              Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource AppForegroundBrush}">
+    <UserControl.Resources>
+        <!-- Custom TabItem Style to support Dark & Light modes when selected -->
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="HeaderBorder"
+                            Background="Transparent"
+                            BorderBrush="{DynamicResource SubtleBorderBrush}"
+                            BorderThickness="1,1,1,0"
+                            CornerRadius="3,3,0,0"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="2,0,2,0">
+                            <ContentPresenter x:Name="ContentSite"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Header"
+                                          RecognizesAccessKey="True" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Unselected Tab Hover State -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                                <Setter TargetName="HeaderBorder" Property="Opacity" Value="0.8" />
+                            </Trigger>
+
+                            <!-- Selected Tab State (Active Tab) -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+                                <Setter Property="Panel.ZIndex" Value="1" />
+                            </Trigger>
+
+                            <!-- Unselected Tab State (Inactive Tab) -->
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="HeaderBorder" Property="Background" Value="Transparent" />
+                                <Setter TargetName="HeaderBorder" Property="Opacity" Value="0.6" />
+                                <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Implicit Style for ListBox -->
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorderBrush}" />
+        </Style>
+
+        <!-- Implicit Style for ListBox Items (Ensures text stays light when unselected) -->
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+        </Style>
+
+        <!-- Implicit Style for TextBlocks -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+        </Style>
+
+        <!-- Implicit Style for TabControl and TabItems -->
+        <Style TargetType="TabControl">
+            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorderBrush}" />
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="12">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -36,12 +108,12 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox x:Name="tbEspressione" Grid.Column="0" ToolTipService.ShowDuration="10000" KeyUp="Espressione_KeyUp" Grid.ColumnSpan="2" Margin="0,0,32,0" >
-            <TextBox.ToolTip>
-                <ToolTip>
-                    <TextBlock Text="{DynamicResource RicercaEspressioneAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
-                </ToolTip>
-            </TextBox.ToolTip>
-        </TextBox>
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{DynamicResource RicercaEspressioneAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
             <Button x:Name="pulAiutoEspressione" Grid.Column="1" Content="?" Width="26" Margin="6,0,0,0" Click="AiutoEspressione_Click">
                 <Button.ToolTip>
                     <ToolTip>
@@ -50,9 +122,150 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        <TextBlock Grid.Row="2" Margin="0,8,0,0" Text="{DynamicResource RicercaVersione}" />
 
-        <ComboBox x:Name="cbVersione" Grid.Row="3" Margin="0,8,0,0" ToolTipService.ShowDuration="10000" Background="{DynamicResource ControlBackgroundBrush}" SelectionChanged="Versione_SelectionChanged">
+        <Expander x:Name="expWordPicker" Grid.Row="2" Header="{DynamicResource RicercaScegliParole}" Margin="0,8,0,0"
+                      Background="{DynamicResource ControlBackgroundBrush}" 
+                      Foreground="{DynamicResource AppForegroundBrush}"
+                    Expanded="ExpWordPicker_StateChanged" Collapsed="ExpWordPicker_StateChanged">
+            <Expander.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource RicercaScegliParoleAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </Expander.ToolTip>
+
+            <TabControl Margin="0,6,0,0" Height="350"
+                            Background="{DynamicResource ControlBackgroundBrush}" 
+                            Foreground="{DynamicResource AppForegroundBrush}">
+
+                <!-- TAB 1: WORDS -->
+                <TabItem Header="{DynamicResource CreaChiaveTipoParole}" x:Name="tabParole">
+                    <Grid Margin="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Filter Box -->
+                        <TextBox x:Name="tbFiltroParole" Grid.Row="0" Margin="0,0,0,4" TextChanged="TbFiltroParole_TextChanged">
+                            <TextBox.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleFiltroAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <!-- Words List -->
+                        <ListBox x:Name="lbParole" Grid.Row="1"
+                                     SelectionChanged="LbParole_SelectionChanged"
+                                     MouseDoubleClick="LbParole_MouseDoubleClick">
+                            <ListBox.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleListaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </ListBox.ToolTip>
+                        </ListBox>
+
+                        <!-- Info Labels -->
+                        <TextBlock x:Name="lblOccorrenzeParola" Grid.Row="2" Text="{DynamicResource RicercaOccorrenze}" Margin="0,4,0,2"/>
+                        <TextBlock x:Name="lblRadiceParola" Grid.Row="3" Text="{DynamicResource RicercaRadice}" Margin="0,0,0,4"/>
+
+                        <!-- Action Button -->
+                        <Button x:Name="btnAggiungiParola" Grid.Row="4" Content="{DynamicResource RicercaAggiungiParola}" Padding="10,0,10,0"
+                                    IsEnabled="False" Click="BtnAggiungiParola_Click" HorizontalAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleAggiungiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </TabItem>
+
+                <!-- TAB 2: ROOTS -->
+                <TabItem Header="{DynamicResource CreaChiaveTipoRadici}" x:Name="tabRadici">
+                    <Grid Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox x:Name="tbFiltroRadici" Grid.Row="0" Grid.Column="0" Margin="0,0,0,4" TextChanged="TbFiltroRadici_TextChanged">
+                            <TextBox.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleFiltroAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <TextBox x:Name="tbFiltroParoleRadice" Grid.Row="0" Grid.Column="2" Margin="0,0,0,4" TextChanged="TbFiltroParoleRadice_TextChanged">
+                            <TextBox.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleFiltroAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <ListBox x:Name="lbRadici" Grid.Row="1" Grid.Column="0"
+                                        SelectionChanged="LbRadici_SelectionChanged"
+                                        MouseDoubleClick="LbRadici_MouseDoubleClick">
+                            <ListBox.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleRadiciListaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </ListBox.ToolTip>
+                        </ListBox>
+
+                        <ListBox x:Name="lbParoleRadice" Grid.Row="1" Grid.Column="2"
+                                        SelectionChanged="LbParoleRadice_SelectionChanged"
+                                        MouseDoubleClick="LbParoleRadice_MouseDoubleClick">
+                            <ListBox.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleListaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </ListBox.ToolTip>
+                        </ListBox>
+
+                        <TextBlock x:Name="lblOccorrenzeRadice" Grid.Row="2" Grid.Column="0" Text="{DynamicResource RicercaOccorrenze}" Margin="0,4,0,2"/>
+                        <TextBlock x:Name="lblOccorrenzeParolaRadice" Grid.Row="2" Grid.Column="2" Text="{DynamicResource RicercaOccorrenze}" Margin="0,4,0,2"/>
+                        <TextBlock x:Name="lblParoleConRadiceHeader" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource RicercaParoleConRadice}" Margin="0,0,0,4"/>
+
+                        <Button x:Name="btnAggiungiRadice" Grid.Row="4" Grid.Column="0" Content="{DynamicResource RicercaAggiungiRadice}" 
+                                    IsEnabled="False" Click="BtnAggiungiRadice_Click">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleAggiungiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button x:Name="btnAggiungiParolaRadice" Grid.Row="4" Grid.Column="2" Content="{DynamicResource RicercaAggiungiParola}" 
+                                    IsEnabled="False" Click="BtnAggiungiParolaRadice_Click">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock Text="{DynamicResource RicercaScegliParoleAggiungiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Expander>
+
+        <TextBlock Grid.Row="3" Margin="0,8,0,0" Text="{DynamicResource RicercaVersione}" />
+
+        <ComboBox x:Name="cbVersione" Grid.Row="4" Margin="0,8,0,0" ToolTipService.ShowDuration="10000" Background="{DynamicResource ControlBackgroundBrush}" SelectionChanged="Versione_SelectionChanged">
             <ComboBox.ToolTip>
                 <ToolTip>
                     <TextBlock Text="{DynamicResource RicercaTestiAiuto}"
@@ -62,7 +275,7 @@
             </ComboBox.ToolTip>
         </ComboBox>
 
-        <GroupBox x:Name="GbBrano" Grid.Row="4" Header="{DynamicResource RicercaBranoTitolo}" Margin="0,12,0,0" Padding="12" ToolTipService.ShowDuration="10000">
+        <GroupBox x:Name="GbBrano" Grid.Row="5" Header="{DynamicResource RicercaBranoTitolo}" Margin="0,12,0,0" Padding="12" ToolTipService.ShowDuration="10000">
             <GroupBox.ToolTip>
                 <ToolTip>
                     <TextBlock Text="{DynamicResource RicercaBranoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
@@ -114,7 +327,7 @@
                      IsEnabled="{Binding IsChecked, ElementName=rbBrano}"/>
             </Grid>
         </GroupBox>
-        
-        <Button x:Name="btnRicerca" Grid.Row="5" Margin="0,14,0,0" IsDefault="True" Padding="10,8" Content="{DynamicResource RicercaRicerca}" Click="Generate_Click" HorizontalAlignment="Right" />
+
+        <Button x:Name="btnRicerca" Grid.Row="6" Margin="0,14,0,0" IsDefault="True" Padding="10,8" Content="{DynamicResource RicercaRicerca}" Click="Generate_Click" HorizontalAlignment="Right" />
     </Grid>
 </UserControl>

@@ -1,4 +1,6 @@
 ﻿using LaParola.Dialogs;
+using LaParola.Services;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -52,7 +54,7 @@ namespace LaParola
         /// </summary>
         //public const char ParolaRicercata = (char)14;
 
-        internal static bool isRunningOnMono;
+        //internal static bool isRunningOnMono;
 
         private string versione = "";
         /// <summary>
@@ -239,7 +241,7 @@ namespace LaParola
         public RichTextBoxEx()
         {
             // Otherwise, non-standard links get lost when user starts typing next to a non-standard link
-            isRunningOnMono = (Type.GetType("Mono.Runtime") != null);
+            //isRunningOnMono = (Type.GetType("Mono.Runtime") != null);
 
             // 1. Create the base style for Hyperlink
             Style linkStyle = new(typeof(Hyperlink));
@@ -402,7 +404,7 @@ namespace LaParola
             return text.Substring(start, end - start + 1);
         }
 
-        private void Editor_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        private async void Editor_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             e.Handled = true;
             string uri = e.Uri.OriginalString;
@@ -426,6 +428,31 @@ namespace LaParola
             {
                 string targetFile = uri.Replace("filenome:", "");
                 MainWindow.LinkCliccato(3, targetFile);
+            }
+
+            // CASE 4: Web URL
+            else if (uri.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || uri.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = uri,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Handle cases where no default browser is assigned or URL is invalid
+                    Debug.WriteLine($"Failed to open web link: {ex.Message}");
+                    /*
+                    // non è necessario né un MessageBox né un messaggio in status
+                    string messaggio = (string)(Application.Current.TryFindResource("MostraProgressoMessaggio") ?? "Generating text...");
+                    using StatusTask? statusTask = StatusService.AvviaTask(messaggio, progressBarVisibility: Visibility.Collapsed);
+                    statusTask.Update((string)(Application.Current.TryFindResource("MostraProgressoFinito") ?? "Text created"), 100.0);
+                    await Task.Delay(5000); // lasciare il messaggio, poi scompare dopo 5 secondi
+                    */
+                }
             }
         }
 

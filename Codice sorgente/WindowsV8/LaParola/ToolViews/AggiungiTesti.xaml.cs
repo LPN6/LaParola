@@ -17,7 +17,7 @@ using System.Xml.Linq;
 
 namespace LaParola.ToolViews
 {
-    // TODO2 come aggiornare testi? programma?
+    // TODO come aggiornare testi? programma?
 
     /// <summary>
     /// Interaction logic for AggiungiTesti.xaml

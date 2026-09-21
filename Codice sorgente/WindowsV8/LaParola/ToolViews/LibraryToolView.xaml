@@ -260,36 +260,6 @@
                       MouseUp="BooksDataGrid_MouseUp"
                       MouseDoubleClick="BooksDataGrid_MouseDoubleClick"
                       MouseMove="BooksDataGrid_MouseMove">
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
-                        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
-
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Padding" Value="10,8,10,8"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                                    <Grid>
-                                        <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                    BorderThickness="0,0,0,1"
-                                    Padding="{TemplateBinding Padding}">
-
-                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
-                                        </Border>
-
-                                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Width="2" Background="Transparent" Cursor="SizeWE"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{DynamicResource BibliotecaNome}" Binding="{Binding Nome}" Width="2*"/>
                     <DataGridTextColumn Header="{DynamicResource BibliotecaAutore}" Binding="{Binding Autore}" Width="*"/>
@@ -613,9 +583,7 @@
                         <StackPanel Grid.Column="1" Orientation="Vertical">
                             <Button x:Name="ButtonCancella"
                     Content="{DynamicResource BibliotecaCancella}"
-                    MinHeight="28"
-                    Padding="12,0,12,0"
-                    Margin="0,0,0,8"
+                    MinHeight="28" Padding="12,0,12,0" Margin="0,0,0,8"
                     Click="ButtonCancella_Click">
                                 <Button.ToolTip>
                                     <ToolTip>
@@ -644,6 +612,88 @@
                                         <TextBlock Text="{DynamicResource BibliotecaCopiaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                                     </ToolTip>
                                 </Button.ToolTip>
+                            </Button>
+
+                            <Button x:Name="ButtonEsporta"
+                    Content="{DynamicResource BibliotecaEsporta}"
+                    MinHeight="28" Padding="12,0,12,0" Margin="0,0,0,8"
+                    Click="ButtonEsporta_Click">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource BibliotecaEsportaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                                <Button.Resources>
+                                    <Style TargetType="ContextMenu">
+                                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorderBrush}"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="Padding" Value="1,2"/>
+                                    </Style>
+
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}"/>
+                                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0,3"/>
+
+                                        <Style.Resources>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlLightBrushKey}" Color="{DynamicResource ControlBackground}"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF163A55"/>
+                                            <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="#FF163A55"/>
+                                        </Style.Resources>
+                                    </Style>
+
+                                    <Style TargetType="Separator">
+                                        <!-- Margin shifts the line past the icon column (32px from left) cleanly -->
+                                        <Setter Property="Margin" Value="32,3,4,3"/>
+                                        <Setter Property="Height" Value="1"/>
+                                        <Setter Property="Background" Value="{DynamicResource SubtleBorderBrush}"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Separator">
+                                                    <Border Background="{TemplateBinding Background}" Height="1"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Resources>
+
+                                <Button.ContextMenu>
+                                    <ContextMenu Placement="Bottom">
+                                        <MenuItem x:Name="EsportaOSIS" Header="{DynamicResource BibliotecaEsportaOSIS}" Tag="OSIS" Click="ButtonEsporta_Click">
+                                            <MenuItem.Icon>
+                                                <iconPacks:PackIconMaterial Kind="FileXmlBox" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem x:Name="EsportaZefania" Header="{DynamicResource BibliotecaEsportaZefania}" Tag="Zefania" Click="ButtonEsporta_Click">
+                                            <MenuItem.Icon>
+                                                <iconPacks:PackIconMaterial Kind="FileXmlBox" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem x:Name="EsportaAndroid" Header="{DynamicResource BibliotecaEsportaAndroid}" Tag="Android" Click="ButtonEsporta_Click">
+                                            <MenuItem.Icon>
+                                                <iconPacks:PackIconMaterial Kind="Cellphone" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem x:Name="EsportaFiles" Header="{DynamicResource BibliotecaEsportaFiles}" Tag="Files" Click="ButtonEsporta_Click">
+                                            <MenuItem.Icon>
+                                                <iconPacks:PackIconMaterial Kind="FileMultiple" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem x:Name="EsportaFile" Header="{DynamicResource BibliotecaEsportaFile}" Tag="File" Click="ButtonEsporta_Click">
+                                            <MenuItem.Icon>
+                                                <iconPacks:PackIconMaterial Kind="File" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
                             </Button>
                         </StackPanel>
                     </Grid>

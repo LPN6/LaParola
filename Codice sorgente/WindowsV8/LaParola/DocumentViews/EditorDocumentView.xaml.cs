@@ -133,10 +133,10 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
     private static void ZoomIn(RichTextBox rtb, bool zoomIn)
     {
         int zoom = (int)Math.Round(rtb.LayoutTransform.Value.M11 * 100) + (zoomIn ? 10 : -10);
-        setZoom(rtb, zoom);
+        SetZoom(rtb, zoom);
     }
 
-    private static void setZoom(RichTextBox rtb, int zoom)
+    private static void SetZoom(RichTextBox rtb, int zoom)
     {
         if (zoom < 20) zoom = 20;
         if (zoom > 500) zoom = 500;
@@ -508,7 +508,7 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
     {
         if (sender is MenuItem item && item.Tag is string tagStr && int.TryParse(tagStr, out int zoom))
         {
-            setZoom(Editor, zoom);
+            SetZoom(Editor, zoom);
         }
     }
 

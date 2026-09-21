@@ -31,6 +31,14 @@ usa il comando <i>Aggiungi testi</i> del menu Strumenti per installare i testi d
 
 <h2>Caratteristiche</h2>
 
+<h3>Versione 8.0.7</h3>
+<ul>
+<li><i>Ricerca:</i> puoi scegliere le parole dagli elenchi di parole e di radici nel testo.</li>
+<li><i>Biblioteca:</i> esportare un testo in vari formati.</li>
+<li><i>Opzioni:</i> personalizzare i nomi e le abbreviazioni dei libri della Bibbia.</li>
+<li><i>Molti miglioramenti e ottimizzazioni</i> del codice, per rendere il programma pi&ugrave; veloce</li>.
+</ul>  
+
 <h3>Versione 8.0.6</h3>
 <ul>
 <li><i>Crea chiave:</i> per creare una chiave biblica.</li>

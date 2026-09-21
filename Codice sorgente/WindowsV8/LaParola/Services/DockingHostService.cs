@@ -483,7 +483,7 @@ public class DockingHostService
             }
             else
             {
-                string messaggio = (string)(Application.Current.TryFindResource("ImmaginiCollezioneNonTrovata") ?? "Collection not found");
+                string messaggio = (string)(Application.Current.TryFindResource("ImmaginiCollezioneNonTrovata") ?? "The collection of notes '{0}' was not found.");
                 messaggio = string.Format(CultureInfo.InvariantCulture, messaggio, collezione);
                 string titolo = (string)(Application.Current.TryFindResource("Errore") ?? "Error");
                 if (_ownerWindow != null)

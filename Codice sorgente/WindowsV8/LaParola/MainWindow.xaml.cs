@@ -23,10 +23,13 @@ namespace LaParola;
 // per passare SmartScreen, usa https://www.microsoft.com/en-us/wdsi/filesubmission 
 // per controllare il contenuto di un FlowDocument, System.Windows.Markup.XamlWriter.Save(finalDoc) in Immediate Window
 
-// TODO2 esporta Biblioteca in vari formati - come versione 7
-// TODO2 Regex per identificare riferimenti da Berea
-// TODO versione 8.0.6; update help files (including Recent Changes) and make them readonly type 3
+// TODO versione 8.0.8
+// TODO update help files (including Recent Changes) and make them readonly type 3; check all words have roots; copy it/en.parole_radici in RTF directories
 // TODO togliere tutti "var "
+
+// TODO brani simili, poi Informazioni sul versetto/tema
+// TODO esporta Biblioteca in vari formati - come versione 7
+// TODO2 Regex per identificare riferimenti da Berea
 // TODO2 all'uscita con note modificate, ci vuole tanto tempo per scrivere le modifiche e chiudere il programma
 // TODO2 importare Henry come Libro dà Out of Memory errore
 // TODO2 perché parlare in lingue importato ha ipertesto (ma senza hover), ma Brani no? forse CollegaCitazioniEEscape?
@@ -226,12 +229,28 @@ public partial class MainWindow : Window
             if (settings.UltimaBibbiaCompleta != "")
                 Testi.UltimaBibbiaCompleta = settings.UltimaBibbiaCompleta;
 
-            if (settings.Lingua == "it")
+            string libriNomiSettings = settings.LibriNomi;
+            string libriAbbreviazioniUsateSettings = settings.LibriAbbreviazioniUsate;
+            string libriAbbreviazioniRiconosciuteSettings = settings.LibriAbbreviazioniRiconosciute;
+
+            if (string.IsNullOrEmpty(libriNomiSettings) && settings.Lingua == "it")
+                libriNomiSettings = Texts.LibriNomiItaliano;
+            if (string.IsNullOrEmpty(libriAbbreviazioniUsateSettings) && settings.Lingua == "it")
+                libriAbbreviazioniUsateSettings = Texts.LibriAbbreviazioniUsateItaliano;
+            if (string.IsNullOrEmpty(libriAbbreviazioniRiconosciuteSettings) && settings.Lingua == "it")
+                libriAbbreviazioniRiconosciuteSettings = Texts.LibriAbbreviazioniRiconosciuteItaliano;
+
+            if (!string.IsNullOrEmpty(libriNomiSettings))
             {
-                // TODO2 salvati in settings, da cambiare in Opzioni
-                Testi.libriNomi = Texts.LibriNomiItaliano.Split('|');
-                Testi.libriAbbreviazioniUsate = Texts.LibriAbbreviazioniUsateItaliano.Split('|');
-                string[] libriAbbRic = Texts.LibriAbbreviazioniRiconosciuteItaliano.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                Testi.libriNomi = libriNomiSettings.Split('|');
+            }
+            if (!string.IsNullOrEmpty(libriAbbreviazioniUsateSettings))
+            {
+                Testi.libriAbbreviazioniUsate = libriAbbreviazioniUsateSettings.Split('|');
+            }
+            if (!string.IsNullOrEmpty(libriAbbreviazioniRiconosciuteSettings))
+            {
+                string[] libriAbbRic = libriAbbreviazioniRiconosciuteSettings.Split('|', StringSplitOptions.RemoveEmptyEntries);
                 string[] abbreviazioniDiLibro;
                 Testi.LibriAbbreviazioniRiconosciute.Clear();
                 for (byte i = 1; i <= 73; ++i)
@@ -240,102 +259,102 @@ public partial class MainWindow : Window
                     foreach (string abbreviazioneDiLibro in abbreviazioniDiLibro)
                         Testi.LibriAbbreviazioniRiconosciute[abbreviazioneDiLibro] = i;
                 }
-
-                UpdateShortcutBindings("it");
             }
 
-            // Ora ripristina layout
-            RestoreDockLayout();
+            UpdateShortcutBindings("it");
+        }
 
-            ShowLoadingOverlay(false);
+        // Ora ripristina layout
+        RestoreDockLayout();
 
-            App.DockingHost.ActiveEditorChanged += (_, _) =>
+        ShowLoadingOverlay(false);
+
+        App.DockingHost.ActiveEditorChanged += (_, _) =>
+        {
+            UpdateEditorMenuState();
+        };
+
+        App.DockingHost.ActiveWindowChanged += (_, _) =>
+        {
+            UpdateMenuState();
+        };
+
+        AggiornaMenuVisualizza();
+
+        if (Testi.NomiVersioni().Count == 0)
+        {
+            MessageBoxLPN.Show(this,
+                (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Use the 'Add Texts' command of the Tools menu to add some texts."),
+                (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+        }
+
+        // imposta dizionari
+        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioInglese).Lingua) != "en")
+            settings.DizionarioInglese = "";
+        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioItaliano).Lingua) != "it")
+            settings.DizionarioItaliano = "";
+        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioGreco).Lingua) != "el")
+            settings.DizionarioGreco = "";
+        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioEbraico).Lingua) != "he")
+            settings.DizionarioEbraico = "";
+        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioLatino).Lingua) != "la")
+            settings.DizionarioLatino = "";
+
+        if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("International Standard Bible Encyclopedia").Lingua == "en")
+            settings.DizionarioInglese = "International Standard Bible Encyclopedia";
+        if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Easton's Bible Dictionary").Lingua == "en")
+            settings.DizionarioInglese = "Easton's Bible Dictionary";
+        if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Torrey's New Topical Textbook").Lingua == "en")
+            settings.DizionarioInglese = "Torrey's New Topical Textbook";
+        if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Smith's Bible Dictionary").Lingua == "en")
+            settings.DizionarioInglese = "Smith's Bible Dictionary";
+        if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Nave's Topical Bible").Lingua == "en")
+            settings.DizionarioInglese = "Nave's Topical Bible";
+        if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Hitchcock's Bible Names Dictionary").Lingua == "en")
+            settings.DizionarioInglese = "Hitchcock's Bible Names Dictionary";
+
+        if (string.IsNullOrEmpty(settings.DizionarioItaliano) && Testi.Info("Enciclopedia biblica").Lingua == "it")
+            settings.DizionarioItaliano = "Enciclopedia biblica";
+        if (string.IsNullOrEmpty(settings.DizionarioItaliano) && Testi.Info("Note della Nuova Riveduta").Lingua == "it")
+            settings.DizionarioItaliano = "Note della Nuova Riveduta";
+
+        if (settings.Lingua.Length >= 2 && settings.Lingua[..2].Equals("IT", StringComparison.InvariantCultureIgnoreCase))
+        {
+            if (string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info("Vocabolario del Nuovo Testamento").Lingua) == "el")
+                settings.DizionarioGreco = "Vocabolario del Nuovo Testamento";
+        }
+        if (string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info("Strong's Greek Dictionary").Lingua) == "el")
+            settings.DizionarioGreco = "Strong's Greek Dictionary";
+        if (string.IsNullOrEmpty(settings.DizionarioEbraico) && Funzioni.LinguaPrincipale(Testi.Info("Strong's Hebrew Dictionary").Lingua) == "he")
+            settings.DizionarioEbraico = "Strong's Hebrew Dictionary";
+        if (string.IsNullOrEmpty(settings.DizionarioLatino) && Funzioni.LinguaPrincipale(Testi.Info("Words Latin Dictionary").Lingua) == "la")
+            settings.DizionarioLatino = "Words Latin Dictionary";
+
+        Collection<string> dizionariTutti = Testi.NomiVersioni(TestoTipi.Dizionario);
+        foreach (string dizionario in dizionariTutti)
+        {
+            switch (Funzioni.LinguaPrincipale(Testi.Info(dizionario).Lingua))
             {
-                UpdateEditorMenuState();
-            };
-
-            App.DockingHost.ActiveWindowChanged += (_, _) =>
-            {
-                UpdateMenuState();
-            };
-
-            AggiornaMenuVisualizza();
-
-            if (Testi.NomiVersioni().Count == 0)
-            {
-                MessageBoxLPN.Show(this,
-                    (string)(Application.Current.TryFindResource("MainNessunaVersione") ?? "No text was found. Use the 'Add Texts' command of the Tools menu to add some texts."),
-                    (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
-            }
-
-            // imposta dizionari
-            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioInglese).Lingua) != "en")
-                settings.DizionarioInglese = "";
-            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioItaliano).Lingua) != "it")
-                settings.DizionarioItaliano = "";
-            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioGreco).Lingua) != "el")
-                settings.DizionarioGreco = "";
-            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioEbraico).Lingua) != "he")
-                settings.DizionarioEbraico = "";
-            if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioLatino).Lingua) != "la")
-                settings.DizionarioLatino = "";
-
-            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("International Standard Bible Encyclopedia").Lingua == "en")
-                settings.DizionarioInglese = "International Standard Bible Encyclopedia";
-            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Easton's Bible Dictionary").Lingua == "en")
-                settings.DizionarioInglese = "Easton's Bible Dictionary";
-            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Torrey's New Topical Textbook").Lingua == "en")
-                settings.DizionarioInglese = "Torrey's New Topical Textbook";
-            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Smith's Bible Dictionary").Lingua == "en")
-                settings.DizionarioInglese = "Smith's Bible Dictionary";
-            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Nave's Topical Bible").Lingua == "en")
-                settings.DizionarioInglese = "Nave's Topical Bible";
-            if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("Hitchcock's Bible Names Dictionary").Lingua == "en")
-                settings.DizionarioInglese = "Hitchcock's Bible Names Dictionary";
-
-            if (string.IsNullOrEmpty(settings.DizionarioItaliano) && Testi.Info("Enciclopedia biblica").Lingua == "it")
-                settings.DizionarioItaliano = "Enciclopedia biblica";
-            if (string.IsNullOrEmpty(settings.DizionarioItaliano) && Testi.Info("Note della Nuova Riveduta").Lingua == "it")
-                settings.DizionarioItaliano = "Note della Nuova Riveduta";
-
-            if (settings.Lingua.Length >= 2 && settings.Lingua[..2].Equals("IT", StringComparison.InvariantCultureIgnoreCase))
-            {
-                if (string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info("Vocabolario del Nuovo Testamento").Lingua) == "el")
-                    settings.DizionarioGreco = "Vocabolario del Nuovo Testamento";
-            }
-            if (string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info("Strong's Greek Dictionary").Lingua) == "el")
-                settings.DizionarioGreco = "Strong's Greek Dictionary";
-            if (string.IsNullOrEmpty(settings.DizionarioEbraico) && Funzioni.LinguaPrincipale(Testi.Info("Strong's Hebrew Dictionary").Lingua) == "he")
-                settings.DizionarioEbraico = "Strong's Hebrew Dictionary";
-            if (string.IsNullOrEmpty(settings.DizionarioLatino) && Funzioni.LinguaPrincipale(Testi.Info("Words Latin Dictionary").Lingua) == "la")
-                settings.DizionarioLatino = "Words Latin Dictionary";
-
-            Collection<string> dizionariTutti = Testi.NomiVersioni(TestoTipi.Dizionario);
-            foreach (string dizionario in dizionariTutti)
-            {
-                switch (Funzioni.LinguaPrincipale(Testi.Info(dizionario).Lingua))
-                {
-                    case "en":
-                        if (string.IsNullOrEmpty(settings.DizionarioInglese))
-                            settings.DizionarioInglese = dizionario;
-                        break;
-                    case "it":
-                        if (string.IsNullOrEmpty(settings.DizionarioItaliano))
-                            settings.DizionarioItaliano = dizionario;
-                        break;
-                    case "el":
-                        if (string.IsNullOrEmpty(settings.DizionarioGreco))
-                            settings.DizionarioGreco = dizionario;
-                        break;
-                    case "he":
-                        if (string.IsNullOrEmpty(settings.DizionarioEbraico))
-                            settings.DizionarioEbraico = dizionario;
-                        break;
-                    case "la":
-                        if (string.IsNullOrEmpty(settings.DizionarioLatino))
-                            settings.DizionarioLatino = dizionario;
-                        break;
-                }
+                case "en":
+                    if (string.IsNullOrEmpty(settings.DizionarioInglese))
+                        settings.DizionarioInglese = dizionario;
+                    break;
+                case "it":
+                    if (string.IsNullOrEmpty(settings.DizionarioItaliano))
+                        settings.DizionarioItaliano = dizionario;
+                    break;
+                case "el":
+                    if (string.IsNullOrEmpty(settings.DizionarioGreco))
+                        settings.DizionarioGreco = dizionario;
+                    break;
+                case "he":
+                    if (string.IsNullOrEmpty(settings.DizionarioEbraico))
+                        settings.DizionarioEbraico = dizionario;
+                    break;
+                case "la":
+                    if (string.IsNullOrEmpty(settings.DizionarioLatino))
+                        settings.DizionarioLatino = dizionario;
+                    break;
             }
         }
     }
@@ -698,7 +717,8 @@ public partial class MainWindow : Window
         string nome = settings.Lingua.ToLower()[..2] == "it" ? "Guida a LaParola" : "Help for LaParola";
         if (Testi.VersioneEsiste(nome))
         {
-            /*ViewerDocumentView? view = */App.DockingHost.OpenViewerDocument(nome, sezione, true);
+            /*ViewerDocumentView? view = */
+            App.DockingHost.OpenViewerDocument(nome, sezione, true);
         }
         else
         {

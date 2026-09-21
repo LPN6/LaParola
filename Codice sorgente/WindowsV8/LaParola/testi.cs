@@ -23,6 +23,8 @@ namespace LaParola
     /// </summary>
     public class ConfrontoCI : IComparer<string>, IEqualityComparer<string>
     {
+        private static readonly CompareInfo CompareInfo = CultureInfo.InvariantCulture.CompareInfo;
+
         /// <summary>
         /// La funzione Compare.
         /// </summary>
@@ -31,11 +33,29 @@ namespace LaParola
         /// <returns>Il confronto delle stringhe: -1, 0 o 1.</returns>
         public int Compare(string? x, string? y)
         {
-            if (x == null && y == null) return 0;
+            if (ReferenceEquals(x, y)) return 0;
             if (x == null) return -1;
             if (y == null) return 1;
 
-            return String.Compare(x.Normalize(NormalizationForm.FormD), y.Normalize(NormalizationForm.FormD), StringComparison.InvariantCultureIgnoreCase);
+            string normX = x.Normalize(NormalizationForm.FormD);
+            string normY = y.Normalize(NormalizationForm.FormD);
+
+            // Compare ignoring both casing and punctuation/symbols like hyphens
+            int result = CompareInfo.Compare(normX, normY, CompareOptions.IgnoreCase | CompareOptions.IgnoreSymbols);
+
+            // tie-breaker: if two words are identical except for hyphens/punctuation,
+            // fall back shortest first (eg without hyphen)
+            // then to ordinal comparison so BinarySearch can distinguish them.
+            if (result == 0)
+            {
+                result = normX.Length.CompareTo(normY.Length);
+                if (result == 0)
+                {
+                    result = string.Compare(normX, normY, StringComparison.OrdinalIgnoreCase);
+                }
+            }
+
+            return result;
         }
 
         public bool Equals(string? x, string? y)
@@ -63,6 +83,7 @@ namespace LaParola
     /// </summary>
     public class ConfrontoCS : IComparer<String>
     {
+        private static readonly CompareInfo CompareInfo = CultureInfo.InvariantCulture.CompareInfo;
         /// <summary>
         /// La funzione Compare.
         /// </summary>
@@ -71,11 +92,25 @@ namespace LaParola
         /// <returns>Il confronto delle stringhe: -1, 0 o 1.</returns>
         public int Compare(string? x, string? y)
         {
-            ArgumentNullException.ThrowIfNull(x);
+            if (ReferenceEquals(x, y)) return 0;
+            if (x is null) return -1;
+            if (y is null) return 1;
 
-            ArgumentNullException.ThrowIfNull(y);
+            string normX = x.Normalize(NormalizationForm.FormD);
+            string normY = y.Normalize(NormalizationForm.FormD);
 
-            return String.Compare(x.Normalize(NormalizationForm.FormD), y.Normalize(NormalizationForm.FormD), StringComparison.InvariantCulture);
+            int result = CompareInfo.Compare(normX, normY, CompareOptions.IgnoreSymbols);
+
+            if (result == 0)
+            {
+                result = normX.Length.CompareTo(normY.Length);
+                if (result == 0)
+                {
+                    result = string.Compare(normX, normY, StringComparison.Ordinal);
+                }
+            }
+
+            return result;
         }
     }
 
@@ -903,7 +938,8 @@ namespace LaParola
         /// <seealso cref="FormatoTesto"/>
         public FormatoTesto()
         {
-            fontNome = IsRunningOnMono() ? "Times New Roman" : "Georgia";
+            //fontNome = IsRunningOnMono() ? "Times New Roman" : "Georgia";
+            fontNome = "Georgia";
             fontDimensione = 12;
             // false è il valore predefinito, quindi non è necessario impostarlo
             //            fontGrassetto = false;
@@ -985,10 +1021,12 @@ namespace LaParola
             formato.testoVisualizzato = testoVisualizzato;
         }
 
+        /*
         private static bool IsRunningOnMono()
         {
             return Type.GetType("Mono.Runtime") != null;
         }
+        */
     }
 
     #endregion
@@ -1881,19 +1919,6 @@ namespace LaParola
             }
 
             return versioniNonSalvate;
-        }
-
-        /// <summary>
-        /// Carica dei file dei testi informazioni sulle radici e sulle citazioni ai brani,
-        /// che possono essere lette in un secondo momento dopo la creazione dell'oggetto Testi.
-        /// </summary>
-        public void CaricaInformazioniAddizionali()
-        {
-            foreach (string nomeVersione in NomiVersioni())
-            {
-                versioni[nomeVersione].CreaListaRadiceDiParole();
-                versioni[nomeVersione].CreaListaCitazioni();
-            }
         }
 
         /// <summary>
@@ -3150,9 +3175,7 @@ namespace LaParola
     Collection<string>? collezioniDaVisualizzare = null,
     bool conNomiVersioni = true,
     Riferimento? paroleRicercate = null,
-    bool alternare = false,
-    BackgroundWorker? worker = null,
-    DoWorkEventArgs? e = null)
+    bool alternare = false)
         {
             return await TestoBranoAsync(
                 riferimento,
@@ -3160,9 +3183,7 @@ namespace LaParola
                 collezioniDaVisualizzare,
                 conNomiVersioni,
                 paroleRicercate,
-                alternare,
-                worker,
-                e);
+                alternare);
         }
 
         public async Task<string> TestoBranoAsync(
@@ -3171,9 +3192,7 @@ namespace LaParola
             Collection<string>? collezioniDaVisualizzare = null,
             bool conNomiVersioni = true,
             Riferimento? paroleRicercate = null,
-            bool alternare = false,
-            BackgroundWorker? worker = null,
-            DoWorkEventArgs? e = null)
+            bool alternare = false)
         {
             return await TestoBranoAsync(
                 ConvertiRiferimento(riferimento),
@@ -3181,9 +3200,7 @@ namespace LaParola
                 collezioniDaVisualizzare,
                 conNomiVersioni,
                 paroleRicercate,
-                alternare,
-                worker,
-                e);
+                alternare);
         }
 
         public async Task<string> TestoBranoAsync(
@@ -3192,9 +3209,7 @@ namespace LaParola
             Collection<string>? collezioniDaVisualizzare = null,
             bool conNomiVersioni = true,
             Riferimento? paroleRicercate = null,
-            bool alternare = false,
-            BackgroundWorker? worker = null,
-            DoWorkEventArgs? e = null)
+            bool alternare = false)
         {
             return await TestoBranoAsync(
                 ConvertiRiferimento(riferimento),
@@ -3202,9 +3217,7 @@ namespace LaParola
                 collezioniDaVisualizzare,
                 conNomiVersioni,
                 paroleRicercate,
-                alternare,
-                worker,
-                e);
+                alternare);
         }
 
         public async Task<FlowDocument> FlowDocumentBranoAsync(
@@ -3213,9 +3226,7 @@ namespace LaParola
     Collection<string>? collezioniDaVisualizzare = null,
     bool conNomiVersioni = true,
     Riferimento? paroleRicercate = null,
-    bool alternare = false,
-    BackgroundWorker? worker = null,
-    DoWorkEventArgs? e = null)
+    bool alternare = false)
         {
             return await FlowDocumentBranoAsync(
                 riferimento,
@@ -3223,9 +3234,7 @@ namespace LaParola
                 collezioniDaVisualizzare,
                 conNomiVersioni,
                 paroleRicercate,
-                alternare,
-                worker,
-                e);
+                alternare);
         }
 
         public async Task<FlowDocument> FlowDocumentBranoAsync(
@@ -3234,9 +3243,7 @@ namespace LaParola
             Collection<string>? collezioniDaVisualizzare = null,
             bool conNomiVersioni = true,
             Riferimento? paroleRicercate = null,
-            bool alternare = false,
-            BackgroundWorker? worker = null,
-            DoWorkEventArgs? e = null)
+            bool alternare = false)
         {
             return await FlowDocumentBranoAsync(
                 ConvertiRiferimento(riferimento),
@@ -3244,9 +3251,7 @@ namespace LaParola
                 collezioniDaVisualizzare,
                 conNomiVersioni,
                 paroleRicercate,
-                alternare,
-                worker,
-                e);
+                alternare);
         }
 
         public async Task<FlowDocument> FlowDocumentBranoAsync(
@@ -3255,9 +3260,7 @@ namespace LaParola
            Collection<string>? collezioniDaVisualizzare = null,
            bool conNomiVersioni = true,
            Riferimento? paroleRicercate = null,
-           bool alternare = false,
-           BackgroundWorker? worker = null,
-           DoWorkEventArgs? e = null)
+           bool alternare = false)
         {
             return await FlowDocumentBranoAsync(
                 ConvertiRiferimento(riferimento),
@@ -3265,9 +3268,7 @@ namespace LaParola
                 collezioniDaVisualizzare,
                 conNomiVersioni,
                 paroleRicercate,
-                alternare,
-                worker,
-                e);
+                alternare);
         }
 
         public async Task<FlowDocument> FlowDocumentBranoAsync(
@@ -3276,279 +3277,262 @@ namespace LaParola
     Collection<string>? collezioniDaVisualizzare = null,
     bool conNomiVersioni = true,
     Riferimento? paroleRicercate = null,
-    bool alternare = false,
-    BackgroundWorker? worker = null,
-    DoWorkEventArgs? e = null)
+    bool alternare = false)
         {
             collezioniDaVisualizzare ??= [];
             paroleRicercate ??= new Riferimento();
-            FlowDocument fd;
 
-            if (alternare)
+            List<string> stringheRtf = await Task.Run(async () =>
             {
-                byte cap0, cap1, vers0, vers1, maxCapitoloInTuttiTesti, maxVersettoInTuttiTesti;
+                return alternare
+                    ? await CostruisciRtfAlternatoAsync(riferimento, listaVersioni, collezioniDaVisualizzare, paroleRicercate).ConfigureAwait(false)
+                    : await CostruisciRtfLineareAsync(riferimento, listaVersioni, collezioniDaVisualizzare, conNomiVersioni, paroleRicercate).ConfigureAwait(false);
+            });
 
-                StringBuilder titoloVersetto = new(RtfIntestazione().Length + 40);
-                int lunghezzaIntestazione = RtfIntestazione().Length;
-                //string titoloVersettoInizio = RtfIntestazione() + @"{\v " + RichTextBoxEx.InizioRiferimento;
-                string titoloVersettoInizio = RtfIntestazione() + MainWindow.LPN_ANCORA;
+            return await MergeManyRtfAsync(stringheRtf);
+        }
 
-                string libStringa, capStringa, versStringa;
-                RiferimentoFormato rfVecchio = Formato.RiferimentoFormato;
-                List<string> stringheRtf = await Task.Run(async () =>
+        private async Task<List<string>> CostruisciRtfLineareAsync(Riferimento riferimento, IReadOnlyList<string> listaVersioni, Collection<string> collezioniDaVisualizzare, bool conNomiVersioni, Riferimento paroleRicercate)
+        {
+            List<string> stringheRtf = [];
+            try
+            {
+                List<Riferimento> noteDaVisualizzare = [];
+                if (listaVersioni.Count > 0)
                 {
-                    List<string> stringheRtf = [];
-                    StringBuilder stringaRtf = new(RtfIntestazione());
-                    byte[] riferimentoArray = new byte[6];
-                    Riferimento rif = new(riferimentoArray);
-                    foreach (byte[] branoInRiferimento in riferimento.Brani)
+                    foreach (string collezione in collezioniDaVisualizzare)
                     {
-                        for (byte lib = branoInRiferimento[0]; lib <= branoInRiferimento[3]; ++lib)
+                        noteDaVisualizzare.Add(versioni[collezione].ElencaNoteInBrano(riferimento));
+                    }
+                }
+
+                bool bibbiaTrovata = false;
+                if (listaVersioni.Count == 0)
+                { // non c'è una versione della Bibbia, solo note
+                    string testoInCollezione;
+                    for (int i = 0; i < collezioniDaVisualizzare.Count; ++i)
+                    {
+                        try
                         {
-                            libStringa = Numeri2Stringhe[lib];
+                            Riferimento noteInCollezione = riferimento.Versetti ? versioni[collezioniDaVisualizzare[i]].ElencaNoteInBrano(riferimento) : riferimento;
 
-                            if (lib == branoInRiferimento[0])
+                            if (noteInCollezione.Count > 0)
                             {
-                                cap0 = branoInRiferimento[1];
-                            }
-                            else
-                            {
-                                cap0 = 1;
-                            }
-
-                            maxCapitoloInTuttiTesti = 0;
-                            foreach (string versioneDaControllare in listaVersioni)
-                            {
-                                if (Info(versioneDaControllare).Tipo == TestoTipi.Bibbia && CapitoliInLibro(lib, versioneDaControllare) > maxCapitoloInTuttiTesti)
+                                if (conNomiVersioni)
                                 {
-                                    maxCapitoloInTuttiTesti = CapitoliInLibro(lib, versioneDaControllare);
-                                }
-                            }
-
-                            if (maxCapitoloInTuttiTesti == 0)
-                            {
-                                maxCapitoloInTuttiTesti = CapitoliInLibro(lib, UltimaBibbia);
-                            }
-
-                            if (lib == branoInRiferimento[3])
-                            {
-                                cap1 = branoInRiferimento[4];
-                            }
-                            else
-                            {
-                                cap1 = maxCapitoloInTuttiTesti;
-                            }
-                            if (cap1 > maxCapitoloInTuttiTesti)
-                            {
-                                cap1 = maxCapitoloInTuttiTesti;
-                            }
-
-                            for (byte cap = cap0; cap <= cap1; ++cap)
-                            {
-                                capStringa = Numeri3Stringhe[cap];
-                                //capStringa = "00" + cap.ToString(CultureInfo.InvariantCulture);
-                                //capStringa = capStringa[^3..];
-
-                                if (lib == branoInRiferimento[0] && cap == branoInRiferimento[1])
-                                {
-                                    vers0 = branoInRiferimento[2];
-                                }
-                                else
-                                {
-                                    vers0 = 1;
+                                    stringheRtf.Add(RtfIntestazione() + @"\fs28\b " + collezioniDaVisualizzare[i] + @"\par}");
                                 }
 
-                                maxVersettoInTuttiTesti = 0;
-                                foreach (string versioneDaControllare in listaVersioni)
+                                testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBranoAsync(noteInCollezione, [], [], conNomiVersioni);
+                                if (i != collezioniDaVisualizzare.Count - 1)
                                 {
-                                    if (Info(versioneDaControllare).Tipo == TestoTipi.Bibbia && VersettiInCapitolo(lib, cap, versioneDaControllare) > maxVersettoInTuttiTesti)
-                                    {
-                                        maxVersettoInTuttiTesti = VersettiInCapitolo(lib, cap, versioneDaControllare);
-                                    }
+                                    testoInCollezione = testoInCollezione[..^1] + @"\par\ql\par}";
                                 }
-
-                                if (maxVersettoInTuttiTesti == 0)
-                                {
-                                    maxVersettoInTuttiTesti = VersettiInCapitolo(lib, cap, UltimaBibbia);
-                                }
-
-                                if (lib == branoInRiferimento[3] && cap == branoInRiferimento[4])
-                                {
-                                    vers1 = branoInRiferimento[5];
-                                }
-                                else
-                                {
-                                    vers1 = maxVersettoInTuttiTesti;
-                                }
-
-                                if (vers1 > maxVersettoInTuttiTesti)
-                                {
-                                    vers1 = maxVersettoInTuttiTesti;
-                                }
-
-                                for (byte vers = vers0; vers <= vers1; ++vers)
-                                {
-                                    versStringa = Numeri3Stringhe[vers];
-                                    riferimentoArray[0] = lib;
-                                    riferimentoArray[1] = cap;
-                                    riferimentoArray[2] = vers;
-                                    riferimentoArray[3] = lib;
-                                    riferimentoArray[4] = cap;
-                                    riferimentoArray[5] = vers;
-                                    stringaRtf.Clear();
-                                    stringaRtf.Append(titoloVersettoInizio);
-                                    stringaRtf.Append(libStringa).Append(capStringa).Append(versStringa);
-                                    stringaRtf.Append(@"\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\b0\par}");
-                                    stringheRtf.Add(stringaRtf.ToString());
-                                    Formato.RiferimentoFormato = RiferimentoFormato.Nessuno;
-                                    rif.Rimuovi(0);
-                                    rif.AggiungiBrano(riferimentoArray);
-                                    if (await ListBranoAsync(rif, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate) is { } ls)
-                                    {
-                                        stringheRtf.AddRange(ls);
-                                    }
-                                    stringheRtf.Add(RtfIntestazione() + @"\par}");
-                                    Formato.RiferimentoFormato = rfVecchio;
-                                }
+                                stringheRtf.Add(testoInCollezione);
                             }
                         }
-                        // TODO2 worker?.ReportProgress(-listaVersioni.Count - collezioniDaVisualizzare.Count, e);
+                        catch { }
                     }
-                    //stringheRtf.Add(stringaRtf.ToString());
-                    return stringheRtf;
-                }).ConfigureAwait(false);
-                fd = await MergeManyRtfAsync(stringheRtf);
+                }
+                else if (listaVersioni.Count == 1 && ((versioni[listaVersioni[0]].Info.Tipo & TestoTipi.Bibbia) != TestoTipi.Bibbia))
+                {
+                    // quando una collezione di note, il testo è già RTF completo
+                    string testoCommentario = await versioni[listaVersioni[0]].TestoBranoAsync(
+                riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate).ConfigureAwait(false);
+                    // old but no longer necessary was: ProcessAndHideAnchors(fd); // altrimenti ancora lasciato all'inizio del testo, che in altri casi è chiamato da MergeManyRtfAsync
+                    stringheRtf.Add(testoCommentario);
+                }
+                else
+                {
+                        StringBuilder stringaRtf = new(RtfIntestazione());
+                        string testoInVersione;
+                        bool ultimaVersioneBibbia = true;
+                        int lunghezzaIntestazione = stringaRtf.Length;
+                        for (int i = 0; i < listaVersioni.Count; ++i)
+                        {
+                            try
+                            {
+                                if (conNomiVersioni && listaVersioni.Count > 1)
+                                {
+                                    stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
+                                }
+                                testoInVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate);
+                                if (versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
+                                {
+                                    if (lunghezzaIntestazione < testoInVersione.Length - 1 && testoInVersione[lunghezzaIntestazione] != ' ')
+                                    {
+                                        stringaRtf.Append(' ');
+                                    }
+                                    stringaRtf.Append(testoInVersione[lunghezzaIntestazione..^1]);
+                                    if (!bibbiaTrovata)
+                                    {
+                                        UltimaBibbia = listaVersioni[i];
+                                        bibbiaTrovata = true;
+                                    }
+                                    ultimaVersioneBibbia = true;
+                                }
+                                else
+                                { // commentario
+                                    stringheRtf.Add(stringaRtf + @"}");
+                                    stringheRtf.Add(testoInVersione);
+                                    stringaRtf = new(RtfIntestazione());
+                                    ultimaVersioneBibbia = false;
+                                }
+                                if (i < listaVersioni.Count - 1)
+                                {
+                                    stringaRtf.Append(@"\par\ql\par");
+                                }
+                            }
+                            catch { } // il nome della versione non era riconosciuto
+                        }
+                        if (ultimaVersioneBibbia)
+                            stringheRtf.Add(stringaRtf + @"}");
+                        return stringheRtf;
+                }
             }
-            else
-            { // else non alternare
-                try
+            catch (KeyNotFoundException)
+            {
+                throw new TextNotExistException();
+            }
+
+            return stringheRtf;
+        }
+
+        private async Task<List<string>> CostruisciRtfAlternatoAsync(
+    Riferimento riferimento,
+    IReadOnlyList<string> listaVersioni,
+    Collection<string> collezioniDaVisualizzare,
+    Riferimento paroleRicercate)
+        {
+            byte cap0, cap1, vers0, vers1, maxCapitoloInTuttiTesti, maxVersettoInTuttiTesti;
+            List<string> stringheRtf = [];
+            StringBuilder stringaRtf = new(RtfIntestazione());
+            byte[] riferimentoArray = new byte[6];
+            Riferimento rif = new(riferimentoArray);
+            string titoloVersettoInizio = RtfIntestazione() + MainWindow.LPN_ANCORA;
+
+            //StringBuilder titoloVersetto = new(RtfIntestazione().Length + 40);
+            //int lunghezzaIntestazione = RtfIntestazione().Length;
+
+            string libStringa, capStringa, versStringa;
+            RiferimentoFormato rfVecchio = Formato.RiferimentoFormato;
+            foreach (byte[] branoInRiferimento in riferimento.Brani)
+            {
+                for (byte lib = branoInRiferimento[0]; lib <= branoInRiferimento[3]; ++lib)
                 {
-                    List<Riferimento> noteDaVisualizzare = [];
-                    if (listaVersioni.Count > 0)
+                    libStringa = Numeri2Stringhe[lib];
+
+                    if (lib == branoInRiferimento[0])
                     {
-                        foreach (string collezione in collezioniDaVisualizzare)
-                        {
-                            noteDaVisualizzare.Add(versioni[collezione].ElencaNoteInBrano(riferimento));
-                        }
-                    }
-
-                    bool bibbiaTrovata = false;
-                    // TODO2 worker?.ReportProgress(-1, e);
-                    if (listaVersioni.Count == 0)
-                    { // non c'è una versione della Bibbia, solo note
-                        List<string> stringheRtf = await Task.Run(async () =>
-                        {
-                            List<string> stringheRtf = [];
-                            string testoInCollezione;
-                            for (int i = 0; i < collezioniDaVisualizzare.Count; ++i)
-                            {
-                                try
-                                {
-                                    Riferimento noteInCollezione = new();
-                                    if (riferimento.Versetti)
-                                    {
-                                        noteInCollezione = versioni[collezioniDaVisualizzare[i]].ElencaNoteInBrano(riferimento);
-                                    }
-                                    else
-                                    {
-                                        noteInCollezione = riferimento;
-                                    }
-
-                                    if (noteInCollezione.Count > 0)
-                                    {
-                                        if (conNomiVersioni)
-                                        {
-                                            stringheRtf.Add(RtfIntestazione() + @"\fs28\b " + collezioniDaVisualizzare[i] + @"\par}");
-                                        }
-
-                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBranoAsync(noteInCollezione, [], [], conNomiVersioni, worker, e);
-                                        if (i != collezioniDaVisualizzare.Count - 1)
-                                        {
-                                            testoInCollezione = testoInCollezione[..^1] + @"\par\ql\par}";
-                                        }
-                                        stringheRtf.Add(testoInCollezione);
-                                    }
-                                }
-                                catch { }
-                            }
-                            return stringheRtf;
-                        }).ConfigureAwait(false);
-                        fd = await MergeManyRtfAsync(stringheRtf);
-                    }
-                    else if (listaVersioni.Count == 1 && ((versioni[listaVersioni[0]].Info.Tipo & TestoTipi.Bibbia) != TestoTipi.Bibbia))
-                    {
-                        // quando una collezione di note, il testo è già RTF completo
-
-                        /*fd = new FlowDocument();
-                        using MemoryStream ms = new(Encoding.ASCII.GetBytes(await versioni[listaVersioni[0]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, paroleRicercate)));
-                        ms.Position = 0;
-
-                        TextRange range = new(fd.ContentStart, fd.ContentEnd);
-                        range.Load(ms, DataFormats.Rtf);*/
-
-                        fd = await versioni[listaVersioni[0]].FlowDocumentBranoCommentarioAsync(riferimento, paroleRicercate);
-                        ProcessAndHideAnchors(fd); // altrimenti ancora lasciato all'inizio del testo, che in altri casi è chiamato da MergeManyRtfAsync
+                        cap0 = branoInRiferimento[1];
                     }
                     else
                     {
-                        List<string> stringheRtf = await Task.Run(async () =>
-                         {
-                             List<string> stringheRtf = [];
-                             StringBuilder stringaRtf = new(RtfIntestazione());
-                             string testoInVersione;
-                             bool ultimaVersioneBibbia = true;
-                             int lunghezzaIntestazione = stringaRtf.Length;
-                             for (int i = 0; i < listaVersioni.Count; ++i)
-                             {
-                                 try
-                                 {
-                                     if (conNomiVersioni && listaVersioni.Count > 1)
-                                     {
-                                         stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
-                                     }
-                                     testoInVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate, worker, e);
-                                     if (versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
-                                     {
-                                         if (lunghezzaIntestazione < testoInVersione.Length - 1 && testoInVersione[lunghezzaIntestazione] != ' ')
-                                         {
-                                             stringaRtf.Append(' ');
-                                         }
-                                         stringaRtf.Append(testoInVersione[lunghezzaIntestazione..^1]);
-                                         if (!bibbiaTrovata)
-                                         {
-                                             UltimaBibbia = listaVersioni[i];
-                                             bibbiaTrovata = true;
-                                         }
-                                         ultimaVersioneBibbia = true;
-                                     }
-                                     else
-                                     { // commentario
-                                         stringheRtf.Add(stringaRtf + @"}");
-                                         stringheRtf.Add(testoInVersione);
-                                         stringaRtf = new(RtfIntestazione());
-                                         ultimaVersioneBibbia = false;
-                                     }
-                                     if (i < listaVersioni.Count - 1)
-                                     {
-                                         stringaRtf.Append(@"\par\ql\par");
-                                     }
-                                 }
-                                 catch { } // il nome della versione non era riconosciuto
-                             }
-                             if (ultimaVersioneBibbia)
-                                 stringheRtf.Add(stringaRtf + @"}");
-                             return stringheRtf;
-                         }).ConfigureAwait(false);
-                        fd = await MergeManyRtfAsync(stringheRtf);
+                        cap0 = 1;
+                    }
+
+                    maxCapitoloInTuttiTesti = 0;
+                    foreach (string versioneDaControllare in listaVersioni)
+                    {
+                        if (Info(versioneDaControllare).Tipo == TestoTipi.Bibbia && CapitoliInLibro(lib, versioneDaControllare) > maxCapitoloInTuttiTesti)
+                        {
+                            maxCapitoloInTuttiTesti = CapitoliInLibro(lib, versioneDaControllare);
+                        }
+                    }
+
+                    if (maxCapitoloInTuttiTesti == 0)
+                    {
+                        maxCapitoloInTuttiTesti = CapitoliInLibro(lib, UltimaBibbia);
+                    }
+
+                    if (lib == branoInRiferimento[3])
+                    {
+                        cap1 = branoInRiferimento[4];
+                    }
+                    else
+                    {
+                        cap1 = maxCapitoloInTuttiTesti;
+                    }
+                    if (cap1 > maxCapitoloInTuttiTesti)
+                    {
+                        cap1 = maxCapitoloInTuttiTesti;
+                    }
+
+                    for (byte cap = cap0; cap <= cap1; ++cap)
+                    {
+                        capStringa = Numeri3Stringhe[cap];
+                        //capStringa = "00" + cap.ToString(CultureInfo.InvariantCulture);
+                        //capStringa = capStringa[^3..];
+
+                        if (lib == branoInRiferimento[0] && cap == branoInRiferimento[1])
+                        {
+                            vers0 = branoInRiferimento[2];
+                        }
+                        else
+                        {
+                            vers0 = 1;
+                        }
+
+                        maxVersettoInTuttiTesti = 0;
+                        foreach (string versioneDaControllare in listaVersioni)
+                        {
+                            if (Info(versioneDaControllare).Tipo == TestoTipi.Bibbia && VersettiInCapitolo(lib, cap, versioneDaControllare) > maxVersettoInTuttiTesti)
+                            {
+                                maxVersettoInTuttiTesti = VersettiInCapitolo(lib, cap, versioneDaControllare);
+                            }
+                        }
+
+                        if (maxVersettoInTuttiTesti == 0)
+                        {
+                            maxVersettoInTuttiTesti = VersettiInCapitolo(lib, cap, UltimaBibbia);
+                        }
+
+                        if (lib == branoInRiferimento[3] && cap == branoInRiferimento[4])
+                        {
+                            vers1 = branoInRiferimento[5];
+                        }
+                        else
+                        {
+                            vers1 = maxVersettoInTuttiTesti;
+                        }
+
+                        if (vers1 > maxVersettoInTuttiTesti)
+                        {
+                            vers1 = maxVersettoInTuttiTesti;
+                        }
+
+                        for (byte vers = vers0; vers <= vers1; ++vers)
+                        {
+                            versStringa = Numeri3Stringhe[vers];
+                            riferimentoArray[0] = lib;
+                            riferimentoArray[1] = cap;
+                            riferimentoArray[2] = vers;
+                            riferimentoArray[3] = lib;
+                            riferimentoArray[4] = cap;
+                            riferimentoArray[5] = vers;
+
+                            stringaRtf.Clear();
+                            stringaRtf.Append(titoloVersettoInizio);
+                            stringaRtf.Append(libStringa).Append(capStringa).Append(versStringa);
+                            stringaRtf.Append(@"\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\b0\par}");
+                            stringheRtf.Add(stringaRtf.ToString());
+                            Formato.RiferimentoFormato = RiferimentoFormato.Nessuno;
+                            rif.Rimuovi(0);
+                            rif.AggiungiBrano(riferimentoArray);
+                            stringheRtf.Add(stringaRtf.ToString());
+
+                            if (await ListBranoAsync(rif, listaVersioni, collezioniDaVisualizzare, true, paroleRicercate).ConfigureAwait(false) is { } ls)
+                            {
+                                stringheRtf.AddRange(ls);
+                            }
+
+                            stringheRtf.Add(RtfIntestazione() + @"\par}");
+                            Formato.RiferimentoFormato = rfVecchio;
+                        }
                     }
                 }
-                catch (KeyNotFoundException)
-                {
-                    throw new TextNotExistException();
-                }
             }
-
-            return fd;
+            return stringheRtf;
         }
 
         /// <summary>
@@ -3560,8 +3544,6 @@ namespace LaParola
         /// <param name="conNomiVersioni">Se aggiungi i nomi dei testi al risultato.</param>
         /// <param name="paroleRicercate">Tutte le parole che vanno sottolineate nel testo visualizzato.</param>
         /// <param name="alternare">Se tutti i testi sono mostrati per ogni versetto, l'uno dopo l'altro (invece di fare tutti i testi l'uno dopo l'altro).</param>
-        /// <param name="worker">Il thread in cui il testo è creato.</param>
-        /// <param name="e">Gli argomenti del thread.</param>
         /// <returns>Il testo biblico.</returns>
         private async Task<string> TestoBranoAsync(
     Riferimento riferimento,
@@ -3569,9 +3551,7 @@ namespace LaParola
     Collection<string>? collezioniDaVisualizzare = null,
     bool conNomiVersioni = true,
     Riferimento? paroleRicercate = null,
-    bool alternare = false,
-    BackgroundWorker? worker = null,
-    DoWorkEventArgs? e = null)
+    bool alternare = false)
         {
             collezioniDaVisualizzare ??= [];
             paroleRicercate ??= new Riferimento();
@@ -3694,15 +3674,14 @@ namespace LaParola
                                     titoloVersetto.Append(@"\fs28\b ").Append(ConvertiRiferimentoDa3ByteATesto(riferimentoArray, Formato.RiferimentoFormato)).Append(@"\par}");
                                     stringheRtf.Add(titoloVersetto.ToString());
                                     Formato.RiferimentoFormato = RiferimentoFormato.Nessuno;
-                                    testoVersetto = await TestoBranoAsync(new Riferimento(riferimentoArray), listaVersioni, collezioniDaVisualizzare, false, paroleRicercate, false, null, e); // null per worker, così non è aggiornato per ogni versetto
+                                    testoVersetto = await TestoBranoAsync(new Riferimento(riferimentoArray), listaVersioni, collezioniDaVisualizzare, false, paroleRicercate, false);
                                     stringheRtf.Add(testoVersetto[..^1] + @"\par}");
-                                    //stringheRtf.Add(await TestoBranoAsync(new Riferimento(riferimentoArray), listaVersioni, collezioniDaVisualizzare, false, paroleRicercate, false, null, e)); // null per worker, così non è aggiornato per ogni versetto
+                                    //stringheRtf.Add(await TestoBranoAsync(new Riferimento(riferimentoArray), listaVersioni, collezioniDaVisualizzare, false, paroleRicercate, false));
                                     //stringheRtf.Add(RtfIntestazione() + @"\par}");
                                     Formato.RiferimentoFormato = rfVecchio;
                                 }
                             }
                         }
-                        // TODO2 worker?.ReportProgress(-listaVersioni.Count - collezioniDaVisualizzare.Count, e);
                     }
                     return stringheRtf;
                 }).ConfigureAwait(false);
@@ -3722,7 +3701,6 @@ namespace LaParola
                     }
 
                     bool bibbiaTrovata = false;
-                    // TODO2 worker?.ReportProgress(-1, e);
                     if (listaVersioni.Count == 0)
                     { // non c'è una versione della Bibbia, solo note
                         List<string> stringheRtf = await Task.Run(async () =>
@@ -3750,7 +3728,7 @@ namespace LaParola
                                             stringheRtf.Add(RtfIntestazione() + @"\fs28\b " + collezioniDaVisualizzare[i] + @"\par}");
                                         }
 
-                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBranoAsync(noteInCollezione, [], [], conNomiVersioni, worker, e);
+                                        testoInCollezione = await versioni[collezioniDaVisualizzare[i]].TestoBranoAsync(noteInCollezione, [], [], conNomiVersioni);
                                         if (i != collezioniDaVisualizzare.Count - 1)
                                         {
                                             testoInCollezione = testoInCollezione[..^1] + @"\par\ql\par}";
@@ -3786,7 +3764,7 @@ namespace LaParola
                                     {
                                         stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
                                     }
-                                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, Formato.RiferimentoFormato != RiferimentoFormato.Nessuno, paroleRicercate, worker, e);
+                                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, Formato.RiferimentoFormato != RiferimentoFormato.Nessuno, paroleRicercate);
                                     testoPerVersione = testoPerVersione.Contains("colortbl") && testoPerVersione.IndexOf(' ', testoPerVersione.IndexOf("colortbl")) != -1 ? testoPerVersione[(testoPerVersione.IndexOf(' ', testoPerVersione.IndexOf("colortbl")) + 1)..] : testoPerVersione;
                                     if (!testoPerVersione.StartsWith(' '))
                                         stringaRtf.Append(' ');
@@ -3887,7 +3865,7 @@ Riferimento? paroleRicercate = null)
                         stringheRtf.Add(RtfIntestazione() + @"{\b1" + listaVersioni[i] + @"}\par}");
                     }
 
-                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, Formato.RiferimentoFormato != RiferimentoFormato.Nessuno, paroleRicercate, null, null);
+                    testoPerVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, Formato.RiferimentoFormato != RiferimentoFormato.Nessuno, paroleRicercate);
                     stringheRtf.Add(testoPerVersione);
 
                     if (i < listaVersioni.Count - 1)
@@ -6516,15 +6494,44 @@ Riferimento? paroleRicercate = null)
                 .Where(s => !string.IsNullOrWhiteSpace(s))
                 .ToList() ?? [];
 
-            // Build the FlowDocument on the UI dispatcher so the returned doc
-            // belongs to the UI thread and can be used by RichTextBox/DockingHost.
-            return await Application.Current.Dispatcher.InvokeAsync(
-                () => BuildMergedFlowDocument(sourceRtfs, impostaFormato),
-                DispatcherPriority.Normal);
+            FlowDocument finalDoc = new()
+            {
+                FlowDirection = FlowDirection.LeftToRight,
+                TextAlignment = TextAlignment.Left
+            };
+            foreach (string originalRtf in sourceRtfs)
+            {
+                // Yield to the WPF Dispatcher so the UI/Progress Bar can animate
+                await Task.Yield();
+
+                FlowDocument tempDoc = LoadRtfToFlowDocumentOnUiThread(originalRtf);
+                NormalizeLoadedBlocks(tempDoc, null);
+
+                // Move blocks into final doc
+                while (tempDoc.Blocks.FirstBlock != null)
+                {
+                    Block block = tempDoc.Blocks.FirstBlock;
+                    tempDoc.Blocks.Remove(block);
+                    finalDoc.Blocks.Add(block);
+                }
+            }
+
+            NormalizeLoadedBlocks(finalDoc, null);
+
+            if (impostaFormato)
+            {
+                ApplyGlobalFormatting(finalDoc);
+            }
+
+            return finalDoc;
         }
 
         public async Task<string> MergeManyRtfAsStringAsync(List<string> rtfStrings)
         {
+            if (rtfStrings == null || rtfStrings.Count == 0)
+                return string.Empty;
+
+            /* TODO2 da cancellare vecchia versione non funziona più
             // 1. Merge the RTF strings into a FlowDocument using your existing logic
             FlowDocument doc = await MergeManyRtfAsync(rtfStrings);
 
@@ -6533,6 +6540,13 @@ Riferimento? paroleRicercate = null)
                 () => ToRtfString(doc),
                 DispatcherPriority.Normal
             ).Task;
+            */
+
+            return await Application.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                FlowDocument doc = await MergeManyRtfAsync(rtfStrings);
+                return ToRtfString(doc);
+            }, DispatcherPriority.Normal).Task.Unwrap();
         }
 
         public static async Task<FlowDocument> MergeManyRtfAsDocumentAsync(List<string> rtfStrings)
@@ -6574,50 +6588,6 @@ Riferimento? paroleRicercate = null)
             });
         }
 
-        public FlowDocument BuildMergedFlowDocument(IReadOnlyList<string> rtfs, bool impostaFormato = false)
-        {
-            FlowDocument finalDoc = new()
-            {
-                FlowDirection = FlowDirection.LeftToRight,
-                TextAlignment = TextAlignment.Left
-            };
-
-            //bool first = true;
-
-            foreach (string originalRtf in rtfs)
-            {
-                //TextAlignment sourceAlignment = GetAlignment(originalRtf);
-                FlowDocument tempDoc = LoadRtfToFlowDocumentOnUiThread(originalRtf);
-                NormalizeLoadedBlocks(tempDoc, null);
-
-                //if (!first)
-               // {
-                //    finalDoc.Blocks.Add(new Paragraph(new Run("")));
-                //}
-
-                // Move blocks into final doc
-                while (tempDoc.Blocks.FirstBlock != null)
-                {
-                    Block block = tempDoc.Blocks.FirstBlock;
-                    tempDoc.Blocks.Remove(block);
-                    finalDoc.Blocks.Add(block);
-                }
-
-                //first = false;
-            }
-
-            // Final safety pass on the merged document so the displayed result is correct.
-            NormalizeLoadedBlocks(finalDoc, null);
-
-            if (impostaFormato)
-            {
-                ApplyGlobalFormatting(finalDoc);
-            }
-
-            //CollapseConsecutiveBlankParagraphs(finalDoc);
-            return finalDoc;
-        }
-
         public static FlowDocument LoadRtfToFlowDocumentOnUiThread(string rtf)
         {
             FlowDocument doc = new();
@@ -6636,56 +6606,47 @@ Riferimento? paroleRicercate = null)
 
         private static void ProcessAndHideAnchors(FlowDocument doc)
         {
-            bool foundAny;
-            do
+            TextPointer navigator = doc.ContentStart;
+
+            while (navigator != null && navigator.CompareTo(doc.ContentEnd) < 0)
             {
-                foundAny = false;
-                TextPointer navigator = doc.ContentStart;
-
-                while (navigator != null && navigator.CompareTo(doc.ContentEnd) < 0)
+                if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
                 {
-                    if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                    string runText = navigator.GetTextInRun(LogicalDirection.Forward);
+                    int index = runText.IndexOf(MainWindow.LPN_ANCORA, StringComparison.Ordinal);
+
+                    if (index >= 0)
                     {
-                        string runText = navigator.GetTextInRun(LogicalDirection.Forward);
-                        int index = runText.IndexOf(MainWindow.LPN_ANCORA, StringComparison.Ordinal);
-
-                        if (index >= 0)
+                        Match match = MainWindow.AncoraRegEx.Match(runText[index..]);
+                        if (match.Success)
                         {
-                            Match match = MainWindow.AncoraRegEx.Match(runText[index..]);
-                            if (match.Success)
+                            string verseId = match.Groups[1].Value;
+                            string fullMarkerText = match.Value;
+
+                            if (navigator.Parent is Run currentRun)
                             {
-                                string verseId = match.Groups[1].Value;
-                                string fullMarkerText = match.Value;
+                                // 1. Remove the anchor text from the current run
+                                currentRun.Text = currentRun.Text.Replace(fullMarkerText, "");
 
-                                if (navigator.Parent is Run currentRun)
+                                // 2. Attach the tag to the target run
+                                Run? nextRun = FindNextRun(navigator, currentRun, doc.ContentEnd);
+                                if (nextRun != null)
                                 {
-                                    // 1. Remove the anchor text from the current run (previous verse block)
-                                    currentRun.Text = currentRun.Text.Replace(fullMarkerText, "");
-
-                                    // 2. Scan forward to find the next upcoming Run element (the target verse text)
-                                    Run? nextRun = FindNextRun(navigator, currentRun, doc.ContentEnd);
-
-                                    if (nextRun != null)
-                                    {
-                                        // Attach the tag to the actual beginning of the chosen verse
-                                        nextRun.Tag = "VERSE_" + verseId;
-                                    }
-                                    else
-                                    {
-                                        // Fallback to current run only if it happens to be the last text element in the document
-                                        currentRun.Tag = "VERSE_" + verseId;
-                                    }
-
-                                    // Restart the scan safely to prevent tree corruption issues after updating text
-                                    foundAny = true;
-                                    break;
+                                    // Attach the tag to the actual beginning of the chosen verse
+                                    nextRun.Tag = "VERSE_" + verseId;
                                 }
+                                else
+                                {
+                                    // Fallback to current run only if it happens to be the last text element in the document
+                                    currentRun.Tag = "VERSE_" + verseId;
+                                }
+                                // Continue forward pass without restarting from ContentStart
                             }
                         }
                     }
-                    navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
                 }
-            } while (foundAny);
+                navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
+            }
         }
 
         // Helper method to look ahead for the next structural Text/Run element

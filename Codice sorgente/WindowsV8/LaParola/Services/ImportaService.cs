@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Threading;
 using System.Xml;
 
 namespace LaParola.Services
@@ -1003,7 +1002,7 @@ namespace LaParola.Services
                                         buffer.Add("");
                                         continue;
                                     }
-                                    var rif = EstrazionePdf.RilevaIntestazione(rp);
+                                    (int numero, int capitolo, int v1, int v2)? rif = EstrazionePdf.RilevaIntestazione(rp);
                                     if (rif.HasValue)
                                     {
                                         if (!string.IsNullOrEmpty(titoloNota) && buffer.Count > 0)

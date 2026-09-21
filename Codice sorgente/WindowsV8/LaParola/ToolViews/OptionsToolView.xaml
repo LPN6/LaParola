@@ -40,6 +40,7 @@
                 <TreeViewItem x:Name="TreeFormato" Header="{DynamicResource OpzioniFormato}">
                     <TreeViewItem x:Name="NodeText" Header="{DynamicResource OpzioniTestoTitolo}"/>
                     <TreeViewItem x:Name="NodeReferences" Header="{DynamicResource OpzioniRiferimentiTitolo}"/>
+                    <TreeViewItem x:Name="NodeBooks" Header="{DynamicResource OpzioniLibriTitolo}"/>
                     <TreeViewItem x:Name="NodeFonts" Header="{DynamicResource OpzioniFontTitolo}"/>
                 </TreeViewItem>
 
@@ -222,6 +223,50 @@
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="SectionBooks" Margin="0,4,0,16" Header="{DynamicResource OpzioniLibriTitolo}" ToolTipService.ShowDuration="10000">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniLibriAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="GridLibri" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                                  PreparingCellForEdit="GridLibri_PreparingCellForEdit" CellEditEnding="GridLibri_CellEditEnding"
+                                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" MaxHeight="450" VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="{DynamicResource OpzioniLibriNomi}" 
+                                Binding="{Binding Nome, UpdateSourceTrigger=PropertyChanged}" 
+                                Width="Auto"/>
+                                <DataGridTextColumn Header="{DynamicResource OpzioniLibriAbbreviazioniUsate}" 
+                                Binding="{Binding AbbreviazioneUsata, UpdateSourceTrigger=PropertyChanged}" 
+                                Width="Auto"/>
+                                <DataGridTextColumn Header="{DynamicResource OpzioniLibriAbbreviazioniRiconosciute}" 
+                                Binding="{Binding AbbreviazioniRiconosciute, UpdateSourceTrigger=PropertyChanged}" 
+                                Width="Auto"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,8,0,8" HorizontalAlignment="Center">
+                            <Button x:Name="BtnPredefinitiItaliano" 
+                    Content="{DynamicResource OpzioniLibriPredefinitiItaliano}" 
+                    Margin="0,0,8,0" 
+                    Padding="8,4" 
+                    Click="BtnPredefinitiItaliano_Click"/>
+                            <Button x:Name="BtnPredefinitiInglese" 
+                    Content="{DynamicResource OpzioniLibriPredefinitiInglese}" 
+                    Padding="8,4" 
+                    Click="BtnPredefinitiInglese_Click"/>
+                        </StackPanel>
+                    </Grid>
                 </GroupBox>
 
                 <GroupBox x:Name="SectionFonts" Margin="0,4,0,0" Header="{DynamicResource OpzioniFontTitolo}" ToolTipService.ShowDuration="10000">

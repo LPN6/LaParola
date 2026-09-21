@@ -63,9 +63,6 @@ namespace LaParola.ToolViews
             AggiornaVersioniDisponibili();
 
             MostraPulsanteStato();
-
-            // Auto-save when view closes/unloads
-            Unloaded += (s, e) => App.Settings.Save(MainWindow.settings);
         }
 
         // Available items for the ComboBox
@@ -102,7 +99,6 @@ namespace LaParola.ToolViews
 
                 // Save selection to settings if needed
                 MainWindow.settings.CreaChiaveTipo = _tipo;
-                App.Settings.Save(MainWindow.settings);
             }
         }
 
@@ -138,7 +134,6 @@ namespace LaParola.ToolViews
 
                 // Save selection to settings if needed
                 MainWindow.settings.CreaChiaveOrdine = _ordine;
-                App.Settings.Save(MainWindow.settings);
             }
         }
 
@@ -173,7 +168,6 @@ namespace LaParola.ToolViews
                 _numeroMinimo = clamped;
                 OnPropertyChanged();
                 MainWindow.settings.CreaChiaveNumeroMinimo = _numeroMinimo;
-                //App.Settings.Save(MainWindow.settings); non salviamo, perché con slider, troppi salvataggi sul disco, salviamo solo quando si chiude la finestra
             }
         }
 
@@ -186,7 +180,6 @@ namespace LaParola.ToolViews
                 _conRiferimenti = value;
                 OnPropertyChanged();
                 MainWindow.settings.CreaChiaveConRiferimenti = _conRiferimenti;
-                App.Settings.Save(MainWindow.settings);
             }
         }
 
@@ -199,7 +192,6 @@ namespace LaParola.ToolViews
                 _escludiParoleAbilitato = value;
                 OnPropertyChanged();
                 MainWindow.settings.CreaChiaveEscludiParole = _escludiParoleAbilitato;
-                App.Settings.Save(MainWindow.settings);
             }
         }
 
@@ -212,7 +204,6 @@ namespace LaParola.ToolViews
                 _paroleDaEscludereText = value;
                 OnPropertyChanged();
                 MainWindow.settings.CreaChiaveParoleDaEscludere = _paroleDaEscludereText;
-                App.Settings.Save(MainWindow.settings);
             }
         }
 
@@ -271,8 +262,6 @@ namespace LaParola.ToolViews
                 labBrano.Visibility = bibbiaComm ? Visibility.Visible : Visibility.Collapsed;
                 tbBrano.Visibility = bibbiaComm ? Visibility.Visible : Visibility.Collapsed;
             }
-            App.Settings.Save(MainWindow.settings);
-
         }
 
         private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)

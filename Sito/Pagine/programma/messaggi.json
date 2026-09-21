@@ -1,5 +1,14 @@
 [
   {
+    "Id": 6,
+    "Title": "Version 8.0.7",
+    "Content": "The new beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are lists of words and roots in the Search window, export texts, and customising the names and abbreviations of the books of the Bible.",
+    "TitleIt": "Versione 8.0.7",
+    "ContentIt": "La nuova versione beta è ora disponibile a https://www.laparola.net/programma/windowsbeta.php . Le novità principali sono elenchi di parole e radici nella finestra Ricerca, esportare testi, e personalizzare i nomi e le abbreviazioni dei libri della Bibbia.",
+    "Date": "2026-09-21T07:00:00"
+  }
+
+  {
     "Id": 5,
     "Title": "Version 8.0.6",
     "Content": "The new beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are the creation of concordances of any text, the zoom in the editor and viewer windows, and the help file (working but incomplete).",

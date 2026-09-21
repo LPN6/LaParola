@@ -114,6 +114,7 @@ namespace LaParola.Services
         internal static readonly Dictionary<string, int> AbbrevALibro = CostruisciAbbrevALibro();
         private static readonly HashSet<int> LibriUnCapitolo = [38, 64, 70, 71, 72];
 
+        // TODO2 generatedregexattribute x3
         private static readonly Regex RigaHeader = new(@"^([1-3]?\s?[A-Za-zàèéìòùÀÈÉÌÒÙ]+)\.?\s+(\d{1,3}):(\d{1,3})(?:[-,](\d{1,3}))?$", RegexOptions.Compiled);
         private static readonly Regex RigaHeaderUnCapitolo = new(@"^([1-3]?\s?[A-Za-zàèéìòùÀÈÉÌÒÙ]+)\.?\s+(\d{1,3})(?:[-,](\d{1,3}))?$", RegexOptions.Compiled);
         internal static readonly Regex CitazioneInline = new(@"\b([1-3]?\s?[A-ZÀ-Ù][a-zàèéìòù]+)\.?\s+(\d{1,3}):(\d{1,3})(?:[-,](\d{1,3}))?", RegexOptions.Compiled);
@@ -121,7 +122,7 @@ namespace LaParola.Services
         private static Dictionary<string, int> CostruisciAbbrevALibro()
         {
             Dictionary<string, int> dict = [];
-            foreach (var (numero, _nome, abbreviazioni) in Libri)
+            foreach ((int numero, string _nome, string[] abbreviazioni) in Libri)
                 foreach (string a in abbreviazioni)
                     dict[a] = numero;
             return dict;
@@ -578,11 +579,11 @@ namespace LaParola.Services
                             bufferTesto.Add("");
                             continue;
                         }
-                        var riferimento = RilevaIntestazione(rigaPulita);
+                        (int numero, int capitolo, int v1, int v2)? riferimento = RilevaIntestazione(rigaPulita);
                         if (riferimento.HasValue)
                         {
                             SalvaBloccoCorrente();
-                            var (numeroLibro, capitolo, v1, v2) = riferimento.Value;
+                            (int numeroLibro, int capitolo, int v1, int v2) = riferimento.Value;
                             // TODO2 da cancellare nomeFileAttuale = NomeFileNota(numeroLibro, capitolo, v1, v2);
                             nomeFileAttuale = new Riferimento([(byte)numeroLibro, (byte)capitolo, (byte)v1, (byte)numeroLibro, (byte)capitolo, (byte)v2]).ComeNotaTuttoRiferimento() + ".rtf";
                             paginaDelBloccoCorrente = numeroPagina;

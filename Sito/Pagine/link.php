@@ -10,11 +10,13 @@ require("capo.php");
 <h3>Il testo biblico</h3>
 <a name="ricercare"></a>
 <h4>Ricercare la Bibbia</h4>
-<p><a href="https://www.biblegateway.com/keyword/?language1=it" rel="nofollow">Versioni C.E.I., Nuova Diodati e La Parola &egrave; Vita</a></p>
+<p><a href="https://nuova-biblioteca-hilkia.pages.dev/BIBBIE/Cerca_nelle_Bibbie.html" rel="nofollow">Versioni Nuova Riveduta, Nuova Diodati, Riveduta/Luzzi e Diodati</a></p>
+<p><a href="https://www.biblegateway.com/keyword/?language1=it" rel="nofollow">Versioni C.E.I., Nuova Diodati, Nuova Riveduta, e La Parola &egrave; Vita</a></p>
 <!--<p><a href="http://www.evangelico.it/chiave_biblica.html" rel="nofollow">Versioni Nuova Riveduta, Nuova Diodati, Riveduta/Luzzi e Diodati</a></p>-->
 <p><a href="https://www.biblestudytools.com/?language=it" rel="nofollow">Versioni Riveduta/Luzzi e Diodati</a></p>
 <a name="testo_bibbia"></a>
 <h4>Testo della Bibbia</h4>
+<p><a href="https://nuova-biblioteca-hilkia.pages.dev/BIBBIE/Leggi_la_Bibbia.html" rel="nofollow">Versioni Nuova Riveduta, Nuova Diodati, Riveduta/Luzzi e Diodati</a> pi&ugrave; molti commentari, dizionari, e altri testi</p>
 <p><a href="https://www.bibbiaedu.it/CEI2008/" rel="nofollow">Versione C.E.I. (2008), C.E.I. (1974), Interconfessionale</a> (diviso per capitolo, con note)</p>
 <p><a href="http://www.1b1s.org/wordpress/la-bibbia-per-capitoli/" rel="nofollow">Versione C.E.I. (2008), C.E.I. (1974), Nuova Riveduta, Nuova Diodati</a> (diviso per capitoli)</p>
 <p><a href="https://www.scrutatio.it/" rel="nofollow">Versione C.E.I. (2008), C.E.I. (1974), Martini, Ricciotti, Tintori</a> (diviso per capitolo, con note)</p>
@@ -42,7 +44,7 @@ require("capo.php");
 <p><a href="https://www.accordancebible.com/" rel="nofollow">Accordance</a> per Macintosh; con la Nuova Riveduta</p>
 <a name="palmari"></a>
 <h4>Programmi per cellulari e tablet</h4>
-<p><a href="/programma/">LaParola</a>: il mio programma per Android, iPhone/iPad, Windows Phone, gratuito; in italiano con molte versioni della Bibbia, ed anche commentari e dizionari, in italiano, e risorse in altre lingue</p>
+<p><a href="/programma/">LaParola</a>: il mio programma per Android, iPhone/iPad, gratuito; in italiano con molte versioni della Bibbia, ed anche commentari e dizionari, in italiano, e risorse in altre lingue</p>
 <p><a href="https://www.olivetree.com/" rel="nofollow">Olive Tree</a> per iPhone/iPad, Android, gratuito; con la C.E.I., Luzzi/Riveduta, e Diodati gratuite, e la Nuova Riveduta a pagamento</p>
 <p><a href="https://www.bible.com/app" rel="nofollow">YouVersion</a> per iPhone/iPod, Blackberry, Android, Symbian, Windows Phone, HP/Palm, Kindle Fire, gratuito; con la Nuova Riveduta (due edizioni), La Parola &egrave; Vita, Riveduta/Luzzi (due edizioni)) e Diodati (due edizioni)</p>
 <p>Bibbia CEI per <a href="https://apps.apple.com/it/app/bibbia-cei/id734275381" rel="nofollow">iOS</a><!-- e per <a href="https://play.google.com/store/apps/details?id=cei.bibbia.app">Android</a>-->, gratuito; con la C.E.I. (2008)</p>

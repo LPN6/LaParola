@@ -15,7 +15,7 @@ using System.Windows.Media;
 namespace LaParola.DocumentViews;
 
 // TODO2 indice in Sommario Dottrina cristiana ha 3 sezioni in un unico link invece di 3 link diversi
-// TODO2 c'è sempre uno spazio addizionale all'inizio del testo biblico in Viewer
+// TODO c'è sempre uno spazio addizionale all'inizio del testo biblico in Viewer
 
 // TODO2 toolbar: lista versetti, bookmark, highlights
 // TODO2 in 7, paralleli, aggiungi, noteNonAggiunte: servono?
@@ -1246,7 +1246,6 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
             }
         }
 
-        // TODO2 zoom in toolbar Visualizzatore e Editor?
         // zoom in/out with Ctrl + '+' or Ctrl + '-'
         if (ctrlPremuto && sender is RichTextBox rtbz)
         {
@@ -1563,6 +1562,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
                         parts.Add(new Run(clean[pos..m.Index]));
                     string visText = m.Value;
                     string token = m.Groups[1].Value.Trim().ToLowerInvariant().Replace(" ", "").Replace(".", "");
+                    // TODO2 usa abbreviazione riconosciuta, ma non solo uguale a Key ma startswith Key
                     if (!Services.EstrazionePdf.AbbrevALibro.ContainsKey(token))
                     {
                         parts.Add(new Run(visText));
@@ -1599,7 +1599,7 @@ public partial class ViewerDocumentView : UserControl, IFlowDocumentHost
     }
 
     private static async void MostraPopupVersetto(string refText, Hyperlink sender)
-    { // TODO2 controlla
+    { // TODO2 controlla; also "sender" is never used
         // TODO2 era per riferimenti automatici. Ma riconosce solo libri italiani, ma se libri in inglese dà il "Libro non trovato" errore
         try
         {

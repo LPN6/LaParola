@@ -47,37 +47,6 @@
                       Background="Transparent"
                       BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
                       MouseMove="GridTesti_MouseMove">
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
-                        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
-
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Padding" Value="10,8,10,8"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                                    <Grid>
-                                        <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                    BorderThickness="0,0,0,1"
-                                    Padding="{TemplateBinding Padding}">
-
-                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
-                                        </Border>
-
-                                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Width="2" Background="Transparent" Cursor="SizeWE"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.Resources>
-
                 <DataGrid.Columns>
                     <!-- Text Name -->
                     <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaNome}" Binding="{Binding Nome}" Width="*" IsReadOnly="True"/>

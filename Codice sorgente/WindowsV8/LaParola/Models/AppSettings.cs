@@ -42,6 +42,10 @@ public class AppSettings
 
     public FormatoTesto Formato { get; set; } = new FormatoTesto();
 
+    public string LibriNomi { get; set; } = "";
+    public string LibriAbbreviazioniUsate { get; set; } = "";
+    public string LibriAbbreviazioniRiconosciute { get; set; } = "";
+
     public string VoceSintesiVocale { get; set; } = "";
     public bool VoceDelTesto { get; set; } = true;
     public double VelocitaVoce { get; set; } = 1.0;
@@ -55,6 +59,8 @@ public class AppSettings
     public string UltimaCartellaImportare { get; set; } = "";
     public string UltimaCartellaImportarePDF { get; set; } = "";
     public string UltimaCartellaImportareRtf { get; set; } = "";
+    public string UltimaCartellaEsportareFile { get; set; } = "";
+    public string UltimaCartellaEsportareCartella { get; set; } = "";
 
     public bool EditorChiudere { get; set; } = false;
     public bool IpertestoTooltip { get; set; } = true;
@@ -75,6 +81,7 @@ public class AppSettings
     public LibraryToolState LibraryState { get; set; } = new LibraryToolState();
 
     public string RicercaTestoSelezionato { get; set; } = "";
+    public bool RicercaScegliParolaAperta { get; set; } = false;
 
     public List<string> MostraVersioniTutte { get; set; } = [];
     public List<string> MostraVersioniSelezionate { get; set; } = [];

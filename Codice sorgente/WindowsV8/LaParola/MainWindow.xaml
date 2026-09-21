@@ -355,7 +355,7 @@
                             <!-- Template per ciascuna coppia Testo + ProgressBar -->
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0,15,0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0,15,0" Visibility="{Binding IsVisible}">
                                         <!-- Testo descrittivo del processo -->
                                         <TextBlock Text="{Binding Message}" 
                                    Foreground="{DynamicResource AppForegroundBrush}" 
@@ -365,7 +365,7 @@
                                         <!-- ProgressBar dedicata -->
                                         <ProgressBar Width="90" Height="12" 
                                      IsIndeterminate="{Binding IsIndeterminate}" 
-                                     Value="{Binding Progress}" Visibility="{Binding IsVisible}"
+                                     Value="{Binding Progress}" Visibility="{Binding ProgressBarVisibility}"
                                      Minimum="0" Maximum="100" 
                                      VerticalAlignment="Center" />
 

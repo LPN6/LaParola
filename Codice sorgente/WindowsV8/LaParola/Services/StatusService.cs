@@ -41,11 +41,12 @@ namespace LaParola.Services
     /// Rappresenta una singola coppia (Testo + ProgressBar) visibile nella StatusBar.
     /// Implementa IDisposable per consentire la distruzione automatica a fine operazione.
     /// </summary>
-    public class StatusTask(string message, Visibility isVisible = Visibility.Visible, bool isIndeterminate = true) : INotifyPropertyChanged, IDisposable
+    public class StatusTask(string message, Visibility isVisible = Visibility.Visible, bool isIndeterminate = true, Visibility progressBarVisibility = Visibility.Visible) : INotifyPropertyChanged, IDisposable
     {
         private string _message = message;
         private bool _isIndeterminate = isIndeterminate;
         private Visibility _isVisible = isVisible;
+        private Visibility _progressBarVisibility = progressBarVisibility;
         private double _progress = 0;
 
         public string Message
@@ -60,6 +61,9 @@ namespace LaParola.Services
             set { _isIndeterminate = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Controlla la visibilità dell'intero elemento della StatusBar.
+        /// </summary>
         public Visibility IsVisible
         {
             get => _isVisible;
@@ -73,9 +77,18 @@ namespace LaParola.Services
         }
 
         /// <summary>
+        /// Controlla la visibilità della sola ProgressBar.
+        /// </summary>
+        public Visibility ProgressBarVisibility
+        {
+            get => _progressBarVisibility;
+            set { _progressBarVisibility = value; OnPropertyChanged(); }
+        }
+
+        /// <summary>
         /// Aggiorna il messaggio e/o la percentuale di progresso (da 0 a 100).
         /// </summary>
-        public void Update(string message, double? percent = null)
+        public void Update(string message, double? percent = null, Visibility? progressBarVisibility = null)
         {
             Application.Current?.Dispatcher.InvokeAsync(() =>
             {
@@ -84,6 +97,10 @@ namespace LaParola.Services
                 {
                     IsIndeterminate = false;
                     Progress = percent.Value;
+                }
+                if (progressBarVisibility.HasValue)
+                {
+                    ProgressBarVisibility = progressBarVisibility.Value;
                 }
             });
         }
@@ -109,9 +126,9 @@ namespace LaParola.Services
         /// <summary>
         /// Crea e registra una nuova coppia Testo/ProgressBar nella StatusBar.
         /// </summary>
-        public static StatusTask AvviaTask(string messaggioIniziale, Visibility isVisible = Visibility.Visible, bool isIndeterminate = true)
+        public static StatusTask AvviaTask(string messaggioIniziale, Visibility isVisible = Visibility.Visible, bool isIndeterminate = true, Visibility progressBarVisibility = Visibility.Visible)
         {
-            StatusTask task = new(messaggioIniziale, isVisible, isIndeterminate);
+            StatusTask task = new(messaggioIniziale, isVisible, isIndeterminate, progressBarVisibility);
 
             Application.Current?.Dispatcher.InvokeAsync(() =>
             {

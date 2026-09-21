@@ -18,7 +18,7 @@ echo "<html><body>\n";
 echo "<link rel=\"stylesheet\" href=\"/stili/stilebase6.css\" type=\"text/css\" />";
 //echo "<p>rif=".$sin_riferimento.".</p>";
 if (strlen($sin_riferimento)>0)
-	vistesto($sin_riferimento, $versioni, $formato_rif);
+	vistesto($sin_riferimento, $versioni, $formato_rif,"v","s");
 echo "\n</body></html>";
 
 ?>

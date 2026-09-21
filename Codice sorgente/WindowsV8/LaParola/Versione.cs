@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Buffers.Binary;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Documents;
@@ -36,12 +37,6 @@ namespace LaParola
         public List<UInt16> indiceCapitolo = [];
 
         private string[]? parole = null;
-        private string[]? radici = null;
-        private UInt32[]? radiceDiParola = null;
-        private StringBuilder[]? paroleDiRadice = null;
-
-        private static readonly ConfrontoCI confrontoParole = new();
-
         public string[] Parole
         {
             get
@@ -57,6 +52,8 @@ namespace LaParola
                 return parole;
             }
         }
+
+        private string[]? radici = null;
         public string[] Radici
         {
             get
@@ -81,6 +78,38 @@ namespace LaParola
             }
         }
 
+        private UInt32[]? listaRadiceDiParola = null;
+        internal UInt32[] ListaRadiceDiParola
+        {
+            get
+            {
+                if (listaRadiceDiParola == null)
+                {
+                    if (listaRadiceDiParola == null)
+                    {
+                        lock (fileLock)
+                        {
+                            int numeroParole = Parole.Length;
+                            int numeroRadici = Radici.Length; // serve solo per costringere la lettura delle radici, che imposta pRadiciDiParole correttamente
+                            listaRadiceDiParola = new UInt32[numeroParole];
+                            if (numeroRadici > 0 && pRadiciDiParole > 0)
+                            { // quando pRadiciDiParole==0 (valore predefinito), non ci sono radici in questa versione
+                              // numeroRadici>0 quindi non è necessario, ma è incluso per fare sì che la riga che definisce numeroRadici è usata
+                                fs.Seek(pRadiciDiParole, SeekOrigin.Begin);
+                                byte[] radiciArray = br.ReadBytes(numeroParole * 4);
+                                Buffer.BlockCopy(radiciArray, 0, listaRadiceDiParola, 0, radiciArray.Length);
+                            }
+                        }
+                    }
+                }
+                return listaRadiceDiParola;
+            }
+        }
+
+        private StringBuilder[]? paroleDiRadice = null;
+
+        private static readonly ConfrontoCI confrontoParole = new();
+
         private struct RadiceDiversa
         {
             public OccorrenzaParola OccorrenzaRadice;
@@ -90,12 +119,52 @@ namespace LaParola
 
         internal List<Int16[]> riferimentiDiversi = [];
 
-        private struct CitazioneRiferimento
+        public struct CitazioneRiferimento
         {
             public byte[] Brano;
             public UInt32 NumeroNota;
         }
         private List<CitazioneRiferimento>? citazioniRiferimenti = null;
+        public List<CitazioneRiferimento> CitazioniRiferimenti
+        {
+            get
+            {
+                if (citazioniRiferimenti == null)
+                {
+                    citazioniRiferimenti = [];
+                    if (pCitazioniRiferimenti > pInizioDati) // quando ==, non ci sono collegamenti a riferimenti
+                    {
+                        lock (fileLock)
+                        {
+                            fs.Seek(pCitazioniRiferimenti, SeekOrigin.Begin);
+                            UInt32 nCitazioniRiferimenti = br.ReadUInt32();
+
+                            if (nCitazioniRiferimenti > 0)
+                            {
+                                // 1. Pre-allocate list capacity to eliminate repeated array resizing during .Add()
+                                citazioniRiferimenti.Capacity = citazioniRiferimenti.Count + (int)nCitazioniRiferimenti;
+
+                                // 2. Read bytes into buffer and wrap in a Span for zero-cost slicing
+                                byte[] citazioniArray = br.ReadBytes(10 * (int)nCitazioniRiferimenti);
+                                ReadOnlySpan<byte> span = citazioniArray;
+                                int offset;
+                                for (int i = 0; i < nCitazioniRiferimenti; ++i)
+                                {
+                                    offset = 10 * i;
+
+                                    citazioniRiferimenti.Add(new CitazioneRiferimento
+                                    {
+                                        Brano = span.Slice(offset, 6).ToArray(),
+                                        NumeroNota = BinaryPrimitives.ReadUInt32LittleEndian(span[(offset + 6)..])
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+                return citazioniRiferimenti;
+            }
+        }
 
         public List<string> noteInOrdine = [];
 
@@ -116,9 +185,9 @@ namespace LaParola
         readonly UInt32 pCitazioniRiferimenti, pInizioDati;
         long pRadiciDiParole = 0;
 
-        private readonly bool isRunningOnMono = false;
+        //private readonly bool isRunningOnMono = false;
 
-        private readonly Object fileLock = new();
+        private readonly Lock fileLock = new();
         private static readonly char[] divisore = ['|'];
 
         #endregion
@@ -137,7 +206,7 @@ namespace LaParola
 
             genitore = testi;
             info.NomeDelFile = nomeFile;
-            isRunningOnMono = (Type.GetType("Mono.Runtime") != null);
+            //isRunningOnMono = (Type.GetType("Mono.Runtime") != null);
             try
             {
                 fs = new FileStream(nomeFile, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -296,76 +365,88 @@ namespace LaParola
                             byte[] riferimento = new byte[3];
                             byte[] riferimento6 = new byte[6];
                             UInt16[] versetto = new UInt16[2];
-                            for (UInt32 i = 0; i < nRadiciDiverse; ++i)
+                            if (nRadiciDiverse > 0)
                             {
-                                riferimento = br.ReadBytes(3);
-                                for (int j = 0; j <= 2; ++j)
+                                radiciDiverse.Capacity = radiciDiverse.Count + (int)nRadiciDiverse;
+                                Span<byte> ref6 = stackalloc byte[6];
+                                for (UInt32 i = 0; i < nRadiciDiverse; ++i)
                                 {
-                                    riferimento6[j] = riferimento[j];
-                                    riferimento6[j + 3] = riferimento[j];
+                                    br.Read(ref6[..3]);
+                                    ref6[..3].CopyTo(ref6[3..]);
+                                    versetto = NumeroVersettoDaRiferimento(ref6.ToArray());
+
+                                    radiciDiverse.Add(new RadiceDiversa
+                                    {
+                                        OccorrenzaRadice = new OccorrenzaParola
+                                        {
+                                            Voce = versetto[0],
+                                            Parola = br.ReadUInt16()
+                                        },
+                                        NuovaRadice = br.ReadString()
+                                    });
                                 }
-                                versetto = NumeroVersettoDaRiferimento(riferimento6);
-                                OccorrenzaParola op = new()
-                                {
-                                    Voce = versetto[0],
-                                    Parola = br.ReadUInt16()
-                                };
-                                RadiceDiversa rd = new()
-                                {
-                                    OccorrenzaRadice = op,
-                                    NuovaRadice = br.ReadString()
-                                };
-                                radiciDiverse.Add(rd);
                             }
                             break;
                         case 1:
-                            for (UInt32 i = 0; i < nRadiciDiverse; ++i)
+                            if (nRadiciDiverse > 0)
                             {
-                                OccorrenzaParola op = new()
+                                radiciDiverse.Capacity = radiciDiverse.Count + (int)nRadiciDiverse;
+                                for (uint i = 0; i < nRadiciDiverse; ++i)
                                 {
-                                    Voce = br.ReadUInt32(),
-                                    Parola = br.ReadUInt16()
-                                };
-                                RadiceDiversa rd = new()
-                                {
-                                    OccorrenzaRadice = op,
-                                    NuovaRadice = br.ReadString()
-                                };
-                                radiciDiverse.Add(rd);
+                                    radiciDiverse.Add(new RadiceDiversa
+                                    {
+                                        OccorrenzaRadice = new OccorrenzaParola
+                                        {
+                                            Voce = br.ReadUInt32(),
+                                            Parola = br.ReadUInt16()
+                                        },
+                                        NuovaRadice = br.ReadString()
+                                    });
+                                }
                             }
                             break;
                     }
                 }
-
-                //                    Trace.WriteLine("  rad diverse " + (Environment.TickCount - tick0).ToString());
 
                 if (pRiferimentiDiversi > pInizioDati) // quando ==, non ci sono riferimenti diversi in questa versione
                 {
                     fs.Seek(pRiferimentiDiversi, SeekOrigin.Begin);
                     UInt32 nRiferimentiDiversi = br.ReadUInt32();
-                    //                        byte[] riferimentiDiversiArray = br.ReadBytes(12 * (int)nRiferimentiDiversi);
-                    //                        int i12;
-                    for (int i = 0; i < nRiferimentiDiversi; ++i)
+                    if (nRiferimentiDiversi > 0)
                     {
-                        //                            i12 = i * 12;
-                        //                            riferimentiDiversi.Add(new Int16[] { (Int16)(256 * riferimentiDiversiArray[i12 + 1] + riferimentiDiversiArray[i12]),
-                        //                            (Int16)(256 * riferimentiDiversiArray[i12 + 3] + riferimentiDiversiArray[i12+2]),
-                        //                            (Int16)(256 * riferimentiDiversiArray[i12 + 5] + riferimentiDiversiArray[i12+4]),
-                        //                            (Int16)(256 * riferimentiDiversiArray[i12 + 7] + riferimentiDiversiArray[i12+6]),
-                        //                            (Int16)(256 * riferimentiDiversiArray[i12 + 9] + riferimentiDiversiArray[i12+8]),
-                        //                            (Int16)(256 * riferimentiDiversiArray[i12 + 11] + riferimentiDiversiArray[i12+10])});
-                        riferimentiDiversi.Add([br.ReadInt16(), br.ReadInt16(), br.ReadInt16(), br.ReadInt16(), br.ReadInt16(), br.ReadInt16()]);
+                        // 1. Pre-allocate list capacity to eliminate internal array resizes
+                        riferimentiDiversi.Capacity = riferimentiDiversi.Count + (int)nRiferimentiDiversi;
+
+                        // 2. Read all 12-byte blocks (6 shorts * 2 bytes = 12 bytes per item) at once
+                        byte[] byteBuffer = br.ReadBytes(12 * (int)nRiferimentiDiversi);
+
+                        // 3. Reinterpret the byte array as a span of shorts (0-cost memory cast)
+                        ReadOnlySpan<short> shortSpan = MemoryMarshal.Cast<byte, short>(byteBuffer);
+
+                        for (int i = 0; i < nRiferimentiDiversi; ++i)
+                        {
+                            // Slices 6 shorts and allocates the 6-element array in a single vectorized memory copy
+                            riferimentiDiversi.Add(shortSpan.Slice(i * 6, 6).ToArray());
+                        }
                     }
                 }
-
 
                 if (pNoteInOrdine > pInizioDati) // quando ==, non ci sono note in ordine
                 {
                     fs.Seek(pNoteInOrdine, SeekOrigin.Begin);
                     UInt32 nNoteInOrdine = br.ReadUInt32();
-                    for (int i = 0; i < nNoteInOrdine; ++i)
+                    if (nNoteInOrdine > 0)
                     {
-                        noteInOrdine.Add(br.ReadString());
+                        int count = (int)nNoteInOrdine;
+
+                        // 1. Pre-allocate list capacity to avoid dynamic array resizes during .Add()
+                        noteInOrdine.Capacity = noteInOrdine.Count + count;
+
+                        // 2. Read strings cleanly with typed loop bound
+                        for (int i = 0; i < count; ++i)
+                        {
+                            noteInOrdine.Add(br.ReadString());
+                        }
                     }
 
                     if (nNoteInOrdine > 0)
@@ -377,57 +458,6 @@ namespace LaParola
             catch
             {
                 throw new FileNonValidoException();
-            }
-        }
-
-        internal void CreaListaRadiceDiParole()
-        {
-            lock (fileLock)
-            {
-                if (radiceDiParola == null)
-                {
-                    int numeroParole = Parole.Length;
-                    int numeroRadici = Radici.Length; // serve solo per costringere la lettura delle radici, che imposta pRadiciDiParole correttamente
-                    radiceDiParola = new UInt32[numeroParole];
-                    if (numeroRadici > 0 && pRadiciDiParole > 0)
-                    { // quando pRadiciDiParole==0 (valore predefinito), non ci sono radici in questa versione
-                      // numeroRadici>0 quindi non è necessario, ma è incluso per fare sì che la riga che definisce numeroRadici è usata
-                        fs.Seek(pRadiciDiParole, SeekOrigin.Begin);
-                        byte[] radiciArray = br.ReadBytes(numeroParole * 4);
-                        int i4;
-                        for (int i = 0; i < numeroParole; ++i)
-                        {
-                            i4 = 4 * i;
-                            radiceDiParola[i] = (UInt32)(256 * (256 * (256 * radiciArray[i4 + 3] + radiciArray[i4 + 2]) + radiciArray[i4 + 1]) + radiciArray[i4]);
-                        }
-                    }
-                }
-            }
-        }
-
-        internal void CreaListaCitazioni()
-        {
-            lock (fileLock)
-            {
-                if (citazioniRiferimenti == null)
-                {
-                    citazioniRiferimenti = [];
-                    if (pCitazioniRiferimenti > pInizioDati) // quando ==, non ci sono collegamenti a riferimenti
-                    {
-                        fs.Seek(pCitazioniRiferimenti, SeekOrigin.Begin);
-                        UInt32 nCitazioniRiferimenti = br.ReadUInt32();
-                        CitazioneRiferimento citazione;
-                        int i10;
-                        byte[] citazioniArray = br.ReadBytes(10 * (int)nCitazioniRiferimenti);
-                        for (int i = 0; i < nCitazioniRiferimenti; ++i)
-                        {
-                            i10 = 10 * i;
-                            citazione.Brano = [citazioniArray[i10 + 0], citazioniArray[i10 + 1], citazioniArray[i10 + 2], citazioniArray[i10 + 3], citazioniArray[i10 + 4], citazioniArray[i10 + 5]];
-                            citazione.NumeroNota = (UInt32)(256 * (256 * (256 * citazioniArray[i10 + 9] + citazioniArray[i10 + 8]) + citazioniArray[i10 + 7]) + citazioniArray[i10 + 6]);
-                            citazioniRiferimenti.Add(citazione);
-                        }
-                    }
-                }
             }
         }
 
@@ -936,8 +966,6 @@ namespace LaParola
 
         private List<OccorrenzaParola> RicercaParola(string parola)
         {
-            CreaListaRadiceDiParole();
-
             List<OccorrenzaParola> occorrenze = [];
             bool cercaRadice = false, cercaRadiceDiParola = false;
 
@@ -963,7 +991,7 @@ namespace LaParola
                         String radiceDaRicercare = Parole[i];
                         if (cercaRadiceDiParola)
                         {
-                            radiceDaRicercare = Radici[(int)(radiceDiParola[i])];
+                            radiceDaRicercare = Radici[(int)(ListaRadiceDiParola[i])];
                         }
 
                         if (cercaRadice)
@@ -992,7 +1020,7 @@ namespace LaParola
                         int numeroParola = NumeroDiParola(parola);
                         if (numeroParola >= 0)
                         {
-                            parola = Radici[(int)(radiceDiParola[numeroParola])];
+                            parola = Radici[(int)(ListaRadiceDiParola[numeroParola])];
                         }
                         else
                         {
@@ -1042,9 +1070,6 @@ namespace LaParola
         private List<OccorrenzaParola> OccorrenzeParola(int nParola, bool solaRadiceNormale)
         {
             // restituisce una lista con tutte le occorrenze di una parola; con la radice normale oppure solo quando non c'è una radice diversa
-
-            CreaListaRadiceDiParole();
-
             List<OccorrenzaParola> occorrenze = [];
             if (nParola >= 0)
             {
@@ -1172,15 +1197,41 @@ namespace LaParola
         /// <returns>Il numero di occorrenze.</returns>
         public int NumeroVolteRadice(string radice)
         {
-            string[] paroleNumeri = SplitString(ParoleNumeriDiRadice(radice), '|');
             int numeroVolte = 0;
+            ReadOnlySpan<char> span = ParoleNumeriDiRadice(radice).AsSpan();
+
             lock (fileLock)
             {
-                foreach (string parolaNumero in paroleNumeri)
+                int start = 0;
+                while (start < span.Length)
                 {
-                    fs.Seek(pParoleIndiceIndice + 4 * Convert.ToInt32(parolaNumero, CultureInfo.InvariantCulture), SeekOrigin.Begin);
-                    int inizioVersetti = (int)br.ReadUInt32();
-                    numeroVolte += ((int)br.ReadUInt32() - (int)inizioVersetti) / 6;
+                    // 1. Slice by '|' without creating any string objects in memory
+                    int pipeIndex = span[start..].IndexOf('|');
+                    ReadOnlySpan<char> token;
+
+                    if (pipeIndex < 0)
+                    {
+                        token = span[start..];
+                        start = span.Length;
+                    }
+                    else
+                    {
+                        token = span.Slice(start, pipeIndex);
+                        start += pipeIndex + 1;
+                    }
+
+                    if (token.IsEmpty) continue;
+
+                    // 2. Fast 0-allocation int parsing directly from char span
+                    int parolaNumero = int.Parse(token, NumberStyles.Integer, CultureInfo.InvariantCulture);
+
+                    // 3. 64-bit long math for stream seeking
+                    fs.Seek(pParoleIndiceIndice + (4L * parolaNumero), SeekOrigin.Begin);
+
+                    uint inizioVersetti = br.ReadUInt32();
+                    uint fineVersetti = br.ReadUInt32();
+
+                    numeroVolte += (int)(fineVersetti - inizioVersetti) / 6;
                 }
             }
             foreach (RadiceDiversa radiceDiversa in radiciDiverse)
@@ -1202,10 +1253,8 @@ namespace LaParola
                 return "";
             }
 
-            CreaListaRadiceDiParole();
-
             int numeroParola = NumeroDiParola(parola);
-            return ((numeroParola >= 0) ? Radici[(int)(radiceDiParola[numeroParola])] : "");
+            return ((numeroParola >= 0) ? Radici[(int)(ListaRadiceDiParola[numeroParola])] : "");
         }
 
         public UInt32 RadiceNumeroDiParola(string parola)
@@ -1216,10 +1265,8 @@ namespace LaParola
                 return (UInt32)(Array.BinarySearch(Radici, "*", confrontoParole));
             }
 
-            CreaListaRadiceDiParole();
-
             int numeroParola = NumeroDiParola(parola);
-            return ((numeroParola >= 0) ? (radiceDiParola[numeroParola]) : (UInt32)(Array.BinarySearch(Radici, "*", confrontoParole)));
+            return ((numeroParola >= 0) ? (ListaRadiceDiParola[numeroParola]) : (UInt32)(Array.BinarySearch(Radici, "*", confrontoParole)));
         }
 
         public Collection<string> ParoleDiRadice(string radice)
@@ -1244,8 +1291,6 @@ namespace LaParola
                 if (paroleDiRadice == null)
                 // siccome la creazione di paroleDiRadice richiede un po' di tempo, lo facciamo solo la prima volta che è necessario
                 {
-                    CreaListaRadiceDiParole();
-
                     int numeroRadici = Radici.Length;
                     paroleDiRadice = new StringBuilder[numeroRadici];
                     for (int i = 0; i < numeroRadici; ++i)
@@ -1256,7 +1301,7 @@ namespace LaParola
                     int numeroParole = Parole.Length;
                     for (UInt32 i = 0; i < numeroParole; ++i)
                     {
-                        paroleDiRadice[radiceDiParola[i]].Append(i.ToString(CultureInfo.InvariantCulture)).Append('|');
+                        paroleDiRadice[ListaRadiceDiParola[i]].Append(i.ToString(CultureInfo.InvariantCulture)).Append('|');
                     }
                 }
                 return paroleDiRadice[numeroRadice].ToString();
@@ -1269,22 +1314,22 @@ namespace LaParola
 
         public void AggiungiRadiciAllaVersione(string[] elencoRadici, string[] radiceStringaDiParole)
         {
-            CreaListaRadiceDiParole();
+            // Force lazy initialization of ListaRadiceDiParola FIRST.
+            // If radici was null on disk, this reads pRadiciDiParole from file before we replace it.
+            UInt32[] listaTemp = ListaRadiceDiParola;
 
-            if (radici == null)
+            lock (fileLock)
             {
-                radici = new string[elencoRadici.Length];
-            }
-            else
-            {
-                Array.Resize(ref radici, elencoRadici.Length);
+                radici = (string[])elencoRadici.Clone();
             }
 
-            elencoRadici.CopyTo(radici, 0);
-            int numeroParole = parole.Length;
-            for (int i = 0; i < numeroParole; ++i)
+            int numeroParole = Parole.Length;
+            int limit = Math.Min(numeroParole, radiceStringaDiParole.Length);
+            int index;
+            for (int i = 0; i < limit; ++i)
             {
-                radiceDiParola[i] = (UInt32)(Array.BinarySearch(radici, radiceStringaDiParole[i], confrontoParole));
+                index = Array.BinarySearch(radici, radiceStringaDiParole[i], confrontoParole);
+                listaTemp[i] = index >= 0 ? (UInt32)index : 0;
             }
 
             noteModificate = true;
@@ -1532,18 +1577,16 @@ namespace LaParola
 
         public Boolean EsistonoCitazioni()
         {
-            CreaListaCitazioni();
-            return (citazioniRiferimenti.Count > 0);
+            return (CitazioniRiferimenti.Count > 0);
         }
 
         public Collection<string> GetRiferimentiCitati()
         {
-            CreaListaCitazioni();
             Collection<string> riferimentiCitati = [];
-            int numeroCitazioniInCollezione = citazioniRiferimenti.Count;
+            int numeroCitazioniInCollezione = CitazioniRiferimenti.Count;
             for (int i = 0; i < numeroCitazioniInCollezione; ++i)
             {
-                riferimentiCitati.Add(new StringBuilder().Append(citazioniRiferimenti[i].Brano[0]).Append('|').Append(citazioniRiferimenti[i].Brano[1]).Append('|').Append(citazioniRiferimenti[i].Brano[2]).Append('|').Append(citazioniRiferimenti[i].Brano[3]).Append('|').Append(citazioniRiferimenti[i].Brano[4]).Append('|').Append(citazioniRiferimenti[i].Brano[5]).Append('|').Append(citazioniRiferimenti[i].NumeroNota).Append('|').ToString());
+                riferimentiCitati.Add(new StringBuilder().Append(CitazioniRiferimenti[i].Brano[0]).Append('|').Append(CitazioniRiferimenti[i].Brano[1]).Append('|').Append(CitazioniRiferimenti[i].Brano[2]).Append('|').Append(CitazioniRiferimenti[i].Brano[3]).Append('|').Append(CitazioniRiferimenti[i].Brano[4]).Append('|').Append(CitazioniRiferimenti[i].Brano[5]).Append('|').Append(CitazioniRiferimenti[i].NumeroNota).Append('|').ToString());
             }
 
             return riferimentiCitati;
@@ -1553,19 +1596,18 @@ namespace LaParola
         {
             List<int> note = [];
             int numeroBrani = riferimento.Count;
-            CreaListaCitazioni();
-            int numeroCitazioniInCollezione = citazioniRiferimenti.Count;
+            int numeroCitazioniInCollezione = CitazioniRiferimenti.Count;
             int posizione;
             for (int i = 0; i < numeroBrani; ++i)
             {
                 for (int j = 0; j < numeroCitazioniInCollezione; ++j)
                 {
-                    if (ConfrontaBrani(riferimento.Brani[i], citazioniRiferimenti[j].Brano) == 0)
+                    if (ConfrontaBrani(riferimento.Brani[i], CitazioniRiferimenti[j].Brano) == 0)
                     {
-                        posizione = note.BinarySearch((int)(citazioniRiferimenti[j].NumeroNota));
+                        posizione = note.BinarySearch((int)(CitazioniRiferimenti[j].NumeroNota));
                         if (posizione < 0) // non esiste già
                         {
-                            note.Insert(~posizione, (int)(citazioniRiferimenti[j].NumeroNota));
+                            note.Insert(~posizione, (int)(CitazioniRiferimenti[j].NumeroNota));
                         }
                     }
                 }
@@ -1651,25 +1693,21 @@ namespace LaParola
             Collection<string> collezioniDaVisualizzare,
             List<Riferimento> noteDaVisualizzare,
             Riferimento? paroleRicercate = null) // Parametro opzionale
-            => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote: true, paroleRicercate ?? new Riferimento(), null, null);
+            => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote: true, paroleRicercate ?? new Riferimento());
 
         internal Task<string> TestoBranoAsync(
             Riferimento riferimento,
             Collection<string> collezioniDaVisualizzare,
             List<Riferimento> noteDaVisualizzare,
-            bool conNomiDelleNote,
-            BackgroundWorker? worker,
-            DoWorkEventArgs? e)
-            => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, new Riferimento(), worker, e);
+            bool conNomiDelleNote)
+            => TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, new Riferimento());
 
         internal async Task<string> TestoBranoAsync(
             Riferimento riferimento,
             Collection<string> collezioniDaVisualizzare,
             List<Riferimento> noteDaVisualizzare,
             bool conNomiDelleNote,
-            Riferimento paroleRicercate,
-            BackgroundWorker? worker,
-            DoWorkEventArgs? e)
+            Riferimento paroleRicercate)
         {
             string testoComeStringa;
             int numeroCommentari = collezioniDaVisualizzare.Count;
@@ -1757,7 +1795,6 @@ namespace LaParola
                     string punteggiaturaFraCapitoloEVersetto = genitore.SeparatoriNeiRiferimenti()[1];
                     string libroStringa, capitoloStringa, versettoStringa;
                     //string versettoStringaInTestoNascosto;
-                    string versettoStringa1;
                     int p, p1;
 
                     byte[] riferimentoDaMostrare;
@@ -1784,7 +1821,7 @@ namespace LaParola
                         {
                             fs.Seek(pIndice + 4 * (indiceCapitolo[indiceLibro[riferimentoDaMostrare[0] - 1] + riferimentoDaMostrare[1] - 1] + riferimentoDaMostrare[2] - 1), SeekOrigin.Begin);
                             fs.Seek(pTesto + br.ReadInt32(), SeekOrigin.Begin);
-                            string fineRiferimento, formatoRifPerVersetto = "", testoVersetto = "", testoVersettoTitolo, testoVersettoTestoBiblico;
+                            string testoVersetto = "", testoVersettoTitolo, testoVersettoTestoBiblico;
                             bool soloUnVersetto = (riferimentoDaMostrare[0] == riferimentoDaMostrare[3] && riferimentoDaMostrare[1] == riferimentoDaMostrare[4] && riferimentoDaMostrare[2] == riferimentoDaMostrare[5]);
 
                             for (byte lib = riferimentoDaMostrare[0]; lib <= riferimentoDaMostrare[3]; ++lib)
@@ -1891,6 +1928,11 @@ namespace LaParola
 
                                     for (UInt16 vers = vers0; vers <= vers1; ++vers)
                                     {
+                                        // 1. Format verse string efficiently ("001", "042", etc.)
+                                        versettoStringa = $"{capitoloStringa}{vers:000}";
+                                        string versettoStringaInTestoNascosto = MainWindow.LPN_ANCORA + versettoStringa;
+
+                                        // 2. Build the reference body first to check if it's empty
                                         riferimentoVersetto.Length = 0;
                                         switch (genitore.Formato.RiferimentoFormato)
                                         {
@@ -1900,13 +1942,7 @@ namespace LaParola
                                             case RiferimentoFormato.Abbreviazione:
                                                 if (vers == vers0)
                                                 {
-                                                    //  if (cap == cap0)
                                                     riferimentoVersetto.Append(libroCapitoloPunt).Append(vers);
-                                                    //  else
-                                                    //    riferimento = cap.ToString(CultureInfo.CurrentCulture) + punt2 + vers.ToString(CultureInfo.CurrentCulture);
-                                                    // prima della versione 7, il riferimento aveva il libro solo all'inizio e con un nuovo libro
-                                                    // qui c'è il libro all'inizio di ogni capitolo, altrimenti sposta il testo in Sfoglia non funziona,
-                                                    // perché quando cerca il testo Gen 47:1 trova 47:1 per esempio
                                                 }
                                                 else
                                                 {
@@ -1926,33 +1962,41 @@ namespace LaParola
                                                 riferimentoVersetto.Append(libroCapitoloPunt).Append(vers);
                                                 break;
                                         }
+
                                         if (genitore.Formato.RiferimentoTipo == RiferimentoTipo.Citazione)
                                         {
                                             riferimentoVersetto.Append(':');
                                         }
 
-                                        fineRiferimento = "}";
+                                        // 3. Prepend formatting WITHOUT StringBuilder.Insert(0, ...)
+                                        bool haRiferimento = riferimentoVersetto.Length > 0;
+                                        string bodyRef = riferimentoVersetto.ToString();
+                                        riferimentoVersetto.Length = 0;
 
-                                        formatoRifPerVersetto = formatoRiferimento;
-                                        if (riferimentoVersetto.Length > 0)
+                                        riferimentoVersetto.Append('{').Append(formatoRiferimento);
+                                        if (haRiferimento)
                                         {
-                                            formatoRifPerVersetto += " ";
-                                            fineRiferimento += "\\~";
+                                            riferimentoVersetto.Append(' ').Append(bodyRef);
                                         }
 
-                                        versettoStringa = $"{capitoloStringa}{vers:000}";
-                                        string versettoStringaInTestoNascosto = MainWindow.LPN_ANCORA + versettoStringa;
-                                        riferimentoVersetto.Insert(0, formatoRifPerVersetto).Insert(0, @"{");
+                                        // 4. Build context search references efficiently using "000" formatting
                                         if (soloUnVersetto && genitore.Formato.RiferimentoContestoRicerche && genitore.Formato.RiferimentoFormato != RiferimentoFormato.Nessuno)
                                         {
-                                            versettoStringa1 = "00" + (vers > 1 ? vers - 1 : vers).ToString(CultureInfo.InvariantCulture);
-                                            riferimentoVersetto.Append(formatoRiferimentoContestoInizio).Append(capitoloStringa).Append(versettoStringa1[^3..]).Append("0000+");
-                                            // + in un riferimento invece di - indica che il riferimento è sempre visualizzato nella finestra Visualizza (in Principale::LinkCliccato)
-                                            versettoStringa1 = "00" + (vers + 1).ToString(CultureInfo.InvariantCulture);
-                                            riferimentoVersetto.Append(capitoloStringa).Append(versettoStringa1[^3..]).Append(formatoRiferimentoContestoFine);
-                                        }
-                                        riferimentoVersetto.Append(fineRiferimento);
+                                            int prevVers = vers > 1 ? vers - 1 : vers;
+                                            int nextVers = vers + 1;
 
+                                            riferimentoVersetto.Append(formatoRiferimentoContestoInizio)
+                                                               .Append(capitoloStringa)
+                                                               .Append(prevVers.ToString("000", CultureInfo.InvariantCulture))
+                                                               .Append("0000+")
+                                                               .Append(capitoloStringa)
+                                                               .Append(nextVers.ToString("000", CultureInfo.InvariantCulture))
+                                                               .Append(formatoRiferimentoContestoFine);
+                                        }
+
+                                        riferimentoVersetto.Append(haRiferimento ? "}\\~" : "}");
+
+                                        // 5. Spacing check for display text
                                         if (testoDaVisualizzare.Length > 0 &&
                                             !EndsWith(testoDaVisualizzare, @"\par") &&
                                             !EndsWith(testoDaVisualizzare, @"\par}") &&
@@ -1964,6 +2008,7 @@ namespace LaParola
 
                                         testoDaVisualizzare.Append(versettoStringaInTestoNascosto);
 
+                                        // 6. Read verse text
                                         switch (testoVisualizzato)
                                         {
                                             case TestoVisualizzato.Versetti:
@@ -1972,7 +2017,6 @@ namespace LaParola
                                                 {
                                                     testoVersetto += @"\par ";
                                                 }
-
                                                 break;
                                             case TestoVisualizzato.Paragrafi:
                                                 testoVersetto = br.ReadString();
@@ -1981,11 +2025,13 @@ namespace LaParola
                                                 testoVersetto = "";
                                                 break;
                                         }
+
                                         if (lib == riferimentoDaMostrare[0] && cap == cap0 && vers == vers0)
                                         {
                                             testoVersetto = ModificaFormatoParole(testoVersetto, riferimento.numeroParola[i], "{" + formatoRicerca + " ", "}", info.Lingua);
                                         }
 
+                                        // Search highlights lookup
                                         for (int numeroParolaRicercata = ultimaParolaRicercata + 1; numeroParolaRicercata < numeroParoleRicercate; ++numeroParolaRicercata)
                                         {
                                             if (lib > paroleRicercate.Brani[numeroParolaRicercata][0])
@@ -2018,7 +2064,7 @@ namespace LaParola
                                         if (!genitore.Formato.TitoliVisualizzati)
                                         {
                                             while ((p1 = testoVersettoTestoBiblico.IndexOf(@"\lptit1 ", StringComparison.Ordinal)) >= 0)
-                                            { // quando ci sono due titoli in un versetto, come Sal 24 nella CEI
+                                            {
                                                 p = testoVersettoTestoBiblico.IndexOf(@"\lptit0 ", StringComparison.Ordinal);
                                                 if (p > -1)
                                                 {
@@ -2026,52 +2072,65 @@ namespace LaParola
                                                 }
                                                 else
                                                 {
-                                                    testoVersettoTestoBiblico = testoVersettoTestoBiblico[..p1] + testoVersettoTestoBiblico[(p1 + 8)..]; // in questo caso, c'è un errore nel testo
+                                                    testoVersettoTestoBiblico = testoVersettoTestoBiblico[..p1] + testoVersettoTestoBiblico[(p1 + 8)..];
                                                 }
                                             }
                                         }
 
-                                        // inserire le note nel posto giusto nel testo
-                                        string notaStringa;
+                                        // 7. HIGH-PERFORMANCE NOTE MATCHING (Zero Allocations, No Exceptions)
+                                        ReadOnlySpan<char> versetSpan = versettoStringa.AsSpan();
+
                                         for (int iCommentario = 0; iCommentario < numeroCommentari; ++iCommentario)
                                         {
                                             int numeroNote = noteDaVisualizzare[iCommentario].Count;
                                             for (int iNota = numeroNote - 1; iNota >= 0; --iNota)
-                                            { // al contrario, per quando 2 note in un versetto meglio disturbare prima il testo posteriore
-                                                notaStringa = noteDaVisualizzare[iCommentario].Note[iNota];
-                                                if (notaStringa.AsSpan(1, 8).SequenceEqual(versettoStringa)
-                                                    || (notaStringa.AsSpan(6, 3).SequenceEqual("000") && string.Concat(notaStringa.AsSpan(1, 5), "001") == versettoStringa) // nota per tutto il capitolo mostrato all'inizio del primo versetto
-                                                    || (notaStringa.AsSpan(3, 6).SequenceEqual("000000") && string.Concat(notaStringa.AsSpan(1, 2), "001001") == versettoStringa)) // nota per tutto il libro mostrato all'inizio del primo versetto
+                                            {
+                                                string notaRaw = noteDaVisualizzare[iCommentario].Note[iNota];
+                                                ReadOnlySpan<char> notaSpan = notaRaw.AsSpan();
+
+                                                if (notaSpan.Length < 9) continue;
+
+                                                // Zero-allocation Span checks instead of string.Concat & Substring
+                                                bool isMatch = notaSpan.Slice(1, 8).SequenceEqual(versetSpan)
+                                                    || (notaSpan.Slice(6, 3).SequenceEqual("000") && notaSpan.Slice(1, 5).SequenceEqual(versetSpan[..5]) && versetSpan.Slice(5, 3).SequenceEqual("001"))
+                                                    || (notaSpan.Slice(3, 6).SequenceEqual("000000") && notaSpan.Slice(1, 2).SequenceEqual(versetSpan[..2]) && versetSpan.Slice(2, 6).SequenceEqual("001001"));
+
+                                                if (isMatch)
                                                 {
-                                                    UInt16 numeroDellaParola = 0;
-                                                    try
+                                                    ushort numeroDellaParola = 0;
+                                                    if (notaSpan.Length >= 13)
                                                     {
-                                                        numeroDellaParola = Convert.ToUInt16(noteDaVisualizzare[iCommentario].Note[iNota].Substring(9, 4), CultureInfo.InvariantCulture);
+                                                        // Fast integer parsing with no exceptions thrown on failure
+                                                        ushort.TryParse(notaSpan.Slice(9, 4), NumberStyles.Integer, CultureInfo.InvariantCulture, out numeroDellaParola);
                                                     }
-                                                    catch (FormatException) { } // rimane 0 cioè all'inizio del versetto
-                                                    catch (OverflowException) { }
-                                                    testoVersettoTestoBiblico = ModificaFormatoParole(testoVersettoTestoBiblico, numeroDellaParola, "", @"{\v " + RichTextBoxEx.InizioLink + @"}*{\v " + RichTextBoxEx.FineLink1 + RichTextBoxEx.FineLinkNota + collezioniDaVisualizzare[iCommentario] + @"\\" + noteDaVisualizzare[iCommentario].Note[iNota] + RichTextBoxEx.FineLink2 + "}" + (iCommentario == 0 ? "" : " "), info.Lingua);
+
+                                                    testoVersettoTestoBiblico = ModificaFormatoParole(
+                                                        testoVersettoTestoBiblico,
+                                                        numeroDellaParola,
+                                                        "",
+                                                        @"{\v " + RichTextBoxEx.InizioLink + @"}*{\v " + RichTextBoxEx.FineLink1 + RichTextBoxEx.FineLinkNota + collezioniDaVisualizzare[iCommentario] + @"\\" + notaRaw + RichTextBoxEx.FineLink2 + "}" + (iCommentario == 0 ? "" : " "),
+                                                        info.Lingua);
                                                 }
                                             }
                                         }
 
+                                        // 8. Optimized Greek / Hebrew RTF wrapping
                                         if (greco)
                                         {
-                                            testoVersettoTestoBiblico = @"{" + formatoGreco + testoVersettoTestoBiblico + "}";
                                             if (testoVersettoTestoBiblico.EndsWith(@"\par }", StringComparison.OrdinalIgnoreCase))
-                                            {
-                                                testoVersettoTestoBiblico = testoVersettoTestoBiblico[..^6] + @"}\par ";
-                                            }
+                                                testoVersettoTestoBiblico = @"{" + formatoGreco + testoVersettoTestoBiblico[..^6] + @"}\par ";
+                                            else
+                                                testoVersettoTestoBiblico = @"{" + formatoGreco + testoVersettoTestoBiblico + "}";
                                         }
                                         if (ebraico)
                                         {
-                                            testoVersettoTestoBiblico = @"{" + formatoEbraico + testoVersettoTestoBiblico + "}";
                                             if (testoVersettoTestoBiblico.EndsWith(@"\par }", StringComparison.OrdinalIgnoreCase))
-                                            {
-                                                testoVersettoTestoBiblico = testoVersettoTestoBiblico[..^6] + @"}\par ";
-                                            }
+                                                testoVersettoTestoBiblico = @"{" + formatoEbraico + testoVersettoTestoBiblico[..^6] + @"}\par ";
+                                            else
+                                                testoVersettoTestoBiblico = @"{" + formatoEbraico + testoVersettoTestoBiblico + "}";
                                         }
 
+                                        // 9. Output assembly
                                         switch (riferimentoPosto)
                                         {
                                             case RiferimentoPosto.PrimaStessaRiga:
@@ -2090,7 +2149,7 @@ namespace LaParola
                                                 {
                                                     testoVersettoTestoBiblico = testoVersettoTestoBiblico[..^5];
                                                     riferimentoVersetto.Append(@"\par ");
-                                                    if (testoVersettoTestoBiblico.EndsWith(@"\par ", StringComparison.Ordinal)) // nuovo paragrafo, ma il testo è visualizzato a versetti
+                                                    if (testoVersettoTestoBiblico.EndsWith(@"\par ", StringComparison.Ordinal))
                                                     {
                                                         testoVersettoTestoBiblico = testoVersettoTestoBiblico[..^5];
                                                         riferimentoVersetto.Append(@"\par ");
@@ -2103,7 +2162,6 @@ namespace LaParola
                                 }
                             }
                         }
-                        worker?.ReportProgress(-1, e);
                     }
                     testoComeStringa = testoDaVisualizzare.ToString();
                     if (rtl)
@@ -2115,7 +2173,7 @@ namespace LaParola
                 } // if (testoFileArray.Tipo==TestoTipo.Bibbia)
                 else // tutte le note in un certo brano
                 {
-                    testoComeStringa = await TestoBranoAsync(ElencaNoteInBrano(riferimento), collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, paroleRicercate, null, null);
+                    testoComeStringa = await TestoBranoAsync(ElencaNoteInBrano(riferimento), collezioniDaVisualizzare, noteDaVisualizzare, conNomiDelleNote, paroleRicercate);
                 }
                 testoComeStringa = ConvertiLink(testoComeStringa);
                 #endregion
@@ -2210,7 +2268,7 @@ namespace LaParola
             string formatoRicerca, formatoRicercaNote;
             (formatoRicerca, formatoRicercaNote) = GetFormatoRicerca();
 
-            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), false, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
+            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), true, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
 
             // Direct compilation without string conversion overhead
             return await Texts.MergeManyRtfAsDocumentAsync(ConvertiLink(stringheRtf));
@@ -2218,64 +2276,90 @@ namespace LaParola
 
         private List<string> StringheBranoCommentario(Riferimento riferimento, bool conNomiDelleNote, Riferimento paroleRicercate, string formatoRicercaNote, string formatoRiferimento, string formatoRicerca)
         {
+            int numeroNote = riferimento.Note.Count;
+            if (numeroNote == 0) return [];
+
+            // 1. Pre-allocate List capacity (each note adds 1 to 2 strings, plus optional separator lines)
+            int maxCapacity = numeroNote * (conNomiDelleNote ? 3 : 2);
+            List<string> stringheRtf = new(maxCapacity);
+
+            // 2. Cache header & format strings outside the loop to avoid repeated concatenations
+            string rtfHeader = genitore.RtfIntestazione();
+            string rtfSeparator = rtfHeader + @"\par}";
+            string inizioFormatoRicercaNote = "{" + formatoRicercaNote + " ";
+            string inizioFormatoRiferimento = "{" + formatoRiferimento + " ";
+            string inizioFormatoRicerca = "{" + formatoRicerca + " ";
+            string inizioInizioRiferimento = MainWindow.LPN_ANCORA;
+
             int numeroParoleRicercate = paroleRicercate.Count;
             int ultimaParolaRicercata = -1;
-            string titoloNota, titoloNotaDaLeggere;
-            List<string> stringheRtf = [];
 
-            string inizioFormatoRicercaNote = '{' + formatoRicercaNote + " ";
-            string inizioFormatoRiferimento = '{' + formatoRiferimento + " ";
-            string inizioInizioRiferimento = MainWindow.LPN_ANCORA;
-            bool notaSuBrano;
-            int numeroNote = riferimento.Note.Count;
-            // TODO2 int quantoSpessoAggiornaBarra = numeroNote / 100 + 1;
-            // TODO2 int quantoSpessoAggiornaBarraMenoUno = quantoSpessoAggiornaBarra - 1;
+            // 3. Reuse a single StringBuilder for all title operations
+            StringBuilder sb = new(256);
+
             for (int i = 0; i < numeroNote; ++i)
             {
                 if (i > 0)
-                { // riga vuota fra i brani
-                    stringheRtf.Add(genitore.RtfIntestazione() + @"\par}");
+                {
+                    // Empty line between passages
+                    stringheRtf.Add(rtfSeparator);
                 }
-                titoloNota = riferimento.Note[i];
-                notaSuBrano = titoloNota.StartsWith('#');
-                titoloNotaDaLeggere = (notaSuBrano ? genitore.ConvertiTitoloNotaARiferimento(titoloNota) : titoloNota);
+
+                string titoloNota = riferimento.Note[i];
+                bool notaSuBrano = titoloNota.StartsWith('#');
+                string titoloNotaDaLeggere = notaSuBrano ? genitore.ConvertiTitoloNotaARiferimento(titoloNota) : titoloNota;
+
                 if (conNomiDelleNote)
                 {
-                    stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(notaSuBrano ? string.Concat(inizioInizioRiferimento, titoloNota.AsSpan(1, 8)) : "").Append(inizioFormatoRiferimento).Append(ConvertiUnicodeInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
-                    //stringheRtf.Add(new StringBuilder(genitore.RtfIntestazione()).Append(inizioFormatoRiferimento).Append(ConvertiUnicodeInRtf(titoloNotaDaLeggere)).Append(@"}\par}").ToString());
+                    sb.Clear();
+                    sb.Append(rtfHeader);
+
+                    if (notaSuBrano && titoloNota.Length >= 9)
+                    {
+                        // Append Span directly to StringBuilder (0 heap allocations)
+                        sb.Append(inizioInizioRiferimento).Append(titoloNota.AsSpan(1, 8));
+                    }
+
+                    sb.Append(inizioFormatoRiferimento)
+                      .Append(ConvertiUnicodeInRtf(titoloNotaDaLeggere))
+                      .Append(@"}\par}");
+
+                    stringheRtf.Add(sb.ToString());
                 }
 
-                string testoModificato = ModificaFormatoParole(GetNotaTestoTitolo(titoloNota), riferimento.numeroParola[i], inizioFormatoRicercaNote, "}", info.Lingua);
+                string testoModificato = GetNotaTestoTitolo(titoloNota);
+                //string testoModificato = ModificaFormatoParole(GetNotaTestoTitolo(titoloNota), riferimento.numeroParola[i], inizioFormatoRicercaNote, "}", info.Lingua);
+
+                // 4. search for matching searched words with clean break
                 for (int numeroParolaRicercata = ultimaParolaRicercata + 1; numeroParolaRicercata < numeroParoleRicercate; ++numeroParolaRicercata)
                 {
-                    switch (string.CompareOrdinal(riferimento.Note[i], paroleRicercate.Note[numeroParolaRicercata]))
+                    int cmp = string.CompareOrdinal(titoloNota, paroleRicercate.Note[numeroParolaRicercata]);
+                    if (cmp > 0)
                     {
-                        case 1:
-                            ultimaParolaRicercata = numeroParolaRicercata;
-                            break;
-                        case -1:
-                            numeroParolaRicercata = numeroParoleRicercate; // finire il loop, non ci sono più note uguali
-                            break;
-                        case 0:
-                            testoModificato = ModificaFormatoParole(testoModificato, paroleRicercate.numeroParola[numeroParolaRicercata], "{" + formatoRicerca + " ", "}", info.Lingua);
-                            break;
+                        ultimaParolaRicercata = numeroParolaRicercata;
+                    }
+                    else if (cmp < 0)
+                    {
+                        // Clean break out of loop when notes no longer match
+                        break;
+                    }
+                    else
+                    {
+                        testoModificato = ModificaFormatoParole(testoModificato, paroleRicercate.numeroParola[numeroParolaRicercata], inizioFormatoRicerca, "}", info.Lingua);
                     }
                 }
+
+                // 5. Wrap non-RTF content with RTF headers
                 if (!testoModificato.StartsWith(@"{\rtf", StringComparison.Ordinal) && !testoModificato.EndsWith('}'))
                 {
-                    testoModificato = genitore.RtfIntestazione() + testoModificato.Replace("\r\n", @"\par ") + "}";
+                    testoModificato = rtfHeader + testoModificato.Replace("\r\n", @"\par ") + "}";
                 }
-                stringheRtf.Add(ConvertiUnicodeInRtf(testoModificato));
-                // TODO2 progress bar
-                //if (worker != null && (i % quantoSpessoAggiornaBarra == quantoSpessoAggiornaBarraMenoUno))
-                //{
-                //    worker.ReportProgress(-quantoSpessoAggiornaBarra, e);
-                //}
 
+                stringheRtf.Add(ConvertiUnicodeInRtf(testoModificato));
             }
+
             return stringheRtf;
         }
-
         private string ConvertiLink(string rtfString)
         {
             if (string.IsNullOrEmpty(rtfString)) return "";
@@ -2387,101 +2471,159 @@ namespace LaParola
             return ModificaFormatoParole(testoDaModificare, listaParole, formatoPrimaDellaParola, formatoDopoLaParola, lingua);
         }
 
-        private static string ModificaFormatoParole(string testoDaModificare, List<UInt16> numeriParoleDaModificare, string formatoPrimaDellaParola, string formatoDopoLaParola, string lingua)
+        private static string ModificaFormatoParole(
+            string testoDaModificare,
+            List<ushort> numeriParoleDaModificare,
+            string formatoPrimaDellaParola,
+            string formatoDopoLaParola,
+            string lingua)
         {
-            if ((formatoPrimaDellaParola == "{" && formatoDopoLaParola == "}") || (string.IsNullOrEmpty(formatoPrimaDellaParola) && string.IsNullOrEmpty(formatoDopoLaParola)) || (numeriParoleDaModificare.Count == 0))
+            // 1. Guard check - Early exit
+            if ((formatoPrimaDellaParola == "{" && formatoDopoLaParola == "}") ||
+                (string.IsNullOrEmpty(formatoPrimaDellaParola) && string.IsNullOrEmpty(formatoDopoLaParola)) ||
+                numeriParoleDaModificare == null ||
+                numeriParoleDaModificare.Count == 0)
             {
-                return testoDaModificare; // non ci sono modifiche da fare, quindi rimane uguale
+                return testoDaModificare;
             }
 
-            string[] lingue = SplitString(lingua.ToLower(CultureInfo.InvariantCulture), '|');
-            //string[] lingue = lingua.ToLower(CultureInfo.InvariantCulture).Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            string linguaDaUsare, linguaPrincipale = (lingue.Length >= 1 ? lingue[0] : "");
-            bool dizionarioGreco = (linguaPrincipale == "el" && lingue.Length >= 2);
-            bool dizionarioEbraico = (linguaPrincipale.StartsWith("he") && lingue.Length >= 2);
+            string[] lingue = SplitString(lingua.ToLowerInvariant(), '|');
+            string linguaPrincipale = lingue.Length >= 1 ? lingue[0] : "";
+            bool dizionarioGreco = linguaPrincipale == "el" && lingue.Length >= 2;
+            bool dizionarioEbraico = linguaPrincipale.StartsWith("he", StringComparison.Ordinal) && lingue.Length >= 2;
 
+            // In lingue RTL, rimuovere eventuali codici \v da formatoPrima / formatoDopo
             if (RightToLeft(linguaPrincipale))
-            { // in lingue RTL (come ebraico), l'inserimento di un carattere non RTL, anche nascosto, rovina la visualizzazione
-              // per questo motivo un testo ricercato in ebraico non salterà alla prima apparizione di una parola ricercata, ma non è troppo grave
-                while (formatoPrimaDellaParola.Contains(@"\v "))
-                {
-                    formatoPrimaDellaParola = formatoPrimaDellaParola[..formatoPrimaDellaParola.IndexOf(@"\v ", StringComparison.Ordinal)] + formatoPrimaDellaParola[(formatoPrimaDellaParola.IndexOf(@"\v0", StringComparison.Ordinal) + 3)..];
-                }
-
-                while (formatoDopoLaParola.Contains(@"{\v "))
-                {
-                    formatoDopoLaParola = formatoDopoLaParola[..formatoDopoLaParola.IndexOf(@"{\v ", StringComparison.Ordinal)] + formatoDopoLaParola[(formatoDopoLaParola.IndexOf('}', StringComparison.Ordinal) + 1)..];
-                }
-
-                while (formatoDopoLaParola.Contains(@"\v "))
-                {
-                    formatoDopoLaParola = formatoDopoLaParola[..formatoDopoLaParola.IndexOf(@"\v ", StringComparison.Ordinal)] + formatoDopoLaParola[(formatoDopoLaParola.IndexOf(@"\v0", StringComparison.Ordinal) + 3)..];
-                }
-            }
-
-            int nParoleDaCambiare = numeriParoleDaModificare.Count;
-            // a volte si chiede che la stessa parola sia modificata 2 volte; non è possibile quindi togliamo i doppioni
-            for (int i = nParoleDaCambiare - 1; i >= 1; --i)
             {
-                if (numeriParoleDaModificare[i] == numeriParoleDaModificare[i - 1])
+                formatoPrimaDellaParola = RimuoviTestoNascosto(formatoPrimaDellaParola, @"\v ", @"\v0", 3);
+                formatoDopoLaParola = RimuoviTestoNascosto(formatoDopoLaParola, @"{\v ", "}", 1);
+                formatoDopoLaParola = RimuoviTestoNascosto(formatoDopoLaParola, @"\v ", @"\v0", 3);
+            }
+
+            // Deduplicazione senza modificare la lista originale del chiamante
+            List<ushort> meNumeri = new(numeriParoleDaModificare.Count);
+            for (int i = 0; i < numeriParoleDaModificare.Count; i++)
+            {
+                if (i == 0 || numeriParoleDaModificare[i] != numeriParoleDaModificare[i - 1])
                 {
-                    numeriParoleDaModificare.RemoveAt(i);
-                    --nParoleDaCambiare;
+                    meNumeri.Add(numeriParoleDaModificare[i]);
                 }
             }
+
+            int nParoleDaCambiare = meNumeri.Count;
             int iParolaDaCambiare = 0;
-            int nProssimaParolaDaCambiare = numeriParoleDaModificare[0];
+            int nProssimaParolaDaCambiare = meNumeri[0];
             int paroleTrovate = 0;
-            StringBuilder parola = new("");
-            int statoCambiamento = 0; // 0=niente da cambiare, 1=cambiare la prossima, 2=chiudere il cambiamento alla fine di questa parola
+            StringBuilder parola = new();
+
+            // Output Builder per evitare string.Insert in loop
+            StringBuilder sb = new(testoDaModificare.Length + 64);
+            int lastAppendedIndex = 0;
+
+            int statoCambiamento = 0; // 0=niente, 1=cambiare la prossima, 2=in corso di cambiamento
             if (nProssimaParolaDaCambiare == 1)
             {
                 statoCambiamento = 1;
                 ++iParolaDaCambiare;
                 if (iParolaDaCambiare < nParoleDaCambiare)
                 {
-                    nProssimaParolaDaCambiare = numeriParoleDaModificare[iParolaDaCambiare];
+                    nProssimaParolaDaCambiare = meNumeri[iParolaDaCambiare];
                 }
             }
-            char c;
-            bool analizzaParola;
-            int carattereIniziale = 0, iCarattere1, iCarattere2, carattereDaInserire = 0;
-            if (testoDaModificare.IndexOf(@"\viewkind", StringComparison.Ordinal) > 0) // saltare un'eventuale intestazione RTF
+
+            // Determinazione del carattere iniziale (salta intestazione RTF)
+            int carattereIniziale = 0;
+            int idx = testoDaModificare.IndexOf(@"\viewkind", StringComparison.Ordinal);
+            if (idx > 0)
             {
-                carattereIniziale = testoDaModificare.IndexOf(@"\viewkind", StringComparison.Ordinal) + 10; // +10 perché c'è un numero dopo viewkind
+                carattereIniziale = idx + 10;
             }
 
-            if (testoDaModificare.IndexOf(@"\deflang", carattereIniziale, StringComparison.Ordinal) > 0) // saltare un'eventuale intestazione RTF
+            idx = testoDaModificare.IndexOf(@"\deflang", carattereIniziale, StringComparison.Ordinal);
+            if (idx > 0)
             {
-                carattereIniziale = testoDaModificare.IndexOf(@"\deflang", carattereIniziale, StringComparison.Ordinal) + 12; // +12 perché ci sono quattro cifre dopo deflang
+                carattereIniziale = idx + 12;
             }
 
-            if (testoDaModificare.StartsWith(@"{\rtf", StringComparison.Ordinal) && carattereIniziale == 0 && testoDaModificare.IndexOf(@"\pard", carattereIniziale, StringComparison.Ordinal) > 0)
+            if (testoDaModificare.StartsWith(@"{\rtf", StringComparison.Ordinal) && carattereIniziale == 0)
             {
-                carattereIniziale = testoDaModificare.IndexOf(@"\pard", carattereIniziale, StringComparison.Ordinal) + 6;
+                idx = testoDaModificare.IndexOf(@"\pard", carattereIniziale, StringComparison.Ordinal);
+                if (idx > 0)
+                {
+                    carattereIniziale = idx + 6;
+                }
             }
 
             if (nProssimaParolaDaCambiare == 0)
             {
-                testoDaModificare = testoDaModificare.Insert(carattereDaInserire, formatoPrimaDellaParola + formatoDopoLaParola);
-                carattereIniziale += (formatoPrimaDellaParola + formatoDopoLaParola).Length;
+                sb.Append(testoDaModificare, 0, carattereIniziale);
+                sb.Append(formatoPrimaDellaParola).Append(formatoDopoLaParola);
+                lastAppendedIndex = carattereIniziale;
+
                 ++iParolaDaCambiare;
                 if (iParolaDaCambiare < nParoleDaCambiare)
                 {
-                    nProssimaParolaDaCambiare = numeriParoleDaModificare[iParolaDaCambiare];
+                    nProssimaParolaDaCambiare = meNumeri[iParolaDaCambiare];
                 }
             }
+
+            char c;
+            bool analizzaParola;
+            string linguaDaUsare;
+            int iCarattere1, iCarattere2, iCarattere3;
 
             for (int i = carattereIniziale; i < testoDaModificare.Length; ++i)
             {
                 c = testoDaModificare[i];
-                if (IsLetteraONumero(c) || (c == '\\' && i < testoDaModificare.Length - 3 && (testoDaModificare[i + 1] == '\'' || (testoDaModificare[i + 1] == 'u' && Char.IsDigit(testoDaModificare[i + 2])))))
+
+                // FIX BUG HYPERLINK: Salta l'intero blocco di istruzioni del campo RTF (\fldinst)
+                if (c == '\\' && i <= testoDaModificare.Length - 8 && testoDaModificare.AsSpan(i, 8).Equals(@"\fldinst", StringComparison.Ordinal))
                 {
-                    if (i <= testoDaModificare.Length - 1 && testoDaModificare[i] == RichTextBoxEx.InizioLink)
+                    if (parola.Length > 0)
                     {
-                        i += 0;
+                        if (statoCambiamento == 2)
+                        {
+                            sb.Append(testoDaModificare, lastAppendedIndex, i - lastAppendedIndex);
+                            sb.Append(formatoDopoLaParola);
+                            lastAppendedIndex = i;
+                            statoCambiamento = 0;
+                        }
+                        ++paroleTrovate;
+                        parola.Clear();
                     }
-                    else
+
+                    int depth = 1;
+                    int j = i + 8;
+                    while (j < testoDaModificare.Length && depth > 0)
+                    {
+                        if (testoDaModificare[j] == '\\')
+                        {
+                            if (j <= testoDaModificare.Length - 7 && testoDaModificare.AsSpan(j, 7).Equals(@"\fldrslt", StringComparison.Ordinal))
+                            {
+                                break;
+                            }
+                            if (j + 1 < testoDaModificare.Length)
+                            {
+                                j++;
+                            }
+                        }
+                        else if (testoDaModificare[j] == '{')
+                        {
+                            depth++;
+                        }
+                        else if (testoDaModificare[j] == '}')
+                        {
+                            depth--;
+                        }
+                        j++;
+                    }
+                    i = j - 1;
+                    continue;
+                }
+
+                if (IsLetteraONumero(c) || (c == '\\' && i < testoDaModificare.Length - 3 && (testoDaModificare[i + 1] == '\'' || (testoDaModificare[i + 1] == 'u' && char.IsDigit(testoDaModificare[i + 2])))))
+                {
+                    if (i <= testoDaModificare.Length - 1 && testoDaModificare[i] != RichTextBoxEx.InizioLink)
                     {
                         if (IsLetteraONumero(c))
                         {
@@ -2491,17 +2633,21 @@ namespace LaParola
                         {
                             parola.Append(testoDaModificare.AsSpan(i, 4));
                         }
-                        else if (testoDaModificare[i + 1] == 'u' && Char.IsDigit(testoDaModificare[i + 2]))
+                        else if (testoDaModificare[i + 1] == 'u' && char.IsDigit(testoDaModificare[i + 2]))
                         {
-                            parola.Append(testoDaModificare.AsSpan(i, testoDaModificare.IndexOf('?', i) - i + 1));
+                            int qIdx = testoDaModificare.IndexOf('?', i);
+                            int len = (qIdx > i) ? (qIdx - i + 1) : 1;
+                            parola.Append(testoDaModificare.AsSpan(i, len));
                         }
 
                         if (statoCambiamento == 1)
                         {
-                            testoDaModificare = testoDaModificare.Insert(i, formatoPrimaDellaParola);
-                            i += formatoPrimaDellaParola.Length;
+                            sb.Append(testoDaModificare, lastAppendedIndex, i - lastAppendedIndex);
+                            sb.Append(formatoPrimaDellaParola);
+                            lastAppendedIndex = i;
                             statoCambiamento = 2;
                         }
+
                         if (!IsLetteraONumero(c))
                         {
                             if (testoDaModificare[i + 1] == '\'')
@@ -2510,21 +2656,29 @@ namespace LaParola
                             }
                             else
                             {
-                                if (testoDaModificare[i + 2] == '0' && testoDaModificare[i + 3] == '0')
-                                    i += 5; // \u0005
-                                else // unicode \u1234? oppure \u123?
-                                    i = testoDaModificare.IndexOf('?', i);
+                                if (i + 3 < testoDaModificare.Length && testoDaModificare[i + 2] == '0' && testoDaModificare[i + 3] == '0')
+                                {
+                                    i += 5;
+                                }
+                                else
+                                {
+                                    int qIdx = testoDaModificare.IndexOf('?', i);
+                                    if (qIdx > i)
+                                    {
+                                        i = qIdx;
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                else if (Char.IsPunctuation(c) || Char.IsWhiteSpace(c) || Char.IsSymbol(c) || Char.GetUnicodeCategory(c) == UnicodeCategory.Format)
+                else if (char.IsPunctuation(c) || char.IsWhiteSpace(c) || char.IsSymbol(c) || char.GetUnicodeCategory(c) == UnicodeCategory.Format)
                 {
                     analizzaParola = true;
-                    carattereDaInserire = i;
+                    int carattereDaInserire = i;
+
                     if (c == '\'')
                     {
-                        // in un dizionario greco-altra lingua, dobbiamo scegliere la lingua giusta
                         linguaDaUsare = linguaPrincipale;
                         if (dizionarioGreco && i > 0 && !IsLetteraGreca(testoDaModificare[i - 1]))
                         {
@@ -2545,8 +2699,8 @@ namespace LaParola
                             case "en":
                                 if ((i == 1 || !IsLetteraONumero(testoDaModificare[i - 1]))
                                     && ((i < testoDaModificare.Length - 1 && (testoDaModificare[i + 1] == 't' || testoDaModificare[i + 1] == 'T') && (i == testoDaModificare.Length - 2 || !IsLetteraONumero(testoDaModificare[i + 2])))
-                                      || (i < testoDaModificare.Length - 3 && testoDaModificare.Substring(i + 1, 3).Equals("tis", StringComparison.CurrentCultureIgnoreCase) && (i == testoDaModificare.Length - 4 || !IsLetteraONumero(testoDaModificare[i + 4])))
-                                      || (i < testoDaModificare.Length - 4 && testoDaModificare.Substring(i + 1, 4).Equals("twas", StringComparison.CurrentCultureIgnoreCase) && (i == testoDaModificare.Length - 5 || !IsLetteraONumero(testoDaModificare[i + 5])))))
+                                      || (i < testoDaModificare.Length - 3 && testoDaModificare.AsSpan(i + 1, 3).Equals("tis", StringComparison.OrdinalIgnoreCase) && (i == testoDaModificare.Length - 4 || !IsLetteraONumero(testoDaModificare[i + 4])))
+                                      || (i < testoDaModificare.Length - 4 && testoDaModificare.AsSpan(i + 1, 4).Equals("twas", StringComparison.OrdinalIgnoreCase) && (i == testoDaModificare.Length - 5 || !IsLetteraONumero(testoDaModificare[i + 5])))))
                                 {
                                     parola.Append(c);
                                     analizzaParola = false;
@@ -2562,7 +2716,7 @@ namespace LaParola
                                         analizzaParola = false;
                                     }
                                     else if (dizionarioEbraico && i < testoDaModificare.Length - 1 && (char.IsLetter(testoDaModificare[i - 1]) && testoDaModificare[i + 1] == '-'))
-                                    { // per il dizionario Strong's Hebrew, che ha pronunce come eh'-sheth
+                                    {
                                         parola.Append(c);
                                         analizzaParola = false;
                                     }
@@ -2574,31 +2728,38 @@ namespace LaParola
                                         analizzaParola = false;
                                     }
                                     else if (i < testoDaModificare.Length - 2
-                                         && IsLetteraONumero(testoDaModificare[i - 1]) && (i == testoDaModificare.Length - 3 || !IsLetteraONumero(testoDaModificare[i + 3]))
-                                    && (testoDaModificare.Substring(i + 1, 2) == "en" || testoDaModificare.Substring(i + 1, 2) == "er" || testoDaModificare.Substring(i + 1, 2) == "ll" || testoDaModificare.Substring(i + 1, 2) == "lt" || testoDaModificare.Substring(i + 1, 2) == "ry" || testoDaModificare.Substring(i + 1, 2) == "st" || testoDaModificare.Substring(i + 1, 2) == "ve"))
+                                         && IsLetteraONumero(testoDaModificare[i - 1]) && (i == testoDaModificare.Length - 3 || !IsLetteraONumero(testoDaModificare[i + 3])))
                                     {
-                                        parola.Append(c);
-                                        analizzaParola = false;
+                                        ReadOnlySpan<char> sub = testoDaModificare.AsSpan(i + 1, 2);
+                                        if (sub.Equals("en", StringComparison.Ordinal) || sub.Equals("er", StringComparison.Ordinal) ||
+                                            sub.Equals("ll", StringComparison.Ordinal) || sub.Equals("lt", StringComparison.Ordinal) ||
+                                            sub.Equals("ry", StringComparison.Ordinal) || sub.Equals("st", StringComparison.Ordinal) ||
+                                            sub.Equals("ve", StringComparison.Ordinal))
+                                        {
+                                            parola.Append(c);
+                                            analizzaParola = false;
+                                        }
                                     }
                                     else if (i < testoDaModificare.Length - 4
-                                    && IsLetteraONumero(testoDaModificare[i - 1]) && (i == testoDaModificare.Length - 3 || !IsLetteraONumero(testoDaModificare[i + 5]))
-                                    && (testoDaModificare.Substring(i + 1, 4) == "ring"))
+                                        && IsLetteraONumero(testoDaModificare[i - 1]) && (i == testoDaModificare.Length - 3 || !IsLetteraONumero(testoDaModificare[i + 5]))
+                                        && testoDaModificare.AsSpan(i + 1, 4).Equals("ring", StringComparison.Ordinal))
                                     {
                                         parola.Append(c);
                                         analizzaParola = false;
                                     }
                                 }
                                 break;
+
                             case "it":
                                 if (i > 0 && i < testoDaModificare.Length - 1)
                                 {
-                                    if ((IsLetteraONumero(testoDaModificare[i - 1]) && (IsLetteraONumero(testoDaModificare[i + 1]) || testoDaModificare[i + 1] == '\'' || testoDaModificare[i + 1] == '«' || testoDaModificare[i + 1] == ']' || (testoDaModificare[i + 1] == ')') && testoDaModificare.IndexOf("('") < i)) || (Array.BinarySearch(Texts.paroleItalianeConApostrofe, parola.ToString()) >= 0))
+                                    if ((IsLetteraONumero(testoDaModificare[i - 1]) && (IsLetteraONumero(testoDaModificare[i + 1]) || testoDaModificare[i + 1] == '\'' || testoDaModificare[i + 1] == '«' || testoDaModificare[i + 1] == ']' || (testoDaModificare[i + 1] == ')' && testoDaModificare.IndexOf("('", StringComparison.Ordinal) < i))) || (Array.BinarySearch(Texts.paroleItalianeConApostrofe, parola.ToString()) >= 0))
                                     {
-                                        // per esempio l'uomo 
                                         parola.Append(c);
                                     }
                                 }
                                 break;
+
                             case "el":
                                 if (i > 0)
                                 {
@@ -2613,32 +2774,26 @@ namespace LaParola
                                     }
                                 }
                                 break;
-                            case "": // interlineare
+
+                            case "":
                                 parola.Append(c);
                                 break;
                         }
                     }
                     else if (c == '[' || c == ']')
                     {
-                        //                            if (linguaLC == "el")
-                        //                            {
-                        if (i > 0 && i < testoDaModificare.Length - 1)
+                        if (i > 0 && i < testoDaModificare.Length - 1 && IsLettera(testoDaModificare[i - 1]) && IsLettera(testoDaModificare[i + 1]))
                         {
-                            if (IsLettera(testoDaModificare[i - 1]) && IsLettera(testoDaModificare[i + 1]))
-                            {
-                                // parentesi quadrate in mezzo ad una parola
-                                analizzaParola = false;
-                            }
+                            analizzaParola = false;
                         }
-                        //                            }
                     }
                     else if (c == '-')
                     {
                         if (i > 0 && i < testoDaModificare.Length - 1)
                         {
                             if (((IsLettera(testoDaModificare[i - 1]) || (testoDaModificare[i - 1] == '?' && i > 1 && char.IsDigit(testoDaModificare[i - 2]))) &&
-                                (IsLettera(testoDaModificare[i + 1]) || (i < testoDaModificare.Length - 2 && testoDaModificare.Substring(i + 1, 2) == @"\u"))) // per esempio Eben-Ezer e \u963?-\u960? ma non 1-2
-                                || (dizionarioEbraico && testoDaModificare[i - 1] == '\'' && char.IsLetter(testoDaModificare[i + 1]))) // per esempio eh'-sheth in Strong's Hebrew
+                                (IsLettera(testoDaModificare[i + 1]) || (i < testoDaModificare.Length - 2 && testoDaModificare.AsSpan(i + 1, 2).Equals(@"\u", StringComparison.Ordinal))))
+                                || (dizionarioEbraico && testoDaModificare[i - 1] == '\'' && char.IsLetter(testoDaModificare[i + 1])))
                             {
                                 parola.Append(c);
                                 analizzaParola = false;
@@ -2647,46 +2802,33 @@ namespace LaParola
                     }
                     else if (c == '}')
                     {
-                        if (i > 0 && i < testoDaModificare.Length - 1)
+                        if (i > 0 && i < testoDaModificare.Length - 1 && IsLettera(testoDaModificare[i - 1]) && IsLettera(testoDaModificare[i + 1]))
                         {
-                            if (IsLettera(testoDaModificare[i - 1]) && IsLettera(testoDaModificare[i + 1]))
-                            {
-                                // per esempio una parola parzialmente in italico come {\\i1 del}la
-                                analizzaParola = false;
-                            }
+                            analizzaParola = false;
                         }
                     }
-                    else if (c == '\\' || c == '{') // saltare codice RTF
+                    else if (c == '{')
                     {
-                        if (i < testoDaModificare.Length - 6 && testoDaModificare.Substring(i, 7) == @"\lptit1")
+                        if (i > 0 && IsLettera(testoDaModificare[i - 1]))
                         {
-                            i = testoDaModificare.IndexOf(@"\lptit0 ", i, StringComparison.Ordinal) + 7; // saltare un titolo nel testo
-                            if (i == 6)
-                            {
-                                i = testoDaModificare.Length - 1;
-                            }
+                            analizzaParola = false;
                         }
-                        // Controllo per inizio testo nascosto (\v o \v1, escludendo \v0)
-                        else if (c == '\\' && i + 1 < testoDaModificare.Length && testoDaModificare[i + 1] == 'v' &&
+                    }
+                    else if (c == '\\')
+                    {
+                        if (i < testoDaModificare.Length - 6 && testoDaModificare.AsSpan(i, 7).Equals(@"\lptit1", StringComparison.Ordinal))
+                        {
+                            idx = testoDaModificare.IndexOf(@"\lptit0 ", i, StringComparison.Ordinal);
+                            i = (idx >= 0) ? (idx + 7) : (testoDaModificare.Length - 1);
+                        }
+                        else if (i + 1 < testoDaModificare.Length && testoDaModificare[i + 1] == 'v' &&
                                  !(i + 2 < testoDaModificare.Length && testoDaModificare[i + 2] == '0'))
                         {
-                            // Cerca la fine del blocco di testo nascosto (\v0)
-                            i = testoDaModificare.IndexOf(@"\v0", i, StringComparison.Ordinal) + 2;
-
-                            // Se IndexOf restituisce -1 (non trovato), -1 + 2 fa 1.
-                            if (i == 1)
-                            {
-                                i = testoDaModificare.Length - 1; // Salta fino alla fine del testo
-                            }
+                            idx = testoDaModificare.IndexOf(@"\v0", i, StringComparison.Ordinal);
+                            i = (idx >= 0) ? (idx + 2) : (testoDaModificare.Length - 1);
                         }
                         else
                         {
-                            if (i > 0 && c == '{' && IsLettera(testoDaModificare[i - 1]))
-                            {
-                                // per esempio una parola parzialmente in italico come tuffata{\\i1 la}
-                                analizzaParola = false;
-                            }
-                            // trova la fine del codice RTF cioè prossimo \ o spazio
                             iCarattere1 = testoDaModificare.IndexOf('\\', i + 1) - 1;
                             if (iCarattere1 == i)
                             {
@@ -2694,39 +2836,52 @@ namespace LaParola
                             }
 
                             iCarattere2 = testoDaModificare.IndexOf(' ', i);
-                            if (iCarattere1 >= 0 && iCarattere1 < iCarattere2)
-                            { // \ prima di spazio
-                                if (i > 0 && c == '\\' && IsLettera(testoDaModificare[i - 1]) && iCarattere1 < testoDaModificare.Length - 2 && testoDaModificare[iCarattere1 + 2] == '\'')
+                            iCarattere3 = testoDaModificare.IndexOf('\n', i);
+                            if (iCarattere3 > 0 && (iCarattere3 < iCarattere2 || iCarattere2 < 0))
+                                iCarattere2 = iCarattere3; // trova primo whitespace, poi butta e riutilizza iCarattere3
+                            iCarattere3 = testoDaModificare.IndexOf('{', i);
+                            if (iCarattere1 >= 0 && (iCarattere1 < iCarattere2 || iCarattere2<0) &&( iCarattere1<iCarattere3||iCarattere3<0))
+                            {
+                                if (i > 0 && IsLettera(testoDaModificare[i - 1]) && iCarattere1 < testoDaModificare.Length - 2 && testoDaModificare[iCarattere1 + 2] == '\'')
                                 {
-                                    // per esempio una parola come necessit\\f2\\'e0
                                     analizzaParola = false;
                                 }
-                                iCarattere2 = iCarattere1;
+                                iCarattere3 = iCarattere1;
+                            }
+                            else if (iCarattere2>= 0 && (iCarattere2 < iCarattere3||iCarattere3<0))
+                            {
+                                if (i > 0 && IsLettera(testoDaModificare[i - 1]) && iCarattere2 >= 0 && iCarattere2 < testoDaModificare.Length - 1 && !testoDaModificare.AsSpan(i, iCarattere2 - i).Equals(@"\par", StringComparison.Ordinal) && !testoDaModificare.AsSpan(i, iCarattere2 - i).Equals("\\par\r", StringComparison.Ordinal) && IsLettera(testoDaModificare[iCarattere2 + 1]))
+                                {
+                                    analizzaParola = false;
+                                }
+                                iCarattere3 = iCarattere2;
+                            }
+                            else if (iCarattere3 >= 0)
+                            {
+                                if (i > 0 && IsLettera(testoDaModificare[i - 1]) && iCarattere3 < testoDaModificare.Length - 1 && IsLettera(testoDaModificare[iCarattere3 + 1]))
+                                {
+                                    analizzaParola = false;
+                                }
                             }
                             else
                             {
-                                if (i > 0 && c == '\\' && IsLettera(testoDaModificare[i - 1]) && iCarattere2 >= 0 && iCarattere2 < testoDaModificare.Length - 1 && testoDaModificare[i..iCarattere2] != @"\par" && (IsLettera(testoDaModificare[iCarattere2 + 1])))
-                                {
-                                    // per esempio una parola come ess\f1 ere
-                                    analizzaParola = false;
-                                }
-                            }
-                            if (iCarattere2 == -1)
-                            {
-                                iCarattere2 = testoDaModificare.Length - 1;
+                                iCarattere3 = testoDaModificare.Length - 1;
                             }
 
-                            i = iCarattere2;
+                            i = iCarattere3;
                         }
                     }
+
                     if (parola.Length > 0 && analizzaParola)
                     {
                         if (statoCambiamento == 2)
                         {
-                            testoDaModificare = testoDaModificare.Insert(carattereDaInserire, formatoDopoLaParola);
-                            i += formatoDopoLaParola.Length;
+                            sb.Append(testoDaModificare, lastAppendedIndex, carattereDaInserire - lastAppendedIndex);
+                            sb.Append(formatoDopoLaParola);
+                            lastAppendedIndex = carattereDaInserire;
                             statoCambiamento = 0;
                         }
+
                         ++paroleTrovate;
                         if (paroleTrovate == nProssimaParolaDaCambiare - 1)
                         {
@@ -2734,19 +2889,38 @@ namespace LaParola
                             ++iParolaDaCambiare;
                             if (iParolaDaCambiare < nParoleDaCambiare)
                             {
-                                nProssimaParolaDaCambiare = numeriParoleDaModificare[iParolaDaCambiare];
+                                nProssimaParolaDaCambiare = meNumeri[iParolaDaCambiare];
                             }
                         }
-                        parola.Remove(0, parola.Length);
+                        parola.Clear();
                     }
                 }
-            } // for (int iCarattere = 0; iCarattere < testoVersetto.Length; ++iCarattere)
-            if (statoCambiamento == 2)
-            {
-                testoDaModificare += "}";
             }
 
-            return testoDaModificare;
+            // Append standard di chiusura
+            if (statoCambiamento == 2)
+            {
+                sb.Append(testoDaModificare, lastAppendedIndex, testoDaModificare.Length - lastAppendedIndex);
+                sb.Append(formatoDopoLaParola);
+            }
+            else
+            {
+                sb.Append(testoDaModificare, lastAppendedIndex, testoDaModificare.Length - lastAppendedIndex);
+            }
+
+            // 2. Main return guaranteed on all paths
+            return sb.ToString();
+        }
+        private static string RimuoviTestoNascosto(string input, string tagInizio, string tagFine, int offsetFine)
+        {
+            int idx;
+            while ((idx = input.IndexOf(tagInizio, StringComparison.Ordinal)) >= 0)
+            {
+                int idxFine = input.IndexOf(tagFine, idx + tagInizio.Length, StringComparison.Ordinal);
+                if (idxFine < 0) break;
+                input = string.Concat(input.AsSpan(0, idx), input.AsSpan(idxFine + offsetFine));
+            }
+            return input;
         }
 
         internal bool EsisteBrano(Riferimento riferimento)

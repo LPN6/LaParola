@@ -68,12 +68,12 @@ namespace LaParola.ToolViews
                 string nomeLibro = MainWindow.Testi.libriNomi[libro];
                 if (string.IsNullOrEmpty(nomeLibro)) continue;
 
-                var libroNode = new TreeViewItem { Header = nomeLibro, Tag = libro };
+                TreeViewItem libroNode = new() { Header = nomeLibro, Tag = libro };
 
                 for (byte cap = 1; cap <= totCap; cap++)
                 {
                     int totVers = MainWindow.Testi.VersettiInCapitolo(libro, cap, versioneBibbia);
-                    var capNode = new TreeViewItem { Header = cap.ToString(), Tag = new Tuple<byte, byte>(libro, cap) };
+                    TreeViewItem capNode = new() { Header = cap.ToString(), Tag = new Tuple<byte, byte>(libro, cap) };
 
                     for (byte v = 1; v <= totVers; v++)
                         capNode.Items.Add(new TreeViewItem { Header = v.ToString(), Tag = new Tuple<byte, byte, byte>(libro, cap, v) });
@@ -155,8 +155,7 @@ namespace LaParola.ToolViews
             try
             {
                 bool showYear = DataConditionComboBox.SelectedItem is ComboBoxItem item && item.Tag?.ToString() != "Any";
-                if (FilterYearTextBox != null)
-                    FilterYearTextBox.Visibility = showYear ? Visibility.Visible : Visibility.Collapsed;
+                FilterYearTextBox?.Visibility = showYear ? Visibility.Visible : Visibility.Collapsed;
                 ApplicaFiltri();
             }
             catch { }
@@ -232,7 +231,7 @@ namespace LaParola.ToolViews
             try
             {
                 if (MainWindow.Testi == null) return null;
-                var info = MainWindow.Testi.Info(versione);
+                VersioneInformazioni info = MainWindow.Testi.Info(versione);
                 return new RisultatoRicerca
                 {
                     Nome = versione,
@@ -252,8 +251,8 @@ namespace LaParola.ToolViews
 
         private static async Task<RisultatoRicerca[]> RicercaRiferimento(RiferimentoParsato rif)
         {
-            var risultati = new List<RisultatoRicerca>();
-            var visti = new HashSet<string>();
+            List<RisultatoRicerca> risultati = [];
+            HashSet<string> visti = [];
             await Task.Yield();
             if (MainWindow.Testi == null) return [];
 
@@ -261,7 +260,7 @@ namespace LaParola.ToolViews
             {
                 try
                 {
-                    var info = MainWindow.Testi.Info(versione);
+                    VersioneInformazioni info = MainWindow.Testi.Info(versione);
                     if ((info.Tipo & (TestoTipi.Commentario | TestoTipi.Dizionario | TestoTipi.Libro)) == 0) continue;
 
                     foreach (string titolo in MainWindow.Testi.NoteConTitolo(versione))

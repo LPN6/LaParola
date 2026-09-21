@@ -223,6 +223,21 @@
     <sys:String x:Key="BibliotecaCopiaAiuto">Crea una copia del testo</sys:String>
     <sys:String x:Key="BibliotecaCopiaCopiato">Il testo '{0}' è stato copiato in '{1}'.</sys:String>
     <sys:String x:Key="BibliotecaCopiaErrore">Errore copiando il testo: {0}</sys:String>
+    <sys:String x:Key="BibliotecaEsporta">Esporta testo</sys:String>
+    <sys:String x:Key="BibliotecaEsportaAiuto">Esporta il testo in un altro formato</sys:String>
+    <sys:String x:Key="BibliotecaEsportaOSIS">File OSIS (XML)</sys:String>
+    <sys:String x:Key="BibliotecaEsportaZefania">File Zefania (XML)</sys:String>
+    <sys:String x:Key="BibliotecaEsportaAndroid">File per LaParola Android</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFiles">File multipli</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFile">File singolo</sys:String>
+    <sys:String x:Key="BibliotecaEsportaAndroidFiltro">File LaParola Android (*.lpj)|*.lpj|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="BibliotecaEsportaCartellaDialogoTitolo">Seleziona la directory dove i file esportati saranno salvati</sys:String>
+    <sys:String x:Key="BibliotecaEsportaMessaggio">Esportazione file in corso</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFinito">Esportazione file completata</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFilesMessaggio">Esportazione dei file in corso</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFilesFinito">Esportazione dei file completata</sys:String>
+    <sys:String x:Key="BibliotecaEsportaErrore">Errore durante l'esportazine: {0}</sys:String>
+    <sys:String x:Key="BibliotecaEsportaNoteModificate">Il testo '{0}' è stato modificato. Chiudi e riapri il programma per salvare le modifiche prima di esportare.</sys:String>
 
     <sys:String x:Key="ImportaErroreXML">Errore importando il file: {0}</sys:String>
     <sys:String x:Key="ImportaErroreNullo">Non sono stati trovati dati validi.</sys:String>
@@ -300,7 +315,7 @@
     <sys:String x:Key="OpzioniTemaScuro">Scuro</sys:String>
     <sys:String x:Key="OpzioniLinguaTitolo">Lingua</sys:String>
     <sys:String x:Key="OpzioniInterfaccia">Interfaccia:</sys:String>
-    <sys:String x:Key="OpzioniLinguaAiuto">Scegli la lingua per l'applicazione, inglese o italiano. La maggior parte dell'interfaccia viene modificata immediatamente, il resto richiede il riavvio dell'app.</sys:String>
+    <sys:String x:Key="OpzioniLinguaAiuto">Scegli la lingua per l'applicazione, inglese o italiano. La maggior parte dell'interfaccia viene modificata immediatamente, il resto richiede il riavvio dell'app. Sarai chiesto se vuoi anche usare i nomi e abbreviazioni dei libri della Bibbia nella nuova lingua.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">Per cambiare completamente la lingua utilizzata nell'app, è necessario riavviare l'applicazione. Cambiare la lingua dell'interfaccia cambia anche la lingua dei nomi e abbreviazioni dei libri usati e riconosciuti.</sys:String>
     <sys:String x:Key="OpzioniVoceTitolo">Sintesi vocale</sys:String>
     <sys:String x:Key="OpzioniVoceAiuto">Scegli le impostazioni per la sintesi vocale: voce, velocità e volume.</sys:String>
@@ -339,6 +354,14 @@
     <sys:String x:Key="OpzioniRiferimentiPosizionePrimaStessa">Prima, stessa riga</sys:String>
     <sys:String x:Key="OpzioniRiferimentiPosizionePrimaDiversa">Prima, riga diversa</sys:String>
     <sys:String x:Key="OpzioniRiferimentiPosizioneDopo">Dopo</sys:String>
+    <sys:String x:Key="OpzioniLibriTitolo">Libri</sys:String>
+    <sys:String x:Key="OpzioniLibriAiuto">Modifica i nomi e le abbreviazioni dei libri che il programma utilizza, e le abbreviazioni che riconosce. I pulsanti sotto la grigia impostano i nomi e abbreviazioni predefiniti in italiano o inglese.</sys:String>
+    <sys:String x:Key="OpzioniLibriNomi">Nomi</sys:String>
+    <sys:String x:Key="OpzioniLibriAbbreviazioniUsate">Abbreviazioni usate</sys:String>
+    <sys:String x:Key="OpzioniLibriAbbreviazioniRiconosciute">Abbreviazioni riconosciute</sys:String>
+    <sys:String x:Key="OpzioniLibriPredefinitiItaliano">Predefiniti in italiano</sys:String>
+    <sys:String x:Key="OpzioniLibriPredefinitiInglese">Predefiniti in inglese</sys:String>
+    <sys:String x:Key="OpzioniLibriCambioLinguaTitolo">Cambio lingua</sys:String>
     <sys:String x:Key="OpzioniFont">Carattere predefinito:</sys:String>
     <sys:String x:Key="OpzioniFontGreco">Carattere greco:</sys:String>
     <sys:String x:Key="OpzioniFontEbraico">Carattere ebraico:</sys:String>
@@ -419,6 +442,17 @@
         \pard\tx3000 /peccare7*pen*\tab Un versetto che contiene una parola da "peccare" ed entro sette versetti una parola che contiene le lettere "pen"\par
 }
     </sys:String>
+    <sys:String x:Key="RicercaScegliParole">Seleziona parole/radici...</sys:String>
+    <sys:String x:Key="RicercaScegliParoleAiuto">Fai clic sulla piccola freccia per aprire o chiudere un pannello per scegliere le parole da aggiungere all'espressione da ricercare.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleFiltroAiuto">Digita le prime lettere della parola che vuoi trovare nella lista sottostante.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleListaAiuto">Seleziona una parola per mostrare più informazioni qui sotto; fai doppio clic su una parola per aggiungerla all'espressione da ricercare.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleRadiciListaAiuto">Seleziona una radice per mostrare più informazioni qui sotto e le parole che hanno quella radice a destra; fai doppio clic per aggiungere la radice all'espressione da ricercare.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleAggiungiAiuto">Fai clic qui per aggiungere la parola selezionata all'espressione da ricercare.</sys:String>
+    <sys:String x:Key="RicercaOccorrenze">Occorrenze:</sys:String>
+    <sys:String x:Key="RicercaRadice">Radice:</sys:String>
+    <sys:String x:Key="RicercaAggiungiParola">Aggiungi parola</sys:String>
+    <sys:String x:Key="RicercaParoleConRadice">Parole con radice:</sys:String>
+    <sys:String x:Key="RicercaAggiungiRadice">Aggiungi radice</sys:String>
     <sys:String x:Key="RicercaVersione">Testo da ricercare:</sys:String>
     <sys:String x:Key="RicercaTestiAiuto">Seleziona il testo in cui vuoi cercare.</sys:String>
     <sys:String x:Key="RicercaRicerca">Ricerca</sys:String>
@@ -453,6 +487,8 @@
     <sys:String x:Key="MostraAlterna">Alterna testi</sys:String>
     <sys:String x:Key="MostraAlternaAiuto">Mostra il brano un versetto dopo l'altro, e per ogni versetto tutti i testi selezionati sono visualizzati. Può essere molto lento per brani lunghi.</sys:String>
     <sys:String x:Key="MostraMostra">Mostra brano</sys:String>
+    <sys:String x:Key="MostraProgressoMessaggio">Generazione del testo...</sys:String>
+    <sys:String x:Key="MostraProgressoFinito">Testo creato</sys:String>
 
     <sys:String x:Key="CreaChiaveTitolo">Crea chiave</sys:String>
     <sys:String x:Key="CreaChiaveAiuto">Una chiave è un elenco delle parole in un testo. Seleziona il testo di cui vuoi creare la chiave, e poi le altre impostazioni. Lascia il mouse sopra una parte della finestra per ulteriori informazioni sulle impostazioni.</sys:String>
@@ -501,6 +537,14 @@
     <sys:String x:Key="Aiuto">Aiuto per questo pannello</sys:String>
     <sys:String x:Key="AiutoApri">Apri Centro assistenza</sys:String>
 
+    <sys:String x:Key="VoceCapitolo">capitolo</sys:String>
+    <sys:String x:Key="VoceVersetto">versetto</sys:String>
+    <sys:String x:Key="VoceDal">dal versetto</sys:String>
+    <sys:String x:Key="VoceAl">al versetto</sys:String>
+    <sys:String x:Key="VoceConn"> e </sys:String>
+    <sys:String x:Key="VocePrima">Prima</sys:String>
+    <sys:String x:Key="VoceSeconda">Seconda</sys:String>
+    <sys:String x:Key="VoceTerza">Terza</sys:String>
     <sys:String x:Key="ColorYellow">Giallo</sys:String>
     <sys:String x:Key="ColorGold">Oro</sys:String>
     <sys:String x:Key="ColorOrange">Arancione</sys:String>

@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace LaParola.ToolViews
 {
-    // TODO2 for each text, buttons to: esportare, unire 2, cambia sola lettura (se Bloccato=0 or 1), creare file unico, aggiungere radici
+    // TODO2 for each text, buttons to: unire 2, cambia sola lettura (se Bloccato=0 or 1), aggiungere radici
 
     /// <summary>
     /// Logica di interazione per LibraryToolView.xaml
@@ -306,7 +306,7 @@ namespace LaParola.ToolViews
                         };
 
                         // Show the dialog box. ShowDialog() returns a nullable boolean (bool?).
-                        bool? result = openFileDialog.ShowDialog();
+                        bool? result = openFileDialog.ShowDialog(Application.Current.MainWindow);
 
                         // If the user clicked OK, import the selected file path
                         if (result == true)
@@ -346,7 +346,7 @@ namespace LaParola.ToolViews
 
                         OpenFolderDialog dialogCartella = new()
                         {
-                            Title = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCartellaDialogoTitolo") ?? "Importing the file"),
+                            Title = (string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriCartellaDialogoTitolo") ?? "Select the directory that contains the files to import"),
                             InitialDirectory = ultimaCartellaImportareRtf,
                         };
 
@@ -626,7 +626,8 @@ namespace LaParola.ToolViews
                         {
                             int nNote = MainWindow.Testi.NumeroNote(testo);
                             int nNoteTitolo = MainWindow.Testi.NumeroNoteConTitolo(testo);
-                            if (nNoteTitolo < nNote / 2) {
+                            if (nNoteTitolo < nNote / 2)
+                            {
                                 MainWindow.VisualizzaCommentario(testo);
                             }
                             else
@@ -743,6 +744,61 @@ namespace LaParola.ToolViews
                 {
                     string messaggio = string.Format((string)(Application.Current.TryFindResource("BibliotecaCopiaErrore") ?? $"Error copying text: {{0}}."), exc);
                     MessageBoxLPN.Show(Window.GetWindow(this), messaggio, (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+                }
+            }
+        }
+
+        private async void ButtonEsporta_Click(object sender, RoutedEventArgs e)
+        {
+            if (BooksDataGrid.SelectedItem is VersioneInformazioni versione)
+            {
+                // CASO 1: L'utente ha fatto clic sul pulsante principale
+                if (sender is Button bottone)
+                {
+                    if (bottone.ContextMenu != null)
+                    {
+                        TestoTipi tipo = versione.Tipo;
+                        bool tipoBibbia = ((tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia);
+
+                        // Allinea il menu esattamente sotto il pulsante
+                        bottone.ContextMenu.PlacementTarget = bottone;
+                        // Forza l'apertura del menu a comparsa
+                        bottone.ContextMenu.IsOpen = true;
+
+                        EsportaOSIS.Visibility = tipoBibbia ? Visibility.Visible : Visibility.Collapsed;
+                        EsportaZefania.Visibility = tipoBibbia ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
+
+                // CASO 2: L'utente ha cliccato su una delle opzioni del menu
+                else if (sender is MenuItem voceMenu)
+                {
+                    // Recuperiamo il Tag identificativo
+                    string tagSelezionato = voceMenu.Tag?.ToString() ?? "";
+                    TipoEsportazione tipo = TipoEsportazione.Nessuno;
+
+                    switch (tagSelezionato)
+                    {
+                        case "OSIS":
+                            tipo = TipoEsportazione.EsportaOSIS;
+                            break;
+                        case "Zefania":
+                            tipo = TipoEsportazione.EsportaZefania;
+                            break;
+                        case "Android":
+                            tipo = TipoEsportazione.EsportaAndroid;
+                            break;
+                        case "File":
+                            tipo = TipoEsportazione.EsportaFileSingolo;
+                            break;
+                        case "Files":
+                            tipo = TipoEsportazione.EsportaFileMultipli;
+                            break;
+                        default:
+                            // Gestione di sicurezza se un Tag dovesse mancare o essere errato
+                            break;
+                    }
+                    EsportaService.EsportaTesto(versione, tipo);
                 }
             }
         }

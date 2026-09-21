@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Windows.Storage;
 
 namespace LaParola.Services
 {
@@ -265,7 +266,7 @@ namespace LaParola.Services
         /// una parola qualunque che assomiglia a un'abbreviazione (alcune abbreviazioni sono di
         /// una o due lettere, es. "o" per Osea, "la"/"mi"/"ti" per altri libri, che altrimenti
         /// sarebbero normalissime parole italiane) - con il nome completo del libro
-        /// (Principale.testi.GetLibroNumeroDaAbbreviazione + GetLibroNome, gia' usati altrove nel
+        /// (Principale.testi.GetLibroNumeroDaAbbreviazione + GetLibroNome, già usati altrove nel
         /// programma per lo stesso scopo, solo in direzione inversa).
         /// </summary>
         private static string EspandiAbbreviazioniLibri(string testo)
@@ -296,14 +297,12 @@ namespace LaParola.Services
 
             string num = m.Groups[1].Value;
             string resto = m.Groups[2].Value;
-            string ordinale;
 
-            if (_linguaEspansione == "en")
-                ordinale = num switch { "1" => "First", "2" => "Second", "3" => "Third", _ => "" };
-            else if (_linguaEspansione == "es")
-                ordinale = num switch { "1" => "Primera", "2" => "Segunda", "3" => "Tercera", _ => "" };
-            else
-                ordinale = num switch { "1" => "Prima", "2" => "Seconda", "3" => "Terza", _ => "" };
+            string primo = (string)(Application.Current.TryFindResource("VocePrima") ?? "First");
+            string secondo = (string)(Application.Current.TryFindResource("VoceSeconda") ?? "Second");
+            string terzo = (string)(Application.Current.TryFindResource("VoceTerza") ?? "Third");
+
+            string ordinale = num switch { "1" => primo, "2" => secondo, "3" => terzo, _ => "" };
 
             return string.IsNullOrEmpty(ordinale) ? nomeLibro : ordinale + " " + resto;
         }
@@ -312,11 +311,11 @@ namespace LaParola.Services
         {
             try
             {
-                string cap = "capitolo", vers = "versetto", dal = "dal versetto", al = "al versetto", conn = " e ";
-                if (_linguaEspansione == "en")
-                { cap = "chapter"; vers = "verse"; dal = "from verse"; al = "to verse"; conn = " and "; }
-                else if (_linguaEspansione == "es")
-                { cap = "capítulo"; vers = "versículo"; dal = "del versículo"; al = "al versículo"; conn = " y "; }
+                string cap = (string)(Application.Current.TryFindResource("VoceCapitolo") ?? "chapter");
+                string vers = (string)(Application.Current.TryFindResource("VoceVersetto") ?? "verse");
+                string dal = (string)(Application.Current.TryFindResource("VoceDal") ?? "from verse");
+                string al = (string)(Application.Current.TryFindResource("VoceDal") ?? "to verse");
+                string conn = (string)(Application.Current.TryFindResource("VoceConn") ?? " and ");
 
                 testo = RegexEspandiRiferimenti1().Replace(testo, m =>
                     $"{cap} {m.Groups[1].Value} {dal} {m.Groups[2].Value} {al} {m.Groups[3].Value}");
@@ -428,7 +427,14 @@ namespace LaParola.Services
             try
             {
                 HashSet<string> viste = [];
-                string[] perLibro = MainWindow.Testi.LibriAbbreviazioniRiconosciute.AbbreviazioniPerLibro();
+                string[] perLibro = [];
+                if (_linguaEspansione=="it")
+                    perLibro= Texts.LibriAbbreviazioniRiconosciuteItaliano.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                else if (_linguaEspansione == "en")
+                    perLibro = Texts.LibriAbbreviazioniRiconosciuteInglese.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                else if (_linguaEspansione == "es")
+                    perLibro = Texts.LibriAbbreviazioniRiconosciuteSpagnolo.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                // se altra lingua, non riconosciamo nessuna abbreviazione
                 foreach (string variantiLibro in perLibro)
                 {
                     if (string.IsNullOrEmpty(variantiLibro)) continue;
@@ -438,18 +444,6 @@ namespace LaParola.Services
                         if (v.Length > 0) viste.Add(v);
                     }
                 }
-                // Aggiunge abbreviazioni italiane mancanti (non presenti nell'elenco inglese caricato da Testi)
-                // TODO2 da Testi
-                string[] itExtra = ["ge","gn","eo","es","le","lv","nm","nu","de","dt","gios","gs","gdc","giudic","rt","ru",
-                    "1s","2s","1r","2r","1cr","2cr","ed","esd","ne","tb","to","giudit","est","et","1m","2m","gb","giob",
-                    "sal","sl","pr","pv","ec","q","ca","cc","ct","sap","si","is","ger","gr","la","b","ez","da","dn","o",
-                    "gioe","gl","am","abd","ad","gion","mi","na","aba","ac","h","so","ag","z","mal","ml","mat","mt",
-                    "mar","mc","mr","lc","lu","giov","gv","at","rm","ro","1co","ico","2co","iico","ga","ef","fili","fl",
-                    "cl","co","1te","ite","2te","iite","1ti","iti","2ti","iiti","ti","tt","file","fm","eb","gc","gia","gm",
-                    "1p","ip","2p","iip","1g","ig","2g","iig","3g","iiig","gd","giuda","ap","1s","2s","1r","1cr","2cr",
-                    "1m","2m","1co","2co","1te","2te","1ti","2ti","1p","2p","1g","2g","3g"];
-                foreach (string a in itExtra)
-                    if (a.Length > 0) viste.Add(a);
 
                 List<String> abbreviazioni = [.. viste.OrderByDescending(x => x.Length).Select(Regex.Escape)];
                 if (abbreviazioni.Count == 0) return null;

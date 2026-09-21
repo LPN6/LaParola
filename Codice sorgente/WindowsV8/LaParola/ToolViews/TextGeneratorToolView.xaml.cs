@@ -1,11 +1,8 @@
+using LaParola.Services;
 using LaParola.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -19,7 +16,6 @@ public partial class TextGeneratorToolView : UserControl
     // TODO2 aggiungere "Con definizioni": load and save state from settings
     //    then genitore.MostraDefinizioniInEditor(branoDaMostrare, clbVersioni.CheckedItems[0].ToString());
     //    and in SelectedItem change:             cbDefinizioni.Enabled = (clbVersioni.CheckedItems.Count > 0 && !string.IsNullOrEmpty(Funzioni.DizionarioDiVersione(clbVersioni.CheckedItems[0].ToString())));
-    // TODO2 progress bar; there are better ways to do the threading
     // TODO2 testo può andare in una finestra editor attuale?
     // TODO2 alternare - riga addizionale da togliere
 
@@ -240,7 +236,6 @@ public partial class TextGeneratorToolView : UserControl
             .. VersioneItems
             .Select(x => x.Name)
         ];
-        App.Settings.Save(MainWindow.settings);
     }
 
     private void SaveSelectedVersions()
@@ -253,8 +248,6 @@ public partial class TextGeneratorToolView : UserControl
             .Where(x => x.IsSelected)
             .Select(x => x.Name)
         ];
-
-        App.Settings.Save(MainWindow.settings);
     }
 
     private void HelpFlyout_OnHelpClicked(object sender, RoutedEventArgs e)
@@ -283,7 +276,6 @@ public partial class TextGeneratorToolView : UserControl
     private void Alternare_Click(object sender, RoutedEventArgs e)
     {
         MainWindow.settings.MostraAlternare = cbAlternare.IsChecked == true;
-        App.Settings.Save(MainWindow.settings);
     }
 
     protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -299,11 +291,39 @@ public partial class TextGeneratorToolView : UserControl
     private async void Generate_Click(object sender, RoutedEventArgs e)
     {
         Collection<string> versioni = new([.. GetSelectedVersionNames()]);
-        if (versioni.Count == 0)
+        if (versioni.Count == 0 || string.IsNullOrWhiteSpace(tbBrano.Text))
         {
             return;
         }
 
+        MostraBranoInEditor(tbBrano.Text, versioni, cbAlternare.IsChecked == true);
+    }
+
+    public static void MostraBranoInEditor(string riferimentoDaMostrare, string versione, bool alternare = false)
+    {
+        MostraBranoInEditor(MainWindow.Testi.ConvertiRiferimento(riferimentoDaMostrare), versione, alternare);
+    }
+
+    public static void MostraBranoInEditor(Collection<string> noteDaMostrare, string versione, bool alternare = false)
+    {
+        Riferimento riferimentoDaMostrare = new(false);
+        foreach (string nota in noteDaMostrare)
+            riferimentoDaMostrare.AggiungiNotaEParole(nota, []);
+        MostraBranoInEditor(riferimentoDaMostrare, versione, alternare);
+    }
+
+    public static void MostraBranoInEditor(string riferimentoDaMostrare, Collection<string> versioni, bool alternare=false)
+    {
+        MostraBranoInEditor(MainWindow.Testi.ConvertiRiferimento(riferimentoDaMostrare), versioni, alternare);
+    }
+
+    public static async void MostraBranoInEditor(Riferimento riferimentoDaMostrare, string versione, bool alternare=false)
+    {
+        MostraBranoInEditor(riferimentoDaMostrare, [versione], alternare);
+    }
+
+    public static async void MostraBranoInEditor(Riferimento riferimentoDaMostrare, Collection<string> versioni, bool alternare)
+    {
         string abbVersioni = "";
         foreach (string versione in versioni)
         {
@@ -317,15 +337,17 @@ public partial class TextGeneratorToolView : UserControl
         if (!String.IsNullOrEmpty(abbVersioni))
             abbVersioni = " (" + abbVersioni[..^2] + ")";
 
-        string title = string.IsNullOrWhiteSpace(tbBrano.Text) ? (string)(System.Windows.Application.Current.TryFindResource("EditorTitolo") ?? "Document") : MainWindow.Testi.NormalizzaRiferimento(tbBrano.Text) + abbVersioni;
+        string title = riferimentoDaMostrare.Count==0 ? (string)(Application.Current.TryFindResource("EditorTitolo") ?? "Document") : MainWindow.Testi.NormalizzaRiferimento(riferimentoDaMostrare) + abbVersioni;
 
-        Riferimento rif = MainWindow.Testi.ConvertiRiferimento(tbBrano.Text);
-        bool alternare = cbAlternare.IsChecked == true;
-        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(rif, versioni, alternare:alternare);
+        string messaggio = (string)(Application.Current.TryFindResource("MostraProgressoMessaggio") ?? "Generating text...");
+        using StatusTask? statusTask = StatusService.AvviaTask(messaggio, progressBarVisibility: Visibility.Collapsed);
+        await Application.Current.Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Render);
+        FlowDocument doc = await MainWindow.Testi.FlowDocumentBranoAsync(riferimentoDaMostrare, versioni, alternare: alternare);
         doc.Tag = versioni[0];
         Brush fg = (Brush)Application.Current.FindResource("AppForegroundBrush");
         RtfColorTransformer.ApplyThemeToDocument(doc, true, fg, true);
-
         App.DockingHost.SendFlowDocumentToActiveEditor(doc, title, versioni[0]);
+        statusTask.Update((string)(Application.Current.TryFindResource("MostraProgressoFinito") ?? "Text created"), 100.0);
+        await Task.Delay(5000); // lasciare il messaggio, poi scompare dopo 5 secondi
     }
 }

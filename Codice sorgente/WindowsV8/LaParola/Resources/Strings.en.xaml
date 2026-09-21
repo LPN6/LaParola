@@ -223,6 +223,21 @@
     <sys:String x:Key="BibliotecaCopiaAiuto">Create a copy of the text</sys:String>
     <sys:String x:Key="BibliotecaCopiaCopiato">The text '{0}' was copied to '{1}'.</sys:String>
     <sys:String x:Key="BibliotecaCopiaErrore">Error copying text: {0}</sys:String>
+    <sys:String x:Key="BibliotecaEsporta">Export Text</sys:String>
+    <sys:String x:Key="BibliotecaEsportaAiuto">Export the text to another format</sys:String>
+    <sys:String x:Key="BibliotecaEsportaOSIS">OSIS File (XML)</sys:String>
+    <sys:String x:Key="BibliotecaEsportaZefania">Zefania File (XML)</sys:String>
+    <sys:String x:Key="BibliotecaEsportaAndroid">File for LaParola Android</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFiles">Multiple Files</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFile">Single File</sys:String>
+    <sys:String x:Key="BibliotecaEsportaAndroidFiltro">LaParola Android files (*.lpj)|*.lpj|All files (*.*)|*.*</sys:String>
+    <sys:String x:Key="BibliotecaEsportaCartellaDialogoTitolo">Select the directory where the exported files will be saved</sys:String>
+    <sys:String x:Key="BibliotecaEsportaMessaggio">Exporting file</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFinito">Exporting file completed</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFilesMessaggio">Exporting files</sys:String>
+    <sys:String x:Key="BibliotecaEsportaFilesFinito">Exporting files completed</sys:String>
+    <sys:String x:Key="BibliotecaEsportaErrore">Error during the exporting: {0}</sys:String>
+    <sys:String x:Key="BibliotecaEsportaNoteModificate">The text '{0}' has been modified. Please close and reopen the program to save the changes before exporting.</sys:String>
 
     <sys:String x:Key="ImportaErroreXML">Error importing the file: {0}</sys:String>
     <sys:String x:Key="ImportaErroreNullo">Failed to find valid metadata.</sys:String>
@@ -300,7 +315,7 @@
     <sys:String x:Key="OpzioniTemaScuro">Dark</sys:String>
     <sys:String x:Key="OpzioniLinguaTitolo">Language</sys:String>
     <sys:String x:Key="OpzioniInterfaccia">Interface:</sys:String>
-    <sys:String x:Key="OpzioniLinguaAiuto">Choose the language for the application, English or Italian. Most of the interface is changed immediately, the rest requires a restart of the app.</sys:String>
+    <sys:String x:Key="OpzioniLinguaAiuto">Choose the language for the application, English or Italian. Most of the interface is changed immediately, the rest requires a restart of the app. You will be asked if you want to also use the names and abbreviations of the books of the Bible in the new language.</sys:String>
     <sys:String x:Key="OpzioniLinguaNota">To completely change the language used in the app, you need to restart the application. Changing the interface language also changes the language of the names and abbreviations of the books used and recognised.</sys:String>
     <sys:String x:Key="OpzioniVoceTitolo">Speech Synthesis</sys:String>
     <sys:String x:Key="OpzioniVoceAiuto">Choose the settings for speech synthesis: voice, speed and volume.</sys:String>
@@ -336,6 +351,14 @@
     <sys:String x:Key="OpzioniRiferimentiPosizionePrimaStessa">Before, same line</sys:String>
     <sys:String x:Key="OpzioniRiferimentiPosizionePrimaDiversa">Before, different line</sys:String>
     <sys:String x:Key="OpzioniRiferimentiPosizioneDopo">After</sys:String>
+    <sys:String x:Key="OpzioniLibriTitolo">Books</sys:String>
+    <sys:String x:Key="OpzioniLibriAiuto">Modify the names and abbreviations of the books that the program uses, and the abbreviations that it recognises. The buttons under the grid set the default names and abbreviations in either Italian or English.</sys:String>
+    <sys:String x:Key="OpzioniLibriNomi">Names</sys:String>
+    <sys:String x:Key="OpzioniLibriAbbreviazioniUsate">Used Abbreviations</sys:String>
+    <sys:String x:Key="OpzioniLibriAbbreviazioniRiconosciute">Recognised Abbreviations</sys:String>
+    <sys:String x:Key="OpzioniLibriPredefinitiItaliano">Default in Italian</sys:String>
+    <sys:String x:Key="OpzioniLibriPredefinitiInglese">Default in English</sys:String>
+    <sys:String x:Key="OpzioniLibriCambioLinguaTitolo">Language Change</sys:String>
     <sys:String x:Key="OpzioniFontTitolo">Fonts</sys:String>
     <sys:String x:Key="OpzioniFontAiuto">Choose the font settings for the text. Note that the colour chosen is that which is shown in light mode - if black text is chosen, it is shown as white in dark mode. For the Bible references, you can also choose to use superscripts.</sys:String>
     <sys:String x:Key="OpzioniFont">Default Font:</sys:String>
@@ -418,6 +441,17 @@
         \pard\tx3000 /sin7*pen*\tab A verse that contains a word from "sin" and within seven verses a word that contains the letters "pen"\par
 }
     </sys:String>
+    <sys:String x:Key="RicercaScegliParole">Select Words/Roots...</sys:String>
+    <sys:String x:Key="RicercaScegliParoleAiuto">Click on the small arrow to open or close a panel to choose the words to add to the search expression.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleFiltroAiuto">Type the first few letters of the word you want to find in the list below.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleListaAiuto">Select a word to show more information below; double click a word to add it to the search expression.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleRadiciListaAiuto">Select a root to show more information below and the words that have that root at right; double click to add the root to the search expression.</sys:String>
+    <sys:String x:Key="RicercaScegliParoleAggiungiAiuto">Click here to add the selected word to the search expression.</sys:String>
+    <sys:String x:Key="RicercaOccorrenze">Appearances:</sys:String>
+    <sys:String x:Key="RicercaRadice">Root:</sys:String>
+    <sys:String x:Key="RicercaAggiungiParola">Add Word</sys:String>
+    <sys:String x:Key="RicercaParoleConRadice">Words with Root:</sys:String>
+    <sys:String x:Key="RicercaAggiungiRadice">Add Root</sys:String>
     <sys:String x:Key="RicercaVersione">Text to Search:</sys:String>
     <sys:String x:Key="RicercaTestiAiuto">Select the text that you want to search in.</sys:String>
     <sys:String x:Key="RicercaRicerca">Search</sys:String>
@@ -452,6 +486,8 @@
     <sys:String x:Key="MostraAlterna">Alternate Texts</sys:String>
     <sys:String x:Key="MostraAlternaAiuto">Show the passage one verse at a time, and for every verse all of the selected texts are shown. Can be slow for long passages.</sys:String>
     <sys:String x:Key="MostraMostra">Show Passage</sys:String>
+    <sys:String x:Key="MostraProgressoMessaggio">Generating text...</sys:String>
+    <sys:String x:Key="MostraProgressoFinito">Text created</sys:String>
 
     <sys:String x:Key="CreaChiaveTitolo">Create Concordance</sys:String>
     <sys:String x:Key="CreaChiaveAiuto">A concordance is a list of the words in a text. Select the text you want of which you want to create the concordance, and then the other options. Hover the mouse over a part of the window for more information on the options.</sys:String>
@@ -500,6 +536,14 @@
     <sys:String x:Key="Aiuto">Help about this panel</sys:String>
     <sys:String x:Key="AiutoApri">Open Help Centre</sys:String>
 
+    <sys:String x:Key="VoceCapitolo">chapter</sys:String>
+    <sys:String x:Key="VoceVersetto">verse</sys:String>
+    <sys:String x:Key="VoceDal">from verse</sys:String>
+    <sys:String x:Key="VoceAl">to verse</sys:String>
+    <sys:String x:Key="VoceConn"> and </sys:String>
+    <sys:String x:Key="VocePrima">First</sys:String>
+    <sys:String x:Key="VoceSeconda">Second</sys:String>
+    <sys:String x:Key="VoceTerza">Third</sys:String>
     <sys:String x:Key="ColorYellow">Yellow</sys:String>
     <sys:String x:Key="ColorGold">Gold</sys:String>
     <sys:String x:Key="ColorOrange">Orange</sys:String>
