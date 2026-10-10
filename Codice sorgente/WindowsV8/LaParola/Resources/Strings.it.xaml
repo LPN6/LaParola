@@ -58,6 +58,7 @@
     <sys:String x:Key="MenuRicerca">_Ricerca</sys:String>
     <sys:String x:Key="MenuTextGenerator">_Mostra brano</sys:String>
     <sys:String x:Key="MenuCreaChiave">Crea _chiave</sys:String>
+    <sys:String x:Key="MenuBraniSimili">Brani _simili</sys:String>
     <sys:String x:Key="MenuConverter">Conver_titore misure</sys:String>
     <sys:String x:Key="MenuRiferimenti">_Cerca riferimenti</sys:String>
     <sys:String x:Key="RiferimentiTitolo">Cerca riferimenti</sys:String>
@@ -65,11 +66,11 @@
     <sys:String x:Key="RiferimentiTrovati">Trovati {0} risultati in {1} testi</sys:String>
     <sys:String x:Key="RiferimentiAiuto">Digita un riferimento biblico (es. Gv 3:16), poi clicca Cerca per trovare tutti i testi che lo contengono.</sys:String>
     <sys:String x:Key="MenuVoce">Sintesi _vocale</sys:String>
-    <sys:String x:Key="MenuAggiungiTesti">_Aggiungi testi</sys:String>
+    <sys:String x:Key="MenuAggiungiTesti">_Aggiungi e aggiorna testi</sys:String>
     <sys:String x:Key="MenuOptions">_Opzioni</sys:String>
     <sys:String x:Key="MenuAssistenza">_Centro assistenza</sys:String>
     <sys:String x:Key="MenuAbout">_Informazioni su LaParola</sys:String>
-    <sys:String x:Key="MainNessunaVersione">Nessuno testo trovato. Usa il commando 'Aggiungi testi' del menu Strumenti per aggiungere qualche testo.</sys:String>
+    <sys:String x:Key="MainNessunaVersione">Nessuno testo trovato. Usa il commando 'Aggiungi e aggiorna testi' del menu Strumenti per aggiungere qualche testo.</sys:String>
     <sys:String x:Key="MainNessunaGuida">Il file della guida non è stato trovato. Potrebbe essere un problema interno del programma.</sys:String>
 
     <sys:String x:Key="ViewerTitolo">Visualizzatore</sys:String>
@@ -149,7 +150,7 @@
     <sys:String x:Key="FileNone">(nessuno)</sys:String>
 
     <sys:String x:Key="BibliotecaTitolo">Biblioteca</sys:String>
-    <sys:String x:Key="BibliotecaAiuto">La grigia elenca tutti i testi installati. Cliccare su una riga mostra ulteriori informazioni nel pannello a destra, un doppio clic apre il testo nel programma. Le due righe superiori danno vari modi per ricercare o filtare i testi. Il pulsante a sinistra dà vari modi per aggiungere testi alla biblioteca. Lascia il mouse sopra gli elementi della finestra per ulteriori informationi.</sys:String>
+    <sys:String x:Key="BibliotecaAiuto">La grigia elenca tutti i testi installati. Se clicchi su una riga vengono mostrate ulteriori informazioni nel pannello a destra; se fai un doppio clic viente aperto il testo nel programma. Le due righe superiori danno vari modi per ricercare o filtare i testi. Il pulsante a sinistra dà vari modi per aggiungere testi alla biblioteca; il pulsante sotto salva le informazioni su tutti i testi installati in un file. Lascia il mouse sopra gli elementi della finestra per ulteriori informationi.</sys:String>
     <sys:String x:Key="BibliotecaRicercaHint">Ricerca...</sys:String>
     <sys:String x:Key="BibliotecaRicercaAiuto">Digita alcune lettere, e i testi saranno filtrati per includere solo quelli che contengono quelle lettere nel nome, autore, o abbreviazione.</sys:String>
     <sys:String x:Key="BibliotecaNome">Nome</sys:String>
@@ -186,6 +187,8 @@
     <sys:String x:Key="BibliotecaFiltroDataQualsiasi">Qualsiasi</sys:String>
     <sys:String x:Key="BibliotecaFiltroDataPrima">Prima del</sys:String>
     <sys:String x:Key="BibliotecaFiltroDataDopo">Dopo il</sys:String>
+    <sys:String x:Key="BibliotecaEsportaBiblioteca">Esporta biblioteca</sys:String>
+    <sys:String x:Key="BibliotecaEsportaBibliotecaAiuto">Salva le informazioni sui libri della biblioteca in un file.</sys:String>
     <sys:String x:Key="BibliotecaAggiungiLibri">Aggiungi un testo</sys:String>
     <sys:String x:Key="BibliotecaAggiungiLibriAiuto">Scarica testi da LaParola.net, importa testi da file esistenti, o crea un nuovo testo</sys:String>
     <sys:String x:Key="BibliotecaAggiungiLibriScarica">Scarica e installa</sys:String>
@@ -211,6 +214,8 @@
     <sys:String x:Key="BibliotecaAggiungiLibriCreaCompletato">{0} aggiunto al programma</sys:String>
     <sys:String x:Key="BibliotecaAggiungiLibriCreaErrore">Error durante la creazione e il salvataggio del file</sys:String>
     <sys:String x:Key="BibliotecaGrigiaAiuto">Un elenco di tutti i testi installati. Cliccare su una riga mostra ulteriori informazioni sul testo, un doppio clic apre il testo nel programma. Lasciare il mouse sopra le icone sotto 'Tipo' le spiega. I testi possono essere reordinati cliccando sull'instestazione di una colonna. Spostare le righe verticali fra le intestazioni cambia la larghezza delle colonne. La largehezza della grigia può essere modificata spostando la riga fra essa e il pannello a destra.</sys:String>
+    <sys:String x:Key="BibliotecaGuida">Mostra in Guida</sys:String>
+    <sys:String x:Key="BibliotecaGuidaAiuto">Visualizza la descrizione del testo nel sistema di aiuto.</sys:String>
     <sys:String x:Key="BibliotecaCancella">Elimina testo</sys:String>
     <sys:String x:Key="BibliotecaCancellaAiuto">Cancella il testo dal disco (sarà richiesta una conferma)</sys:String>
     <sys:String x:Key="BibliotecaCancellaDomanda">Sei sicuro di volere cancella '{0}' dal tuo disco? (Se è un file di LaParola, potrà essere riscaricato e reinstallato.)</sys:String>
@@ -238,6 +243,37 @@
     <sys:String x:Key="BibliotecaEsportaFilesFinito">Esportazione dei file completata</sys:String>
     <sys:String x:Key="BibliotecaEsportaErrore">Errore durante l'esportazine: {0}</sys:String>
     <sys:String x:Key="BibliotecaEsportaNoteModificate">Il testo '{0}' è stato modificato. Chiudi e riapri il programma per salvare le modifiche prima di esportare.</sys:String>
+
+    <sys:String x:Key="EsportaBibliotecaTitolo">Esportare biblioteca</sys:String>
+    <sys:String x:Key="EsportaBibliotecaAiuto">Scegliere le informazioni sui testi che vuoi esportare, l'ordine dei testi, e il formato del file che contiene le informazioni.</sys:String>
+    <sys:String x:Key="EsportaBibliotecaSelezionaInformazioni">Seleziona le informazioni da esportare:</sys:String>
+    <sys:String x:Key="EsportaBibliotecaSeleziona">Seleziona tutte</sys:String>
+    <sys:String x:Key="EsportaBibliotecaDeseleziona">Deseleziona tutte</sys:String>
+    <sys:String x:Key="EsportaBibliotecaSelezionaInformazioniAiuto">Scegli quali informazioni su ogni testo vuoi salvare. Usa i due pulsanti per rapidamente selezionare o deselezionare tutte.</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdine">Ordine dei testi:</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdineAiuto">Scegli l'ordine in cui i testi saranno elencati.</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdineN">Nome</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdineTN">Tipo, Nome</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdineLN">Lingua, Nome</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdineTLN">Tipo, Lingua, Nome</sys:String>
+    <sys:String x:Key="EsportaBibliotecaOrdineLTN">Lingua, Tipo, Nome</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormato">Formato del file:</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormatoAiuto">Scegli il formato del file che sarà creato con le informazioni sui testi. Se scegli una delle prime due opzioni, il file sarà poi aperto in questo programma; altrimenti, sarà aperto in un altro programma del computer.</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormatoTXT">File di testo</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormatoRTF">File RTF</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormatoCSV">File CSV</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormatoHTML">File HTML</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFormatoXML">File XML</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFile">Salva il file con nome:</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFileTXTFiltro">File di testo (*.txt)|*.txt|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFileRTFFiltro">File RTF (*.rtf)|*.rtf|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFileCSVFiltro">File CSV (*.csv)|*.csv|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFileHTMLFiltro">File HTML (*.html)|*.html|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="EsportaBibliotecaFileXMLFiltro">File XML (*.xml)|*.xml|Tutti i file (*.*)|*.*</sys:String>
+    <sys:String x:Key="EsportaBibliotecaTesto">Testo</sys:String>
+    <sys:String x:Key="EsportaBibliotecaEsportando">Sto esportando il file</sys:String>
+    <sys:String x:Key="EsportaBibliotecaEsportato">Il file {0} è stato creato.</sys:String>
+    <sys:String x:Key="EsportaBibliotecaErrore">Errore mentre esportavo la biblioteca.</sys:String>
 
     <sys:String x:Key="ImportaErroreXML">Errore importando il file: {0}</sys:String>
     <sys:String x:Key="ImportaErroreNullo">Non sono stati trovati dati validi.</sys:String>
@@ -277,27 +313,28 @@
     <sys:String x:Key="ImportaDialogoDescrizioneAiuto">Una descrizione del testo, che di solito è più lunga degli altri campi.</sys:String>
     <sys:String x:Key="ImportaDialogoNoTitolo">Devi digitare un titolo per il testo.</sys:String>
 
-    <sys:String x:Key="AggiungiTestiTitolo">Aggiungi testi</sys:String>
+    <sys:String x:Key="AggiungiTestiTitolo">Aggiungi e aggiorna testi</sys:String>
     <sys:String x:Key="AggiungiTestiErroreCaricamento">Errore durante il caricamento dell'elenco dei testi: {0}</sys:String>
-    <sys:String x:Key="AggiungiTestiAiuto">Nella tabella a sinistra, scegli i testi che vuoi aggiungere al programma. Se ci sono dei testi che non ti interessano, puoi rimuoverli dall'elenco scegliendo di nasconderli. Poi clicca 'Applica modifiche' per installare e/o nascondere i testi.</sys:String>
-    <sys:String x:Key="AggiungiTestiNienteDaInstallare">Nessuno testo è stato trovato che può essere aggiunto al progrmma.</sys:String>
+    <sys:String x:Key="AggiungiTestiAiuto">Nella tabella a sinistra, scegli i testi che vuoi aggiungere al programma o aggiornare. Se ci sono dei testi che non ti interessano, puoi rimuoverli dall'elenco scegliendo di nasconderli. Poi clicca 'Applica modifiche' per scaricare e/o nascondere i testi.</sys:String>
+    <sys:String x:Key="AggiungiTestiNienteDaInstallare">Nessuno nuovo testo o aggiornamento è stato trovato che può essere aggiunto al progrmma.</sys:String>
     <sys:String x:Key="AggiungiTestiNienteDaInstallareTestiNascosti">Però, ci sono dei testi che hai nascosto che possono essere installati: clicca il pulsante 'Mostra i testi nascosti' per rivelarli.</sys:String>
     <sys:String x:Key="AggiungiTestiPreparazione">Scaricamento dell'elenco di testi disponibili in corso...</sys:String>
     <sys:String x:Key="AggiungiTestiFiltro">Filtra testi:</sys:String>
     <sys:String x:Key="AggiungiTestiFiltroAiuto">Digita alcune lettere, e solo i testi che le contengono verranno visualizzati</sys:String>
-    <sys:String x:Key="AggiungiTestiGrigiaAiuto">Clicca nelle ultime due colonne se vuoi scaricare e installare un testo oppure nascondere un testo da questo elenco</sys:String>
+    <sys:String x:Key="AggiungiTestiGrigiaAiuto">Seleziona la casella di controllo nella colonna 'Scaricare?' per installare un nuovo testo o aggiornare un testo esistente. Seleziona 'Nascondere?' per nascondere il testo da questo elenco.</sys:String>
     <sys:String x:Key="AggiungiTestiColonnaNome">Nome del testo</sys:String>
     <sys:String x:Key="AggiungiTestiColonnaTipo">Tipo</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaStato">Versione</sys:String>
     <sys:String x:Key="AggiungiTestiColonnaDimensione">Dimensione</sys:String>
-    <sys:String x:Key="AggiungiTestiColonnaScarica">Aggiungi?</sys:String>
-    <sys:String x:Key="AggiungiTestiColonnaNascondi">Nascondi?</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaScarica">Scaricare?</sys:String>
+    <sys:String x:Key="AggiungiTestiColonnaNascondi">Nascondere?</sys:String>
     <sys:String x:Key="AggiungiTestiApplica">Applica modifiche</sys:String>
     <sys:String x:Key="AggiungiTestiApplicaAiuto">Scarica o nasconde i testi selezionati</sys:String>
-    <sys:String x:Key="AggiungiTestiScaricaTutti">Scarica e installa tutti</sys:String>
-    <sys:String x:Key="AggiungiTestiScaricaTuttiAiuto">Seleziona tutti i testi elencati, affinché siano scaricati e aggiunti al programma. Dovrai poi cliccare il pulsante 'Applica modifiche' per far partire lo scaricamento.</sys:String>
+    <sys:String x:Key="AggiungiTestiScaricaTutti">Seleziona tutti</sys:String>
+    <sys:String x:Key="AggiungiTestiScaricaTuttiAiuto">Seleziona tutti i testi elencati, affinché siano scaricati e aggiunti al programma o aggiornati. Dovrai poi cliccare il pulsante 'Applica modifiche' per far partire lo scaricamento.</sys:String>
     <sys:String x:Key="AggiungiTestiDeselezionaTutti">Deseleziona tutti</sys:String>
     <sys:String x:Key="AggiungiTestiDeselezionaTuttiAiuto">Deseleziona tutti i testi selezionati</sys:String>
-    <sys:String x:Key="AggiungiTestiMostraNascosti">Mostra i testi nascosti</sys:String>
+    <sys:String x:Key="AggiungiTestiMostraNascosti">Mostra testi nascosti</sys:String>
     <sys:String x:Key="AggiungiTestiMostraNascostiAiuto">Rivela i testi che sono stati nascosti in precedenza</sys:String>
     <sys:String x:Key="AggiungiTestiInstallazioneScaricamentoInCorso">Scaricamento del file {0} in corso</sys:String>
     <sys:String x:Key="AggiungiTestiInstallazioneInstallazioneInCorso">Installazione del file {0} in corso</sys:String>
@@ -385,11 +422,13 @@
     <sys:String x:Key="OpzioniTestiDizionarioLatino">Latino:</sys:String>
     <sys:String x:Key="OpzioniAggiornamenti">Aggiornamenti</sys:String>
     <sys:String x:Key="OpzioniAggiornamentiMessaggi">Messaggi sugli aggiornamenti</sys:String>
-    <sys:String x:Key="OpzioniMessaggiMai">Non controllare mai per messaggi</sys:String>
+    <sys:String x:Key="OpzioniMessaggiMai">Non controllare mai</sys:String>
     <sys:String x:Key="OpzioniMessaggiGiorno">Controllare giornalmente</sys:String>
     <sys:String x:Key="OpzioniMessaggiSettimana">Controllare settimanalmente</sys:String>
     <sys:String x:Key="OpzioniMessaggiMese">Controllare mensilmente</sys:String>
     <sys:String x:Key="OpzioniMessaggiAiuto">Scegli quanto frequentemente controllare per messaggi sugli aggiornamenti dell'app, delle risorse e del sito.</sys:String>
+    <sys:String x:Key="OpzioniAggiornamentiTesti">Aggiornamenti ai testi</sys:String>
+    <sys:String x:Key="OpzioniAggiornamentiTestiAiuto">Scegli quanto frequentemente controllare per aggiornamenti ai testi installati.</sys:String>
 
     <sys:String x:Key="FontDialogAiuto">Scegli le impostazioni del carattere per il testo. Nota che il colore scelto è quello che viene mostrato in modalità chiara - se viene scelto il testo nero, viene mostrato come bianco in modalità scura.</sys:String>
     <sys:String x:Key="FontDialogFont">Carattere</sys:String>
@@ -479,7 +518,7 @@
     <sys:String x:Key="MostraTitolo">Mostra brano</sys:String>
     <sys:String x:Key="MostraAiuto">Digita il riferimento del brano che vuoi mostrare e scegliere la/le versione/i della Bibbia e/o i commentari che vuoi leggere. "Alterna testi" mostra un versetto alla volta nei diversi testi scelti. Il testo viene aperto in una finestra dell'editor, dove può essere modificato, copiato o salvato.</sys:String>
     <sys:String x:Key="MostraRiferimento">Versetti da mostrare:</sys:String>
-    <sys:String x:Key="MostraRiferimentoAiuto">Digitare qui il riferimento del brano da visualizzare, per esempio Gen 1:1-2, 1P 3:16. L'app capisce molti formati diversi per i riferimenti.</sys:String>
+    <sys:String x:Key="MostraRiferimentoAiuto">Digita qui il riferimento del brano da visualizzare, per esempio Gen 1:1-2, 1P 3:16. L'app capisce molti formati diversi per i riferimenti.</sys:String>
     <sys:String x:Key="MostraTesti">Testi da mostrare:</sys:String>
     <sys:String x:Key="MostraTestiAiuto">Seleziona i testi che vuoi visualizzare. Puoi trascinare le voci per riordinarle; l'ordine personalizzato sarà utilizzato la prossima volta che usi il programma.</sys:String>
     <sys:String x:Key="MostraSeleziona">Seleziona tutti</sys:String>
@@ -514,6 +553,20 @@
     <sys:String x:Key="CreaChiaveCreaChiave">Crea Chiave</sys:String>
     <sys:String x:Key="CreaChiaveCreazione">Creazione della chiave in corso...</sys:String>
     <sys:String x:Key="CreaChiaveChiaveTitolo">Chiave di</sys:String>
+
+    <sys:String x:Key="BraniSimiliTitolo">Brani simili</sys:String>
+    <sys:String x:Key="BraniSimiliAiuto">Digita il riferimento di un brano e scegli una versione della Bibbia, e questa finestra trova i versetti o i capitoli che sono simili al brano, nel senso di contenere molte delle stesse parole.</sys:String>
+    <sys:String x:Key="BraniSimiliBrano">Brano:</sys:String>
+    <sys:String x:Key="BraniSimiliBranoAiuto">Digita qui il riferimento del brano di cui vuoi trovare i brani simili, per esempio Gen 1:1-2, 1P 3:16. L'app capisce molti formati diversi per i riferimenti.</sys:String>
+    <sys:String x:Key="BraniSimiliVersione">Versione:</sys:String>
+    <sys:String x:Key="BraniSimiliVersioneAiuto">Seleziona la versione della Bibbia che vuoi usare per confrontare i brani.</sys:String>
+    <sys:String x:Key="BraniSimiliNumero">Visualizza fino a</sys:String>
+    <sys:String x:Key="BraniSimiliNumeroAiuto">Scegli il massimo numero di brani che vuoi visualizzare, e se cercare versetti simili oppure capitoli simili.</sys:String>
+    <sys:String x:Key="BraniSimiliVersetti">versetti</sys:String>
+    <sys:String x:Key="BraniSimiliCapitoli">capitoli</sys:String>
+    <sys:String x:Key="BraniSimiliAvvia">Trova brani simili</sys:String>
+    <sys:String x:Key="BraniSimiliCreazione">Sto calcolando i brani simili...</sys:String>
+    <sys:String x:Key="BraniSimiliRisultatoTitolo">Brani simili a</sys:String>
 
     <sys:String x:Key="MisureTitolo">Convertitore misure</sys:String>
     <sys:String x:Key="MisureAiuto">Sul lato sinistro, scegli l'unità da cui vuoi convertire e digita il numero di quell'unità. Sul lato destro, scegli l'unità in cui vuoi convertire e verrà mostrato il valore in quell'unità.</sys:String>

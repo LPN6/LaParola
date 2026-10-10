@@ -314,7 +314,7 @@ namespace LaParola.ToolViews
                             string? percorso = Path.GetDirectoryName(openFileDialog.FileName);
                             if (!string.IsNullOrEmpty(percorso))
                             {
-                                MainWindow.settings.UltimaCartellaImportare = openFileDialog.FileName;
+                                MainWindow.settings.UltimaCartellaImportare = percorso;
                             }
 
                             using StatusTask status = StatusService.AvviaTask((string)(Application.Current.TryFindResource("BibliotecaAggiungiLibriInCorso") ?? "Importing the file"));
@@ -448,7 +448,7 @@ namespace LaParola.ToolViews
                             string? percorso = Path.GetDirectoryName(openFileDialogPDF.FileName);
                             if (!string.IsNullOrEmpty(percorso))
                             {
-                                MainWindow.settings.UltimaCartellaImportarePDF = openFileDialogPDF.FileName;
+                                MainWindow.settings.UltimaCartellaImportarePDF = percorso;
                             }
 
                             MetaData datiPDF = new();
@@ -567,6 +567,80 @@ namespace LaParola.ToolViews
                 }
             }
         }
+        private async void EsportaBiblioteca_Click(object sender, RoutedEventArgs e)
+        {
+            EsportaBiblioteca dialog = new()
+            {
+                Owner = Window.GetWindow(this), // Sets parent window for proper styling/centering
+                Informazioni = MainWindow.settings.EsportaBibliotecaInformazioni,
+                Ordine = MainWindow.settings.EsportaBibliotecaOrdine,
+                Formato = MainWindow.settings.EsportaBibliotecaFormato,
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                // Retrieve the results
+                string informazioni = dialog.Informazioni;
+                int ordine = dialog.Ordine;
+                int formato = dialog.Formato;
+                MainWindow.settings.EsportaBibliotecaInformazioni = informazioni;
+                MainWindow.settings.EsportaBibliotecaOrdine = ordine;
+                MainWindow.settings.EsportaBibliotecaFormato = formato;
+
+                string cartellaEsportare = MainWindow.settings.EsportaBibliotecaCartella;
+                if (string.IsNullOrEmpty(cartellaEsportare))
+                    cartellaEsportare = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string titoloDialogo = (string)(Application.Current.TryFindResource("EsportaBibliotecaFile") ?? "Save the File As:");
+                string filtro = formato switch
+                {
+                    // RTF
+                    1 => (string)(Application.Current.TryFindResource("EsportaBibliotecaFileRTFFiltro") ?? "RTF files (*.rtf)|*.rtf|All files (*.*)|*.*"),
+                    // CSV
+                    2 => (string)(Application.Current.TryFindResource("EsportaBibliotecaFileCSVFiltro") ?? "CSV files (*.csv)|*.csv|All files (*.*)|*.*"),
+                    // HTML
+                    3 => (string)(Application.Current.TryFindResource("EsportaBibliotecaFileHTMLFiltro") ?? "HTML files (*.html)|*.html|All files (*.*)|*.*"),
+                    // XML
+                    4 => (string)(Application.Current.TryFindResource("EsportaBibliotecaFileXMLFiltro") ?? "XML files (*.xml)|*.xml|All files (*.*)|*.*"),
+                    // incluso case 0, testo
+                    _ => (string)(Application.Current.TryFindResource("EsportaBibliotecaFileTXTFiltro") ?? "Text files (*.txt)|*.txt|All files (*.*)|*.*"),
+                };
+                SaveFileDialog saveFileDialog = new()
+                {
+                    Title = titoloDialogo,
+                    Filter = filtro,
+                    InitialDirectory = cartellaEsportare
+                };
+
+                // Show the dialog box. ShowDialog() returns a nullable boolean (bool?).
+                bool? result = saveFileDialog.ShowDialog(Application.Current.MainWindow);
+
+                // If the user clicked OK, import the selected file path
+                if (result == true)
+                {
+                    string? percorso = Path.GetDirectoryName(saveFileDialog.FileName);
+                    if (!string.IsNullOrEmpty(percorso))
+                    {
+                        MainWindow.settings.EsportaBibliotecaCartella = percorso;
+                    }
+
+                    using StatusTask status = StatusService.AvviaTask((string)(Application.Current.TryFindResource("EsportaBibliotecaEsportando") ?? "Exporting the file"));
+
+                    bool successo = await EsportaBibliotecaService.EsportaBiblioteca(saveFileDialog.FileName,informazioni,ordine, formato);
+                    if (successo)
+                    {
+                        string messaggio = string.Format(CultureInfo.InvariantCulture, (string)(Application.Current.TryFindResource("EsportaBibliotecaEsportato") ?? "The file {0} was created."), saveFileDialog.FileName);
+                        status.Update(messaggio, 100);
+                    }
+                    else
+                    {
+                        status.Update((string)(Application.Current.TryFindResource("EsportaBibliotecaErrore") ?? "Error while importing the file"), 100);
+                    }
+
+                    // Remove status bar text after 5 seconds
+                    await Task.Delay(5000);
+                }
+            }
+        }
 
         // Triggers filter recalculation on generic combo changes
         private void FilterControl_SelectionChanged(object sender, SelectionChangedEventArgs e) => _booksView?.Refresh();
@@ -641,6 +715,15 @@ namespace LaParola.ToolViews
                         catch { }
                     }
                 }
+            }
+        }
+
+        private void ButtonGuida_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the currently selected item from the DataGrid
+            if (BooksDataGrid.SelectedItem is VersioneInformazioni selectedBook)
+            {
+                MainWindow.MostraGuida(selectedBook.Nome);
             }
         }
 
@@ -724,7 +807,7 @@ namespace LaParola.ToolViews
                         nuovoNomeTesto = selectedBook.Nome + count.ToString(CultureInfo.InvariantCulture);
                     }
 
-                    string cartella = Path.GetDirectoryName(SettingsService.ResolveSettingsPath()) + Path.DirectorySeparatorChar;
+                    string cartella = Path.GetDirectoryName(SettingsService.SettingsPath) + Path.DirectorySeparatorChar;
                     count = 1;
                     string nuovoNomeFile = cartella + Path.GetFileNameWithoutExtension(vecchioNome) + count.ToString(CultureInfo.InvariantCulture) + Path.GetExtension(vecchioNome);
                     while (File.Exists(nuovoNomeFile))

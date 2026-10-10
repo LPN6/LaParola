@@ -3,6 +3,7 @@ using AvalonDock.Layout;
 using AvalonDock.Serializer.Xml;
 using LaParola.DocumentViews;
 using LaParola.Models;
+using LaParola.Services;
 using LaParola.ToolViews;
 using LaParola.Utilities;
 using Microsoft.Win32;
@@ -18,17 +19,35 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
+/* Procedura per aggiornare il programma
+ * -------------------------------------
+cambiare il numero di versione in LaParola.csproj (3 volte)
+aggiornare i due file della Guida (inclusa la pagina Cambiamenti recenti)
+controllare i due file della Guida: copia it/en.parole_radici nella cartelle dei file RTF, e controlla le parole senza radice
+creare i file di Guida, copiare alle risorse, renderli di sola lettura tipo 3
+
+In Terminal (Developer PowerShell) oppure menu Build -> Publish LaParola:
+dotnet publish -c Release -r win-x64 --self-contained true -o ./publish-standalone
+
+Per app portable: caricare sul sito la cartella publish direttamente, eventualmente zippato
+Per Store: vedi https://learn.microsoft.com/en-au/windows/apps/publish/ e AI
+
+aggiorna laparola.net/programma/messaggi.json
+aggiornare programma/windows.php, program/index.php
+aggiorna file x cd
+github codice: finestra Gitchanges: metti il numero di versione, commit; poi menu Git: Push
+github sito+codice
+novita.php, feed.xml
+messaggio mailing list, Facebook
+*/
+
 namespace LaParola;
 
 // per passare SmartScreen, usa https://www.microsoft.com/en-us/wdsi/filesubmission 
 // per controllare il contenuto di un FlowDocument, System.Windows.Markup.XamlWriter.Save(finalDoc) in Immediate Window
 
-// TODO versione 8.0.8
-// TODO update help files (including Recent Changes) and make them readonly type 3; check all words have roots; copy it/en.parole_radici in RTF directories
 // TODO togliere tutti "var "
-
-// TODO brani simili, poi Informazioni sul versetto/tema
-// TODO esporta Biblioteca in vari formati - come versione 7
+// TODO2 Informazioni sul versetto/tema
 // TODO2 Regex per identificare riferimenti da Berea
 // TODO2 all'uscita con note modificate, ci vuole tanto tempo per scrivere le modifiche e chiudere il programma
 // TODO2 importare Henry come Libro dà Out of Memory errore
@@ -120,6 +139,7 @@ public partial class MainWindow : Window
     private SearchToolView? _searchView;
     private TextGeneratorToolView? _textGenView;
     private CreaChiaveToolView? _creaChiaveView;
+    private BraniSimiliToolView? _braniSimiliView;
     private ConverterToolView? _converterView;
     private OptionsToolView? _optionsView;
     private LibraryToolView? _libraryView;
@@ -134,6 +154,9 @@ public partial class MainWindow : Window
 
     private object CreaChiaveToolViewInstance()
         => _creaChiaveView ??= new CreaChiaveToolView();
+
+    private object BraniSimiliToolViewInstance()
+        => _braniSimiliView ??= new BraniSimiliToolView();
 
     private object ConverterToolViewInstance()
         => _converterView ??= new ConverterToolView();
@@ -169,6 +192,7 @@ public partial class MainWindow : Window
     public static readonly RoutedUICommand FontCommand = new("Font", "FontCommand", typeof(MainWindow));
     public static readonly RoutedUICommand MostraCommand = new("Mostra", "MostraCommand", typeof(MainWindow));
     public static readonly RoutedUICommand CreaChiaveCommand = new("CreaChiave", "CreaChiaveCommand", typeof(MainWindow));
+    public static readonly RoutedUICommand BraniSimiliCommand = new("BraniSimili", "BraniSimiliCommand", typeof(MainWindow));
     public static readonly RoutedUICommand ConverterCommand = new("Converter", "ConverterCommand", typeof(MainWindow));
     public static readonly RoutedUICommand VoiceCommand = new("Voice", "VoiceCommand", typeof(MainWindow));
     public static readonly RoutedUICommand AddTextsCommand = new("AddTexts", "AddTextsCommand", typeof(MainWindow));
@@ -289,15 +313,15 @@ public partial class MainWindow : Window
         }
 
         // imposta dizionari
-        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioInglese).Lingua) != "en")
+        if (!string.IsNullOrEmpty(settings.DizionarioInglese) && Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioInglese).Lingua) != "en")
             settings.DizionarioInglese = "";
-        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioItaliano).Lingua) != "it")
+        if (!string.IsNullOrEmpty(settings.DizionarioItaliano) && Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioItaliano).Lingua) != "it")
             settings.DizionarioItaliano = "";
-        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioGreco).Lingua) != "el")
+        if (!string.IsNullOrEmpty(settings.DizionarioGreco) && Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioGreco).Lingua) != "el")
             settings.DizionarioGreco = "";
-        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioEbraico).Lingua) != "he")
+        if (!string.IsNullOrEmpty(settings.DizionarioEbraico) && Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioEbraico).Lingua) != "he")
             settings.DizionarioEbraico = "";
-        if (Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioLatino).Lingua) != "la")
+        if (!string.IsNullOrEmpty(settings.DizionarioLatino) && Funzioni.LinguaPrincipale(Testi.Info(settings.DizionarioLatino).Lingua) != "la")
             settings.DizionarioLatino = "";
 
         if (string.IsNullOrEmpty(settings.DizionarioInglese) && Testi.Info("International Standard Bible Encyclopedia").Lingua == "en")
@@ -357,6 +381,12 @@ public partial class MainWindow : Window
                     break;
             }
         }
+
+        // Wait 3 seconds after window load so UI startup remains crisp and unblocked
+        await Task.Delay(3000);
+
+        // Runs background update check (respects the interval in settings)
+        await UpdateService.VerificaEMostraNotificaAggiornamentiAsync(forzato: false);
     }
 
     private void DockingManager_DocumentClosed(object sender, DocumentClosedEventArgs e)
@@ -537,6 +567,7 @@ public partial class MainWindow : Window
             if (id == "tool.search") { args.Content = SearchToolViewInstance(); return; }
             if (id == "tool.textgen") { args.Content = TextGenToolViewInstance(); return; }
             if (id == "tool.creachiave") { args.Content = CreaChiaveToolViewInstance(); return; }
+            if (id == "tool.branisimili") { args.Content = BraniSimiliToolViewInstance(); return; }
             if (id == "tool.converter") { args.Content = ConverterToolViewInstance(); return; }
             if (id == "tool.options") { args.Content = OptionsToolViewInstance(); return; }
             if (id == "tool.library") { args.Content = LibraryToolViewInstance(); return; }
@@ -709,23 +740,6 @@ public partial class MainWindow : Window
         }
         newShortcut = new(LibraryCommand, italiano ? Key.B : Key.L, ModifierKeys.Control);
         this.InputBindings.Add(newShortcut);
-    }
-
-    internal static void MostraGuida(string sezione)
-    {
-
-        string nome = settings.Lingua.ToLower()[..2] == "it" ? "Guida a LaParola" : "Help for LaParola";
-        if (Testi.VersioneEsiste(nome))
-        {
-            /*ViewerDocumentView? view = */
-            App.DockingHost.OpenViewerDocument(nome, sezione, true);
-        }
-        else
-        {
-            MessageBoxLPN.Show(Application.Current.MainWindow,
-                (string)(Application.Current.TryFindResource("MainNessunaGuida") ?? "The help file was not found. It is maybe an internal problem in the program."),
-                (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
-        }
     }
 
     private void NuovoEditor_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.OpenEditorDocument();
@@ -1286,6 +1300,13 @@ public partial class MainWindow : Window
         App.DockingHost.ShowTool("tool.creachiave");
     }
 
+    private void BraniSimili_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        if (Testi == null)
+            return; // oppure mostra un messaggio / lascia l’overlay attivo
+
+        App.DockingHost.ShowTool("tool.branisimili");
+    }
 
     private void Converter_Executed(object sender, ExecutedRoutedEventArgs e) => App.DockingHost.ShowTool("tool.converter");
 
@@ -1305,7 +1326,30 @@ public partial class MainWindow : Window
 
     private void AddTexts_Executed(object sender, ExecutedRoutedEventArgs e)
     {
+        ApriAggiungiTesti();
+    }
+
+    public static void ApriAggiungiTesti(List<TextUpdateInfo>? aggiornamenti = null)
+    {
         App.DockingHost.ShowTool("tool.aggiungitesti");
+
+        if (Application.Current.MainWindow is MainWindow mw)
+        {
+            if (mw.FindName("Dock") is AvalonDock.DockingManager dock)
+            {
+                LayoutDocument? aggiungiTestiDocument = dock.Layout.Descendents()
+                    .OfType<LayoutDocument>()
+                    .FirstOrDefault(a => a.ContentId == "tool.aggiungitesti");
+
+                if (aggiungiTestiDocument?.Content is AggiungiTesti aggiungiTestiView)
+                {
+                    if (aggiornamenti != null && aggiornamenti.Count > 0)
+                    {
+                        aggiungiTestiView.SelezionaAggiornamenti(aggiornamenti);
+                    }
+                }
+            }
+        }
     }
 
     private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1323,11 +1367,29 @@ public partial class MainWindow : Window
         }
     }
 
-    private static void MostraGuida()
+    internal static void MostraGuida(string sezione = "")
     {
         string linguaInterfaccia = MainWindow.settings.Lingua.ToLower()[..2];
         string nome = linguaInterfaccia == "en" ? "Help for LaParola" : "Guida a LaParola";
-        VisualizzaLibro(nome);
+
+        if (Testi.VersioneEsiste(nome))
+        {
+            if (string.IsNullOrEmpty(sezione))
+            {
+                VisualizzaLibro(nome);
+            }
+            else
+            {
+                /*ViewerDocumentView? view = */
+                App.DockingHost.OpenViewerDocument(nome, sezione, true);
+            }
+        }
+        else
+        {
+            MessageBoxLPN.Show(Application.Current.MainWindow,
+                (string)(Application.Current.TryFindResource("MainNessunaGuida") ?? "The help file was not found. It is maybe an internal problem in the program."),
+                (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
+        }
     }
 
     private void About_Click(object sender, RoutedEventArgs e)
@@ -1375,6 +1437,8 @@ public partial class MainWindow : Window
 
         // 4) Salva sempre le impostazioni
         App.Settings.Save(settings);
+
+        Testi.Chiudi();
     }
 
     protected override void OnClosing(CancelEventArgs e)

@@ -51,6 +51,7 @@
 
                 <TreeViewItem x:Name="TreeAggiornamenti" Header="{DynamicResource OpzioniAggiornamenti}">
                     <TreeViewItem x:Name="NodeMessages" Header="{DynamicResource OpzioniAggiornamentiMessaggi}"/>
+                    <TreeViewItem x:Name="NodeTextUpdates" Header="{DynamicResource OpzioniAggiornamentiTesti}"/>
                 </TreeViewItem>
             </TreeView>
         </ScrollViewer>
@@ -412,7 +413,7 @@
 
                 <TextBlock x:Name="SectionAggiornamentiHeader" FontSize="16" FontWeight="SemiBold" Margin="4,12,0,8" Text="{DynamicResource OpzioniAggiornamenti}"/>
 
-                <GroupBox x:Name="SectionMessages" Margin="0,4,0,16" Header="{DynamicResource OpzioniAggiornamentiMessaggi}">
+                <GroupBox x:Name="SectionMessaggi" Margin="0,4,0,0" Header="{DynamicResource OpzioniAggiornamentiMessaggi}">
                     <GroupBox.ToolTip>
                         <ToolTip>
                             <TextBlock Text="{DynamicResource OpzioniMessaggiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
@@ -423,6 +424,20 @@
                         <RadioButton x:Name="AggiornamentiMessaggiGiorno" Content="{DynamicResource OpzioniMessaggiGiorno}" Margin="0,6,0,0" Checked="SettingChanged"/>
                         <RadioButton x:Name="AggiornamentiMessaggiSettimana" Content="{DynamicResource OpzioniMessaggiSettimana}" Margin="0,6,0,0" Checked="SettingChanged"/>
                         <RadioButton x:Name="AggiornamentiMessaggiMese" Content="{DynamicResource OpzioniMessaggiMese}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                    </StackPanel>
+                </GroupBox>
+                
+                <GroupBox x:Name="SectionAggiornamentiTesti" Margin="0,4,0,16" Header="{DynamicResource OpzioniAggiornamentiTesti}">
+                    <GroupBox.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource OpzioniAggiornamentiTestiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                        </ToolTip>
+                    </GroupBox.ToolTip>
+                    <StackPanel Margin="10">
+                        <RadioButton x:Name="AggiornamentiTestiMai" Content="{DynamicResource OpzioniMessaggiMai}" Checked="SettingChanged"/>
+                        <RadioButton x:Name="AggiornamentiTestiGiorno" Content="{DynamicResource OpzioniMessaggiGiorno}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <RadioButton x:Name="AggiornamentiTestiSettimana" Content="{DynamicResource OpzioniMessaggiSettimana}" Margin="0,6,0,0" Checked="SettingChanged"/>
+                        <RadioButton x:Name="AggiornamentiTestiMese" Content="{DynamicResource OpzioniMessaggiMese}" Margin="0,6,0,0" Checked="SettingChanged"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

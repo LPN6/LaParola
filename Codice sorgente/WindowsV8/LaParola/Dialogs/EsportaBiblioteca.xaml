@@ -1,0 +1,148 @@
+﻿<Window x:Class="LaParola.Dialogs.EsportaBiblioteca"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LaParola.Dialogs" xmlns:controls="clr-namespace:LaParola"
+        mc:Ignorable="d" Width="400"
+        WindowStartupLocation="CenterOwner"
+        Title="{DynamicResource EsportaBibliotecaTitolo}"
+        Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+    
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <!-- Checked ListBox Section -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <!-- ComboBoxes Section -->
+            <RowDefinition Height="Auto"/>
+            <!-- Action Buttons Section -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ListBox Label -->
+        <Label Grid.Row="0" 
+                   Content="{DynamicResource EsportaBibliotecaSelezionaInformazioni}" 
+                   FontWeight="SemiBold" 
+                   Margin="0,0,0,5"/>
+
+        <controls:HelpFlyout
+                x:Name="HelpFlyoutControl"
+            HorizontalAlignment="Right"
+                Grid.Row="0"
+                Margin="0,0,0,0"
+                HelpText="{DynamicResource EsportaBibliotecaAiuto}"
+                HelpClicked="HelpFlyout_OnHelpClicked"/>
+
+        <!-- Checked ListBox with 12 Fixed Items -->
+        <ListBox x:Name="ItemsListBox"
+                 Grid.Row="1" 
+                 Margin="0,0,0,8"
+                 Background="{DynamicResource ControlBackgroundBrush}"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource EsportaBibliotecaSelezionaInformazioniAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </ListBox.ToolTip>
+            <ListBox.Items>
+                <CheckBox Content="{DynamicResource BibliotecaNome}"/>
+                <CheckBox Content="{DynamicResource BibliotecaAbbreviazione}"/>
+                <CheckBox Content="{DynamicResource BibliotecaTipo}"/>
+                <CheckBox Content="{DynamicResource BibliotecaAutore}"/>
+                <CheckBox Content="{DynamicResource BibliotecaData}"/>
+                <CheckBox Content="{DynamicResource BibliotecaLingua}"/>
+                <CheckBox Content="{DynamicResource BibliotecaCasaEditrice}"/>
+                <CheckBox Content="{DynamicResource BibliotecaISBN}"/>
+                <CheckBox Content="{DynamicResource BibliotecaCopyright}"/>
+                <CheckBox Content="{DynamicResource BibliotecaDescrizione}"/>
+                <CheckBox Content="{DynamicResource BibliotecaNomeDelFile}"/>
+                <CheckBox Content="{DynamicResource BibliotecaVersione}"/>
+            </ListBox.Items>
+        </ListBox>
+
+        <!-- Select All / Deselect All Buttons -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    Margin="0,0,0,15">
+            <StackPanel.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource EsportaBibliotecaSelezionaInformazioniAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </StackPanel.ToolTip>
+            <Button x:Name="SelectAllButton" 
+                    Content="{DynamicResource EsportaBibliotecaSeleziona}" 
+                    Width="100" Height="26" 
+                    Margin="0,0,10,0" 
+                    Click="SelectAllButton_Click"/>
+            <Button x:Name="DeselectAllButton" 
+                    Content="{DynamicResource EsportaBibliotecaDeseleziona}" 
+                    Width="100" Height="26" 
+                    Click="DeselectAllButton_Click"/>
+        </StackPanel>
+
+        <!-- ComboBoxes Section -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,15">
+            <!-- First Label + ComboBox (5 entries) -->
+            <Label Content="{DynamicResource EsportaBibliotecaOrdine}" 
+                       FontWeight="SemiBold" 
+                       Margin="0,0,0,4"/>
+            <ComboBox x:Name="CbOrdine" 
+                      SelectedIndex="0" 
+                      Margin="0,0,0,12" 
+                      Height="26">
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaOrdineN}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaOrdineTN}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaOrdineLN}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaOrdineTLN}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaOrdineLTN}"/>
+                <ComboBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{DynamicResource EsportaBibliotecaOrdineAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                    </ToolTip>
+                </ComboBox.ToolTip>
+            </ComboBox>
+
+            <!-- Second Label + ComboBox (5 entries) -->
+            <Label Content="{DynamicResource EsportaBibliotecaFormato}" 
+                       FontWeight="SemiBold" 
+                       Margin="0,0,0,4"/>
+            <ComboBox x:Name="CbFormato" SelectedIndex="0" Height="26">
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaFormatoTXT}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaFormatoRTF}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaFormatoCSV}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaFormatoHTML}"/>
+                <ComboBoxItem Content="{DynamicResource EsportaBibliotecaFormatoXML}"/>
+            <ComboBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource EsportaBibliotecaFormatoAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                </ToolTip>
+            </ComboBox.ToolTip>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- OK / Cancel Buttons -->
+        <StackPanel Grid.Row="4" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button x:Name="OkButton" 
+                    Content="OK" 
+                    IsDefault="True" 
+                    Width="85" Height="28" 
+                    Margin="0,0,10,0" 
+                    Click="OkButton_Click"/>
+            <Button x:Name="CancelButton" 
+                    Content="Cancel" 
+                    IsCancel="True" 
+                    Width="85" Height="28"/>
+        </StackPanel>
+    </Grid>
+</Window>

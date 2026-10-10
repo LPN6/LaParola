@@ -14,6 +14,11 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20261010"></a>
+<h2>10 ottobre 2026</h2>
+<p>La nuova versione di prova (8.0.8) &egrave; disponibile, con la ricerca di brani simili, salvare le informazioni sui testi installati, e aggiornare i testi quando ci sono nuove versioni.
+Vedi la pagina della <a href="/programma/windowsbeta.php">versione beta</a> per ulteriori informazioni.</p>
+
 <a name="20260921"></a>
 <h2>21 settembre 2026</h2>
 <p>La nuova versione di prova (8.0.7) &egrave; disponibile, con elenchi di parole e radici nella finestra Ricerca, esportare testi, e personalizzare i nomi e le abbreviazioni dei libri della Bibbia.

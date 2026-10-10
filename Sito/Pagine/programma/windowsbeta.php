@@ -18,18 +18,25 @@ li possa correggere nella prossima versione beta.<p>
 <p>Bisogna scaricare l'app beta in una qualsiasi cartella.
 Non serve l'installazione; basta avviare il file scaricato.<br />
 Ci sono due versioni dell'app da cui scegliere:<br />
-1. Versione autonoma da <a href="LaParola0.exe">scaricare qui</a>; circa 168Mb. Non ha bisogno di certi componenti facoltativi di Windows<br />
-2. Versione dipendente da <a href="LaParola.exe">scaricare qui</a>; circa 37Mb. Possibilmente (dipende dalle app che hai gi&agrave; installato) la prima volta che avvi l'app ti dir&agrave; che devi prima installare
+1. Versione autonoma da <a href="LaParola0.exe">scaricare qui</a>; circa 180Mb. Non ha bisogno di certi componenti facoltativi di Windows<br />
+2. Versione dipendente da <a href="LaParola.exe">scaricare qui</a>; circa 55Mb. Possibilmente (dipende dalle app che hai gi&agrave; installato) la prima volta che avvi l'app ti dir&agrave; che devi prima installare
 .NET Desktop Runtime versione 10; in quel caso segui le istruzioni per scaricare e avviare il programma per installare il componente.</p>
 
-<p>L'app beta trova tutte le versioni installate dalla versione 7 dell'app nella cartella
+<p>L'app beta contiene gi&agrave; le versione Nuova Riveduta e C.E.I..
+Inoltre, trova tutte le versioni installate dalla versione 7 dell'app nella cartella
 c:\users\&lt;nome utente&gt;\AppData\Roaming\LaParola .
-Se non hai la versione 7 installata o le versioni della Bibbia non sono installate in quella cartella,
-usa il comando <i>Aggiungi testi</i> del menu Strumenti per installare i testi desiderati.</p>
+Puoi usare il comando <i>Aggiungi e aggiorna testi</i> del menu Strumenti per installare altri testi desiderati.</p>
 
-<p> L'installazione sar&agrave; migliorata in una versione futura della versione beta.</p>
+<p>L'installazione sar&agrave; migliorata nella prossima versione.</p>
 
 <h2>Caratteristiche</h2>
+
+<h3>Versione 8.0.8</h3>
+<ul>
+<li><i>Brani simili:</i> trova i versetti o capitoli che contengono parole simili a qualsiasi brano.</li>
+<li><i>Biblioteca:</i> salva informazioni su tutti i testi installati in un file.</li>
+<li><i>Aggiungi e aggiorna testi:</i> ora scarica e installa anche testi che possono essere aggiornati; un controllo automatico viene fatto all'avvio del programma.</li>
+</ul>
 
 <h3>Versione 8.0.7</h3>
 <ul>

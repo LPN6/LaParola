@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>C:\Users\richa\source\repos\LaParolaWPF\LaParola\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Dialogs\EsportaBiblioteca.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ToolViews\AggiungiTesti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -20,6 +23,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="DocumentViews\Immagine.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ToolViews\BraniSimiliToolView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ToolViews\CreaChiaveToolView.xaml.cs">

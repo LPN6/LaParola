@@ -106,7 +106,7 @@ namespace LaParola
             }
         }
 
-        private StringBuilder[]? paroleDiRadice = null;
+        private uint[][]? paroleDiRadice = null;
 
         private static readonly ConfrontoCI confrontoParole = new();
 
@@ -201,33 +201,35 @@ namespace LaParola
         /// <exception cref="FileNonValidoException">Se c'è un errore nel file.</exception>
         public Versione(Texts testi, string nomeFile, byte testoInFile)
         {
-            //                int tick0 = Environment.TickCount;
-            //                Trace.WriteLine("  inizio nomeVersione " +nomeFile+" "+ (Environment.TickCount - tick0).ToString());
-
             genitore = testi;
             info.NomeDelFile = nomeFile;
-            //isRunningOnMono = (Type.GetType("Mono.Runtime") != null);
+
             try
             {
                 fs = new FileStream(nomeFile, FileMode.Open, FileAccess.Read, FileShare.Read);
                 br = new BinaryReader(fs);
-                char[] c = br.ReadChars(3);
-                if (!(c[0].Equals('L') && c[1].Equals('P') && c[2].Equals('N')))
+
+                // 1. Validazione Header a zero allocazioni ("LPN")
+                Span<byte> magic = stackalloc byte[3];
+                br.ReadExactly(magic);
+                if (!magic.SequenceEqual("LPN"u8))
                 {
                     throw new FileNonValidoException();
                 }
 
-                byte[] versioneByte = br.ReadBytes(4);
-                // la versione del programma deve essere dopo quella del testo
-                Version? versione = Assembly.GetExecutingAssembly().GetName().Version;
-                if (versione == null || versione.Major < versioneByte[0] || (versione.Major == versioneByte[0] && versione.Minor < versioneByte[1]))
+                // 2. Lettura versione file senza allocare byte[] nello Heap
+                Span<byte> ver = stackalloc byte[4];
+                br.ReadExactly(ver);
+
+                Version? versioneProgramma = Assembly.GetExecutingAssembly().GetName().Version;
+                if (versioneProgramma == null || versioneProgramma.Major < ver[0] || (versioneProgramma.Major == ver[0] && versioneProgramma.Minor < ver[1]))
                 {
                     throw new FileNonValidoException();
                 }
 
-                info.Versione = versioneByte[0].ToString(CultureInfo.InvariantCulture) + "." + versioneByte[1].ToString(CultureInfo.InvariantCulture) + "." + versioneByte[2].ToString(CultureInfo.InvariantCulture);
+                info.Versione = $"{ver[0]}.{ver[1]}.{ver[2]}";
 
-                UInt32 pInizioTesto = 0;
+                uint pInizioTesto = 0;
                 for (byte i = 0; i <= testoInFile; ++i)
                 {
                     pInizioTesto = br.ReadUInt32();
@@ -238,8 +240,11 @@ namespace LaParola
                 info.Nome = br.ReadString();
                 info.Abbreviazione = br.ReadString();
                 info.Titolo = br.ReadString();
-                // il campo dell'autore è stato introdotto nella versione 7.08 del programma
-                if (versioneByte[0] >= (byte)8 || (versioneByte[0] >= (byte)7 && versioneByte[1] >= (byte)8))
+
+                // Controllo versione >= 7.08 calcolato una sola volta
+                bool isAtLeast7_08 = ver[0] > 7 || (ver[0] == 7 && ver[1] >= 8);
+
+                if (isAtLeast7_08)
                 {
                     info.Autore = br.ReadString();
                 }
@@ -251,8 +256,8 @@ namespace LaParola
                 info.Descrizione = br.ReadString();
                 info.Lingua = br.ReadString();
                 info.VersioneDelleNote = br.ReadString();
-                // il campo sul bloccaggio è stato introdotto nella versione 7.08 del programma
-                if (versioneByte[0] >= (byte)8 || (versioneByte[0] >= (byte)7 && versioneByte[1] >= (byte)8))
+
+                if (isAtLeast7_08)
                 {
                     info.Bloccato = (BloccatoTipi)br.ReadByte();
                 }
@@ -261,7 +266,8 @@ namespace LaParola
 
                 fs.Seek(pInizioDati, SeekOrigin.Begin);
                 pTesto = br.ReadUInt32() + pInizioDati;
-                UInt32 pIndiceLibriCapitoli = 0, pIndiceNote = 0;
+
+                uint pIndiceLibriCapitoli = 0, pIndiceNote = 0;
                 switch (tipo)
                 {
                     case 0:
@@ -271,17 +277,17 @@ namespace LaParola
                         pIndiceNote = br.ReadUInt32() + pInizioDati;
                         break;
                 }
+
                 pIndice = br.ReadUInt32() + pInizioDati;
                 pParole = br.ReadUInt32() + pInizioDati;
                 pParoleIndiceIndice = br.ReadUInt32() + pInizioDati;
                 pParoleIndice = br.ReadUInt32() + pInizioDati;
                 pRadici = br.ReadUInt32() + pInizioDati;
-                UInt32 pRadiciDiverse = br.ReadUInt32() + pInizioDati;
-                UInt32 pRiferimentiDiversi = br.ReadUInt32() + pInizioDati;
+                uint pRadiciDiverse = br.ReadUInt32() + pInizioDati;
+                uint pRiferimentiDiversi = br.ReadUInt32() + pInizioDati;
                 pCitazioniRiferimenti = br.ReadUInt32() + pInizioDati;
-                UInt32 pNoteInOrdine = br.ReadUInt32() + pInizioDati;
+                uint pNoteInOrdine = br.ReadUInt32() + pInizioDati;
 
-                //                    Trace.WriteLine("  indici " + (Environment.TickCount - tick0).ToString());
                 switch (tipo)
                 {
                     case 0:
@@ -289,43 +295,59 @@ namespace LaParola
                         info.Tipo = TestoTipi.Bibbia;
 
                         fs.Seek(pIndiceLibriCapitoli, SeekOrigin.Begin);
-                        UInt16 somma = 0;
+                        ushort somma = 0;
+
+                        capitoliInLibro.Capacity = 74;
+                        indiceLibro.Capacity = 74;
                         capitoliInLibro.Add(0);
                         indiceLibro.Add(0);
-                        byte[] capitoliArray = br.ReadBytes(73);
+
+                        Span<byte> capitoliArray = stackalloc byte[73];
+                        br.ReadExactly(capitoliArray);
+
                         for (int i = 0; i < 73; ++i)
                         {
-                            capitoliInLibro.Add(capitoliArray[i]);
-                            somma += capitoliArray[i];
+                            byte capCount = capitoliArray[i];
+                            capitoliInLibro.Add(capCount);
+                            somma += capCount;
                             indiceLibro.Add(somma);
                         }
+
+                        // Pre-allocazione della capacità esatta per evitare riallocazioni dell'array interno
+                        versettiInCapitolo.Capacity = somma + 1;
+                        indiceCapitolo.Capacity = somma + 1;
+
                         versettiInCapitolo.Add(0);
                         indiceCapitolo.Add(0);
+
                         byte[] versettiArray = br.ReadBytes(somma);
                         somma = 0;
                         int numeroVersetto = 0;
+
                         for (int i = 1; i <= 73; ++i)
                         {
-                            for (int j = 1; j <= capitoliInLibro[i]; ++j)
+                            int totalCaps = capitoliInLibro[i];
+                            for (int j = 1; j <= totalCaps; ++j)
                             {
-                                versettiInCapitolo.Add(versettiArray[numeroVersetto]);
-                                somma += versettiArray[numeroVersetto];
+                                byte vCount = versettiArray[numeroVersetto++];
+                                versettiInCapitolo.Add(vCount);
+                                somma += vCount;
                                 indiceCapitolo.Add(somma);
-                                ++numeroVersetto;
                             }
                         }
-
                         break;
                         #endregion
+
                     case 1:
                         #region Note
-
                         fs.Seek(pIndiceNote, SeekOrigin.Begin);
                         noteTitoli.AddRange(SplitString(br.ReadString(), '|'));
                         int numeroNote = noteTitoli.Count;
+
                         notePosizione.Capacity = numeroNote;
-                        bool commentario = (numeroNote == 0); // collezione vuota automaticamente di tutto e due i tipi
+                        bool commentario = (numeroNote == 0);
                         bool dizionario = (numeroNote == 0);
+
                         for (int i = 0; i < numeroNote; ++i)
                         {
                             if (noteTitoli[i].StartsWith('#'))
@@ -339,6 +361,7 @@ namespace LaParola
 
                             notePosizione.Add(i);
                         }
+
                         if (commentario)
                         {
                             info.Tipo = TestoTipi.Commentario;
@@ -351,6 +374,7 @@ namespace LaParola
 
                         break;
                         #endregion
+
                     default:
                         throw new FileNonValidoException();
                 }
@@ -358,102 +382,90 @@ namespace LaParola
                 if (pRadiciDiverse > pInizioDati)
                 {
                     fs.Seek(pRadiciDiverse, SeekOrigin.Begin);
-                    UInt32 nRadiciDiverse = br.ReadUInt32();
-                    switch (tipo)
+                    uint nRadiciDiverse = br.ReadUInt32();
+                    if (nRadiciDiverse > 0)
                     {
-                        case 0:
-                            byte[] riferimento = new byte[3];
-                            byte[] riferimento6 = new byte[6];
-                            UInt16[] versetto = new UInt16[2];
-                            if (nRadiciDiverse > 0)
-                            {
-                                radiciDiverse.Capacity = radiciDiverse.Count + (int)nRadiciDiverse;
-                                Span<byte> ref6 = stackalloc byte[6];
-                                for (UInt32 i = 0; i < nRadiciDiverse; ++i)
-                                {
-                                    br.Read(ref6[..3]);
-                                    ref6[..3].CopyTo(ref6[3..]);
-                                    versetto = NumeroVersettoDaRiferimento(ref6.ToArray());
+                        radiciDiverse.Capacity = radiciDiverse.Count + (int)nRadiciDiverse;
 
-                                    radiciDiverse.Add(new RadiceDiversa
-                                    {
-                                        OccorrenzaRadice = new OccorrenzaParola
-                                        {
-                                            Voce = versetto[0],
-                                            Parola = br.ReadUInt16()
-                                        },
-                                        NuovaRadice = br.ReadString()
-                                    });
-                                }
-                            }
-                            break;
-                        case 1:
-                            if (nRadiciDiverse > 0)
+                        if (tipo == 0)
+                        {
+                            // Un solo buffer di 6 byte riutilizzato in loop per azzerare le allocazioni
+                            byte[] ref6Buffer = new byte[6];
+                            for (uint i = 0; i < nRadiciDiverse; ++i)
                             {
-                                radiciDiverse.Capacity = radiciDiverse.Count + (int)nRadiciDiverse;
-                                for (uint i = 0; i < nRadiciDiverse; ++i)
+                                br.ReadExactly(ref6Buffer.AsSpan(0, 3));
+                                ref6Buffer.AsSpan(0, 3).CopyTo(ref6Buffer.AsSpan(3, 3));
+
+                                ushort[] versetto = NumeroVersettoDaRiferimento(ref6Buffer);
+
+                                radiciDiverse.Add(new RadiceDiversa
                                 {
-                                    radiciDiverse.Add(new RadiceDiversa
+                                    OccorrenzaRadice = new OccorrenzaParola
                                     {
-                                        OccorrenzaRadice = new OccorrenzaParola
-                                        {
-                                            Voce = br.ReadUInt32(),
-                                            Parola = br.ReadUInt16()
-                                        },
-                                        NuovaRadice = br.ReadString()
-                                    });
-                                }
+                                        Voce = versetto[0],
+                                        Parola = br.ReadUInt16()
+                                    },
+                                    NuovaRadice = br.ReadString()
+                                });
                             }
-                            break;
+                        }
+                        else if (tipo == 1)
+                        {
+                            for (uint i = 0; i < nRadiciDiverse; ++i)
+                            {
+                                radiciDiverse.Add(new RadiceDiversa
+                                {
+                                    OccorrenzaRadice = new OccorrenzaParola
+                                    {
+                                        Voce = br.ReadUInt32(),
+                                        Parola = br.ReadUInt16()
+                                    },
+                                    NuovaRadice = br.ReadString()
+                                });
+                            }
+                        }
                     }
                 }
 
-                if (pRiferimentiDiversi > pInizioDati) // quando ==, non ci sono riferimenti diversi in questa versione
+                if (pRiferimentiDiversi > pInizioDati)
                 {
                     fs.Seek(pRiferimentiDiversi, SeekOrigin.Begin);
-                    UInt32 nRiferimentiDiversi = br.ReadUInt32();
+                    uint nRiferimentiDiversi = br.ReadUInt32();
                     if (nRiferimentiDiversi > 0)
                     {
-                        // 1. Pre-allocate list capacity to eliminate internal array resizes
                         riferimentiDiversi.Capacity = riferimentiDiversi.Count + (int)nRiferimentiDiversi;
 
-                        // 2. Read all 12-byte blocks (6 shorts * 2 bytes = 12 bytes per item) at once
                         byte[] byteBuffer = br.ReadBytes(12 * (int)nRiferimentiDiversi);
-
-                        // 3. Reinterpret the byte array as a span of shorts (0-cost memory cast)
                         ReadOnlySpan<short> shortSpan = MemoryMarshal.Cast<byte, short>(byteBuffer);
 
                         for (int i = 0; i < nRiferimentiDiversi; ++i)
                         {
-                            // Slices 6 shorts and allocates the 6-element array in a single vectorized memory copy
                             riferimentiDiversi.Add(shortSpan.Slice(i * 6, 6).ToArray());
                         }
                     }
                 }
 
-                if (pNoteInOrdine > pInizioDati) // quando ==, non ci sono note in ordine
+                if (pNoteInOrdine > pInizioDati)
                 {
                     fs.Seek(pNoteInOrdine, SeekOrigin.Begin);
-                    UInt32 nNoteInOrdine = br.ReadUInt32();
+                    uint nNoteInOrdine = br.ReadUInt32();
                     if (nNoteInOrdine > 0)
                     {
                         int count = (int)nNoteInOrdine;
-
-                        // 1. Pre-allocate list capacity to avoid dynamic array resizes during .Add()
                         noteInOrdine.Capacity = noteInOrdine.Count + count;
 
-                        // 2. Read strings cleanly with typed loop bound
                         for (int i = 0; i < count; ++i)
                         {
                             noteInOrdine.Add(br.ReadString());
                         }
-                    }
 
-                    if (nNoteInOrdine > 0)
-                    {
                         info.Tipo |= TestoTipi.Libro;
                     }
                 }
+            }
+            catch (FileNonValidoException)
+            {
+                throw;
             }
             catch
             {
@@ -487,35 +499,40 @@ namespace LaParola
 
         public void Chiudi()
         {
-            string nomeVersione = info.Nome;
-            string nomeFile = nomeVersione;
+            Dispose();
+            if (!noteModificate) return;
 
-            if (noteModificate)
+            string nomeVersione = info.Nome;
+            string appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LaParola");
+            Directory.CreateDirectory(appDataDir); // Assicura che la cartella esista
+
+            // Generazione sicura del percorso temporaneo senza cicli While su File.Exists
+            string fileTemporaneo = Path.Combine(appDataDir, $"{nomeVersione}_{Guid.NewGuid():N}.tmp");
+
+            try
             {
                 SortedDictionary<string, List<OccorrenzaParola>> chiave = new(confrontoParole);
 
-                int suffisso = 0;
-                while (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar + nomeFile + ".laparola"))
+                using (FileStream fsNuovo = new(fileTemporaneo, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (BinaryWriter bwNuovo = new(fsNuovo))
                 {
-                    suffisso += 1;
-                    nomeFile = nomeVersione + suffisso.ToString(CultureInfo.InvariantCulture);
-                }
-                nomeFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "LaParola" + Path.DirectorySeparatorChar + nomeFile + ".laparola";
-
-                try
-                {
-                    using FileStream fsNuovo = new(nomeFile, FileMode.Create, FileAccess.Write);
-                    using BinaryWriter bwNuovo = new(fsNuovo);
-
                     Version versioneApp = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(8, 0, 0);
-                    bwNuovo.Write(['L', 'P', 'N', System.Convert.ToChar(versioneApp.Major), System.Convert.ToChar(versioneApp.Minor), System.Convert.ToChar(versioneApp.Build), (char)1]);
-                    bwNuovo.Write((UInt32)11);
-                    bwNuovo.Write((UInt32)0);
 
+                    // 1. Scrittura Header pulita senza conversioni trasversali char/byte
+                    bwNuovo.Write("LPN"u8);
+                    bwNuovo.Write((byte)versioneApp.Major);
+                    bwNuovo.Write((byte)versioneApp.Minor);
+                    bwNuovo.Write((byte)versioneApp.Build);
+                    bwNuovo.Write((byte)1);
+
+                    bwNuovo.Write((uint)11);
+                    bwNuovo.Write((uint)0);
+
+                    // Scrittura Metadati
                     bwNuovo.Write(nomeVersione);
                     bwNuovo.Write(info.Abbreviazione);
                     bwNuovo.Write(info.Titolo);
-                    bwNuovo.Write(info.Autore);
+                    bwNuovo.Write(info.Autore ?? string.Empty);
                     bwNuovo.Write(info.CasaEditrice);
                     bwNuovo.Write(info.Data);
                     bwNuovo.Write(info.Copyright);
@@ -523,95 +540,73 @@ namespace LaParola
                     bwNuovo.Write(info.Descrizione);
                     bwNuovo.Write(info.Lingua);
                     bwNuovo.Write(info.VersioneDelleNote);
-                    bwNuovo.Write((byte)(info.Bloccato));
-                    bwNuovo.Write(Convert.ToByte(1)); // sempre una collezione di note
-                    UInt32 pInizioDati = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current));
-                    bwNuovo.Seek(11, SeekOrigin.Begin);
-                    bwNuovo.Write(pInizioDati);
-                    bwNuovo.Seek(0, SeekOrigin.End);
+                    bwNuovo.Write((byte)info.Bloccato);
+                    bwNuovo.Write((byte)1); // Sempre collezione di note
 
-                    UInt32 inizioTestoIndiceLC = 0, inizioTestoIndice = 0;
-                    //                        UInt32 inizioTesto = pInizioDati + 44; // '44' va cambiato qui, nella riga successiva, e 2 volte in ImportaBibbia.cs
-                    bwNuovo.Write((UInt32)44); // inizio del testo
-                    bwNuovo.Write((UInt32)0); // inizio indici libri e capitoli/inizio titoli note
-                    bwNuovo.Write((UInt32)0); // inizio indice versetti/note
-                    bwNuovo.Write((UInt32)0); // inizio elenco parole
-                    bwNuovo.Write((UInt32)0); // inizio indice dell'indice delle parole
-                    bwNuovo.Write((UInt32)0); // inizio indice delle parole
-                    bwNuovo.Write((UInt32)0); // inizio elenco radici
-                    bwNuovo.Write((UInt32)0); // inizio elenco radici diverse
-                    bwNuovo.Write((UInt32)0); // inizio elenco differenze nei riferimenti
-                    bwNuovo.Write((UInt32)0); // inizio indice dei riferimenti citati
-                    bwNuovo.Write((UInt32)0); // inizio note in ordine
+                    uint pInizioDati = (uint)bwNuovo.BaseStream.Position;
+
+                    // Aggiorna il puntatore pInizioDati nell'header
+                    bwNuovo.BaseStream.Seek(11, SeekOrigin.Begin);
+                    bwNuovo.Write(pInizioDati);
+                    bwNuovo.BaseStream.Seek(0, SeekOrigin.End);
+
+                    // Placeholder per gli offset della tabella degli indici
+                    bwNuovo.Write((uint)44); // inizio del testo
+                    for (int i = 0; i < 10; ++i)
+                    {
+                        bwNuovo.Write((uint)0);
+                    }
 
                     int numeroNote = noteTitoli.Count;
                     string[] nuoviTesti = new string[numeroNote];
 
-                    RichTextBoxEx rtb = new(); // TODO2
-                    for (UInt32 i = 0; i < numeroNote; ++i)
+                    for (uint i = 0; i < numeroNote; ++i)
                     {
                         nuoviTesti[i] = GetNotaTestoTitolo(noteTitoli[(int)i]);
-                        try
-                        {
-                            rtb.Rtf = nuoviTesti[i];
-                            chiave = Texts.TrovaParoleInVoce(rtb.Text, i, chiave, info.Lingua);
-                        }
-                        catch
-                        {
-                            chiave = Texts.TrovaParoleInVoce(nuoviTesti[i], i, chiave, info.Lingua);
-                        }
+                        string plainText = StripRtf(nuoviTesti[i]);
+                        chiave = Texts.TrovaParoleInVoce(plainText, i, chiave, info.Lingua);
                     }
-                    UInt32[] indici = new UInt32[2];
-                    indici = Texts.ScriviNote(bwNuovo, pInizioDati, [.. noteTitoli], nuoviTesti);
-                    inizioTestoIndiceLC = indici[0];
-                    inizioTestoIndice = indici[1];
 
-                    UInt32 inizioParole = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                    StringBuilder parole = new("");
+                    (uint inizioTestoIndiceLC, uint inizioTestoIndice) = Texts.ScriviNote(bwNuovo, pInizioDati, [.. noteTitoli], nuoviTesti);
+
+                    uint inizioParole = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    StringBuilder parole = new();
                     foreach (string s in chiave.Keys)
                     {
                         parole.Append(s).Append('|');
                     }
-
                     bwNuovo.Write(parole.ToString());
 
-                    UInt32 inizioParoleIndiceIndice = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                    UInt32 numeroApparenze = 0;
-                    byte[] datiDaScrivere = new byte[4 * chiave.Count + 4];
-                    MemoryStream ms = new(datiDaScrivere, true);
-                    BinaryWriter bwMemoria = new(ms);
-                    bwMemoria.Write((UInt32)0);
-                    foreach (List<OccorrenzaParola> lista in chiave.Values)
-                    {
-                        numeroApparenze += (UInt32)(lista.Count);
-                        bwMemoria.Write(6 * numeroApparenze);
-                    }
-                    bwMemoria.Seek(0, SeekOrigin.Begin);
-                    bwNuovo.Write(datiDaScrivere);
+                    // Scrittura diretta degli indici
+                    uint inizioParoleIndiceIndice = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    uint numeroApparenze = 0;
 
-                    UInt32 inizioParoleIndice = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
+                    bwNuovo.Write((uint)0);
                     foreach (List<OccorrenzaParola> lista in chiave.Values)
                     {
-                        byte[] datiDaScrivereParoleIndice = new byte[lista.Count * 6];
-                        MemoryStream msParoleIndice = new(datiDaScrivereParoleIndice, true);
-                        BinaryWriter bwMemoriaParoleIndice = new(msParoleIndice);
+                        numeroApparenze += (uint)lista.Count;
+                        bwNuovo.Write(6 * numeroApparenze);
+                    }
+
+                    uint inizioParoleIndice = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    foreach (List<OccorrenzaParola> lista in chiave.Values)
+                    {
                         foreach (OccorrenzaParola op in lista)
                         {
-                            bwMemoriaParoleIndice.Write(op.Voce);
-                            bwMemoriaParoleIndice.Write(op.Parola);
+                            // Scrittura diretta sul BinaryWriter principale
+                            bwNuovo.Write(op.Voce);
+                            bwNuovo.Write(op.Parola);
                         }
-                        bwMemoriaParoleIndice.Seek(0, SeekOrigin.Begin);
-                        bwNuovo.Write(datiDaScrivereParoleIndice);
                     }
 
-                    UInt32 inizioRadici = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                    int numeroRadici = Radici.Length;
-                    if (numeroRadici > 0)
+                    // Radici
+                    uint inizioRadici = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    if (Radici.Length > 0)
                     {
-                        StringBuilder listaRadici = new("");
-                        for (int i = 0; i < numeroRadici; ++i)
+                        StringBuilder listaRadici = new();
+                        foreach (string r in Radici)
                         {
-                            listaRadici.Append(Radici[i]).Append('|');
+                            listaRadici.Append(r).Append('|');
                         }
 
                         bwNuovo.Write(listaRadici.ToString());
@@ -625,34 +620,33 @@ namespace LaParola
                         inizioRadici = 0;
                     }
 
-                    UInt32 inizioRadiciDiverse = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                    int numeroRadiciDiverse = radiciDiverse.Count;
-                    if (numeroRadiciDiverse > 0)
+                    // Radici Diverse
+                    uint inizioRadiciDiverse = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    if (radiciDiverse.Count > 0)
                     {
-                        bwNuovo.Write((UInt32)numeroRadiciDiverse);
-                        for (int i = 0; i < numeroRadiciDiverse; ++i)
+                        bwNuovo.Write((uint)radiciDiverse.Count);
+                        foreach (RadiceDiversa rd in radiciDiverse)
                         {
-                            bwNuovo.Write(radiciDiverse[i].OccorrenzaRadice.Voce);
-                            bwNuovo.Write(radiciDiverse[i].OccorrenzaRadice.Parola);
-                            bwNuovo.Write(radiciDiverse[i].NuovaRadice);
+                            bwNuovo.Write(rd.OccorrenzaRadice.Voce);
+                            bwNuovo.Write(rd.OccorrenzaRadice.Parola);
+                            bwNuovo.Write(rd.NuovaRadice);
                         }
-
                     }
                     else
                     {
                         inizioRadiciDiverse = 0;
                     }
 
-                    UInt32 inizioRiferimentiDiversi = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                    int numeroRiferimentiDiversi = riferimentiDiversi.Count;
-                    if (numeroRiferimentiDiversi > 0)
+                    // Riferimenti Diversi
+                    uint inizioRiferimentiDiversi = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    if (riferimentiDiversi.Count > 0)
                     {
-                        bwNuovo.Write((UInt32)numeroRiferimentiDiversi);
-                        for (int i = 0; i < numeroRiferimentiDiversi; ++i)
+                        bwNuovo.Write((uint)riferimentiDiversi.Count);
+                        foreach (short[] arr in riferimentiDiversi)
                         {
                             for (int j = 0; j < 6; ++j)
                             {
-                                bwNuovo.Write(riferimentiDiversi[i][j]);
+                                bwNuovo.Write(arr[j]);
                             }
                         }
                     }
@@ -661,20 +655,21 @@ namespace LaParola
                         inizioRiferimentiDiversi = 0;
                     }
 
-                    UInt32 inizioRiferimentiCitati = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
+                    // Riferimenti Citati
+                    uint inizioRiferimentiCitati = (uint)bwNuovo.BaseStream.Position - pInizioDati;
                     if (!genitore.ScriviRiferimentiCitati(bwNuovo, nuoviTesti))
                     {
                         inizioRiferimentiCitati = 0;
                     }
 
-                    UInt32 inizioNoteInOrdine = (UInt32)(bwNuovo.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                    int numeroNoteInOrdine = noteInOrdine.Count;
-                    if (numeroNoteInOrdine > 0)
+                    // Note in Ordine
+                    uint inizioNoteInOrdine = (uint)bwNuovo.BaseStream.Position - pInizioDati;
+                    if (noteInOrdine.Count > 0)
                     {
-                        bwNuovo.Write((UInt32)numeroNoteInOrdine);
-                        for (int i = 0; i < numeroNoteInOrdine; ++i)
+                        bwNuovo.Write((uint)noteInOrdine.Count);
+                        foreach (string nota in noteInOrdine)
                         {
-                            bwNuovo.Write(noteInOrdine[i]);
+                            bwNuovo.Write(nota);
                         }
                     }
                     else
@@ -682,7 +677,8 @@ namespace LaParola
                         inizioNoteInOrdine = 0;
                     }
 
-                    bwNuovo.Seek((int)pInizioDati + 4, SeekOrigin.Begin);
+                    // Scrittura finale dei puntatori reali nella tabella iniziale
+                    bwNuovo.BaseStream.Seek(pInizioDati + 4, SeekOrigin.Begin);
                     bwNuovo.Write(inizioTestoIndiceLC);
                     bwNuovo.Write(inizioTestoIndice);
                     bwNuovo.Write(inizioParole);
@@ -693,21 +689,24 @@ namespace LaParola
                     bwNuovo.Write(inizioRiferimentiDiversi);
                     bwNuovo.Write(inizioRiferimentiCitati);
                     bwNuovo.Write(inizioNoteInOrdine);
-                    bwNuovo.Seek(0, SeekOrigin.End);
+                } // Chiude e rilascia in modo sicuro fsNuovo e bwNuovo prima dello scambio dei file
 
-                    try { br?.Dispose(); } catch { }
-                    try { fs?.Dispose(); } catch { }
+                // Rilascio definitivo dei file correnti prima di sovrascrivere
+                br?.Dispose();
+                fs?.Dispose();
 
-                    if (nomeFile != info.NomeDelFile)
-                    {
-                        File.Move(nomeFile, info.NomeDelFile, overwrite: true);
-                    }
-                }
-                catch (Exception)
+                // Sovrascrittura atomica del file sorgente
+                string percorsoDestinazione = info.NomeDelFile;
+                File.Move(fileTemporaneo, percorsoDestinazione, overwrite: true);
+            }
+            catch (Exception)
+            {
+                // Cleanup del file temp in caso di errore durante la fase di scrittura
+                if (File.Exists(fileTemporaneo))
                 {
-                    // Catches any write failures or file swapping access exceptions
-                    throw new ImpossibileScrivereModificheException();
+                    try { File.Delete(fileTemporaneo); } catch { }
                 }
+                throw new ImpossibileScrivereModificheException();
             }
         }
 
@@ -818,10 +817,13 @@ namespace LaParola
         private List<OccorrenzaParola> OccorrenzeRadice(string radice)
         {
             List<OccorrenzaParola> occorrenze = [];
-            string[] paroleDaRicercare = SplitString(ParoleNumeriDiRadice(radice), '|');
-            foreach (string parolaDaRicercare in paroleDaRicercare)
+
+            // Get direct span of word IDs (zero allocations)
+            ReadOnlySpan<uint> idParole = ParoleNumeriDiRadice(radice);
+
+            foreach (uint idParola in idParole)
             {
-                occorrenze.AddRange(OccorrenzeParola(Convert.ToInt32(parolaDaRicercare, CultureInfo.InvariantCulture), true));
+                occorrenze.AddRange(OccorrenzeParola((int)idParola, true));
             }
 
             occorrenze.AddRange(OccorrenzeRadiceDiversa(radice));
@@ -860,110 +862,125 @@ namespace LaParola
 
         private Riferimento RestringiRiferimentoABrano(List<OccorrenzaParola> occorrenze, Riferimento branoDaRicercare)
         {
-            Riferimento occorrenzeInBrano = new((info.Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia);
+            bool isBibbia = (info.Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia;
+            Riferimento occorrenzeInBrano = new(isBibbia);
             int numeroBrani = branoDaRicercare.Brani.Count;
-            foreach (OccorrenzaParola op in occorrenze)
+
+            if (numeroBrani == 0 || occorrenze.Count == 0)
+                return occorrenzeInBrano;
+
+            if (occorrenzeInBrano.Versetti)
             {
-                if (occorrenzeInBrano.Versetti)
+                // 1. Pre-calculate range boundaries OUTSIDE the occurrence loop (O(N) instead of O(N * M))
+                int[] inizioBrani = new int[numeroBrani];
+                int[] fineBrani = new int[numeroBrani];
+
+                for (int i = 0; i < numeroBrani; i++)
                 {
-                    List<int> inizioBrani = [];
-                    List<int> fineBrani = [];
-                    UInt16[] numeroVersetto;
-                    foreach (byte[] b in branoDaRicercare.Brani)
-                    {
-                        numeroVersetto = NumeroVersettoDaRiferimento(b);
-                        inizioBrani.Add(numeroVersetto[0]);
-                        fineBrani.Add(numeroVersetto[1]);
-                    }
+                    UInt16[] numeroVersetto = NumeroVersettoDaRiferimento(branoDaRicercare.Brani[i]);
+                    inizioBrani[i] = numeroVersetto[0];
+                    fineBrani[i] = numeroVersetto[1];
+                }
+
+                // 2. Filter occurrences against pre-calculated ranges
+                foreach (OccorrenzaParola op in occorrenze)
+                {
                     for (int i = 0; i < numeroBrani; ++i)
                     {
-                        if (inizioBrani[i] <= op.Voce && fineBrani[i] >= op.Voce)
+                        if (inizioBrani[i] <= op.Voce && op.Voce <= fineBrani[i])
                         {
                             occorrenzeInBrano.Brani.Add(RiferimentoDaNumeroVersetto(op.Voce));
-                            List<UInt16> lista =
-                            [
-                                op.Parola
-                            ];
-                            occorrenzeInBrano.numeroParola.Add(lista);
+                            occorrenzeInBrano.numeroParola.Add([op.Parola]);
                             break;
                         }
                     }
                 }
-                else
+            }
+            else
+            {
+                // 1. Pack Book/Chapter/Verse into 32-bit integers: (Book << 16) | (Chapter << 8) | Verse
+                // This reduces 6 complex boolean conditions down to a single integer check: start <= target <= end
+                int[] startKeys = new int[numeroBrani];
+                int[] endKeys = new int[numeroBrani];
+
+                for (int i = 0; i < numeroBrani; i++)
                 {
-                    string nomeNota;
-                    byte libro, capitolo, versetto;
-                    for (int i = 0; i < numeroBrani; ++i)
+                    byte[] b = branoDaRicercare.Brani[i];
+                    startKeys[i] = (b[0] << 16) | (b[1] << 8) | b[2];
+                    endKeys[i] = (b[3] << 16) | (b[4] << 8) | b[5];
+                }
+
+                // 2. Filter occurrences using zero-allocation Spans
+                foreach (OccorrenzaParola op in occorrenze)
+                {
+                    // Bounds check replaces expensive try-catch
+                    if ((uint)op.Voce >= (uint)noteTitoli.Count)
+                        continue;
+
+                    string nomeNota = noteTitoli[(int)op.Voce];
+
+                    // Validate format (#LLCCCVVV requires at least 9 chars)
+                    if (nomeNota.Length >= 9 && nomeNota[0] == '#')
                     {
-                        nomeNota = noteTitoli[(int)(op.Voce)];
-                        if (nomeNota.StartsWith('#')) // altrimenti fa parte di un dizionario
+                        // Slice string without allocating heap memory
+                        ReadOnlySpan<char> span = nomeNota.AsSpan();
+
+                        if (byte.TryParse(span.Slice(1, 2), CultureInfo.InvariantCulture, out byte libro) &&
+                            byte.TryParse(span.Slice(3, 3), CultureInfo.InvariantCulture, out byte capitolo) &&
+                            byte.TryParse(span.Slice(6, 3), CultureInfo.InvariantCulture, out byte versetto))
                         {
-                            libro = Convert.ToByte(nomeNota.Substring(1, 2), CultureInfo.InvariantCulture);
-                            capitolo = Convert.ToByte(nomeNota.Substring(3, 3), CultureInfo.InvariantCulture);
-                            versetto = Convert.ToByte(nomeNota.Substring(6, 3), CultureInfo.InvariantCulture);
-                            if ((branoDaRicercare.Brani[i][0] < libro
-                                || (branoDaRicercare.Brani[i][0] == libro && branoDaRicercare.Brani[i][1] < capitolo)
-                                || (branoDaRicercare.Brani[i][0] == libro && branoDaRicercare.Brani[i][1] == capitolo && branoDaRicercare.Brani[i][2] <= versetto))
-                                &&
-                                (branoDaRicercare.Brani[i][3] > libro
-                                || (branoDaRicercare.Brani[i][3] == libro && branoDaRicercare.Brani[i][4] > capitolo)
-                                || (branoDaRicercare.Brani[i][3] == libro && branoDaRicercare.Brani[i][4] == capitolo && branoDaRicercare.Brani[i][5] >= versetto)))
+                            int targetKey = (libro << 16) | (capitolo << 8) | versetto;
+
+                            for (int i = 0; i < numeroBrani; ++i)
                             {
-                                try
+                                if (startKeys[i] <= targetKey && targetKey <= endKeys[i])
                                 {
-                                    occorrenzeInBrano.Note.Add(noteTitoli[(int)(op.Voce)]);
-                                    List<UInt16> lista =
-                                    [
-                                        op.Parola
-                                    ];
-                                    occorrenzeInBrano.numeroParola.Add(lista);
-                                }
-                                catch
-                                {
-                                    // la prima riga sopra può dare un errore se una nota è stata cancellata, e quindi op.Voce>noteTitoli.Count
+                                    occorrenzeInBrano.Note.Add(nomeNota);
+                                    occorrenzeInBrano.numeroParola.Add([op.Parola]);
+                                    break;
                                 }
                             }
                         }
                     }
                 }
             }
+
             return occorrenzeInBrano;
         }
 
         private Riferimento ConvertiOccorrenzeARiferimento(List<OccorrenzaParola> occorrenze)
         {
-            Riferimento occorrenzeInBibbia = new((info.Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia);
-            foreach (OccorrenzaParola op in occorrenze)
+            bool isBibbia = (info.Tipo & TestoTipi.Bibbia) == TestoTipi.Bibbia;
+            Riferimento occorrenzeInBibbia = new(isBibbia);
+
+            if (occorrenze.Count == 0)
+                return occorrenzeInBibbia;
+
+            if (occorrenzeInBibbia.Versetti)
             {
-                if (occorrenzeInBibbia.Versetti)
+                foreach (OccorrenzaParola op in occorrenze)
                 {
                     occorrenzeInBibbia.Brani.Add(RiferimentoDaNumeroVersetto(op.Voce));
-                    List<UInt16> lista =
-                    [
-                        op.Parola
-                    ];
-                    occorrenzeInBibbia.numeroParola.Add(lista);
+                    occorrenzeInBibbia.numeroParola.Add([op.Parola]);
                 }
-                else
+            }
+            else
+            {
+                int totalNote = noteTitoli.Count;
+
+                foreach (OccorrenzaParola op in occorrenze)
                 {
-                    try
+                    // (Casting to uint handles both op.Voce < 0 and op.Voce >= totalNote in one check)
+                    if ((uint)op.Voce < (uint)totalNote)
                     {
-                        occorrenzeInBibbia.Note.Add(noteTitoli[(int)(op.Voce)]);
-                        List<UInt16> lista =
-                        [
-                            op.Parola
-                        ];
-                        occorrenzeInBibbia.numeroParola.Add(lista);
-                    }
-                    catch
-                    {
-                        // la prima riga sopra può dare un errore se una nota è stata cancellata, e quindi op.Voce>noteTitoli.Count
+                        occorrenzeInBibbia.Note.Add(noteTitoli[(int)op.Voce]);
+                        occorrenzeInBibbia.numeroParola.Add([op.Parola]);
                     }
                 }
             }
+
             return occorrenzeInBibbia;
         }
-
         private List<OccorrenzaParola> RicercaParola(string parola)
         {
             List<OccorrenzaParola> occorrenze = [];
@@ -996,10 +1013,10 @@ namespace LaParola
 
                         if (cercaRadice)
                         {
-                            string[] paroleDaRicercare = SplitString(ParoleNumeriDiRadice(radiceDaRicercare), '|');
-                            foreach (string parolaDaRicercare in paroleDaRicercare)
+                            ReadOnlySpan<uint> idParole = ParoleNumeriDiRadice(radiceDaRicercare);
+                            foreach (uint idParola in idParole)
                             {
-                                occorrenze.AddRange(OccorrenzeParola(Convert.ToInt32(parolaDaRicercare, CultureInfo.InvariantCulture), true));
+                                occorrenze.AddRange(OccorrenzeParola((int)idParola, true));
                             }
 
                             occorrenze.AddRange(OccorrenzeRadiceDiversa(radiceDaRicercare));
@@ -1035,10 +1052,10 @@ namespace LaParola
                 }
                 if (cercaRadice)
                 {
-                    string[] paroleDaRicercare = SplitString(ParoleNumeriDiRadice(parola), '|');
-                    foreach (string parolaDaRicercare in paroleDaRicercare)
+                    ReadOnlySpan<uint> idParole = ParoleNumeriDiRadice(parola);
+                    foreach (uint idParola in idParole)
                     {
-                        occorrenze.AddRange(OccorrenzeParola(Convert.ToInt32(parolaDaRicercare, CultureInfo.InvariantCulture), true));
+                        occorrenze.AddRange(OccorrenzeParola((int)idParola, true));
                     }
 
                     occorrenze.AddRange(OccorrenzeRadiceDiversa(parola));
@@ -1069,64 +1086,84 @@ namespace LaParola
 
         private List<OccorrenzaParola> OccorrenzeParola(int nParola, bool solaRadiceNormale)
         {
-            // restituisce una lista con tutte le occorrenze di una parola; con la radice normale oppure solo quando non c'è una radice diversa
-            List<OccorrenzaParola> occorrenze = [];
-            if (nParola >= 0)
+            // restituisce una lista con tutte le occorrenze di una parola; con la radice normale oppure solo quando non c'è una radice diversa 
+            if (nParola < 0)
+                return [];
+
+            int nByte;
+            byte[] occArray;
+
+            lock (fileLock)
             {
-                int nByte;
-                byte[] occArray;
-                lock (fileLock)
+                fs.Seek(pParoleIndiceIndice + 4L * nParola, SeekOrigin.Begin);
+                uint inizioVersetti = br.ReadUInt32();
+                uint fineVersetti = br.ReadUInt32();
+
+                fs.Seek(pParoleIndice + inizioVersetti, SeekOrigin.Begin);
+                nByte = (int)(fineVersetti - inizioVersetti);
+
+                occArray = new byte[nByte];
+                // Ensure complete buffer read
+                br.ReadExactly(occArray);
+            }
+
+            int nOccorrenze = nByte / 6; // 6 perché ogni occorrenza prende 6 byte (UInt32 + UInt16) 
+            List<OccorrenzaParola> occorrenze = new(nOccorrenze);
+
+            ReadOnlySpan<byte> span = occArray.AsSpan();
+
+            if (!solaRadiceNormale)
+            {
+                int offset;
+                // Fast path: direct decoding with zero filtering
+                for (int i = 0; i < nOccorrenze; ++i)
                 {
-                    fs.Seek(pParoleIndiceIndice + 4 * nParola, SeekOrigin.Begin);
-                    UInt32 inizioVersetti = br.ReadUInt32();
-                    UInt32 fineVersetti = br.ReadUInt32();
-                    fs.Seek(pParoleIndice + inizioVersetti, SeekOrigin.Begin);
-                    nByte = (int)(fineVersetti - inizioVersetti);
-                    occArray = new byte[nByte];
-                    br.Read(occArray, 0, nByte);
+                    offset = 6 * i;
+                    occorrenze.Add(new OccorrenzaParola
+                    {
+                        Voce = BinaryPrimitives.ReadUInt32LittleEndian(span.Slice(offset, 4)),
+                        Parola = BinaryPrimitives.ReadUInt16LittleEndian(span.Slice(offset + 4, 2))
+                    });
                 }
-                int nOccorrenze = nByte / 6; // 6 perché ogni occorrenza prende 6 byte (UInt32 + UInt16)
-                string radice = "";
-                if (solaRadiceNormale)
-                {
-                    radice = RadiceDiParola(Parole[nParola]);
-                }
+            }
+            else
+            {
+                string radice = RadiceDiParola(Parole[nParola]);
 
                 for (int i = 0; i < nOccorrenze; ++i)
                 {
+                    int offset = 6 * i;
                     OccorrenzaParola op = new()
                     {
-                        Voce = (UInt32)(16777216 * occArray[6 * i + 3] + 65536 * occArray[6 * i + 2] + 256 * occArray[6 * i + 1] + occArray[6 * i]),
-                        Parola = (UInt16)(256 * occArray[6 * i + 5] + occArray[6 * i + 4])
+                        Voce = BinaryPrimitives.ReadUInt32LittleEndian(span.Slice(offset, 4)),
+                        Parola = BinaryPrimitives.ReadUInt16LittleEndian(span.Slice(offset + 4, 2))
                     };
-                    if (!solaRadiceNormale)
+
+                    bool radiceEDiversa = false;
+
+                    // Note: If radiciDiverse is sorted by OccorrenzaRadice, 
+                    // replacing this loop with Array.BinarySearch / List.BinarySearch will give a massive speedup.
+                    for (int j = 0; j < radiciDiverse.Count; ++j)
+                    {
+                        if (radiciDiverse[j].OccorrenzaRadice.CompareTo(op) == 0)
+                        {
+                            if (radiciDiverse[j].NuovaRadice != radice)
+                            {
+                                radiceEDiversa = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!radiceEDiversa)
                     {
                         occorrenze.Add(op);
                     }
-                    else
-                    {
-                        bool radiceEDiversa = false;
-                        for (int j = 0; j < radiciDiverse.Count; ++j)
-                        {
-                            if (radiciDiverse[j].OccorrenzaRadice.CompareTo(op) == 0)
-                            {
-                                radiceEDiversa = (radiciDiverse[j].NuovaRadice != radice);
-                                if (radiceEDiversa)
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        if (!radiceEDiversa)
-                        {
-                            occorrenze.Add(op);
-                        }
-                    }
                 }
             }
+
             return occorrenze;
         }
-
         private List<OccorrenzaParola> OccorrenzeParola(int nParola)
         {
             // restituisce una lista con tutte le occorrenze di una parola
@@ -1163,30 +1200,32 @@ namespace LaParola
 
         public int NumeroVolteParola(string parola)
         {
-            int numeroVolte;
             int numeroParola = NumeroDiParola(parola);
-            if (numeroParola >= 0)
-            {
-                lock (fileLock)
-                {
-                    fs.Seek(pParoleIndiceIndice + 4 * numeroParola, SeekOrigin.Begin);
-                    int inizioVersetti = (int)br.ReadUInt32();
-                    numeroVolte = ((int)br.ReadUInt32() - inizioVersetti) / 6;
-                }
-            }
-            else
-            {
-                numeroVolte = 0;
-            }
+            if (numeroParola < 0)
+                return 0;
 
-            return numeroVolte;
+            lock (fileLock)
+            {
+                fs.Seek(pParoleIndiceIndice + 4L * numeroParola, SeekOrigin.Begin);
+
+                uint inizioVersetti = br.ReadUInt32();
+                uint fineVersetti = br.ReadUInt32();
+
+                return (int)((fineVersetti - inizioVersetti) / 6);
+            }
         }
 
         internal byte[] GetApparenzeParole()
         {
-            fs.Seek(pParoleIndice - 4, SeekOrigin.Begin);
-            int count = (int)br.ReadUInt32();
-            return br.ReadBytes(count);
+            lock (fileLock)
+            {
+                fs.Seek(pParoleIndice - 4L, SeekOrigin.Begin);
+
+                byte[] buffer = new byte[(int)br.ReadUInt32()];
+                br.ReadExactly(buffer);
+
+                return buffer;
+            }
         }
 
         /// <summary>
@@ -1198,56 +1237,39 @@ namespace LaParola
         public int NumeroVolteRadice(string radice)
         {
             int numeroVolte = 0;
-            ReadOnlySpan<char> span = ParoleNumeriDiRadice(radice).AsSpan();
+            ReadOnlySpan<uint> idParole = ParoleNumeriDiRadice(radice);
 
-            lock (fileLock)
+            if (!idParole.IsEmpty)
             {
-                int start = 0;
-                while (start < span.Length)
+                lock (fileLock)
                 {
-                    // 1. Slice by '|' without creating any string objects in memory
-                    int pipeIndex = span[start..].IndexOf('|');
-                    ReadOnlySpan<char> token;
-
-                    if (pipeIndex < 0)
+                    foreach (uint parolaNumero in idParole)
                     {
-                        token = span[start..];
-                        start = span.Length;
+                        fs.Seek(pParoleIndiceIndice + (4L * parolaNumero), SeekOrigin.Begin);
+
+                        uint inizioVersetti = br.ReadUInt32();
+                        uint fineVersetti = br.ReadUInt32();
+
+                        numeroVolte += (int)((fineVersetti - inizioVersetti) / 6);
                     }
-                    else
-                    {
-                        token = span.Slice(start, pipeIndex);
-                        start += pipeIndex + 1;
-                    }
-
-                    if (token.IsEmpty) continue;
-
-                    // 2. Fast 0-allocation int parsing directly from char span
-                    int parolaNumero = int.Parse(token, NumberStyles.Integer, CultureInfo.InvariantCulture);
-
-                    // 3. 64-bit long math for stream seeking
-                    fs.Seek(pParoleIndiceIndice + (4L * parolaNumero), SeekOrigin.Begin);
-
-                    uint inizioVersetti = br.ReadUInt32();
-                    uint fineVersetti = br.ReadUInt32();
-
-                    numeroVolte += (int)(fineVersetti - inizioVersetti) / 6;
                 }
             }
-            foreach (RadiceDiversa radiceDiversa in radiciDiverse)
+
+            int totalRadiciDiverse = radiciDiverse.Count;
+            for (int i = 0; i < totalRadiciDiverse; ++i)
             {
-                if (radiceDiversa.NuovaRadice == radice)
+                if (string.Equals(radiciDiverse[i].NuovaRadice, radice, StringComparison.Ordinal))
                 {
-                    ++numeroVolte;
+                    numeroVolte++;
                 }
             }
+
             return numeroVolte;
         }
 
         public string RadiceDiParola(string parola)
         {
             // la radice normale, non un'eventuale radice diversa
-
             if (Radici.Length == 0)
             {
                 return "";
@@ -1272,44 +1294,65 @@ namespace LaParola
         public Collection<string> ParoleDiRadice(string radice)
         {
             // le parole che solitamente hanno questa radice, non altre parole che la hanno a volte come radice diversa
-            string[] paroleNumeri = SplitString(ParoleNumeriDiRadice(radice), '|');
-            Collection<string> paroleDiRadice = [];
-            foreach (string rn in paroleNumeri)
+            ReadOnlySpan<uint> idParole = ParoleNumeriDiRadice(radice);
+
+            // Inizializziamo la lista con la capacità esatta per evitare riallocazioni
+            List<string> lista = new(idParole.Length);
+            foreach (uint id in idParole)
             {
-                paroleDiRadice.Add(Parole[Convert.ToInt32(rn, CultureInfo.InvariantCulture)]);
+                lista.Add(Parole[(int)id]);
             }
 
-            return paroleDiRadice;
+            return new Collection<string>(lista);
         }
 
-        private string ParoleNumeriDiRadice(string radice)
+        /// <summary>
+        /// Restituisce tutte le ID delle parole legate a una data radice.
+        /// </summary>
+        private ReadOnlySpan<uint> ParoleNumeriDiRadice(string radice)
         {
-            // restituisce tutte le parole di una certa radice - restituisce una stringa con i numeri delle parole separati da |
             int numeroRadice = Array.BinarySearch(Radici, radice, confrontoParole);
-            if (numeroRadice >= 0)
+            if (numeroRadice < 0)
             {
-                if (paroleDiRadice == null)
-                // siccome la creazione di paroleDiRadice richiede un po' di tempo, lo facciamo solo la prima volta che è necessario
-                {
-                    int numeroRadici = Radici.Length;
-                    paroleDiRadice = new StringBuilder[numeroRadici];
-                    for (int i = 0; i < numeroRadici; ++i)
-                    {
-                        paroleDiRadice[i] = new StringBuilder();
-                    }
+                return [];
+            }
 
-                    int numeroParole = Parole.Length;
-                    for (UInt32 i = 0; i < numeroParole; ++i)
-                    {
-                        paroleDiRadice[ListaRadiceDiParola[i]].Append(i.ToString(CultureInfo.InvariantCulture)).Append('|');
-                    }
-                }
-                return paroleDiRadice[numeroRadice].ToString();
-            }
-            else
+            if (paroleDiRadice == null)
             {
-                return "";
+                InizializzaParoleDiRadice();
             }
+
+            return paroleDiRadice![numeroRadice];
+        }
+
+        private void InizializzaParoleDiRadice()
+        {
+            int numeroRadici = Radici.Length;
+            int numeroParole = Parole.Length;
+
+            // Pass 1: Count how many words belong to each root
+            int[] counts = new int[numeroRadici];
+            for (int i = 0; i < numeroParole; ++i)
+            {
+                counts[ListaRadiceDiParola[i]]++;
+            }
+
+            // Pass 2: Allocate exact-sized array for each root
+            uint[][] tempParoleDiRadice = new uint[numeroRadici][];
+            for (int i = 0; i < numeroRadici; ++i)
+            {
+                tempParoleDiRadice[i] = new uint[counts[i]];
+            }
+
+            // Pass 3: Fill arrays directly with word IDs
+            int[] offsets = new int[numeroRadici];
+            for (uint i = 0; i < (uint)numeroParole; ++i)
+            {
+                int radiceIdx = (int)ListaRadiceDiParola[i];
+                tempParoleDiRadice[radiceIdx][offsets[radiceIdx]++] = i;
+            }
+
+            paroleDiRadice = tempParoleDiRadice;
         }
 
         public void AggiungiRadiciAllaVersione(string[] elencoRadici, string[] radiceStringaDiParole)
@@ -1364,33 +1407,29 @@ namespace LaParola
         public string GetNotaTestoTitolo(string titolo)
         {
             if (string.IsNullOrEmpty(titolo))
-            {
-                return "";
-            }
+                return string.Empty;
 
-            // prima cerchiamo la nota con esattamente lo stesso titolo, poi con lettere minuscole
             int numeroNota = GetNumeroNotaTitolo(titolo);
             if (numeroNota < 0)
+                return string.Empty;
+
+            int pos = notePosizione[numeroNota];
+
+            if (pos < 0)
             {
-                return "";
+                int indexNuova = -pos - 1;
+                return (uint)indexNuova < (uint)noteNuoveTesto.Count
+                    ? noteNuoveTesto[indexNuova]
+                    : string.Empty;
             }
-            else // numeroNota>=0
+
+            lock (fileLock)
             {
-                if (notePosizione[numeroNota] >= 0)
-                {
-                    string testo;
-                    lock (fileLock)
-                    {
-                        fs.Seek(pIndice + 4 * notePosizione[numeroNota], SeekOrigin.Begin);
-                        fs.Seek(pTesto + br.ReadUInt32(), SeekOrigin.Begin);
-                        testo = br.ReadString();
-                    }
-                    return testo;
-                }
-                else
-                {
-                    return noteNuoveTesto[-notePosizione[numeroNota] - 1];
-                }
+                fs.Seek(pIndice + 4L * pos, SeekOrigin.Begin);
+                uint offsetTesto = br.ReadUInt32();
+
+                fs.Seek(pTesto + offsetTesto, SeekOrigin.Begin);
+                return br.ReadString();
             }
         }
 
@@ -1582,14 +1621,17 @@ namespace LaParola
 
         public Collection<string> GetRiferimentiCitati()
         {
-            Collection<string> riferimentiCitati = [];
-            int numeroCitazioniInCollezione = CitazioniRiferimenti.Count;
-            for (int i = 0; i < numeroCitazioniInCollezione; ++i)
+            int count = CitazioniRiferimenti.Count;
+            List<string> list = new(count);
+
+            for (int i = 0; i < count; ++i)
             {
-                riferimentiCitati.Add(new StringBuilder().Append(CitazioniRiferimenti[i].Brano[0]).Append('|').Append(CitazioniRiferimenti[i].Brano[1]).Append('|').Append(CitazioniRiferimenti[i].Brano[2]).Append('|').Append(CitazioniRiferimenti[i].Brano[3]).Append('|').Append(CitazioniRiferimenti[i].Brano[4]).Append('|').Append(CitazioniRiferimenti[i].Brano[5]).Append('|').Append(CitazioniRiferimenti[i].NumeroNota).Append('|').ToString());
+                CitazioneRiferimento cit = CitazioniRiferimenti[i];
+                byte[] b = cit.Brano;
+                list.Add($"{b[0]}|{b[1]}|{b[2]}|{b[3]}|{b[4]}|{b[5]}|{cit.NumeroNota}|");
             }
 
-            return riferimentiCitati;
+            return new Collection<string>(list);
         }
 
         public Riferimento Citazioni(Riferimento riferimento)
@@ -1749,8 +1791,7 @@ namespace LaParola
             formatoEbraico += " ";
 
             string formatoRiferimento = GetFormatoRiferimento();
-            string formatoRicerca, formatoRicercaNote;
-            (formatoRicerca, formatoRicercaNote) = GetFormatoRicerca();
+            (string formatoRicerca, string formatoRicercaNote) = GetFormatoRicerca();
 
             int ultimaParolaRicercata = -1;
 
@@ -2181,7 +2222,7 @@ namespace LaParola
             else
             {
                 #region nota
-                List<string> stringheRtf = StringheBranoCommentario(riferimento, conNomiDelleNote, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
+                List<string> stringheRtf = StringheBranoCommentario(riferimento, conNomiDelleNote, paroleRicercate, /*formatoRicercaNote,*/ formatoRiferimento, formatoRicerca);
                 // collezioniDaVisualizzare e noteDaVisualizzare non sono usati in questo caso
                 testoComeStringa = await genitore.MergeManyRtfAsStringAsync(ConvertiLink(stringheRtf));
                 if (string.IsNullOrEmpty(testoComeStringa))
@@ -2239,8 +2280,7 @@ namespace LaParola
         {
             // FontRicerca (\f2) e FontRicercaDimensione non è usato, per non disturbare troppo il font del testo
             //                string formatoRicerca = @"\f2\fs" + Convert.ToString(Convert.ToInt32(genitore.Formato.FontRicercaDimensione * 2), CultureInfo.InvariantCulture) + @"\cf2";
-            // TODO2 da cancellare?
-            //string formatoRicercaNote = (isRunningOnMono ? "" : @"\v " + RichTextBoxEx.ParolaRicercata + @"\v0"); // per non disturbare il formato delle note, cambiare solo lo stile delle parole ricercate, non il colore (il font e la dimensione non sono cambiati comunque, neanche per Bibbie)
+            // TODO2 da cancellare formatoRicercaNote? Non è più usato
             string formatoRicercaNote = "";
             string formatoRicerca = formatoRicercaNote + @"\cf2";
             // comunque, modificare il font e il colore non funzionano, perché \f? e \cf? non necessariamente corrispondono al font e al colore giusti
@@ -2265,16 +2305,15 @@ namespace LaParola
         public async Task<FlowDocument> FlowDocumentBranoCommentarioAsync(Riferimento riferimento, Riferimento paroleRicercate)
         {
             string formatoRiferimento = GetFormatoRiferimento();
-            string formatoRicerca, formatoRicercaNote;
-            (formatoRicerca, formatoRicercaNote) = GetFormatoRicerca();
+            (string formatoRicerca, string formatoRicercaNote) = GetFormatoRicerca();
 
-            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), true, paroleRicercate, formatoRicercaNote, formatoRiferimento, formatoRicerca);
+            List<string> stringheRtf = StringheBranoCommentario(ElencaNoteInBrano(riferimento), true, paroleRicercate, /*formatoRicercaNote,*/ formatoRiferimento, formatoRicerca);
 
             // Direct compilation without string conversion overhead
             return await Texts.MergeManyRtfAsDocumentAsync(ConvertiLink(stringheRtf));
         }
 
-        private List<string> StringheBranoCommentario(Riferimento riferimento, bool conNomiDelleNote, Riferimento paroleRicercate, string formatoRicercaNote, string formatoRiferimento, string formatoRicerca)
+        private List<string> StringheBranoCommentario(Riferimento riferimento, bool conNomiDelleNote, Riferimento paroleRicercate, /*string formatoRicercaNote,*/ string formatoRiferimento, string formatoRicerca)
         {
             int numeroNote = riferimento.Note.Count;
             if (numeroNote == 0) return [];
@@ -2286,7 +2325,7 @@ namespace LaParola
             // 2. Cache header & format strings outside the loop to avoid repeated concatenations
             string rtfHeader = genitore.RtfIntestazione();
             string rtfSeparator = rtfHeader + @"\par}";
-            string inizioFormatoRicercaNote = "{" + formatoRicercaNote + " ";
+            //string inizioFormatoRicercaNote = "{" + formatoRicercaNote + " ";
             string inizioFormatoRiferimento = "{" + formatoRiferimento + " ";
             string inizioFormatoRicerca = "{" + formatoRicerca + " ";
             string inizioInizioRiferimento = MainWindow.LPN_ANCORA;
@@ -2840,7 +2879,7 @@ namespace LaParola
                             if (iCarattere3 > 0 && (iCarattere3 < iCarattere2 || iCarattere2 < 0))
                                 iCarattere2 = iCarattere3; // trova primo whitespace, poi butta e riutilizza iCarattere3
                             iCarattere3 = testoDaModificare.IndexOf('{', i);
-                            if (iCarattere1 >= 0 && (iCarattere1 < iCarattere2 || iCarattere2<0) &&( iCarattere1<iCarattere3||iCarattere3<0))
+                            if (iCarattere1 >= 0 && (iCarattere1 < iCarattere2 || iCarattere2 < 0) && (iCarattere1 < iCarattere3 || iCarattere3 < 0))
                             {
                                 if (i > 0 && IsLettera(testoDaModificare[i - 1]) && iCarattere1 < testoDaModificare.Length - 2 && testoDaModificare[iCarattere1 + 2] == '\'')
                                 {
@@ -2848,7 +2887,7 @@ namespace LaParola
                                 }
                                 iCarattere3 = iCarattere1;
                             }
-                            else if (iCarattere2>= 0 && (iCarattere2 < iCarattere3||iCarattere3<0))
+                            else if (iCarattere2 >= 0 && (iCarattere2 < iCarattere3 || iCarattere3 < 0))
                             {
                                 if (i > 0 && IsLettera(testoDaModificare[i - 1]) && iCarattere2 >= 0 && iCarattere2 < testoDaModificare.Length - 1 && !testoDaModificare.AsSpan(i, iCarattere2 - i).Equals(@"\par", StringComparison.Ordinal) && !testoDaModificare.AsSpan(i, iCarattere2 - i).Equals("\\par\r", StringComparison.Ordinal) && IsLettera(testoDaModificare[iCarattere2 + 1]))
                                 {

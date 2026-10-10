@@ -23,7 +23,7 @@ namespace LaParola.Services
 
         public static async Task CheckForNewMessagesAsync()
         {
-            int CheckIntervalDays = MainWindow.settings.ControlloMessaggi;
+            int CheckIntervalDays = MainWindow.settings.IntervalloGiorniControlloMessaggi;
             // 1. Check if the user opted out
             if (CheckIntervalDays == 0)
                 return;

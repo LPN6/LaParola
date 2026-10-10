@@ -26,6 +26,7 @@
         <KeyBinding Key="F5" Command="{x:Static local:MainWindow.SearchCommand}" />
         <KeyBinding Key="F6" Command="{x:Static local:MainWindow.MostraCommand}" />
         <KeyBinding Key="F7" Command="{x:Static local:MainWindow.CreaChiaveCommand}" />
+        <KeyBinding Key="F8" Command="{x:Static local:MainWindow.BraniSimiliCommand}" />
         <KeyBinding Key="M" Modifiers="Ctrl+Shift" Command="{x:Static local:MainWindow.ConverterCommand}" />
         <KeyBinding Key="F10" Command="{x:Static local:MainWindow.VoiceCommand}" />
         <KeyBinding Key="R" Modifiers="Ctrl" Command="{x:Static local:MainWindow.RiferimentiCommand}" />
@@ -50,6 +51,7 @@
         <CommandBinding Command="{x:Static local:MainWindow.SearchCommand}" Executed="Search_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.MostraCommand}" Executed="Mostra_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.CreaChiaveCommand}" Executed="CreaChiave_Executed" />
+        <CommandBinding Command="{x:Static local:MainWindow.BraniSimiliCommand}" Executed="BraniSimili_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.ConverterCommand}" Executed="Converter_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.VoiceCommand}" Executed="Voice_Executed" />
         <CommandBinding Command="{x:Static local:MainWindow.AddTextsCommand}" Executed="AddTexts_Executed" />
@@ -268,6 +270,11 @@
                     <MenuItem Header="{DynamicResource MenuCreaChiave}" Command="{x:Static local:MainWindow.CreaChiaveCommand}" InputGestureText="F7">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="BookAlphabet"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MenuBraniSimili}" Command="{x:Static local:MainWindow.BraniSimiliCommand}" InputGestureText="F8">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="BookMultiple"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource MenuConverter}" Command="{x:Static local:MainWindow.ConverterCommand}" InputGestureText="Ctrl+Shift+M">

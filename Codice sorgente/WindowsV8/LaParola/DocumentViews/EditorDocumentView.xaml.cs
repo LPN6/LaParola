@@ -512,7 +512,6 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
         }
     }
 
-
     private void Voce_Click(object sender, RoutedEventArgs e)
     {
         ToggleLettura();
@@ -655,8 +654,13 @@ public partial class EditorDocumentView : UserControl, IFlowDocumentHost, INotif
             // Ripristina lo stato grafico corretto del tema
             TxtSearch.ClearValue(TextBox.BackgroundProperty);
             TxtSearch.ClearValue(TextBox.BorderBrushProperty);
-
             Editor.Selection.Select(foundRange.Start, foundRange.End);
+
+            // Scroll the found range into view
+            if (foundRange.Start.Parent is FrameworkContentElement element)
+            {
+                element.BringIntoView();
+            }
             Editor.Focus();
             return true;
         }

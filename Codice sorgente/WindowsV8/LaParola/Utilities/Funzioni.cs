@@ -4,17 +4,17 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
 namespace LaParola.Utilities
 {
-    class Funzioni
+    partial class Funzioni
     {
         internal static string AggiungiZero(string stringa, int lunghezza)
         {
-            string s1 = new String('0', lunghezza) + stringa;
-            return s1[^lunghezza..];
+            return stringa?.PadLeft(lunghezza, '0') ?? new string('0', lunghezza);
         }
 
         internal static string AggiungiZero(int numero, int lunghezza)
@@ -70,7 +70,7 @@ namespace LaParola.Utilities
         }
 
         public static bool RightToLeft(string lingua)
-        { // anche in funzioni.cs
+        {
             string linguaPrincipale = LinguaPrincipale(lingua);
             return (linguaPrincipale == "he" || linguaPrincipale == "ar");
         }
@@ -82,7 +82,6 @@ namespace LaParola.Utilities
 
             StringBuilder sb = new(rtf.Length + 256);
 
-            Span<char> buffer = stackalloc char[6];
             foreach (char c in rtf)
             {
                 if (c < 128)
@@ -91,12 +90,9 @@ namespace LaParola.Utilities
                 }
                 else
                 {
-                    sb.Append(@"\u");
-                    if (((int)c).TryFormat(buffer, out int written))
-                    {
-                        sb.Append(buffer[..written]);
-                    }
-                    sb.Append('?');
+                    // RTF requires a signed 16-bit integer (-32768 to 32767)
+                    // .Append((short)c) formats directly into StringBuilder without allocations
+                    sb.Append(@"\u").Append((short)c).Append('?');
                 }
             }
 
@@ -343,6 +339,15 @@ namespace LaParola.Utilities
                         creaChiaveView.AggiornaVersioniDisponibili();
                     }
 
+                    LayoutAnchorable? braniSimiliAnchorable = dock.Layout.Descendents()
+                        .OfType<LayoutAnchorable>()
+                        .FirstOrDefault(a => a.ContentId == "tool.branisimili");
+
+                    if (braniSimiliAnchorable?.Content is BraniSimiliToolView braniSimiliView)
+                    {
+                        braniSimiliView.AggiornaVersioniDisponibili();
+                    }
+
                     LayoutDocument? opzioniDocument = dock.Layout.Descendents()
                         .OfType<LayoutDocument>()
                         .FirstOrDefault(a => a.ContentId == "tool.options");
@@ -361,22 +366,93 @@ namespace LaParola.Utilities
                         bibliotecaView.LoadLibraryData();
                     }
 
-
                     LayoutDocument? aggiungiTestiDocument = dock.Layout.Descendents()
                         .OfType<LayoutDocument>()
                         .FirstOrDefault(a => a.ContentId == "tool.aggiungitesti");
 
                     if (aggiungiTestiDocument?.Content is AggiungiTesti aggiungiTestiView)
                     {
-                        aggiungiTestiView.PopolaGrigia();
+                        aggiungiTestiView.PopolaGriglia();
                         aggiungiTestiView.AggiornaConteggioStato();
                     }
-
                 }
 
                 mw.AggiornaMenuVisualizza();
             }
-
         }
+
+        public static string StripRtf(string rtf)
+        {
+            if (!rtf.StartsWith("{\\rtf", StringComparison.OrdinalIgnoreCase))
+                return rtf;
+
+            string text = rtf;
+
+            // 1. Delete complete metadata/header groups (font tables, color tables, pictures, generator info, etc.)
+            text = RegExTables().Replace(text, string.Empty);
+
+            // 2. Decode Unicode escapes \uN (e.g., \u3456? or \u-10123\'3f)
+            // Matches the \u number and consumes its trailing fallback character (literal char or hex escape)
+            text = RegExUnicode().Replace(text, m =>
+            {
+                if (short.TryParse(m.Groups[1].Value, out short codePointShort))
+                {
+                    // Cast to ushort to handle negative 16-bit short values in RTF (e.g., \u-10123)
+                    ushort codePoint = (ushort)codePointShort;
+                    return char.ConvertFromUtf32(codePoint);
+                }
+                return string.Empty;
+            });
+
+            // 3. Decode Hex escapes \'hh (e.g., \'a9 -> ©)
+            Encoding win1252 = GetWindows1252Encoding();
+            text = RegExAscii().Replace(text, m =>
+            {
+                byte b = Convert.ToByte(m.Groups[1].Value, 16);
+                return win1252.GetString([b]);
+            });
+
+            // 4. Convert RTF line breaks and tabs to plain spaces/newlines
+            text = RegExACapo().Replace(text, "\n");
+            text = RegExTab().Replace(text, "\t");
+
+            // 5. Remove remaining control words (e.g., \b1, \i, \fs20)
+            text = RegExControl().Replace(text, string.Empty);
+
+            // 6. Remove remaining bare braces '{' and '}'
+            text = RegExParentesi().Replace(text, string.Empty);
+
+            return text.Trim();
+        }
+
+        internal static Encoding GetWindows1252Encoding()
+        {
+            try
+            {
+                return Encoding.GetEncoding(1252);
+            }
+            catch
+            {
+                // Fallback for modern .NET (.NET Core / 5+) where Windows code pages aren't registered by default
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                return Encoding.GetEncoding(1252);
+            }
+        }
+
+        [GeneratedRegex(@"{\\fonttbl.*?}|{\\colortbl.*?}|{\\stylesheet.*?}|{\\pict.*?}|{\\\*\\.*?}", RegexOptions.Singleline
+        )]
+        private static partial Regex RegExTables();
+        [GeneratedRegex(@"\\u(-?\d+)\s?(\\'[0-9a-fA-F]{2}|.)?")]
+        private static partial Regex RegExUnicode();
+        [GeneratedRegex(@"\\'([0-9a-fA-F]{2})")]
+        private static partial Regex RegExAscii();
+        [GeneratedRegex(@"\\par\b\s?|\\line\b\s?")]
+        private static partial Regex RegExACapo();
+        [GeneratedRegex(@"\\tab\b\s?")]
+        private static partial Regex RegExTab();
+        [GeneratedRegex(@"\\[a-zA-Z0-9-]+\b\s?")]
+        private static partial Regex RegExControl();
+        [GeneratedRegex(@"[{}]")]
+        private static partial Regex RegExParentesi();
     }
 }

@@ -180,7 +180,7 @@
                 HelpText="{DynamicResource BibliotecaAiuto}"
                 HelpClicked="HelpFlyout_OnHelpClicked"/>
 
-            <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10,0,0" VerticalAlignment="Center">
+            <WrapPanel Grid.Row="1" Grid.Column="0" Margin="0,10,0,0" VerticalAlignment="Center">
 
                 <TextBlock VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium">
                     <Run Text="{DynamicResource BibliotecaTipo}"/>:
@@ -237,7 +237,20 @@
                         </ToolTip>
                     </TextBox.ToolTip>
                 </TextBox>
+
             </WrapPanel>
+            <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Center"
+                    Content="{DynamicResource BibliotecaEsportaBiblioteca}"
+                    MinHeight="28"
+                    Click="EsportaBiblioteca_Click">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{DynamicResource BibliotecaEsportaBibliotecaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
         </Grid>
 
         <Grid Grid.Row="1">
@@ -572,8 +585,6 @@
                         </RichTextBox>
                     </StackPanel>
 
-                    <Separator Margin="0,12,0,12"/>
-
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -581,6 +592,19 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <Button x:Name="ButtonGuida"
+                    Content="{DynamicResource BibliotecaGuida}"
+                    MinHeight="28" Padding="12,0,12,0" Margin="0,12,0,0"
+                    Click="ButtonGuida_Click">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource BibliotecaGuidaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            
+                            <Separator Margin="0,12,0,12" />
+
                             <Button x:Name="ButtonCancella"
                     Content="{DynamicResource BibliotecaCancella}"
                     MinHeight="28" Padding="12,0,12,0" Margin="0,0,0,8"

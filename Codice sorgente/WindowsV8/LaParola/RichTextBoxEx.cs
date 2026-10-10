@@ -17,7 +17,7 @@ namespace LaParola
     /// <summary>
     /// An extension for RichTextBox
     /// </summary>
-    public class RichTextBoxEx : RichTextBox
+    public class RichTextBoxEx : RichTextBox, IDisposable
     {
         #region proprietà
 
@@ -821,6 +821,28 @@ namespace LaParola
             }
 
             return parolaAttuale;
+        }
+
+        public void Dispose()
+        {
+            // Release large resources held by the RichTextBox to aid garbage collection.
+            // Clear and replace the Document to break possible references to large object graphs.
+            try
+            {
+                FlowDocument doc = Document;
+                if (doc != null)
+                {
+                    doc.Blocks.Clear();
+                    // Replace with a fresh, empty FlowDocument to ensure previous content can be collected.
+                    Document = new FlowDocument();
+                }
+            }
+            catch
+            {
+                // Swallow exceptions from Dispose to avoid throwing during disposal/finalization.
+            }
+
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>

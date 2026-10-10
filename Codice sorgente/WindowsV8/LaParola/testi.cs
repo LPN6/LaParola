@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -1760,6 +1759,7 @@ namespace LaParola
                 stileFont += @"\u1";
             }
 
+            // TODO da cancellare? rtfintestazione
             //            return @"{\rtf1\ansi\ansicpg1252\deff0\deflang1040{\fonttbl{\f0\fnil\fcharset0 " + formato.FontNome + @";}{\f1\fnil\fcharset0 " + formato.FontRiferimentoNome + @";}{\f3\fnil\fcharset0 " + formato.FontGrecoNome + @";}{\f4\fnil\fcharset0 " + formato.FontEbraicoNome + @";}}"
             return @"{\rtf1\ansi\ansicpg1252\deff0\deflang1040{\fonttbl{\f0\fnil\fcharset0 " + formato.FontNome + @";}{\f1\fnil\fcharset0 " + formato.FontRiferimentoNome + @";}{\f3\fnil\fcharset0 " + formato.FontGrecoNome + @";}{\f4\fnil\fcharset0 " + formato.FontEbraicoNome + @";}}"
                 + @"{\colortbl\red" + formato.FontColore.R.ToString(CultureInfo.InvariantCulture) + @"\green" + formato.FontColore.G.ToString(CultureInfo.InvariantCulture) + @"\blue" + formato.FontColore.B.ToString(CultureInfo.InvariantCulture)
@@ -1917,7 +1917,6 @@ namespace LaParola
                     versioniNonSalvate += " " + k.Value.Info.Nome;
                 }
             }
-
             return versioniNonSalvate;
         }
 
@@ -1947,7 +1946,6 @@ namespace LaParola
             }
             return nomeTesto;
         }
-
 
         /// <summary>
         /// Cancella il file che contiene un testo.
@@ -3344,50 +3342,50 @@ namespace LaParola
                 }
                 else
                 {
-                        StringBuilder stringaRtf = new(RtfIntestazione());
-                        string testoInVersione;
-                        bool ultimaVersioneBibbia = true;
-                        int lunghezzaIntestazione = stringaRtf.Length;
-                        for (int i = 0; i < listaVersioni.Count; ++i)
+                    StringBuilder stringaRtf = new(RtfIntestazione());
+                    string testoInVersione;
+                    bool ultimaVersioneBibbia = true;
+                    int lunghezzaIntestazione = stringaRtf.Length;
+                    for (int i = 0; i < listaVersioni.Count; ++i)
+                    {
+                        try
                         {
-                            try
+                            if (conNomiVersioni && listaVersioni.Count > 1)
                             {
-                                if (conNomiVersioni && listaVersioni.Count > 1)
-                                {
-                                    stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
-                                }
-                                testoInVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate);
-                                if (versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
-                                {
-                                    if (lunghezzaIntestazione < testoInVersione.Length - 1 && testoInVersione[lunghezzaIntestazione] != ' ')
-                                    {
-                                        stringaRtf.Append(' ');
-                                    }
-                                    stringaRtf.Append(testoInVersione[lunghezzaIntestazione..^1]);
-                                    if (!bibbiaTrovata)
-                                    {
-                                        UltimaBibbia = listaVersioni[i];
-                                        bibbiaTrovata = true;
-                                    }
-                                    ultimaVersioneBibbia = true;
-                                }
-                                else
-                                { // commentario
-                                    stringheRtf.Add(stringaRtf + @"}");
-                                    stringheRtf.Add(testoInVersione);
-                                    stringaRtf = new(RtfIntestazione());
-                                    ultimaVersioneBibbia = false;
-                                }
-                                if (i < listaVersioni.Count - 1)
-                                {
-                                    stringaRtf.Append(@"\par\ql\par");
-                                }
+                                stringaRtf.Append(@"{\b1").Append(listaVersioni[i]).Append(@"}\par\ql\par");
                             }
-                            catch { } // il nome della versione non era riconosciuto
+                            testoInVersione = await versioni[listaVersioni[i]].TestoBranoAsync(riferimento, collezioniDaVisualizzare, noteDaVisualizzare, conNomiVersioni, paroleRicercate);
+                            if (versioni[listaVersioni[i]].Info.Tipo == TestoTipi.Bibbia)
+                            {
+                                if (lunghezzaIntestazione < testoInVersione.Length - 1 && testoInVersione[lunghezzaIntestazione] != ' ')
+                                {
+                                    stringaRtf.Append(' ');
+                                }
+                                stringaRtf.Append(testoInVersione[lunghezzaIntestazione..^1]);
+                                if (!bibbiaTrovata)
+                                {
+                                    UltimaBibbia = listaVersioni[i];
+                                    bibbiaTrovata = true;
+                                }
+                                ultimaVersioneBibbia = true;
+                            }
+                            else
+                            { // commentario
+                                stringheRtf.Add(stringaRtf + @"}");
+                                stringheRtf.Add(testoInVersione);
+                                stringaRtf = new(RtfIntestazione());
+                                ultimaVersioneBibbia = false;
+                            }
+                            if (i < listaVersioni.Count - 1)
+                            {
+                                stringaRtf.Append(@"\par\ql\par");
+                            }
                         }
-                        if (ultimaVersioneBibbia)
-                            stringheRtf.Add(stringaRtf + @"}");
-                        return stringheRtf;
+                        catch { } // il nome della versione non era riconosciuto
+                    }
+                    if (ultimaVersioneBibbia)
+                        stringheRtf.Add(stringaRtf + @"}");
+                    return stringheRtf;
                 }
             }
             catch (KeyNotFoundException)
@@ -5048,9 +5046,10 @@ Riferimento? paroleRicercate = null)
                     versettoNumerico.Append(riferimentoRimanente.AsSpan(j, 1));
                 }
 
+
                 try
                 {
-                    versetto = Convert.ToByte(versettoNumerico.ToString(), CultureInfo.InvariantCulture);
+                    versetto = (versettoNumerico.Length == 0 ? (byte)0 : Convert.ToByte(versettoNumerico.ToString(), CultureInfo.InvariantCulture));
                 }
                 catch (OverflowException)
                 {
@@ -5087,7 +5086,7 @@ Riferimento? paroleRicercate = null)
 
                 try
                 {
-                    parola = Convert.ToByte(parolaNumerico.ToString(), CultureInfo.InvariantCulture);
+                    parola = (parolaNumerico.Length == 0 ? (byte)0 : Convert.ToByte(parolaNumerico.ToString(), CultureInfo.InvariantCulture));
                 }
                 catch (OverflowException)
                 {
@@ -5378,7 +5377,7 @@ Riferimento? paroleRicercate = null)
         /// Se la versione ha delle radici.
         /// </summary>
         /// <param name="nomeVersione">Il nome della versione.</param>
-        /// <returns>Vero se esistono la radici.</returns>
+        /// <returns>Vero se esistono le radici nella versioen.</returns>
         public bool EsistonoRadici(string nomeVersione)
         {
             // tested
@@ -5907,41 +5906,53 @@ Riferimento? paroleRicercate = null)
         /// <param name="noteTitolo">I titoli delle note</param>
         /// <param name="noteTesto">I testi delle note (formato RTF o testo normale)</param>
         /// <returns>Due interi senza segno, con la posizione dell'inizio dei titoli e la posizione dell'inizio dell'indice delle note, sempre relativo a pInizioDati</returns>
-        public static UInt32[] ScriviNote(BinaryWriter bw, UInt32 posizioneInizioDati, string[] noteTitolo, string[] noteTesto)
+        public static (uint InizioTestoIndiceLC, uint InizioTestoIndice) ScriviNote(
+            BinaryWriter bw,
+            uint posizioneInizioDati,
+            string[] noteTitolo,
+            string[] noteTesto)
         {
             ArgumentNullException.ThrowIfNull(bw);
-
             ArgumentNullException.ThrowIfNull(noteTitolo);
-
             ArgumentNullException.ThrowIfNull(noteTesto);
 
-            UInt32[] indici = new UInt32[2];
+            if (noteTitolo.Length != noteTesto.Length)
+            {
+                throw new ArgumentException("I vettori dei titoli e dei testi devono avere la stessa dimensione.");
+            }
 
             int numeroNote = noteTitolo.Length;
-            StringBuilder titoliNote = new("");
-            UInt32[] posizioniNote = new UInt32[numeroNote];
+            StringBuilder titoliNote = new();
+            uint[] posizioniNote = new uint[numeroNote];
+
+            // Memorizza la posizione assoluta iniziale prima della scrittura delle note
+            uint pInizioPrimoTesto = (uint)bw.BaseStream.Position;
+
             for (int i = 0; i < numeroNote; ++i)
             {
-                if (!string.IsNullOrEmpty(noteTitolo[i]))
+                string titolo = noteTitolo[i];
+                if (!string.IsNullOrEmpty(titolo))
                 {
-                    titoliNote.Append(noteTitolo[i]).Append('|');
-                    posizioniNote[i] = (UInt32)(bw.Seek(0, SeekOrigin.Current));
+                    titoliNote.Append(titolo).Append('|');
+                    posizioniNote[i] = (uint)bw.BaseStream.Position;
                     bw.Write(noteTesto[i]);
                 }
             }
 
-            indici[0] = (UInt32)(bw.Seek(0, SeekOrigin.Current)) - posizioneInizioDati; // diventa inizioTestoIndiceLC
+            uint inizioTestoIndiceLC = (uint)bw.BaseStream.Position - posizioneInizioDati;
             bw.Write(titoliNote.ToString());
-            indici[1] = (UInt32)(bw.Seek(0, SeekOrigin.Current)) - posizioneInizioDati; // diventa inizioTestoIndice
+
+            uint inizioTestoIndice = (uint)bw.BaseStream.Position - posizioneInizioDati;
             for (int i = 0; i < numeroNote; ++i)
             {
                 if (!string.IsNullOrEmpty(noteTitolo[i]))
                 {
-                    bw.Write(posizioniNote[i] - posizioniNote[0]);
+                    // Sottrazione calcolata rispetto al punto di origine reale dei testi
+                    bw.Write(posizioniNote[i] - pInizioPrimoTesto);
                 }
             }
 
-            return indici;
+            return (inizioTestoIndiceLC, inizioTestoIndice);
         }
 
         /// <summary>
@@ -5952,28 +5963,45 @@ Riferimento? paroleRicercate = null)
         /// <returns>Falso se non c'erano riferimenti citati nella collezione.</returns>
         public bool ScriviRiferimentiCitati(BinaryWriter bw, string[] noteTesto)
         {
-            int posizione1 = (int)(bw.Seek(0, SeekOrigin.Current));
-            List<Riferimento> riferimenti;
-            UInt32 numeroCitazioni = 0;
-            bw.Write(numeroCitazioni); // il valore vero sarà scritto più avanti in questa routine
-            for (UInt32 i = 0; i < noteTesto.Length; ++i)
+            ArgumentNullException.ThrowIfNull(bw);
+            ArgumentNullException.ThrowIfNull(noteTesto);
+
+            long posInizio = bw.BaseStream.Position;
+            uint numeroCitazioni = 0;
+
+            // Scrive un placeholder da 4 byte per il conteggio
+            bw.Write((uint)0);
+
+            for (int i = 0; i < noteTesto.Length; ++i)
             {
-                riferimenti = TrovaRiferimentiInVoce(noteTesto[i]);
-                for (int j = 0; j < riferimenti.Count; ++j)
+                string testo = noteTesto[i];
+                if (string.IsNullOrEmpty(testo)) continue;
+
+                List<Riferimento> riferimenti = TrovaRiferimentiInVoce(testo);
+                if (riferimenti == null || riferimenti.Count == 0) continue;
+
+                foreach (Riferimento rif in riferimenti)
                 {
-                    bw.Write(riferimenti[j].Brani[0]);
-                    bw.Write(i);
+                    bw.Write(rif.Brani[0]);
+                    bw.Write((uint)i);
                     ++numeroCitazioni;
                 }
             }
+
             if (numeroCitazioni > 0)
             {
-                int posizione2 = (int)(bw.Seek(0, SeekOrigin.Current));
-                bw.Seek(posizione1, SeekOrigin.Begin);
+                // Torna indietro e scrive il numero effettivo di citazioni
+                long posFine = bw.BaseStream.Position;
+                bw.BaseStream.Position = posInizio;
                 bw.Write(numeroCitazioni);
-                bw.Seek(posizione2, SeekOrigin.Begin);
+                bw.BaseStream.Position = posFine;
+
+                return true;
             }
-            return (numeroCitazioni > 0);
+
+            // Ripristina la posizione originaria per evitare di lasciare 4 byte "orfani" nel file
+            bw.BaseStream.Position = posInizio;
+            return false;
         }
 
         /// <summary>

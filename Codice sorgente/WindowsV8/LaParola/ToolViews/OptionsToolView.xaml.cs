@@ -123,7 +123,7 @@ public partial class OptionsToolView : UserControl
 
         InitializeTextsPreferences(); //deve essere fatto dopo che Testi è pronto
 
-        switch (MainWindow.settings?.ControlloMessaggi)
+        switch (MainWindow.settings?.IntervalloGiorniControlloMessaggi)
         {
             case 0:
                 AggiornamentiMessaggiMai.IsChecked = true;
@@ -139,6 +139,24 @@ public partial class OptionsToolView : UserControl
                 break;
             default:
                 AggiornamentiMessaggiGiorno.IsChecked = true;
+                break;
+        }
+        switch (MainWindow.settings?.IntervalloGiorniControlloTesti)
+        {
+            case 0:
+                AggiornamentiTestiMai.IsChecked = true;
+                break;
+            case 1:
+                AggiornamentiTestiGiorno.IsChecked = true;
+                break;
+            case 7:
+                AggiornamentiTestiSettimana.IsChecked = true;
+                break;
+            case 30:
+                AggiornamentiTestiMese.IsChecked = true;
+                break;
+            default:
+                AggiornamentiTestiSettimana.IsChecked = true;
                 break;
         }
 
@@ -493,7 +511,10 @@ public partial class OptionsToolView : UserControl
                     targetElement = SectionAggiornamentiHeader;
                     break;
                 case "NodeMessages":
-                    targetElement = SectionMessages;
+                    targetElement = SectionMessaggi;
+                    break;
+                case "NodeTextUpdates":
+                    targetElement = SectionAggiornamentiTesti;
                     break;
             }
 
@@ -518,7 +539,10 @@ public partial class OptionsToolView : UserControl
         switch (((Button)sender).Name)
         {
             case "Modifica":
-                dlg = new FontDialog(allowSuperscript: false, f.FontNome, f.FontDimensione, f.FontGrassetto, f.FontCorsivo, f.FontSottolineato, false, f.FontColore.ToString());
+                dlg = new FontDialog(allowSuperscript: false, f.FontNome, f.FontDimensione, f.FontGrassetto, f.FontCorsivo, f.FontSottolineato, false, f.FontColore.ToString())
+                {
+                    Owner = Window.GetWindow(this)
+                };
 
                 if (dlg.ShowDialog() == true)
                 {
@@ -538,7 +562,10 @@ public partial class OptionsToolView : UserControl
                 }
                 break;
             case "ModificaGreco":
-                dlg = new FontDialog(allowSuperscript: false, f.FontGrecoNome, f.FontGrecoDimensione, f.FontGrecoGrassetto, f.FontGrecoCorsivo, f.FontGrecoSottolineato, false, f.FontGrecoColore.ToString());
+                dlg = new FontDialog(allowSuperscript: false, f.FontGrecoNome, f.FontGrecoDimensione, f.FontGrecoGrassetto, f.FontGrecoCorsivo, f.FontGrecoSottolineato, false, f.FontGrecoColore.ToString())
+                {
+                    Owner = Window.GetWindow(this)
+                };
 
                 if (dlg.ShowDialog() == true)
                 {
@@ -558,7 +585,10 @@ public partial class OptionsToolView : UserControl
                 }
                 break;
             case "ModificaEbraico":
-                dlg = new FontDialog(allowSuperscript: false, f.FontEbraicoNome, f.FontEbraicoDimensione, f.FontEbraicoGrassetto, f.FontEbraicoCorsivo, f.FontEbraicoSottolineato, false, f.FontEbraicoColore.ToString());
+                dlg = new FontDialog(allowSuperscript: false, f.FontEbraicoNome, f.FontEbraicoDimensione, f.FontEbraicoGrassetto, f.FontEbraicoCorsivo, f.FontEbraicoSottolineato, false, f.FontEbraicoColore.ToString())
+                {
+                    Owner = Window.GetWindow(this)
+                };
 
                 if (dlg.ShowDialog() == true)
                 {
@@ -578,7 +608,10 @@ public partial class OptionsToolView : UserControl
                 }
                 break;
             case "ModificaRicerca":
-                dlg = new FontDialog(allowSuperscript: false, f.FontRicercaNome, f.FontRicercaDimensione, f.FontRicercaGrassetto, f.FontRicercaCorsivo, f.FontRicercaSottolineato, false, f.FontRicercaColore.ToString());
+                dlg = new FontDialog(allowSuperscript: false, f.FontRicercaNome, f.FontRicercaDimensione, f.FontRicercaGrassetto, f.FontRicercaCorsivo, f.FontRicercaSottolineato, false, f.FontRicercaColore.ToString())
+                {
+                    Owner = Window.GetWindow(this)
+                };
 
                 if (dlg.ShowDialog() == true)
                 {
@@ -598,7 +631,10 @@ public partial class OptionsToolView : UserControl
                 }
                 break;
             case "ModificaRiferimenti":
-                dlg = new FontDialog(allowSuperscript: true, f.FontRiferimentoNome, f.FontRiferimentoDimensione, f.FontRiferimentoGrassetto, f.FontRiferimentoCorsivo, f.FontRiferimentoSottolineato, f.RiferimentoApice, f.FontRiferimentoColore.ToString());
+                dlg = new FontDialog(allowSuperscript: true, f.FontRiferimentoNome, f.FontRiferimentoDimensione, f.FontRiferimentoGrassetto, f.FontRiferimentoCorsivo, f.FontRiferimentoSottolineato, f.RiferimentoApice, f.FontRiferimentoColore.ToString())
+                {
+                    Owner = Window.GetWindow(this)
+                };
 
                 if (dlg.ShowDialog() == true)
                 {
@@ -889,9 +925,18 @@ public partial class OptionsToolView : UserControl
                   AggiornamentiMessaggiSettimana.IsChecked == true ? 7 :
                   AggiornamentiMessaggiMese.IsChecked == true ? 30 :
                   0;
-        if (agg != _settings.ControlloMessaggi)
+        if (agg != _settings.IntervalloGiorniControlloMessaggi)
         {
-            _settings.ControlloMessaggi = agg;
+            _settings.IntervalloGiorniControlloMessaggi = agg;
+        }
+
+        int aggTesti = AggiornamentiTestiGiorno.IsChecked == true ? 1 :
+                       AggiornamentiTestiSettimana.IsChecked == true ? 7 :
+                       AggiornamentiTestiMese.IsChecked == true ? 30 :
+                       0;
+        if (aggTesti != _settings.IntervalloGiorniControlloTesti)
+        {
+            _settings.IntervalloGiorniControlloTesti = aggTesti;
         }
 
         if (Application.Current.MainWindow is MainWindow mw)

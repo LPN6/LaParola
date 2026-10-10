@@ -1,5 +1,14 @@
 [
   {
+    "Id": 7,
+    "Title": "Version 8.0.8",
+    "Content": "The new beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are the search for similar passages, saving the information about the installed texts, and updating the texts when there are new versions.",
+    "TitleIt": "Versione 8.0.8",
+    "ContentIt": "La nuova versione beta è ora disponibile a https://www.laparola.net/programma/windowsbeta.php . Le novità principali sono la ricerca di brani simili, salvare le informazioni sui testi installati, e aggiornare i testi quando ci sono nuove versioni.",
+    "Date": "2026-10-10T07:00:00"
+  }
+
+  {
     "Id": 6,
     "Title": "Version 8.0.7",
     "Content": "The new beta version is now available at https://www.laparola.net/programma/windowsbeta.php . The main new features are lists of words and roots in the Search window, export texts, and customising the names and abbreviations of the books of the Bible.",

@@ -114,7 +114,7 @@ namespace LaParola.Services
         internal static readonly Dictionary<string, int> AbbrevALibro = CostruisciAbbrevALibro();
         private static readonly HashSet<int> LibriUnCapitolo = [38, 64, 70, 71, 72];
 
-        // TODO2 generatedregexattribute x3
+        // TODO generatedregexattribute x3; berea per terzo?
         private static readonly Regex RigaHeader = new(@"^([1-3]?\s?[A-Za-zàèéìòùÀÈÉÌÒÙ]+)\.?\s+(\d{1,3}):(\d{1,3})(?:[-,](\d{1,3}))?$", RegexOptions.Compiled);
         private static readonly Regex RigaHeaderUnCapitolo = new(@"^([1-3]?\s?[A-Za-zàèéìòùÀÈÉÌÒÙ]+)\.?\s+(\d{1,3})(?:[-,](\d{1,3}))?$", RegexOptions.Compiled);
         internal static readonly Regex CitazioneInline = new(@"\b([1-3]?\s?[A-ZÀ-Ù][a-zàèéìòù]+)\.?\s+(\d{1,3}):(\d{1,3})(?:[-,](\d{1,3}))?", RegexOptions.Compiled);
@@ -250,6 +250,7 @@ namespace LaParola.Services
             return paragrafi;
         }
 
+        // TODO RTFIntestazione?
         private static string DocumentoRtf(string corpo) => "{\\rtf1\\ansi\\ansicpg1252\\deff0\n" + corpo + "\n}";
 
         private static string PaginaARtf(string testoPagina)

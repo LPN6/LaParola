@@ -87,7 +87,7 @@ public class ThemeManager
 
         _handler = (_, __) =>
         {
-            AppSettings settings = App.Settings.Load();
+            AppSettings settings = MainWindow.settings;
             ApplyTheme(settings.ThemeMode);
             ApplyDockTheme(dock, settings.ThemeMode);
         };

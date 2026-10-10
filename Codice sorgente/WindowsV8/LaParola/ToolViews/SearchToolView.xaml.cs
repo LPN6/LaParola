@@ -1,7 +1,6 @@
 ﻿using LaParola.Utilities;
 using System.Globalization;
 using System.IO;
-using System.Security.Principal;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,6 +69,9 @@ namespace LaParola.ToolViews
         private void Versione_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string versioneSelezionata = cbVersione.SelectedItem as string ?? "";
+            if (string.IsNullOrEmpty(versioneSelezionata))
+                return;
+
             MainWindow.settings.RicercaTestoSelezionato = versioneSelezionata;
             TestoTipi tipoSelezionata = MainWindow.Testi.Info(versioneSelezionata).Tipo;
             if ((tipoSelezionata & TestoTipi.Commentario) == TestoTipi.Commentario || (tipoSelezionata & TestoTipi.Bibbia) == TestoTipi.Bibbia)
@@ -373,13 +375,34 @@ namespace LaParola.ToolViews
         }
 
         private void LbParole_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-            => BtnAggiungiParola_Click(sender, e);
+        {
+            // Verify the click originated from an actual ListBoxItem (and not a scrollbar/empty area)
+            if (e.OriginalSource is DependencyObject source &&
+                ItemsControl.ContainerFromElement(lbParole, source) is ListBoxItem)
+            {
+                BtnAggiungiParola_Click(sender, e);
+            }
+        }
 
         private void LbRadici_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-            => BtnAggiungiRadice_Click(sender, e);
+        {
+            // Verify the click originated from an actual ListBoxItem (and not a scrollbar/empty area)
+            if (e.OriginalSource is DependencyObject source &&
+                ItemsControl.ContainerFromElement(lbRadici, source) is ListBoxItem)
+            {
+                BtnAggiungiRadice_Click(sender, e);
+            }
+        }
 
         private void LbParoleRadice_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-            => BtnAggiungiParolaRadice_Click(sender, e);
+        {
+            // Verify the click originated from an actual ListBoxItem (and not a scrollbar/empty area)
+            if (e.OriginalSource is DependencyObject source &&
+                ItemsControl.ContainerFromElement(lbParoleRadice, source) is ListBoxItem)
+            {
+                BtnAggiungiParolaRadice_Click(sender, e);
+            }
+        }
 
         #endregion
 

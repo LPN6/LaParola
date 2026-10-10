@@ -1,12 +1,9 @@
 ﻿using LaParola.Services;
 using LaParola.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Security.Principal;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,6 +49,8 @@ namespace LaParola.ToolViews
         private OrdineChiave _ordine = MainWindow.settings.CreaChiaveOrdine;
         private bool _escludiParoleAbilitato = MainWindow.settings.CreaChiaveEscludiParole;
         private string _paroleDaEscludereText = MainWindow.settings.CreaChiaveParoleDaEscludere;
+        // Available items for the ComboBox
+        public ObservableCollection<string> VersioneItems { get; } = [];
 
         public CreaChiaveToolView()
         {
@@ -64,9 +63,6 @@ namespace LaParola.ToolViews
 
             MostraPulsanteStato();
         }
-
-        // Available items for the ComboBox
-        public ObservableCollection<string> VersioneItems { get; } = [];
 
         // Currently selected single item
         public string? SelectedVersione
@@ -283,7 +279,6 @@ namespace LaParola.ToolViews
             {
                 PulCreaChiave.IsEnabled = false;
             }
-
         }
 
         private async void CreaChiave_Click(object sender, RoutedEventArgs e)

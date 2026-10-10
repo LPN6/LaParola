@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:LaParola.ToolViews"
         mc:Ignorable="d"
         Loaded="Window_Loaded">
-    
+
     <Grid Margin="12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -32,7 +32,6 @@
                         <TextBlock Text="{DynamicResource AggiungiTestiFiltroAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                     </ToolTip>
                 </DockPanel.ToolTip>
-
             </DockPanel>
 
             <!-- Data Table -->
@@ -46,19 +45,81 @@
                       SelectionMode="Single"
                       Background="Transparent"
                       BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       MouseMove="GridTesti_MouseMove">
+
+                <!-- Highlight Rows with Updates -->
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HaAggiornamentoDisponibile}" Value="True">
+                                <Setter Property="Background" Value="#0DFF9800"/>
+                                <!-- Subtle Orange Tint -->
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
                 <DataGrid.Columns>
                     <!-- Text Name -->
-                    <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaNome}" Binding="{Binding Nome}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaNome}" Binding="{Binding Nome}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="6,0,6,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                     <!-- Type -->
-                    <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaTipo}" Binding="{Binding Tipo}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaTipo}" Binding="{Binding Tipo}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="12,0,12,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Status Column (Badges for New vs Update) -->
+                    <DataGridTemplateColumn Header="{DynamicResource AggiungiTestiColonnaStato}" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Padding="6,2,6,2" Margin="6,0,6,0" CornerRadius="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#2196F3"/>
+                                            <!-- Blue for New -->
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding HaAggiornamentoDisponibile}" Value="True">
+                                                    <Setter Property="Background" Value="#FF9800"/>
+                                                    <!-- Orange for Update -->
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+
+                                        <!-- Version Detail (e.g., 1.0 -> 2.0 or 1.5) -->
+                                        <TextBlock Text="{Binding DettaglioVersione}" FontSize="10" Foreground="#FFFFFF" VerticalAlignment="Center" Opacity="0.9"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                     <!-- Size -->
-                    <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaDimensione}" Binding="{Binding Dimensione}" Width="90" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="{DynamicResource AggiungiTestiColonnaDimensione}" Binding="{Binding Dimensione}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="6,0,6,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                     <!-- Download Checkbox -->
-                    <DataGridTemplateColumn Header="{DynamicResource AggiungiTestiColonnaScarica}">
+                    <DataGridTemplateColumn Header="{DynamicResource AggiungiTestiColonnaScarica}" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding DaScaricare, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -69,7 +130,7 @@
                     </DataGridTemplateColumn>
 
                     <!-- Hide Option -->
-                    <DataGridTemplateColumn Header="{DynamicResource AggiungiTestiColonnaNascondi}">
+                    <DataGridTemplateColumn Header="{DynamicResource AggiungiTestiColonnaNascondi}" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding DaNascondere, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -78,12 +139,12 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+
                 <DataGrid.ToolTip>
                     <ToolTip x:Name="DataGridToolTip" Opened="DataGridToolTip_Opened" Closed="DataGridToolTip_Closed">
                         <TextBlock Text="{DynamicResource AggiungiTestiGrigiaAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
                     </ToolTip>
                 </DataGrid.ToolTip>
-
             </DataGrid>
 
             <!-- Async Loading Overlay -->
@@ -111,7 +172,7 @@
             </Button>
 
             <Button x:Name="BtnSelezionaTutti" Content="{DynamicResource AggiungiTestiScaricaTutti}" 
-                    Margin="0,0,0,6" 
+                    Margin="0,0,0,6" Width="Auto"
                     Click="BtnSelezionaTutti_Click">
                 <Button.ToolTip>
                     <ToolTip>
@@ -131,15 +192,14 @@
             </Button>
 
             <Button x:Name="BtnMostraNascosti" Content="{DynamicResource AggiungiTestiMostraNascosti}" 
-                          Margin="0,0,0,15" 
-                          Click="BtnMostraNascosti_Click">
-            <Button.ToolTip>
-                <ToolTip>
+                    Margin="0,0,0,15" 
+                    Click="BtnMostraNascosti_Click">
+                <Button.ToolTip>
+                    <ToolTip>
                         <TextBlock Text="{DynamicResource AggiungiTestiMostraNascostiAiuto}" TextWrapping="Wrap" MaxWidth="300"/>
-                </ToolTip>
-            </Button.ToolTip>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
-
         </StackPanel>
     </Grid>
 </UserControl>

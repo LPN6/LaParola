@@ -712,7 +712,7 @@ namespace LaParola.Services
                         {
                             try
                             {
-                                noteTesto[i] = File.ReadAllText(fileNote[i], Encoding.GetEncoding(1252));
+                                noteTesto[i] = File.ReadAllText(fileNote[i], Funzioni.GetWindows1252Encoding());
                             }
                             catch (ArgumentException) // se code page europeo occidentale non è installato, proviamo quello predefinito
                             {
@@ -723,12 +723,16 @@ namespace LaParola.Services
                                 noteTesto[i] = File.ReadAllText(fileNote[i], Encoding.GetEncoding(0));
                             }
                             noteTesto[i] = ConvertiLink(ConvertiApostrofeTrattino(noteTesto[i]));
+
+                            string plainText = Funzioni.StripRtf(noteTesto[i]);
+                            chiave = Texts.TrovaParoleInVoce(plainText, i, chiave, data.Lingua);
+                            /*
                             try
                             {
                                 chiave = await RunInSTAThread(() =>
                                 {
                                     // This code runs on a custom background STA thread!
-                                    RichTextBoxEx rtb = new()
+                                    using RichTextBoxEx rtb = new()
                                     {
                                         Rtf = noteTesto[i]
                                     };
@@ -739,10 +743,10 @@ namespace LaParola.Services
                             { // il file non è RTF, lo consideriamo testo normale
                                 chiave = Texts.TrovaParoleInVoce(noteTesto[i], i, chiave, data.Lingua);
                             }
+                            */
+
                         }
-                        indici = Texts.ScriviNote(bw, pInizioDati, noteTitoli, noteTesto);
-                        inizioTestoIndiceLC = indici[0];
-                        inizioTestoIndice = indici[1];
+                        (inizioTestoIndiceLC, inizioTestoIndice) = Texts.ScriviNote(bw, pInizioDati, noteTitoli, noteTesto);
                         break;
                     #endregion
                     #region Nuove note
@@ -751,9 +755,7 @@ namespace LaParola.Services
                         noteTesto = [];
                         for (UInt32 i = 0; i < noteTesto.Length; ++i)
                             chiave = Texts.TrovaParoleInVoce(noteTesto[i], i, chiave, data.Lingua);
-                        indici = Texts.ScriviNote(bw, pInizioDati, titoliNuoveNote, noteTesto);
-                        inizioTestoIndiceLC = indici[0];
-                        inizioTestoIndice = indici[1];
+                        (inizioTestoIndiceLC, inizioTestoIndice) = Texts.ScriviNote(bw, pInizioDati, titoliNuoveNote, noteTesto);
                         break;
                     #endregion
                     #region ThML
@@ -865,20 +867,11 @@ namespace LaParola.Services
 
                             for (UInt32 i = 0; i < fileNote.Length; ++i)
                             {
-                                chiave = await RunInSTAThread(() =>
-                                {
-                                    // This code runs on a custom background STA thread!
-                                    RichTextBoxEx rtb = new()
-                                    {
-                                        Rtf = noteTesto[i]
-                                    };
-                                    return Texts.TrovaParoleInVoce(rtb.Text, i, chiave, data.Lingua);
-                                });
+                                string plainText = Funzioni.StripRtf(noteTesto[i]);
+                                chiave = Texts.TrovaParoleInVoce(plainText, i, chiave, data.Lingua);
                             }
 
-                            indici = Texts.ScriviNote(bw, pInizioDati, fileNote, noteTesto);
-                            inizioTestoIndiceLC = indici[0];
-                            inizioTestoIndice = indici[1];
+                            (inizioTestoIndiceLC, inizioTestoIndice) = Texts.ScriviNote(bw, pInizioDati, fileNote, noteTesto);
                         }
                         break;
                         #endregion
@@ -940,7 +933,7 @@ namespace LaParola.Services
                                 noteTitoliPDF[i] = Path.GetFileNameWithoutExtension(fileNome);
                                 try
                                 {
-                                    noteTestoPDF[i] = File.ReadAllText(fileNome, Encoding.GetEncoding(1252));
+                                    noteTestoPDF[i] = File.ReadAllText(fileNome, Funzioni.GetWindows1252Encoding());
                                 }
                                 catch (ArgumentException) // se code page europeo occidentale non è installato, proviamo quello predefinito
                                 {
@@ -950,22 +943,9 @@ namespace LaParola.Services
                                 {
                                     noteTestoPDF[i] = File.ReadAllText(fileNome, Encoding.GetEncoding(0));
                                 }
-                                try
-                                {
-                                    chiave = await RunInSTAThread(() =>
-                                    {
-                                        // This code runs on a custom background STA thread!
-                                        RichTextBoxEx rtb = new()
-                                        {
-                                            Rtf = noteTestoPDF[i]
-                                        };
-                                        return Texts.TrovaParoleInVoce(rtb.Text, i, chiave, data.Lingua);
-                                    });
-                                }
-                                catch
-                                { // il file non è RTF, lo consideriamo testo normale
-                                    chiave = Texts.TrovaParoleInVoce(noteTestoPDF[i], i, chiave, data.Lingua);
-                                }
+
+                                string plainText = Funzioni.StripRtf(noteTestoPDF[i]);
+                                chiave = Texts.TrovaParoleInVoce(plainText, i, chiave, data.Lingua);
                             }
                             try { Directory.Delete(cartellaTemp, true); } catch { }
                         }
@@ -974,7 +954,7 @@ namespace LaParola.Services
                             string rtf;
                             try
                             {
-                                rtf = File.ReadAllText(data.FileDaAnalizzare, Encoding.GetEncoding(1252));
+                                rtf = File.ReadAllText(data.FileDaAnalizzare, Funzioni.GetWindows1252Encoding());
                             }
                             catch (ArgumentException) // se code page europeo occidentale non è installato, proviamo quello predefinito
                             {
@@ -1010,6 +990,7 @@ namespace LaParola.Services
                                             string corpo = string.Join("\\par\n", buffer.Where(l => l.Trim().Length > 0).Select(l => EstrazionePdf.CollegaCitazioniEEscape(l)));
                                             // TODO2 da cancellare listaTitoli.Add(EstrazionePdf.RiferimentoAStringa(rif.Value.numero, rif.Value.capitolo, rif.Value.v1, rif.Value.v2));
                                             listaTitoli.Add(new Riferimento([(byte)rif.Value.numero, (byte)rif.Value.capitolo, (byte)rif.Value.v1, (byte)rif.Value.numero, (byte)rif.Value.capitolo, (byte)rif.Value.v2]).ComeNotaTuttoRiferimento());
+                                            // TODO rtfintestazione?
                                             listaTesti.Add("{\\rtf1\\ansi\\ansicpg1252\\deff0\n" + corpo + "\n}");
                                         }
                                         buffer.Clear();
@@ -1023,6 +1004,7 @@ namespace LaParola.Services
                                 {
                                     string corpo = string.Join("\\par\n", buffer.Where(l => l.Trim().Length > 0).Select(l => EstrazionePdf.CollegaCitazioniEEscape(l)));
                                     listaTitoli.Add(titoloNota);
+                                    // TODO rtf intestazione
                                     listaTesti.Add("{\\rtf1\\ansi\\ansicpg1252\\deff0\n" + corpo + "\n}");
                                 }
                                 noteTestoPDF = [.. listaTesti];
@@ -1038,31 +1020,15 @@ namespace LaParola.Services
 
                             for (UInt32 i = 0; i < noteTestoPDF.Length; ++i)
                             {
-                                try
-                                {
-                                    chiave = await RunInSTAThread(() =>
-                                    {
-                                        // This code runs on a custom background STA thread!
-                                        RichTextBoxEx rtb = new()
-                                        {
-                                            Rtf = noteTestoPDF[i]
-                                        };
-                                        return Texts.TrovaParoleInVoce(rtb.Text, i, chiave, data.Lingua);
-                                    });
-                                }
-                                catch
-                                { // il file non è RTF, lo consideriamo testo normale
-                                    chiave = Texts.TrovaParoleInVoce(noteTestoPDF[i], i, chiave, data.Lingua);
-                                }
+                                string plainText = Funzioni.StripRtf(noteTestoPDF[i]);
+                                chiave = Texts.TrovaParoleInVoce(plainText, i, chiave, data.Lingua);
                             }
                         } // else if rtf
                         else
                         {
                             return false;
                         }
-                        indici = Texts.ScriviNote(bw, pInizioDati, noteTitoliPDF, noteTestoPDF);
-                        inizioTestoIndiceLC = indici[0];
-                        inizioTestoIndice = indici[1];
+                        (inizioTestoIndiceLC, inizioTestoIndice) = Texts.ScriviNote(bw, pInizioDati, noteTitoliPDF, noteTestoPDF);
                         break;
                     #endregion
                 }
@@ -1120,65 +1086,64 @@ namespace LaParola.Services
                 {
                     inizioRadiciDiverse = (UInt32)(bw.Seek(0, SeekOrigin.Current)) - pInizioDati;
                     string[] riga = new string[5];
-                    bool fileAperto = false;
-                    try
+                    if (File.Exists(nomeFileBase + ".radici_diverse"))
                     {
-                        string[] radiciDiverse = File.ReadAllLines(nomeFileBase + ".radici_diverse");
-                        fileAperto = true;
-                        bw.Write((UInt32)(radiciDiverse.Length));
-                        if (data.Tipo == TipoImportazione.ImportaOSIS || data.Tipo == TipoImportazione.ImportaZefania || data.Tipo == TipoImportazione.ImportaBibleWorks || (data.Tipo == TipoImportazione.ImportaThML && data.ThMLTipo == TipoThML.Bibbia))
+                        try
                         {
-                            foreach (string radiceDiversa in radiciDiverse)
+                            string[] radiciDiverse = File.ReadAllLines(nomeFileBase + ".radici_diverse");
+                            bw.Write((UInt32)(radiciDiverse.Length));
+                            if (data.Tipo == TipoImportazione.ImportaOSIS || data.Tipo == TipoImportazione.ImportaZefania || data.Tipo == TipoImportazione.ImportaBibleWorks || (data.Tipo == TipoImportazione.ImportaThML && data.ThMLTipo == TipoThML.Bibbia))
                             {
-                                riga = radiceDiversa.Split(['|'], StringSplitOptions.RemoveEmptyEntries);
-                                bw.Write(Convert.ToByte(riga[0], CultureInfo.InvariantCulture));
-                                bw.Write(Convert.ToByte(riga[1], CultureInfo.InvariantCulture));
-                                bw.Write(Convert.ToByte(riga[2], CultureInfo.InvariantCulture));
-                                bw.Write(Convert.ToUInt16(riga[3], CultureInfo.InvariantCulture));
-                                bw.Write(riga[4]);
-                            }
-                        }
-                        else if (data.Tipo == TipoImportazione.ImportaRtf || (data.Tipo == TipoImportazione.ImportaThML && data.ThMLTipo != TipoThML.Bibbia))
-                        { // TipoImportazione.NuovaNota non può avere radiciDiverse (perché non ci sono ancora parole)
-                            foreach (string radiceDiversa in radiciDiverse)
-                            {
-                                riga = radiceDiversa.Split(['|'], StringSplitOptions.RemoveEmptyEntries);
-                                int numeroNota = Array.BinarySearch(fileNote, riga[0]);
-                                if (numeroNota >= 0)
+                                foreach (string radiceDiversa in radiciDiverse)
                                 {
-                                    bw.Write(Convert.ToUInt32(numeroNota, CultureInfo.InvariantCulture));
-                                    bw.Write(Convert.ToUInt16(riga[1], CultureInfo.InvariantCulture));
-                                    bw.Write(riga[2]);
-                                }
-                                else
-                                {
-                                    bw.Write(UInt32.MaxValue);
-                                    bw.Write((UInt16)(1));
-                                    bw.Write("*");
+                                    riga = radiceDiversa.Split(['|'], StringSplitOptions.RemoveEmptyEntries);
+                                    bw.Write(Convert.ToByte(riga[0], CultureInfo.InvariantCulture));
+                                    bw.Write(Convert.ToByte(riga[1], CultureInfo.InvariantCulture));
+                                    bw.Write(Convert.ToByte(riga[2], CultureInfo.InvariantCulture));
+                                    bw.Write(Convert.ToUInt16(riga[3], CultureInfo.InvariantCulture));
+                                    bw.Write(riga[4]);
                                 }
                             }
+                            else if (data.Tipo == TipoImportazione.ImportaRtf || (data.Tipo == TipoImportazione.ImportaThML && data.ThMLTipo != TipoThML.Bibbia))
+                            { // TipoImportazione.NuovaNota non può avere radiciDiverse (perché non ci sono ancora parole)
+                                foreach (string radiceDiversa in radiciDiverse)
+                                {
+                                    riga = radiceDiversa.Split(['|'], StringSplitOptions.RemoveEmptyEntries);
+                                    int numeroNota = Array.BinarySearch(fileNote, riga[0]);
+                                    if (numeroNota >= 0)
+                                    {
+                                        bw.Write(Convert.ToUInt32(numeroNota, CultureInfo.InvariantCulture));
+                                        bw.Write(Convert.ToUInt16(riga[1], CultureInfo.InvariantCulture));
+                                        bw.Write(riga[2]);
+                                    }
+                                    else
+                                    {
+                                        bw.Write(UInt32.MaxValue);
+                                        bw.Write((UInt16)(1));
+                                        bw.Write("*");
+                                    }
+                                }
+                            }
                         }
-                    }
-                    catch (Exception exc)
-                    {
-                        inizioRadiciDiverse = 0;
-                        if (fileAperto)
-                        { // altrimenti il file non esiste (o impossibile aprirlo)
+                        catch (Exception exc)
+                        {
+                            inizioRadiciDiverse = 0;
                             Application.Current.Dispatcher.Invoke(() =>
                             {
                                 MessageBoxLPN.Show(Application.Current.MainWindow, String.Format(CultureInfo.InvariantCulture, (string)(Application.Current.TryFindResource("ImportaErroreRadiciDiverse") ?? "Error in the line {1} in the file radici_diverse: {0}"), exc.Message, riga[0] + "|" + riga[1] + "|" + riga[2] + "|" + riga[3] + "|" + riga[4] + "|"), (string)(Application.Current.TryFindResource("Errore") ?? "Error"));
                             });
                         }
                     }
+                    else
+                    { // file non esiste
+                        inizioRadiciDiverse = 0;
+                    }
                 }
 
                 UInt32 inizioRiferimentiDiversi = (UInt32)(bw.Seek(0, SeekOrigin.Current)) - pInizioDati;
-                try
+                if (!ScriviRiferimentiDiversi(bw, nomeFileBase))
                 {
-                    ScriviRiferimentiDiversi(bw, nomeFileBase);
-                }
-                catch // file non esiste, o qualche problema nella lettura
-                {
+                    // file non esiste, o qualche problema nella lettura
                     inizioRiferimentiDiversi = 0;
                 }
 
@@ -1334,7 +1299,7 @@ namespace LaParola.Services
             int suffisso = 0;
             string nomeVersioneUtilizzato;
             string nomeVersione = Path.GetFileNameWithoutExtension(percorsoFile);
-            string percorsoPerSalvare = Path.GetDirectoryName(SettingsService.ResolveSettingsPath()) ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LaParola");
+            string percorsoPerSalvare = Path.GetDirectoryName(SettingsService.SettingsPath) ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LaParola");
             nomeVersioneUtilizzato = percorsoPerSalvare + Path.DirectorySeparatorChar + nomeVersione;
             while (File.Exists(nomeVersioneUtilizzato + ".laparola"))
             {
@@ -2400,7 +2365,7 @@ namespace LaParola.Services
             bw.Write(datiDaScrivere);
         }
 
-        private static void ScriviRiferimentiDiversi(BinaryWriter bw, string nomeFileBase)
+        private static bool ScriviRiferimentiDiversi(BinaryWriter bw, string nomeFileBase)
         {
             string nomeFile = Path.GetFileName(nomeFileBase);
             if (nomeFile.Contains('('))
@@ -2408,7 +2373,8 @@ namespace LaParola.Services
             string directory = Path.GetDirectoryName(nomeFileBase) ?? ".";
             string[] fileRiferimenti = Directory.GetFiles(directory, nomeFile + "*.riferimenti");
             if (fileRiferimenti.Length == 0)
-                throw new Exception();
+                return false;
+
             string[] riferimentiDiversi = File.ReadAllLines(fileRiferimenti[0]);
             bw.Write(riferimentiDiversi.Length);
             string[] riferimento6Cifre;
@@ -2418,6 +2384,7 @@ namespace LaParola.Services
                 for (int i = 0; i < 6; ++i)
                     bw.Write(Convert.ToInt16(riferimento6Cifre[i], CultureInfo.InvariantCulture));
             }
+            return true;
         }
 
         private static void ScriviOrdine(BinaryWriter bw, string[]? noteInOrdine, string nomeFileBase)
@@ -2437,6 +2404,8 @@ namespace LaParola.Services
             return s.Replace("</" + htmlTag + ">", "");
         }
 
+        /*
+         * TODO2 delete
         private static Task<T> RunInSTAThread<T>(Func<T> action)
         {
             TaskCompletionSource<T> tcs = new();
@@ -2451,14 +2420,18 @@ namespace LaParola.Services
                 {
                     tcs.SetException(ex);
                 }
-            });
+            })
+            {
+                IsBackground = true // Allows process to exit without waiting 30s
+            };
 
-            // Crucial step: Configure the thread before starting it
+            // Configure the thread before starting it
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 
             return tcs.Task;
         }
+        */
 
         [GeneratedRegex(@"\\([a-z]+)(-?\d+)?[ ]?")]
         private static partial Regex RegexRTFPlain1();

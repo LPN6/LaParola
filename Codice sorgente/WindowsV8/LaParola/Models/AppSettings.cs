@@ -65,9 +65,12 @@ public class AppSettings
     public bool EditorChiudere { get; set; } = false;
     public bool IpertestoTooltip { get; set; } = true;
     public bool IpertestoDizionario { get; set; } = true;
-    public int ControlloMessaggi { get; set; } = 1;
+    public int IntervalloGiorniControlloMessaggi { get; set; } = 1;
     public DateTime UltimoControlloMessaggi { get; set; } = DateTime.MinValue;
     public int UltimoMessaggioControllatoId { get; set; } = 0;
+    public int IntervalloGiorniControlloTesti { get; set; } = 7; // Check every 7 days
+    public DateTime UltimoControlloAggiornamentiTesti { get; set; } = DateTime.MinValue;
+
     public string BibbiaPreferita1 { get; set; } = "";
     public string BibbiaPreferita2 { get; set; } = "";
     public string BibbiaPreferita3 { get; set; } = "";
@@ -94,6 +97,16 @@ public class AppSettings
     public OrdineChiave CreaChiaveOrdine { get; set; } = OrdineChiave.Alfabetico;
     public bool CreaChiaveEscludiParole { get; set; } = true;
     public string CreaChiaveParoleDaEscludere { get; set; } = "*";
+
+    // Brani simili
+    public string BraniSimiliVersioneSelezionata { get; set; } = "";
+    public int BraniSimiliNumero { get; set; } = 10;
+    public TipoBrani BraniSimiliVersetti { get; set; } = TipoBrani.Versetti;
+
+    public string EsportaBibliotecaInformazioni { get; set; } = "-";
+    public int EsportaBibliotecaOrdine { get; set; } = 0;
+    public int EsportaBibliotecaFormato { get; set; } = 0;
+    public string EsportaBibliotecaCartella { get; set; } = "";
 
     // Reference search
     public bool ReferenceSearchTocVisible { get; set; } = true;
