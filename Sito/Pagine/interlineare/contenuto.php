@@ -133,71 +133,72 @@ else {
 function mostraGrammatica(string $text): string
 {
     $ann="";
+    $textMG = $text;
     if ($text[0]=='C') {
-        $text="Cong.";$ann="Congiunzione";
+        $textMG="Cong.";$ann="Congiunzione";
     }
     if ($text[0]=='P') {
-        $text="Prep.";$ann="Preposizione";
+        $textMG="Prep.";$ann="Preposizione";
     }
     if ($text[0]=='X') {
-        $text="Part.";$ann="Particella";
+        $textMG="Part.";$ann="Particella";
     }
     if ($text[0]=='D') {
-        $comp=0;if ($text[9]=='C') $comp=1;
-        $text="Avv.";$ann="Avverbio";
-        if ($comp==1) {$text.=" comp.";$ann.=" comparativo";}
+        $comp=0;
+        if ($text[9]=='C') $comp=1;
+        $textMG="Avv.";$ann="Avverbio";
+        if ($comp==1) {$textMG.=" comp.";$ann.=" comparativo";}
     }
     if ($text[0]=='I') {
-        $text="Inter.";$ann="Interiezione";
+        $textMG="Inter.";$ann="Interiezione";
     }
     if (substr($text,0,2)=="V-") {
         if ($text[5]=='N') {
             $ann="Verbo ".tempo($text[3])." ".forma($text[4])." infinito";
-            $text="Vb. ".$text[3].$text[4]." inf.";
+            $textMG="Vb. ".$text[3].$text[4]." inf.";
         }
         if ($text[5]=='I' || $text[5]=='S' || $text[5]=='D' || $text[5]=='O') {
             $ann="Verbo ".persona($text[2])." ".numero($text[7])." ".tempo($text[3])." ".forma($text[4])." ".tense($text[5]);
-            $text="Vb. ".$text[2].$text[7].$text[3].$text[4]." ".tense2($text[5]);
+            $textMG="Vb. ".$text[2].$text[7].$text[3].$text[4]." ".tense2($text[5]);
         }
         if ($text[5]=='P') {
             $ann="Verbo ".tempo($text[3])." ".forma($text[4])." ".genere($text[8])." ".numero($text[7])." ".caso($text[6])." participio";
-            $text="Vb. ".$text[3].$text[4].$text[8].$text[7].$text[6]." part.";
+            $textMG="Vb. ".$text[3].$text[4].$text[8].$text[7].$text[6]." part.";
         }
     }
     if (substr($text,0,2)=="N-") {
         $ann="Sostantivo ".genere($text[8])." ".numero($text[7])." ".caso($text[6]);
-        $text="Sost. ".$text[8].$text[7].$text[6];
+        $textMG="Sost. ".$text[8].$text[7].$text[6];
     }
     if (substr($text,0,2)=="A-") {
         $comp=0;if ($text[9]=='C') $comp=1;
         $sup=0;if ($text[9]=='S') $sup=1;
         $ann="Aggettivo ".genere($text[8])." ".numero($text[7])." ".caso($text[6]);
-        $text="Agg. ".$text[8].$text[7].$text[6];
-        if ($comp==1) {$text.=" comp.";$ann.=" comparativo";}
-        if ($sup==1) {$text.=" sup.";$ann.=" superlativo";}
+        $textMG="Agg. ".$text[8].$text[7].$text[6];
+        if ($comp==1) {$textMG.=" comp.";$ann.=" comparativo";}
+        if ($sup==1) {$textMG.=" sup.";$ann.=" superlativo";}
     }
     if (substr($text,0,2)=="RA") {
         $ann="Articolo definitivo ".genere($text[8])." ".numero($text[7])." ".caso($text[6]);
-        $text="Art. def. ".$text[8].$text[7].$text[6];
+        $textMG="Art. def. ".$text[8].$text[7].$text[6];
     }
     if (substr($text,0,2)=="RD") {
         $ann="Pronome dimostrativo ".genere($text[8])." ".numero($text[7])." ".caso($text[6]);
-        $text="Pron. dim. ".$text[8].$text[7].$text[6];
+        $textMG="Pron. dim. ".$text[8].$text[7].$text[6];
     }
     if (substr($text,0,2)=="RI") {
         $ann="Pronome interrogativo ".genere($text[8])." ".numero($text[7])." ".caso($text[6]);
-        $text="Pron. int. ".$text[8].$text[7].$text[6];
+        $textMG="Pron. int. ".$text[8].$text[7].$text[6];
     }
     if (substr($text,0,2)=="RR") {
         $ann="Pronome relativo ".genere($text[8])." ".numero($text[7])." ".caso($text[6]);
-        $text="Pron. rel. ".$text[8].$text[7].$text[6];
+        $textMG="Pron. rel. ".$text[8].$text[7].$text[6];
     }
     if (substr($text,0,2)=="RP") {
         $ann="Pronome personale ".($text[8]!="-"?genere($text[8])." ":"").numero($text[7])." ".caso($text[6]);
-        $text="Pron. pers. ".($text[8]!="-"?$text[8]:"").$text[7].$text[6];
+        $textMG="Pron. pers. ".($text[8]!="-"?$text[8]:"").$text[7].$text[6];
     }
-    $text="<span class='analysis-code' data-analysis='".$ann."'>".$text."</span>";
-    return $text;
+    return "<span class='analysis-code' data-analysis='".$ann."'>".$textMG."</span>";
 }
 
 function persona(string $g): string

@@ -23569,7 +23569,7 @@
 10|47|13|33|Disse loro un'altra parabola: &ldquo;Il regno dei cieli &egrave; simile al lievito che una donna prende e nasconde in tre misure di farina, finch&eacute; la pasta sia tutta lievitata&rdquo;.<br />|
 10|47|13|34|Ges&ugrave; disse tutte queste cose in parabole alle folle e senza parabola non diceva loro nulla,|
 10|47|13|35|affinch&eacute; si adempisse quello che era stato detto per mezzo del profeta:<br />&ldquo;<i>Aprir&ograve; in parabole la mia bocca; esporr&ograve; cose nascoste fin dalla fondazione del mondo</i>&rdquo;.<br />|
-10|47|13|36|<i>Spiegazione della parabola delle zizzanie</i>^Allora Ges&ugrave;, lasciate le folle, torn&ograve; a casa e suoi discepoli gli si accostarono, dicendo: &ldquo;Spiegaci la parabola delle zizzanie del campo&rdquo;.|
+10|47|13|36|<i>Spiegazione della parabola delle zizzanie</i>^Allora Ges&ugrave;, lasciate le folle, torn&ograve; a casa e i suoi discepoli gli si accostarono, dicendo: &ldquo;Spiegaci la parabola delle zizzanie del campo&rdquo;.|
 10|47|13|37|Ed egli, rispondendo, disse loro: &ldquo;Colui che semina la buona semenza, &egrave; il Figlio dell'uomo;|
 10|47|13|38|il campo &egrave; il mondo; la buona semenza sono i figli del Regno; le zizzanie sono i figli del maligno;|
 10|47|13|39|il nemico che le ha seminate &egrave; il diavolo; la mietitura &egrave; la fine dell'et&agrave; presente; i mietitori sono gli angeli.|

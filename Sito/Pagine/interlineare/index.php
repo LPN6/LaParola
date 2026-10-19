@@ -70,10 +70,6 @@ require("../capo.php");
     pointer-events: none;
 }
 
-.analysis-code.active .tooltip {
-    display: block;
-}
-
 </style>
 
 <h1>Interlineare greco-italiano del Nuovo Testamento</h1>
@@ -144,7 +140,6 @@ different versions of the book with different lines (no lemma, translit x 2, gra
 <p><button class="button" onclick="changeChapter(-1)">Capitolo precedente</button>
     <button class="button" onclick="changeChapter(1)">Prossimo capitolo</button></p>
 <p><a href="capitoli.php">Tutti i capitoli del Nuovo Testamento con link all'interlineare</a><p>
-<div id="tooltip" class="tooltip"></div>
 <script>
 const books = [
     "Matteo", "Marco", "Luca", "Giovanni", "Atti", "Romani", "1Corinzi", "2Corinzi",
@@ -159,6 +154,7 @@ const chapters = [
     4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22
 ];
 
+document.addEventListener('DOMContentLoaded', () => {
 const tooltip = document.getElementById('tooltip');
 let activeCodeEl = null;
 
@@ -215,6 +211,7 @@ document.addEventListener('mouseout', function(e) {
 document.addEventListener('click', function(e) {
     const code = e.target.closest('.analysis-code');
     if (code) {
+        e.stopPropagation();
         if (activeCodeEl === code && tooltip.style.display === 'block') {
             hideTooltip();
         } else {
@@ -224,6 +221,7 @@ document.addEventListener('click', function(e) {
     } else {
         hideTooltip();
     }
+});
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -499,6 +497,7 @@ function generaContenuto(nLibro, nCapitolo) {
 </script>
 
 <div class="container" id="container"></div>
+<div id="tooltip" class="tooltip"></div>
 
 <?
 require("../piede.php");
