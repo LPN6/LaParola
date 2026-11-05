@@ -1174,12 +1174,12 @@
 <tipo>dizionario</tipo>
 </file>
 <file>
-<nome>Vocabolario del Nuovo Testamento (Italian)</nome>
-<nome language="it">Vocabolario del Nuovo Testamento</nome>
-<componente>Vocabolario del Nuovo Testamento</componente>
-<versione>7.16.1</versione>
-<url>https://www.laparola.net/v7/Vocabolario del Nuovo Testamento.laparola.gz</url>
-<dimensione>2098 Kb</dimensione>
+<nome>Vocabolario greco-italiano (Italian)</nome>
+<nome language="it">Vocabolario greco-italiano</nome>
+<componente>Vocabolario greco-italiano</componente>
+<versione>8.0.0</versione>
+<url>https://www.laparola.net/v7/Vocabolario greco-italiano.laparola.gz</url>
+<dimensione>2174 Kb</dimensione>
 <lingua>it</lingua>
 <tipo>dizionario</tipo>
 </file>

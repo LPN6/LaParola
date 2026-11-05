@@ -1,0 +1,7 @@
+USE laparola_testo;
+
+DROP TABLE IF EXISTS Vocabolario2;
+CREATE TABLE Vocabolario2 (id_p MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, Parola TINYTEXT NOT NULL, ParolaHtml TINYTEXT NOT NULL, ParolaNorm TINYTEXT NOT NULL, Traslit TINYTEXT NOT NULL, TraslitHtml TINYTEXT NOT NULL, Parte TINYTEXT NOT NULL, Definizione TEXT NOT NULL, Strong TINYTEXT NOT NULL, TDNT TINYTEXT NOT NULL, Forme TEXT NOT NULL, Uso TEXT NOT NULL);
+ALTER TABLE Vocabolario2 ADD KEY key_p(Parola(4));
+ALTER TABLE Vocabolario2 ADD KEY key_t(Traslit(4));
+LOAD DATA LOCAL INFILE "c:\\users\\richa\\onedrive\\siti\\laparola\\mysql\\vocabolario2.txt" INTO TABLE Vocabolario2 FIELDS TERMINATED BY '|' (Parola,ParolaHtml,ParolaNorm,Traslit,TraslitHtml,Parte,Strong,TDNT,Definizione,Forme,Uso);

@@ -1,11 +1,3 @@
-#nota: quando si usa con MyPHPAdmin, è importante togliere il campo "Campo composto da".
-# poi usa "Import", non compresso, caratteri utf-8 (anche se ci sono caratteri>128), CSV with LOAD DATA, Campo terminato da |, campo composto da (vuoto), campo impedito da \, nomi colonne, con LOCAL
-#se il server Aruba non permette LOAD DATA, bisogna usare Import, non compresso [anzi, più veloce zippare prima], utf-8 [anzi iso 8859-1 funziona meglio], CSV, | (vuoto) \ nomi colonne, e un file importato senza | alla fine di ogni riga
-# new best method: use addtodb.php to import CSV files FTP'ed to root directory of site
-
-#nota: per computer locale, adesso i file dovrebbero essere utf-8, e meglio provare a importare in utf-8, almeno nella tabella Versetti
-#ma così forse non funziona sul server
-
 DROP DATABASE IF EXISTS laparola_testo;
 CREATE DATABASE laparola_testo;
 USE laparola_testo;
