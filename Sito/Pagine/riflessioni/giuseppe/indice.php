@@ -7,4 +7,5 @@
 <li><?if ($n<>4) echo "<a href=\"giuseppe04.php\">";?>Posto per un proposito (Genesi 41)<?if ($n<>4) echo "</a>";?></li>
 <li><?if ($n<>5) echo "<a href=\"giuseppe05.php\">";?>Colpiti dal senso di colpa (Genesi 42)<?if ($n<>5) echo "</a>";?></li>
 <li><?if ($n<>6) echo "<a href=\"giuseppe06.php\">";?>Prova e perdono (Genesi 43-44)<?if ($n<>6) echo "</a>";?></li>
+<li><?if ($n<>7) echo "<a href=\"giuseppe07.php\">";?>Discernere il proposito di Dio (Genesi 45-46)<?if ($n<>7) echo "</a>";?></li>
 </ol>

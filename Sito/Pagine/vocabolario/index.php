@@ -26,7 +26,7 @@ require("indvocab.php");
 ?>
 <h2>Altri formati</h2>
 <p>Il vocabolario &egrave; anche disponibile:<br />
-1. come componente facoltativo del <a href="/programma/windowsbeta.php">programma gratuito per Windows</a> (versione 8 o superiore);<br />
+1. come componente facoltativo del <a href="/programma/windowsbeta.php">programma gratuito per Windows</a> (versione 8 o superiore del programma);<br />
 2. come <a href="https://www.amazon.it/dp/B0HQFL8ND2">libro cartaceo</a>, da Amazon;<br />
 3. come <a href="Vocabolario del Nuovo Testamento.pdf">file PDF</a>; il formato &egrave; esattamente uguale al libro cartaceo.</p>
 </p>

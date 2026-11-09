@@ -713,7 +713,7 @@
 <nome>Matthew Henry's Commentary</nome>
 <nome language="it">Matthew Henry's Commentary (commentario inglese)</nome>
 <componente>Matthew Henry's Commentary</componente>
-<versione>7.00.3</versione>
+<versione>7.19.0</versione>
 <url>https://www.laparola.net/v7/Matthew Henry's Commentary.laparola.gz</url>
 <dimensione>31159 Kb</dimensione>
 <tipo>commentario</tipo>
@@ -1048,6 +1048,26 @@
 <tipo>commentario</tipo>
 </file>
 <file>
+<nome>Esposizione del libro di Proverbi (Italian commentary)</nome>
+<nome language="it">Esposizione del libro di Proverbi</nome>
+<componente>Esposizione del libro di Proverbi</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Esposizione del libro di Proverbi.laparola.gz</url>
+<dimensione>1285 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
+<nome>Commentario di Lutero su Galati (Italian commentary)</nome>
+<nome language="it">Commentario di Lutero su Galati</nome>
+<componente>Commentario di Lutero su Galati</componente>
+<versione>7.20.0</versione>
+<url>https://www.laparola.net/v7/Commentario di Lutero su Galati.laparola.gz</url>
+<dimensione>412 Kb</dimensione>
+<lingua>it</lingua>
+<tipo>commentario</tipo>
+</file>
+<file>
 <nome>Riferimenti incrociati (Treasury of Scriptural Knowledge in Italan)</nome>
 <nome language="it">Riferimenti incrociati</nome>
 <componente>Riferimenti incrociati</componente>
@@ -1087,7 +1107,7 @@
 <nome>Aiuto Biblico (Italian sermons)</nome>
 <nome language="it">Aiuto Biblico</nome>
 <componente>Aiuto Biblico</componente>
-<versione>7.08.0</versione>
+<versione>7.19.0</versione>
 <url>https://www.laparola.net/v7/Aiuto Biblico.laparola.gz</url>
 <dimensione>4897 Kb</dimensione>
 <tipo>commentario</tipo>
@@ -1132,7 +1152,7 @@
 <nome>Panoramica della Bibbia (Italian)</nome>
 <nome language="it">Panoramica della Bibbia</nome>
 <componente>Panoramica della Bibbia</componente>
-<versione>7.19.0</versione>
+<versione>7.19.1</versione>
 <url>https://www.laparola.net/v7/Panoramica della Bibbia.laparola.gz</url>
 <dimensione>284 Kb</dimensione>
 <tipo>libro</tipo>
@@ -1150,7 +1170,7 @@
 <nome>Istituzione della religione cristiana (Italian)</nome>
 <nome language="it">Istituzione della religione cristiana</nome>
 <componente>Istituzione della religione cristiana</componente>
-<versione>7.19.0</versione>
+<versione>7.19.1</versione>
 <url>https://www.laparola.net/v7/Istituzione della religione cristiana.laparola.gz</url>
 <dimensione>2725 Kb</dimensione>
 <lingua>it</lingua>
@@ -1160,7 +1180,7 @@
 <nome>Sommario della dottrina cristiana (Italian)</nome>
 <nome language="it">Sommario della dottrina cristiana</nome>
 <componente>Sommario della dottrina cristiana</componente>
-<versione>7.19.3</versione>
+<versione>7.19.4</versione>
 <url>https://www.laparola.net/v7/Sommario della dottrina cristiana.laparola.gz</url>
 <dimensione>252 Kb</dimensione>
 <tipo>libro</tipo>

@@ -14,6 +14,17 @@ require("capo.php");
 <li>seguire la <a href="https://www.facebook.com/pages/LaParola/114249198597738">pagina del sito su Facebook</a>.</li>
 </ul>
 
+<a name="20261109"></a>
+<h2>9 novembre 2026</h2>
+<p>Il <a href="/vocabolario/">vocabolario greco-italiano del Nuovo Testamento</a> &egrave; stato completamente rinnovato.
+Oltre a molte correzioni, usa i caratteri Unicode per modernizzare il testo e ci sono le traduzioni di ogni parola in due versioni italiane.
+L'<a href="/interlineare/">interlineare greco-italiano</a> e i <a href="/greco/">testi greci con letture varianti</a> contengono link a questo vocabolario.</p>
+
+<a name="20261011"></a>
+<h2>11 ottobre 2026</h2>
+<p>Nuovo nell'<a href="/interlineare/">interlineare greco-italiano</a>: una riga che mostra l'analisi grammaticale di ogni parola greca. Se tocchi o clicchi l'analisi, l'abbreviazione mostrata viene spiegata.
+Bisogna prima scegliere di visualizzare la riga dell'analisi grammaticale nelle spiegazioni in cima alla pagina.</p> 
+
 <a name="20261010"></a>
 <h2>10 ottobre 2026</h2>
 <p>La nuova versione di prova (8.0.8) &egrave; disponibile, con la ricerca di brani simili, salvare le informazioni sui testi installati, e aggiornare i testi quando ci sono nuove versioni.
@@ -118,14 +129,6 @@ mentre la "Nuova Riveduta (1994)" &egrave; quella del 1994 (la decima edizione d
 I riassunti possono essere letti su <a href="/riassunti/">questo sito</a>, oppure scaricati e installati nelle <a href="/programma/">app di LaParola</a>.</p>
 <p>Per trovare in modo pi&ugrave; facile delle risorse per studiare un capitolo, ho creato un indice degli strumenti che si possono utilizzare sul sito. Basta iniziare dall'<a href="/bibbia/">elenco di libri della Bibbia</a> e scegliere il libro e poi il capitolo.</p>
 <p>L'aspetto del sito &egrave; stato semplificato e modernizzato. Adesso si pu&ograve; trovare tutto nel menu superiore, o con uno schermo piccolo toccando l'icona in alto a sinistra.</p>
-
-<a name="20240915"></a>
-<h2>15 settembre 2024</h2>
-<p>Ho pubblicato alcuni dei miei studi biblici in una nuova sezione del sito chiamata <a href="/riflessioni/">Riflessioni mie</a>. Aggiunger&ograve; altri studi nel futuro.</p>
-
-<a name="20240709"></a>
-<h2>9 luglio 2024</h2>
-<p>Ho rilasciato nuove versioni delle app per macOS (14.1 e dopo) e iOS (17.1 e dopo), che sono disponibili su App Store. Le app sono state completamente riscritte, per renderle pi&ugrave; moderni e (spero) pi&ugrave; facili da usare. Per ulteriori informazioni, vedi <a href="/programma/macintosh.php">LaParola per macOS</a> e <a href="/programma/ios.php">LaParola per iOS</a>.</p>
 
 <?
 require("piede.php");

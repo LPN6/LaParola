@@ -215,7 +215,7 @@ function tempo(string $g): string
 {
 switch($g) {
 case 'P': return "presente";
-case 'A': return "aorista";
+case 'A': return "aoristo";
 case 'X': return "perfetto";
 case 'F': return "futuro";
 case 'I': return "imperfetto";
